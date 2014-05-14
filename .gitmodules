@@ -1,0 +1,3 @@
+[submodule "app/modules/miniCore"]
+	path = app/modules/miniCore
+	url = git@gitlab.neoteric.eu:jmach/angular-seed-minicore.git
