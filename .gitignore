@@ -1,0 +1,12 @@
+app/bower_components
+coverage
+node_modules
+nbproject/
+app/styles/css
+dist
+
+.sass-cache
+.todo
+.ask
+.tmp
+*.sublime*
