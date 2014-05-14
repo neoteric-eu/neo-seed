@@ -1,12 +1,12 @@
 (function() {
 	'use strict';
 	define([], function() {
-		var menu = function(locale, permissions){
+		var navMenu = function(locale, permissions){
 			return {
 
 				menu: [
-					{ href: 'start', title: locale.getT('Start'), icon: 'fa fa-lg fa-fw fa-home'},
-					{ href: 'account', title: locale.getT('Your_account'), icon: 'fa fa-lg fa-fw fa-wrench'},
+					{ href: 'forms/create', title: 'dodaj szablon', icon: 'fa fa-lg fa-fw fa-pencil-square-o'},
+
 					{ href: 'invoice', title: 'Moje faktury', icon: 'fa fa-lg fa-fw fa-inbox', access: 'EF_INVOICE_GET' },
 					{ href: 'invoice/shared', title: 'Udostępnione dla mnie', icon: 'fa-lg fa-fw glyphicon glyphicon-cloud', access: 'EF_INVOICE_SHARE' },
 					// { href: 'invoice/accept', title: 'Oczekujące', icon: 'fa-lg fa-fw glyphicon glyphicon-log-in', access: 'EF_INVOICE_GET' },
@@ -19,8 +19,8 @@
 						return permissions.checkMenuAccess(item.access);
 					});
 				},
-			}
+			};
 		};
-		return ['locale', 'permissions', $config];
+		return ['locale', 'permissions', navMenu];
 	});
 }());
