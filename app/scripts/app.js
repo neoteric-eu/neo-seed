@@ -8,7 +8,9 @@ define([
 	'angularResource',
 	// 'sentryClient',
 	// '../modules/global_settings',
-	'../modules/miniCore/miniCoreModule'
+	'../modules/miniCore/miniCoreModule',
+	'../modules/formBuilder/formBuilderModule',
+	'../modules/neoDocs/neoDocsModule'
 ],
 function (angular) {
 	'use strict';
@@ -25,7 +27,17 @@ function (angular) {
 		'miniCore',
 		'miniCore.controllers',
 		'miniCore.directives',
-		'miniCore.services'
+		'miniCore.services',
+
+		'formBuilder',
+		'formBuilder.controllers',
+		'formBuilder.directives',
+		'formBuilder.services',
+
+		// 'neoDocs',
+		'neoDocs.controllers',
+		'neoDocs.services'
+
 	])
 
 	.config(function($httpProvider) {
@@ -149,9 +161,9 @@ function (angular) {
 		]);
 	})
 	.run(['$rootScope', '$location', 'session', 'template', 'permissions',
-		'setDefaultsHeaders', 'appMessages',
+		'setDefaultsHeaders', 'appMessages', 'menu',
 		function($rootScope, $location, session, template, permissions,
-		setDefaultsHeaders, appMessages) {
+		setDefaultsHeaders, appMessages, menu) {
 
 		setDefaultsHeaders.setContentType('application/json');
 		$rootScope.appReady = false;
@@ -200,7 +212,8 @@ function (angular) {
 		};
 		$rootScope.checkSession();
 
-
+		$rootScope.menu = menu.getMenu();
+		console.log('aa1', menu.getMenu());
 		$rootScope.$on('event:loginRequired', function() {
 			session.clearSession();
 			$rootScope.checkSession();
