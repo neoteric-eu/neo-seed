@@ -9,6 +9,7 @@ Step1
 ```bash
 git clone git@gitlab.neoteric.eu:developers/angular-seed-template.git [project_name]
 git remote set-url origin  git@gitlab.neoteric.eu:developers/project_name.git
+git push -u origin master
 
 ```
 
