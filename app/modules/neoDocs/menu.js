@@ -11,6 +11,7 @@
 					{ href: 'invoice/shared', title: 'Udostępnione dla mnie', icon: 'fa-lg fa-fw glyphicon glyphicon-cloud', access: 'EF_INVOICE_SHARE' },
 					// { href: 'invoice/accept', title: 'Oczekujące', icon: 'fa-lg fa-fw glyphicon glyphicon-log-in', access: 'EF_INVOICE_GET' },
 					// { href: 'invoice/import', title: 'Importuj fakturę', icon: 'fa fa-lg fa-fw fa-upload' },
+					{ href: 'doc-list', title: 'Dokumenty', icon: 'fa fa-lg fa-fw fa-list-ul' },
 				],
 
 				getMenu: function() {

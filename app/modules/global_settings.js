@@ -7,6 +7,7 @@
 			cfg: {
 				//URL FOR REST CLIENT
 				baseUrl: 'http://188.116.54.20:2222/api/v1/',
+				tempUrl: 'http://188.116.2.53:9003/api/v1/',
 
 				sentryApiKey: '',
 				sentryOptions: {},

@@ -10,7 +10,10 @@ define([
 	// '../modules/global_settings',
 	'../modules/miniCore/miniCoreModule',
 	'../modules/formBuilder/formBuilderModule',
-	'../modules/neoDocs/neoDocsModule'
+	'../modules/neoDocs/neoDocsModule',
+	'../modules/document/documentModule',
+
+
 ],
 function (angular) {
 	'use strict';
@@ -36,7 +39,12 @@ function (angular) {
 
 		// 'neoDocs',
 		'neoDocs.controllers',
-		'neoDocs.services'
+		'neoDocs.services',
+
+		// 'document',
+		'document',
+		'document.controllers',
+		'document.services'
 
 	])
 
@@ -213,7 +221,6 @@ function (angular) {
 		$rootScope.checkSession();
 
 		$rootScope.menu = menu.getMenu();
-		console.log('aa1', menu.getMenu());
 		$rootScope.$on('event:loginRequired', function() {
 			session.clearSession();
 			$rootScope.checkSession();
