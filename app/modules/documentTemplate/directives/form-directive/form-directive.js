@@ -15,7 +15,7 @@
 						console.log('Form canceled..');
 					};
 				},
-				templateUrl: './modules/formBuilder/directives/form-directive/views/form.html',
+				templateUrl: './modules/documentTemplate/directives/form-directive/views/form.html',
 				restrict: 'E',
 				scope: {
 					form:'='

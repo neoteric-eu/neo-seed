@@ -6,7 +6,7 @@
 
 			var getTemplateUrl = function(field) {
 				var type = field.field_type;
-				var modulePath = './modules/formBuilder/directives/field-directive/';
+				var modulePath = './modules/documentTemplate/directives/field-directive/';
 				var templateUrl = '';
 
 				switch(type) {

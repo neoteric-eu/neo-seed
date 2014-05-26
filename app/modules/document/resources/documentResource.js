@@ -2,7 +2,7 @@
 	'use strict';
 	define(['globalSettings'], function(gloabalSettings) {
 		var documentResource = function($resource) {
-			return $resource(gloabalSettings.get('tempUrl')+'document/:action/:documentId',
+			return $resource(gloabalSettings.get('baseUrl')+'document/:action/:documentId',
 				{
 					action: '@action',
 					documentId: '@documentId',
