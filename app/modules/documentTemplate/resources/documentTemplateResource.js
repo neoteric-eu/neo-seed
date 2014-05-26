@@ -14,7 +14,7 @@
 						isArray: true
 					},
 
-					getTemplateById: { 	// id w ciele
+					getTemplateById: {
 						method: 'GET'
 					},
 
@@ -22,11 +22,11 @@
 						method: 'POST'
 					},
 
-					updateTemplate: {	// id w ciele
+					updateTemplate: {
 						method: 'POST'
-					},					
+					},
 
-					removeTemplate: {	// id w ciele
+					removeTemplate: {
 						method: 'DELETE',
 					}
 

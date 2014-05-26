@@ -54,7 +54,7 @@
 				documentTemplateService.getTemplateById(template.id).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(errorCb).toHaveBeenCalled();
-			});			
+			});
 
 			it('should createTemplate()', function() {
 				$httpBackend.expectPOST(globalSettings.get('baseUrl') + 'documentTemplates').respond(200, {});

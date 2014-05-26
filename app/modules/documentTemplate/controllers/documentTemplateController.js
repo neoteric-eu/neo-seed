@@ -21,7 +21,7 @@
 				});
 			};
 
-			$scope.getTemplates = function(){
+			$scope.getTemplates = function() {
 				//$System.showLoader();
 				documentTemplateService.getTemplates().then(
 					//console.log($scope.docs)
@@ -30,7 +30,7 @@
 						$scope.documentTemplates = documentTemplateService.documentTemplates.getModel();
 						$scope.templatesTable = $scope.ngTableBuilder($scope.documentTemplates);
 						console.log('kontroler', $scope.documentTemplates);
-						console.log('table', $scope.templatesTabl);
+						console.log('table', $scope.templatesTable);
 					}, function(){	//reason
 						// $System.hideLoader();
 						// $System.$appMessages.error($System.$locale.getT('Operation_failed'));
@@ -38,8 +38,16 @@
 					}
 
 				);
+			};
 
-
+			$scope.initTemplate = function() {
+				console.log('asdsad');
+				if($location.path() === '/template/create') {
+					$scope.editMode = 0;
+				}else{
+					$scope.editMode = 1;
+				}
+				console.log($scope.editMode);
 			};
 
 			$scope.createDoc = function() {

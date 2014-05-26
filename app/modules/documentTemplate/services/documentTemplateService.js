@@ -6,8 +6,8 @@
 		var documentTemplateService = function($q, documentTemplateResource) {
 			var self = this;
 
-			/* jshint  quotmark: false */
-			var mockedTemplateData = [
+			/* jshint  quotmark: false, undef: false */
+/*			var mockedTemplateData = [
 	{
 		"id": "535e063f975ac384eb3a79f8",
 		"templateId": "000000000000000000000000",
@@ -165,7 +165,7 @@
 
 
 
-];
+];*/
 
 			/* jshint  quotmark: false */
 			function ModelConstructor()  {
@@ -194,19 +194,20 @@
 
 			this.getTemplates = function() {
 				var deferred = $q.defer();
-/*				documentTemplateResource.getTemplates(
+					console.log("start1");
+				documentTemplateResource.getTemplates(
 					function(data) {
-				console.log("start");
+				console.log("start2");
 						self.documentTemplates.setModel(data);
 						deferred.resolve(data);
 						console.log('data', data);
 					}, function(reason) {
 						deferred.reject(reason);
 					}
-				);*/
+				);
 
-				self.documentTemplates.setModel(mockedTemplateData);
-				deferred.resolve(mockedTemplateData);
+/*				self.documentTemplates.setModel(mockedTemplateData);
+				deferred.resolve(mockedTemplateData);*/
 
 				return deferred.promise;
 			};
