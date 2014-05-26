@@ -38,7 +38,7 @@
 			.controller('documentController', documentController);
 
 		angular.module( services, ['ngResource'] )
-			.service('documentResource', documentResource)
-			.service('documentService', documentService);
+			.service('documentService', documentService)
+			.service('documentResource', documentResource);
 	});
 }());

@@ -9,7 +9,7 @@ define([
 	// 'sentryClient',
 	// '../modules/global_settings',
 	'../modules/miniCore/miniCoreModule',
-	'../modules/formBuilder/formBuilderModule',
+	'../modules/documentTemplate/documentTemplateModule',
 	'../modules/neoDocs/neoDocsModule',
 	'../modules/document/documentModule',
 
@@ -32,10 +32,10 @@ function (angular) {
 		'miniCore.directives',
 		'miniCore.services',
 
-		'formBuilder',
-		'formBuilder.controllers',
-		'formBuilder.directives',
-		'formBuilder.services',
+		'documentTemplate',
+		'documentTemplate.controllers',
+		'documentTemplate.directives',
+		'documentTemplate.services',
 
 		// 'neoDocs',
 		'neoDocs.controllers',

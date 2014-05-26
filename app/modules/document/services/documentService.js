@@ -7,7 +7,7 @@
 			var self = this;
 
 			/* jshint  quotmark: false */
-			var mockedData = [
+/*			var mockedData = [
 	{
 		"id": "535e063f975ac384eb3a79f8",
 		"templateId": "000000000000000000000000",
@@ -96,20 +96,23 @@
 		"accesses": [],
 		"labels": []
 	}
-];
-			function ModelConstructor(initModel)  {
-				var model = initModel;	// Private varialble
-				return {				// Public methods
+];*/
+			function ModelConstructor()  {
+				var model = [];
+				return {
 					getModel:  function() {
 						return model;
+					},
+					pushDataToModel: function(data) {
+						model.push(data);
 					},
 					setModel: function(data) {
 						model = data;
 					},
 					removeModel: function(data) {
-						var index = _.indexOf(this.model, data);
+						var index = _.indexOf(model, data);
 						if ( index > -1 ) {
-							this.model.splice(index, 1);
+							model.splice(index, 1);
 						}
 					}
 				};
@@ -121,17 +124,17 @@
 			this.getDocuments = function() {
 				var deferred = $q.defer();
 
-/*				documentResource.getDocuments(
+				documentResource.getDocuments(
 					function(data) {
 						self.docs.setModel(data);
 						deferred.resolve(data);
 					}, function(reason) {
 						deferred.reject(reason);
 					}
-				);*/
+				);
 
-				self.docs.setModel(mockedData);
-				deferred.resolve(mockedData);
+/*				self.docs.setModel(mockedData);
+				deferred.resolve(mockedData);*/
 
 				return deferred.promise;
 			};
@@ -141,6 +144,7 @@
 
 				documentResource.createDocument(doc, function(data) {
 						deferred.resolve(data);
+						self.docs.pushDataToModel(data);
 					}, function(reason) {
 						deferred.reject(reason);
 					}

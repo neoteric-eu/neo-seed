@@ -5,13 +5,15 @@
 			return {
 
 				menu: [
-					{ href: 'forms/create', title: 'dodaj szablon', icon: 'fa fa-lg fa-fw fa-pencil-square-o'},
+					{ href: 'document/create', title: 'Utwórz nowy dokument', icon: 'fa fa-lg fa-fw fa-file-o' },
 
-					{ href: 'invoice', title: 'Moje faktury', icon: 'fa fa-lg fa-fw fa-inbox', access: 'EF_INVOICE_GET' },
-					{ href: 'invoice/shared', title: 'Udostępnione dla mnie', icon: 'fa-lg fa-fw glyphicon glyphicon-cloud', access: 'EF_INVOICE_SHARE' },
-					// { href: 'invoice/accept', title: 'Oczekujące', icon: 'fa-lg fa-fw glyphicon glyphicon-log-in', access: 'EF_INVOICE_GET' },
-					// { href: 'invoice/import', title: 'Importuj fakturę', icon: 'fa fa-lg fa-fw fa-upload' },
-					{ href: 'doc-list', title: 'Dokumenty', icon: 'fa fa-lg fa-fw fa-list-ul' },
+					{ href: 'template/create', title: 'Utwórz nowy szablon', icon: 'fa fa-lg fa-fw fa-pencil-square-o'},
+
+					{ href: 'document/document-list', title: 'Lista Dokumentów', icon: 'fa fa-lg fa-fw fa-list-ul' },
+
+					{ href: 'template/template-list', title: 'Lista Szablonów', icon: 'fa fa-lg fa-fw fa-list-ul' },
+				
+				//	{ href: 'template/template-list', title: 'Lista Szablonów', icon: 'fa fa-lg fa-fw fa-list-ul' }
 				],
 
 				getMenu: function() {

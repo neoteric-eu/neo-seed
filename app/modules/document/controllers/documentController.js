@@ -3,7 +3,7 @@
 	'use strict';
 	define([], function(){
 
-		var documentController = function($scope, $filter, $modal, documentService, documentModulePath, ngTableParams) {
+		var documentController = function($scope, $filter, $modal, $location, documentService, documentModulePath, ngTableParams) {
 
 			$scope.ngTableBuilder = function(data) {
 				return new ngTableParams({
@@ -15,10 +15,8 @@
 				}, {
 					total: data.length,
 					getData: function($defer, params) {
-						console.log('ssas', params);
 						var orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
 						$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-						console.log('ssas', orderedData);
 					}
 				});
 			};
@@ -43,6 +41,19 @@
 
 
 			};
+
+			$scope.initDocument = function() { //TODO: unfinished
+				console.log('asdsad');
+				if($location.path() === '/document/create') {
+					$scope.editMode = 0;
+				}else{
+					$scope.editMode = 1;
+				}
+				console.log($scope.editMode);
+			};
+
+
+
 
 /*			$scope.editDocument = function(doc){
 
@@ -81,6 +92,6 @@
 
 		};
 
-		return ['$scope', '$filter', '$modal','documentService', 'documentModulePath', 'ngTableParams', documentController, ];
+		return ['$scope', '$filter', '$modal', '$location', 'documentService', 'documentModulePath', 'ngTableParams', documentController, ];
 	});
 }());
