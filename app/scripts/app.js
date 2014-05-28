@@ -182,16 +182,15 @@ function (angular) {
 		 */
 		$rootScope.redirectMgr = function(path){
 			if ( session.logged.getModel() ) {
-				switch (path) {
-					case '/login':
-						path = 'start';
-						break;
-					default:
-						path = 'start';
+
+				if(path === '/login') {
+					path = '/start';
 				}
+
 				$location.url(path);
 
-			} else {
+			} else if ($location.url() !== '/login') {
+				console.log('in');
 				$location.url('/login');
 			}
 		};
@@ -204,7 +203,7 @@ function (angular) {
 		$rootScope.checkSession = function() {
 			session.checkSession().then(
 				function() {
-					var path = $location.path();
+					var path = localStorage.getItem('prevRoute') || '/start';
 					$rootScope.mainTemplate = template.get('main', 'logged');
 					$rootScope.redirectMgr(path);
 					$rootScope.initUserData();
@@ -225,7 +224,18 @@ function (angular) {
 			$rootScope.checkSession();
 		});
 
+
+		$rootScope.$on('$locationChangeStart', function(event, nextRoute, currentRoute){
+
+			var route = currentRoute.split('#');
+			if(angular.isDefined(route[1])) {
+				localStorage.setItem('prevRoute', route[1]);
+			}
+
+		});
+
 		$rootScope.$on('$routeChangeSuccess', function(event, currentRoute, priorRoute) {
+
 			if(permissions.clearCache) {
 				permissions.clearCache = false;
 			}
