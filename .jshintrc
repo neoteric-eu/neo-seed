@@ -29,7 +29,7 @@
     "camelcase": false,
     "_": false,
     "$": false,
-    "t": false,
+    "t": true,
 
     /* Tests */
     "after": false,

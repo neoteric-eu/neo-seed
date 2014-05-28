@@ -7,7 +7,7 @@ define([
 	'theme.app',
 	'gritter',
 	// 'sentryClient',
-	'../modules/miniCore/miniCoreModule',
+	'angular-file-upload',
 	'angularRoute',
 	'angularCookies',
 	'angularSanitize',
@@ -15,7 +15,9 @@ define([
 	'ui.bootstrap',
 	'xeditable',
 	'ngTable',
-	'app'
+
+	'../scripts/app'
+
 	], function(require, angular) {
 		'use strict';
 		require(['domReady!'], function(document) {

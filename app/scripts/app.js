@@ -1,18 +1,17 @@
 /* jshint unused: false, undef: false, quotmark:false */
-/* global t:true */
-var t = { pl: {}, en: {}};
+var t;
+t = { pl: {}, en: {}};
 
-define([
+define( [
 	'angular',
 	'underscore',
 	'angularResource',
-	// 'sentryClient',
-	// '../modules/global_settings',
+
+	// Required for unit tests
 	'../modules/miniCore/miniCoreModule',
 	'../modules/documentTemplate/documentTemplateModule',
 	'../modules/neoDocs/neoDocsModule',
 	'../modules/document/documentModule',
-
 
 ],
 function (angular) {
@@ -26,6 +25,7 @@ function (angular) {
 		'xeditable',
 		'ngTable',
 		// 'sentryClient',
+		'angularFileUpload',
 
 		'miniCore',
 		'miniCore.controllers',
@@ -37,11 +37,10 @@ function (angular) {
 		'documentTemplate.directives',
 		'documentTemplate.services',
 
-		// 'neoDocs',
+		'neoDocs',
 		'neoDocs.controllers',
 		'neoDocs.services',
 
-		// 'document',
 		'document',
 		'document.controllers',
 		'document.services'
@@ -249,109 +248,5 @@ function (angular) {
 		});
 	}]);
 
-/*	.run(['$rootScope', '$session', 'customerHelper', 'loginRegisterHelper', 'permissions' , '$route', '$location', '$AppMessages', '$enums', '$config', 'setDefaultsHeaders', '$exceptionHandler', 'editableOptions',
-	function($rootScope, $session, customerHelper, loginRegisterHelper, permissions, $route, $location, $appMessages, $enums, $config, setDefaultsHeaders, $exceptionHandler, editableOptions) {
-		$rootScope.appReady = false;
-		// set default headers
-		var applicationId = $config.get('SaaSApplicationID');
-		setDefaultsHeaders.setContentType('application/json');
-		setDefaultsHeaders.setApplicationId(applicationId);
-
-		editableOptions.theme = 'bs3';
-
-		$session.init();
-
-		if($session.isLoginDataPresent) {
-			setDefaultsHeaders.setAuthToken($session.getToken());
-			setDefaultsHeaders.setCustomerId($session.getCurrentCustomerId());
-
-			customerHelper.init();
-			customerHelper.getCurrentCustomer().then(function(customer) {
-				$session.currentCustomer(customer);
-				loginRegisterHelper.getFeatures().then(function(data) {
-					permissions.features = data.values;
-					$rootScope.appReady = true;
-					$session.setLogged(true);
-
-				});
-			}, function(reason) {
-				$session.setLogged(false);
-				// mark everything as not logged
-				$session.clearSession();
-				$rootScope.appReady = true;
-				$exceptionHandler(reason);
-			});
-			// try request
-		} else {
-			$session.clearSession();
-			$rootScope.appReady = true;
-			// redirect to login screen;
-		}
-
-		// FIXME:
-		// U = new Utilities();
-		$session.loggedTime = $config.get('loggedTime');
-		// $session.init(setUserData, permissions.init);
-		// $.jqplot.config.enablePlugins = true;
-
-		// $rootScope.$on('$includeContentLoaded', runCustomizer);
-		// $rootScope.$on('$viewContentLoaded', runCustomizer);
-
-		$rootScope.$on('event:loginRequired', function() {
-			$session.clearSession();
-			$rootScope.redirectToLogin();
-			console.log('loginRequired');
-		});
-
-		$rootScope.$on('$locationChangeStart', function(event, nextRoute, currentRoute){
-			var route = currentRoute.split('#');
-			if(angular.isDefined(route[1])) {
-				localStorage.setItem('prevRoute',route[1]);
-			}
-		});
-
-		$rootScope.$on('$viewContentLoaded', function(event){
-			pageSetUp();
-		});
-
-		$rootScope.$on('$routeChangeSuccess', function(event, currentRoute, priorRoute) {
-			if(permissions.clearCache) {
-				permissions.clearCache = false;
-			}
-			if($session.isLogged()) {
-				try {
-					if(!permissions.checkRouteAccess(currentRoute)) {
-						$location.path('401');
-						$session.set('prevRoute', null);
-					}
-				} catch (e) {
-					$location.path('401');
-					$session.set('prevRoute', null);
-					throw e;
-				}
-
-				$session.updateCookieTime();
-			} else {
-				var path = $location.path();
-
-				if(path === '/activation' || path === '/activation/simplified') {
-					return;
-				}
-
-				// if($rootScope.appReady) {
-					// $location.path('/start');
-				// }
-
-				if (path.indexOf('get/') !== -1) {
-					$location.path(path);
-				} else {
-					$location.path('/login');
-				}
-			}
-
-			$appMessages.$apply();
-		});
-	}
-	]);*/
 
 });

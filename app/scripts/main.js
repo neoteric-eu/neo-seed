@@ -1,28 +1,34 @@
 /*jshint unused: vars */
 
+
 //http://code.angularjs.org/1.2.1/docs/guide/bootstrap#overview_deferred-bootstrap
 window.name = 'NG_DEFER_BOOTSTRAP!';
 
 require.config({
+	baseUrl: 'bower_components/',
 	paths: {
-		angular: '../bower_components/angular/angular',
-		angularRoute: '../bower_components/angular-route/angular-route',
-		angularCookies: '../bower_components/angular-cookies/angular-cookies',
-		angularSanitize: '../bower_components/angular-sanitize/angular-sanitize',
-		angularResource: '../bower_components/angular-resource/angular-resource',
-		angularMocks: '../bower_components/angular-mocks/angular-mocks',
-		text: '../bower_components/requirejs-text/text',
-		underscore: '../bower_components/underscore/underscore',
-		domReady: '../bower_components/requirejs-domready/domReady',
-		jQuery: '../bower_components/jquery/dist/jquery',
-		gritter: '../bower_components/jquery.gritter/js/jquery.gritter.min',
-		'ui.bootstrap': '../bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls',
+		angular: 'angular/angular',
+		angularRoute: 'angular-route/angular-route',
+		angularCookies: 'angular-cookies/angular-cookies',
+		angularSanitize: 'angular-sanitize/angular-sanitize',
+		angularResource: 'angular-resource/angular-resource',
+		angularMocks: 'angular-mocks/angular-mocks',
+		domReady: 'requirejs-domready/domReady',
+		gritter: 'jquery.gritter/js/jquery.gritter.min',
+		jQuery: 'jquery/dist/jquery',
+		ngTable: 'ng-table/ng-table',
+		text: 'requirejs-text/text',
+		underscore: 'underscore/underscore',
+		xeditable: 'angular-xeditable/dist/js/xeditable',
+		'angular-file-upload': 'angular-file-upload/angular-file-upload',
+		'ui.bootstrap': 'angular-ui-bootstrap-bower/ui-bootstrap-tpls',
+
+
+		globalSettings: '../modules/global_settings',
 		'theme.app': '../plugins/theme.app',
 		'theme.smartwidgets': '../plugins/smartwidgets/jarvis.widget.min',
-		xeditable: '../bower_components/angular-xeditable/dist/js/xeditable',
-		ngTable: '../bower_components/ng-table/ng-table',
-		globalSettings: '../modules/global_settings'
-		// 'raven-js': '../bower_components/raven-js/dist/raven.min',
+
+		// 'raven-js': 'raven-js/dist/raven.min',
 		// ravenInstall: '../plugins/sentry-client/raven-install',
 		// sentryClient: '../plugins/sentry-client/sentry-client'
 	},
@@ -45,6 +51,8 @@ require.config({
 		'xeditable': { deps: ['angular']},
 		'ngTable': { deps: ['angular']},
 		'gritter': { deps: ['jQuery']},
+		'angular-file-upload': { deps: ['angular']}
+
 		// 'sentryClient':{ deps: ['raven-js', 'ravenInstall', 'angular'] },
 		// 'ravenInstall':{ deps: ['raven-js']}
 	},
@@ -53,6 +61,6 @@ require.config({
 	],
 	deps: [
 		// kick start application... see bootstrap.js
-		'./bootstrap'
+		'../scripts/bootstrap'
 	]
 });
