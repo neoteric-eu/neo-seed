@@ -10,13 +10,14 @@
 	define([
 		'angular',
 		'./controllers/NeoDocsController',
+		'./controllers/UploaderController',
 		'./menu',
 
-		// './neoDocsUrls',
+		'./neoDocsUrls',
 		// './locale/en_EN',
 		// './locale/pl_PL'
 
-	], function(angular, NeoDocsController, menu)
+	], function(angular, NeoDocsController, UploaderController, menu, neoDocsUrls)
 	{
 
 		var moduleName = 'neoDocs';
@@ -24,8 +25,14 @@
 		// var directives = moduleName + '.directives';
 		var services = moduleName + '.services';
 
+		angular.module( moduleName , [] )
+			.constant('PATH_NEODOCS', './modules/neoDocs/')
+			.config(neoDocsUrls);
+
+
 		angular.module( controllers , [] )
-			.controller('NeoDocsController', NeoDocsController);
+			.controller('NeoDocsController', NeoDocsController)
+			.controller('UploaderController', UploaderController);
 
 		angular.module( services, [] )
 			.service('menu', menu);
