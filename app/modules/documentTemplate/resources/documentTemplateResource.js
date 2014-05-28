@@ -2,7 +2,7 @@
 	'use strict';
 	define(['globalSettings'], function(gloabalSettings) {
 		var documentTemplateResource = function($resource) {
-			return $resource(gloabalSettings.get('baseUrl')+'documentTemplates/:action/:templateId',
+			return $resource(gloabalSettings.get('tempUrl')+'documentTemplates/:action/:templateId',
 				{
 					action: '@action',
 					templateId: '@templateId',
@@ -10,8 +10,7 @@
 				{
 
 					getTemplates: {
-						method: 'GET',
-						isArray: true
+						method: 'GET'
 					},
 
 					getTemplateById: {
@@ -28,7 +27,7 @@
 
 					removeTemplate: {
 						method: 'DELETE',
-					}
+					},
 
 
 				}

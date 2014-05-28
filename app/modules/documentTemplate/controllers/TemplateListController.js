@@ -3,7 +3,7 @@
 	'use strict';
 	define([], function(){
 
-		var documentTemplateController = function($scope, $filter, $modal, $location, documentTemplateService, documentTemplateModulePath, ngTableParams) {
+		var TemplateListController = function($scope, $filter, $modal, $location, documentTemplateService, documentTemplateModulePath, ngTableParams) {
 
 			$scope.ngTableBuilder = function(data) {
 				return new ngTableParams({
@@ -25,13 +25,11 @@
 				//$System.showLoader();
 				documentTemplateService.getTemplates().then(
 					//console.log($scope.docs)
-					function(){
+					function() {
 						//$System.hideLoader();
 						$scope.documentTemplates = documentTemplateService.documentTemplates.getModel();
 						$scope.templatesTable = $scope.ngTableBuilder($scope.documentTemplates);
-						console.log('kontroler', $scope.documentTemplates);
-						console.log('table', $scope.templatesTable);
-					}, function(){	//reason
+					}, function() {	//reason
 						// $System.hideLoader();
 						// $System.$appMessages.error($System.$locale.getT('Operation_failed'));
 						// $System.$exceptionHandler(reason);
@@ -40,25 +38,14 @@
 				);
 			};
 
-			$scope.initTemplate = function() {
-				console.log('asdsad');
-				if($location.path() === '/template/create') {
-					$scope.editMode = 0;
-				}else{
-					$scope.editMode = 1;
-				}
-				console.log($scope.editMode);
-			};
-
 			$scope.createDoc = function() {
 				$location.url('/template/create');
 			};
 
 
 
-
 		};
 
-		return ['$scope', '$filter', '$modal', '$location', 'documentTemplateService', 'documentTemplateModulePath', 'ngTableParams', documentTemplateController, ];
+		return ['$scope', '$filter', '$modal', '$location', 'documentTemplateService', 'documentTemplateModulePath', 'ngTableParams', TemplateListController, ];
 	});
 }());

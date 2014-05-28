@@ -11,25 +11,26 @@
 
 	define([
 		'angular',
-		'./controllers/CreateFbController',
+		'./controllers/CreateTemplateController',
 		'./controllers/ViewFbController',
-		'./controllers/documentTemplateController',
+		'./controllers/TemplateListController',
 
 		'./directives/field-directive/field-directive',
 		'./directives/form-directive/form-directive',
+		'./directives/heightWatch',
 
-		'./services/formService',
 		'./services/documentTemplateService',
 
 		'./resources/documentTemplateResource',
+		'./resources/fieldTypesResource',
 
 		'./documentTemplateUrls',
 		'./locale/en_EN',
 		'./locale/pl_PL'
 
-	], function(angular, CreateFbController, ViewFbController, documentTemplateController, fieldDirective,
-		formDirective, formService, documentTemplateService, documentTemplateResource, documentTemplateUrls) {
-console.log(documentTemplateService);
+	], function(angular, CreateTemplateController, ViewFbController, TemplateListController, fieldDirective,
+		formDirective, heightWatch, documentTemplateService, documentTemplateResource, fieldTypesResource, documentTemplateUrls) {
+
 		var moduleName = 'documentTemplate';
 		var controllers = moduleName + '.controllers';
 		var directives = moduleName + '.directives';
@@ -40,18 +41,19 @@ console.log(documentTemplateService);
 			.config(documentTemplateUrls);
 
 		angular.module( controllers , [] )
-			.controller('CreateFbController', CreateFbController)
+			.controller('CreateTemplateController', CreateTemplateController)
 			.controller('ViewFbController', ViewFbController)
-			.controller('documentTemplateController', documentTemplateController);
+			.controller('TemplateListController', TemplateListController);
 
 		angular.module( directives , [] )
 			.directive('fieldDirective', fieldDirective)
-			.directive('formDirective', formDirective);
+			.directive('formDirective', formDirective)
+			.directive('heightWatch', heightWatch);
 
 		angular.module( services, ['ngResource'] )
-			.service('formService', formService)
 			.service('documentTemplateService', documentTemplateService)
-			.service('documentTemplateResource', documentTemplateResource);
+			.service('documentTemplateResource', documentTemplateResource)
+			.service('fieldTypesResource', fieldTypesResource);
 			// .service('$config', config)
 
 	});

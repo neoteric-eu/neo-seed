@@ -7,8 +7,7 @@
 
 			$routeProvider
 			.when('/template/create', {
-				templateUrl: modulePath + 'create.html',
-				controller: 'CreateFbController'
+				templateUrl: modulePath + 'create.html'
 			})
 			.when('/template/:id/view', {
 				templateUrl: modulePath + 'view.html',
