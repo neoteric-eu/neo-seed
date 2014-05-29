@@ -13,10 +13,6 @@
 		<div class="form-fields" ng-hide="previewMode">
 			<div class="form-properties">
 				<h3>Właściwości szablonu</h3>
-				<!-- 				<div class="row">
-					<div class="span2">Form ID: </div>
-					<div class="span4"><input type="text" name="form-id" ng-disabled="true" ng-model="form.form_id"></div>
-				</div> -->
 				<div class="">
 					<div class="span2">{{t('Form_Name')}}</div>
 					<div class="span4"><input type="text" name="form-name" ng-disabled="previewMode" ng-model="form.name"></div>
@@ -46,11 +42,6 @@
 					</accordion-heading>
 					<div class="accordion-edit">
 						<button class="btn btn-danger pull-right" type="button" ng-click="deleteField(form, $index)"><i class="icon-trash icon-white"></i> {{t('Delete')}}</button>
-
-<!--					<div class="row">
-							<div class="span2">Field ID: </div>
-							<div class="span4">{{field.field_id}}</div>
-						</div>-->
 						<div class="row">
 							<div class="span2">{{t('Field_Type')}}:</div>
 							<div class="span4">{{field.fieldTypeName}}</div>
@@ -64,20 +55,14 @@
 						</div>
 						<div class="row">
 							<div class="span2">{{t('Field_Description')}}:</div>
-<!--							<div class="span4"><input type="text" ng-model="field.description"></div>-->
 							<div class="span4"><textarea rows="3" cols="80" type="text" name="form-description" ng-disabled="previewMode" ng-model="field.fieldDescription"></textarea></div>
 						</div>
-<!--					<div class="row">
-							<div class="span2">Field Default Value:</div>
-							<div class="span4"><input type="text" ng-model="field.field_value" value="{{field.field_value}}"></div>
-						</div>-->
 						<div class="row" ng-show="showAddOptions(field)">
 							<div class="span2">{{t('Field_Options')}}:</div>
 							<div class="span6">
 								<div ng-repeat="option in field.options track by $index">
 									<input type="text" ng-model="field.options[$index]">
 									<a class="btn btn-danger btn-mini right" type="button" ng-click="deleteOption(field, $index)"><i class="icon-minus icon-white"></i></a>
-									<!-- <span class="label label-inverse">Value: {{ option.option_value }}</span> -->
 								</div>
 								<button class="btn btn-primary btn-small" type="button" ng-click="addOption(field)"><i class="fa fa-plus"></i>  {{t('Add_Option')}}</button>
 							</div>
@@ -105,7 +90,7 @@
 			</accordion>
 			<br><hr>
 			<p class="text-center">
-				<button class="btn btn-primary right" type="button" ng-click="saveTemplate(form)" ng-disabled="!form.description || !form.name || form.metaFields.length == 0"><i class="icon-eye-open icon-white"></i> Zapisz</button>
+				<button class="btn btn-primary right" type="button" ng-click="saveTemplate(form)" ng-disabled="!form.name || form.metaFields.length == 0"><i class="icon-eye-open icon-white"></i> Zapisz</button>
 				<button class="btn btn-primary right" type="button" ng-click="previewOn()"><i class="icon-eye-open icon-white"></i> Podgląd</button>
 				<button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Wyczyść</button>
 			</p>

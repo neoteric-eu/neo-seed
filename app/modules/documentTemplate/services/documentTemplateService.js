@@ -8,42 +8,6 @@
 
 			/* jshint  quotmark: false */
 
-
-
-				this.fields = [
-					{
-						name : 'textfield',
-						typeName : 'Textfield',
-						id : '5379cc6c94c980bca9923d50'
-					},
-					{
-						name : 'email',
-						typeName : 'E-mail',
-						id : '5379cc6c94c980bca9923d51'
-					},
-					{
-						name : 'radio',
-						typeName : 'Radio Buttons',
-						id : '5379cc6c94c980bca9923d52'
-					},
-					{
-						name : 'dropdown',
-						typeName : 'Dropdown List',
-						id : '5379cc6c94c980bca9923d53'
-					},
-					{
-						name : 'date',
-						typeName : 'Date',
-						id : '5379cc6c94c980bca9923d54'
-					},
-					{
-						name : 'checkbox',
-						typeName : 'Checkbox',
-						id : '5379cc6c94c980bca9923d55'
-					}
-				];
-
-
 			function ModelConstructor()  {
 				var model = [];
 				return {
@@ -66,13 +30,26 @@
 			}
 
 			this.documentTemplates = new ModelConstructor();
-			this.fieldTypes = new ModelConstructor();
+			this.primitiveFieldTypes = new ModelConstructor();
+			this.complexFieldTypes = new ModelConstructor();
 
 			this.getFieldTypes = function() {
 				var deferred = $q.defer();
 				fieldTypesResource.getFieldTypes(
 					function(data) {
-						self.fieldTypes.setModel(data.data);
+						var primitive = [];
+						var complex = [];
+						//field types primitive vs complex
+						_.each(data.data, function(fieldType) {
+							if(fieldType.class === "PRIMITIVE") {
+								primitive.push(fieldType);
+							} else if(fieldType.class === "COMPLEX") {
+								complex.push(fieldType);
+							}
+
+						});
+						self.primitiveFieldTypes.setModel(primitive);
+						self.complexFieldTypes.setModel(complex);
 						deferred.resolve(data);
 					}, function(reason) {
 						deferred.reject(reason);
