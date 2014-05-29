@@ -7,7 +7,7 @@
 			var self = this;
 
 			/* jshint  quotmark: false */
-/*			var mockedData = [
+			var mockedData = [
 	{
 		"id": "535e063f975ac384eb3a79f8",
 		"templateId": "000000000000000000000000",
@@ -96,7 +96,7 @@
 		"accesses": [],
 		"labels": []
 	}
-];*/
+];
 			function ModelConstructor()  {
 				var model = [];
 				return {
@@ -124,17 +124,17 @@
 			this.getDocuments = function() {
 				var deferred = $q.defer();
 
-				documentResource.getDocuments(
+/*				documentResource.getDocuments(
 					function(data) {
 						self.docs.setModel(data);
 						deferred.resolve(data);
 					}, function(reason) {
 						deferred.reject(reason);
 					}
-				);
+				);*/
 
-/*				self.docs.setModel(mockedData);
-				deferred.resolve(mockedData);*/
+				self.docs.setModel(mockedData);
+				deferred.resolve(mockedData);
 
 				return deferred.promise;
 			};

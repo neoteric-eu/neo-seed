@@ -1,4 +1,4 @@
-<div ng-controller="documentTemplateController" ng-init="getTemplates()">
+<div ng-controller="TemplateListController" ng-init="getTemplates()">
 	<div class="row"  ng-if="documentTemplates.length">
 		<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
 			<h1 class="page-title txt-color-blueDark">
@@ -30,20 +30,19 @@
 							<table class="table table-hover">
 								<table ng-table="templatesTable" class="table table-hover">
 									<tbody>
-										<tr ng-repeat="item in $data">
-											<td width="2%">{{ $index }}</td> <!--  data-title="'Numer dokumentu'" sortable="'$index'" -->
-											<td width="25%" data-title="'Nazwa szablonu'" sortable="'name'">{{ item.name }}</td>
-											<td width="33%" data-title="'Opis szablonu'" sortable="'description'">{{ item.description }}</td>
-											<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">{{ item.timestamp | date:dateFormat}}</td>
+										<tr ng-repeat="template in $data">
+											<td width="25%" data-title="'Nazwa szablonu'" sortable="'name'">{{ template.name }}</td>
+											<td width="35%" data-title="'Opis szablonu'" sortable="'description'">{{ template.description }}</td>
+											<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">{{ template.timestamp | date:dateFormat}}</td>
 											<td width="30%">
 												<div class="pull-right">
 													<div class="btn-group">
-														<button type="button" class="btn btn-default" ng-click="displayDocument(item)">Podgląd</button>
-														<button type="button" class="btn btn-default" ng-click="shareModal(item)">Udostępnij</button>
+														<!-- <button type="button" class="btn btn-default" ng-click="displayTemplate(template)">Podgląd</button> -->
+														<button type="button" class="btn btn-default" ng-click="shareModal(template)">Udostępnij</button>
 													</div>
 													<div class="btn-group">
-														<button type="button" class="btn btn-info" ng-click="editDocument(item)">Edytuj</button>
-														<button type="button" class="btn btn-danger" ng-click="removeModal(item)">Usuń</button>
+														<a type="button" class="btn btn-info" href="#/template/edit-template/{{template.id}}" ng-click="$event.stopPropagation();">Edytuj</a>
+														<button type="button" class="btn btn-danger" ng-click="removeTemplateModal(template)">Usuń</button>
 													</div>
 												</div>
 											</td>

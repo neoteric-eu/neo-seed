@@ -5,7 +5,7 @@
 	define(['angular', 'angularMocks', 'app', 'globalSettings'],
 	function(angular, mocks, app, globalSettings) {
 
-		describe('documentService', function() {
+		describe('documentTemplateService', function() {
 			var $httpBackend, $exceptionHandler, documentTemplateService, successCb, errorCb;
 			var template = {
 			  'id': '53762680b8ea6c608fbf553a',
@@ -29,63 +29,63 @@
 			
 
 			it('should getTemplates()', function() {
-				$httpBackend.expectGET(globalSettings.get('baseUrl') + 'documentTemplates').respond(200, []);
+				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'documentTemplates').respond(200, {});
 				documentTemplateService.getTemplates().then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(successCb).toHaveBeenCalled();
 			});
 
 			it('should fail to getTemplates()', function() {
-				$httpBackend.expectGET(globalSettings.get('baseUrl') + 'documentTemplates').respond(409, []);
+				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'documentTemplates').respond(409, []);
 				documentTemplateService.getTemplates().then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(errorCb).toHaveBeenCalled();
 			});
 
 			it('should getTemplateById()', function() {
-				$httpBackend.expectGET(globalSettings.get('baseUrl') + 'documentTemplates/' + template.id).respond(200, {});
+				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'documentTemplates/' + template.id).respond(200, {});
 				documentTemplateService.getTemplateById(template.id).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(successCb).toHaveBeenCalled();
 			});
 
 			it('should fail to getTemplateById()', function() {
-				$httpBackend.expectGET(globalSettings.get('baseUrl') + 'documentTemplates/' + template.id).respond(409, {});
+				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'documentTemplates/' + template.id).respond(409, {});
 				documentTemplateService.getTemplateById(template.id).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(errorCb).toHaveBeenCalled();
 			});
 
 			it('should createTemplate()', function() {
-				$httpBackend.expectPOST(globalSettings.get('baseUrl') + 'documentTemplates').respond(200, {});
+				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'documentTemplates').respond(200, {});
 				documentTemplateService.createTemplate(template).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(successCb).toHaveBeenCalled();
 			});
 
 			it('should fail to createTemplate()', function() {
-				$httpBackend.expectPOST(globalSettings.get('baseUrl') + 'documentTemplates').respond(409, {});
+				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'documentTemplates').respond(409, {});
 				documentTemplateService.createTemplate(template).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(errorCb).toHaveBeenCalled();
 			});
 
 			it('should updateTemplate()', function() {
-				$httpBackend.expectPOST(globalSettings.get('baseUrl') + 'documentTemplates/' + template.id).respond(200, {});
+				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'documentTemplates/' + template.id).respond(200, {});
 				documentTemplateService.updateTemplate(template).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(successCb).toHaveBeenCalled();
 			});
 
 			it('should fail to updateTemplate()', function() {
-				$httpBackend.expectPOST(globalSettings.get('baseUrl') + 'documentTemplates/'  + template.id).respond(409, {});
+				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'documentTemplates/'  + template.id).respond(409, {});
 				documentTemplateService.updateTemplate(template).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(errorCb).toHaveBeenCalled();
 			});
 
 			it('should removeTemplate()', function() {
-				$httpBackend.expectDELETE(globalSettings.get('baseUrl') + 'documentTemplates/' + template.id).respond(200, {});
+				$httpBackend.expectDELETE(globalSettings.get('tempUrl') + 'documentTemplates/' + template.id).respond(200, {});
 				dump(template);
 				documentTemplateService.removeTemplate(template).then(successCb, errorCb);
 				$httpBackend.flush();
@@ -93,7 +93,7 @@
 			});
 
 			it('should fail to removeTemplate()', function() {
-				$httpBackend.expectDELETE(globalSettings.get('baseUrl') + 'documentTemplates/' + template.id).respond(409, {});
+				$httpBackend.expectDELETE(globalSettings.get('tempUrl') + 'documentTemplates/' + template.id).respond(409, {});
 				documentTemplateService.removeTemplate(template).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(errorCb).toHaveBeenCalled();
