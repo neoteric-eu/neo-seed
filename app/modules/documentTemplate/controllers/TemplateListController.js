@@ -42,6 +42,33 @@
 				$location.url('/template/create');
 			};
 
+			$scope.removeTemplateModal = function(template) {
+				var modalScope = $scope.$new();
+				modalScope.template = template;
+
+				var modalInstance = $modal.open({
+					templateUrl: documentTemplateModulePath + 'views/modals/removeTemplateModal.html',
+					scope: modalScope
+				});
+				modalInstance.result.then(function () {
+						$scope.removeTemplate(template);
+				});
+			};
+
+			$scope.removeTemplate = function(template) {
+				//$System.showLoader();
+				documentTemplateService.removeTemplate(template).then(
+					function() {
+						//$System.hideLoader();						
+						$scope.templatesTable.reload();
+						// $System.$appMessages.success($System.$locale.getT('Operation_succeeded'));
+					}, function() {	//reason
+						// $System.$appMessages.error($System.$locale.getT('Operation_failed'));
+						// $System.$exceptionHandler(reason);
+					}
+				);
+			};
+
 
 
 		};

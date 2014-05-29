@@ -12,7 +12,7 @@
 	define([
 		'angular',
 		'./controllers/CreateTemplateController',
-		'./controllers/ViewFbController',
+		'./controllers/ViewTemplateController',
 		'./controllers/TemplateListController',
 
 		'./directives/field-directive/field-directive',
@@ -28,7 +28,7 @@
 		'./locale/en_EN',
 		'./locale/pl_PL'
 
-	], function(angular, CreateTemplateController, ViewFbController, TemplateListController, fieldDirective,
+	], function(angular, CreateTemplateController, ViewTemplateController, TemplateListController, fieldDirective,
 		formDirective, heightWatch, documentTemplateService, documentTemplateResource, fieldTypesResource, documentTemplateUrls) {
 
 		var moduleName = 'documentTemplate';
@@ -42,7 +42,7 @@
 
 		angular.module( controllers , [] )
 			.controller('CreateTemplateController', CreateTemplateController)
-			.controller('ViewFbController', ViewFbController)
+			.controller('ViewTemplateController', ViewTemplateController)
 			.controller('TemplateListController', TemplateListController);
 
 		angular.module( directives , [] )

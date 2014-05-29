@@ -21,7 +21,11 @@
 			Field_Options: 'Opcje',
 			Required_Field: 'Pole Wymagane',
 			Add_Option: 'Dodaj Opcję',
-			Field_Default_Value: 'Wartość domyślna'
+			Field_Default_Value: 'Wartość domyślna',
+			Delete_template: 'Usuń szablon',
+			Do_you_want_to_remove: 'Czy na pewno chcesz usunąć szablon',
+			No: 'Nie',
+			Remove: 'Usuń',
 
 		});
 	});

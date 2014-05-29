@@ -111,7 +111,6 @@
 			// deletes all the fields
 			$scope.reset = function () {
 				$scope.form.metaFields.splice(0, $scope.form.metaFields.length);
-				$scope.addField.lastAddedID = 0;
 			};
 
 			$scope.initTemplate = function() {
@@ -123,7 +122,17 @@
 				console.log($scope.editMode);
 			};
 
-
+			$scope.saveTemplate = function(form) {
+				documentTemplateService.createTemplate(form).then(function(){
+					console.log('success');
+					//info ze sie udalo
+				}, function() {
+					console.log('failed');
+				});
+				$scope.form.name = '';
+				$scope.form.description = '';
+				$scope.form.metaFields = [];
+			};
 
 
 

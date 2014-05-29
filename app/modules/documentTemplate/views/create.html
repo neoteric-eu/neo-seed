@@ -35,7 +35,7 @@
 				<div>{{t('Field_Name')}}:</div>
 				<input type="text" ng-model="fieldName">
 				<select ng-model="selectedType" ng-options="type as type.typeName for type in addField.types"></select>
-				<button type="submit" class="btn btn-info" ng-click="addNewField()"ng-disabled="!fieldName"><i class="icon-plus"></i> {{t('Add_Field')}}</button>
+				<button type="submit" class="btn btn-info" ng-click="addNewField()"ng-disabled="!fieldName"><i class="fa fa-plus"></i>  {{t('Add_Field')}}</button>
 			</div>
 			<hr>
 			<p ng-show="form.metaFields.length == 0">{{t('No_fields_added_yet')}}</p>
@@ -79,7 +79,7 @@
 									<a class="btn btn-danger btn-mini right" type="button" ng-click="deleteOption(field, $index)"><i class="icon-minus icon-white"></i></a>
 									<!-- <span class="label label-inverse">Value: {{ option.option_value }}</span> -->
 								</div>
-								<button class="btn btn-primary btn-small" type="button" ng-click="addOption(field)"><i class="icon-plus icon-white"></i> {{t('Add_Option')}}</button>
+								<button class="btn btn-primary btn-small" type="button" ng-click="addOption(field)"><i class="fa fa-plus"></i>  {{t('Add_Option')}}</button>
 							</div>
 						</div>
 						<div class="row">
@@ -103,9 +103,9 @@
 					</div>
 				</accordion-group>
 			</accordion>
-
+			<br><hr>
 			<p class="text-center">
-				<button class="btn btn-primary right" type="button" ng-click="previewOn()"><i class="icon-eye-open icon-white"></i> Zapisz</button>
+				<button class="btn btn-primary right" type="button" ng-click="saveTemplate(form)" ng-disabled="!form.description || !form.name || form.metaFields.length == 0"><i class="icon-eye-open icon-white"></i> Zapisz</button>
 				<button class="btn btn-primary right" type="button" ng-click="previewOn()"><i class="icon-eye-open icon-white"></i> Podgląd</button>
 				<button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Wyczyść</button>
 			</p>

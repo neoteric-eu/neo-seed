@@ -6,19 +6,10 @@
 			var modulePath = './modules/documentTemplate/views/';
 
 			$routeProvider
-			.when('/template/create', {
-				templateUrl: modulePath + 'create.html'
-			})
-			.when('/template/:id/view', {
-				templateUrl: modulePath + 'view.html',
-				controller: 'ViewController'
-			})
-			.when('/template/template-list', {
-				templateUrl: modulePath + 'template-list.html'
-			})
-			.when('/template/edit-template/:templateId', {	//edycja szablonu
-				templateUrl: modulePath + 'create.html'
-			});
+			.when('/template/create', {templateUrl: modulePath + 'create.html'})
+			.when('/template/:id/view', {templateUrl: modulePath + 'view.html', controller: 'ViewTemplateController'})
+			.when('/template/template-list', {templateUrl: modulePath + 'template-list.html'})
+			.when('/template/edit-template/:templateId', {templateUrl: modulePath + 'create.html'});
 		};
 		return ['$routeProvider', documentTemplateUrls];
 	});
