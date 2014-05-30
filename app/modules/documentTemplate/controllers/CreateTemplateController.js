@@ -2,7 +2,7 @@
 	'use strict';
 	define([], function() {
 
-		var CreateTemplateController = function($scope, $location, documentTemplateService) {
+		var CreateTemplateController = function($scope, $location, $routeParams, documentTemplateService) {
 
 			// preview form mode
 			$scope.previewMode = false;
@@ -19,8 +19,7 @@
 
 			// add new field drop-down:
 			$scope.addField = {};
-			$scope.addField.types = documentTemplateService.fields;
-			$scope.selectedType = $scope.addField.types[0];
+
 
 			// accordion settings
 			$scope.accordion = {};
@@ -101,7 +100,7 @@
 
 			// decides whether field options block will be shown (true for dropdown and radio fields)
 			$scope.showAddOptions = function (field) {
-				if(field.fieldTypeName === 'Radio Buttons' || field.fieldTypeName === 'Dropdown List') {
+				if(field.fieldTypeName === 'Radio button' || field.fieldTypeName === 'Dropdown list') {
 					return true;
 				} else {
 					return false;
@@ -114,24 +113,33 @@
 			};
 
 			$scope.initTemplate = function() {
-				if($location.path() === '/template/create') {
-					$scope.editMode = 0;
-				}else{
+				documentTemplateService.getFieldTypes().then(function() {
+					$scope.addField.types = documentTemplateService.primitiveFieldTypes.getModel();
+					$scope.selectedType = $scope.addField.types[0];
+				});
+
+				if(angular.isDefined($routeParams.templateId)) {
 					$scope.editMode = 1;
+					documentTemplateService.getTemplateById($routeParams.templateId).then(function(template) {
+						$scope.form = template;
+					}, function() {//reason
+						//$exceptionHandler(reason);
+					});
+				} else {
+					$scope.editMode = 0;
 				}
-				console.log($scope.editMode);
 			};
 
 			$scope.saveTemplate = function(form) {
-				documentTemplateService.createTemplate(form).then(function(){
+				documentTemplateService.createTemplate(form).then(function() {
 					console.log('success');
-					//info ze sie udalo
+					$scope.form.name = '';
+					$scope.form.description = '';
+					$scope.form.metaFields = [];//info ze sie udalo
 				}, function() {
 					console.log('failed');
 				});
-				$scope.form.name = '';
-				$scope.form.description = '';
-				$scope.form.metaFields = [];
+
 			};
 
 
@@ -139,6 +147,6 @@
 
 		};
 
-		return ['$scope', '$location', 'documentTemplateService', CreateTemplateController];
+		return ['$scope', '$location', '$routeParams','documentTemplateService', CreateTemplateController];
 	});
 }());
