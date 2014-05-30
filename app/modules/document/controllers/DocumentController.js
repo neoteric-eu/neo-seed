@@ -1,10 +1,10 @@
-/*jshint newcap: false */
 (function() {
 	'use strict';
 	define([], function(){
 
-		var documentController = function($scope, $filter, $modal, $location, documentService, documentModulePath, ngTableParams) {
+		var DocumentController = function($scope, $filter, $modal, $location, documentService, documentModulePath, ngTableParams) {
 
+			/*jshint newcap: false */
 			$scope.ngTableBuilder = function(data) {
 				return new ngTableParams({
 					page: 1,
@@ -21,15 +21,13 @@
 				});
 			};
 
-
 			$scope.getDocs = function(){
 				//$System.showLoader();
 				documentService.getDocuments().then(
 					//console.log($scope.docs)
 					function(){
 						//$System.hideLoader();
-						$scope.docs = documentService.docs.getModel();	//$scope.docs = data;
-//						 console.log('aaa', $scope.docs);
+						$scope.docs = documentService.docs.getModel();
 						$scope.docsTable = $scope.ngTableBuilder($scope.docs);
 					}, function(){	//reason
 						// $System.hideLoader();
@@ -42,27 +40,9 @@
 
 			};
 
-			$scope.initDocument = function() { //TODO: unfinished
-				console.log('asdsad');
-				if($location.path() === '/document/create') {
-					$scope.editMode = 0;
-				}else{
-					$scope.editMode = 1;
-				}
-				console.log($scope.editMode);
-			};
-
-
-
-
-/*			$scope.editDocument = function(doc){
-
-			};*/
-
 			$scope.removeModal = function(doc){
 				var modalScope = $scope.$new();
 				modalScope.doc = doc;
-				console.log('doc do modala', doc);
 				var modalInstance = $modal.open({
 					templateUrl: documentModulePath + 'views/modals/removeDocModal.html',
 					scope: modalScope
@@ -73,10 +53,10 @@
 			};
 
 			$scope.removeDocument = function(doc) {
-				//$System.showLoader();				
+				//$System.showLoader();
 				documentService.removeDocument(doc).then(
 					function() {
-						//$System.hideLoader();						
+						//$System.hideLoader();
 						$scope.docsTable.reload();
 						// $System.$appMessages.success($System.$locale.getT('Operation_succeeded'));
 					}, function() {	//reason
@@ -92,6 +72,6 @@
 
 		};
 
-		return ['$scope', '$filter', '$modal', '$location', 'documentService', 'documentModulePath', 'ngTableParams', documentController, ];
+		return ['$scope', '$filter', '$modal', '$location', 'documentService', 'documentModulePath', 'ngTableParams', DocumentController, ];
 	});
 }());

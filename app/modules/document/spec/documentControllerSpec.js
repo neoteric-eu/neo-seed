@@ -72,7 +72,7 @@
 				var $controller = $injector.get('$controller');
 
 				function createDocumentController() {
-					return $controller('documentController', {
+					return $controller('DocumentController', {
 						'$scope' : scope,
 						'documentService': documentService,
 						'$System': $System,

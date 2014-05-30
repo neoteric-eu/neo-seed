@@ -10,21 +10,18 @@
 	define([
 		'angular',
 
-		'./controllers/documentController',
-
-
-		//'./directives/...',
+		'./controllers/DocumentController',
+		'./controllers/CreateDocumentController',
 
 		'./services/documentService',
-
 		'./resources/documentResource',
 
 		'./docsUrls',
 		'./locale/en_EN',
 		'./locale/pl_PL'
 
-	], function(angular, documentController, documentService, documentResource, docsUrls)
-	{
+	], function(angular, DocumentController, CreateDocumentController,
+	documentService, documentResource, docsUrls) {
 		var moduleName = 'document';
 		var controllers = moduleName + '.controllers';
 		// var directives = moduleName + '.directives';
@@ -35,7 +32,8 @@
 			.config(docsUrls);
 
 		angular.module( controllers , [] )
-			.controller('documentController', documentController);
+			.controller('DocumentController', DocumentController)
+			.controller('CreateDocumentController', CreateDocumentController);
 
 		angular.module( services, ['ngResource'] )
 			.service('documentService', documentService)
