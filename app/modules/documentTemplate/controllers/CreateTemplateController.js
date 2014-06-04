@@ -2,7 +2,7 @@
 	'use strict';
 	define([], function() {
 
-		var CreateTemplateController = function($scope, $location, $routeParams, documentTemplateService) {
+		var CreateTemplateController = function($scope, $location, $routeParams, $modal, enums, documentTemplateService, documentTemplateModulePath) {
 
 			// preview form mode
 			$scope.previewMode = false;
@@ -34,9 +34,11 @@
 					'fieldDescription' : $scope.fieldDescription || '',
 					'fieldTypeId' : $scope.selectedType.id,	//to do
 					'fieldTypeName' : $scope.selectedType.typeName,
+					'fieldLabel' : $scope.selectedType.label,
 					'fieldClass' : null,
 					'composite': [],
-					//options are pushed 
+					//options are pushed
+					'validationPatternNeeded': false,
 					'validationPattern' : null,
 					'required' : true,
 					'value' : ''
@@ -100,7 +102,15 @@
 
 			// decides whether field options block will be shown (true for dropdown and radio fields)
 			$scope.showAddOptions = function (field) {
-				if(field.fieldTypeName === 'Radio button' || field.fieldTypeName === 'Dropdown list') {
+				if(field.fieldTypeName === enums.fieldTypes.RADIO || field.fieldTypeName === enums.fieldTypes.DROPDOWN) {
+					return true;
+				} else {
+					return false;
+				}
+			};
+
+			$scope.showValidationInput = function (field) {
+				if(field.fieldTypeName === enums.fieldTypes.TEXTFIELD) {
 					return true;
 				} else {
 					return false;
@@ -122,6 +132,14 @@
 					$scope.editMode = 1;
 					documentTemplateService.getTemplateById($routeParams.templateId).then(function(template) {
 						$scope.form = template;
+						// _.each responsible for displaying REGEX DIV correctly in edit mode.
+						_.each($scope.form.metaFields, function(field) {
+							if(field.validationPattern) {
+								field.validationPatternNeeded = true;
+							} else {
+								field.validationPatternNeeded = false;
+							}
+						});
 					}, function() {//reason
 						//$exceptionHandler(reason);
 					});
@@ -130,7 +148,25 @@
 				}
 			};
 
+			// function used to load chosen version of the template
+			$scope.editTemplate = function(template, version) {
+
+				console.log('c', version);
+				documentTemplateService.getTemplateById($routeParams.templateId, version.version).then(function(template) {
+
+					$scope.form = template;
+				}, function() {	// reason
+					// $exceptionHandler(reason);
+				});
+			};
+
+			// saves a newly created template
 			$scope.saveTemplate = function(form) {
+				console.log('mega wazne', form);
+				if (angular.isDefined(form.version)) {
+					$scope.updateTemplate(form);
+					return;
+				}
 				documentTemplateService.createTemplate(form).then(function() {
 					console.log('success');
 					$scope.form.name = '';
@@ -142,11 +178,41 @@
 
 			};
 
+			// updates already existing template to newer version
+			$scope.updateTemplate = function(form) {
+				console.log('update wszedl', form);
+				documentTemplateService.updateTemplate(form).then(function() {
+					console.log('success');
+				}, function() {	// reason
+					// $exceptionHandler(reason);
+				});
+			};
 
+			$scope.restoreVersionModal = function(template, version) {
+				// argument version - current object in "versions" array of the current template
+				var modalScope = $scope.$new();
+				modalScope.template = template;
+				modalScope.version = version;
+
+				var modalInstance = $modal.open({
+					templateUrl: documentTemplateModulePath + 'views/modals/restoreVersionModal.html',
+					scope: modalScope
+				});
+				modalInstance.result.then(function () {
+					$scope.restoreVersion(template, version);
+				});
+			};
+
+			$scope.restoreVersion = function(template, version) {
+				//console.log('restore', template, 'aaaaa', version);
+				$scope.editTemplate(template, version);
+				console.log('edit sie udal', $scope.form);
+				$scope.updateTemplate($scope.form);
+			};
 
 
 		};
 
-		return ['$scope', '$location', '$routeParams','documentTemplateService', CreateTemplateController];
+		return ['$scope', '$location', '$routeParams', '$modal', 'enums', 'documentTemplateService', 'documentTemplateModulePath', CreateTemplateController];
 	});
 }());

@@ -43,14 +43,14 @@
 			});
 
 			it('should getTemplateById()', function() {
-				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'documentTemplates/' + template.id).respond(200, {});
+				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'documentTemplates/' + template.id + '?').respond(200, {});
 				documentTemplateService.getTemplateById(template.id).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(successCb).toHaveBeenCalled();
 			});
 
 			it('should fail to getTemplateById()', function() {
-				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'documentTemplates/' + template.id).respond(409, {});
+				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'documentTemplates/' + template.id + '?').respond(409, {});
 				documentTemplateService.getTemplateById(template.id).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(errorCb).toHaveBeenCalled();
