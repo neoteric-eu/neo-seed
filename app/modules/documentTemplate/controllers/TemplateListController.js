@@ -39,7 +39,15 @@
 			};
 
 			$scope.createDoc = function() {
+				$location.url('/document/create');
+			};
+
+/*			$scope.createTemplate = function() {
 				$location.url('/template/create');
+			};*/
+
+			$scope.editTemplate = function(template) {
+				$location.url('/template/edit-template/' + template.id);
 			};
 
 			$scope.removeTemplateModal = function(template) {

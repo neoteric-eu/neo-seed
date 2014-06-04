@@ -83,9 +83,9 @@
 				return deferred.promise;
 			};
 
-			this.getTemplateById = function(id) {
+			this.getTemplateById = function(id, version) {
 				var deferred = $q.defer();
-				documentTemplateResource.getTemplateById({templateId: id}, function(data) {
+				documentTemplateResource.getTemplateById({templateId: id, version: version}, function(data) {
 					deferred.resolve(data);
 				},function(reason) {
 					deferred.reject(reason);
@@ -108,7 +108,7 @@
 
 			this.updateTemplate = function(template) {
 				var deferred = $q.defer();
-				documentTemplateResource.updateTemplate({templateId: template.id}, function (data) {
+				documentTemplateResource.updateTemplate({templateId: template.id}, template, function (data) {
 					deferred.resolve(data);
 				}, function(reason){
 					deferred.reject(reason);

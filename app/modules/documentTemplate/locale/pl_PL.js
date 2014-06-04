@@ -26,6 +26,13 @@
 			Do_you_want_to_remove: 'Czy na pewno chcesz usunąć szablon',
 			No: 'Nie',
 			Remove: 'Usuń',
+			Display_validation_pattern: 'Czy chcesz zdefiniować wyrażenie regularne REGEX?',
+			Version: 'Wersja',
+			Version_history_template: 'Historia wersji szablonu',
+			Add_template: 'Dodaj szablon',
+			Restore_version: 'Przywrócenie wersji',
+			Do_you_want_to_restore_template_to_version: 'Czy na pewno chcesz przywrócić szablon do wersji',
+			Restore: 'Przywróć'
 
 		});
 	});

@@ -20,6 +20,7 @@
 		'./directives/heightWatch',
 
 		'./services/documentTemplateService',
+		'./services/enums',
 
 		'./resources/documentTemplateResource',
 		'./resources/fieldTypesResource',
@@ -29,7 +30,7 @@
 		'./locale/pl_PL'
 
 	], function(angular, CreateTemplateController, ViewTemplateController, TemplateListController, fieldDirective,
-		formDirective, heightWatch, documentTemplateService, documentTemplateResource, fieldTypesResource, documentTemplateUrls) {
+		formDirective, heightWatch, documentTemplateService, enums, documentTemplateResource, fieldTypesResource, documentTemplateUrls) {
 
 		var moduleName = 'documentTemplate';
 		var controllers = moduleName + '.controllers';
@@ -52,6 +53,7 @@
 
 		angular.module( services, ['ngResource'] )
 			.service('documentTemplateService', documentTemplateService)
+			.service('enums', enums)
 			.service('documentTemplateResource', documentTemplateResource)
 			.service('fieldTypesResource', fieldTypesResource);
 			// .service('$config', config)
