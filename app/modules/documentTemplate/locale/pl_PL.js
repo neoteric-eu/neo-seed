@@ -32,8 +32,8 @@
 			Add_template: 'Dodaj szablon',
 			Restore_version: 'Przywrócenie wersji',
 			Do_you_want_to_restore_template_to_version: 'Czy na pewno chcesz przywrócić szablon do wersji',
-			Restore: 'Przywróć'
-
+			Restore: 'Przywróć',
+			Any_unsaved_changes_will_be_lost: 'Niezapisane zmiany zostaną utracone'
 		});
 	});
 }());
