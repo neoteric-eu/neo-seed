@@ -41,10 +41,12 @@
 			var linker = function(scope, element) {
 				// GET template content from path
 				var templateUrl = getTemplateUrl(scope.field);
+				scope.ready = false;
 
 				$http.get(templateUrl).success(function(data) {
 					element.html(data);
 					$compile(element.contents())(scope);
+					scope.ready = true;
 				});
 
 
@@ -62,13 +64,11 @@
 				controller: function($scope){
 					$scope.isValidationPattern = function(validationPattern) {
 						var patern;
-						console.log('validationPattern', validationPattern);
 						if (angular.isDefined(validationPattern)) {
 							patern = new RegExp(validationPattern);
 						} else {
 							patern = new RegExp('^.*');
 						}
-						console.log(patern, 'patern');
 						return patern;
 					};
 				}
