@@ -25,7 +25,7 @@
 
 
 			// FAQ #1
-			var item = {
+/*			var item = {
 				file: {
 					name: 'Previously uploaded file',
 					size: 1e6
@@ -34,6 +34,8 @@
 				isUploaded: true,
 				isSuccess: true
 			};
+
+
 			item.remove = function() {
 				$scope.uploader.removeFromQueue(this);
 			};
@@ -48,6 +50,7 @@
 				return true;
 			});
 
+			*/
 			// REGISTER HANDLERS
 
 			$scope.uploader.bind('afteraddingfile', function (event, item) {

@@ -12,8 +12,8 @@
 					{ href: 'document/document-list', title: 'Lista Dokumentów', icon: 'fa fa-lg fa-fw fa-list-ul' },
 
 					{ href: 'template/template-list', title: 'Lista Szablonów', icon: 'fa fa-lg fa-fw fa-list-ul' },
-				
-				//	{ href: 'template/template-list', title: 'Lista Szablonów', icon: 'fa fa-lg fa-fw fa-list-ul' }
+
+					{ href: 'upload', title: 'upload', icon: 'fa fa-lg fa-fw fa-upload' }
 				],
 
 				getMenu: function() {

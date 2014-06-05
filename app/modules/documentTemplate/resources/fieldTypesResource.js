@@ -20,6 +20,8 @@
 				}
 			);
 		};
+
 		return ['$resource', fieldTypesResource];
+
 	});
 }());

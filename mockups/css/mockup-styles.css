@@ -1,0 +1,37 @@
+/*	Document Template */
+
+
+.form-template .form-control {
+	border: 1px solid transparent;
+	background-color: transparent;
+	margin-bottom: 5px;
+}
+
+.form-template .form-control:hover {
+	background-color: #ffffff;
+	border-color: #cccccc;
+}
+.form-template .form-control:focus {
+	background-color: #ffffff;
+	border-color: #66afe9;
+}
+
+.form-title {
+	font-size: 23px;
+	font-weight: bold;
+	line-height: 28px;
+	padding: 3px 8px 1px 6px;
+}
+
+.icon-on-hover button {
+	padding: 8px 12px 0 0;
+}
+
+.padding-25-0 {
+	padding: 25px 0;
+}
+
+.col-centered {
+	float: none;
+	margin: 0 auto;
+}

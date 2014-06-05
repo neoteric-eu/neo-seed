@@ -219,6 +219,7 @@ function (angular) {
 		$rootScope.checkSession();
 
 		$rootScope.menu = menu.getMenu();
+
 		$rootScope.$on('event:loginRequired', function() {
 			session.clearSession();
 			$rootScope.checkSession();
@@ -232,6 +233,10 @@ function (angular) {
 				localStorage.setItem('prevRoute', route[1]);
 			}
 
+		});
+
+		$rootScope.$on('$viewContentLoaded', function(event){
+			pageSetUp();
 		});
 
 		$rootScope.$on('$routeChangeSuccess', function(event, currentRoute, priorRoute) {
@@ -254,7 +259,7 @@ function (angular) {
 
 			}
 
-			appMessages.apply();
+			appMessages.$apply();
 		});
 	}]);
 

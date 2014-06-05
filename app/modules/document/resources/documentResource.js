@@ -2,7 +2,7 @@
 	'use strict';
 	define(['globalSettings'], function(gloabalSettings) {
 		var documentResource = function($resource) {
-			return $resource(gloabalSettings.get('tempUrl')+'document/:action/:documentId',
+			return $resource(gloabalSettings.get('tempUrl')+'documents/:action/:documentId',
 				{
 					action: '@action',
 					documentId: '@documentId',
@@ -14,9 +14,7 @@
 					},
 
 					getDocuments: {
-						method: 'GET',
-						isArray: true
-
+						method: 'GET'
 					},
 
 					deleteDocument: {	// 19.05 - brak REST
