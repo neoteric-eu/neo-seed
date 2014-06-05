@@ -28,7 +28,7 @@
 					}
 				};
 			}
-
+			this.activeTemplate = new ModelConstructor();
 			this.documentTemplates = new ModelConstructor();
 			this.primitiveFieldTypes = new ModelConstructor();
 			this.complexFieldTypes = new ModelConstructor();
@@ -86,6 +86,7 @@
 			this.getTemplateById = function(id, version) {
 				var deferred = $q.defer();
 				documentTemplateResource.getTemplateById({templateId: id, version: version}, function(data) {
+					self.activeTemplate.setModel(data);
 					deferred.resolve(data);
 				},function(reason) {
 					deferred.reject(reason);
@@ -129,6 +130,23 @@
 
 				return deferred.promise;
 			};
+
+			this.restoreTemplateVersion = function(id, version) {
+				var deferred = $q.defer();
+				documentTemplateResource.updateTemplate({templateId: id, version: version}, {}, function(data) {
+					self.activeTemplate.setModel(data);
+					deferred.resolve(data);
+				},function(reason) {
+					deferred.reject(reason);
+				});
+
+				return deferred.promise;
+
+
+			};
+
+
+
 
 		};
 
