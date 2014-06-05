@@ -55,7 +55,7 @@
 
 
 			return {
-				template: '<div>{{field}}</div>',
+				template: '<div ng-show="ready">{{field}}</div>',
 				restrict: 'E',
 				scope: {
 					field:'='
