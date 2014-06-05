@@ -131,10 +131,11 @@
 				<h4>{{t('Version_history_template')}}:</h4>
 				<div class="well">
 					<table class="versionList">
+						<!--  item == object in versions array  -->
 						<tr ng-repeat="item in form.versions | orderBy:'version':true" ng-mouseover="isActive = true" ng-mouseleave="isActive = false" ng-click="editTemplate(form, item)">
 							<td>
 								<strong>WERSJA {{item.version}}</strong> została utworzona przez <strong>{{item.author | uppercase}}</strong> dnia {{item.timestamp | date:'dd-MM-yyyy'}}
-								<button ng-show="isActive" class="btn btn-primary btn-xs" ng-click="restoreVersionModal(form, item); $event.stopPropagation();">Przywróć</button>
+								<button ng-show="isActive" class="btn btn-primary btn-xs" ng-click="restoreVersionModal(form.id, item); $event.stopPropagation();">Przywróć</button>
 							</td>
 						</tr>
 

@@ -149,12 +149,9 @@
 			};
 
 			// function used to load chosen version of the template
-			$scope.editTemplate = function(template, version) {
-
-				console.log('c', version);
-				documentTemplateService.getTemplateById($routeParams.templateId, version.version).then(function(template) {
-
-					$scope.form = template;
+			$scope.editTemplate = function(template, version) { //FIXME: check if template argument is needed
+				documentTemplateService.getTemplateById($routeParams.templateId, version.version).then(function() {
+					$scope.form = documentTemplateService.activeTemplate.getModel();
 				}, function() {	// reason
 					// $exceptionHandler(reason);
 				});
@@ -162,7 +159,6 @@
 
 			// saves a newly created template
 			$scope.saveTemplate = function(form) {
-				console.log('mega wazne', form);
 				if (angular.isDefined(form.version)) {
 					$scope.updateTemplate(form);
 					return;
@@ -203,12 +199,39 @@
 				});
 			};
 
-			$scope.restoreVersion = function(template, version) {
-				//console.log('restore', template, 'aaaaa', version);
-				$scope.editTemplate(template, version);
-				console.log('edit sie udal', $scope.form);
-				$scope.updateTemplate($scope.form);
+			$scope.restoreVersion = function(id, version) {
+
+				documentTemplateService.restoreTemplateVersion($routeParams.templateId, version.version).then(function() {
+
+					$scope.form = documentTemplateService.activeTemplate.getModel();
+					//console.log('scope.form po editTemplate', $scope.form);
+				}, function() {	// reason
+					// $exceptionHandler(reason);
+				});
+
 			};
+
+///////////////////////////// TRASH //////////////////////////////////////
+/*			$scope.restoreVersion = function(template, version) {
+				//console.log('restore', template, 'aaaaa', version);
+				documentTemplateService.getTemplateById($routeParams.templateId, version.version).then(function(data) {
+
+					ret
+
+				}).then(function() {
+					console.log('edit sie udal', $scope.form);
+					documentTemplateService.updateTemplate($scope.form).then(function() {
+						console.log('success');
+					}, function() {	// reason
+						// $exceptionHandler(reason);
+					});
+				});
+
+			};*/
+
+
+
+
 
 
 		};
