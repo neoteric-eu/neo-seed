@@ -178,6 +178,7 @@
 			$scope.updateTemplate = function(form) {
 				console.log('update wszedl', form);
 				documentTemplateService.updateTemplate(form).then(function() {
+					$scope.form = documentTemplateService.activeTemplate.getModel();
 					console.log('success');
 				}, function() {	// reason
 					// $exceptionHandler(reason);
@@ -210,24 +211,6 @@
 				});
 
 			};
-
-///////////////////////////// TRASH //////////////////////////////////////
-/*			$scope.restoreVersion = function(template, version) {
-				//console.log('restore', template, 'aaaaa', version);
-				documentTemplateService.getTemplateById($routeParams.templateId, version.version).then(function(data) {
-
-					ret
-
-				}).then(function() {
-					console.log('edit sie udal', $scope.form);
-					documentTemplateService.updateTemplate($scope.form).then(function() {
-						console.log('success');
-					}, function() {	// reason
-						// $exceptionHandler(reason);
-					});
-				});
-
-			};*/
 
 
 
