@@ -110,6 +110,7 @@
 			this.updateTemplate = function(template) {
 				var deferred = $q.defer();
 				documentTemplateResource.updateTemplate({templateId: template.id}, template, function (data) {
+					self.activeTemplate.setModel(data);
 					deferred.resolve(data);
 				}, function(reason){
 					deferred.reject(reason);
