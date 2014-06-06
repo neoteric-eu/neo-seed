@@ -3,10 +3,8 @@
 	'use strict';
 	define([],function() {
 
-		var documentTemplateService = function($q, documentTemplateResource, fieldTypesResource) {
+		var documentTemplateService = function($q, enums, locale, documentTemplateResource, fieldTypesResource) {
 			var self = this;
-
-			/* jshint  quotmark: false */
 
 			function ModelConstructor()  {
 				var model = [];
@@ -46,14 +44,19 @@
 						var complex = [];
 						//field types primitive vs complex
 						_.each(data.data, function(fieldType) {
-							if(fieldType.class === "PRIMITIVE") {
+							if(fieldType.class === enums.fieldTypes.PRIMITIVE) {
 								primitive.push(fieldType);
-							} else if(fieldType.class === "COMPLEX") {
+							} else if(fieldType.class === enums.fieldTypes.COMPLEX) {
 								complex.push(fieldType);
 							}
 
 						});
+						// Trnslate label names
+						primitive = self.translateFieldsType(primitive);
 						self.primitiveFieldTypes.setModel(primitive);
+						console.log(primitive);
+
+
 						self.complexFieldTypes.setModel(complex);
 						deferred.resolve(data);
 					}, function(reason) {
@@ -63,8 +66,22 @@
 				return deferred.promise;
 			};
 
+			/**
+			 *	@name translateFieldsType
+			 *
+			 *	@param {array} fieldTypes
+			 *	@return {array} fieldTypes field types with locale labels
+			 *	@description Translate label of each fieldTypes
+			 */
+			this.translateFieldsType = function(fieldTypes) {
+				_.each(fieldTypes, function(fieldType) {
+					fieldType.label = locale.getT(fieldType.typeName);
+				});
 
-/*		-----	SERVICE NEVER USED - creating fieldTypes disallowed at this stage  ----
+				return fieldTypes;
+			};
+
+	/*-----	SERVICE NEVER USED - creating fieldTypes disallowed at this stage  ----*/
 			this.createFieldType = function(fieldType) {
 				var deferred = $q.defer();
 				fieldTypesResource.createFieldType(fieldType, function(data) {
@@ -75,7 +92,7 @@
 				});
 
 				return deferred.promise;
-			};*/
+			};
 
 			this.getTemplates = function() {
 				var deferred = $q.defer();
@@ -128,7 +145,7 @@
 
 			this.removeTemplate = function(template) {
 				var deferred = $q.defer();
-				
+
 				documentTemplateResource.removeTemplate({templateId: template.id}, function(data) {
 					self.documentTemplates.removeModel(template);
 					deferred.resolve(data);
@@ -149,17 +166,11 @@
 				});
 
 				return deferred.promise;
-
-
 			};
 
 
 
-
 		};
-
-
-		return ['$q', 'documentTemplateResource', 'fieldTypesResource', documentTemplateService];
-
+		return ['$q', 'enums', 'locale', 'documentTemplateResource', 'fieldTypesResource', documentTemplateService];
 	});
 }());

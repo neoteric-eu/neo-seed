@@ -1,8 +1,8 @@
 /* jshint undef:false*/
 (function() {
 	'use strict';
-	define(['underscore'], function() {
-		_.extend(t.pl,{
+	define(['angular'], function() {
+		angular.extend(t.pl,{
 		//	value: 'value',
 			create_template: 'Utwórz szablon',
 			edit_template: 'Edytuj szablon',
@@ -14,6 +14,7 @@
 			Fields: 'Pola',
 			Field_Name: 'Nazwa Pola',
 			Add_Field: 'Dodaj Pole',
+			Help_text: 'Tekst Pomocy',
 			No_fields_added_yet: 'Brak dodanych pól',
 			Delete: 'Usuń',
 			Field_Type: 'Typ Pola',
@@ -32,8 +33,17 @@
 			Add_template: 'Dodaj szablon',
 			Restore_version: 'Przywrócenie wersji',
 			Do_you_want_to_restore_template_to_version: 'Czy na pewno chcesz przywrócić szablon do wersji',
-			Restore: 'Przywróć'
+			Restore: 'Przywróć',
+			Any_unsaved_changes_will_be_lost: 'Niezapisane zmiany zostaną utracone',
+			New_template: 'Nowy szablon',
 
+			TEXTFIELD: 'Tekst',
+			TEXTAREA: 'Tekst akapitu',
+			EMAIL: 'E-mail',
+			RADIO: 'Wielokrotny wybór',
+			DROPDOWN: 'Wybierz z listy',
+			DATE: 'Data',
+			CHECKBOX: 'Jednokrotny wybór',
 		});
 	});
 }());

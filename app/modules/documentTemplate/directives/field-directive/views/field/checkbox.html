@@ -1,22 +1,18 @@
 
 <div class="form-group">
-	<label class="col-md-2 control-label">
-		<span ng-show="field.required" class="text-danger">* </span>
-		{{field.fieldName}}
-	</label>
-
-	<div class="col-md-9">
+	<div class="col-md-9 col-md-offset-2">
 		<div class="checkbox">
 			<label>
 				<input ng-model="field.value" id="{{field.id}}" type="checkbox" ng-true-value="1" ng-false-value="0" ng-required="field.required">
-				Checkbox 1
+				<span ng-show="field.required" class="text-danger">* </span>
+				{{field.fieldName}}
 			</label>
 		</div>
 	</div>
 	<div class="col-sm-1">
 		<div class="icon-on-hover">
 			<button type="button" class="close pull-left" ng-click="editModal(field)"><i class="fa fa-edit"></i></button>
-			<button type="button" class="close pull-left" ng-click="removeField(field)">&times;</button>
+			<button type="button" class="close pull-left" ng-click="removeField(field, metaFields)">&times;</button>
 		</div>
 	</div>
 </div>

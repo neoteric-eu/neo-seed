@@ -1,8 +1,8 @@
 /* jshint undef:false*/
 (function() {
 	'use strict';
-	define(['underscore'], function() {
-		_.extend(t.en,{
+	define(['angular'], function() {
+		angular.extend(t.en,{
 		//	value: 'value',
 
 		});

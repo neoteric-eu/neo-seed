@@ -35,12 +35,16 @@
 					<hr>
 
 
-					<form-directive form="form"></form-directive>
+					<ng-form name="documentForm" class="form-horizontal" role="form">
+						<div ng-repeat="field in form.metaFields">
+							<field-directive field="field" meta-fields="form.metaFields"></field-directive>
 
+						</div>
+					</ng-form>
 
 
 					<div class="row">
-						<div class="col-sm-3 col-centered">
+						<div class="col-sm-4 col-centered">
 							<div class="form-inline padding-25-0">
 
 								<div class="form-group">
@@ -58,6 +62,13 @@
 
 
 					<hr>
+
+
+					<div class="pull-left">
+						<!-- Template version is hidden in template creation mode -->
+						<a ng-show="!showVersionHistory && form.version" ng-click="showVersionHistory = true">Wersja {{form.version}}</a>
+						<a ng-show="showVersionHistory" ng-click="showVersionHistory = false">Wersja {{form.version}}</a>
+					</div>
 					<div class="pull-right">
 
 						<button class="btn btn-default right" type="button" ng-click="saveTemplateAndContinue()" ng-disabled="form.metaFields.length == 0"> Zapisz i kontynuuj edycję</button>
@@ -65,129 +76,34 @@
 					</div>
 					<div class="clearfix"></div>
 				</div>
+			</div>
 
 
 
 
+			<div ng-show="showVersionHistory">
+				<h4>{{t('Version_history_template')}}:</h4>
+				<div class="well">
+					<table class="versionList">
+						<tr ng-repeat="item in form.versions | orderBy:'version':true" ng-mouseover="isActive = true" ng-mouseleave="isActive = false" ng-click="editTemplate(form, item)">
+							<td>
+								<strong>WERSJA {{item.version}}</strong> została utworzona przez <strong>{{item.author | uppercase}}</strong> dnia {{item.timestamp | date:'dd-MM-yyyy'}}
+								<button ng-show="isActive" class="btn btn-primary btn-xs" ng-click="restoreVersionModal(form, item); $event.stopPropagation();">Przywróć</button>
+							</td>
+						</tr>
 
 
-
-<!--
-
-					<h3>{{t('Fields')}}</h3>
-					<div class="add-field">
-						<div>{{t('Field_Name')}}:</div>
-						<input type="text" ng-model="fieldName">
-					</div>
-					<hr>
-
-					<p ng-show="form.metaFields.length == 0">{{t('No_fields_added_yet')}}</p>
-					<accordion close-others="accordion.oneAtATime">
-						<accordion-group ng-repeat="field in form.metaFields">
-							<accordion-heading>
-								{{field.fieldName}}<div class="pull-right">{{field.fieldLabel}}</div>
-							</accordion-heading>
-							<div class="accordion-edit">
-								<button class="btn btn-danger pull-right" type="button" ng-click="deleteField(form, $index)"><i class="icon-trash icon-white"></i> {{t('Delete')}}</button>
-								<div class="row">
-									<div class="span2">{{t('Field_Type')}}:</div>
-									<div class="span4">{{field.fieldLabel}}</div>
-								</div>
-
-								<div class="clear"></div> <hr>
-
-								<div class="row">
-									<div class="span2">{{t('Field_Name')}}:</div>
-									<div class="span4"><input type="text" ng-model="field.fieldName"></div>
-								</div>
-								<div class="row">
-									<div class="span2">{{t('Field_Description')}}:</div>
-									<div class="span4"><textarea rows="3" cols="80" type="text" name="form-description" ng-disabled="previewMode" ng-model="field.fieldDescription"></textarea></div>
-								</div>
-								<div class="row" ng-show="showAddOptions(field)">
-									<div class="span2">{{t('Field_Options')}}:</div>
-									<div class="span6">
-										<div ng-repeat="option in field.options track by $index">
-											<input type="text" ng-model="field.options[$index]">
-											<a class="btn btn-danger btn-mini right" type="button" ng-click="deleteOption(field, $index)"><i class="icon-minus icon-white"></i></a>
-										</div>
-										<button class="btn btn-primary btn-small" type="button" ng-click="addOption(field)"><i class="fa fa-plus"></i>  {{t('Add_Option')}}</button>
-									</div>
-								</div>
-								<div class="row">
-									<div class="span2">{{t('Field_Default_Value')}}:</div>
-									<div class="span4"><input type="text" ng-model="field.value"></div>
-								</div>
-
-								<div class="row">
-									<div class="span2">{{t('Required_Field')}}:</div>
-									<div class="span4">
-										<label>
-											<input type="radio" ng-value="true" ng-selected ng-model="field.required"/>
-											&nbsp; Yes
-										</label>
-										<label>
-											<input type="radio" ng-value="false" ng-model="field.required"/>
-											&nbsp; No
-										</label>
-									</div>
-								</div>
-
-								<div class="row" ng-show="showValidationInput(field)">
-									<div class="span2">{{t('Display_validation_pattern')}}:</div>
-									<div class="span4">
-										<label>
-											<input type="radio" ng-value="true" ng-model="field.validationPatternNeeded"/>
-											&nbsp; Yes
-										</label>
-										<label>
-											<input type="radio" ng-value="false" ng-selected ng-model="field.validationPatternNeeded"/>
-											&nbsp; No
-										</label>
-										<div ng-show="field.validationPatternNeeded">
-											<input type="text" ng-model="field.validationPattern">
-										</div>
-									</div>
-								</div>
-							</div>
-						</accordion-group>
-					</accordion>
-					<br><hr>
-					<p class="text-center">
-						<button class="btn btn-primary right" type="button" ng-click="saveTemplate(form)" ng-disabled="!form.name || form.metaFields.length == 0"><i class="icon-eye-open icon-white"></i> Zapisz</button>
-						<button class="btn btn-primary right" type="button" ng-click="previewOn()"><i class="icon-eye-open icon-white"></i> Podgląd</button>
-					</p>
-					-->
-
-
-					<!-- Template version is hidden in template creation mode -->
-					<a ng-show="!showVersionHistory && form.version" ng-click="showVersionHistory = true">Wersja {{form.version}}</a>
-					<a ng-show="showVersionHistory" ng-click="showVersionHistory = false">Wersja {{form.version}}</a><br><br>
-					<div ng-show="showVersionHistory">
-						<h4>{{t('Version_history_template')}}:</h4>
-						<div class="well">
-							<table class="versionList">
-								<tr ng-repeat="item in form.versions | orderBy:'version':true" ng-mouseover="isActive = true" ng-mouseleave="isActive = false" ng-click="editTemplate(form, item)">
-									<td>
-										<strong>WERSJA {{item.version}}</strong> została utworzona przez <strong>{{item.author | uppercase}}</strong> dnia {{item.timestamp | date:'dd-MM-yyyy'}}
-										<button ng-show="isActive" class="btn btn-primary btn-xs" ng-click="restoreVersionModal(form, item); $event.stopPropagation();">Przywróć</button>
-									</td>
-								</tr>
-
-
-							</table>
-
-
-						</div>
-
-					</div>
+					</table>
 
 
 				</div>
+
 			</div>
 
 
 		</div>
 
+
 	</div>
+
 </section>
