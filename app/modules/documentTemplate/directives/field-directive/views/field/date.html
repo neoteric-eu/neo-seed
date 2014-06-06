@@ -7,12 +7,12 @@
 
 	<div class="col-sm-2">
 		<div class="input-group">
-			<p class="input-group">
-				<input type="text" class="form-control" ng-model="field.value" ng-required="field.required" close-text="Close">
-				<span class="input-group-btn">
-					<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-				</span>
-			</p>
+			<span class="input-group">
+				<input type="text" class="form-control"
+				datepicker-popup="" ng-model="field.value" datepicker-options="dateOptions" ng-required="field.required"
+				close-text="Zamknij" current-text="Dziś" toggle-weeks-text="Tygodnie" clear-text="Wyczyść">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</span>
 		</div>
 	</div>
 
@@ -20,7 +20,7 @@
 	<div class="col-sm-1 col-sm-offset-7">
 		<div class="icon-on-hover">
 			<button type="button" class="close pull-left" ng-click="editModal(field)"><i class="fa fa-edit"></i></button>
-			<button type="button" class="close pull-left" ng-click="removeField(field, metaFields)">&times;</button>
+			<button type="button" class="close pull-left" ng-click="removeField(field, form.metaFields)">&times;</button>
 		</div>
 	</div>
 

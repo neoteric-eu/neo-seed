@@ -54,7 +54,6 @@
 						// Trnslate label names
 						primitive = self.translateFieldsType(primitive);
 						self.primitiveFieldTypes.setModel(primitive);
-						console.log(primitive);
 
 
 						self.complexFieldTypes.setModel(complex);
@@ -123,6 +122,7 @@
 				var deferred = $q.defer();
 				documentTemplateResource.createTemplate(template, function(data) {
 					self.documentTemplates.pushDataToModel(data);
+					self.activeTemplate.setModel(data);
 					deferred.resolve(data);
 				}, function(reason) {
 					deferred.reject(reason);
