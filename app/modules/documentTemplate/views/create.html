@@ -5,8 +5,8 @@
 		<div class="col-md-8 col-md-offset-2">
 
 
-			<div class="well">
-				<div class="form-fields" ng-hide="previewMode">
+			<div class="well"  ng-show="readyToShow">
+				<div class="form-fields">
 
 
 					<div class="row">
@@ -33,7 +33,6 @@
 					</div>
 
 					<hr>
-
 
 					<ng-form name="documentForm" class="form-horizontal" role="form">
 						<div ng-repeat="field in form.metaFields">
@@ -71,8 +70,8 @@
 					</div>
 					<div class="pull-right">
 
-						<button class="btn btn-default right" type="button" ng-click="saveTemplateAndContinue()" ng-disabled="form.metaFields.length == 0"> Zapisz i kontynuuj edycję</button>
-						<button class="btn btn-primary right" type="button" ng-click="saveTemplate(form)" ng-disabled="form.metaFields.length == 0"> Zapisz</button>
+						<button class="btn btn-default right" type="button" ng-click="saveTemplate(form)" ng-disabled="form.metaFields.length == 0"> Zapisz i kontynuuj edycję</button>
+						<button class="btn btn-primary right" type="button" ng-click="saveTemplate(form, true)" ng-disabled="form.metaFields.length == 0"> Zapisz</button>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -97,9 +96,7 @@
 
 
 				</div>
-
 			</div>
-
 
 		</div>
 
