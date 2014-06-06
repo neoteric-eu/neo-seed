@@ -5,13 +5,11 @@
 			return {
 
 				menu: [
-					{ href: 'document/create', title: 'Utwórz nowy dokument', icon: 'fa fa-lg fa-fw fa-file-o' },
 
+					{ href: 'template/template-list', title: 'Szablony', icon: 'fa fa-lg fa-fw fa-list-ul' },
 					{ href: 'template/create', title: 'Utwórz nowy szablon', icon: 'fa fa-lg fa-fw fa-pencil-square-o'},
 
-					{ href: 'document/document-list', title: 'Lista Dokumentów', icon: 'fa fa-lg fa-fw fa-list-ul' },
 
-					{ href: 'template/template-list', title: 'Lista Szablonów', icon: 'fa fa-lg fa-fw fa-list-ul' },
 
 					{ href: 'upload', title: 'upload', icon: 'fa fa-lg fa-fw fa-upload' }
 				],

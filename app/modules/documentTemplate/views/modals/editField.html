@@ -41,10 +41,10 @@
 
 		<div class="col-sm-6">
 			<div ng-repeat="option in field.options track by $index">
-				<input type="text" class="form-control" style="width:50%" ng-model="field.options[$index]">
-				<button class="btn btn-danger btn-xs pull-right" type="button" ng-click="deleteOption(field, $index)"><i class="fa fa-minus icon-white"></i></button>
+				<input type="text" class="form-control margin-bottom-5 width-auto" ng-model="field.options[$index]">
+				<span><i class="fa fa-minus icon-muted-hover" ng-click="deleteOption(field, $index)"></i></span>
 			</div>
-			<button class="btn btn-primary btn-xs pull-right" type="button" ng-click="addOption(field)"><i class="fa fa-plus"></i>  {{t('Add_Option')}}</button>
+			<span><i class="fa fa-plus icon-muted-hover " ng-click="addOption(field)"></i> </span>
 		</div>
 
 	</div>

@@ -40,10 +40,10 @@
 			TEXTFIELD: 'Tekst',
 			TEXTAREA: 'Tekst akapitu',
 			EMAIL: 'E-mail',
-			RADIO: 'Wybór wielokrotny',
+			RADIO: 'Wielokrotny wybór',
 			DROPDOWN: 'Wybierz z listy',
 			DATE: 'Data',
-			CHECKBOX: 'Wybór jednokrotny',
+			CHECKBOX: 'Jednokrotny wybór',
 		});
 	});
 }());

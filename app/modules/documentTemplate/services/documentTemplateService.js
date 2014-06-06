@@ -6,6 +6,9 @@
 		var documentTemplateService = function($q, enums, locale, documentTemplateResource, fieldTypesResource) {
 			var self = this;
 
+
+
+
 			function ModelConstructor()  {
 				var model = [];
 				return {

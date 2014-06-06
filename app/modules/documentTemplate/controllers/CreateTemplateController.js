@@ -33,25 +33,11 @@
 					'options': [''],
 					'validationPattern' : null,
 					'required' : false,
-					'value' : ''
+					'value' : null
 				};
 				// put newField into fields array
 				$scope.form.metaFields.push(newField);
 			};
-
-			// deletes particular field on button click
-/*			$scope.deleteField = function (field_id){
-				for(var i = 0; i < $scope.form.metaFields.length; i++){
-					if($scope.form.metaFields[i].field_id === field_id){
-						$scope.form.metaFields.splice(i, 1);
-						break;
-					}
-				}
-			};*/
-
-			// $scope.deleteField = function(form, index) {
-			// 	form.metaFields.splice(index, 1);
-			// };
 
 
 			$scope.initTemplate = function() {
@@ -141,6 +127,7 @@
 
 		};
 
-		return ['$scope', '$location', '$routeParams', '$modal', 'locale', 'enums', 'documentTemplateService', 'documentTemplateModulePath', CreateTemplateController];
+		return ['$scope', '$location', '$routeParams', '$modal', 'locale', 'enums',
+		'documentTemplateService', 'documentTemplateModulePath', CreateTemplateController];
 	});
 }());
