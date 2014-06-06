@@ -28,10 +28,15 @@
 					}
 				};
 			}
+
 			this.activeTemplate = new ModelConstructor();
 			this.documentTemplates = new ModelConstructor();
 			this.primitiveFieldTypes = new ModelConstructor();
 			this.complexFieldTypes = new ModelConstructor();
+
+			var iconsArray = ['fa-file-text-o', 'fa-bars', 'fa-exclamation-circle', 'fa-key', 'fa-info', 'fa-legal', 'fa-phone', 'fa-pencil'];
+			this.iconsArray = new ModelConstructor();
+			self.iconsArray.setModel(iconsArray);
 
 			this.getFieldTypes = function() {
 				var deferred = $q.defer();

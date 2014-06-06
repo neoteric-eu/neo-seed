@@ -34,10 +34,11 @@
 								<table ng-table="templatesTable" class="table table-hover">
 									<tbody>
 										<tr ng-repeat="template in $data" ng-click="editTemplate(template)">
+												<td width="5%" data-title="'Ikona'" sortable="'icon'">{{ template.icon }}</td>
 											<td width="30%" data-title="'Nazwa szablonu'" sortable="'name'">{{ template.name }}</td>
-											<td width="50%" data-title="'Opis szablonu'" sortable="'description'">{{ template.description }}</td>
+											<td width="44%" data-title="'Opis szablonu'" sortable="'description'">{{ template.description }}</td>
 											<td width="15%" data-title="'Data modyfikacji'" sortable="'timestamp'">{{ template.timestamp | date:dateFormat}}</td>
-											<td width="5%">
+											<td width="6%">
 												<div class="pull-right">
 <!-- 	Buttony obecnie nieużywane					<div class="btn-group">
 														<button type="button" class="btn btn-default" ng-click="displayTemplate(template)">Podgląd</button>
@@ -47,9 +48,9 @@
  	<a type="button" class="btn btn-info" href="#/template/edit-template/{{template.id}}" ng-click="$event.stopPropagation();">Edytuj</a>
  	<button type="button" class="btn btn-danger" ng-click="removeTemplateModal(template)">Usuń</button>
  </div> --> 
-													<div class="icon-on-hover">
-														<a type="button" class="close pull-left" href="#/template/edit-template/{{template.id}}"><i class="fa fa-edit"></i></a>
-														<button type="button" class="close pull-left" ng-click="removeTemplateModal(template); $event.stopPropagation();">×</button>
+													<div class="">
+														<button type="button" class="close x-button" ng-click="removeTemplateModal(template); $event.stopPropagation();">×</button>
+														<a type="button" class="close" href="#/template/edit-template/{{template.id}}"><i class="fa fa-edit"></i></a>
 													</div>
 												</div>
 											</td>

@@ -12,14 +12,15 @@
 			$scope.form.name = '';
 			$scope.form.description = '';
 			$scope.form.metaFields = [];
+			$scope.form.icon = documentTemplateService.iconsArray.getModel()[0];
 
+			$scope.disableLeftArrow = true;
 			// previewForm - for preview purposes, form will be copied into this
 			// otherwise, actual form might get manipulated in preview mode
 			$scope.previewForm = {};
 
 			// add new field drop-down:
 			$scope.addField = {};
-
 
 			// accordion settings
 			$scope.accordion = {};
@@ -127,7 +128,7 @@
 					$scope.addField.types = documentTemplateService.primitiveFieldTypes.getModel();
 					$scope.selectedType = $scope.addField.types[0];
 				});
-
+console.log('xxx', documentTemplateService.iconsArray.getModel());
 				if(angular.isDefined($routeParams.templateId)) {
 					$scope.editMode = 1;
 					documentTemplateService.getTemplateById($routeParams.templateId).then(function(template) {
@@ -212,7 +213,28 @@
 
 			};
 
-
+			$scope.switchIcon = function(i) {
+				var array = documentTemplateService.iconsArray.getModel();
+				
+				$scope.disableLeftArrow = false;
+				$scope.disableRightArrow = false;
+				var n =_.indexOf(array, $scope.form.icon);
+				if (n === 0 && i === -1) {
+					$scope.disableLeftArrow = true;
+					return;
+				}
+				if (n === array.length-1 && i === 1) {
+					$scope.disableRightArrow = true;
+					return;
+				}
+				$scope.form.icon = array[n + i];
+				if (n + i === 0) {
+					$scope.disableLeftArrow = true;
+				}
+				if (n + i === array.length-1) {
+					$scope.disableRightArrow = true;
+				}
+			};
 
 
 
