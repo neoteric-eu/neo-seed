@@ -305,8 +305,19 @@
 	user-select: none;
 }
 
-.list-sortable {
-	.item {
+.sortable-list {
+	.sortable-item {
+		position: relative;
+	}
+	.sortable-handler {
+		position: absolute;
+		-webkit-transform: rotate(-90deg);
+		-ms-transform: rotate(-90deg);
 
+		font-size: 18px;
+		padding-top: 12px;
+		&:hover {
+			cursor: pointer;
+		}
 	}
 }

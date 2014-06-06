@@ -35,8 +35,9 @@
 					<hr>
 
 					<ng-form name="documentForm" class="form-horizontal" role="form">
-						<ul ui-sortable="" ng-model="form.metaFields" class="list-unstyled list-sortable">
-							<li ng-repeat="field in form.metaFields" class="item">
+						<ul ui-sortable="" ng-model="form.metaFields" class="list-unstyled sortable-list">
+							<li ng-repeat="field in form.metaFields" class="sortable-item">
+								<i class="fa fa-bars icon-muted-hover sortable-handler"></i>
 								<field-directive field="field" meta-fields="form.metaFields"></field-directive>
 
 							</li>
