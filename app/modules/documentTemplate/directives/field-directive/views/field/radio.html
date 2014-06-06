@@ -5,20 +5,19 @@
 	</label>
 
 	<div class="col-sm-9">
-		<div ng-repeat="option in field.options">
+		<div ng-repeat="option in field.options track by $index">
 			<div class="radio">
 				<label>
+					<input type="radio" name="radio-{{field.id}}" ng-model="field.value" value="{{field.value}}" ng-required="field.required">
 					{{ option }}
-					<input type="radio" name="radio-{{field.id}}" ng-model="field.value" value="{{option}}" ng-required="field.required">
 				</label>
-
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-1">
 		<div class="icon-on-hover">
 			<button type="button" class="close pull-left" ng-click="editModal(field)"><i class="fa fa-edit"></i></button>
-			<button type="button" class="close pull-left" ng-click="removeField(field)">&times;</button>
+			<button type="button" class="close pull-left" ng-click="removeField(field, metaFields)">&times;</button>
 		</div>
 	</div>
 </div>
