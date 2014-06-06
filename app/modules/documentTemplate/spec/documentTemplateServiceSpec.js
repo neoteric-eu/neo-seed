@@ -26,7 +26,21 @@
 				errorCb = jasmine.createSpy();
 			}));
 
-			
+
+			it('should getFieldTypes()', function() {
+				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'fieldTypes').respond(200, {});
+				documentTemplateService.getFieldTypes().then(successCb, errorCb);
+				$httpBackend.flush();
+				expect(successCb).toHaveBeenCalled();
+				
+			});
+
+			it('should fail to getFieldTypes()', function() {
+				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'fieldTypes').respond(409, []);
+				documentTemplateService.getFieldTypes().then(successCb, errorCb);
+				$httpBackend.flush();
+				expect(errorCb).toHaveBeenCalled();
+			});
 
 			it('should getTemplates()', function() {
 				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'documentTemplates').respond(200, {});
@@ -86,7 +100,6 @@
 
 			it('should removeTemplate()', function() {
 				$httpBackend.expectDELETE(globalSettings.get('tempUrl') + 'documentTemplates/' + template.id).respond(200, {});
-				dump(template);
 				documentTemplateService.removeTemplate(template).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(successCb).toHaveBeenCalled();
@@ -99,6 +112,37 @@
 				expect(errorCb).toHaveBeenCalled();
 			});
 
+			it('should restoreTemplateVersion()', function() {
+				var version = 2;
+				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'documentTemplates/' + template.id + '?version=' + version).respond(200, {});
+				documentTemplateService.restoreTemplateVersion(template.id, version).then(successCb, errorCb);
+				$httpBackend.flush();
+				expect(successCb).toHaveBeenCalled();
+			});
+
+			it('should fail to restoreTemplateVersion()', function() {
+				var version = 2;
+				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'documentTemplates/' + template.id + '?version=' + version).respond(409, {});
+				documentTemplateService.restoreTemplateVersion(template.id, version).then(successCb, errorCb);
+				$httpBackend.flush();
+				expect(errorCb).toHaveBeenCalled();
+			});
+
+			it('should get Model', function() {
+				var model = 'Model';
+				documentTemplateService.documentTemplates.setModel(model);
+				documentTemplateService.documentTemplates.getModel();
+				expect(documentTemplateService.documentTemplates.getModel()).toEqual('Model');
+			});
+
+			it('should remove Model', function() {
+				var model = ['raz','dwa'];
+				documentTemplateService.documentTemplates.setModel(model);
+				expect(documentTemplateService.documentTemplates.getModel().length).toEqual(2);
+
+				documentTemplateService.documentTemplates.removeModel('dwa');
+				expect(documentTemplateService.documentTemplates.getModel().length).toEqual(1);
+			});
 
 		});
 

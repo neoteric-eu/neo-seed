@@ -32,6 +32,7 @@
 			beforeEach(module('document.controllers'));
 
 			beforeEach(inject(function($injector) {
+				//$routeParams = {};
 				$routeParams = $injector.get('$routeParamsMock');
 				$config = $injector.get('$config');
 				documentService = $injector.get('documentService');
@@ -71,16 +72,15 @@
 
 				var $controller = $injector.get('$controller');
 
-				function createDocumentController() {
-					return $controller('DocumentController', {
+				function createCreateDocumentController() {
+					return $controller('CreateDocumentController', {
 						'$scope' : scope,
-						'documentService': documentService,
-						'$System': $System,
-						'$modal': modalMock
+						'$routeParams':$routeParams
+
 						//'$routeParams': $routeParams
 					});
 				}
-				createDocumentController();
+				createCreateDocumentController();
 			}));
 
 			afterEach(function() {
@@ -88,79 +88,28 @@
 				$httpBackend.verifyNoOutstandingRequest();
 			});
 
-			describe('DocumentController', function() {
+			describe('CreateDocumentController', function() {
 
-				it ('should getDocs()', function() {
-					var deferred = $q.defer();
-
-					spyOn(documentService, 'getDocuments').andReturn(deferred.promise);
-					spyOn(documentService.docs, 'getModel').andReturn('someDataFromBackend');
-
-					scope.getDocs();
-					deferred.resolve();
-					scope.$digest();
-
-					expect(scope.docs).toEqual('someDataFromBackend');
-					expect(documentService.getDocuments).toHaveBeenCalled();
-				});
-
-				it ('should fail to getDocs()', function() {
-					var deferred = $q.defer();
-
-					spyOn(documentService, 'getDocuments').andReturn(deferred.promise);
-
-					scope.getDocs();
-					deferred.reject();
-					scope.$digest();
-
-					expect(scope.docs).toBeUndefined();
-					expect(documentService.getDocuments).toHaveBeenCalled();
-				});
-
-				it ('should open removeModal()', function() {
-					spyOn(scope, 'removeDocument');
-
-					scope.removeModal();
-					modalDfd.resolve();
-					scope.$digest();
-
-					expect(modalMock.open).toHaveBeenCalled();
-					expect(scope.removeDocument).toHaveBeenCalled();
-				});
-
-				it ('should removeDocument()', function() {
-					var doc = {};
-					scope.docsTable = {
-						reload: function() {}
+				xit ('should initDocument() in edit mode', function() {
+					$routeParams = {
+						documentId: '000000000'
 					};
-					var deferred = $q.defer();
-					spyOn(documentService, 'removeDocument').andReturn(deferred.promise);
-					spyOn(scope.docsTable, 'reload');
+					dump(angular.isDefined($routeParams.documentId)); // FIXME
+					dump(scope.editMode);
+					scope.initDocument();
+					dump(scope.editMode);
+					expect(scope.editMode).toEqual(1);
 
-					scope.removeDocument(doc);
-					deferred.resolve(doc);
-					scope.$digest();
-
-					expect(documentService.removeDocument).toHaveBeenCalled();
-					expect(scope.docsTable.reload).toHaveBeenCalled();
-				});
-
-				it ('should fail to removeDocument()', function() {
-					var doc = {};
-					scope.docsTable = {
-						reload: function() {}
-					};
-					var deferred = $q.defer();
-					spyOn(documentService, 'removeDocument').andReturn(deferred.promise);
-					scope.removeDocument(doc);
-					deferred.reject();
-					scope.$digest();
-					expect(documentService.removeDocument).toHaveBeenCalled();
 				});
 
 
-			});  // END OF DESCRIBE
+				it ('should initDocument() in create new mode', function() {
+					scope.initDocument();
+					expect(scope.editMode).toEqual(0);
+				});
 
+
+			});	// END OF DESCRIBE
 
 		});
 	});

@@ -65,6 +65,21 @@
 				expect(errorCb).toHaveBeenCalled();
 			});
 
+			it('should get Model', function() {
+				var model = 'Model';
+				documentService.docs.setModel(model);
+				documentService.docs.getModel();
+				expect(documentService.docs.getModel()).toEqual('Model');
+			});
+
+			it('should remove Model', function() {
+				var model = ['raz','dwa'];
+				documentService.docs.setModel(model);
+				expect(documentService.docs.getModel().length).toEqual(2);
+
+				documentService.docs.removeModel('dwa');
+				expect(documentService.docs.getModel().length).toEqual(1);
+			});
 
 		});
 

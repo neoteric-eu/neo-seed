@@ -58,6 +58,8 @@
 				return deferred.promise;
 			};
 
+
+/*		-----	SERVICE NEVER USED - creating fieldTypes disallowed at this stage  ----
 			this.createFieldType = function(fieldType) {
 				var deferred = $q.defer();
 				fieldTypesResource.createFieldType(fieldType, function(data) {
@@ -68,7 +70,7 @@
 				});
 
 				return deferred.promise;
-			};
+			};*/
 
 			this.getTemplates = function() {
 				var deferred = $q.defer();
