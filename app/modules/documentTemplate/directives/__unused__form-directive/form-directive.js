@@ -11,18 +11,10 @@
 					form:'='
 				},
 				controller: function($scope){
-
-					$scope.submit = function(){
-						console.log('Form submitted..');
-						$scope.form.submitted = true;
-					};
-
-					$scope.cancel = function(){
-						console.log('Form canceled..');
-					};
-
+/*
 					$scope.isValidationPattern = function(validationPattern) {
 						var patern;
+						cl
 						if (angular.isDefined(validationPattern)) {
 							patern = new RegExp(validationPattern);
 						} else {
@@ -30,10 +22,8 @@
 						}
 
 						return patern;
-					};
-				},
-				link: function() {
-					console.log('uhu!');
+					};*/
+
 				}
 			};
 

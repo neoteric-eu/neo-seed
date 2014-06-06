@@ -16,7 +16,6 @@
 		'./controllers/TemplateListController',
 
 		'./directives/field-directive/field-directive',
-		'./directives/form-directive/form-directive',
 		'./directives/heightWatch',
 
 		'./services/documentTemplateService',
@@ -30,7 +29,7 @@
 		'./locale/pl_PL'
 
 	], function(angular, CreateTemplateController, ViewTemplateController, TemplateListController, fieldDirective,
-		formDirective, heightWatch, documentTemplateService, enums, documentTemplateResource, fieldTypesResource, documentTemplateUrls) {
+		heightWatch, documentTemplateService, enums, documentTemplateResource, fieldTypesResource, documentTemplateUrls) {
 
 		var moduleName = 'documentTemplate';
 		var controllers = moduleName + '.controllers';
@@ -48,7 +47,6 @@
 
 		angular.module( directives , [] )
 			.directive('fieldDirective', fieldDirective)
-			.directive('formDirective', formDirective)
 			.directive('heightWatch', heightWatch);
 
 		angular.module( services, ['ngResource'] )

@@ -5,12 +5,15 @@
 			return {
 
 				fieldTypes: {
-					TEXTFIELD: 'TEXTFIELD',
-					EMAIL: 'EMAIL',
-					RADIO: 'RADIO',
-					DROPDOWN: 'DROPDOWN',
-					DATE: 'DATE',
 					CHECKBOX: 'CHECKBOX',
+					COMPLEX: 'COMPLEX',
+					DATE: 'DATE',
+					DROPDOWN: 'DROPDOWN',
+					EMAIL: 'EMAIL',
+					PRIMITIVE: 'PRIMITIVE',
+					RADIO: 'RADIO',
+					TEXTAREA: 'TEXTAREA',
+					TEXTFIELD: 'TEXTFIELD',
 				}
 			};
 
