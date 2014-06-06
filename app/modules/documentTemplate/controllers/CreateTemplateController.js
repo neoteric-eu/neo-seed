@@ -5,6 +5,7 @@
 		var CreateTemplateController = function($scope, $location, $routeParams,
 		$modal, appMessages, locale, enums, documentTemplateService, documentTemplateModulePath) {
 			$scope.dateOptions = { 'starting-day': 1 };
+
 			// preview form mode
 			$scope.previewMode = false;
 
