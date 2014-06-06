@@ -23,6 +23,10 @@ require.config({
 		'angular-file-upload': 'angular-file-upload/angular-file-upload',
 		'ui.bootstrap': 'angular-ui-bootstrap-bower/ui-bootstrap-tpls',
 
+		'jQuery-ui': 'jquery-ui/ui/jquery-ui',
+		'angular-ui-sortable': 'angular-ui-sortable/sortable',
+
+
 
 		globalSettings: '../modules/global_settings',
 		'theme.app': '../plugins/theme.app',
@@ -51,8 +55,10 @@ require.config({
 		'xeditable': { deps: ['angular']},
 		'ngTable': { deps: ['angular']},
 		'gritter': { deps: ['jQuery']},
-		'angular-file-upload': { deps: ['angular']}
+		'angular-file-upload': { deps: ['angular']},
 
+		'jQuery-ui': { deps: ['jQuery']},
+		'angular-ui-sortable': { deps: ['angular', 'jQuery-ui']},
 		// 'sentryClient':{ deps: ['raven-js', 'ravenInstall', 'angular'] },
 		// 'ravenInstall':{ deps: ['raven-js']}
 	},

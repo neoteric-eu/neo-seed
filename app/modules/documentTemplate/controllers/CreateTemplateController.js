@@ -4,6 +4,7 @@
 
 		var CreateTemplateController = function($scope, $location, $routeParams,
 		$modal, appMessages, locale, enums, documentTemplateService, documentTemplateModulePath) {
+
 			$scope.dateOptions = { 'starting-day': 1 };
 
 			// preview form mode
@@ -159,7 +160,7 @@
 
 			$scope.switchIcon = function(i) {
 				var array = documentTemplateService.iconsArray.getModel();
-				
+
 				$scope.disableLeftArrow = false;
 				$scope.disableRightArrow = false;
 				var n =_.indexOf(array, $scope.form.icon);
