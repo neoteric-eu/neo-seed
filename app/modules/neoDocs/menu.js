@@ -11,7 +11,7 @@
 
 
 
-					{ href: 'upload', title: 'upload', icon: 'fa fa-lg fa-fw fa-upload' }
+					// { href: 'upload', title: 'upload', icon: 'fa fa-lg fa-fw fa-upload' }
 				],
 
 				getMenu: function() {
