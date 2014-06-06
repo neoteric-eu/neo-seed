@@ -8,6 +8,8 @@ define([
 	'gritter',
 	// 'sentryClient',
 	'angular-file-upload',
+	'angular-ui-sortable',
+
 	'angularRoute',
 	'angularCookies',
 	'angularSanitize',

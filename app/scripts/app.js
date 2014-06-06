@@ -22,6 +22,7 @@ function (angular) {
 		'ngSanitize',
 		'ngRoute',
 		'ui.bootstrap',
+		'ui.sortable',
 		'xeditable',
 		'ngTable',
 		// 'sentryClient',

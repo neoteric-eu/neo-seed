@@ -12,7 +12,7 @@
 					<div class="row">
 
 						<div class="col-sm-1 text-center">
-							
+
 
 							<div><i class="fa {{form.icon}} fa-5x" ng-model="form.icon"></i></div>
 							<div class="text-center">
@@ -35,11 +35,22 @@
 					<hr>
 
 					<ng-form name="documentForm" class="form-horizontal" role="form">
-						<div ng-repeat="field in form.metaFields">
-							<field-directive field="field" meta-fields="form.metaFields"></field-directive>
+						<ul ui-sortable="" ng-model="form.metaFields" class="list-unstyled sortable-list">
+							<li ng-repeat="field in form.metaFields" class="sortable-item">
+								<i class="fa fa-bars icon-muted-hover sortable-handler"></i>
+								<field-directive field="field" meta-fields="form.metaFields"></field-directive>
 
-						</div>
+							</li>
+						</ul>
 					</ng-form>
+
+
+
+
+
+
+
+
 
 
 					<div class="row">
