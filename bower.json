@@ -19,7 +19,9 @@
     "jquery.gritter": "*",
     "ng-table": "~0.3.1",
     "raven-js": "~1.1.14",
-    "angular-file-upload": "~0.5.7"
+    "angular-file-upload": "~0.5.7",
+    "angular-ui-sortable": "~0.12.7",
+    "jquery-ui": "~1.10.4"
   },
   "devDependencies": {
     "angular-mocks": "1.2.11",
