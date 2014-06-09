@@ -8,7 +8,7 @@
 		<div ng-repeat="option in field.options track by $index">
 			<div class="radio">
 				<label>
-					<input type="radio" name="radio-{{field.id}}" ng-model="field.value" value="{{field.value}}" ng-required="field.required">
+					<input type="radio" name="radio-{{field.id}}" ng-model="field.value" value="{{ option }}" ng-required="field.required">
 					{{ option }}
 				</label>
 			</div>
