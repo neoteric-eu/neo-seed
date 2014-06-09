@@ -73,7 +73,7 @@ module.exports = function (grunt) {
 			// },
 			serve: {
 				options: {
-					port: 9000,
+					port: 8069,
 					hostname: '0.0.0.0',
 					base: [
 						'<%= yeoman.app %>'

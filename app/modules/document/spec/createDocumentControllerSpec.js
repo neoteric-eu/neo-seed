@@ -18,8 +18,10 @@
 				};
 			});
 
-			angular.module('document.services').service('$routeParamsMock',function() {
-				return {};
+			angular.module('document.services').service('$routeParams',function() {
+				return {
+					documentId: '00000'
+				};
 			});
 
 			angular.module('document.services').service('ngTableParams',function() {
@@ -33,7 +35,7 @@
 
 			beforeEach(inject(function($injector) {
 				//$routeParams = {};
-				$routeParams = $injector.get('$routeParamsMock');
+				$routeParams = $injector.get('$routeParams');
 				$config = $injector.get('$config');
 				documentService = $injector.get('documentService');
 				$httpBackend = $injector.get('$httpBackend');
@@ -90,20 +92,13 @@
 
 			describe('CreateDocumentController', function() {
 
-				xit ('should initDocument() in edit mode', function() {
-					$routeParams = {
-						documentId: '000000000'
-					};
-					dump(angular.isDefined($routeParams.documentId)); // FIXME
-					dump(scope.editMode);
+				it ('should initDocument() in edit mode', function() {
 					scope.initDocument();
-					dump(scope.editMode);
 					expect(scope.editMode).toEqual(1);
-
 				});
 
-
 				it ('should initDocument() in create new mode', function() {
+					delete $routeParams.documentId;
 					scope.initDocument();
 					expect(scope.editMode).toEqual(0);
 				});
