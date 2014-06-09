@@ -3,7 +3,11 @@
 	<div class="col-md-9 col-md-offset-2">
 		<div class="checkbox">
 			<label>
-				<input ng-model="field.value" id="{{field.id}}" type="checkbox" ng-true-value="1" ng-false-value="0" ng-required="field.required">
+				<input type="checkbox" id="{{field.id}}"
+					ng-model="field.value"
+					ng-required="field.required"
+					ng-checked="{{field.value}}">
+
 				<span ng-show="field.required" class="text-danger">* </span>
 				{{field.fieldName}}
 			</label>
