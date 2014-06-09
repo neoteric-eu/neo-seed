@@ -9,9 +9,9 @@
 				return new ngTableParams({
 					page: 1,
 					count: 10,
-					// sorting: {
-					// 	'document.': 'desc' //FIXME
-					// }
+					sorting: {
+						timestamp: 'desc'
+					}
 				}, {
 					total: data.length,
 					getData: function($defer, params) {

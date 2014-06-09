@@ -1,35 +1,21 @@
 <section ng-controller="CreateTemplateController" ng-init="initTemplate()">
-
-
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-
-
 			<div class="well"  ng-show="readyToShow">
 				<div class="form-fields">
-
-
 					<div class="row">
-
-
 						<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 text-center">
-							
-
 							<div><i class="fa {{form.icon}} fa-5x" ng-model="form.icon"></i></div>
 							<div class="text-center">
 								<i class="fa fa-caret-left fa-3x margin-lr-5 unselectable" ng-class="{'disabledArrow': disableLeftArrow}" ng-click="switchIcon(-1)"></i>
 								<i class="fa fa-caret-right fa-3x margin-lr-5 unselectable" ng-class="{'disabledArrow': disableRightArrow}" ng-click="switchIcon(1)"></i>
 							</div>
-
 						</div>
-
 						<div class="col-xs-8 col-sm-9 col-md-10 col-lg-10 form-properties">
-
 							<div class="form-group form-template">
 								<input type="text" name="form-name" ng-model="form.name" class="form-title form-control">
 								<textarea rows="1" type="text" name="form-description" ng-model="form.description" placeholder="Opis szablonu" class="form-description form-control"></textarea>
 							</div>
-
 						</div>
 					</div>
 
@@ -37,43 +23,28 @@
 
 					<ng-form name="documentForm" class="form-horizontal" role="form">
 						<ul ui-sortable="" ng-model="form.metaFields" class="list-unstyled sortable-list">
-							<li ng-repeat="field in form.metaFields" class="sortable-item">
-								<i class="fa fa-bars icon-muted-hover sortable-handler"></i>
+							<li ng-repeat="field in form.metaFields" class="sortable-item padding-10-0"  ng-mouseover="isActive = true" ng-mouseleave="isActive = false">
+								<i ng-show="isActive" class="fa fa-bars icon-muted-hover sortable-handler"></i>
 								<field-directive field="field" meta-fields="form.metaFields"></field-directive>
 
 							</li>
 						</ul>
 					</ng-form>
 
-
-
-
-
-
-
-
-
-
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<div class="form-inline text-center padding-25-0">
-
 								<div class="form-group">
 									<label class="sr-only" for="exampleInputEmail2">{{t('Field_Type')}}</label>
 									<select ng-model="selectedType" class="form-control" ng-options="type as type.label for type in addField.types"></select>
 								</div>
-
 								<button type="button" class="btn btn-info ng-binding" ng-click="addNewField()"><i class="fa fa-plus"></i>  {{t('Add_Field')}}</button>
 
 							</div>
 						</div>
 					</div>
 
-
-
-
 					<hr>
-
 
 					<div class="pull-left">
 						<!-- Template version is hidden in template creation mode -->
@@ -81,16 +52,12 @@
 						<a ng-show="showVersionHistory" ng-click="showVersionHistory = false">Wersja {{form.version}}</a>
 					</div>
 					<div class="pull-right">
-
 						<button class="btn btn-default right" type="button" ng-click="saveTemplate(form)" ng-disabled="form.metaFields.length == 0"> Zapisz i kontynuuj edycję</button>
 						<button class="btn btn-primary right" type="button" ng-click="saveTemplate(form, true)" ng-disabled="form.metaFields.length == 0"> Zapisz</button>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 			</div>
-
-
-
 
 			<div ng-show="showVersionHistory">
 				<h4>{{t('Version_history_template')}}:</h4>
@@ -102,16 +69,10 @@
 								<button ng-show="isActive" class="btn btn-primary btn-xs" ng-click="restoreVersionModal(form, item); $event.stopPropagation();">Przywróć</button>
 							</td>
 						</tr>
-
-
 					</table>
-			
 				</div>
 			</div>
 				<!-- <pre>{{ form | json }}</pre> -->
 		</div>
-
-
 	</div>
-
 </section>

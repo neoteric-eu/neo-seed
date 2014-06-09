@@ -308,16 +308,79 @@
 .sortable-list {
 	.sortable-item {
 		position: relative;
+		padding: 5px 5px 5px 0;
+		&:hover {
+			background-color: #d7d7d7;
+			cursor: move;
+		}
+		.form-group {
+			margin-bottom: 0px;
+		}
+		label:hover {
+			cursor: move;
+		}
 	}
 	.sortable-handler {
 		position: absolute;
 		-webkit-transform: rotate(-90deg);
 		-ms-transform: rotate(-90deg);
-
 		font-size: 18px;
 		padding-top: 12px;
-		&:hover {
-			cursor: pointer;
-		}
 	}
+}
+
+/*table.versionList {
+  width: 100%;
+}
+
+table.versionList tr:hover {
+  background-color: #d7d7d7;
+}
+
+table.versionList tr td {
+  padding: 5px;
+  &:hover {
+	cursor: -webkit-zoom-in;
+	cursor: -moz-zoom-in;
+  }
+}*/
+
+table.versionList {
+	width: 100%;
+	tr {
+		td {
+			padding: 5px;
+			&:hover {
+				cursor: -webkit-zoom-in;
+				cursor: -moz-zoom-in;
+			}
+		}
+		&:hover {
+			background-color: #d7d7d7;
+		}	
+	}
+}
+
+.addButton {
+  color: #dddddd;
+  margin-right: 10px;
+  vertical-align: 0% !important;
+}
+
+.templateListContainer {
+  width: 70%;
+  margin: auto;
+  table {
+  	tr {
+		cursor: pointer;
+  	}
+  }
+}
+
+.x-button {
+	margin-left:10px;
+}
+
+body .ng-table th {
+	text-align: left;
 }
