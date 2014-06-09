@@ -46,8 +46,18 @@
 			<nav>
 				<ul>
 					<li ng-repeat="item in menu" class="ng-scope">
-						<a href="documentList.html" title="Utwórz nowy szablon">
-							<i class="fa fa-lg fa-fw fa-pencil-square-o"></i> <span class="menu-item-parent ng-binding">Dokumenty</span>
+						<a href="szablon.html" title="Utwórz nowy szablon">
+							<i class="fa fa-lg fa-fw fa-pencil-square-o"></i> <span class="menu-item-parent ng-binding"> Szablon</span>
+						</a>
+					</li>
+					<li ng-repeat="item in menu" class="ng-scope">
+						<a href="documentList.html" title="Utwórz nowy dokument">
+							<i class="fa fa-lg fa-fw fa-file-text-o"></i> <span class="menu-item-parent ng-binding"> Dokumenty</span>
+						</a>
+					</li>
+					<li ng-repeat="item in menu" class="ng-scope">
+						<a href="document.html" title="Utwórz nowy dokument">
+							<i class="fa fa-lg fa-fw fa-file-text-o"></i> <span class="menu-item-parent ng-binding"> Dokument</span>
 						</a>
 					</li>
 				</ul>
@@ -112,13 +122,13 @@
 											<td width="20%" data-title="'Opis dokumentu'" sortable="'description'">To jest zamówienie</td>
 											<td width="20%" data-title="'Szablon'" sortable="'timestamp'">Szablon zamówienia</td>
 											<td width="15%" data-title="'Data modyfikacji'" sortable="'timestamp'"><i class="fa fa-check"></i></td>
-											<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">May 16, 2014 </td>											
+											<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">May 16, 2014 </td>
 											<td width="10%">
 												<div class="pull-right">
-													<div class="">						
+													<div class="">
 														<button type="button" class="close x-button" ng-click="removeTemplateModal(template); $event.stopPropagation();">×</button>
 														<a type="button" class="close x-button" href="#/template/edit-template/{{template.id}}"><i class="fa fa-edit"></i></a>
-														<a type="button" class="close" href="#/template/edit-template/{{template.id}}" style="margin-top: -2px;"><i class="fa fa-cloud-upload"></i></a>														
+														<a type="button" class="close" href="#/template/edit-template/{{template.id}}" style="margin-top: -2px;"><i class="fa fa-cloud-upload"></i></a>
 													</div>
 												</div>
 											</td>
@@ -130,13 +140,13 @@
 											<td width="20%" data-title="'Opis dokumentu'" sortable="'description'">Dane pracownika</td>
 											<td width="20%" data-title="'Szablon'" sortable="'timestamp'">Dane osobowe</td>
 											<td width="15%" data-title="'Data modyfikacji'" sortable="'timestamp'"></td>
-											<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">May 26, 2014 </td>											
+											<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">May 26, 2014 </td>
 											<td width="10%">
 												<div class="pull-right">
-													<div class="">						
+													<div class="">
 														<button type="button" class="close x-button" ng-click="removeTemplateModal(template); $event.stopPropagation();">×</button>
 														<a type="button" class="close x-button" href="#/template/edit-template/{{template.id}}"><i class="fa fa-edit"></i></a>
-														<a type="button" class="close" href="#/template/edit-template/{{template.id}}" style="margin-top: -2px;"><i class="fa fa-cloud-upload"></i></a>														
+														<a type="button" class="close" href="#/template/edit-template/{{template.id}}" style="margin-top: -2px;"><i class="fa fa-cloud-upload"></i></a>
 													</div>
 												</div>
 											</td>
@@ -148,17 +158,17 @@
 											<td width="20%" data-title="'Opis dokumentu'" sortable="'description'">cośtam</td>
 											<td width="20%" data-title="'Szablon'" sortable="'timestamp'">Szablon</td>
 											<td width="15%" data-title="'Data modyfikacji'" sortable="'timestamp'"><i class="fa fa-check"></i></td>
-											<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">June 1, 2014 </td>											
+											<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">June 1, 2014 </td>
 											<td width="10%">
 												<div class="pull-right">
-													<div class="">						
+													<div class="">
 														<button type="button" class="close x-button" ng-click="removeTemplateModal(template); $event.stopPropagation();">×</button>
 														<a type="button" class="close x-button" href="#/template/edit-template/{{template.id}}"><i class="fa fa-edit"></i></a>
-														<a type="button" class="close" href="#/template/edit-template/{{template.id}}" style="margin-top: -2px;"><i class="fa fa-cloud-upload"></i></a>														
+														<a type="button" class="close" href="#/template/edit-template/{{template.id}}" style="margin-top: -2px;"><i class="fa fa-cloud-upload"></i></a>
 													</div>
 												</div>
 											</td>
-										</tr>										
+										</tr>
 
 									</tbody>
 								</table>
