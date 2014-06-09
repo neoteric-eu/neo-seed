@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
+
+	<title> SmartAdmin </title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+		<!-- Use the correct meta names below for your web application
+			 Ref: http://davidbcalhoun.com/2010/viewport-metatag
+
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320">-->
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=latin,latin-ext">
+
+		<link rel="stylesheet" href="css/bootstrap-custom.css">
+		<link rel="stylesheet" href="css/smartadmin-production.css">
+		<link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="css/xeditable.css">
+		<link rel="stylesheet" href="css/mockup-styles.css">
+
+
+
+	</head>
+	<body class="">
+		<!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
+
+		<!-- Left panel : Navigation area -->
+		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+		<aside id="left-panel" class="ng-scope" style="min-height: 1114px;">
+			<!-- User info -->
+			<div class="login-info">
+
+				<span class="user-data">
+					<img src="images/male.png" alt="me" class="offline">
+					<a href="#/account" class="ng-binding">admin@neoteric.eu</a>
+				</span>
+			</div>
+
+			<nav>
+				<ul>
+					<li ng-repeat="item in menu" class="ng-scope">
+						<a href="documentList.html" title="Utwórz nowy szablon">
+							<i class="fa fa-lg fa-fw fa-pencil-square-o"></i> <span class="menu-item-parent ng-binding">Dokumenty</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+		</aside>
+		<!-- END NAVIGATION -->
+
+		<!-- MAIN PANEL -->
+
+
+
+
+<div class="container">
+<div ng-class="{templateListContainer: documentTemplates.length}" ng-controller="TemplateListController" ng-init="getTemplates()">
+	<div class="row"  ng-if="documentTemplates.length">
+		<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+			<h1 class="page-title txt-color-blueDark">
+				<i class="glyphicon glyphicon-list-alt"></i>
+				Lista dokumentów
+				<span>>
+					Moje dokumenty
+				</span>
+			</h1>
+		</div>
+	</div>
+	<section id="widget-grid" ng-if="documentTemplates.length">
+
+		<div class="row">
+
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+
+
+				<div class="jarviswidget jarviswidget-color-blueDark">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-inbox"></i> </span>
+						<h2>Lista dokumentów</h2>
+						<div class="pull-right">
+							<a class="" href="#template/create" ui-tooltip="{title: t('Add_template')}"><i class="addButton fa fa-lg fa-plus"></i></a>
+						</div>
+					</header>
+
+					<div class="widget-body">
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<table ng-table="templatesTable" class="table table-hover">
+									<tbody>
+										<tr>
+											<th class="header  sortable"><div class="ng-scope ng-binding">Ikona</div></th>
+											<th class="header  sortable"><div class="ng-scope ng-binding">Nazwa dokumentu</div></th>
+											<th class="header  sortable"><div class="ng-scope ng-binding">Opis dokumentu</div></th>
+											<th class="header  sortable"><div class="ng-scope ng-binding">Szablon</div></th>
+											<th class="header  sortable"><div class="ng-scope ng-binding">Załącznik</div></th>
+											<th class="header  sortable"><div class="ng-scope ng-binding">Data modyfikacji</div></th>
+											<th class="header  sortable"><div class="ng-scope ng-binding"></div></th>
+										</tr>
+										<tr ng-repeat="template in $data" ng-click="editTemplate(template)">
+											<td width="5%" data-title="'Ikona'" sortable="'icon'" class="text-center"><i class="fa fa-edit fa-lg"></i></td>
+											<td width="20%" data-title="'Nazwa dokumentu'" sortable="'name'">Zamówienie</td>
+											<td width="20%" data-title="'Opis dokumentu'" sortable="'description'">To jest zamówienie</td>
+											<td width="20%" data-title="'Szablon'" sortable="'timestamp'">Szablon zamówienia</td>
+											<td width="15%" data-title="'Data modyfikacji'" sortable="'timestamp'"><i class="fa fa-check"></i></td>
+											<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">May 16, 2014 </td>											
+											<td width="10%">
+												<div class="pull-right">
+													<div class="">						
+														<button type="button" class="close x-button" ng-click="removeTemplateModal(template); $event.stopPropagation();">×</button>
+														<a type="button" class="close x-button" href="#/template/edit-template/{{template.id}}"><i class="fa fa-edit"></i></a>
+														<a type="button" class="close" href="#/template/edit-template/{{template.id}}" style="margin-top: -2px;"><i class="fa fa-cloud-upload"></i></a>														
+													</div>
+												</div>
+											</td>
+										</tr>
+
+										<tr ng-repeat="template in $data" ng-click="editTemplate(template)">
+											<td width="5%" data-title="'Ikona'" sortable="'icon'" class="text-center"><i class="fa fa-edit fa-lg"></i></td>
+											<td width="20%" data-title="'Nazwa dokumentu'" sortable="'name'">Dane osobowe</td>
+											<td width="20%" data-title="'Opis dokumentu'" sortable="'description'">Dane pracownika</td>
+											<td width="20%" data-title="'Szablon'" sortable="'timestamp'">Dane osobowe</td>
+											<td width="15%" data-title="'Data modyfikacji'" sortable="'timestamp'"></td>
+											<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">May 26, 2014 </td>											
+											<td width="10%">
+												<div class="pull-right">
+													<div class="">						
+														<button type="button" class="close x-button" ng-click="removeTemplateModal(template); $event.stopPropagation();">×</button>
+														<a type="button" class="close x-button" href="#/template/edit-template/{{template.id}}"><i class="fa fa-edit"></i></a>
+														<a type="button" class="close" href="#/template/edit-template/{{template.id}}" style="margin-top: -2px;"><i class="fa fa-cloud-upload"></i></a>														
+													</div>
+												</div>
+											</td>
+										</tr>
+
+										<tr ng-repeat="template in $data" ng-click="editTemplate(template)">
+											<td width="5%" data-title="'Ikona'" sortable="'icon'" class="text-center"><i class="fa fa-edit fa-lg"></i></td>
+											<td width="20%" data-title="'Nazwa dokumentu'" sortable="'name'">Procedura</td>
+											<td width="20%" data-title="'Opis dokumentu'" sortable="'description'">cośtam</td>
+											<td width="20%" data-title="'Szablon'" sortable="'timestamp'">Szablon</td>
+											<td width="15%" data-title="'Data modyfikacji'" sortable="'timestamp'"><i class="fa fa-check"></i></td>
+											<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">June 1, 2014 </td>											
+											<td width="10%">
+												<div class="pull-right">
+													<div class="">						
+														<button type="button" class="close x-button" ng-click="removeTemplateModal(template); $event.stopPropagation();">×</button>
+														<a type="button" class="close x-button" href="#/template/edit-template/{{template.id}}"><i class="fa fa-edit"></i></a>
+														<a type="button" class="close" href="#/template/edit-template/{{template.id}}" style="margin-top: -2px;"><i class="fa fa-cloud-upload"></i></a>														
+													</div>
+												</div>
+											</td>
+										</tr>										
+
+									</tbody>
+								</table>
+
+						</div>
+					</div>
+
+
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- END MAIN PANEL -->
+
+	<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<script src="js/app.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			pageSetUp();
+		});
+	</script>
+
+</body>
+
+</html>

@@ -140,6 +140,19 @@
 .margin-top-10 {
   margin-top: 10px;
 }
+.margin-lr-5 {
+  margin: 0px 5px 0px 5px;
+}
+.padding-25-0 {
+  padding: 25px 0;
+}
+.padding-10 {
+  padding: 10px;
+}
+.width-auto {
+  width: auto;
+  display: inline;
+}
 .stamp {
   min-height: 91px;
 }
@@ -275,17 +288,132 @@
 .text-danger {
   color: #d9534f;
 }
+/*	Document Template */
+.form-template .form-control {
+  border: 1px solid transparent;
+  background-color: transparent;
+  margin-bottom: 5px;
+}
+.form-template .form-control:hover {
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+.form-template .form-control:focus {
+  background-color: #ffffff;
+  border-color: #66afe9;
+}
+.form-template .form-description {
+  resize: none;
+}
+.form-title {
+  font-size: 23px;
+  font-weight: bold;
+  line-height: 28px;
+  padding: 3px 8px 1px 6px;
+}
+.icon-on-hover button {
+  padding: 8px 12px 0 0;
+}
+.icon-muted-hover {
+  color: #C2C2C2;
+}
+.icon-muted-hover:hover {
+  color: #000000;
+  cursor: pointer;
+}
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+.disabledArrow {
+  color: #dddddd;
+}
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.sortable-list .sortable-item {
+  position: relative;
+  padding: 5px 5px 5px 0;
+}
+.sortable-list .sortable-item:hover {
+  background-color: #d7d7d7;
+  cursor: move;
+}
+.sortable-list .sortable-item .form-group {
+  margin-bottom: 0px;
+}
+.sortable-list .sortable-item label:hover {
+  cursor: move;
+}
+.sortable-list .sortable-handler {
+  position: absolute;
+  -webkit-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  font-size: 18px;
+  padding-top: 12px;
+}
+/*table.versionList {
+  width: 100%;
+}
+
+table.versionList tr:hover {
+  background-color: #d7d7d7;
+}
+
+table.versionList tr td {
+  padding: 5px;
+  &:hover {
+	cursor: -webkit-zoom-in;
+	cursor: -moz-zoom-in;
+  }
+}*/
+table.versionList {
+  width: 100%;
+}
+table.versionList tr td {
+  padding: 5px;
+}
+table.versionList tr td:hover {
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+}
+table.versionList tr:hover {
+  background-color: #d7d7d7;
+}
+.addButton {
+  color: #dddddd;
+  margin-right: 10px;
+  vertical-align: 0% !important;
+}
+.templateListContainer {
+  width: 70%;
+  margin: auto;
+}
+.templateListContainer table tr {
+  cursor: pointer;
+}
+.x-button {
+  margin-left: 10px;
+}
+body .ng-table th {
+  text-align: left;
+}
 /*
 
 	 Copyright 2013 - SmartAdmin : WebApp (Sunny)
-
+	
 	 * This is part of an item on wrapbootstrap.com
 	 * https://wrapbootstrap.com/user/myorange
 	 * ==================================
-
+	
 	 Table of Contents
 	 ---------------------------------------------------------------
-
+	
 	 - Main
 	 - Header
 	 - Content
@@ -300,7 +428,7 @@
 	 - Clearfix
 	 - Examples (minimalistic in grid)
 	 - Examples (lists)
-
+	
 	 */
 /*
 	 * MAIN
@@ -968,9 +1096,9 @@ body.nooverflow {
 .jarviswidget-color-greenLight > header {
   border-color: #638167 !important;
 }
-/*
+/* 
 	 * WIDGET COLOR DROPDOWN
-	 *
+	 * 
 	 */
 .color-select {
   list-style: none;
@@ -2116,7 +2244,7 @@ body.nooverflow {
 }
 /*
 		 * date picker
-
+		
 		.ui-datepicker {
 			display: none;
 			padding: 10px 12px;
@@ -2171,19 +2299,19 @@ body.nooverflow {
 			text-align:center;
 		}
 		.ui-datepicker-unselectable.ui-state-disabled {
-
+			
 		}
 		.ui-datepicker-unselectable.ui-state-disabled > span {
 			color:#bfbfbf;
 			background-color: #FAFCFD;
 		}
-
+		
 		.ui-datepicker-calendar a:hover {
 			background: #3276B1;
 			color:#fff;
 		}
 		.ui-datepicker-calendar span {
-
+			
 		}
 		.ui-datepicker-today a {
 			font-weight: 700;
@@ -2297,7 +2425,7 @@ body.nooverflow {
   height: 11px;
   top: 17px;
 }
-/*! X-editable - v1.5.0
+/*! X-editable - v1.5.0 
 * In-place editing with Twitter Bootstrap, jQuery UI or pure jQuery
 * http://github.com/vitalets/x-editable
 * Copyright (c) 2013 Vitaliy Potapov; Licensed MIT */
@@ -7922,7 +8050,7 @@ table.fc-border-separate {
   font-size: 21px;
   color: #999;
 }
-/*
+/* 
  * RIBBON
  */
 .ribbon {
@@ -8556,7 +8684,7 @@ ul.DTTT_dropdown.dropdown-menu li:hover a {
  * Language:    Javascript
  * License:     GPL v2 / 3 point BSD
  * Project:     DataTables
- *
+ * 
  * Copyright 2009-2012 Allan Jardine, all rights reserved.
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -8980,12 +9108,12 @@ body.fd-slider-drag-horizontal * {
 }
 /*
 	 Sample tooltip code. Only works on grade A browsers (so no IE6,7 or 8).
-
+	
 	 See: http://nicolasgallagher.com/multiple-backgrounds-and-borders-with-css2/ for full info on
 	 how to style generated content & the associated pitfalls
-
+	
 	 This code to be taken as experimental & untested - use at your discretion
-
+	
 	 If showing the tooltip above the sider handle you are relegated to showing
 	 single line tooltips due to styling constraints!
 	 */
@@ -9016,7 +9144,7 @@ body.fd-slider-drag-horizontal * {
 	 The tooltip body - as we position it above the slider and position the tooltip arrow
 	 below it, we need to know the height of the body. This means that multi-line tooltips
 	 are not supported.
-
+	
 	 To support multi-line tooltips, you will need to position the tooltip below the slider
 	 and the tooltip pointer above the tooltip body. Additionally, you will have to set the
 	 tooltip bodies "height" to auto
@@ -12214,7 +12342,7 @@ textarea.clone {
 /*
 .MessageIE{
     background-image: url("@{base-url}/bg.png");
-
+    
 }*/
 .MessageBoxContainer {
   top: 35%;
@@ -13288,7 +13416,7 @@ textarea.clone {
 }
 /*
  * JS SLIDER
- * Copied from: js/plugin/noUiSlider/jquery.nouislider.css
+ * Copied from: js/plugin/noUiSlider/jquery.nouislider.css 
  */
 /*	General CSS resets;
  *		The target itself is not affected, allowing
@@ -14325,7 +14453,7 @@ td.fc-other-month,
   display: block;
   opacity: 1 !important;
 }
-/*
+/* 
 	* Drag and drop events
 	*/
 #external-events > li {
@@ -15427,14 +15555,14 @@ html {
   padding: 0;
   height: 100%;
   overflow-x: hidden !important;
-  background: url('../images/mybg.png') #ffffff;
+  background: url('../../images/mybg.png') #ffffff;
 }
 body {
   margin: 0;
   padding: 0;
   height: 100%;
   overflow: hidden;
-  background: url('../images/mybg.png') #ffffff;
+  background: url('../../images/mybg.png') #ffffff;
   direction: ltr;
 }
 a:hover,
@@ -20277,7 +20405,7 @@ img.away {
 /*
  * ANIMATED
  */
-/* Navigation icon first level
+/* Navigation icon first level 
 .desktop-detected nav > ul > li > a:hover i {
 	-webkit-animation-name: wobble;
 	-moz-animation-name: wobble;
