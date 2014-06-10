@@ -1,26 +1,33 @@
 (function() {
 	'use strict';
-	define(['globalSettings'], function(gloabalSettings) {
+	define(['globalSettings'], function(globalSettings) {
 		var documentResource = function($resource) {
-			return $resource(gloabalSettings.get('tempUrl')+'documents/:action/:documentId',
+			return $resource(globalSettings.get('tempUrl')+'documents/:action/:documentId',
 				{
 					action: '@action',
 					documentId: '@documentId',
 				},
 				{
 
-					createDocument: {
-						method: 'POST'
+					getDocumentById: {
+						method: 'GET'
 					},
 
 					getDocuments: {
 						method: 'GET'
 					},
 
-					deleteDocument: {	// 19.05 - brak REST
+					createDocument: {
+						method: 'POST'
+					},
+
+					updateDocument: {
+						method: 'POST'
+					},
+
+					deleteDocument: {
 						method: 'DELETE',
 					}
-
 
 				}
 			);
