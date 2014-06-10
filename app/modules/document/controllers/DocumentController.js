@@ -21,13 +21,13 @@
 				});
 			};
 
-			$scope.getDocs = function(){
+			$scope.getDocuments = function(){
 				//$System.showLoader();
 				documentService.getDocuments().then(
 					//console.log($scope.docs)
 					function(){
 						//$System.hideLoader();
-						$scope.docs = documentService.docs.getModel();
+						$scope.docs = documentService.documents.getModel();
 						$scope.docsTable = $scope.ngTableBuilder($scope.docs);
 					}, function(){	//reason
 						// $System.hideLoader();

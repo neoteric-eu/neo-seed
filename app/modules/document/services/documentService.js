@@ -27,57 +27,76 @@
 				};
 			}
 
-			this.docs = new ModelConstructor();
+			this.activeDocument = new ModelConstructor();
+			this.documents = new ModelConstructor();
 
+			this.getDocumentById = function(id, version) {
+				var deferred = $q.defer();
+
+				documentResource.getDocumentById({documentId: id, version: version}, function(data) {
+					self.activeDocument.setModel(data);
+					deferred.resolve(data);
+				}, function(reason) {
+					deferred.reject(reason);
+				});
+
+				return deferred.promise;
+			};
 
 			this.getDocuments = function() {
 				var deferred = $q.defer();
 
-				documentResource.getDocuments(
-					function(data) {
-						self.docs.setModel(data);
-						deferred.resolve(data);
-					}, function(reason) {
-						deferred.reject(reason);
-					}
-				);
+				documentResource.getDocuments(function(data) {
+					self.documents.setModel(data);
+					deferred.resolve(data);
+				}, function(reason) {
+					deferred.reject(reason);
+				});
 
 				return deferred.promise;
 			};
 
-			this.createDocument = function(doc) {
+			this.createDocument = function(document) {
 				var deferred = $q.defer();
 
-				documentResource.createDocument(doc, function(data) {
-						deferred.resolve(data);
-						self.docs.pushDataToModel(data);
-					}, function(reason) {
-						deferred.reject(reason);
-					}
-				);
+				documentResource.createDocument(document, function(data) {
+					deferred.resolve(data);
+					self.documents.pushDataToModel(data);
+					self.activeDocument.setModel(data);
+				}, function(reason) {
+					deferred.reject(reason);
+				});
+
 				return deferred.promise;
 			};
 
-			this.removeDocument = function(doc){
+			this.updateDocument = function(document) {
 				var deferred = $q.defer();
-				console.log('document service - usuwanie dokumentu...');
-				documentResource.deleteDocument({documentId: doc.id},
-					function(data) {
-						self.docs.removeModel(doc);
-						deferred.resolve(data);
-					}, function(reason) {
-						deferred.reject(reason);
-					}
-				);
+
+				documentResource.updateDocument({documentId: document.id}, document, function(data) {
+					self.activeDocument.setModel(data);
+					deferred.resolve(data);
+				}, function(reason) {
+					deferred.reject(reason);
+				});
 
 				return deferred.promise;
 			};
 
+			this.removeDocument = function(document){
+				var deferred = $q.defer();
 
+				documentResource.deleteDocument({documentId: document.id}, function(data) {
+					self.documents.removeModel(document);
+					deferred.resolve(data);
+				}, function(reason) {
+					deferred.reject(reason);
+				});
 
+				return deferred.promise;
+			};
 
 		};
-
 
 		return ['$q', 'documentResource', documentService];
 

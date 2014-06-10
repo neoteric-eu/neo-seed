@@ -7,8 +7,8 @@
 
 		describe('documentService', function() {
 			var $httpBackend, $exceptionHandler, documentService, successCb, errorCb;
-			var doc = {
-				templateId: '000000000000000000000000',
+			var document = {
+				id: '000000000000000000000000',
 				name: 'whatever',
 				description: 'same as above'
 			};
@@ -21,7 +21,19 @@
 				errorCb = jasmine.createSpy();
 			}));
 
+			it('should getDocumentById()', function() {
+				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'documents/' + document.id + '?').respond(200, {});
+				documentService.getDocumentById(document.id).then(successCb, errorCb);
+				$httpBackend.flush();
+				expect(successCb).toHaveBeenCalled();
+			});
 
+			it('should fail to getDocumentById()', function() {
+				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'documents/' + document.id + '?').respond(409, {});
+				documentService.getDocumentById(document.id).then(successCb, errorCb);
+				$httpBackend.flush();
+				expect(errorCb).toHaveBeenCalled();
+			});
 
 			it('should getDocuments()', function() {
 				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'documents').respond(200, {});
@@ -39,46 +51,60 @@
 
 			it('should createDocument()', function() {
 				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'documents').respond(200, {});
-				documentService.createDocument(doc).then(successCb, errorCb);
+				documentService.createDocument(document).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(successCb).toHaveBeenCalled();
 			});
 
 			it('should fail to createDocument()', function() {
 				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'documents').respond(409, {});
-				documentService.createDocument(doc).then(successCb, errorCb);
+				documentService.createDocument(document).then(successCb, errorCb);
+				$httpBackend.flush();
+				expect(errorCb).toHaveBeenCalled();
+			});
+
+			it('should updateTemplate()', function() {
+				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'documents/' + document.id).respond(200, {});
+				documentService.updateDocument(document).then(successCb, errorCb);
+				$httpBackend.flush();
+				expect(successCb).toHaveBeenCalled();
+			});
+
+			it('should fail to updateTemplate()', function() {
+				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'documents/'  + document.id).respond(409, {});
+				documentService.updateDocument(document).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(errorCb).toHaveBeenCalled();
 			});
 
 			it('should removeDocument()', function() {
-				$httpBackend.expectDELETE(globalSettings.get('tempUrl') + 'documents').respond(200, {});
-				documentService.removeDocument(doc).then(successCb, errorCb);
+				$httpBackend.expectDELETE(globalSettings.get('tempUrl') + 'documents/' + document.id).respond(200, {});
+				documentService.removeDocument(document).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(successCb).toHaveBeenCalled();
 			});
 
 			it('should fail to removeDocument()', function() {
-				$httpBackend.expectDELETE(globalSettings.get('tempUrl') + 'documents').respond(409, {});
-				documentService.removeDocument(doc).then(successCb, errorCb);
+				$httpBackend.expectDELETE(globalSettings.get('tempUrl') + 'documents/' + document.id).respond(409, {});
+				documentService.removeDocument(document).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(errorCb).toHaveBeenCalled();
 			});
 
 			it('should get Model', function() {
 				var model = 'Model';
-				documentService.docs.setModel(model);
-				documentService.docs.getModel();
-				expect(documentService.docs.getModel()).toEqual('Model');
+				documentService.documents.setModel(model);
+				documentService.documents.getModel();
+				expect(documentService.documents.getModel()).toEqual('Model');
 			});
 
 			it('should remove Model', function() {
 				var model = ['raz','dwa'];
-				documentService.docs.setModel(model);
-				expect(documentService.docs.getModel().length).toEqual(2);
+				documentService.documents.setModel(model);
+				expect(documentService.documents.getModel().length).toEqual(2);
 
-				documentService.docs.removeModel('dwa');
-				expect(documentService.docs.getModel().length).toEqual(1);
+				documentService.documents.removeModel('dwa');
+				expect(documentService.documents.getModel().length).toEqual(1);
 			});
 
 		});

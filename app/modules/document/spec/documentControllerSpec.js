@@ -94,7 +94,7 @@
 					var deferred = $q.defer();
 
 					spyOn(documentService, 'getDocuments').andReturn(deferred.promise);
-					spyOn(documentService.docs, 'getModel').andReturn('someDataFromBackend');
+					spyOn(documentService.documents, 'getModel').andReturn('someDataFromBackend');
 
 					scope.getDocs();
 					deferred.resolve();

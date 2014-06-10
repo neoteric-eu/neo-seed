@@ -38,6 +38,7 @@
 
 			this.getFieldTypes = function() {
 				var deferred = $q.defer();
+
 				fieldTypesResource.getFieldTypes(
 					function(data) {
 						var primitive = [];
@@ -54,7 +55,6 @@
 						// Trnslate label names
 						primitive = self.translateFieldsType(primitive);
 						self.primitiveFieldTypes.setModel(primitive);
-
 
 						self.complexFieldTypes.setModel(complex);
 						deferred.resolve(data);
@@ -83,6 +83,7 @@
 	/*-----	SERVICE NEVER USED - creating fieldTypes disallowed at this stage  ----*/
 			this.createFieldType = function(fieldType) {
 				var deferred = $q.defer();
+
 				fieldTypesResource.createFieldType(fieldType, function(data) {
 					self.fieldTypes.pushDataToModel(data);
 					deferred.resolve(data);
@@ -95,19 +96,20 @@
 
 			this.getTemplates = function() {
 				var deferred = $q.defer();
-				documentTemplateResource.getTemplates(
-					function(data) {
-						self.documentTemplates.setModel(data.data);
-						deferred.resolve(data);
-					}, function(reason) {
-						deferred.reject(reason);
-					});
+
+				documentTemplateResource.getTemplates(function(data) {
+					self.documentTemplates.setModel(data.data);
+					deferred.resolve(data);
+				}, function(reason) {
+					deferred.reject(reason);
+				});
 
 				return deferred.promise;
 			};
 
 			this.getTemplateById = function(id, version) {
 				var deferred = $q.defer();
+
 				documentTemplateResource.getTemplateById({templateId: id, version: version}, function(data) {
 					self.activeTemplate.setModel(data);
 					deferred.resolve(data);
@@ -120,6 +122,7 @@
 
 			this.createTemplate = function(template) { // zamienić argument na templateId. caly obiekt nie jest potrzbny
 				var deferred = $q.defer();
+
 				documentTemplateResource.createTemplate(template, function(data) {
 					self.documentTemplates.pushDataToModel(data);
 					self.activeTemplate.setModel(data);
@@ -133,6 +136,7 @@
 
 			this.updateTemplate = function(template) {
 				var deferred = $q.defer();
+
 				documentTemplateResource.updateTemplate({templateId: template.id}, template, function (data) {
 					self.activeTemplate.setModel(data);
 					deferred.resolve(data);
@@ -158,6 +162,7 @@
 
 			this.restoreTemplateVersion = function(id, version) {
 				var deferred = $q.defer();
+
 				documentTemplateResource.updateTemplate({templateId: id, version: version}, {}, function(data) {
 					self.activeTemplate.setModel(data);
 					deferred.resolve(data);

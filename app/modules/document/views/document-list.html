@@ -1,5 +1,5 @@
-<div ng-controller="DocumentController" ng-init="getDocs()">
-	<div class="row"  ng-if="docs.length">
+<div ng-class="{documentListContainer: documents.length}" ng-controller="DocumentController" ng-init="getDocuments()">
+	<div class="row"  ng-if="documents.length">
 		<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
 			<h1 class="page-title txt-color-blueDark">
 				<i class="glyphicon glyphicon-list-alt"></i>
