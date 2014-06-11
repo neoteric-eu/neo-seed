@@ -277,7 +277,7 @@
 					} else {
 						$scope.document = documentService.activeDocument.getModel();
 						$location.path('/document/edit/' + $scope.document.id);
-						$scope.initEditDocument();
+						$scope.init();
 					}
 
 					appMessages.success(locale.getT('Operation_succeeded'));

@@ -37,13 +37,13 @@
 							<fieldset>
 								<legend>Metadane</legend>
 
-								<section ng-controller="CreateTemplateController">
-									<ng-form name="documentForm" class="form-horizontal" ng-hide="loadingMetafilds" role="form">
-										<div ng-repeat="field in document.metaFields">
-											<field-directive></field-directive>
-										</div>
-									</ng-form>
-								</section>
+								<ng-form name="documentForm" class="form-horizontal" ng-hide="loadingMetafilds" role="form">
+									<section ng-controller="CreateTemplateController">
+											<div ng-repeat="field in document.metaFields">
+												<field-directive></field-directive>
+											</div>
+									</section>
+								</ng-form>
 
 								<hr class="simple">
 
