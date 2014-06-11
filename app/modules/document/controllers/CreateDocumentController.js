@@ -152,6 +152,9 @@
 						$scope.documentTemplate = data;
 
 						$scope.document.icon = data.icon;
+						$scope.document.name = data.name;
+						$scope.document.description = data.description;
+
 						$scope.document.templateId = data.id;
 						$scope.document.metaFields = data.metaFields;
 
