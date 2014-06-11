@@ -136,6 +136,8 @@
 			};
 
 
+			$scope.dateFormat = 'dd-MM-yyyy';
+			$scope.templateMode = false;
 
 
 			$scope.init = function() {
@@ -209,43 +211,12 @@
 			};
 
 
-
-			// $scope.documentTemplate = mockedTemplate;
-			// $scope.mockedDocument = mockedDocument;
-			// $scope.mockedCreateDocument = mockedCreateDocument;
-			// $scope.document = mockedDocument;
-
-
-
-			$scope.dateFormat = 'dd-MM-yyyy';
-			$scope.templateMode = false;
-
-
-
-
-
 			/**
-			 *	@name isValidationPattern
+			 *	@name updateDocument
 			 *
-			 *	@param {String} validationPattern
-			 *	@return {RegEx} Regular expression
-			 *
-			 *	@descrtiption
-			 *	Return RegEx with validationPattern or any character
+			 *	@param {object} document
+			 *	@param {bolean} changeLocation
 			 */
-			$scope.isValidationPattern = function(validationPattern) {
-				var	patern = new RegExp('^.*');
-
-				if (!!validationPattern) {
-					patern = new RegExp(validationPattern);
-				}
-
-				return patern;
-			};
-
-
-
-
 			$scope.updateDocument = function(document, changeLocation) {
 
 				documentService.updateDocument(document).then(function() {
@@ -265,6 +236,12 @@
 
 			};
 
+			/**
+			 *	@name saveDocument
+			 *
+			 *	@param {object} document
+			 *	@param {bolean} changeLocation
+			 */
 			$scope.saveDocument = function(document, changeLocation) {
 				if (angular.isDefined(document.version)) {
 					$scope.updateDocument(document, changeLocation);
