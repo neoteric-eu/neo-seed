@@ -11,13 +11,14 @@
 		'angular',
 		'./controllers/NeoDocsController',
 		'./controllers/UploaderController',
+		'./services/enums',
 		'./menu',
 
 		'./neoDocsUrls',
 		// './locale/en_EN',
 		// './locale/pl_PL'
 
-	], function(angular, NeoDocsController, UploaderController, menu, neoDocsUrls)
+	], function(angular, NeoDocsController, UploaderController, enums, menu, neoDocsUrls)
 	{
 
 		var moduleName = 'neoDocs';
@@ -35,6 +36,7 @@
 			.controller('UploaderController', UploaderController);
 
 		angular.module( services, [] )
-			.service('menu', menu);
+			.service('menu', menu)
+			.service('enums', enums);
 	});
 }());
