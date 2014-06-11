@@ -17,7 +17,7 @@
 	</div>
 
 	<div>
-		<div class="icon-on-hover pull-right">
+		<div class="icon-on-hover pull-right" ng-if="templateMode">
 			<button type="button" class="close pull-left" ng-click="editModal(field)"><i class="fa fa-edit"></i></button>
 			<button type="button" class="close pull-left" ng-click="removeField(field, form.metaFields)">&times;</button>
 		</div>
