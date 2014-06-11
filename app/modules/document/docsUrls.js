@@ -13,6 +13,7 @@
 			var modulePath = './modules/document/views/';
 			$routeProvider
 			.when('/document/create', {templateUrl: modulePath + 'create-document.html'})
+			.when('/document/create/template/:templateId', {templateUrl: modulePath + 'create-document.html'})
 			.when('/document/edit/:documentId', {templateUrl: modulePath + 'create-document.html'})
 			.when('/document/document-list', {templateUrl: modulePath + 'document-list.html'});
 

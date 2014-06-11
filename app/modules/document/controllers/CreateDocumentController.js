@@ -174,7 +174,27 @@
 				return patern;
 			};
 
+/*			$scope.saveDocument = function(document, changeLocation) {
+				if (angular.isDefined(form.version)) {
+					$scope.updateTemplate(form, changeLocation);
+					return;
+				}
 
+				documentTemplateService.createTemplate(form).then(function() {
+					console.log(changeLocation);
+					if (changeLocation) {
+						$location.path('/template/template-list');
+					} else {
+						$scope.form = documentTemplateService.activeTemplate.getModel();
+					}
+
+					appMessages.success(locale.getT('Operation_succeeded'));
+				}, function() {
+					appMessages.error(locale.getT('Operation_failed'));
+					//$exceptionHandler(reason);
+				});
+
+			};*/
 
 
 		};
