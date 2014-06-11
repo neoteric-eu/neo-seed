@@ -6,7 +6,7 @@
 
 				menu: [
 
-					{ href: 'document/document-list', title: 'Dokumenty', icon: 'fa fa-lg fa-fw fa-file-text-o'},
+					{ href: 'documents', title: 'Dokumenty', icon: 'fa fa-lg fa-fw fa-file-text-o'},
 					{ href: 'template/template-list', title: 'Szablony', icon: 'fa fa-lg fa-fw fa-list-ul'},
 					{ href: 'template/create', title: 'Utwórz nowy szablon', icon: 'fa fa-lg fa-fw fa-pencil-square-o'},
 

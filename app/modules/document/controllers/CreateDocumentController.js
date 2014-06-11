@@ -3,7 +3,8 @@
 	'use strict';
 	define([], function(){
 
-		var CreateDocumentController = function ($scope, $routeParams, documentTemplateService) {
+		var CreateDocumentController = function ($scope, $routeParams, $location,
+			appMessages, locale, documentTemplateService, documentService) {
 			/* jshint  quotmark:false, unused:false */
 			var mockedTemplate = {
 				"id": "53970ec4e4b07061e6405ba1",
@@ -144,13 +145,13 @@
 
 				// create document by template
 				var templateId = $routeParams.templateId;
+
 				if(angular.isDefined(templateId)) {
-					$scope.loadingMetafilds = true;
+					$scope.readyToShow = false;
+					$scope.editMode = false;
+
 					documentTemplateService.getTemplateById(templateId).then(function(data) {
-						$scope.loadingMetafilds = false;
-
 						$scope.documentTemplate = data;
-
 						$scope.document.icon = data.icon;
 						$scope.document.name = data.name;
 						$scope.document.description = data.description;
@@ -158,17 +159,46 @@
 						$scope.document.templateId = data.id;
 						$scope.document.metaFields = data.metaFields;
 
+					}, function(reason) {
+						appMessages.error(locale.getT('template_wont_load_please_refresh_browser'));
+
+					}).finally(function() {
+						$scope.readyToShow = true;
+
 					});
 
 				// Create document by empty template
 				}else{
 
+					$scope.initEditDocument();
 				}
 
 
 			};
 
+			$scope.initEditDocument = function() {
+				$scope.document = {};
 
+				// get document by id
+				var documentId = $routeParams.documentId;
+
+				if(angular.isDefined(documentId)) {
+					$scope.readyToShow = false;
+					$scope.editMode = false;
+
+					documentService.getDocumentById(documentId).then(function(data) {
+						$scope.editMode = true;
+						$scope.document = documentService.activeDocument.getModel();
+
+					}, function(reason) {
+						appMessages.error(locale.getT('Operation_failed'));
+
+					}).finally(function() {
+						$scope.readyToShow = true;
+
+					});
+				}
+			};
 
 
 			// $scope.documentTemplate = mockedTemplate;
@@ -204,18 +234,17 @@
 				return patern;
 			};
 
-/*			$scope.saveDocument = function(document, changeLocation) {
-				if (angular.isDefined(form.version)) {
-					$scope.updateTemplate(form, changeLocation);
-					return;
-				}
 
-				documentTemplateService.createTemplate(form).then(function() {
-					console.log(changeLocation);
+
+
+			$scope.updateDocument = function(document, changeLocation) {
+
+				documentService.updateDocument(document).then(function() {
+
 					if (changeLocation) {
-						$location.path('/template/template-list');
+						$location.path('/documents');
 					} else {
-						$scope.form = documentTemplateService.activeTemplate.getModel();
+						$scope.document = documentService.activeDocument.getModel();
 					}
 
 					appMessages.success(locale.getT('Operation_succeeded'));
@@ -224,11 +253,36 @@
 					//$exceptionHandler(reason);
 				});
 
-			};*/
+
+			};
+
+			$scope.saveDocument = function(document, changeLocation) {
+				if (angular.isDefined(document.version)) {
+					$scope.updateDocument(document, changeLocation);
+					return;
+				}
+
+				documentService.createDocument(document).then(function() {
+					if (changeLocation) {
+						$location.path('/documents');
+					} else {
+						$scope.document = documentService.activeDocument.getModel();
+						$location.path('/document/edit/' + $scope.document.id);
+						$scope.initEditDocument();
+					}
+
+					appMessages.success(locale.getT('Operation_succeeded'));
+				}, function() {
+					appMessages.error(locale.getT('Operation_failed'));
+					//$exceptionHandler(reason);
+				});
+
+			};
 
 
 		};
 
-		return ['$scope', '$routeParams', 'documentTemplateService', CreateDocumentController];
+		return ['$scope', '$routeParams', '$location', 'appMessages', 'locale',
+		'documentTemplateService', 'documentService', CreateDocumentController];
 	});
 }());
