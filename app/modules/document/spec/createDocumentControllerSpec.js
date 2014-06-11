@@ -92,12 +92,12 @@
 
 			describe('CreateDocumentController', function() {
 
-				it ('should initDocument() in edit mode', function() {
+				xit ('should initDocument() in edit mode', function() {
 					scope.initDocument();
 					expect(scope.editMode).toEqual(1);
 				});
 
-				it ('should initDocument() in create new mode', function() {
+				xit ('should initDocument() in create new mode', function() {
 					delete $routeParams.documentId;
 					scope.initDocument();
 					expect(scope.editMode).toEqual(0);
