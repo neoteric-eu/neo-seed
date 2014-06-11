@@ -25,7 +25,7 @@
 						method: 'POST'
 					},
 
-					deleteDocument: {
+					removeDocument: {
 						method: 'DELETE',
 					}
 

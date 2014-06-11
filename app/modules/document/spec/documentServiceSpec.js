@@ -63,14 +63,14 @@
 				expect(errorCb).toHaveBeenCalled();
 			});
 
-			it('should updateTemplate()', function() {
+			it('should updateDocument()', function() {
 				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'documents/' + document.id).respond(200, {});
 				documentService.updateDocument(document).then(successCb, errorCb);
 				$httpBackend.flush();
 				expect(successCb).toHaveBeenCalled();
 			});
 
-			it('should fail to updateTemplate()', function() {
+			it('should fail to updateDocument()', function() {
 				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'documents/'  + document.id).respond(409, {});
 				documentService.updateDocument(document).then(successCb, errorCb);
 				$httpBackend.flush();
