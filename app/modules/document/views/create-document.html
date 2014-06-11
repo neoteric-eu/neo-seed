@@ -37,7 +37,7 @@
 							<fieldset>
 								<legend>Metadane</legend>
 
-								<ng-form name="documentForm" class="form-horizontal" role="form">
+								<ng-form name="documentForm" class="form-horizontal" ng-show="loadingMetafilds" role="form">
 									<div ng-repeat="field in document.metaFields">
 										<field-directive></field-directive>
 									</div>

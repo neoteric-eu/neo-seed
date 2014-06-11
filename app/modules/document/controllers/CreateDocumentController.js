@@ -3,8 +3,8 @@
 	'use strict';
 	define([], function(){
 
-		var CreateDocumentController = function ($scope) {
-			/* jshint  quotmark: false */
+		var CreateDocumentController = function ($scope, $routeParams, documentTemplateService) {
+			/* jshint  quotmark:false, unused:false */
 			var mockedTemplate = {
 				"id": "53970ec4e4b07061e6405ba1",
 				"templateId": "53970e6ee4b07061e6405b9f",
@@ -134,17 +134,44 @@
 				}]
 			};
 
+
+
+
 			$scope.initDocument = function() {
 
+				$scope.document = {};
+
+
+				// create document by template
+				var templateId = $routeParams.templateId;
+				if(angular.isDefined(templateId)) {
+					$scope.loadingMetafilds = true;
+					documentTemplateService.getTemplateById(templateId).then(function(data) {
+						$scope.loadingMetafilds = false;
+
+						$scope.documentTemplate = data;
+
+						$scope.document.icon = data.icon;
+						$scope.document.templateId = data.id;
+						$scope.document.metaFields = data.metaFields;
+
+					});
+
+				// Create document by empty template
+				}else{
+
+				}
 
 
 			};
 
-			$scope.documentTemplate = mockedTemplate;
-			$scope.mockedDocument = mockedDocument;
-			$scope.mockedCreateDocument = mockedCreateDocument;
 
-			$scope.document = mockedDocument;
+
+
+			// $scope.documentTemplate = mockedTemplate;
+			// $scope.mockedDocument = mockedDocument;
+			// $scope.mockedCreateDocument = mockedCreateDocument;
+			// $scope.document = mockedDocument;
 
 
 
@@ -199,6 +226,6 @@
 
 		};
 
-		return ['$scope', '$routeParams', CreateDocumentController];
+		return ['$scope', '$routeParams', 'documentTemplateService', CreateDocumentController];
 	});
 }());

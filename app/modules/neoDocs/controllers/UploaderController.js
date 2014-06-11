@@ -9,7 +9,7 @@
 			$scope.uploader = $fileUploader.create({
 				// to automatically update the html. Default: $rootScope
 				scope: $scope,
-				url: globalSettings.get('baseUrl') + 'documents/upload/',
+				url: globalSettings.get('tempUrl') + 'documents/upload/',
 				formData: [
 					{ key: 'value' }
 				],
