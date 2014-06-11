@@ -94,8 +94,8 @@ function (angular) {
 		$httpProvider.responseInterceptors.push(interceptor);
 
 		$httpProvider.interceptors.push([
-			'$q', '$templateCache', 'permissions',
-			function($q, $templateCache, permissions) {
+			'$q', '$templateCache', 'permissions', 'enums',
+			function($q, $templateCache, permissions, enums) {
 
 				return {
 					'request': function(request) {

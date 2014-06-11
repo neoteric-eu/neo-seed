@@ -138,67 +138,76 @@
 
 
 
-			$scope.initDocument = function() {
+			$scope.init = function() {
 
-				$scope.document = {};
-
-
-				// create document by template
 				var templateId = $routeParams.templateId;
-
-				if(angular.isDefined(templateId)) {
-					$scope.readyToShow = false;
-					$scope.editMode = false;
-
-					documentTemplateService.getTemplateById(templateId).then(function(data) {
-						$scope.documentTemplate = data;
-						$scope.document.icon = data.icon;
-						$scope.document.name = data.name;
-						$scope.document.description = data.description;
-
-						$scope.document.templateId = data.id;
-						$scope.document.metaFields = data.metaFields;
-
-					}, function(reason) {
-						appMessages.error(locale.getT('template_wont_load_please_refresh_browser'));
-
-					}).finally(function() {
-						$scope.readyToShow = true;
-
-					});
-
-				// Create document by empty template
-				}else{
-
-					$scope.initEditDocument();
-				}
-
-
-			};
-
-			$scope.initEditDocument = function() {
-				$scope.document = {};
-
-				// get document by id
 				var documentId = $routeParams.documentId;
 
-				if(angular.isDefined(documentId)) {
-					$scope.readyToShow = false;
-					$scope.editMode = false;
-
-					documentService.getDocumentById(documentId).then(function(data) {
-						$scope.editMode = true;
-						$scope.document = documentService.activeDocument.getModel();
-
-					}, function(reason) {
-						appMessages.error(locale.getT('Operation_failed'));
-
-					}).finally(function() {
-						$scope.readyToShow = true;
-
-					});
+				if (angular.isDefined(templateId)) {
+					$scope.renderDocumentFromTemplate(templateId);
+					return;
+				} else if (angular.isDefined(documentId)) {
+					$scope.renderDocumentbyId(documentId);
+					return;
 				}
 			};
+
+
+			/**
+			 *	@name renderDocumentFromTemplate
+			 *
+			 *	@param {String} templateId
+			 *	@description Render new document from template
+			 */
+			$scope.renderDocumentFromTemplate = function(templateId) {
+				$scope.document = {};
+				$scope.readyToShow = false;
+				$scope.editMode = false;
+
+				documentTemplateService.getTemplateById(templateId).then(function(data) {
+					$scope.documentTemplate = data;
+					$scope.document.icon = data.icon;
+					$scope.document.name = data.name;
+					$scope.document.description = data.description;
+
+					$scope.document.templateId = data.id;
+					$scope.document.metaFields = data.metaFields;
+
+				}, function(reason) {
+					appMessages.error(locale.getT('template_was_not_loaded_please_refresh_browser'));
+
+				}).finally(function() {
+					$scope.readyToShow = true;
+
+				});
+
+			};
+
+			/**
+			 *	@name renderDocumentbyId
+			 *
+			 *	@param {String} documentId
+			 *	@description Render new document from template
+			 */
+			$scope.renderDocumentbyId = function(documentId) {
+				$scope.document = {};
+
+				$scope.readyToShow = false;
+				$scope.editMode = false;
+
+				documentService.getDocumentById(documentId).then(function(data) {
+					$scope.editMode = true;
+					$scope.document = documentService.activeDocument.getModel();
+
+				}, function(reason) {
+					appMessages.error(locale.getT('Operation_failed'));
+
+				}).finally(function() {
+					$scope.readyToShow = true;
+
+				});
+			};
+
 
 
 			// $scope.documentTemplate = mockedTemplate;

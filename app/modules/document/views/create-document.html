@@ -1,4 +1,4 @@
-<section ng-controller="CreateDocumentController" ng-init="initDocument()">
+<section ng-controller="CreateDocumentController" ng-init="init()">
 	<div class="contianer">
 
 		<div class="jarviswidget well">
@@ -22,8 +22,8 @@
 
 
 					<div class="col-xs-4 col-md-3 muted text-right">
-						<span>Ostatnia modyfikacja: {{ document.timestamp | date : dateFormat }}</span><br>
-						<span>wersja: {{ document.version }}</span><br>
+						<span ng-show="document.timestamp">Ostatnia modyfikacja: {{ document.timestamp | date : dateFormat }}</span><br>
+						<span ng-show="document.version">wersja: {{ document.version }}</span><br>
 					</div>
 
 
@@ -36,14 +36,14 @@
 						<div class="form-horizontal">
 							<fieldset>
 								<legend>Metadane</legend>
-								{{ loadingMetafilds }}
-								<ng-form name="documentForm" class="form-horizontal" ng-hide="loadingMetafilds" role="form">
-									<div ng-repeat="field in document.metaFields">
-										<field-directive></field-directive>
-									</div>
 
-
-								</ng-form>
+								<section ng-controller="CreateTemplateController">
+									<ng-form name="documentForm" class="form-horizontal" ng-hide="loadingMetafilds" role="form">
+										<div ng-repeat="field in document.metaFields">
+											<field-directive></field-directive>
+										</div>
+									</ng-form>
+								</section>
 
 								<hr class="simple">
 
