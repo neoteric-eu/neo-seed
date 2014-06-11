@@ -47,7 +47,7 @@
 				var deferred = $q.defer();
 
 				documentResource.getDocuments(function(data) {
-					self.documents.setModel(data);
+					self.documents.setModel(data.data);
 					deferred.resolve(data);
 				}, function(reason) {
 					deferred.reject(reason);
@@ -86,7 +86,7 @@
 			this.removeDocument = function(document){
 				var deferred = $q.defer();
 
-				documentResource.deleteDocument({documentId: document.id}, function(data) {
+				documentResource.removeDocument({documentId: document.id}, function(data) {
 					self.documents.removeModel(document);
 					deferred.resolve(data);
 				}, function(reason) {

@@ -28,6 +28,7 @@
 					function() {
 						//$System.hideLoader();
 						$scope.documentTemplates = documentTemplateService.documentTemplates.getModel();
+						//console.log($scope.documentTemplates.length);
 						$scope.templatesTable = $scope.ngTableBuilder($scope.documentTemplates);
 					}, function() {	//reason
 						// $System.hideLoader();

@@ -90,37 +90,37 @@
 
 			describe('DocumentController', function() {
 
-				xit ('should getDocs()', function() {
+				it ('should getDocuments()', function() {
 					var deferred = $q.defer();
 
 					spyOn(documentService, 'getDocuments').andReturn(deferred.promise);
 					spyOn(documentService.documents, 'getModel').andReturn('someDataFromBackend');
 
-					scope.getDocs();
+					scope.getDocuments();
 					deferred.resolve();
 					scope.$digest();
 
-					expect(scope.docs).toEqual('someDataFromBackend');
+					expect(scope.documents).toEqual('someDataFromBackend');
 					expect(documentService.getDocuments).toHaveBeenCalled();
 				});
 
-				xit ('should fail to getDocs()', function() {
+				it ('should fail to getDocuments()', function() {
 					var deferred = $q.defer();
 
 					spyOn(documentService, 'getDocuments').andReturn(deferred.promise);
 
-					scope.getDocs();
+					scope.getDocuments();
 					deferred.reject();
 					scope.$digest();
 
-					expect(scope.docs).toBeUndefined();
+					expect(scope.documents).toBeUndefined();
 					expect(documentService.getDocuments).toHaveBeenCalled();
 				});
 
 				it ('should open removeModal()', function() {
 					spyOn(scope, 'removeDocument');
 
-					scope.removeModal();
+					scope.removeDocumentModal();
 					modalDfd.resolve();
 					scope.$digest();
 
@@ -158,6 +158,16 @@
 					expect(documentService.removeDocument).toHaveBeenCalled();
 				});
 
+				it ('should open updateDocumentToNewestTemplateModal()', function() {
+					spyOn(scope, 'updateDocumentToNewestTemplate');
+
+					scope.updateDocumentToNewestTemplateModal();
+					modalDfd.resolve();
+					scope.$digest();
+
+					expect(modalMock.open).toHaveBeenCalled();
+					expect(scope.updateDocumentToNewestTemplate).toHaveBeenCalled();
+				});
 
 			});  // END OF DESCRIBE
 

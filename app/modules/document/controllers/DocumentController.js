@@ -9,9 +9,9 @@
 				return new ngTableParams({
 					page: 1,
 					count: 10,
-					// sorting: {
-					// 	'document.': 'desc' //FIXME
-					// }
+					sorting: {
+						'timestamp': 'desc' //FIXME
+					}
 				}, {
 					total: data.length,
 					getData: function($defer, params) {
@@ -24,11 +24,12 @@
 			$scope.getDocuments = function(){
 				//$System.showLoader();
 				documentService.getDocuments().then(
-					//console.log($scope.docs)
+					
 					function(){
 						//$System.hideLoader();
-						$scope.docs = documentService.documents.getModel();
-						$scope.docsTable = $scope.ngTableBuilder($scope.docs);
+						$scope.documents = documentService.documents.getModel();
+						console.log($scope.documents.length);
+						$scope.docsTable = $scope.ngTableBuilder($scope.documents);
 					}, function(){	//reason
 						// $System.hideLoader();
 						// $System.$appMessages.error($System.$locale.getT('Operation_failed'));
@@ -40,23 +41,24 @@
 
 			};
 
-			$scope.removeModal = function(doc){
+			$scope.removeDocumentModal = function(document){
 				var modalScope = $scope.$new();
-				modalScope.doc = doc;
+				modalScope.document = document;
 				var modalInstance = $modal.open({
 					templateUrl: documentModulePath + 'views/modals/removeDocModal.html',
 					scope: modalScope
 				});
 				modalInstance.result.then(function () {
-						$scope.removeDocument(doc);
+						$scope.removeDocument(document);
 				});
 			};
 
-			$scope.removeDocument = function(doc) {
+			$scope.removeDocument = function(document) {
 				//$System.showLoader();
-				documentService.removeDocument(doc).then(
+				documentService.removeDocument(document).then(
 					function() {
 						//$System.hideLoader();
+							
 						$scope.docsTable.reload();
 						// $System.$appMessages.success($System.$locale.getT('Operation_succeeded'));
 					}, function() {	//reason
@@ -66,7 +68,21 @@
 				);
 			};
 
+			$scope.updateDocumentToNewestTemplateModal = function() {
+				var modalScope = $scope.$new();
+				modalScope.document = document;
+				var modalInstance = $modal.open({
+					templateUrl: documentModulePath + 'views/modals/removeDocModal.html',
+					scope: modalScope
+				});
+				modalInstance.result.then(function () {
+						$scope.updateDocumentToNewestTemplate(document);
+				});
+			};
 
+			$scope.updateDocumentToNewestTemplate = function(document) {
+				console.log('open modal', document);
+			};
 
 
 
