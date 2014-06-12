@@ -24,7 +24,7 @@
 			$scope.getDocuments = function(){
 				//$System.showLoader();
 				documentService.getDocuments().then(
-					
+
 					function(){
 						//$System.hideLoader();
 						$scope.documents = documentService.documents.getModel();
@@ -58,7 +58,7 @@
 				documentService.removeDocument(document).then(
 					function() {
 						//$System.hideLoader();
-							
+
 						$scope.docsTable.reload();
 						// $System.$appMessages.success($System.$locale.getT('Operation_succeeded'));
 					}, function() {	//reason
@@ -84,6 +84,10 @@
 				console.log('open modal', document);
 			};
 
+
+			$scope.editDocument = function(document) {
+				$location.url('/document/edit/' + document.id);
+			};
 
 
 		};
