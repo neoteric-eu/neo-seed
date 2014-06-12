@@ -3,7 +3,7 @@
 	define([], function() {
 
 		var CreateTemplateController = function($scope, $location, $routeParams,
-		$modal, appMessages, locale, enums, documentTemplateService, documentTemplateModulePath) {
+		$modal, appMessages, locale, docsEnums, documentTemplateService, documentTemplateModulePath) {
 
 			$scope.dateOptions = { 'starting-day': 1 };
 
@@ -23,9 +23,13 @@
 			// add new field drop-down:
 			$scope.addField = {};
 
-			// create new field button click
-			$scope.addNewField = function() {
-
+			/**
+			 *	@name fieldFactory
+			 *
+			 *	@param {bolean} addOptions
+			 *	@return {object} with or without array in the options property
+			 */
+			function fieldFactory(addOptions) {
 				var newField = {
 					'id' : null,
 					'fieldName' : $scope.selectedType.label,
@@ -36,14 +40,26 @@
 					'fieldClass' : null,
 					'composite': [],
 					//options are pushed
-					'options': [''],
+					'options': null,
 					'validationPattern' : null,
 					'required' : false,
 					'value' : null
 				};
+
+				if(addOptions) {
+					newField.options = [''];
+				}
+
+				return newField;
+			}
+
+			// create new field button click
+			$scope.addNewField = function() {
+				var addOptions = $scope.showAddOptions($scope.selectedType);
 				// put newField into fields array
-				$scope.form.metaFields.push(newField);
+				$scope.form.metaFields.push(fieldFactory(addOptions));
 			};
+
 
 
 			$scope.initTemplate = function() {
@@ -256,18 +272,40 @@
 				field.options.splice(index, 1);
 			};
 
-
+			/**
+			 *	@name showAddOptions
+			 *
+			 *	@param {object} field
+			 *	@return {bolean} return true if field type is RADIO or DROPDOWN
+			 */
 			$scope.showAddOptions = function (field) {
-				return field.fieldTypeName === enums.fieldTypes.RADIO || field.fieldTypeName === enums.fieldTypes.DROPDOWN;
+				var result;
+				switch (field.fieldTypeName || field.typeName){
+					case docsEnums.fieldTypes.RADIO:
+					case docsEnums.fieldTypes.DROPDOWN:
+						result = true;
+						break;
+
+					default:
+						result = false;
+				}
+
+				return result;
 			};
 
+			/**
+			 *	@name showHelpText
+			 *
+			 *	@param {object} field
+			 *	@return {bolean} return false if field type is DATE, RADIO, etc.
+			 */
 			$scope.showHelpText = function(field) {
 				var result;
 				switch (field.fieldTypeName){
-					case enums.fieldTypes.DATE:
-					case enums.fieldTypes.DROPDOWN:
-					case enums.fieldTypes.CHECKBOX:
-					case enums.fieldTypes.RADIO:
+					case docsEnums.fieldTypes.DATE:
+					case docsEnums.fieldTypes.DROPDOWN:
+					case docsEnums.fieldTypes.CHECKBOX:
+					case docsEnums.fieldTypes.RADIO:
 						result = false;
 						break;
 
@@ -279,14 +317,14 @@
 			};
 
 			$scope.showValidationInput = function (field) {
-				return field.fieldTypeName === enums.fieldTypes.TEXTFIELD;
+				return field.fieldTypeName === docsEnums.fieldTypes.TEXTFIELD;
 			};
 
 
 		};
 
 		return ['$scope', '$location', '$routeParams', '$modal', 'appMessages',
-		'locale', 'enums', 'documentTemplateService', 'documentTemplateModulePath',
+		'locale', 'docsEnums', 'documentTemplateService', 'documentTemplateModulePath',
 		CreateTemplateController];
 	});
 }());

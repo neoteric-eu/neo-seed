@@ -39,6 +39,10 @@
 				);
 			};
 
+			$scope.refreshTemplatesList = function() {
+				$scope.documentTemplates = documentTemplateService.documentTemplates.getModel();
+			};
+
 			$scope.createDoc = function() {
 				$location.url('/document/create');
 			};
