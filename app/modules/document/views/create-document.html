@@ -211,10 +211,10 @@
 
 
 						<table class="versionList">
-							<tr ng-repeat="item in document.versions | orderBy:'version':true" ng-mouseover="isActive = true" ng-mouseleave="isActive = false">
+							<tr ng-repeat="item in document.versions | orderBy:'version':true" ng-mouseover="isActive = true" ng-mouseleave="isActive = false" ng-click="docPreviewModal(document,item)">
 								<td>
 									<strong>WERSJA {{item.version}}</strong> została utworzona przez <strong>{{item.author | uppercase}}</strong> dnia {{item.timestamp | date:dateFormat}}
-									<button ng-show="isActive" class="btn btn-primary btn-xs" ng-click="restoreVersionModal(form, item); $event.stopPropagation();">Przywróć</button>
+									<button ng-show="isActive" class="btn btn-primary btn-xs" ng-click="restoreVersionModal(document, item); $event.stopPropagation();">Przywróć</button>
 								</td>
 							</tr>
 						</table>

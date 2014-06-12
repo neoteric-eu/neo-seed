@@ -25,6 +25,8 @@
 			Field_Default_Value: 'Wartość domyślna',
 			Delete_template: 'Usuń szablon',
 			Do_you_want_to_remove: 'Czy na pewno chcesz usunąć szablon',
+			Do_you_want_to_remove_document: 'Czy na pewno chcesz usunąć dokument',
+
 			No: 'Nie',
 			Remove: 'Usuń',
 			Display_validation_pattern: 'Czy chcesz zdefiniować wyrażenie regularne REGEX?',
