@@ -52,7 +52,7 @@
 			};*/
 
 			$scope.editTemplate = function(template) {
-				$location.url('/template/edit-template/' + template.id);
+				$location.url('/template/edit/' + template.id);
 			};
 
 			$scope.removeTemplateModal = function(template) {

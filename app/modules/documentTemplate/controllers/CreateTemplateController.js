@@ -119,7 +119,7 @@
 				documentTemplateService.createTemplate(form).then(function() {
 					console.log(changeLocation);
 					if (changeLocation) {
-						$location.path('/template/template-list');
+						$location.path('/templates');
 					} else {
 						$scope.form = documentTemplateService.activeTemplate.getModel();
 					}
@@ -137,7 +137,7 @@
 				documentTemplateService.updateTemplate(form).then(function() {
 
 					if (changeLocation) {
-						$location.path('/template/template-list');
+						$location.path('/templates');
 					} else {
 						$scope.form = documentTemplateService.activeTemplate.getModel();
 					}
