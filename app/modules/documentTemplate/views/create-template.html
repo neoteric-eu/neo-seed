@@ -25,7 +25,7 @@
 						<ul ui-sortable="" ng-model="form.metaFields" class="list-unstyled sortable-list">
 							<li ng-repeat="field in form.metaFields" class="sortable-item padding-10-0"  ng-mouseover="isActive = true" ng-mouseleave="isActive = false">
 								<i ng-show="isActive" class="fa fa-bars icon-muted-hover sortable-handler"></i>
-								<field-directive field="field" meta-fields="form.metaFields"></field-directive>
+								<field-directive></field-directive>
 
 							</li>
 						</ul>
@@ -38,7 +38,7 @@
 									<label class="sr-only" for="exampleInputEmail2">{{t('Field_Type')}}</label>
 									<select ng-model="selectedType" class="form-control" ng-options="type as type.label for type in addField.types"></select>
 								</div>
-								<button type="button" class="btn btn-info ng-binding" ng-click="addNewField()"><i class="fa fa-plus"></i>  {{t('Add_Field')}}</button>
+								<button type="button" class="btn btn-info ng-binding" ng-click="addNewField(form.metaFields, selectedType)"><i class="fa fa-plus"></i>  {{t('Add_Field')}}</button>
 
 							</div>
 						</div>
@@ -72,7 +72,6 @@
 					</table>
 				</div>
 			</div>
-				<!-- <pre>{{ form | json }}</pre> -->
 		</div>
 	</div>
 </section>

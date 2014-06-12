@@ -5,165 +5,51 @@
 
 		var CreateDocumentController = function ($scope, $routeParams, $location,
 			appMessages, locale, documentTemplateService, documentService) {
-			/* jshint  quotmark:false, unused:false */
-			var mockedTemplate = {
-				"id": "53970ec4e4b07061e6405ba1",
-				"templateId": "53970e6ee4b07061e6405b9f",
-				"templateName": "Prosty",
-				"templateVersion": 1,
-				"latestTemplateVersion": 1,
-				"userId": "5357699c9d33da5ee72b45ce",
-				"email": "admin@neoteric.eu",
-				"customerId": "5351090b8fe7f4e7b99d6e67",
-				"name": "foo",
-				"description": "bar",
-				"timestamp": null,
-				"versions": [{
-					"version": 1,
-					"previousVersion": null,
-					"author": "admin@neoteric.eu",
-					"timestamp": "2014-06-10T15:57:24.431"
-				}],
-				"metaFields": [
-				{
-					"id": "53970e6ee4b07061e6405b9e",
-					"fieldName": "Tekst",
-					"fieldDescription": "",
-					"fieldTypeId": "5379cc6c94c980bca9923d50",
-					"fieldTypeName": "TEXTFIELD",
-					"fieldTypeLabel": "Textfield",
-					"class": "PRIMITIVE",
-					"templateField": true,
-					"options": [
-					""
-					],
-					"validationPattern": null,
-					"required": false,
-					"composite": [],
-					"value": ""
-				}
-				],
-				"version": 1,
-				"privileges": [
-				"ALL"
-				],
-				"sharingInfo": null
-			};
 
-			var mockedDocument =  {
-				"id": "53970ec4e4b07061e6405ba1",
-				"templateId": "53970e6ee4b07061e6405b9f",
-				"templateName": "Prosty",
-				"templateVersion": 1,
-				"latestTemplateVersion": 1,
-				"userId": "5357699c9d33da5ee72b45ce",
-				"email": "admin@neoteric.eu",
-				"customerId": "5351090b8fe7f4e7b99d6e67",
-				"name": "Zlecenie serwisowe",
-				"description": "Lorem ipsum dolor sit amet senin",
-				"timestamp": "2014-06-10T15:57:24.431",
-				"versions": [
-				{
-					"version": 1,
-					"previousVersion": null,
-					"author": "admin@neoteric.eu",
-					"timestamp": "2014-06-10T15:57:24.431"
-				}
-				],
-				"metaFields": [
-				{
-					"id": "53970e6ee4b07061e6405b9e",
-					"fieldName": "Tekst",
-					"fieldDescription": "",
-					"fieldTypeId": "5379cc6c94c980bca9923d50",
-					"fieldTypeName": "TEXTFIELD",
-					"fieldTypeLabel": "Textfield",
-					"class": "PRIMITIVE",
-					"templateField": true,
-					"options": [
-					""
-					],
-					"validationPattern": null,
-					"required": false,
-					"composite": [],
-					"value": ""
-				},
-				{
-					"id": "53970e6ee4b07061e6405b9e",
-					"fieldName": "Tekst",
-					"fieldDescription": "",
-					"fieldTypeId": "5379cc6c94c980bca9923d50",
-					"fieldTypeName": "TEXTFIELD",
-					"fieldTypeLabel": "Textfield",
-					"class": "PRIMITIVE",
-					"templateField": true,
-					"options": [
-					""
-					],
-					"validationPattern": null,
-					"required": false,
-					"composite": [],
-					"value": ""
-				}
-				],
-				"version": 1,
-				"privileges": [
-				"ALL"
-				],
-				"sharingInfo": null
-			};
-
-
-			var mockedCreateDocument = {
-				"templateId":"53970e6ee4b07061e6405b9f",
-				"name":"foo",
-				"description":"bar",
-				"metaFields": [{
-					"id": "53970e6ee4b07061e6405b9e",
-					"fieldName": "Tekst",
-					"fieldDescription": "",
-					"fieldTypeId": "5379cc6c94c980bca9923d50",
-					"fieldTypeName": "TEXTFIELD",
-					"fieldTypeLabel": "Textfield",
-					"class": "PRIMITIVE",
-					"templateField": true,
-					"options": [""],
-					"validationPattern": null,
-					"required": false,
-					"composite": [],
-					"value": null
-				}]
-			};
-
-
+			// Setup environment
 			$scope.dateFormat = 'dd-MM-yyyy';
+			$scope.editMode = false;
+			$scope.readyToShow = false;
+			$scope.templateCreatorMode = false;
 
-
+			/**
+			 *	@name init
+			 *
+			 *	@description
+			 *
+			 *	The are 4x "types" of the document:
+			 *	+ create new by template
+			 *	- create new by templateCreator
+			 *	+ edit document by id
+			 *	- view document by id (only view)
+			 *
+			 */
 			$scope.init = function() {
 
 				var templateId = $routeParams.templateId;
 				var documentId = $routeParams.documentId;
 
 				if (angular.isDefined(templateId)) {
-					$scope.renderDocumentFromTemplate(templateId);
+					$scope.createNewByTemplate(templateId);
 					return;
 				} else if (angular.isDefined(documentId)) {
-					$scope.renderDocumentbyId(documentId);
+					$scope.editDocumentById(documentId);
 					return;
+				} else {
+					$scope.createNewByTemplateCreator();
+
 				}
 			};
 
 
 			/**
-			 *	@name renderDocumentFromTemplate
+			 *	@name createNewByTemplate
 			 *
 			 *	@param {String} templateId
 			 *	@description Render new document from template
 			 */
-			$scope.renderDocumentFromTemplate = function(templateId) {
+			$scope.createNewByTemplate = function(templateId) {
 				$scope.document = {};
-				$scope.readyToShow = false;
-				$scope.editMode = false;
 
 				documentTemplateService.getTemplateById(templateId).then(function(data) {
 					$scope.documentTemplate = data;
@@ -174,7 +60,7 @@
 					$scope.document.templateId = data.id;
 					$scope.document.metaFields = data.metaFields;
 
-				}, function(reason) {
+				}, function() {
 					appMessages.error(locale.getT('template_was_not_loaded_please_refresh_browser'));
 
 				}).finally(function() {
@@ -185,27 +71,49 @@
 			};
 
 			/**
-			 *	@name renderDocumentbyId
+			 *	@name editDocumentById
 			 *
 			 *	@param {String} documentId
 			 *	@description Render new document from template
 			 */
-			$scope.renderDocumentbyId = function(documentId) {
-				$scope.document = {};
+			$scope.editDocumentById = function(documentId) {
 
-				$scope.readyToShow = false;
-				$scope.editMode = false;
-
-				documentService.getDocumentById(documentId).then(function(data) {
+				documentService.getDocumentById(documentId).then(function() {
 					$scope.editMode = true;
 					$scope.document = documentService.activeDocument.getModel();
 
-				}, function(reason) {
+				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
 
 				}).finally(function() {
 					$scope.readyToShow = true;
 
+				});
+			};
+
+			/**
+			 *	@name createNewByTemplateCreator
+			 *
+			 *	@description Create new document with Template Creator
+			 *
+			 */
+			$scope.createNewByTemplateCreator = function() {
+				// Setup environment
+				$scope.templateCreatorMode = true;
+				$scope.editMode = true;
+
+				// Init empty document
+				$scope.document = {};
+				$scope.document.description = '';
+				$scope.document.icon = documentTemplateService.iconsArray.getModel()[0];
+				$scope.document.metaFields = [];
+				$scope.document.name = locale.getT('New_document');
+
+				// Get field types
+				documentTemplateService.getFieldTypes().then(function() {
+					$scope.readyToShow = true;
+					$scope.fieldTypes = documentTemplateService.primitiveFieldTypes.getModel();
+					$scope.docSelectedType = $scope.fieldTypes[0];
 				});
 			};
 
@@ -263,6 +171,7 @@
 				});
 
 			};
+
 
 
 		};

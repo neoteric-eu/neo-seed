@@ -33,33 +33,63 @@
 				<div class="row">
 
 					<div class="col-lg-6 col-md-12">
-						<div class="form-horizontal">
+						<div>
 							<fieldset>
 								<legend>Metadane</legend>
 
-								<ng-form name="documentForm" class="form-horizontal" ng-hide="loadingMetafilds" role="form">
-									<section ng-controller="CreateTemplateController" ng-init="templateMode = false">
-										<div ng-repeat="field in document.metaFields">
-											<field-directive></field-directive>
-										</div>
-									</section>
-								</ng-form>
+									<form name="documentForm" role="form">
+										<section ng-controller="CreateTemplateController" ng-init="templateMode = editMode; form = document">
+											<ul class="list-unstyled sortable-list form-horizontal"
+											ng-if="templateCreatorMode"
+											ui-sortable=""
+											ng-model="document.metaFields">
+												<li ng-repeat="field in document.metaFields" class="sortable-item padding-10-0"  ng-mouseover="isActive = true" ng-mouseleave="isActive = false">
+													<i ng-show="isActive" class="fa fa-bars icon-muted-hover sortable-handler"></i>
+													<field-directive></field-directive>
+												</li>
+											</ul>
+
+
+
+											<div class="form-horizontal"
+											ng-if="!templateCreatorMode"
+											ng-repeat="field in document.metaFields">
+												<field-directive></field-directive>
+											</div>
+
+											<div class="row" ng-if="templateCreatorMode" ng-show="readyToShow">
+												<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+													<div class="form-inline text-center padding-25-0">
+														<div class="form-group">
+															<label class="sr-only" for="exampleInputEmail2">{{t('Field_Type')}}</label>
+															<select ng-model="docSelectedType" class="form-control" ng-options="type as type.label for type in fieldTypes"></select>
+														</div>
+														<button type="button" class="btn btn-info" ng-click="addNewField(document.metaFields, docSelectedType)"><i class="fa fa-plus"></i> {{t('Add_Field')}}</button>
+
+													</div>
+												</div>
+											</div>
+										</section>
+									</form>
+
+
 
 								<hr class="simple">
 
 								<div class="form-group ng-scope">
-									<label class="col-sm-2 control-label ng-binding">
+									<label class="col-sm-2 control-label">
 										Status dokumentu
 									</label>
 
 									<div class="col-sm-9">
 
 										<!-- ng-options="o as o for o in field.options" -->
-										<select class="form-control" ng-model="document.status" sng-required="true">
-											<option value="0">Nowy</option>
+										<!-- <select class="form-control" ng-model="document.status" sng-required="true"> -->
+										<select class="form-control">
+											<option value="0" selected="selected">Nowy</option>
 											<option value="1" >W toku</option>
 											<option value="2">Zatwierdzony</option>
-											<option value="3" selected="selected">Zablokowany</option>
+											<option value="3" >Zablokowany</option>
 											<option value="4">Zakończony</option>
 											<option value="5">Zakończony i zablokowany</option>
 										</select>
@@ -140,18 +170,14 @@
 						</div>
 					</div>
 				</div>
-
-
-
-
 				<hr>
+
 				<div class="pull-right">
 					<div class="btn-group">
-
-						<button class="btn btn-primary" ng-disabled="!documentForm.$valid" ng-click="saveDocument(document, false)">
+						<button class="btn btn-primary" ng-disabled="!documentForm.$valid && !templateCreatorMode" ng-click="saveDocument(document, false)">
 							Zapisz
 						</button>
-						<button class="btn btn-primary dropdown-toggle" ng-disabled="!documentForm.$valid" data-toggle="dropdown">
+						<button class="btn btn-primary dropdown-toggle" ng-disabled="!documentForm.$valid && !templateCreatorMode" data-toggle="dropdown">
 							<span class="caret"></span>
 						</button>
 						<ul class="pull-right dropdown-menu">
@@ -209,7 +235,7 @@
 		</div>
 
 
-{{ document }}
+<pre>{{ document | json }}</pre>
 
 	</div>
 </section>

@@ -30,21 +30,21 @@
 			 *	@param {bolean} addOptions
 			 *	@return {object} with or without array in the options property
 			 */
-			function fieldFactory(addOptions) {
+			function fieldFactory(addOptions, selectedType) {
 				var newField = {
 					'id' : null,
-					'fieldName' : $scope.selectedType.label,
-					'fieldDescription' : $scope.fieldDescription || '',
-					'fieldTypeId' : $scope.selectedType.id,
-					'fieldTypeName' : $scope.selectedType.typeName,
-					'fieldLabel' : $scope.selectedType.label,
+					'fieldName' : selectedType.label,
+					'fieldDescription' : selectedType.fieldDescription || '',
+					'fieldTypeId' : selectedType.id,
+					'fieldTypeName' : selectedType.typeName,
+					'fieldLabel' : selectedType.label,
 					'fieldClass' : null,
 					'composite': [],
 					//options are pushed
 					'options': null,
 					'validationPattern' : null,
 					'required' : false,
-					'value' : null
+					'value' : ''
 				};
 
 				if(addOptions) {
@@ -54,11 +54,15 @@
 				return newField;
 			}
 
-			// create new field button click
-			$scope.addNewField = function() {
-				var addOptions = $scope.showAddOptions($scope.selectedType);
+			/**
+			 *	@name addNewField
+			 *
+			 *	@param {array} array
+			 */
+			$scope.addNewField = function(array, selectedType) {
+				var addOptions = $scope.showAddOptions(selectedType);
 				// put newField into fields array
-				$scope.form.metaFields.push(fieldFactory(addOptions));
+				array.push(fieldFactory(addOptions, selectedType));
 			};
 
 
@@ -118,7 +122,6 @@
 				}
 
 				documentTemplateService.createTemplate(form).then(function() {
-					console.log(changeLocation);
 					if (changeLocation) {
 						$location.path('/templates');
 					} else {
@@ -168,9 +171,7 @@
 			$scope.restoreVersion = function(id, version) {
 
 				documentTemplateService.restoreTemplateVersion($routeParams.templateId, version.version).then(function() {
-
 					$scope.form = documentTemplateService.activeTemplate.getModel();
-					//console.log('scope.form po editTemplate', $scope.form);
 				}, function() {	// reason
 					// $exceptionHandler(reason);
 				});
@@ -251,10 +252,7 @@
 					scope: modalScope
 				});
 				modalInstance.result.then(function (editedField) {
-					// console.log(editedField);
-					// field = editedField;
 					return _.extend(field, editedField);
-
 				});
 			};
 
