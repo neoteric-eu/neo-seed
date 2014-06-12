@@ -8,6 +8,7 @@ define([
 	'gritter',
 	// 'sentryClient',
 	'../modules/miniCore/miniCoreModule',
+	'../modules/templateCore/templateCoreModule',
 	'angularRoute',
 	'angularCookies',
 	'angularSanitize',

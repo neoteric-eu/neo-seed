@@ -8,7 +8,8 @@ define([
 	'angularResource',
 	// 'sentryClient',
 	// '../modules/global_settings',
-	'../modules/miniCore/miniCoreModule'
+	'../modules/miniCore/miniCoreModule',
+	'../modules/templateCore/templateCoreModule'
 ],
 function (angular) {
 	'use strict';
@@ -25,7 +26,10 @@ function (angular) {
 		'miniCore',
 		'miniCore.controllers',
 		'miniCore.directives',
-		'miniCore.services'
+		'miniCore.services',
+
+		'templateCore.services',
+		'templateCore.directives'
 	])
 
 	.config(function($httpProvider) {
@@ -149,30 +153,31 @@ function (angular) {
 		]);
 	})
 	.run(['$rootScope', '$location', 'session', 'template', 'permissions',
-		'setDefaultsHeaders', 'appMessages',
+		'setDefaultsHeaders', 'appMessages', 'menu', 'locale',
 		function($rootScope, $location, session, template, permissions,
-		setDefaultsHeaders, appMessages) {
+		setDefaultsHeaders, appMessages, menu, locale) {
 
 		setDefaultsHeaders.setContentType('application/json');
 		$rootScope.appReady = false;
+		$rootScope.menu = menu.getMenu();
+		$rootScope.t = locale.getT;
 
 		/**
 		 *	@name redirectMgr
 		 *	@param {string} path
-		 *	@decription
 		 */
+		//FIXME: test it
 		$rootScope.redirectMgr = function(path){
 			if ( session.logged.getModel() ) {
-				switch (path) {
-					case '/login':
-						path = 'start';
-						break;
-					default:
-						path = 'start';
+
+				if(path === '/login') {
+					path = '/start';
 				}
+
 				$location.url(path);
 
-			} else {
+			} else if ($location.url() !== '/login') {
+				console.log('in');
 				$location.url('/login');
 			}
 		};
@@ -185,7 +190,7 @@ function (angular) {
 		$rootScope.checkSession = function() {
 			session.checkSession().then(
 				function() {
-					var path = $location.path();
+					var path = localStorage.getItem('prevRoute') || '/start';
 					$rootScope.mainTemplate = template.get('main', 'logged');
 					$rootScope.redirectMgr(path);
 					$rootScope.initUserData();
@@ -204,6 +209,19 @@ function (angular) {
 		$rootScope.$on('event:loginRequired', function() {
 			session.clearSession();
 			$rootScope.checkSession();
+		});
+
+		$rootScope.$on('$locationChangeStart', function(event, nextRoute, currentRoute){
+
+			var route = currentRoute.split('#');
+			if(angular.isDefined(route[1])) {
+				localStorage.setItem('prevRoute', route[1]);
+			}
+
+		});
+
+		$rootScope.$on('$viewContentLoaded', function(event){
+			pageSetUp();
 		});
 
 		$rootScope.$on('$routeChangeSuccess', function(event, currentRoute, priorRoute) {
@@ -225,113 +243,8 @@ function (angular) {
 
 			}
 
-			appMessages.apply();
+			appMessages.$apply();
 		});
 	}]);
-
-/*	.run(['$rootScope', '$session', 'customerHelper', 'loginRegisterHelper', 'permissions' , '$route', '$location', '$AppMessages', '$enums', '$config', 'setDefaultsHeaders', '$exceptionHandler', 'editableOptions',
-	function($rootScope, $session, customerHelper, loginRegisterHelper, permissions, $route, $location, $appMessages, $enums, $config, setDefaultsHeaders, $exceptionHandler, editableOptions) {
-		$rootScope.appReady = false;
-		// set default headers
-		var applicationId = $config.get('SaaSApplicationID');
-		setDefaultsHeaders.setContentType('application/json');
-		setDefaultsHeaders.setApplicationId(applicationId);
-
-		editableOptions.theme = 'bs3';
-
-		$session.init();
-
-		if($session.isLoginDataPresent) {
-			setDefaultsHeaders.setAuthToken($session.getToken());
-			setDefaultsHeaders.setCustomerId($session.getCurrentCustomerId());
-
-			customerHelper.init();
-			customerHelper.getCurrentCustomer().then(function(customer) {
-				$session.currentCustomer(customer);
-				loginRegisterHelper.getFeatures().then(function(data) {
-					permissions.features = data.values;
-					$rootScope.appReady = true;
-					$session.setLogged(true);
-
-				});
-			}, function(reason) {
-				$session.setLogged(false);
-				// mark everything as not logged
-				$session.clearSession();
-				$rootScope.appReady = true;
-				$exceptionHandler(reason);
-			});
-			// try request
-		} else {
-			$session.clearSession();
-			$rootScope.appReady = true;
-			// redirect to login screen;
-		}
-
-		// FIXME:
-		// U = new Utilities();
-		$session.loggedTime = $config.get('loggedTime');
-		// $session.init(setUserData, permissions.init);
-		// $.jqplot.config.enablePlugins = true;
-
-		// $rootScope.$on('$includeContentLoaded', runCustomizer);
-		// $rootScope.$on('$viewContentLoaded', runCustomizer);
-
-		$rootScope.$on('event:loginRequired', function() {
-			$session.clearSession();
-			$rootScope.redirectToLogin();
-			console.log('loginRequired');
-		});
-
-		$rootScope.$on('$locationChangeStart', function(event, nextRoute, currentRoute){
-			var route = currentRoute.split('#');
-			if(angular.isDefined(route[1])) {
-				localStorage.setItem('prevRoute',route[1]);
-			}
-		});
-
-		$rootScope.$on('$viewContentLoaded', function(event){
-			pageSetUp();
-		});
-
-		$rootScope.$on('$routeChangeSuccess', function(event, currentRoute, priorRoute) {
-			if(permissions.clearCache) {
-				permissions.clearCache = false;
-			}
-			if($session.isLogged()) {
-				try {
-					if(!permissions.checkRouteAccess(currentRoute)) {
-						$location.path('401');
-						$session.set('prevRoute', null);
-					}
-				} catch (e) {
-					$location.path('401');
-					$session.set('prevRoute', null);
-					throw e;
-				}
-
-				$session.updateCookieTime();
-			} else {
-				var path = $location.path();
-
-				if(path === '/activation' || path === '/activation/simplified') {
-					return;
-				}
-
-				// if($rootScope.appReady) {
-					// $location.path('/start');
-				// }
-
-				if (path.indexOf('get/') !== -1) {
-					$location.path(path);
-				} else {
-					$location.path('/login');
-				}
-			}
-
-			$appMessages.$apply();
-		});
-	}
-	]);*/
 
 });
