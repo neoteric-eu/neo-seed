@@ -30,32 +30,29 @@
 
 					<div class="widget-body">
 						<div class="table-responsive">
-							<table class="table table-hover">
-								<table ng-table="docsTable" class="table table-hover">
-									<tbody>
-										<tr ng-repeat="document in $data">
-											<td width="5%" data-title="'Ikona'" sortable="'icon'" class="text-center"><i class="fa fa-bolt fa-lg"></i></td> <!--  {{document.icon}} -->
-											<td width="20%" data-title="'Nazwa dokumentu'" sortable="'name'">{{ document.name }}</td>
-											<td width="20%" data-title="'Opis dokumentu'" sortable="'description'">{{ document.description }}</td>
-											<td width="20%" data-title="'Email(etykiety??)'" sortable="'tags'">{{ document.email }}</td>
-											<td width="10%" data-title="'Szablon'" sortable="'template'">{{ document.templateName}}</td>
-											<td width="5%" data-title="'Załącznik'" sortable="'attachment'" class="text-center"><i class="fa fa-check"></i></td>
-											<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">{{ document.versions[0].timestamp | date:dateFormat}}</td>	<!-- FIXME when timestamp is not null -->										
-											<td width="10%">
-												<div class="pull-right">
-													<div class="">
-														<button type="button" class="close x-button" ng-click="removeDocumentModal(document); $event.stopPropagation();">×</button>
-														<a type="button" class="close x-button" href="#/template/edit-template/{{document.id}}"><i class="fa fa-edit"></i></a>
-														<button type="button" class="close x-button"  ng-click="removeDocumentModal(document)" style="margin-top: -2px;"><i class="fa fa-cloud-upload"></i></button>
-														<button type="button" class="close infoColor" ng-click="updateDocumentToNewestTemplateModal(document)" style="margin-top: -2px;">
-															<i class="fa fa-exclamation-triangle" tooltip-html-unsafe="Aktualizuj dokument do najnowszej wersji szablonu" tooltip-placement="top"></i>
-														</button>
-													</div>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
+							<table ng-table="docsTable" class="table table-hover">
+								<tbody>
+									<tr ng-repeat="document in $data" ng-click="editDocument(document)">
+										<td width="5%" data-title="'Ikona'" sortable="'icon'" class="text-center"><i class="fa fa-bolt fa-lg"></i></td> <!--  {{document.icon}} -->
+										<td width="20%" data-title="'Nazwa dokumentu'" sortable="'name'">{{ document.name }}</td>
+										<td width="20%" data-title="'Opis dokumentu'" sortable="'description'">{{ document.description }}</td>
+										<td width="20%" data-title="'Email(etykiety??)'" sortable="'tags'">{{ document.email }}</td>
+										<td width="10%" data-title="'Szablon'" sortable="'template'">{{ document.templateName}}</td>
+										<td width="5%" data-title="'Załącznik'" sortable="'attachment'" class="text-center"><i class="fa fa-check"></i></td>
+										<td width="10%" data-title="'Data modyfikacji'" sortable="'timestamp'">{{ document.versions[0].timestamp | date:dateFormat}}</td>	<!-- FIXME when timestamp is not null -->
+										<td width="10%">
+											<div class="pull-right">
+												<button type="button" class="close x-button" ng-click="removeDocumentModal(document); $event.stopPropagation();">×</button>
+												<button type="button" class="close x-button" ng-click="editDocument(document); $event.stopPropagation()"><i class="fa fa-edit"></i></a>
+												<button type="button" class="close x-button"  ng-click="removeDocumentModal(document)" style="margin-top: -2px;"><i class="fa fa-cloud-upload"></i></button>
+												<button type="button" class="close infoColor" ng-click="updateDocumentToNewestTemplateModal(document)" style="margin-top: -2px;">
+													<i class="fa fa-exclamation-triangle" tooltip-html-unsafe="Aktualizuj dokument do najnowszej wersji szablonu" tooltip-placement="top"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 
 						</div>
 					</div>

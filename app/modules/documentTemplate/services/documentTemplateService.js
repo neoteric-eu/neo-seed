@@ -3,7 +3,7 @@
 	'use strict';
 	define([],function() {
 
-		var documentTemplateService = function($q, enums, locale, documentTemplateResource, fieldTypesResource) {
+		var documentTemplateService = function($q, docsEnums, locale, documentTemplateResource, fieldTypesResource) {
 			var self = this;
 
 			function ModelConstructor()  {
@@ -45,9 +45,9 @@
 						var complex = [];
 						//field types primitive vs complex
 						_.each(data.data, function(fieldType) {
-							if(fieldType.class === enums.fieldTypes.PRIMITIVE) {
+							if(fieldType.class === docsEnums.fieldTypes.PRIMITIVE) {
 								primitive.push(fieldType);
-							} else if(fieldType.class === enums.fieldTypes.COMPLEX) {
+							} else if(fieldType.class === docsEnums.fieldTypes.COMPLEX) {
 								complex.push(fieldType);
 							}
 
@@ -176,6 +176,6 @@
 
 
 		};
-		return ['$q', 'enums', 'locale', 'documentTemplateResource', 'fieldTypesResource', documentTemplateService];
+		return ['$q', 'docsEnums', 'locale', 'documentTemplateResource', 'fieldTypesResource', documentTemplateService];
 	});
 }());

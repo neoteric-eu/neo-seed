@@ -39,6 +39,10 @@
 				);
 			};
 
+			$scope.refreshTemplatesList = function() {
+				$scope.documentTemplates = documentTemplateService.documentTemplates.getModel();
+			};
+
 			$scope.createDoc = function() {
 				$location.url('/document/create');
 			};
@@ -48,7 +52,7 @@
 			};*/
 
 			$scope.editTemplate = function(template) {
-				$location.url('/template/edit-template/' + template.id);
+				$location.url('/template/edit/' + template.id);
 			};
 
 			$scope.removeTemplateModal = function(template) {
@@ -68,7 +72,7 @@
 				//$System.showLoader();
 				documentTemplateService.removeTemplate(template).then(
 					function() {
-						//$System.hideLoader();						
+						//$System.hideLoader();
 						$scope.templatesTable.reload();
 						// $System.$appMessages.success($System.$locale.getT('Operation_succeeded'));
 					}, function() {	//reason

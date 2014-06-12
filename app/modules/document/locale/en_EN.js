@@ -10,8 +10,9 @@
 		// last_modification: 'Last modification',
 		Delete_document: 'Delete document',
 		Do_you_want_to_remove: 'Are you sure you want to delete document',
-		remove: 'Delete'
-
+		New_document: 'New document',
+		remove: 'Delete',
+		template_was_not_loaded_please_refresh_browser: 'Template was not loaded. Please refresh browser'
 
 		});
 	});

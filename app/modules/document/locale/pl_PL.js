@@ -10,8 +10,9 @@
 		// last_modification: 'Data modyfikacji',
 		Delete_document: 'Usuń dokument',
 		Do_you_want_to_remove: 'Czy na pewno chcesz usunąć dokument',
-		remove: 'Usuń'
-
+		New_document: 'Nowy dokument',
+		remove: 'Usuń',
+		template_was_not_loaded_please_refresh_browser: 'Szablon nie został załadowany, odśwież przeglądarkę',
 
 		});
 	});
