@@ -9,6 +9,7 @@
 
 			// preview form mode
 			$scope.previewMode = false;
+
 			// display edit icons
 			$scope.templateMode = true;
 

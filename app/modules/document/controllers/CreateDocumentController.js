@@ -137,7 +137,6 @@
 
 
 			$scope.dateFormat = 'dd-MM-yyyy';
-			$scope.templateMode = false;
 
 
 			$scope.init = function() {

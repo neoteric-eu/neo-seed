@@ -38,10 +38,10 @@
 								<legend>Metadane</legend>
 
 								<ng-form name="documentForm" class="form-horizontal" ng-hide="loadingMetafilds" role="form">
-									<section ng-controller="CreateTemplateController">
-											<div ng-repeat="field in document.metaFields">
-												<field-directive></field-directive>
-											</div>
+									<section ng-controller="CreateTemplateController" ng-init="templateMode = false">
+										<div ng-repeat="field in document.metaFields">
+											<field-directive></field-directive>
+										</div>
 									</section>
 								</ng-form>
 
