@@ -6,13 +6,13 @@
 				<i class="fa fa-file-text-o fa-4x hidden-xs"></i>
 			</div>
 			<div class="col-xs-7 col-md-8 form-properties">
-				<div class="preview-title">{{document.name}}</div>
-				<div class="preview-description">{{document.description}}</div>
+				<div class="preview-title">{{previewDocument.name}}</div>
+				<div class="preview-description">{{previewDocument.description}}</div>
 			</div>
 
 			<div class="col-xs-4 col-md-3 muted text-right">
-				<span>Ostatnia modyfikacja: {{ document.timestamp | date : dateFormat }}</span><br>
-				<span>wersja: {{ document.version }}</span><br>
+				<span>Ostatnia modyfikacja: {{ previewDocument.timestamp | date : dateFormat }}</span><br>
+				<span>wersja: {{ previewDocument.version }}</span><br>
 			</div>
 		</div>
 
@@ -25,7 +25,7 @@
 					<fieldset>
 						<legend>Metadane</legend>
 						<ng-form name="documentForm" class="form-horizontal" role="form">
-							<div ng-repeat="field in document.metaFields">
+							<div ng-repeat="field in previewDocument.metaFields">
 								<field-preview-directive></field-preview-directive>
 							</div>
 						</ng-form>
@@ -101,15 +101,16 @@
 		<div class="">
 			<div class="row">
 				<div class="col-md-5">
-					<a class="pull-left" ng-click="switchVersion(-1)">Poprzednia wersja</a>
+					<a class="pull-left" ng-click="switchVersion(previewDocument, previewVersion, -1)">Poprzednia wersja</a>
 					</div>
 				<div class="col-md-2">
-					<button class="btn btn-primary btn-block" ng-click="restoreVersion()">Przywróć</button>	
+					<button class="btn btn-primary btn-block" ng-click="restoreDocumentVersion(previewDocument, previewVersion)">Przywróć</button>	
 				</div>
 				<div class="col-md-5">
-					<a class="pull-right" ng-click="switchVersion(1)">Następna wersja</a>
+					<a class="pull-right" ng-click="switchVersion(previewDocument, previewVersion, 1)">Następna wersja</a>
 				</div>
 			</div>
+			<div class="row text-center" style="margin-top: 5px; color: #B6052D">{{t('Restore_may_cause_loss_of_data')}}</div>
 		</div>
 
 		<div class="clearfix"></div>

@@ -13,6 +13,7 @@
 		New_document: 'Nowy dokument',
 		remove: 'Usuń',
 		template_was_not_loaded_please_refresh_browser: 'Szablon nie został załadowany, odśwież przeglądarkę',
+		Restore_may_cause_loss_of_data: 'Uwaga! Przywrócenie wersji może spowodować utratę danych!'
 
 		});
 	});
