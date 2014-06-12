@@ -44,7 +44,8 @@ function (angular) {
 
 		'document',
 		'document.controllers',
-		'document.services'
+		'document.services',
+		'document.directives'
 
 	])
 

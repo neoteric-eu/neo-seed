@@ -4,7 +4,7 @@
 	define([], function(){
 
 		var CreateDocumentController = function ($scope, $routeParams, $location,
-			appMessages, locale, documentTemplateService, documentService) {
+			appMessages, locale, documentTemplateService, documentService, $modal, documentModulePath) {
 
 			// Setup environment
 			$scope.dateFormat = 'dd-MM-yyyy';
@@ -24,6 +24,7 @@
 			 *	- view document by id (only view)
 			 *
 			 */
+
 			$scope.init = function() {
 
 				var templateId = $routeParams.templateId;
@@ -173,10 +174,60 @@
 			};
 
 
+			$scope.docPreviewModal = function(document, version) {
+				console.log(document, 'adasdasda', version);
+				var modalScope = $scope.$new();
+				var previewDocument = angular.copy(document);
+				var previewVersion = angular.copy(version);
+				modalScope.previewDocument = previewDocument;
+				modalScope.previewVersion = previewVersion;
+				modalScope.switchVersion = $scope.switchVersion;
+
+				var modalInstance = $modal.open({
+					templateUrl: documentModulePath + 'views/modals/docPreview.html',
+					scope: modalScope,
+					windowClass: 'docPreview'
+				});
+				modalInstance.result.then(function () {
+					console.log('sss');
+					//$scope.restoreVersion(document, version);
+				});
+			};
+
+
+
+			$scope.switchVersion = function(previewDocument, previewVersion, i) {
+				var version = previewVersion.version+i;
+				console.log(version);
+				documentService.restoreDocumentVersion(previewDocument.id, version).then(function() {
+
+					previewDocument = documentService.previewDocument.getModel();
+					//$scope.document = angular.copy($scope.previewDocument);
+					//console.log('scope.form po editTemplate', $scope.form);
+				}, function() { // reason
+					// $exceptionHandler(reason);
+				});
+				
+			};
+
+			$scope.restoreDocumentVersion = function(previewDocument, previewVersion) {
+
+				documentService.restoreDocumentVersion(previewDocument.id, previewVersion.version).then(function() {
+
+					$scope.previewDocument = documentService.previewDocument.getModel();
+					$scope.document = angular.copy($scope.previewDocument);
+					//console.log('scope.form po editTemplate', $scope.form);
+				}, function() { // reason
+					// $exceptionHandler(reason);
+				});
+			};
 
 		};
 
+
+
 		return ['$scope', '$routeParams', '$location', 'appMessages', 'locale',
-		'documentTemplateService', 'documentService', CreateDocumentController];
+		'documentTemplateService', 'documentService', '$modal', 'documentModulePath', CreateDocumentController];
+
 	});
 }());

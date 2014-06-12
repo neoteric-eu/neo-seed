@@ -27,6 +27,7 @@
 				};
 			}
 
+			this.previewDocument = new ModelConstructor();
 			this.activeDocument = new ModelConstructor();
 			this.documents = new ModelConstructor();
 
@@ -90,6 +91,20 @@
 					self.documents.removeModel(document);
 					deferred.resolve(data);
 				}, function(reason) {
+					deferred.reject(reason);
+				});
+
+				return deferred.promise;
+			};
+
+			this.restoreDocumentVersion = function(id, version) {
+				var deferred = $q.defer();
+				console.log('sss');
+				documentResource.updateDocument({documentId: id, version: version}, {}, function(data) {
+					self.previewDocument.setModel(data);
+					//console.log('success w restore doc version');
+					deferred.resolve(data);
+				},function(reason) {
 					deferred.reject(reason);
 				});
 

@@ -13,18 +13,21 @@
 		'./controllers/DocumentController',
 		'./controllers/CreateDocumentController',
 
+		'./directives/field-preview-directive/field-preview-directive',
+
 		'./services/documentService',
+		
 		'./resources/documentResource',
 
 		'./docsUrls',
 		'./locale/en_EN',
 		'./locale/pl_PL'
 
-	], function(angular, DocumentController, CreateDocumentController,
+	], function(angular, DocumentController, CreateDocumentController, fieldPreviewDirective,
 	documentService, documentResource, docsUrls) {
 		var moduleName = 'document';
 		var controllers = moduleName + '.controllers';
-		// var directives = moduleName + '.directives';
+		var directives = moduleName + '.directives';
 		var services = moduleName + '.services';
 
 		angular.module( moduleName, [])
@@ -34,6 +37,9 @@
 		angular.module( controllers , [] )
 			.controller('DocumentController', DocumentController)
 			.controller('CreateDocumentController', CreateDocumentController);
+
+		angular.module( directives , [] )
+			.directive('fieldPreviewDirective', fieldPreviewDirective);
 
 		angular.module( services, ['ngResource'] )
 			.service('documentService', documentService)
