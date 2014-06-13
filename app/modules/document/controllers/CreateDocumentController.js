@@ -4,7 +4,8 @@
 	define([], function(){
 
 		var CreateDocumentController = function ($scope, $routeParams, $location,
-			appMessages, locale, documentTemplateService, documentService, $modal, documentModulePath) {
+			$modal, system, appMessages, locale, documentTemplateService,
+			documentService, documentModulePath) {
 
 			// Setup environment
 			$scope.dateFormat = 'dd-MM-yyyy';
@@ -51,7 +52,7 @@
 			 */
 			$scope.createNewByTemplate = function(templateId) {
 				$scope.document = {};
-
+				system.showLoader();
 				documentTemplateService.getTemplateById(templateId).then(function(data) {
 					$scope.documentTemplate = data;
 					$scope.document.icon = data.icon;
@@ -66,7 +67,7 @@
 
 				}).finally(function() {
 					$scope.readyToShow = true;
-
+					system.hideLoader();
 				});
 
 			};
@@ -207,7 +208,7 @@
 				}, function() { // reason
 					// $exceptionHandler(reason);
 				});
-				
+
 			};
 
 			$scope.restoreDocumentVersion = function(previewDocument, previewVersion) {
@@ -226,8 +227,9 @@
 
 
 
-		return ['$scope', '$routeParams', '$location', 'appMessages', 'locale',
-		'documentTemplateService', 'documentService', '$modal', 'documentModulePath', CreateDocumentController];
+		return ['$scope', '$routeParams', '$location', '$modal', 'system',
+		'appMessages', 'locale', 'documentTemplateService', 'documentService',
+		'documentModulePath', CreateDocumentController];
 
 	});
 }());

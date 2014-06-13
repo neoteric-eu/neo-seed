@@ -2,7 +2,9 @@
 	'use strict';
 	define([], function(){
 
-		var DocumentController = function($scope, $filter, $modal, $location, documentService, documentModulePath, ngTableParams) {
+		var DocumentController = function($scope, $filter, $modal, $location,
+			system, appMessages, locale, documentService, documentModulePath,
+			ngTableParams) {
 
 			/*jshint newcap: false */
 			$scope.ngTableBuilder = function(data) {
@@ -22,21 +24,21 @@
 			};
 
 			$scope.getDocuments = function(){
-				//$System.showLoader();
+				system.showLoader();
 				documentService.getDocuments().then(
 
 					function(){
-						//$System.hideLoader();
 						$scope.documents = documentService.documents.getModel();
-						console.log($scope.documents.length);
 						$scope.docsTable = $scope.ngTableBuilder($scope.documents);
-					}, function(){	//reason
-						// $System.hideLoader();
-						// $System.$appMessages.error($System.$locale.getT('Operation_failed'));
-						// $System.$exceptionHandler(reason);
+
+					}, function(){
+
+						appMessages.error(locale.getT('Operation_failed'));
 					}
 
-				);
+				).finally(function() {
+					system.hideLoader();
+				});
 
 
 			};
@@ -54,16 +56,15 @@
 			};
 
 			$scope.removeDocument = function(document) {
-				//$System.showLoader();
+				system.showLoader();
 				documentService.removeDocument(document).then(
 					function() {
-						//$System.hideLoader();
+						system.hideLoader();
 
 						$scope.docsTable.reload();
-						// $System.$appMessages.success($System.$locale.getT('Operation_succeeded'));
-					}, function() {	//reason
-						// $System.$appMessages.error($System.$locale.getT('Operation_failed'));
-						// $System.$exceptionHandler(reason);
+						appMessages.success(locale.getT('Operation_succeeded'));
+					}, function() {
+						appMessages.error(locale.getT('Operation_failed'));
 					}
 				);
 			};
@@ -76,7 +77,7 @@
 					scope: modalScope
 				});
 				modalInstance.result.then(function () {
-						$scope.updateDocumentToNewestTemplate(document);
+					$scope.updateDocumentToNewestTemplate(document);
 				});
 			};
 
@@ -92,6 +93,8 @@
 
 		};
 
-		return ['$scope', '$filter', '$modal', '$location', 'documentService', 'documentModulePath', 'ngTableParams', DocumentController, ];
+		return ['$scope', '$filter', '$modal', '$location', 'system',
+		'appMessages', 'locale', 'documentService', 'documentModulePath',
+		'ngTableParams', DocumentController, ];
 	});
 }());
