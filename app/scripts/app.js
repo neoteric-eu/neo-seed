@@ -28,6 +28,7 @@ function (angular) {
 		'miniCore.directives',
 		'miniCore.services',
 
+		'templateCore',
 		'templateCore.services',
 		'templateCore.directives'
 	])
