@@ -18,9 +18,29 @@
 				};
 			});
 
+			angular.module('document.services').service('system',function() {
+				return {
+					showLoader: jasmine.createSpy(),
+					hideLoader: jasmine.createSpy()
+				};
+			});
+
+			angular.module('document.services').service('appMessages',function() {
+				return {
+					success: jasmine.createSpy(),
+					error: jasmine.createSpy(),
+				};
+			});
+
+			angular.module('document.services').service('locale', function() {
+				return {
+					getT: jasmine.createSpy()
+				};
+			});
 			angular.module('document.services').service('$routeParamsMock',function() {
 				return {};
 			});
+
 
 			angular.module('document.services').service('ngTableParams',function() {
 				var ngTableParams = function (baseParameters, baseSettings) {
