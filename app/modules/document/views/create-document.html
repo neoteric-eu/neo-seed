@@ -76,25 +76,31 @@
 
 								<hr class="simple">
 
-								<div class="form-group ng-scope">
-									<label class="col-sm-2 control-label">
-										Status dokumentu
-									</label>
+								<div class="form-horizontal">
+									<div class="form-group ng-scope">
+										<label class="col-sm-2 control-label">
+											Status dokumentu
+										</label>
 
-									<div class="col-sm-9">
+										<div class="col-sm-3">
 
-										<!-- ng-options="o as o for o in field.options" -->
-										<!-- <select class="form-control" ng-model="document.status" sng-required="true"> -->
-										<select class="form-control">
-											<option value="0" selected="selected">Nowy</option>
-											<option value="1" >W toku</option>
-											<option value="2">Zatwierdzony</option>
-											<option value="3" >Zablokowany</option>
-											<option value="4">Zakończony</option>
-											<option value="5">Zakończony i zablokowany</option>
-										</select>
+											<!-- ng-options="o as o for o in field.options" -->
+											<!-- <select class="form-control" ng-model="document.status" sng-required="true"> -->
+											<select class="form-control">
+												<option value="0" selected="selected">Nowy</option>
+												<option value="1" >W toku</option>
+												<option value="2">Zatwierdzony</option>
+												<option value="3" >Zablokowany</option>
+												<option value="4">Zakończony</option>
+												<option value="5">Zakończony i zablokowany</option>
+											</select>
+										</div>
 									</div>
 								</div>
+
+
+
+
 
 							</fieldset>
 						</div>
@@ -110,8 +116,29 @@
 
 											<div class="row">
 												<div class="col-md-12">
+
+													<label for="importFile" class="drag-drop-wrapper">
+														<div class="drag-drop-inner text-center margin-bottom-20">
+
+															<h2 class="margin-bottom-0">Przeciągnij i upuść</h2>
+
+															<p class="muted">albo</p>
+
+															<span class="btn btn-default">Wybierz plik</span>
+
+															<div class="clearfix"></div>
+
+															<input id="importFile" type="file" class="hide" ng-file-select  multiple>
+														</div>
+													</label>
+
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-12">
 													<div class="table-responsive">
-														<table class="table table-hover" ng-show="uploader.queue.length">
+														<table class="table table-hover" ng-show="uploader.queue.length" height-watch>
 															<thead>
 																<tr>
 																	<th width="50%">Name</th>
@@ -153,14 +180,6 @@
 												</div>
 											</div>
 
-											<div class="row">
-												<div class="col-md-12">
-
-
-													<input ng-file-select type="file" multiple>
-
-												</div>
-											</div>
 
 										</section>
 
@@ -174,10 +193,10 @@
 
 				<div class="pull-right">
 					<div class="btn-group">
-						<button class="btn btn-primary" ng-disabled="!documentForm.$valid && !templateCreatorMode" ng-click="saveDocument(document, false)">
+						<button class="btn btn-primary" ng-disabled="!documentForm.$valid" ng-click="saveDocument(document, false)">
 							Zapisz
 						</button>
-						<button class="btn btn-primary dropdown-toggle" ng-disabled="!documentForm.$valid && !templateCreatorMode" data-toggle="dropdown">
+						<button class="btn btn-primary dropdown-toggle" ng-disabled="!documentForm.$valid" data-toggle="dropdown">
 							<span class="caret"></span>
 						</button>
 						<ul class="pull-right dropdown-menu">
@@ -196,7 +215,7 @@
 			</div>
 		</div> <!-- /jarviswidget -->
 
-		<div class="jarviswidget well">
+		<div class="jarviswidget well" ng-if="document.versions">
 			<div class="widget-body">
 
 				<tabset>
@@ -204,7 +223,7 @@
 						<tab-heading><i class="fa fa-fw fa-lg fa-info"></i> Aktywność</tab-heading>
 
 					</tab>
-					<tab ng-if="document.version">
+					<tab ng-if="document.version" active="true">
 						<tab-heading>
 							<i class="fa fa-fw fa-lg fa-repeat"></i> Historia
 						</tab-heading>
@@ -233,9 +252,6 @@
 				</tabset>
 			</div>
 		</div>
-
-
-<pre>{{ document | json }}</pre>
 
 	</div>
 </section>

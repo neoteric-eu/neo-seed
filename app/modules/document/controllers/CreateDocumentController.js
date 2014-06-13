@@ -19,9 +19,9 @@
 			 *	@description
 			 *
 			 *	The are 4x "types" of the document:
-			 *	+ create new by template
+			 *	- create new by template
 			 *	- create new by templateCreator
-			 *	+ edit document by id
+			 *	- edit document by id
 			 *	- view document by id (only view)
 			 *
 			 */

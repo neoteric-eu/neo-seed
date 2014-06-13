@@ -3,7 +3,8 @@
 	define([], function() {
 
 		var CreateTemplateController = function($scope, $location, $routeParams,
-		$modal, appMessages, locale, docsEnums, documentTemplateService, documentTemplateModulePath) {
+		$modal, system, appMessages, locale, docsEnums, documentTemplateService,
+		documentTemplateModulePath) {
 
 			$scope.dateOptions = { 'starting-day': 1 };
 
@@ -44,7 +45,7 @@
 					'options': null,
 					'validationPattern' : null,
 					'required' : false,
-					'value' : ''
+					'value' : null
 				};
 
 				if(addOptions) {
@@ -69,7 +70,6 @@
 
 			$scope.initTemplate = function() {
 				$scope.readyToShow = false;
-
 				documentTemplateService.getFieldTypes().then(function() {
 					$scope.readyToShow = true;
 					$scope.addField.types = documentTemplateService.primitiveFieldTypes.getModel();
@@ -78,6 +78,7 @@
 
 				if(angular.isDefined($routeParams.templateId)) {
 					$scope.editMode = 1;
+					system.showLoader();
 					documentTemplateService.getTemplateById($routeParams.templateId).then(function() {
 						$scope.form = documentTemplateService.activeTemplate.getModel();
 						// _.each responsible for displaying REGEX DIV correctly in edit mode.
@@ -91,7 +92,10 @@
 					}, function() {
 						//$exceptionHandler(reason);
 						appMessages.error(locale.getT('Operation_failed'));
+					}).finally(function() {
+						system.hideLoader();
 					});
+
 				} else {
 					$scope.editMode = 0;
 				}
@@ -99,11 +103,14 @@
 
 			// function used to load chosen version of the template
 			$scope.editTemplate = function(template, version) { //FIXME: check if template argument is needed
+				system.showLoader();
 				documentTemplateService.getTemplateById($routeParams.templateId, version.version).then(function() {
 					$scope.form = documentTemplateService.activeTemplate.getModel();
 				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
 					// $exceptionHandler(reason);
+				}).finally(function() {
+					system.hideLoader();
 				});
 			};
 
@@ -120,24 +127,28 @@
 					$scope.updateTemplate(form, changeLocation);
 					return;
 				}
-
+				system.showLoader();
 				documentTemplateService.createTemplate(form).then(function() {
 					if (changeLocation) {
 						$location.path('/templates');
 					} else {
 						$scope.form = documentTemplateService.activeTemplate.getModel();
+						$location.path('/template/edit/' + $scope.form.id);
 					}
 
 					appMessages.success(locale.getT('Operation_succeeded'));
 				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
 					//$exceptionHandler(reason);
+				}).finally(function() {
+					system.hideLoader();
 				});
 
 			};
 
 			// updates already existing template to newer version
 			$scope.updateTemplate = function(form, changeLocation) {
+				system.showLoader();
 				documentTemplateService.updateTemplate(form).then(function() {
 
 					if (changeLocation) {
@@ -150,6 +161,8 @@
 				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
 					//$exceptionHandler(reason);
+				}).finally(function() {
+					system.hideLoader();
 				});
 			};
 
@@ -169,11 +182,14 @@
 			};
 
 			$scope.restoreVersion = function(id, version) {
-
+				system.showLoader();
 				documentTemplateService.restoreTemplateVersion($routeParams.templateId, version.version).then(function() {
 					$scope.form = documentTemplateService.activeTemplate.getModel();
-				}, function() {	// reason
-					// $exceptionHandler(reason);
+				}, function() {
+					appMessages.error(locale.getT('Operation_failed'));
+					//$exceptionHandler(reason);
+				}).finally(function() {
+					system.hideLoader();
 				});
 
 			};
@@ -322,8 +338,8 @@
 
 		};
 
-		return ['$scope', '$location', '$routeParams', '$modal', 'appMessages',
-		'locale', 'docsEnums', 'documentTemplateService', 'documentTemplateModulePath',
-		CreateTemplateController];
+		return ['$scope', '$location', '$routeParams', '$modal', 'system',
+		'appMessages', 'locale', 'docsEnums', 'documentTemplateService',
+		'documentTemplateModulePath', CreateTemplateController];
 	});
 }());
