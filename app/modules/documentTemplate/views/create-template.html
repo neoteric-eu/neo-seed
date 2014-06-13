@@ -52,10 +52,22 @@
 						<a ng-show="showVersionHistory" ng-click="showVersionHistory = false">Wersja {{form.version}}</a>
 					</div>
 					<div class="pull-right">
-						<button class="btn btn-default right" type="button" ng-click="saveTemplate(form)" ng-disabled="form.metaFields.length == 0"> Zapisz i kontynuuj edycję</button>
-						<button class="btn btn-primary right" type="button" ng-click="saveTemplate(form, true)" ng-disabled="form.metaFields.length == 0"> Zapisz</button>
+						<div class="btn-group">
+							<button class="btn btn-primary" ng-click="saveTemplate(form, false)" ng-disabled="form.metaFields.length == 0">
+								Zapisz
+							</button>
+							<button class="btn btn-primary dropdown-toggle" ng-disabled="form.metaFields.length == 0" data-toggle="dropdown">
+								<span class="caret"></span>
+							</button>
+							<ul class="pull-right dropdown-menu">
+								<li>
+									<a href="javascript:void(0);" ng-click="saveTemplate(form, true)">Zapisz i zamknij</a>
+								</li>
+							</ul>
+						</div>
 					</div>
 					<div class="clearfix"></div>
+
 				</div>
 			</div>
 
@@ -72,6 +84,7 @@
 					</table>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </section>
