@@ -1,4 +1,4 @@
-/* jshint unused: false, undef: false, quotmark:false */
+	/* jshint unused: false, undef: false, quotmark:false */
 var t;
 t = { pl: {}, en: {}};
 
@@ -171,18 +171,20 @@ function (angular) {
 		]);
 	})
 	.run(['$rootScope', '$location', 'session', 'template', 'permissions',
-		'setDefaultsHeaders', 'appMessages', 'menu',
+		'setDefaultsHeaders', 'appMessages', 'menu', 'locale',
 		function($rootScope, $location, session, template, permissions,
-		setDefaultsHeaders, appMessages, menu) {
+		setDefaultsHeaders, appMessages, menu, locale) {
 
 		setDefaultsHeaders.setContentType('application/json');
 		$rootScope.appReady = false;
+		$rootScope.menu = menu.getMenu();
+		$rootScope.t = locale.getT;
 
 		/**
 		 *	@name redirectMgr
 		 *	@param {string} path
-		 *	@decription
 		 */
+		//FIXME: test it
 		$rootScope.redirectMgr = function(path){
 			if ( session.logged.getModel() ) {
 
@@ -221,13 +223,11 @@ function (angular) {
 		};
 		$rootScope.checkSession();
 
-		$rootScope.menu = menu.getMenu();
 
 		$rootScope.$on('event:loginRequired', function() {
 			session.clearSession();
 			$rootScope.checkSession();
 		});
-
 
 		$rootScope.$on('$locationChangeStart', function(event, nextRoute, currentRoute){
 
@@ -243,7 +243,6 @@ function (angular) {
 		});
 
 		$rootScope.$on('$routeChangeSuccess', function(event, currentRoute, priorRoute) {
-
 			if(permissions.clearCache) {
 				permissions.clearCache = false;
 			}
@@ -265,6 +264,5 @@ function (angular) {
 			appMessages.$apply();
 		});
 	}]);
-
 
 });
