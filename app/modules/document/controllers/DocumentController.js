@@ -32,7 +32,6 @@
 						$scope.docsTable = $scope.ngTableBuilder($scope.documents);
 
 					}, function(){
-
 						appMessages.error(locale.getT('Operation_failed'));
 					}
 
@@ -51,7 +50,7 @@
 					scope: modalScope
 				});
 				modalInstance.result.then(function () {
-						$scope.removeDocument(document);
+					$scope.removeDocument(document);
 				});
 			};
 

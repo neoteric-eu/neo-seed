@@ -3,7 +3,9 @@
 	'use strict';
 	define([], function(){
 
-		var TemplateListController = function($scope, $filter, $modal, $location, documentTemplateService, documentTemplateModulePath, ngTableParams) {
+		var TemplateListController = function($scope, $filter, $modal, $location,
+			system, locale, appMessages, documentTemplateService,
+			documentTemplateModulePath, ngTableParams) {
 
 			$scope.ngTableBuilder = function(data) {
 				return new ngTableParams({
@@ -22,21 +24,20 @@
 			};
 
 			$scope.getTemplates = function() {
-				//$System.showLoader();
+				system.showLoader();
+
 				documentTemplateService.getTemplates().then(
-					//console.log($scope.docs)
 					function() {
-						//$System.hideLoader();
 						$scope.documentTemplates = documentTemplateService.documentTemplates.getModel();
-						//console.log($scope.documentTemplates.length);
 						$scope.templatesTable = $scope.ngTableBuilder($scope.documentTemplates);
-					}, function() {	//reason
-						// $System.hideLoader();
-						// $System.$appMessages.error($System.$locale.getT('Operation_failed'));
-						// $System.$exceptionHandler(reason);
+					}, function() {
+						appMessages.error(locale.getT('Operation_failed'));
+						// system.$exceptionHandler(reason);
 					}
 
-				);
+				).finally(function() {
+					system.hideLoader();
+				});
 			};
 
 			$scope.refreshTemplatesList = function() {
@@ -64,28 +65,30 @@
 					scope: modalScope
 				});
 				modalInstance.result.then(function () {
-						$scope.removeTemplate(template);
+					$scope.removeTemplate(template);
 				});
 			};
 
 			$scope.removeTemplate = function(template) {
-				//$System.showLoader();
+				system.showLoader();
 				documentTemplateService.removeTemplate(template).then(
 					function() {
-						//$System.hideLoader();
 						$scope.templatesTable.reload();
-						// $System.$appMessages.success($System.$locale.getT('Operation_succeeded'));
-					}, function() {	//reason
-						// $System.$appMessages.error($System.$locale.getT('Operation_failed'));
-						// $System.$exceptionHandler(reason);
+						appMessages.success(locale.getT('Operation_succeeded'));
+					}, function() {
+						appMessages.error(locale.getT('Operation_failed'));
 					}
-				);
+				).finally(function() {
+					system.hideLoader();
+				});
 			};
 
 
 
 		};
 
-		return ['$scope', '$filter', '$modal', '$location', 'documentTemplateService', 'documentTemplateModulePath', 'ngTableParams', TemplateListController, ];
+		return ['$scope', '$filter', '$modal', '$location', 'system', 'locale',
+		'appMessages', 'documentTemplateService', 'documentTemplateModulePath',
+		'ngTableParams', TemplateListController, ];
 	});
 }());

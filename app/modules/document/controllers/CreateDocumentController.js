@@ -79,7 +79,7 @@
 			 *	@description Render new document from template
 			 */
 			$scope.editDocumentById = function(documentId) {
-
+				system.showLoader();
 				documentService.getDocumentById(documentId).then(function() {
 					$scope.editMode = true;
 					$scope.document = documentService.activeDocument.getModel();
@@ -89,7 +89,7 @@
 
 				}).finally(function() {
 					$scope.readyToShow = true;
-
+					system.hideLoader();
 				});
 			};
 
@@ -100,6 +100,7 @@
 			 *
 			 */
 			$scope.createNewByTemplateCreator = function() {
+				system.showLoader();
 				// Setup environment
 				$scope.templateCreatorMode = true;
 				$scope.editMode = true;
@@ -116,6 +117,8 @@
 					$scope.readyToShow = true;
 					$scope.fieldTypes = documentTemplateService.primitiveFieldTypes.getModel();
 					$scope.docSelectedType = $scope.fieldTypes[0];
+				}).finally(function() {
+					system.hideLoader();
 				});
 			};
 
@@ -127,7 +130,7 @@
 			 *	@param {bolean} changeLocation
 			 */
 			$scope.updateDocument = function(document, changeLocation) {
-
+				system.showLoader();
 				documentService.updateDocument(document).then(function() {
 
 					if (changeLocation) {
@@ -140,6 +143,8 @@
 				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
 					//$exceptionHandler(reason);
+				}).finally(function() {
+					system.hideLoader();
 				});
 
 
@@ -157,6 +162,7 @@
 					return;
 				}
 
+				system.showLoader();
 				documentService.createDocument(document).then(function() {
 					if (changeLocation) {
 						$location.path('/documents');
@@ -170,6 +176,8 @@
 				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
 					//$exceptionHandler(reason);
+				}).finally(function() {
+					system.hideLoader();
 				});
 
 			};
