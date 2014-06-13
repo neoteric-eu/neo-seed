@@ -9,8 +9,8 @@ define( [
 
 	// Required for unit tests
 	'../modules/miniCore/miniCoreModule',
+	'../modules/templateCore/templateCoreModule',
 	'../modules/documentTemplate/documentTemplateModule',
-	'../modules/neoDocs/neoDocsModule',
 	'../modules/document/documentModule',
 
 ],
@@ -33,14 +33,15 @@ function (angular) {
 		'miniCore.directives',
 		'miniCore.services',
 
+		'templateCore',
+		'templateCore.controllers',
+		'templateCore.directives',
+		'templateCore.services',
+
 		'documentTemplate',
 		'documentTemplate.controllers',
 		'documentTemplate.directives',
 		'documentTemplate.services',
-
-		'neoDocs',
-		'neoDocs.controllers',
-		'neoDocs.services',
 
 		'document',
 		'document.controllers',
