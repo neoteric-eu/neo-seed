@@ -1,11 +1,11 @@
-<div class="jarviswidget well modal-body">
+<div class="jarviswidget well modal-body" ng-init="initModal()">
 	<div class="widget-body">
 
 		<div class="row">
 			<div class="col-xs-1 text-center">
-				<i class="fa fa-file-text-o fa-4x hidden-xs"></i>
+				<i class="fa {{previewDocument.icon}} fa-4x hidden-xs"></i>
 			</div>
-			<div class="col-xs-7 col-md-8 form-properties">
+			<div class="col-xs-6 col-md-7 form-properties">
 				<div class="preview-title">{{previewDocument.name}}</div>
 				<div class="preview-description">{{previewDocument.description}}</div>
 			</div>
@@ -13,6 +13,9 @@
 			<div class="col-xs-4 col-md-3 muted text-right">
 				<span>Ostatnia modyfikacja: {{ previewDocument.timestamp | date : dateFormat }}</span><br>
 				<span>wersja: {{ previewDocument.version }}</span><br>
+			</div>
+ 			<div class="col-xs-1 col-md-1 muted text-right">
+				<button type="button" class="close x-button" ng-click="$dismiss(); $event.stopPropagation();">×</button>
 			</div>
 		</div>
 
@@ -29,6 +32,17 @@
 								<field-preview-directive></field-preview-directive>
 							</div>
 						</ng-form>
+								<div class="form-horizontal">
+									<div class="form-group ng-scope">
+										<label class="col-sm-2 control-label">
+											Status dokumentu
+										</label>
+
+										<div class="col-sm-3 preview-values">
+											ZATWIERDZONY(hardcoded)
+										</div>
+									</div>
+								</div>
 						<hr class="simple">
 					</fieldset>
 				</div>
@@ -100,14 +114,15 @@
 		<hr>
 		<div class="">
 			<div class="row">
+				<div class="row text-center" style="margin-top: 10px; margin-bottom: 10px; font-weight: bold;">{{t('VERSION')}} {{ previewDocument.version }}</div>
 				<div class="col-md-5">
-					<a class="pull-left" ng-class="{'disabledLink': disablePrevLink}" ng-click="switchVersion(previewDocument, previewVersion, -1)">Poprzednia wersja</a>
+					<a class="pull-left" ng-class="{'disabledLink': disablePrevLink}" ng-click="switchVersion(previewDocument, -1)">Poprzednia wersja</a>
 					</div>
 				<div class="col-md-2">
 					<button class="btn btn-primary btn-block" ng-click="restoreDocumentVersion(previewDocument, previewVersion)">Przywróć</button>	
 				</div>
 				<div class="col-md-5">
-					<a class="pull-right" ng-class="{'disabledLink': disableNextLink}"ng-click="switchVersion(previewDocument, previewVersion, 1)">Następna wersja</a>
+					<a class="pull-right" ng-class="{'disabledLink': disableNextLink}"ng-click="switchVersion(previewDocument, 1)">Następna wersja</a>
 				</div>
 			</div>
 			<div class="row text-center" style="margin-top: 5px; color: #B6052D">{{t('Restore_may_cause_loss_of_data')}}</div>

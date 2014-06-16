@@ -204,6 +204,7 @@
 				});
 				modalInstance.result.then(function (previewDocument) {
 					$scope.document = previewDocument;
+					console.log('xxxx');
 				});
 
 			};
