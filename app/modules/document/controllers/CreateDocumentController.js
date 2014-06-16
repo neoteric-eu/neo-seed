@@ -184,14 +184,10 @@
 
 
 			$scope.docPreviewModal = function(previewDocument, previewVersion) {
-				//console.log(document, 'adasdasda', version);
-				// var previewDocument = angular.copy(document);
-				// var previewVersion = angular.copy(version);
 				console.log(previewDocument, '!!!!!!!!', previewVersion);
 				var modalInstance = $modal.open({
 					templateUrl: documentModulePath + 'views/modals/docPreview.html',
 					controller: 'PreviewModalController',
-					/*scope: modalScope,*/
 					windowClass: 'docPreview',
 					resolve: {
 						previewDocument: function(){
@@ -204,18 +200,14 @@
 				});
 				modalInstance.result.then(function (previewDocument) {
 					$scope.document = previewDocument;
-					console.log('xxxx');
 				});
 
 			};
 
 			$scope.restoreDocumentVersion = function(previewDocument, previewVersion) {
-
 				documentService.restoreDocumentVersion(previewDocument.id, previewVersion.version).then(function() {
-
 					$scope.previewDocument = documentService.previewDocument.getModel();
 					$scope.document = angular.copy($scope.previewDocument);
-					//console.log('scope.form po editTemplate', $scope.form);
 				}, function() { // reason
 					// $exceptionHandler(reason);
 				});
