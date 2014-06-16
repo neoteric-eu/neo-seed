@@ -4,7 +4,8 @@
 	define([], function(){
 
 		var CreateDocumentController = function ($scope, $routeParams, $location,
-			appMessages, locale, documentTemplateService, documentService, $modal, documentModulePath) {
+			$modal, system, appMessages, locale, documentTemplateService,
+			documentService, documentModulePath) {
 
 			// Setup environment
 			$scope.dateFormat = 'dd-MM-yyyy';
@@ -18,9 +19,9 @@
 			 *	@description
 			 *
 			 *	The are 4x "types" of the document:
-			 *	+ create new by template
+			 *	- create new by template
 			 *	- create new by templateCreator
-			 *	+ edit document by id
+			 *	- edit document by id
 			 *	- view document by id (only view)
 			 *
 			 */
@@ -51,7 +52,7 @@
 			 */
 			$scope.createNewByTemplate = function(templateId) {
 				$scope.document = {};
-
+				system.showLoader();
 				documentTemplateService.getTemplateById(templateId).then(function(data) {
 					$scope.documentTemplate = data;
 					$scope.document.icon = data.icon;
@@ -66,7 +67,7 @@
 
 				}).finally(function() {
 					$scope.readyToShow = true;
-
+					system.hideLoader();
 				});
 
 			};
@@ -78,7 +79,7 @@
 			 *	@description Render new document from template
 			 */
 			$scope.editDocumentById = function(documentId) {
-
+				system.showLoader();
 				documentService.getDocumentById(documentId).then(function() {
 					$scope.editMode = true;
 					$scope.document = documentService.activeDocument.getModel();
@@ -88,7 +89,7 @@
 
 				}).finally(function() {
 					$scope.readyToShow = true;
-
+					system.hideLoader();
 				});
 			};
 
@@ -99,6 +100,7 @@
 			 *
 			 */
 			$scope.createNewByTemplateCreator = function() {
+				system.showLoader();
 				// Setup environment
 				$scope.templateCreatorMode = true;
 				$scope.editMode = true;
@@ -115,6 +117,8 @@
 					$scope.readyToShow = true;
 					$scope.fieldTypes = documentTemplateService.primitiveFieldTypes.getModel();
 					$scope.docSelectedType = $scope.fieldTypes[0];
+				}).finally(function() {
+					system.hideLoader();
 				});
 			};
 
@@ -126,7 +130,7 @@
 			 *	@param {bolean} changeLocation
 			 */
 			$scope.updateDocument = function(document, changeLocation) {
-
+				system.showLoader();
 				documentService.updateDocument(document).then(function() {
 
 					if (changeLocation) {
@@ -139,6 +143,8 @@
 				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
 					//$exceptionHandler(reason);
+				}).finally(function() {
+					system.hideLoader();
 				});
 
 
@@ -156,6 +162,7 @@
 					return;
 				}
 
+				system.showLoader();
 				documentService.createDocument(document).then(function() {
 					if (changeLocation) {
 						$location.path('/documents');
@@ -169,6 +176,8 @@
 				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
 					//$exceptionHandler(reason);
+				}).finally(function() {
+					system.hideLoader();
 				});
 
 			};
@@ -196,6 +205,7 @@
 				modalInstance.result.then(function (previewDocument) {
 					$scope.document = previewDocument;
 				});
+
 			};
 
 			$scope.restoreDocumentVersion = function(previewDocument, previewVersion) {
@@ -214,8 +224,9 @@
 
 
 
-		return ['$scope', '$routeParams', '$location', 'appMessages', 'locale',
-		'documentTemplateService', 'documentService', '$modal', 'documentModulePath', CreateDocumentController];
+		return ['$scope', '$routeParams', '$location', '$modal', 'system',
+		'appMessages', 'locale', 'documentTemplateService', 'documentService',
+		'documentModulePath', CreateDocumentController];
 
 	});
 }());
