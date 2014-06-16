@@ -174,40 +174,28 @@
 			};
 
 
-			$scope.docPreviewModal = function(document, version) {
-				console.log(document, 'adasdasda', version);
-				var modalScope = $scope.$new();
-				var previewDocument = angular.copy(document);
-				var previewVersion = angular.copy(version);
-				modalScope.previewDocument = previewDocument;
-				modalScope.previewVersion = previewVersion;
-				modalScope.switchVersion = $scope.switchVersion;
-
+			$scope.docPreviewModal = function(previewDocument, previewVersion) {
+				//console.log(document, 'adasdasda', version);
+				// var previewDocument = angular.copy(document);
+				// var previewVersion = angular.copy(version);
+				console.log(previewDocument, '!!!!!!!!', previewVersion);
 				var modalInstance = $modal.open({
 					templateUrl: documentModulePath + 'views/modals/docPreview.html',
-					scope: modalScope,
-					windowClass: 'docPreview'
+					controller: 'PreviewModalController',
+					/*scope: modalScope,*/
+					windowClass: 'docPreview',
+					resolve: {
+						previewDocument: function(){
+							return previewDocument;
+						},
+						previewVersion: function(){
+							return previewVersion;
+						}
+					}
 				});
-				modalInstance.result.then(function () {
-					console.log('sss');
-					//$scope.restoreVersion(document, version);
+				modalInstance.result.then(function (previewDocument) {
+					$scope.document = previewDocument;
 				});
-			};
-
-
-
-			$scope.switchVersion = function(previewDocument, previewVersion, i) {
-				var version = previewVersion.version+i;
-				console.log(version);
-				documentService.restoreDocumentVersion(previewDocument.id, version).then(function() {
-
-					previewDocument = documentService.previewDocument.getModel();
-					//$scope.document = angular.copy($scope.previewDocument);
-					//console.log('scope.form po editTemplate', $scope.form);
-				}, function() { // reason
-					// $exceptionHandler(reason);
-				});
-				
 			};
 
 			$scope.restoreDocumentVersion = function(previewDocument, previewVersion) {

@@ -12,6 +12,7 @@
 
 		'./controllers/DocumentController',
 		'./controllers/CreateDocumentController',
+		'./controllers/PreviewModalController',
 
 		'./directives/field-preview-directive/field-preview-directive',
 
@@ -23,7 +24,7 @@
 		'./locale/en_EN',
 		'./locale/pl_PL'
 
-	], function(angular, DocumentController, CreateDocumentController, fieldPreviewDirective,
+	], function(angular, DocumentController, CreateDocumentController, PreviewModalController, fieldPreviewDirective,
 	documentService, documentResource, docsUrls) {
 		var moduleName = 'document';
 		var controllers = moduleName + '.controllers';
@@ -36,7 +37,8 @@
 
 		angular.module( controllers , [] )
 			.controller('DocumentController', DocumentController)
-			.controller('CreateDocumentController', CreateDocumentController);
+			.controller('CreateDocumentController', CreateDocumentController)
+			.controller('PreviewModalController', PreviewModalController);
 
 		angular.module( directives , [] )
 			.directive('fieldPreviewDirective', fieldPreviewDirective);

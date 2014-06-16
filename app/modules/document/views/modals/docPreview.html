@@ -101,13 +101,13 @@
 		<div class="">
 			<div class="row">
 				<div class="col-md-5">
-					<a class="pull-left" ng-click="switchVersion(previewDocument, previewVersion, -1)">Poprzednia wersja</a>
+					<a class="pull-left" ng-class="{'disabledLink': disablePrevLink}" ng-click="switchVersion(previewDocument, previewVersion, -1)">Poprzednia wersja</a>
 					</div>
 				<div class="col-md-2">
 					<button class="btn btn-primary btn-block" ng-click="restoreDocumentVersion(previewDocument, previewVersion)">Przywróć</button>	
 				</div>
 				<div class="col-md-5">
-					<a class="pull-right" ng-click="switchVersion(previewDocument, previewVersion, 1)">Następna wersja</a>
+					<a class="pull-right" ng-class="{'disabledLink': disableNextLink}"ng-click="switchVersion(previewDocument, previewVersion, 1)">Następna wersja</a>
 				</div>
 			</div>
 			<div class="row text-center" style="margin-top: 5px; color: #B6052D">{{t('Restore_may_cause_loss_of_data')}}</div>

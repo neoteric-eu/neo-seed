@@ -92,6 +92,6 @@
 
 		};
 
-		return ['$scope', '$filter', '$modal', '$location', 'documentService', 'documentModulePath', 'ngTableParams', DocumentController, ];
+		return ['$scope', '$filter', '$modal', '$location', 'documentService', 'documentModulePath', 'ngTableParams', DocumentController];
 	});
 }());
