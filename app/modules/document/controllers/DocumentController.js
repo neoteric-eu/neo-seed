@@ -95,5 +95,6 @@
 		return ['$scope', '$filter', '$modal', '$location', 'system',
 		'appMessages', 'locale', 'documentService', 'documentModulePath',
 		'ngTableParams', DocumentController, ];
+
 	});
 }());

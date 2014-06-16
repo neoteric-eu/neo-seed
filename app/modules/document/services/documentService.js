@@ -36,6 +36,7 @@
 
 				documentResource.getDocumentById({documentId: id, version: version}, function(data) {
 					self.activeDocument.setModel(data);
+					self.previewDocument.setModel(data);
 					deferred.resolve(data);
 				}, function(reason) {
 					deferred.reject(reason);
