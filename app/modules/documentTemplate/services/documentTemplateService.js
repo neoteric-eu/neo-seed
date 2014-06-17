@@ -81,7 +81,7 @@
 			};
 
 	/*-----	SERVICE NEVER USED - creating fieldTypes disallowed at this stage  ----*/
-			this.createFieldType = function(fieldType) {
+	/*		this.createFieldType = function(fieldType) {
 				var deferred = $q.defer();
 
 				fieldTypesResource.createFieldType(fieldType, function(data) {
@@ -92,7 +92,7 @@
 				});
 
 				return deferred.promise;
-			};
+			};		*/
 
 			this.getTemplates = function() {
 				var deferred = $q.defer();
@@ -120,7 +120,7 @@
 				return deferred.promise;
 			};
 
-			this.createTemplate = function(template) { // zamienić argument na templateId. caly obiekt nie jest potrzbny
+			this.createTemplate = function(template) {
 				var deferred = $q.defer();
 
 				documentTemplateResource.createTemplate(template, function(data) {

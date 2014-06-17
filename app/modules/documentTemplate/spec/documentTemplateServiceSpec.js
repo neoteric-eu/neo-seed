@@ -150,6 +150,52 @@
 				expect(documentTemplateService.documentTemplates.getModel().length).toEqual(1);
 			});
 
+			it('should translateFieldTypes()', function() {
+				var fieldTypes = [
+					{typeName: 'one'},
+					{typeName: 'two'}
+				];
+				// spyOn(locale, 'getT');
+				documentTemplateService.translateFieldsType(fieldTypes);
+				// expect(locale.getT).toHaveBeenCalled();
+			});
+
+			it('should getFieldTypes()', function() {
+				var primitive = [];
+				var complex = [];
+				var fieldTypes = {
+					data: [
+						{class: 'PRIMITIVE'},
+						{class: 'COMPLEX'},
+						{class: 'PRIMITIVE'},
+						{class: 'NONE'}
+					]
+				};
+				var docsEnums = {
+					fieldTypes: {
+						PRIMITIVE: 'PRIMITIVE',
+						COMPLEX: 'COMPLEX'
+					}
+				};
+				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'fieldTypes').respond(200, fieldTypes);
+				documentTemplateService.getFieldTypes().then(successCb, errorCb);
+				$httpBackend.flush();
+				expect(successCb).toHaveBeenCalled();
+				expect(documentTemplateService.primitiveFieldTypes.getModel().length).toEqual(2);
+				expect(documentTemplateService.complexFieldTypes.getModel().length).toEqual(1);
+			});
+
+
+			it('should fail to getFieldTypes()', function() {
+				$httpBackend.expectGET(globalSettings.get('tempUrl') + 'fieldTypes').respond(409, {});
+				documentTemplateService.getFieldTypes().then(successCb, errorCb);
+				$httpBackend.flush();
+				expect(errorCb).toHaveBeenCalled();
+				documentTemplateService.getFieldTypes();
+					
+
+
+			});
 		});
 
 

@@ -189,6 +189,18 @@
 					expect(scope.updateDocumentToNewestTemplate).toHaveBeenCalled();
 				});
 
+				it ('should open updateDocumentToNewestTemplate ()', function() {
+					var document = {id: '00000'};
+					scope.updateDocumentToNewestTemplate (document);
+					
+				});
+
+				it ('should open editDocument()', function() {
+					var document = {id: '00000'};
+					scope.editDocument(document);
+					expect($location.path()).toEqual('/document/edit/00000');
+				});
+
 			});  // END OF DESCRIBE
 
 
