@@ -123,6 +123,7 @@ function (angular) {
 						if (IS_HTML_PAGE.test(url) &&
 							HAS_FLAGS_EXP.test(responseData)) {
 
+
 						// Create a DOM fragment from the response HTML.
 						var template = $('<div>').append(responseData);
 
@@ -132,7 +133,6 @@ function (angular) {
 								data = element.data(),
 								keep = data.keep,
 								features = keep || data.omit || '';
-
 								// Check if the user has all of the specified features.
 								var hasFeature = _.all(features.split(','), function(feature) {
 									var f;
@@ -143,7 +143,6 @@ function (angular) {
 									}
 									return permissions.hasFeature(f);
 								});
-
 								if (features.length && ((keep && !hasFeature) || (!keep && hasFeature))) {
 									element.remove();
 								}
@@ -176,8 +175,9 @@ function (angular) {
 		setDefaultsHeaders, appMessages, menu, locale) {
 
 		setDefaultsHeaders.setContentType('application/json');
+
 		$rootScope.appReady = false;
-		$rootScope.menu = menu.getMenu();
+
 		$rootScope.t = locale.getT;
 
 		/**
@@ -195,9 +195,15 @@ function (angular) {
 				$location.url(path);
 
 			} else if ($location.url() !== '/login') {
-				console.log('in');
 				$location.url('/login');
 			}
+		};
+
+		$rootScope.initUserData = function() {
+			$rootScope.currentCustomer = session.currentCustomer.getModel();
+			$rootScope.customers = session.userData.getModel().user.customers;
+			// $rootScope.isCurrentCustomer = session.isCurrentCustomer;
+			$rootScope.user = session.userData.getModel().user;
 		};
 
 		/**
@@ -211,13 +217,16 @@ function (angular) {
 					var path = localStorage.getItem('prevRoute') || '/start';
 					$rootScope.mainTemplate = template.get('main', 'logged');
 					$rootScope.redirectMgr(path);
+					permissions.features = session.currentCustomer.getModel().featureKeys;
 					$rootScope.initUserData();
+					$rootScope.menu = menu.getMenu();
 				}, function() {
 					$rootScope.mainTemplate = template.get('main', 'not-logged');
 					$rootScope.redirectMgr();
 				}
 			).finally(function() {
 				$rootScope.appReady = true;
+				$rootScope.initUserData();
 			});
 
 		};
