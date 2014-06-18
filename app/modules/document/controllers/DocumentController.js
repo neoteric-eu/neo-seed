@@ -4,7 +4,7 @@
 
 		var DocumentController = function($scope, $filter, $modal, $location,
 			system, appMessages, locale, documentService, documentModulePath,
-			ngTableParams) {
+			ngTableParams, permissions, enums) {
 
 			/*jshint newcap: false */
 			$scope.ngTableBuilder = function(data) {
@@ -86,7 +86,9 @@
 
 
 			$scope.editDocument = function(document) {
-				$location.url('/document/edit/' + document.id);
+				if (permissions.checkMenuAccess(enums.ND_DOC_UPDATE)) {
+					$location.url('/document/edit/' + document.id);
+				}
 			};
 
 
@@ -94,7 +96,7 @@
 
 		return ['$scope', '$filter', '$modal', '$location', 'system',
 		'appMessages', 'locale', 'documentService', 'documentModulePath',
-		'ngTableParams', DocumentController, ];
+		'ngTableParams', 'permissions', 'enums', DocumentController, ];
 
 	});
 }());

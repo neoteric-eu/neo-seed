@@ -41,6 +41,18 @@
 				return {};
 			});
 
+			angular.module('document.services').service('permissions', function() {
+				return {
+					features: jasmine.createSpy()
+				};
+			});
+			angular.module('document.services').service('enums', function() {
+				return {
+					features: jasmine.createSpy()
+				};
+			});
+
+
 
 			angular.module('document.services').service('ngTableParams',function() {
 				var ngTableParams = function (baseParameters, baseSettings) {
