@@ -12,9 +12,10 @@
 			</a>
 			<ul class="dropdown-menu">
 				<li class="nav-header">{{t('Available_profiles')}}</li>
-				<li ng-repeat="customer in customers" ng-class="{'active current': isCurrentCustomer(customer)}">
-					<a ng-if="isCurrentCustomer(customer)" href>{{customer.customerName}}</a>
-					<a ng-if="!isCurrentCustomer(customer)" href ng-click="switchCustomerHeader(customer)">{{customer.customerName}}</a>
+				<!-- ng-class="{'active current': isCurrentCustomer(customer)}" -->
+				<li ng-repeat="customer in customers">
+					<!-- <a ng-if="isCurrentCustomer(customer)" href>{{customer.customerName}}</a> -->
+					<a href ng-click="switchCustomerHeader(customer)">{{customer.customerName}}</a>
 				</li>
 				<li><a href ng-click="logout()"><i class="icon-off"></i> {{t('Logout')}}</a></li>
 			</ul>
