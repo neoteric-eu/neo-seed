@@ -48,8 +48,8 @@
 	<button type="button" class="btn btn-danger" ng-click="removeTemplateModal(template)">Usuń</button>
 </div> -->
 												<div class="">
-													<button type="button" class="close x-button" ng-click="removeTemplateModal(template); $event.stopPropagation()">×</button>
-													<button type="button" class="close x-button" ng-click="editTemplate(template); $event.stopPropagation()"><i class="fa fa-edit"></i></a>
+													<button type="button" class="close x-button" data-keep="ND_DOC_TPL_DELETE" ng-click="removeTemplateModal(template); $event.stopPropagation()">×</button>
+													<button type="button" class="close x-button" data-keep="ND_DOC_TPL_UPDATE" ng-click="editTemplate(template); $event.stopPropagation()"><i class="fa fa-edit"></i></a>
 												</div>
 											</div>
 										</td>
@@ -68,7 +68,8 @@
 	</section>
 	<div ng-if="!documentTemplates.length">
 		<div class="text-align-center alert alert-info">
-			<p><strong>Brak dostępnych szablonów.</strong> <br>Aby dodać szablon, kliknij <a href="#template/create" title="Dodaj dokument" class="capitalize">tutaj</a></p>
+			<p><strong>Brak dostępnych szablonów.</strong> <br>
+			<span data-keep="ND_DOC_TPL_CREATE">Aby dodać szablon, kliknij <a href="#template/create" title="Dodaj dokument" class="capitalize">tutaj</a><span></p>
 		</div>
 	</div>
 </div>

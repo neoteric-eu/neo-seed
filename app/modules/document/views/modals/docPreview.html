@@ -119,7 +119,9 @@
 					<a class="pull-left" ng-class="{'disabledLink': disablePrevLink}" ng-click="switchVersion(previewDocument, -1)">Poprzednia wersja</a>
 					</div>
 				<div class="col-md-2">
-					<button class="btn btn-primary btn-block" ng-click="restoreDocumentVersion(previewDocument, previewVersion)">Przywróć</button>	
+					<button class="btn btn-primary btn-block" type="button"
+					data-keep="ND_DOC_UPDATE"
+					ng-click="restoreDocumentVersion(previewDocument, previewVersion)">Przywróć</button>
 				</div>
 				<div class="col-md-5">
 					<a class="pull-right" ng-class="{'disabledLink': disableNextLink}"ng-click="switchVersion(previewDocument, 1)">Następna wersja</a>

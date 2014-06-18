@@ -52,7 +52,7 @@
 						<a ng-show="showVersionHistory" ng-click="showVersionHistory = false">Wersja {{form.version}}</a>
 					</div>
 					<div class="pull-right">
-						<div class="btn-group">
+						<div class="btn-group" data-keep="ND_DOC_TPL_CREATE,ND_DOC_TPL_UPDATE">
 							<button class="btn btn-primary" ng-click="saveTemplate(form, false)" ng-disabled="form.metaFields.length == 0">
 								Zapisz
 							</button>
