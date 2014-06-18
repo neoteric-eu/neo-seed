@@ -160,7 +160,6 @@ function (angular) {
 
 		setDefaultsHeaders.setContentType('application/json');
 		$rootScope.appReady = false;
-		$rootScope.menu = menu.getMenu();
 		$rootScope.t = locale.getT;
 
 		/**
@@ -195,6 +194,8 @@ function (angular) {
 					$rootScope.mainTemplate = template.get('main', 'logged');
 					$rootScope.redirectMgr(path);
 					$rootScope.initUserData();
+					$rootScope.menu = menu.getMenu();
+
 				}, function() {
 					$rootScope.mainTemplate = template.get('main', 'not-logged');
 					$rootScope.redirectMgr();
