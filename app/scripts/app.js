@@ -75,11 +75,8 @@ function (angular) {
 
 				if (status === 401) {
 					var deferred = $q.defer();
-					var req = {
-						config: response.config,
-						deferred: deferred
-					};
 					scope.$broadcast('event:loginRequired');
+					deferred.reject(response);
 					return deferred.promise;
 				}
 				// otherwise
@@ -123,7 +120,6 @@ function (angular) {
 						if (IS_HTML_PAGE.test(url) &&
 							HAS_FLAGS_EXP.test(responseData)) {
 
-
 						// Create a DOM fragment from the response HTML.
 						var template = $('<div>').append(responseData);
 
@@ -133,6 +129,7 @@ function (angular) {
 								data = element.data(),
 								keep = data.keep,
 								features = keep || data.omit || '';
+
 								// Check if the user has all of the specified features.
 								var hasFeature = _.all(features.split(','), function(feature) {
 									var f;
@@ -143,6 +140,7 @@ function (angular) {
 									}
 									return permissions.hasFeature(f);
 								});
+
 								if (features.length && ((keep && !hasFeature) || (!keep && hasFeature))) {
 									element.remove();
 								}
@@ -169,15 +167,13 @@ function (angular) {
 			}
 		]);
 	})
-	.run(['$rootScope', '$location', 'session', 'template', 'permissions',
+	.run(['$rootScope', '$location', '$route', 'session', 'template', 'permissions',
 		'setDefaultsHeaders', 'appMessages', 'menu', 'locale',
-		function($rootScope, $location, session, template, permissions,
+		function($rootScope, $location, $route, session, template, permissions,
 		setDefaultsHeaders, appMessages, menu, locale) {
 
 		setDefaultsHeaders.setContentType('application/json');
-
 		$rootScope.appReady = false;
-
 		$rootScope.t = locale.getT;
 
 		/**
@@ -199,17 +195,21 @@ function (angular) {
 			}
 		};
 
+		/**
+		 *	@name initUserData
+		 *
+		 *	@description Setup user data to the $rootScope
+		 */
 		$rootScope.initUserData = function() {
 			$rootScope.currentCustomer = session.currentCustomer.getModel();
 			$rootScope.customers = session.userData.getModel().user.customers;
-			// $rootScope.isCurrentCustomer = session.isCurrentCustomer;
 			$rootScope.user = session.userData.getModel().user;
+			$route.reload();
 		};
 
 		/**
-		 *	@name checkSession()
+		 *	@name checkSession
 		 *
-		 *	@description
 		 */
 		$rootScope.checkSession = function() {
 			session.checkSession().then(
@@ -217,16 +217,14 @@ function (angular) {
 					var path = localStorage.getItem('prevRoute') || '/start';
 					$rootScope.mainTemplate = template.get('main', 'logged');
 					$rootScope.redirectMgr(path);
-					permissions.features = session.currentCustomer.getModel().featureKeys;
-					$rootScope.initUserData();
 					$rootScope.menu = menu.getMenu();
+					$rootScope.initUserData();
 				}, function() {
 					$rootScope.mainTemplate = template.get('main', 'not-logged');
 					$rootScope.redirectMgr();
 				}
 			).finally(function() {
 				$rootScope.appReady = true;
-				$rootScope.initUserData();
 			});
 
 		};
