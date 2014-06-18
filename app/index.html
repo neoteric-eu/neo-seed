@@ -36,8 +36,7 @@
 
 		<!-- Add your site or application content here -->
 
-		<div id="root-wrapper" ng-controller="RootController" height-watch>
-
+		<div id="root-wrapper" ng-controller="RootController" ng-if="appReady" height-watch>
 			<ng:include src="mainTemplate"></ng:include>
 		</div>
 

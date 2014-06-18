@@ -79,8 +79,8 @@ function (angular) {
 		$httpProvider.responseInterceptors.push(interceptor);
 
 		$httpProvider.interceptors.push([
-			'$q', '$templateCache', 'permissions',
-			function($q, $templateCache, permissions) {
+			'$q', '$templateCache', 'permissions', 'enums',
+			function($q, $templateCache, permissions, enums) {
 
 				return {
 					'request': function(request) {
@@ -153,9 +153,9 @@ function (angular) {
 			}
 		]);
 	})
-	.run(['$rootScope', '$location', 'session', 'template', 'permissions',
+	.run(['$rootScope', '$location', '$route', 'session', 'template', 'permissions',
 		'setDefaultsHeaders', 'appMessages', 'menu', 'locale',
-		function($rootScope, $location, session, template, permissions,
+		function($rootScope, $location, $route, session, template, permissions,
 		setDefaultsHeaders, appMessages, menu, locale) {
 
 		setDefaultsHeaders.setContentType('application/json');
@@ -177,7 +177,6 @@ function (angular) {
 				$location.url(path);
 
 			} else if ($location.url() !== '/login') {
-				console.log('in');
 				$location.url('/login');
 			}
 		};
@@ -191,11 +190,10 @@ function (angular) {
 			session.checkSession().then(
 				function() {
 					var path = localStorage.getItem('prevRoute') || '/start';
-					$rootScope.mainTemplate = template.get('main', 'logged');
 					$rootScope.redirectMgr(path);
-					$rootScope.initUserData();
 					$rootScope.menu = menu.getMenu();
-
+					$rootScope.mainTemplate = template.get('main', 'logged');
+					$route.reload();
 				}, function() {
 					$rootScope.mainTemplate = template.get('main', 'not-logged');
 					$rootScope.redirectMgr();
