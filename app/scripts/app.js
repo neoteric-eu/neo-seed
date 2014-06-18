@@ -58,11 +58,8 @@ function (angular) {
 
 				if (status === 401) {
 					var deferred = $q.defer();
-					var req = {
-						config: response.config,
-						deferred: deferred
-					};
 					scope.$broadcast('event:loginRequired');
+					deferred.reject(response);
 					return deferred.promise;
 				}
 				// otherwise
@@ -181,6 +178,11 @@ function (angular) {
 			}
 		};
 
+		/**
+		 *	@name initUserData
+		 *
+		 *	@description Setup user data to the $rootScope
+		 */
 		$rootScope.initUserData = function() {
 			$rootScope.currentCustomer = session.currentCustomer.getModel();
 			$rootScope.customers = session.userData.getModel().user.customers;
@@ -189,9 +191,8 @@ function (angular) {
 		};
 
 		/**
-		 *	@name checkSession()
+		 *	@name checkSession
 		 *
-		 *	@description
 		 */
 		$rootScope.checkSession = function() {
 			session.checkSession().then(
