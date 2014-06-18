@@ -37,17 +37,14 @@
 
 
 			return {
-				template: '<div ng-show="ready">{{field}}</div>',
 				restrict: 'E',
 				link: function(scope, element) {
 					// GET template content from path
 					var templateUrl = getTemplateUrl(scope.field);
-					scope.ready = false;
 
 					$http.get(templateUrl).success(function(data) {
 						element.html(data);
 						$compile(element.contents())(scope);
-						scope.ready = true;
 					});
 				}
 			};
