@@ -6,7 +6,8 @@ define([
 	'angular',
 	'underscore',
 	'angularResource',
-	'sentryClient',
+	// 'sentryClient',
+	// '../modules/global_settings',
 	'../modules/miniCore/miniCoreModule',
 	'../modules/templateCore/templateCoreModule'
 ],
@@ -32,7 +33,7 @@ function (angular) {
 		'templateCore.directives'
 	])
 
-	.config(function($httpProvider) {
+	.config(['$httpProvider', function($httpProvider) {
 		$httpProvider.defaults.useXDomain = true;
 		delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
@@ -45,7 +46,9 @@ function (angular) {
 		// Tests if the requested url is a html page.
 		var IS_HTML_PAGE = /\.html$|\.html\?/i;
 
-		var interceptor = ['$rootScope', '$q', function(scope, $q) {
+
+		var interceptor = ['$rootScope', '$q', '$exceptionHandler',
+		function(scope, $q, $exceptionHandler) {
 
 			function success(response) {
 				return response;
@@ -53,6 +56,8 @@ function (angular) {
 
 			function error(response) {
 				var status = response.status;
+
+				$exceptionHandler(response);
 
 				if (status === 401) {
 					var deferred = $q.defer();
@@ -147,7 +152,7 @@ function (angular) {
 				};
 			}
 		]);
-	})
+	}])
 	.run(['$rootScope', '$location', '$route', 'session', 'template', 'permissions',
 		'setDefaultsHeaders', 'appMessages', 'menu', 'locale',
 		function($rootScope, $location, $route, session, template, permissions,
@@ -162,6 +167,7 @@ function (angular) {
 		 *	@param {string} path
 		 */
 		//FIXME: test it
+		//TODO: change urls to the params
 		$rootScope.redirectMgr = function(path){
 			if ( session.logged.getModel() ) {
 
@@ -195,7 +201,7 @@ function (angular) {
 		$rootScope.checkSession = function() {
 			session.checkSession().then(
 				function() {
-					var path = localStorage.getItem('prevRoute') || '/start';
+					var path = localStorage.getItem('prevRoute') || '/';
 					$rootScope.mainTemplate = template.get('main', 'logged');
 					$rootScope.redirectMgr(path);
 					$rootScope.menu = menu.getMenu();
