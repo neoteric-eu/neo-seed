@@ -6,8 +6,7 @@ define([
 	'angular',
 	'underscore',
 	'angularResource',
-	// 'sentryClient',
-	// '../modules/global_settings',
+	'sentryClient',
 	'../modules/miniCore/miniCoreModule',
 	'../modules/templateCore/templateCoreModule'
 ],
@@ -21,7 +20,7 @@ function (angular) {
 		'ui.bootstrap',
 		'xeditable',
 		'ngTable',
-		// 'sentryClient',
+		'sentryClient',
 
 		'miniCore',
 		'miniCore.controllers',
@@ -45,7 +44,6 @@ function (angular) {
 
 		// Tests if the requested url is a html page.
 		var IS_HTML_PAGE = /\.html$|\.html\?/i;
-
 
 		var interceptor = ['$rootScope', '$q', function(scope, $q) {
 

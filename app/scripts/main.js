@@ -21,10 +21,10 @@ require.config({
 		'theme.smartwidgets': '../plugins/smartwidgets/jarvis.widget.min',
 		xeditable: '../bower_components/angular-xeditable/dist/js/xeditable',
 		ngTable: '../bower_components/ng-table/ng-table',
-		globalSettings: '../modules/global_settings'
-		// 'raven-js': '../bower_components/raven-js/dist/raven.min',
-		// ravenInstall: '../plugins/sentry-client/raven-install',
-		// sentryClient: '../plugins/sentry-client/sentry-client'
+		globalSettings: '../modules/global_settings',
+		'raven-js': '../bower_components/raven-js/dist/raven.min',
+		ravenInstall: '../plugins/sentry-client/raven-install',
+		sentryClient: '../plugins/sentry-client/sentry-client'
 	},
 	shim: {
 		'angular' : {'exports' : 'angular', deps:['theme.app']},
@@ -37,16 +37,16 @@ require.config({
 			exports:'angular.mock'
 		},
 		'underscore': {exports: '_'},
-		// 'jQuery': {exports: '$', deps:['raven-js']},
-		'jQuery': {exports: '$'},
+		'jQuery': {exports: '$', deps:['raven-js']},
+		// 'jQuery': {exports: '$'},
 		'ui.bootstrap': { deps: ['angular'] },
 		'theme.smartwidgets': { deps: ['jQuery']},
 		'theme.app': { deps: ['jQuery']},
 		'xeditable': { deps: ['angular']},
 		'ngTable': { deps: ['angular']},
 		'gritter': { deps: ['jQuery']},
-		// 'sentryClient':{ deps: ['raven-js', 'ravenInstall', 'angular'] },
-		// 'ravenInstall':{ deps: ['raven-js']}
+		'sentryClient':{ deps: ['raven-js', 'ravenInstall', 'angular'] },
+		'ravenInstall':{ deps: ['raven-js']}
 	},
 	priority: [
 		'angular'

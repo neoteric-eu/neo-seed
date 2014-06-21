@@ -11,7 +11,7 @@
 
 define(['angular', 'raven-js', 'ravenInstall'], function(angular) {
 	'use strict';
-	angular.module('sentryClient', ['System']).factory('$exceptionHandler', ['$window', '$log',
+	angular.module('sentryClient', []).factory('$exceptionHandler', ['$window', '$log',
 		function ($window, $log) {
 
 			return function (exception, cause) {

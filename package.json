@@ -43,7 +43,13 @@
     "karma-script-launcher": "^0.1.0",
     "load-grunt-tasks": "~0.2.0",
     "requirejs": "^2.1.11",
-    "time-grunt": "~0.2.1"
+    "time-grunt": "~0.2.1",
+    "grunt-replace": "^0.7.8",
+    "grunt-cli": "^0.1.13",
+    "bower": "^1.3.5",
+    "yo": "^1.2.0",
+    "generator-env-config": "0.0.2",
+    "grunt-open": "^0.2.3"
   },
   "engines": {
     "node": ">=0.10.0"
