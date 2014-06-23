@@ -207,7 +207,7 @@ function (angular) {
 		$rootScope.checkSession = function() {
 			session.checkSession().then(
 				function() {
-					var path = localStorage.getItem('prevRoute') || '/dashboard';
+					var path = localStorage.getItem('prevRoute') || '/';
 					$rootScope.mainTemplate = template.get('main', 'logged');
 					$rootScope.redirectMgr(path);
 					$rootScope.menu = menu.getMenu();
