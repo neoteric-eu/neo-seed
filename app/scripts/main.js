@@ -38,16 +38,15 @@ require.config({
 			exports:'angular.mock'
 		},
 		'underscore': {exports: '_'},
-		'jQuery': {exports: '$', deps:['raven-js']},
-		// 'jQuery': {exports: '$'},
+		'jQuery': {exports: '$'},
 		'ui.bootstrap': { deps: ['angular'] },
 		'theme.smartwidgets': { deps: ['jQuery']},
 		'theme.app': { deps: ['jQuery']},
 		'xeditable': { deps: ['angular']},
 		'ngTable': { deps: ['angular']},
 		'gritter': { deps: ['jQuery']},
-		'sentryClient':{ deps: ['raven-js', 'ravenInstall', 'angular'] },
-		'ravenInstall':{ deps: ['raven-js']}
+		// 'sentryClient':{ deps: ['raven-js', 'ravenInstall', 'angular'] },
+		// 'ravenInstall':{ deps: ['raven-js']}
 	},
 	priority: [
 		'angular'
