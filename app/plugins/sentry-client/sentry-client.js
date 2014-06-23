@@ -3,19 +3,20 @@
  *	@description Logging Client Side Errors with Raven-js to the Sentry.
  *
  *	@author Jakub Mach @Budmore
- *	@version v1.3-custom
+ *	@version v1.4-custom
  *	@date 23 April 2014
  *
  *	http://raven-js.readthedocs.org/en/latest
  */
 
-define(['angular', 'raven-js', 'ravenInstall'], function(angular) {
+define(['angular', 'globalSettings', 'raven-js', 'ravenInstall'],
+function(angular, globalSettings) {
 	'use strict';
 	angular.module('sentryClient', []).factory('$exceptionHandler', ['$window', '$log',
 		function ($window, $log) {
 
 			return function (exception, cause) {
-				if ($window.Raven) {
+				if (!globalSettings.get('DEBUG') && $window.Raven) {
 					// Default error handler - display error in the console
 					$log.error.apply($log, arguments);
 

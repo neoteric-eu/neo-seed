@@ -178,7 +178,7 @@ function (angular) {
 		//TODO: change urls to the params
 		$rootScope.redirectMgr = function(path){
 
-			if ( session.logged.getModel() ) {
+			if (session.logged.getModel()) {
 
 				$location.url(path);
 

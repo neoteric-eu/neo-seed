@@ -7,6 +7,8 @@
 				// URL FOR REST CLIENT
 				baseUrl: '@@baseUrl',
 
+				DEBUG: '@@DEBUG',
+
 				sentryApiKey: '@@sentryApiKey',
 				sentryOptions: '@@sentryOptions',
 			},
