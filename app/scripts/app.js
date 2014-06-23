@@ -175,26 +175,32 @@ function (angular) {
 		 *	@param {string} path
 		 */
 		// FIXED By Paprot & Czekaj Time: 22:05
-		$rootScope.redirectMgr = function(path){
+		//
+		
+		$rootScope.redirectMgr = function(path) {
+
+			var url, foundRoute;
+
 
 			if (session.logged) {
 
 				$location.url(path);
 
 			} else {
-
-				var url = $route.current.originalPath;
-
-				var foundRoute = _.find($route.routes, function(r) {
-					return r.originalPath === url && r.access === 'ONLY_NOT_LOGGED';
-				});
-				if (!foundRoute || url === '/') {
-					$location.url('/login');
+				url = $route.current;
+				if (url && url.originalPath) {
+					foundRoute = _.find($route.routes, function(r) {
+						return r.originalPath === url.originalPath && r.access === 'ONLY_NOT_LOGGED';
+					});
+					if (!foundRoute || url.originalPath === '/') {
+						$location.url('/login');
+					}
 				}
 			}
 
 		};
-
+		
+		
 		/**
 		 *	@name initUserData
 		 *
@@ -259,8 +265,9 @@ function (angular) {
 
 			var hasAccess;
 			var isLogged = session.logged;
-			var redirectTo = angular.isDefined(currentRoute.redirectTo) ? currentRoute.redirectTo : '/';
+			var redirectTo = angular.isDefined(currentRoute) && angular.isDefined(currentRoute.redirectTo) ? currentRoute.redirectTo : '/';
 			if (angular.isDefined(nextRoute) && angular.isDefined(nextRoute.$$route)) {
+
 				hasAccess = permissions.checkRouteAccess(nextRoute.$$route);
 
 				// If Route has feature access 'ONLY_NOT_LOGGED' and user is logged
