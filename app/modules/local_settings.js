@@ -7,7 +7,7 @@
 				//URL FOR REST CLIENT
 				baseUrl: 'http://ntrc-delta.neoteric.eu:9000/api/v1/',
 
-				sentryApiKey: 'http://7e66bf589512478c9240b2fe9231e78c@sentry.neoteric.eu:9000/13',
+				sentryApiKey: 'http://00000000000000000000000@sentry.neoteric.eu:9000/0',
 				sentryOptions: {},
 			},
 			get: function(element) {

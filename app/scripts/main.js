@@ -23,9 +23,9 @@ require.config({
 		ngTable: '../bower_components/ng-table/ng-table',
 		globalSettings: '../modules/global_settings',
 
-		'raven-js': '../bower_components/raven-js/dist/raven.min',
-		ravenInstall: '../plugins/sentry-client/raven-install',
-		sentryClient: '../plugins/sentry-client/sentry-client'
+		// 'raven-js': '../bower_components/raven-js/dist/raven.min',
+		// ravenInstall: '../plugins/sentry-client/raven-install',
+		// sentryClient: '../plugins/sentry-client/sentry-client'
 	},
 	shim: {
 		'angular' : {'exports' : 'angular', deps:['theme.app']},
