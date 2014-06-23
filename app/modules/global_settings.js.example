@@ -10,7 +10,7 @@
 				baseUrl: 'http://ntrc-delta.neoteric.eu:9100/api/v1/',
 
 				sentryApiKey: 'http://00000000000000000000000@sentry.neoteric.eu:9000/17',
-				sentryOptions: '{}',
+				sentryOptions: {},
 			},
 			get: function(element) {
 				return this.cfg[element];

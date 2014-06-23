@@ -6,7 +6,7 @@ define([
 	'angular',
 	'underscore',
 	'angularResource',
-	// '../modules/global_settings',
+
 	'../modules/miniCore/miniCoreModule',
 	'../modules/templateCore/templateCoreModule'
 ],
@@ -20,7 +20,7 @@ function (angular) {
 		'ui.bootstrap',
 		'xeditable',
 		'ngTable',
-		// 'sentryClient',
+		'sentryClient',
 
 		'miniCore',
 		'miniCore.controllers',
@@ -61,15 +61,15 @@ function (angular) {
 					scope.$broadcast('event:loginRequired');
 				} else {
 
-					var exception = new Error();
-					angular.extend(exception, {
+					// var exception = new Error();
+					var exception = {
 						message: response.data,
 						method: response.config.method,
 						headers: response.config.header,
 						url: response.config.url,
 						data: response.data,
 						status: response.status
-					});
+					};
 
 					$exceptionHandler(exception);
 				}

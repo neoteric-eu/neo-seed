@@ -6,6 +6,8 @@ define(['globalSettings','raven-js'], function(globalSettings) {
 	var sentryApiKey = globalSettings.get('sentryApiKey') || '';
 
 	// Raven install
-	window.Raven.config(sentryApiKey, sentryOptions).install();
+	if (sentryApiKey) {
+		window.Raven.config(sentryApiKey, sentryOptions).install();
+	}
 
 });
