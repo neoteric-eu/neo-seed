@@ -20,7 +20,7 @@ function (angular) {
 		'ui.bootstrap',
 		'xeditable',
 		'ngTable',
-		'sentryClient',
+		// 'sentryClient',
 
 		'miniCore',
 		'miniCore.controllers',
@@ -62,12 +62,14 @@ function (angular) {
 				} else {
 
 					var exception = new Error();
-					exception.message = response.data;
-					exception.method = response.config.method;
-					exception.headers = response.config.headers;
-					exception.url = response.config.url;
-					exception.data = response.data;
-					exception.status = response.status;
+					angular.extend(exception, {
+						message: response.data,
+						method: response.config.method,
+						headers: response.config.header,
+						url: response.config.url,
+						data: response.data,
+						status: response.status
+					});
 
 					$exceptionHandler(exception);
 				}
@@ -175,17 +177,15 @@ function (angular) {
 		//FIXME: test it
 		//TODO: change urls to the params
 		$rootScope.redirectMgr = function(path){
-			if ( session.logged.getModel() ) {
 
-				if(path === '/login') {
-					path = '/';
-				}
+			if ( session.logged.getModel() ) {
 
 				$location.url(path);
 
-			} else if ($location.url() !== '/login') {
+			} else if ($location.url() === '/') {
 				$location.url('/login');
 			}
+
 		};
 
 		/**
@@ -241,46 +241,41 @@ function (angular) {
 			pageSetUp();
 		});
 
-		$rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
-		/*	if(permissions.clearCache) {
+
+		function routeAccess(nextRoute, currentRoute) {
+			if(permissions.clearCache) {
 				permissions.clearCache = false;
 			}
-			var onlyNotLogged;
+			var hasAccess;
 			var isLogged = session.logged.getModel();
-			var hasAccess = permissions.checkRouteAccess(nextRoute.$$route);
+			var hasFeatures =  permissions.features.length;
 
-			if (angular.isDefined(nextRoute) && nextRoute.$$route.access) {
-				onlyNotLogged = nextRoute.$$route.access === enums.features.ONLY_NOT_LOGGED;
-			}
+			if (angular.isDefined(nextRoute) && angular.isDefined(nextRoute.$$route)) {
+				hasAccess = permissions.checkRouteAccess(nextRoute.$$route);
 
-			console.log('hasAccess', hasAccess);
-
-
-			if(!hasAccess && angular.isDefined(currentRoute)) {
-
-				// $location.path(currentRoute.$$route.originalPath);
-
-				if (isLogged) {
-					$location.path('403');
-				} else {
-					$location.path('401');
+				// If Route has feature access 'ONLY_NOT_LOGGED' and user is logged
+				if (isLogged && nextRoute.$$route.access === enums.features.ONLY_NOT_LOGGED) {
+					return $location.path('/');
 				}
-
 			}
-*/
 
-			// @example Logged user can't go to the '/login' page
-			// if (!hasAccess && isLogged ) {
-			// 	console.log('ONLY_NOT_LOGGED');
-			// 	$location.path(currentRoute.$$route.originalPath);
-			// 	return
-			// }
+			if (!hasAccess) {
+				if (isLogged) {
+					$location.path('/');
+				} else {
+					$location.path('/login');
+				}
+			}
+		}
 
 
+		$rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+			routeAccess(nextRoute, currentRoute);
 		});
 
-		$rootScope.$on('$routeChangeSuccess', function(event, currentRoute, previousRoute) {
 
+		$rootScope.$on('$routeChangeSuccess', function(event, currentRoute, previousRoute) {
+			routeAccess(currentRoute, previousRoute);
 			appMessages.$apply();
 		});
 	}]);
