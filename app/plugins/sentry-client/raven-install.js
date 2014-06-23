@@ -1,5 +1,5 @@
 
-define(['globalSettings', 'raven-js'], function(globalSettings) {
+define(['globalSettings','raven-js'], function(globalSettings) {
 	'use strict';
 
 	var sentryOptions = globalSettings.get('sentryOptions') || {};
