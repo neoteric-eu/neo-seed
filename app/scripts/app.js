@@ -207,7 +207,7 @@ function (angular) {
 		$rootScope.checkSession = function() {
 			session.checkSession().then(
 				function() {
-					var path = localStorage.getItem('prevRoute') || '/';
+					var path = localStorage.getItem('prevRoute') || '/dashboard';
 					$rootScope.mainTemplate = template.get('main', 'logged');
 					$rootScope.redirectMgr(path);
 					$rootScope.menu = menu.getMenu();
@@ -249,19 +249,20 @@ function (angular) {
 			var hasAccess;
 			var isLogged = session.logged.getModel();
 			var hasFeatures =  permissions.features.length;
+			var redirectTo = angular.isDefined(currentRoute) ? currentRoute.redirectTo : '/';
 
 			if (angular.isDefined(nextRoute) && angular.isDefined(nextRoute.$$route)) {
 				hasAccess = permissions.checkRouteAccess(nextRoute.$$route);
 
 				// If Route has feature access 'ONLY_NOT_LOGGED' and user is logged
 				if (isLogged && nextRoute.$$route.access === enums.features.ONLY_NOT_LOGGED) {
-					return $location.path('/');
+					return $location.path(redirectTo);
 				}
 			}
 
 			if (!hasAccess) {
 				if (isLogged) {
-					$location.path('/');
+					$location.path(redirectTo);
 				} else {
 					$location.path('/login');
 				}
