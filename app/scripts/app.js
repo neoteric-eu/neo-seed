@@ -174,16 +174,23 @@ function (angular) {
 		 *	@name redirectMgr
 		 *	@param {string} path
 		 */
-		//FIXME: test it
-		//TODO: change urls to the params
+		// FIXED By Paprot & Czekaj Time: 22:05
 		$rootScope.redirectMgr = function(path){
 
-			if (session.logged.getModel()) {
+			if (session.logged) {
 
 				$location.url(path);
 
-			} else if ($location.url() === '/') {
-				$location.url('/login');
+			} else {
+
+				var url = $route.current.originalPath;
+
+				var foundRoute = _.find($route.routes, function(r) {
+					return r.originalPath === url && r.access === 'ONLY_NOT_LOGGED';
+				});
+				if (!foundRoute || url === '/') {
+					$location.url('/login');
+				}
 			}
 
 		};
@@ -232,9 +239,8 @@ function (angular) {
 		$rootScope.$on('$locationChangeStart', function(event, nextRoute, currentRoute){
 			var route = currentRoute.split('#');
 			if(angular.isDefined(route[1])) {
-				localStorage.setItem('prevRoute', route[1]);
+				localStorage.setItem('prevRoute',route[1]);
 			}
-
 		});
 
 		$rootScope.$on('$viewContentLoaded', function(event){
@@ -243,14 +249,17 @@ function (angular) {
 
 
 		function routeAccess(nextRoute, currentRoute) {
+			// Application has not started yet
+			if(angular.isUndefined(session.logged)) {
+				return;
+			}
 			if(permissions.clearCache) {
 				permissions.clearCache = false;
 			}
-			var hasAccess;
-			var isLogged = session.logged.getModel();
-			var hasFeatures =  permissions.features.length;
-			var redirectTo = angular.isDefined(currentRoute) ? currentRoute.redirectTo : '/';
 
+			var hasAccess;
+			var isLogged = session.logged;
+			var redirectTo = angular.isDefined(currentRoute.redirectTo) ? currentRoute.redirectTo : '/';
 			if (angular.isDefined(nextRoute) && angular.isDefined(nextRoute.$$route)) {
 				hasAccess = permissions.checkRouteAccess(nextRoute.$$route);
 
@@ -275,10 +284,8 @@ function (angular) {
 		});
 
 
-		$rootScope.$on('$routeChangeSuccess', function(event, currentRoute, previousRoute) {
-			routeAccess(currentRoute, previousRoute);
+		$rootScope.$on('$routeChangeSuccess', function() {
 			appMessages.$apply();
 		});
 	}]);
-
 });
