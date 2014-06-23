@@ -6,7 +6,6 @@ define([
 	'angular',
 	'underscore',
 	'angularResource',
-	// 'sentryClient',
 	// '../modules/global_settings',
 	'../modules/miniCore/miniCoreModule',
 	'../modules/templateCore/templateCoreModule'
@@ -55,18 +54,25 @@ function (angular) {
 			}
 
 			function error(response) {
-				var status = response.status;
+				var deferred = $q.defer();
+				deferred.reject(response);
 
-				$exceptionHandler(response);
-
-				if (status === 401) {
-					var deferred = $q.defer();
+				if (response.status === 401) {
 					scope.$broadcast('event:loginRequired');
-					deferred.reject(response);
-					return deferred.promise;
+				} else {
+
+					var exception = new Error();
+					exception.message = response.data;
+					exception.method = response.config.method;
+					exception.headers = response.config.headers;
+					exception.url = response.config.url;
+					exception.data = response.data;
+					exception.status = response.status;
+
+					$exceptionHandler(exception);
 				}
-				// otherwise
-				return $q.reject(response);
+
+				return deferred.promise;
 
 			}
 
@@ -154,9 +160,9 @@ function (angular) {
 		]);
 	}])
 	.run(['$rootScope', '$location', '$route', 'session', 'template', 'permissions',
-		'setDefaultsHeaders', 'appMessages', 'menu', 'locale',
+		'setDefaultsHeaders', 'appMessages', 'menu', 'locale', 'enums',
 		function($rootScope, $location, $route, session, template, permissions,
-		setDefaultsHeaders, appMessages, menu, locale) {
+		setDefaultsHeaders, appMessages, menu, locale, enums) {
 
 		setDefaultsHeaders.setContentType('application/json');
 		$rootScope.appReady = false;
@@ -172,7 +178,7 @@ function (angular) {
 			if ( session.logged.getModel() ) {
 
 				if(path === '/login') {
-					path = '/start';
+					path = '/';
 				}
 
 				$location.url(path);
@@ -224,7 +230,6 @@ function (angular) {
 		});
 
 		$rootScope.$on('$locationChangeStart', function(event, nextRoute, currentRoute){
-
 			var route = currentRoute.split('#');
 			if(angular.isDefined(route[1])) {
 				localStorage.setItem('prevRoute', route[1]);
@@ -236,24 +241,45 @@ function (angular) {
 			pageSetUp();
 		});
 
-		$rootScope.$on('$routeChangeSuccess', function(event, currentRoute, priorRoute) {
-			if(permissions.clearCache) {
+		$rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+		/*	if(permissions.clearCache) {
 				permissions.clearCache = false;
 			}
+			var onlyNotLogged;
+			var isLogged = session.logged.getModel();
+			var hasAccess = permissions.checkRouteAccess(nextRoute.$$route);
 
-			if (session.logged.getModel()) {
-				try {
-					if(!permissions.checkRouteAccess(currentRoute)) {
-						$location.path('401');
-						session.set('prevRoute', null);
-					}
-				} catch (e) {
+			if (angular.isDefined(nextRoute) && nextRoute.$$route.access) {
+				onlyNotLogged = nextRoute.$$route.access === enums.features.ONLY_NOT_LOGGED;
+			}
+
+			console.log('hasAccess', hasAccess);
+
+
+			if(!hasAccess && angular.isDefined(currentRoute)) {
+
+				// $location.path(currentRoute.$$route.originalPath);
+
+				if (isLogged) {
+					$location.path('403');
+				} else {
 					$location.path('401');
-					session.set('prevRoute', null);
-					throw e;
 				}
 
 			}
+*/
+
+			// @example Logged user can't go to the '/login' page
+			// if (!hasAccess && isLogged ) {
+			// 	console.log('ONLY_NOT_LOGGED');
+			// 	$location.path(currentRoute.$$route.originalPath);
+			// 	return
+			// }
+
+
+		});
+
+		$rootScope.$on('$routeChangeSuccess', function(event, currentRoute, previousRoute) {
 
 			appMessages.$apply();
 		});

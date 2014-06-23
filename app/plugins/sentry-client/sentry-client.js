@@ -15,7 +15,6 @@ define(['angular', 'raven-js', 'ravenInstall'], function(angular) {
 		function ($window, $log) {
 
 			return function (exception, cause) {
-
 				if ($window.Raven) {
 					// Default error handler - display error in the console
 					$log.error.apply($log, arguments);
@@ -32,7 +31,9 @@ define(['angular', 'raven-js', 'ravenInstall'], function(angular) {
 							Href: href,
 							Cause: cause,
 							Status: exception.status,
-							Data: exception.config
+							Data: exception.data,
+							Method: exception.method,
+							CustomerId: exception.headers
 						}
 					});
 
