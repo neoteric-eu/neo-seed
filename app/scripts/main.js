@@ -26,13 +26,13 @@ require.config({
 		'jQuery-ui': 'jquery-ui/ui/jquery-ui',
 		'angular-ui-sortable': 'angular-ui-sortable/sortable',
 
-		globalSettings: '../modules/global_settings',
+		'globalSettings': '../modules/global_settings',
 		'theme.app': '../plugins/theme.app',
 		'theme.smartwidgets': '../plugins/smartwidgets/jarvis.widget.min',
 
 		'raven-js': '../bower_components/raven-js/dist/raven.min',
-		ravenInstall: '../plugins/sentry-client/raven-install',
-		sentryClient: '../plugins/sentry-client/sentry-client'
+		'ravenInstall': '../plugins/sentry-client/raven-install',
+		'sentryClient': '../plugins/sentry-client/sentry-client'
 	},
 	shim: {
 		'angular' : {'exports' : 'angular', deps:['theme.app']},
@@ -53,7 +53,6 @@ require.config({
 		'ngTable': { deps: ['angular']},
 		'gritter': { deps: ['jQuery']},
 		'angular-file-upload': { deps: ['angular']},
-
 		'jQuery-ui': { deps: ['jQuery']},
 		'angular-ui-sortable': { deps: ['angular', 'jQuery-ui']},
 		'sentryClient':{ deps: ['raven-js', 'ravenInstall', 'angular'] },

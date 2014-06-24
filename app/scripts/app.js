@@ -25,7 +25,7 @@ function (angular, globalSettings) {
 		'ui.sortable',
 		'xeditable',
 		'ngTable',
-		// 'sentryClient',
+		'sentryClient',
 		'angularFileUpload',
 
 		'miniCore',
@@ -185,6 +185,8 @@ function (angular, globalSettings) {
 
 		setDefaultsHeaders.setContentType('application/json');
 		$rootScope.appReady = false;
+
+		// Locale
 		$rootScope.t = locale.getT;
 		$rootScope.languages = globalSettings.get('LANGUAGES');
 		var lang = $cookieStore.get('lang') || $rootScope.languages[0].code;
@@ -198,7 +200,6 @@ function (angular, globalSettings) {
 		//
 
 		$rootScope.redirectMgr = function(path) {
-
 			var url, foundRoute;
 
 
@@ -206,9 +207,18 @@ function (angular, globalSettings) {
 
 				$location.url(path);
 
-			} else if ($location.url() !== '/login') {
-				$location.url('/login');
+			} else {
+				url = $route.current;
+				if (url && url.originalPath) {
+					foundRoute = _.find($route.routes, function(r) {
+						return r.originalPath === url.originalPath && r.access === 'ONLY_NOT_LOGGED';
+					});
+					if (!foundRoute || url.originalPath === '/') {
+						$location.url('/login');
+					}
+				}
 			}
+
 		};
 
 
