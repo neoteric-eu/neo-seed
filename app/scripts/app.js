@@ -4,13 +4,14 @@ var t = { pl: {}, en: {}};
 
 define([
 	'angular',
+	'globalSettings',
 	'underscore',
 	'angularResource',
 
 	'../modules/miniCore/miniCoreModule',
 	'../modules/templateCore/templateCoreModule'
 ],
-function (angular) {
+function (angular, globalSettings) {
 	'use strict';
 	return angular.module('app', [
 		'ngCookies',
@@ -161,14 +162,18 @@ function (angular) {
 			}
 		]);
 	}])
-	.run(['$rootScope', '$location', '$route', 'session', 'template', 'permissions',
-		'setDefaultsHeaders', 'appMessages', 'menu', 'locale', 'enums',
-		function($rootScope, $location, $route, session, template, permissions,
-		setDefaultsHeaders, appMessages, menu, locale, enums) {
+	.run(['$rootScope', '$location', '$route', '$cookieStore', 'session',
+		'template', 'permissions', 'setDefaultsHeaders', 'appMessages', 'menu',
+		'locale', 'enums',
+		function($rootScope, $location, $route, $cookieStore, session, template,
+		permissions, setDefaultsHeaders, appMessages, menu, locale, enums) {
 
 		setDefaultsHeaders.setContentType('application/json');
 		$rootScope.appReady = false;
 		$rootScope.t = locale.getT;
+		$rootScope.languages = globalSettings.get('LANGUAGES');
+		var lang = $cookieStore.get('lang') || $rootScope.languages[0].code;
+		session.locale.setModel(lang);
 
 		/**
 		 *	@name redirectMgr
@@ -176,7 +181,7 @@ function (angular) {
 		 */
 		// FIXED By Paprot & Czekaj Time: 22:05
 		//
-		
+
 		$rootScope.redirectMgr = function(path) {
 
 			var url, foundRoute;
@@ -199,8 +204,8 @@ function (angular) {
 			}
 
 		};
-		
-		
+
+
 		/**
 		 *	@name initUserData
 		 *
@@ -210,6 +215,7 @@ function (angular) {
 			$rootScope.currentCustomer = session.currentCustomer.getModel();
 			$rootScope.customers = session.userData.getModel().user.customers;
 			$rootScope.user = session.userData.getModel().user;
+			$rootScope.lang = session.locale.getModel();
 			$route.reload();
 		};
 
@@ -270,7 +276,7 @@ function (angular) {
 
 				hasAccess = permissions.checkRouteAccess(nextRoute.$$route);
 
-				// If Route has feature access 'ONLY_NOT_LOGGED' and user is logged
+				// If Route has feature ac`cess 'ONLY_NOT_LOGGED' and user is logged
 				if (isLogged && nextRoute.$$route.access === enums.features.ONLY_NOT_LOGGED) {
 					return $location.path(redirectTo);
 				}
