@@ -29,7 +29,7 @@
 			<ul class="dropdown-menu">
 				<li class="nav-header">{{t('Available_profiles')}}</li>
 				<!-- ng-class="{'active current': isCurrentCustomer(customer)}" -->
-				<li ng-repeat="customer in customers">
+				<li ng-repeat="customer in customers" ng-class="{'active': customer.customerName == currentCustomer.customerName}">
 					<!-- <a ng-if="isCurrentCustomer(customer)" href>{{customer.customerName}}</a> -->
 					<a href ng-click="switchCustomerHeader(customer)">{{customer.customerName}}</a>
 				</li>
