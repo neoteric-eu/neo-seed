@@ -170,6 +170,8 @@ function (angular, globalSettings) {
 
 		setDefaultsHeaders.setContentType('application/json');
 		$rootScope.appReady = false;
+
+		// Locale
 		$rootScope.t = locale.getT;
 		$rootScope.languages = globalSettings.get('LANGUAGES');
 		var lang = $cookieStore.get('lang') || $rootScope.languages[0].code;
@@ -226,8 +228,9 @@ function (angular, globalSettings) {
 		$rootScope.checkSession = function() {
 			session.checkSession().then(
 				function() {
-					var path = localStorage.getItem('prevRoute') || '/';
+					var path = localStorage.getItem('prevRoute') || $route.routes[null].redirectTo;
 					$rootScope.mainTemplate = template.get('main', 'logged');
+
 					$rootScope.redirectMgr(path);
 					$rootScope.menu = menu.getMenu();
 					$rootScope.initUserData();
