@@ -11,6 +11,11 @@
 
 				sentryApiKey: '@@sentryApiKey',
 				sentryOptions: '@@sentryOptions',
+
+				languages: [
+					{lang: 'PL', name:'Polish'},
+					{lang: 'EN', name:'English'}
+				]
 			},
 			get: function(element) {
 				return this.cfg[element];

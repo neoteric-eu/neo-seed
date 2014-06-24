@@ -270,7 +270,7 @@ function (angular) {
 
 				hasAccess = permissions.checkRouteAccess(nextRoute.$$route);
 
-				// If Route has feature access 'ONLY_NOT_LOGGED' and user is logged
+				// If Route has feature ac`cess 'ONLY_NOT_LOGGED' and user is logged
 				if (isLogged && nextRoute.$$route.access === enums.features.ONLY_NOT_LOGGED) {
 					return $location.path(redirectTo);
 				}
