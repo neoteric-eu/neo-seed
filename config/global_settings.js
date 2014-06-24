@@ -12,9 +12,11 @@
 				sentryApiKey: '@@sentryApiKey',
 				sentryOptions: '@@sentryOptions',
 
-				languages: [
-					{lang: 'PL', name:'Polish'},
-					{lang: 'EN', name:'English'}
+				// Language code for this installation. All choices can be found here:
+				// http://www.i18nguy.com/unicode/language-identifiers.html
+				LANGUAGES: [
+					{code: 'pl', name:'Polish'},
+					{code: 'en', name:'English'}
 				]
 			},
 			get: function(element) {
