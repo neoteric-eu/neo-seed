@@ -181,7 +181,7 @@ function (angular, globalSettings) {
 		 */
 		// FIXED By Paprot & Czekaj Time: 22:05
 		//
-		
+
 		$rootScope.redirectMgr = function(path) {
 
 			var url, foundRoute;
@@ -204,8 +204,8 @@ function (angular, globalSettings) {
 			}
 
 		};
-		
-		
+
+
 		/**
 		 *	@name initUserData
 		 *
