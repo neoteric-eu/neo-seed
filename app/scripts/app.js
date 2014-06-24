@@ -4,17 +4,17 @@ t = { pl: {}, en: {}};
 
 define( [
 	'angular',
+	'globalSettings',
 	'underscore',
 	'angularResource',
 
-	// Required for unit tests
 	'../modules/miniCore/miniCoreModule',
 	'../modules/templateCore/templateCoreModule',
 	'../modules/documentTemplate/documentTemplateModule',
 	'../modules/document/documentModule',
 
 ],
-function (angular) {
+function (angular, globalSettings) {
 	'use strict';
 	return angular.module('app', [
 		'ngCookies',
@@ -34,8 +34,6 @@ function (angular) {
 		'miniCore.services',
 
 		'templateCore',
-		'templateCore.controllers',
-		'templateCore.directives',
 		'templateCore.services',
 
 		'documentTemplate',
@@ -50,7 +48,7 @@ function (angular) {
 
 	])
 
-	.config(function($httpProvider) {
+	.config(['$httpProvider', function($httpProvider) {
 		$httpProvider.defaults.useXDomain = true;
 		delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
@@ -64,23 +62,35 @@ function (angular) {
 		var IS_HTML_PAGE = /\.html$|\.html\?/i;
 
 
-		var interceptor = ['$rootScope', '$q', function(scope, $q) {
+		var interceptor = ['$rootScope', '$q', '$exceptionHandler',
+		function(scope, $q, $exceptionHandler) {
 
 			function success(response) {
 				return response;
 			}
 
 			function error(response) {
-				var status = response.status;
+				var deferred = $q.defer();
+				deferred.reject(response);
 
-				if (status === 401) {
-					var deferred = $q.defer();
+				if (response.status === 401) {
 					scope.$broadcast('event:loginRequired');
-					deferred.reject(response);
-					return deferred.promise;
+				} else {
+
+					// var exception = new Error();
+					var exception = {
+						message: response.data,
+						method: response.config.method,
+						headers: response.config.header,
+						url: response.config.url,
+						data: response.data,
+						status: response.status
+					};
+
+					$exceptionHandler(exception);
 				}
-				// otherwise
-				return $q.reject(response);
+
+				return deferred.promise;
 
 			}
 
@@ -166,27 +176,33 @@ function (angular) {
 				};
 			}
 		]);
-	})
-	.run(['$rootScope', '$location', '$route', 'session', 'template', 'permissions',
-		'setDefaultsHeaders', 'appMessages', 'menu', 'locale',
-		function($rootScope, $location, $route, session, template, permissions,
-		setDefaultsHeaders, appMessages, menu, locale) {
+	}])
+	.run(['$rootScope', '$location', '$route', '$cookieStore', 'session',
+		'template', 'permissions', 'setDefaultsHeaders', 'appMessages', 'menu',
+		'locale', 'enums',
+		function($rootScope, $location, $route, $cookieStore, session, template,
+		permissions, setDefaultsHeaders, appMessages, menu, locale, enums) {
 
 		setDefaultsHeaders.setContentType('application/json');
 		$rootScope.appReady = false;
 		$rootScope.t = locale.getT;
+		$rootScope.languages = globalSettings.get('LANGUAGES');
+		var lang = $cookieStore.get('lang') || $rootScope.languages[0].code;
+		session.locale.setModel(lang);
 
 		/**
 		 *	@name redirectMgr
 		 *	@param {string} path
 		 */
-		//FIXME: test it
-		$rootScope.redirectMgr = function(path){
-			if ( session.logged.getModel() ) {
+		// FIXED By Paprot & Czekaj Time: 22:05
+		//
 
-				if(path === '/login') {
-					path = '/start';
-				}
+		$rootScope.redirectMgr = function(path) {
+
+			var url, foundRoute;
+
+
+			if (session.logged) {
 
 				$location.url(path);
 
@@ -194,6 +210,7 @@ function (angular) {
 				$location.url('/login');
 			}
 		};
+
 
 		/**
 		 *	@name initUserData
@@ -214,8 +231,9 @@ function (angular) {
 		$rootScope.checkSession = function() {
 			session.checkSession().then(
 				function() {
-					var path = localStorage.getItem('prevRoute') || '/start';
+					var path = localStorage.getItem('prevRoute') || $route.routes[null].redirectTo;
 					$rootScope.mainTemplate = template.get('main', 'logged');
+
 					$rootScope.redirectMgr(path);
 					$rootScope.menu = menu.getMenu();
 					$rootScope.initUserData();
@@ -249,27 +267,46 @@ function (angular) {
 			pageSetUp();
 		});
 
-		$rootScope.$on('$routeChangeSuccess', function(event, currentRoute, priorRoute) {
+
+		function routeAccess(nextRoute, currentRoute) {
+			// Application has not started yet
+			if(angular.isUndefined(session.logged)) {
+				return;
+			}
 			if(permissions.clearCache) {
 				permissions.clearCache = false;
 			}
 
-			if (session.logged.getModel()) {
-				try {
-					if(!permissions.checkRouteAccess(currentRoute)) {
-						$location.path('401');
-						session.set('prevRoute', null);
-					}
-				} catch (e) {
-					$location.path('401');
-					session.set('prevRoute', null);
-					throw e;
-				}
+			var hasAccess;
+			var isLogged = session.logged;
+			var redirectTo = angular.isDefined(currentRoute) && angular.isDefined(currentRoute.redirectTo) ? currentRoute.redirectTo : '/';
+			if (angular.isDefined(nextRoute) && angular.isDefined(nextRoute.$$route)) {
 
+				hasAccess = permissions.checkRouteAccess(nextRoute.$$route);
+
+				// If Route has feature ac`cess 'ONLY_NOT_LOGGED' and user is logged
+				if (isLogged && nextRoute.$$route.access === enums.features.ONLY_NOT_LOGGED) {
+					return $location.path(redirectTo);
+				}
 			}
 
+			if (!hasAccess) {
+				if (isLogged) {
+					$location.path(redirectTo);
+				} else {
+					$location.path('/login');
+				}
+			}
+		}
+
+
+		$rootScope.$on("$routeChangeStart", function(event, nextRoute, currentRoute) {
+			routeAccess(nextRoute, currentRoute);
+		});
+
+
+		$rootScope.$on('$routeChangeSuccess', function() {
 			appMessages.$apply();
 		});
 	}]);
-
 });

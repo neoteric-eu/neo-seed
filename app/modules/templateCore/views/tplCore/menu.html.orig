@@ -1,0 +1,46 @@
+<<<<<<< HEAD
+<div class="login-info" >
+=======
+<div class="login-info">
+>>>>>>> 08874e2c0b66e377635e765c3529774b344580b3
+
+	<span class="user-data">
+		<img src="images/male.png" alt="me" class="offline">
+		<a href="#/account">{{ user.email }}</a>
+	</span>
+</div>
+<<<<<<< HEAD
+<section data-keep="ND_DOC_CREATE" class="importButton">
+
+	<div class="text-center" ng-controller="TemplateListController" ng-init="getTemplates()">
+		<div class="btn-group" style="margin-top: 10px;">
+			<button type="button" class="btn btn-info" ng-click="createDoc()">Utwórz nowy dokument</button>
+			<button type="button" class="btn btn-info dropdown-toggle" ng-click="refreshTemplatesList()" data-toggle="dropdown">
+				<span class="caret"></span>
+				<span class="sr-only">Toggle Dropdown</span>
+			</button>
+			<ul class="dropdown-menu scrollable-menu" role="menu" style="max-height: 350px; overflow-y: auto;">
+				<li data-keep="ND_DOC_TPL_CREATE"><a class="text-left" href="#/template/create"><i class="fa fa-plus"></i> Dodaj nowy szablon</a></li>
+				<li class="divider"></li>
+				<li ng-repeat="template in documentTemplates">
+					<a href="#/document/create/{{template.id}}" class="text-left">
+						<i class="fa {{template.icon}}"></i>  {{template.name}}
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
+=======
+
+>>>>>>> 08874e2c0b66e377635e765c3529774b344580b3
+<nav>
+	<ul>
+		<li ng-repeat="item in menu">
+			<a href="#/{{item.href}}" title="{{item.title}}">
+				<i class="{{item.icon}}"></i> <span class="menu-item-parent"> {{item.title}}</span>
+			</a>
+		</li>
+	</ul>
+</nav>
+<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>
