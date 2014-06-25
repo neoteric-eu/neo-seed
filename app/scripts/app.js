@@ -34,6 +34,7 @@ function (angular, globalSettings) {
 		'miniCore.services',
 
 		'templateCore',
+		'templateCore.controllers',
 		'templateCore.services',
 
 		'documentTemplate',

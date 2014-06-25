@@ -3,6 +3,23 @@
 	<span class="hide-menu hidden-lg hidden-md btn btn-ribbon">  <i class="fa fa-bars fa-lg"></i></span>
 </span>
 
+<div class="ribbon-button-alignment pull-right" ng-if="languages.length > 1">
+	<ul class="list-inline">
+		<li class="dropdown">
+			<a class="btn btn-ribbon dropdown-toggle" data-toggle="dropdown" href="#">
+				<span class="no-shadow light-color">{{ lang|uppercase }}</span>
+			</a>
+			<ul class="dropdown-menu">
+				<li ng-repeat="item in languages" ng-class="{'active': lang == item.code}" >
+					<a href="javascript:void(0)" ng-click="switchLang(item.code)"><i class="fa fa-globe"></i> {{t(item.name)}}</a>
+				</li>
+			</ul>
+
+		</li>
+	</ul>
+</div>
+
+
 <div class="ribbon-button-alignment pull-right">
 	<ul class="list-inline">
 		<li class="dropdown">
