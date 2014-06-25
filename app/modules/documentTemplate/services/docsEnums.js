@@ -5,6 +5,7 @@
 			return {
 
 				fieldTypes: {
+					ATTACHMENT: 'ATTACHMENT',
 					CHECKBOX: 'CHECKBOX',
 					COMPLEX: 'COMPLEX',
 					DATE: 'DATE',

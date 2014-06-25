@@ -39,6 +39,9 @@
 			Any_unsaved_changes_will_be_lost: 'Niezapisane zmiany zostaną utracone',
 			New_template: 'Nowy szablon',
 
+			Search_document: 'Wyszukaj dokument',
+
+			ATTACHMENT: 'Dołącz inny dokument',
 			TEXTFIELD: 'Tekst',
 			TEXTAREA: 'Tekst akapitu',
 			EMAIL: 'E-mail',

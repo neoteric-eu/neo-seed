@@ -10,6 +10,9 @@
 				var templateUrl = '';
 
 				switch(type) {
+					case 'ATTACHMENT':
+						templateUrl = modulePath + 'views/field/attachment.html';
+						break;
 					case 'TEXTFIELD':
 						templateUrl = modulePath + 'views/field/textfield.html';
 						break;

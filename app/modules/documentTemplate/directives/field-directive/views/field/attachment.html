@@ -1,0 +1,41 @@
+<div class="form-group">
+	<label class="col-md-2 control-label">
+		<span ng-show="field.required" class="text-danger">* </span>
+		{{field.fieldName}}
+	</label>
+
+	<div class="col-sm-3">
+		<div class="input-group">
+			<span class="input-group" ng-hide="field.documentSelected">
+				<input type="text" class="form-control" placeholder="{{ t('Search_document') }}"
+				ng-model="field.value"
+				ng-required="field.required"
+				typeahead-editable="false"
+				typeahead="doc as doc.name for doc in documentTemplates | filter:{name:$viewValue} | limitTo:8"
+				typeahead-template-url="attachment-template.html"
+				typeahead-on-select="attachmentSelected(field)">
+
+				<span class="input-group-addon"><i class="fa fa-search"></i></span>
+			</span>
+			<div class="input-group control-label" ng-show="field.documentSelected">
+				<span><i class="fa {{ field.value.icon }}"></i> <em>{{ field.value.name }}</em></span>
+			</div>
+		</div>
+	</div>
+
+
+	<div>
+		<div class="icon-on-hover pull-right" ng-if="templateMode">
+			<button type="button" class="close pull-left" ng-click="docPreviewModal(document)" ng-show="field.documentSelected"><i class="fa fa-search-plus"></i></button>
+			<button type="button" class="close pull-left" ng-click="reSearch(field)" ng-show="field.documentSelected"><i class="fa fa-refresh"></i></button>
+			<button type="button" class="close pull-left" ng-click="editModal(field)"><i class="fa fa-edit"></i></button>
+			<button type="button" class="close pull-left" ng-click="removeField(field, form.metaFields)">&times;</button>
+		</div>
+	</div>
+</div>
+
+<script type="text/ng-template" id="attachment-template.html">
+	<a>
+		<i class="fa {{ match.model.icon }}"></i> <span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span>
+	</a>
+</script>
