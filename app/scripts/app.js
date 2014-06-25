@@ -232,6 +232,7 @@ function (angular, globalSettings) {
 			$rootScope.currentCustomer = session.currentCustomer.getModel();
 			$rootScope.customers = session.userData.getModel().user.customers;
 			$rootScope.user = session.userData.getModel().user;
+			$rootScope.lang = session.locale.getModel();
 			$route.reload();
 		};
 
