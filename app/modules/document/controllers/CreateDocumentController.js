@@ -115,7 +115,9 @@
 				// Get field types
 				documentTemplateService.getFieldTypes().then(function() {
 					$scope.readyToShow = true;
-					$scope.fieldTypes = documentTemplateService.primitiveFieldTypes.getModel();
+					var primitives = documentTemplateService.primitiveFieldTypes.getModel();
+					var complex = documentTemplateService.complexFieldTypes.getModel();
+					$scope.fieldTypes = primitives.concat(complex);
 					$scope.docSelectedType = $scope.fieldTypes[0];
 				}).finally(function() {
 					system.hideLoader();
