@@ -6,9 +6,12 @@
 			var getTemplateUrl = function(field) {
 				var type = field.fieldTypeName;
 				var modulePath = './modules/document/directives/field-preview-directive/';
-				var templateUrl = '';
+				var templateUrl;
 
 				switch(type) {
+					case 'ATTACHMENT':
+						templateUrl = modulePath + 'views/field/preview-attachment.html';
+						break;
 					case 'TEXTFIELD':
 						templateUrl = modulePath + 'views/field/preview-textfield.html';
 						break;
@@ -36,17 +39,13 @@
 
 
 			return {
-				template: '<div ng-show="ready">{{field}}</div>',
 				restrict: 'E',
 				link: function(scope, element) {
 					// GET template content from path
 					var templateUrl = getTemplateUrl(scope.field);
-					scope.ready = false;
-
 					$http.get(templateUrl).success(function(data) {
 						element.html(data);
 						$compile(element.contents())(scope);
-						scope.ready = true;
 					});
 				}
 			};

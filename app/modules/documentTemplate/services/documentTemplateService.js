@@ -38,7 +38,8 @@
 			this.iconsArray = new ModelConstructor();
 			self.iconsArray.setModel(iconsArray);
 
-/*			var attachmentType = {
+			/* jshint unused:false */
+			var attachmentType = {
 				'typeName': 'ATTACHMENT',
 				'label': 'Attachment',
 				'fieldId': null,
@@ -51,7 +52,7 @@
 				'options': [],
 				'validationPattern': null,
 				'required': null
-			};*/
+			};
 
 
 			this.getFieldTypes = function() {
@@ -75,11 +76,11 @@
 						// Translate label names
 						primitive = self.translateFieldsType(primitive);
 						self.primitiveFieldTypes.setModel(primitive);
-/*
-						//HARDCODE
-						self.primitiveFieldTypes.pushDataToModel(attachmentType);
 
-*/						self.complexFieldTypes.setModel(complex);
+						//HARDCODE
+						// self.primitiveFieldTypes.pushDataToModel(attachmentType);
+
+						self.complexFieldTypes.setModel(complex);
 						deferred.resolve(data);
 					}, function(reason) {
 						deferred.reject(reason);
@@ -143,7 +144,7 @@
 				return deferred.promise;
 			};
 
-			
+
 			this.getComplexById = function(id) {
 				var deferred = $q.defer();
 

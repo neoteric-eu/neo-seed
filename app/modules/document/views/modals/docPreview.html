@@ -27,23 +27,24 @@
 				<div class="form-horizontal">
 					<fieldset>
 						<legend>Metadane</legend>
+
 						<ng-form name="documentForm" class="form-horizontal" role="form">
 							<div ng-repeat="field in previewDocument.metaFields">
 								<field-preview-directive></field-preview-directive>
 							</div>
 						</ng-form>
-								<div class="form-horizontal">
-									<div class="form-group ng-scope">
-										<label class="col-sm-2 control-label">
-											Status dokumentu
-										</label>
-
-										<div class="col-sm-3 preview-values">
-											ZATWIERDZONY(hardcoded)
-										</div>
-									</div>
-								</div>
 						<hr class="simple">
+						<div class="form-horizontal">
+							<div class="form-group ng-scope">
+								<label class="col-sm-2 control-label">
+									Status dokumentu
+								</label>
+
+								<div class="col-sm-3 preview-values">
+									ZATWIERDZONY(hardcoded)
+								</div>
+							</div>
+						</div>
 					</fieldset>
 				</div>
 			</div>
@@ -111,8 +112,8 @@
 			</div>
 		</div> <!-- end of .row -->
 
-		<hr>
-		<div class="">
+		<div ng-hide="onlyPreview">
+			<hr>
 			<div class="row">
 				<div class="row text-center" style="margin-top: 10px; margin-bottom: 10px; font-weight: bold;">{{t('VERSION')}} {{ previewDocument.version }}</div>
 				<div class="col-md-5">

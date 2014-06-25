@@ -7,7 +7,7 @@
 			var getTemplateUrl = function(field) {
 				var type = field.fieldTypeName;
 				var modulePath = './modules/documentTemplate/directives/field-directive/';
-				var templateUrl = '';
+				var templateUrl;
 
 				switch(type) {
 					case 'ATTACHMENT':
