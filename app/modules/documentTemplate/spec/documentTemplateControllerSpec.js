@@ -10,6 +10,7 @@
 			modalMock, modalDfd;
 
 			beforeEach(module('documentTemplate.services'));
+			beforeEach(module('document.services'));
 			angular.module('documentTemplate.services').constant('documentTemplateModulePath', 'documentTemplateModulePath');
 			angular.module('documentTemplate.services').service('$config', function() {
 				var baseUrl = 'http://188.116.54.20:2222/api/v1/';
@@ -194,7 +195,7 @@
 					var template = {};
 					var version = {version: 1};
 					spyOn(documentTemplateService, 'getTemplateById').andReturn(deferred.promise);
-														
+
 					scope.editTemplate(template, version);
 					deferred.reject();
 					scope.$digest();
@@ -298,7 +299,7 @@
 				it('should restoreVersionModal()', function() {
 					var template = {};
 					var version = {};
-					
+
 					spyOn(scope, 'restoreVersion');
 					scope.restoreVersionModal(template, version);
 

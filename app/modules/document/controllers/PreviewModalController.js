@@ -45,7 +45,7 @@
 				if ($scope.activeVersion === array.length) {
 					$scope.disableNextLink = true;
 				}
-				
+
 			};
 
 			$scope.restoreDocumentVersion = function(previewDocument, previewVersion) {

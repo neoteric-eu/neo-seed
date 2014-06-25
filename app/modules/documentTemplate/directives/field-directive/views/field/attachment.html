@@ -11,7 +11,7 @@
 				ng-model="field.value"
 				ng-required="field.required"
 				typeahead-editable="false"
-				typeahead="doc as doc.name for doc in documentTemplates | filter:{name:$viewValue} | limitTo:8"
+				typeahead="doc as doc.name for doc in documentsList | filter:{name:$viewValue} | limitTo:8"
 				typeahead-template-url="attachment-template.html"
 				typeahead-on-select="attachmentSelected(field)">
 
@@ -26,7 +26,7 @@
 
 	<div>
 		<div class="icon-on-hover pull-right" ng-if="templateMode">
-			<button type="button" class="close pull-left" ng-click="docPreviewModal(document)" ng-show="field.documentSelected"><i class="fa fa-search-plus"></i></button>
+			<button type="button" class="close pull-left" ng-click="docPreviewModal(field.value)" ng-show="field.documentSelected"><i class="fa fa-search-plus"></i></button>
 			<button type="button" class="close pull-left" ng-click="reSearch(field)" ng-show="field.documentSelected"><i class="fa fa-refresh"></i></button>
 			<button type="button" class="close pull-left" ng-click="editModal(field)"><i class="fa fa-edit"></i></button>
 			<button type="button" class="close pull-left" ng-click="removeField(field, form.metaFields)">&times;</button>
