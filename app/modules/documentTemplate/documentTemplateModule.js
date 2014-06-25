@@ -14,8 +14,11 @@
 		'./controllers/CreateTemplateController',
 		'./controllers/ViewTemplateController',
 		'./controllers/TemplateListController',
+		'./controllers/ComplexListController',
+		'./controllers/CreateComplexController',
 
 		'./directives/field-directive/field-directive',
+		'./directives/field-complex-directive/field-complex-directive',
 		'./directives/heightWatch',
 
 		'./services/documentTemplateService',
@@ -28,7 +31,8 @@
 		'./locale/en_EN',
 		'./locale/pl_PL'
 
-	], function(angular, CreateTemplateController, ViewTemplateController, TemplateListController, fieldDirective,
+	], function(angular, CreateTemplateController, ViewTemplateController, TemplateListController,
+		ComplexListController, CreateComplexController, fieldDirective, fieldComplexDirective,
 		heightWatch, documentTemplateService, docsEnums, documentTemplateResource, fieldTypesResource, documentTemplateUrls) {
 
 		var moduleName = 'documentTemplate';
@@ -43,10 +47,13 @@
 		angular.module( controllers , [] )
 			.controller('CreateTemplateController', CreateTemplateController)
 			.controller('ViewTemplateController', ViewTemplateController)
-			.controller('TemplateListController', TemplateListController);
+			.controller('TemplateListController', TemplateListController)
+			.controller('ComplexListController', ComplexListController)
+			.controller('CreateComplexController', CreateComplexController);
 
 		angular.module( directives , [] )
 			.directive('fieldDirective', fieldDirective)
+			.directive('fieldComplexDirective', fieldComplexDirective)
 			.directive('heightWatch', heightWatch);
 
 		angular.module( services, ['ngResource'] )

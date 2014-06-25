@@ -24,8 +24,10 @@
 			Add_Option: 'Dodaj Opcję',
 			Field_Default_Value: 'Wartość domyślna',
 			Delete_template: 'Usuń szablon',
+			Delete_complex: 'Usuń pole złożone',
 			Do_you_want_to_remove: 'Czy na pewno chcesz usunąć szablon',
 			Do_you_want_to_remove_document: 'Czy na pewno chcesz usunąć dokument',
+			Do_you_want_to_remove_complex: 'Czy na pewno chcesz usunąć pole złożone',
 
 			No: 'Nie',
 			Remove: 'Usuń',
@@ -38,7 +40,10 @@
 			Restore: 'Przywróć',
 			Any_unsaved_changes_will_be_lost: 'Niezapisane zmiany zostaną utracone',
 			New_template: 'Nowy szablon',
+			New_complex_field: 'Nowe pole złożone',
 
+			PRIMITIVE: 'POLA PROSTE',
+			COMPLEX: 'POLA ZŁOŻONE',
 			TEXTFIELD: 'Tekst',
 			TEXTAREA: 'Tekst akapitu',
 			EMAIL: 'E-mail',

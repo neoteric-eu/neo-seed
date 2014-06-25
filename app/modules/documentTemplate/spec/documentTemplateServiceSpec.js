@@ -192,10 +192,25 @@
 				$httpBackend.flush();
 				expect(errorCb).toHaveBeenCalled();
 				documentTemplateService.getFieldTypes();
-					
-
-
 			});
+
+			it('should createComplexField()', function() {
+				var complex = {};
+				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'fieldTypes').respond(200, {});
+				documentTemplateService.createComplexField(complex).then(successCb, errorCb);
+				$httpBackend.flush();
+				expect(successCb).toHaveBeenCalled();
+			});
+
+			it('should fail to createComplexField()', function() {
+				var complex = {};
+				$httpBackend.expectPOST(globalSettings.get('tempUrl') + 'fieldTypes').respond(409, {});
+				documentTemplateService.createComplexField(complex).then(successCb, errorCb);
+				$httpBackend.flush();
+				expect(errorCb).toHaveBeenCalled();
+			});
+
+
 		});
 
 

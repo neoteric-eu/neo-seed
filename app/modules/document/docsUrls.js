@@ -16,7 +16,7 @@
 			.when('/document/create/:templateId', {templateUrl: modulePath + 'create-document.html'})
 
 			.when('/document/edit/:documentId', {templateUrl: modulePath + 'create-document.html'})
-			.when('/documents', {templateUrl: modulePath + 'document-list.html'});
+			.when('/documents/', {templateUrl: modulePath + 'document-list.html'});
 
 		};
 

@@ -27,10 +27,12 @@
 				};
 			}
 
+			this.activeComplexField = new ModelConstructor();
 			this.activeTemplate = new ModelConstructor();
 			this.documentTemplates = new ModelConstructor();
 			this.primitiveFieldTypes = new ModelConstructor();
 			this.complexFieldTypes = new ModelConstructor();
+			this.activeComplexField = new ModelConstructor();
 
 			var iconsArray = ['fa-file-text-o', 'fa-bars', 'fa-exclamation-circle', 'fa-key', 'fa-info', 'fa-legal', 'fa-phone', 'fa-pencil'];
 			this.iconsArray = new ModelConstructor();
@@ -46,13 +48,15 @@
 						//field types primitive vs complex
 						_.each(data.data, function(fieldType) {
 							if(fieldType.class === docsEnums.fieldTypes.PRIMITIVE) {
+								fieldType.classLabel = locale.getT('PRIMITIVE');
 								primitive.push(fieldType);
 							} else if(fieldType.class === docsEnums.fieldTypes.COMPLEX) {
+								fieldType.classLabel = locale.getT('COMPLEX');
 								complex.push(fieldType);
 							}
 
 						});
-						// Trnslate label names
+						// Translate label names
 						primitive = self.translateFieldsType(primitive);
 						self.primitiveFieldTypes.setModel(primitive);
 
@@ -120,6 +124,20 @@
 				return deferred.promise;
 			};
 
+			
+			this.getComplexById = function(id) {
+				var deferred = $q.defer();
+
+				fieldTypesResource.getComplexById({complexId: id}, function(data) {
+					self.activeComplexField.setModel(data);
+					deferred.resolve(data);
+				},function(reason) {
+					deferred.reject(reason);
+				});
+
+				return deferred.promise;
+			};
+
 			this.createTemplate = function(template) {
 				var deferred = $q.defer();
 
@@ -167,6 +185,33 @@
 					self.activeTemplate.setModel(data);
 					deferred.resolve(data);
 				},function(reason) {
+					deferred.reject(reason);
+				});
+
+				return deferred.promise;
+			};
+
+			this.createComplexField = function(complex) {
+				var deferred = $q.defer();
+
+				fieldTypesResource.createFieldType(complex, function(data) {
+					self.complexFieldTypes.pushDataToModel(data);
+					//self.activeComplexField.setModel(data);
+					deferred.resolve(data);
+				}, function(reason) {
+					deferred.reject(reason);
+				});
+
+				return deferred.promise;
+			};
+
+			this.removeComplexField = function(complex) {
+				var deferred = $q.defer();
+
+				fieldTypesResource.removeComplexField({complexId: complex.id}, function(data) {
+					self.complexFieldTypes.removeModel(complex);
+					deferred.resolve(data);
+				}, function(reason) {
 					deferred.reject(reason);
 				});
 

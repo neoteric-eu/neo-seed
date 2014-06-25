@@ -1,4 +1,4 @@
-<div class="jarviswidget well modal-body" ng-init="initModal()">
+<div class="jarviswidget modal-body" ng-init="initModal()">
 	<div class="widget-body">
 
 		<div class="row">
@@ -10,13 +10,13 @@
 				<div class="preview-description">{{previewDocument.description}}</div>
 			</div>
 
-			<div class="col-xs-4 col-md-3 muted text-right">
+			<div class="col-xs-4 col-md-4 muted text-right">
+				<button type="button" class="close x-button" ng-click="$dismiss(); $event.stopPropagation();">×</button>
 				<span>Ostatnia modyfikacja: {{ previewDocument.timestamp | date : dateFormat }}</span><br>
 				<span>wersja: {{ previewDocument.version }}</span><br>
 			</div>
- 			<div class="col-xs-1 col-md-1 muted text-right">
-				<button type="button" class="close x-button" ng-click="$dismiss(); $event.stopPropagation();">×</button>
-			</div>
+ <!-- 			<div class="col-xs-1 col-md-1 muted text-right">
+ 			</div> -->
 		</div>
 
 		<hr>
