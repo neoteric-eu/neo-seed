@@ -52,6 +52,10 @@
 					newField.options = [''];
 				}
 
+				if(selectedType.class === 'COMPLEX') {
+					newField.composite = selectedType.composite;
+				}
+
 				return newField;
 			}
 
@@ -75,6 +79,7 @@
 					var primitives = documentTemplateService.primitiveFieldTypes.getModel();
 					var complex = documentTemplateService.complexFieldTypes.getModel();
 					$scope.addField.types = primitives.concat(complex);
+					console.log($scope.addField.types);
 					$scope.selectedType = $scope.addField.types[0];
 				});
 

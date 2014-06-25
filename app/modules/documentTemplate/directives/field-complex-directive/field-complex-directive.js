@@ -3,44 +3,11 @@
 	define([], function() {
 
 		var fieldComplexDirective = function($http, $compile) {
-
-			var getTemplateUrl = function() {	//field
-				//var type = field.fieldTypeName;
-				var modulePath = './modules/documentTemplate/directives/field-complex-directive/';
-				var templateUrl = modulePath + 'views/complex.html';
-
-				// switch(type) {
-				// 	case 'TEXTFIELD':
-				// 		templateUrl = modulePath + 'views/field/textfield.html';
-				// 		break;
-				// 	case 'EMAIL':
-				// 		templateUrl = modulePath + 'views/field/email.html';
-				// 		break;
-				// 	case 'TEXTAREA':
-				// 		templateUrl = modulePath + 'views/field/textarea.html';
-				// 		break;
-				// 	case 'CHECKBOX':
-				// 		templateUrl = modulePath + 'views/field/checkbox.html';
-				// 		break;
-				// 	case 'DATE':
-				// 		templateUrl = modulePath + 'views/field/date.html';
-				// 		break;
-				// 	case 'DROPDOWN':
-				// 		templateUrl = modulePath + 'views/field/dropdown.html';
-				// 		break;
-				// 	case 'RADIO':
-				// 		templateUrl =modulePath +  'views/field/radio.html';
-				// 		break;
-				// }
-				return templateUrl;
-			};
-
-
 			return {
 				restrict: 'E',
 				link: function(scope, element) {
-					// GET template content from path
-					var templateUrl = getTemplateUrl(scope.field);
+					var modulePath = './modules/documentTemplate/directives/field-complex-directive/';
+					var templateUrl = modulePath + 'views/complex.html';
 
 					$http.get(templateUrl).success(function(data) {
 						element.html(data);
