@@ -42,15 +42,18 @@
 			New_template: 'Nowy szablon',
 			New_complex_field: 'Nowe pole złożone',
 
-			PRIMITIVE: 'POLA PROSTE',
+			Search_document: 'Wyszukaj dokument',
+
+			ATTACHMENT: 'Dołącz inny dokument',
+			CHECKBOX: 'Jednokrotny wybór',
 			COMPLEX: 'POLA ZŁOŻONE',
-			TEXTFIELD: 'Tekst',
-			TEXTAREA: 'Tekst akapitu',
-			EMAIL: 'E-mail',
-			RADIO: 'Wielokrotny wybór',
 			DROPDOWN: 'Wybierz z listy',
 			DATE: 'Data',
-			CHECKBOX: 'Jednokrotny wybór',
+			EMAIL: 'E-mail',
+			PRIMITIVE: 'POLA PROSTE',
+			RADIO: 'Wielokrotny wybór',
+			TEXTFIELD: 'Tekst',
+			TEXTAREA: 'Tekst akapitu'
 		});
 	});
 }());

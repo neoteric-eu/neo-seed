@@ -35,8 +35,16 @@
 		<![endif]-->
 
 		<!-- Add your site or application content here -->
+<<<<<<< HEAD
+		<!-- ng-if="appReady" -->
+		<div id="root-wrapper" ng-controller="RootController" height-watch>
+
+			<ng:include  src="mainTemplate"></ng:include>
+=======
+
 		<div id="root-wrapper" ng-controller="RootController" ng-if="appReady" height-watch>
 			<ng:include src="mainTemplate"></ng:include>
+>>>>>>> 08874e2c0b66e377635e765c3529774b344580b3
 		</div>
 
 		<!--[if lt IE 9]>

@@ -3,6 +3,7 @@ coverage
 node_modules
 nbproject/
 app/styles/css
+app/modules/global_settings.js
 dist
 
 .sass-cache

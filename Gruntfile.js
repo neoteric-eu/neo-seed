@@ -11,6 +11,7 @@ module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-githooks');
+	grunt.loadNpmTasks('grunt-replace');
 
 	// Load grunt tasks automatically
 	require('load-grunt-tasks')(grunt);
@@ -111,6 +112,12 @@ module.exports = function (grunt) {
 					jshintrc: 'test/.jshintrc'
 				},
 				src: ['test/spec/{,*/}*.js']
+			}
+		},
+
+		open: {
+			server: {
+				url: 'http://localhost:<%= connect.serve.options.port %>'
 			}
 		},
 
@@ -276,20 +283,69 @@ module.exports = function (grunt) {
 				autoWatch: true
 			}
 		},
+
 		githooks: {
 			all: {
 				// !important run 'grunt githooks' after updates.
 				'pre-commit': 'karma:preCommit jshint:all'
 			}
+		},
+
+		replace: {
+			development: {
+				options: {
+					patterns: [{
+						json: grunt.file.readJSON('./config/environments/development.json')
+					}]
+				},
+				files: [{
+					expand: true,
+					flatten: true,
+					src: ['./config/global_settings.js'],
+					dest: '<%= yeoman.app %>/modules/'
+				}]
+			},
+			staging: {
+				options: {
+					patterns: [{
+						json: grunt.file.readJSON('./config/environments/staging.json')
+					}]
+				},
+				files: [{
+					expand: true,
+					flatten: true,
+					src: ['./config/config.js'],
+					dest: '<%= yeoman.app %>/scripts/services/'
+				}]
+			},
+			production: {
+				options: {
+					patterns: [{
+						json: grunt.file.readJSON('./config/environments/production.json')
+					}]
+				},
+				files: [{
+					expand: true,
+					flatten: true,
+					src: ['./config/config.js'],
+					dest: '<%= yeoman.app %>/scripts/services/'
+				}]
+			}
 		}
 	});
 
-	grunt.registerTask('serve', function () {
+	grunt.registerTask('serve', function (target) {
+
+		if (target === 'dist') {
+			return grunt.task.run(['build', 'connect:dist:keepalive']);
+		}
 
 		grunt.task.run([
 			'clean:server',
 			'bower-install',
 			'connect:serve',
+			'replace:development',
+			// 'open',
 			'watch'
 		]);
 	});
@@ -322,6 +378,16 @@ module.exports = function (grunt) {
 		'rev',
 		'usemin',
 		'copy:dist',
+	]);
+
+	grunt.registerTask('staging', [
+		'replace:staging'
+		// Add further deploy related tasks here
+	]);
+
+	grunt.registerTask('production', [
+		'replace:production'
+		// Add further deploy related tasks here
 	]);
 
 	grunt.registerTask('default', [

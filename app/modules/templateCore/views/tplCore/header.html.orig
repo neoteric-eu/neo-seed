@@ -3,6 +3,8 @@
 	<span class="hide-menu hidden-lg hidden-md btn btn-ribbon">  <i class="fa fa-bars fa-lg"></i></span>
 </span>
 
+<<<<<<< HEAD
+=======
 <div class="ribbon-button-alignment pull-right" ng-if="languages.length > 1">
 	<ul class="list-inline">
 		<li class="dropdown">
@@ -19,7 +21,7 @@
 	</ul>
 </div>
 
-
+>>>>>>> 08874e2c0b66e377635e765c3529774b344580b3
 <div class="ribbon-button-alignment pull-right">
 	<ul class="list-inline">
 		<li class="dropdown">
@@ -30,7 +32,11 @@
 			<ul class="dropdown-menu">
 				<li class="nav-header">{{t('Available_profiles')}}</li>
 				<!-- ng-class="{'active current': isCurrentCustomer(customer)}" -->
+<<<<<<< HEAD
+				<li ng-repeat="customer in customers">
+=======
 				<li ng-repeat="customer in customers" ng-class="{'active': customer.customerName == currentCustomer.customerName}">
+>>>>>>> 08874e2c0b66e377635e765c3529774b344580b3
 					<!-- <a ng-if="isCurrentCustomer(customer)" href>{{customer.customerName}}</a> -->
 					<a href ng-click="switchCustomerHeader(customer)">{{customer.customerName}}</a>
 				</li>

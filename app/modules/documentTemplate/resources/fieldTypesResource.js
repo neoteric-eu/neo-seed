@@ -2,7 +2,7 @@
 	'use strict';
 	define(['globalSettings'], function(gloabalSettings) {
 		var fieldTypesResource = function($resource) {
-			return $resource(gloabalSettings.get('tempUrl')+'fieldTypes/:action/:complexId',
+			return $resource(gloabalSettings.get('baseUrl')+'fieldTypes/:action/:complexId',
 				{
 					action: '@action',
 					complexId: '@complexId',
@@ -23,7 +23,7 @@
 					removeComplexField: {
 						method: 'DELETE',
 					},
-					
+
 				}
 			);
 		};

@@ -2,7 +2,7 @@
 	'use strict';
 	define(['globalSettings'], function(globalSettings) {
 		var documentResource = function($resource) {
-			return $resource(globalSettings.get('tempUrl')+'documents/:action/:documentId',
+			return $resource(globalSettings.get('baseUrl')+'documents/:action/:documentId',
 				{
 					action: '@action',
 					documentId: '@documentId',

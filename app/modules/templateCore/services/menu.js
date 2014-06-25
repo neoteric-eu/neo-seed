@@ -12,9 +12,6 @@
 
 					// { href: 'template/create', title: 'Utwórz nowy szablon', icon: 'fa fa-lg fa-fw fa-pencil-square-o', access: 'ND_DOC_TPL_CREATE'},
 
-
-
-					// { href: 'upload', title: 'upload', icon: 'fa fa-lg fa-fw fa-upload' }
 				],
 
 				getMenu: function() {

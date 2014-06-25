@@ -6,10 +6,11 @@ define([
 	'theme.smartwidgets',
 	'theme.app',
 	'gritter',
-	// 'sentryClient',
+	'sentryClient',
+	'../modules/miniCore/miniCoreModule',
+	'../modules/templateCore/templateCoreModule',
 	'angular-file-upload',
 	'angular-ui-sortable',
-
 	'angularRoute',
 	'angularCookies',
 	'angularSanitize',
