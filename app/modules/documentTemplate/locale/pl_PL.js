@@ -47,13 +47,13 @@
 			ATTACHMENT: 'Dołącz inny dokument',
 			CHECKBOX: 'Jednokrotny wybór',
 			COMPLEX: 'POLA ZŁOŻONE',
-			DROPDOWN: 'Wybierz z listy',
 			DATE: 'Data',
+			DROPDOWN: 'Wybierz z listy',
 			EMAIL: 'E-mail',
 			PRIMITIVE: 'POLA PROSTE',
 			RADIO: 'Wielokrotny wybór',
 			TEXTFIELD: 'Tekst',
-			TEXTAREA: 'Tekst akapitu'
+			TEXTAREA: 'Tekst akapitu',
 		});
 	});
 }());

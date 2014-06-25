@@ -194,6 +194,7 @@
 				documentTemplateService.getFieldTypes();
 			});
 
+
 			it('should createComplexField()', function() {
 				var complex = {};
 				$httpBackend.expectPOST(globalSettings.get('baseUrl') + 'fieldTypes').respond(200, {});
