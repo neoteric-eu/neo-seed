@@ -244,6 +244,9 @@
 }
 .text-danger {
 	color: #d9534f;
+	&:hover {
+		color: #d9534f;
+	}
 }
 
 
@@ -330,10 +333,12 @@
 	}
 	.sortable-handler {
 		position: absolute;
-		-webkit-transform: rotate(-90deg);
-		-ms-transform: rotate(-90deg);
 		font-size: 18px;
-		padding-top: 12px;
+		padding: 5px;
+		color: #C2C2C2;
+		i + i {
+			margin-left: -3px;
+		}
 	}
 }
 
@@ -441,10 +446,17 @@ body .infoColor .tooltip {
 		margin-bottom: 0;
 		padding-top: 7px;
 	}
+	.scrollable-textarea {
+		height: 100px;
+		width: 100%;
+		resize: none;
+		overflow-y: scroll;
+		max-height: 100px;
+	}
 	a {
 		cursor: pointer;
 			text-decoration: none;
-		&hover {
+		&:hover {
 			text-decoration: none;
 		}
 	}

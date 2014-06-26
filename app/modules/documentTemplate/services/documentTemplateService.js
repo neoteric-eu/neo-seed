@@ -38,23 +38,6 @@
 			this.iconsArray = new ModelConstructor();
 			self.iconsArray.setModel(iconsArray);
 
-			/* jshint unused:false */
-			var attachmentType = {
-				'typeName': 'ATTACHMENT',
-				'label': 'Attachment',
-				'fieldId': null,
-				'fieldName': '',
-				'fieldDescription': '',
-				'customerId': null,
-				'global': true,
-				'class': 'PRIMITIVE',
-				'composite': [],
-				'options': [],
-				'validationPattern': null,
-				'required': null
-			};
-
-
 			this.getFieldTypes = function() {
 				var deferred = $q.defer();
 
@@ -76,9 +59,6 @@
 						// Translate label names
 						primitive = self.translateFieldsType(primitive);
 						self.primitiveFieldTypes.setModel(primitive);
-
-						//HARDCODE
-						// self.primitiveFieldTypes.pushDataToModel(attachmentType);
 
 						self.complexFieldTypes.setModel(complex);
 						deferred.resolve(data);

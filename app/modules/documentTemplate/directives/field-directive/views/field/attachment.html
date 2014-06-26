@@ -11,11 +11,15 @@
 				ng-model="field.value"
 				ng-required="field.required"
 				typeahead-editable="false"
-				typeahead="doc as doc.name for doc in documentsList | filter:{name:$viewValue} | limitTo:8"
+				typeahead="doc as doc.name for doc in getDocumentsList() | filter:{name:$viewValue} | limitTo:8"
+				typeahead-loading="loadingLocations"
 				typeahead-template-url="attachment-template.html"
 				typeahead-on-select="attachmentSelected(field)">
 
-				<span class="input-group-addon"><i class="fa fa-search"></i></span>
+				<span class="input-group-addon">
+					<i ng-hide="loadingLocations" class="fa fa-search"></i>
+					<i ng-show="loadingLocations" class="fa fa-spin fa-refresh"></i>
+				</span>
 			</span>
 			<div class="input-group control-label" ng-show="field.documentSelected">
 				<span><i class="fa {{ field.value.icon }}"></i> <em>{{ field.value.name }}</em></span>

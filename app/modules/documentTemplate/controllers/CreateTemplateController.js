@@ -71,16 +71,38 @@
 			};
 
 
+//HARDCODE
+/* jshint unused:false */
+var attachmentType = {
+	'typeName': 'ATTACHMENT',
+	'label': 'Attachment',
+	'fieldId': null,
+	'fieldName': '',
+	'fieldDescription': '',
+	'customerId': null,
+	'global': true,
+	'class': 'PRIMITIVE',
+	'composite': [],
+	'options': [],
+	'validationPattern': null,
+	'required': null
+};
+
 
 			$scope.initTemplate = function() {
 				$scope.readyToShow = false;
 				documentTemplateService.getFieldTypes().then(function() {
 					$scope.readyToShow = true;
+//HARDCODE
+console.log('aa', documentTemplateService.primitiveFieldTypes.getModel());
+documentTemplateService.primitiveFieldTypes.pushDataToModel(attachmentType);
+
 					var primitives = documentTemplateService.primitiveFieldTypes.getModel();
 					var complex = documentTemplateService.complexFieldTypes.getModel();
 					$scope.addField.types = primitives.concat(complex);
-					console.log($scope.addField.types);
 					$scope.selectedType = $scope.addField.types[0];
+
+
 				});
 
 				if(angular.isDefined($routeParams.templateId)) {
@@ -343,12 +365,12 @@
 				return field.fieldTypeName === docsEnums.fieldTypes.TEXTFIELD;
 			};
 
+			$scope.getDocumentsList = function() {
 
-
-
-
-			//TODO: get Documents at init
-			$scope.documentsList = documentService.documents.getModel();
+				return documentService.getDocuments().then(function() {
+					return documentService.documents.getModel();
+				});
+			};
 
 			$scope.attachmentSelected = function(field) {
 				field.documentSelected = true;
@@ -357,7 +379,6 @@
 			$scope.reSearch = function(field) {
 				field.documentSelected = false;
 			};
-
 
 			$scope.docPreviewModal = function(previewDocument) {
 				var modalScope = $scope.$new();
