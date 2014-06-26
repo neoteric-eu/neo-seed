@@ -5,7 +5,8 @@
 		var fieldDirective = function($http, $compile) {
 
 			var getTemplateUrl = function(field) {
-				var type = field.fieldTypeName;
+				console.log('dupa', field);
+				var type = field.fieldTypeName || field.typeName;
 				var modulePath = './modules/documentTemplate/directives/field-directive/';
 				var templateUrl;
 

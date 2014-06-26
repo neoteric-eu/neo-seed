@@ -44,8 +44,9 @@
 											ui-sortable=""
 											ng-model="document.metaFields">
 												<li ng-repeat="field in document.metaFields" class="sortable-item padding-10-0"  ng-mouseover="isActive = true" ng-mouseleave="isActive = false">
-													<i ng-show="isActive" class="fa fa-bars icon-muted-hover sortable-handler"></i>
-													<field-directive></field-directive>
+													<i ng-show="isActive" class="fa fa-bars icon-muted-on-hover sortable-handler"></i>
+													<field-directive ng-if="field.fieldTypeName"></field-directive>
+													<field-complex-directive ng-if="!field.fieldTypeName"></field-complex-directive>
 												</li>
 											</ul>
 

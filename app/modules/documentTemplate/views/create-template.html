@@ -1,5 +1,5 @@
 <section ng-controller="CreateTemplateController" ng-init="initTemplate()">
-	<div class="row">
+	<div class="row templateCreator">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="well"  ng-show="readyToShow">
 				<div class="form-fields">
@@ -24,7 +24,7 @@
 					<ng-form name="documentForm" class="form-horizontal" role="form">
 						<ul ui-sortable="" ng-model="form.metaFields" class="list-unstyled sortable-list">
 							<li ng-repeat="field in form.metaFields" class="sortable-item padding-10-0"  ng-mouseover="isActive = true" ng-mouseleave="isActive = false">
-								<i ng-show="isActive" class="fa fa-bars icon-muted-hover sortable-handler"></i>
+								<i ng-show="isActive" class="fa fa-bars icon-muted-on-hover sortable-handler"></i>
 								<field-directive ng-if="field.fieldTypeName"></field-directive>
 								<field-complex-directive ng-if="!field.fieldTypeName"></field-complex-directive>
 							</li>
@@ -84,7 +84,7 @@
 					</table>
 				</div>
 			</div>
-
+<pre>{{ form | json }}</pre>
 		</div>
 	</div>
 </section>

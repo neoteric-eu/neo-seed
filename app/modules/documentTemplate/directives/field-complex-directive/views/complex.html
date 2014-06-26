@@ -1,5 +1,22 @@
-na razie dupa {{field}}
-<hr>
-<div ng-repeat="primitiveField in field.composite">
-	______________{{primitiveField}}
+<div class="complex-container">
+	<div>	 <!-- style="border: 1px #bfbfbf solid; padding: 5px;" -->
+		<div class="complex-title text-center"><span><strong>{{field.fieldName}}</strong></span>
+
+				<i class="fa fa-info-circle"
+					ng-if="field.fieldDescription"
+					tooltip-html-unsafe="{{ field.fieldDescription }}"
+					tooltip-placement="right"></i>
+		<div class="icon-on-hover pull-right">
+			<button type="button" class="close pull-right" ng-click="removeField(field, form.metaFields)" style="padding: 0px;">&times;</button>
+		</div>
+		</div>
+
+
+		<!-- <i ng-show="isActive" class="fa fa-bars icon-muted-hover sortable-handler"></i> -->
+		<ul class="list-unstyled">
+			<li ng-repeat="field in field.composite">
+				<field-directive></field-directive>
+			</li>
+		</ul>
+	</div>
 </div>
