@@ -41,7 +41,7 @@
 							<div class="form-inline text-center padding-25-0">
 								<div class="form-group">
 									<label class="sr-only" for="exampleInputEmail2">{{t('Field_Type')}}</label>
-									<select ng-model="selectedType" class="form-control" ng-options="type as type.label group by type.classLabel for type in addField.types"></select>
+									<select ng-model="selectedType" class="form-control" ng-options="type as type.label group by type.classLabel for type in fieldTypes"></select>
 								</div>
 								<button type="button" class="btn btn-info ng-binding" ng-click="addNewField(form.metaFields, selectedType)"><i class="fa fa-plus"></i>  {{t('Add_Field')}}</button>
 

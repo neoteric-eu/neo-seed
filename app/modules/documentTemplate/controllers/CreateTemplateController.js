@@ -22,8 +22,6 @@
 			$scope.form.icon = documentTemplateService.iconsArray.getModel()[0];
 
 			$scope.disableLeftArrow = true;
-			// add new field drop-down:
-			$scope.addField = {};
 
 			/**
 			 *	@name fieldFactory
@@ -59,6 +57,7 @@
 				return newField;
 			}
 
+
 			/**
 			 *	@name addNewField
 			 *
@@ -71,39 +70,44 @@
 			};
 
 
-//HARDCODE
-/* jshint unused:false */
-var attachmentType = {
-	'typeName': 'ATTACHMENT',
-	'label': 'Attachment',
-	'fieldId': null,
-	'fieldName': '',
-	'fieldDescription': '',
-	'customerId': null,
-	'global': true,
-	'class': 'PRIMITIVE',
-	'composite': [],
-	'options': [],
-	'validationPattern': null,
-	'required': null
-};
+			//TODO: remove HARDCODE
+			/* jshint unused:false */
+			var attachmentType = {
+				'typeName': 'ATTACHMENT',
+				'label': 'Attachment',
+				'fieldId': null,
+				'fieldName': '',
+				'fieldDescription': '',
+				'customerId': null,
+				'global': true,
+				'class': 'PRIMITIVE',
+				'composite': [],
+				'options': [],
+				'validationPattern': null,
+				'required': null
+			};
 
 
-			$scope.initTemplate = function() {
+			$scope.getFieldTypes = function() {
 				$scope.readyToShow = false;
 				documentTemplateService.getFieldTypes().then(function() {
-					$scope.readyToShow = true;
-//HARDCODE
-console.log('aa', documentTemplateService.primitiveFieldTypes.getModel());
-documentTemplateService.primitiveFieldTypes.pushDataToModel(attachmentType);
+
+					//TODO: remove HARDCODE
+					documentTemplateService.primitiveFieldTypes.pushDataToModel(attachmentType);
+
 
 					var primitives = documentTemplateService.primitiveFieldTypes.getModel();
 					var complex = documentTemplateService.complexFieldTypes.getModel();
-					$scope.addField.types = primitives.concat(complex);
-					$scope.selectedType = $scope.addField.types[0];
+					$scope.fieldTypes = primitives.concat(complex);
+					$scope.selectedType = $scope.fieldTypes[0];
 
-
+				}).finally(function() {
+					$scope.readyToShow = true;
 				});
+			};
+
+			$scope.initTemplate = function() {
+				$scope.getFieldTypes();
 
 				if(angular.isDefined($routeParams.templateId)) {
 					$scope.editMode = 1;
@@ -119,7 +123,6 @@ documentTemplateService.primitiveFieldTypes.pushDataToModel(attachmentType);
 							}
 						});
 					}, function() {
-						//$exceptionHandler(reason);
 						appMessages.error(locale.getT('Operation_failed'));
 					}).finally(function() {
 						system.hideLoader();
@@ -137,7 +140,6 @@ documentTemplateService.primitiveFieldTypes.pushDataToModel(attachmentType);
 					$scope.form = documentTemplateService.activeTemplate.getModel();
 				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
-					// $exceptionHandler(reason);
 				}).finally(function() {
 					system.hideLoader();
 				});
@@ -168,7 +170,6 @@ documentTemplateService.primitiveFieldTypes.pushDataToModel(attachmentType);
 					appMessages.success(locale.getT('Operation_succeeded'));
 				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
-					//$exceptionHandler(reason);
 				}).finally(function() {
 					system.hideLoader();
 				});
@@ -189,7 +190,6 @@ documentTemplateService.primitiveFieldTypes.pushDataToModel(attachmentType);
 					appMessages.success(locale.getT('Operation_succeeded'));
 				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
-					//$exceptionHandler(reason);
 				}).finally(function() {
 					system.hideLoader();
 				});
@@ -216,7 +216,6 @@ documentTemplateService.primitiveFieldTypes.pushDataToModel(attachmentType);
 					$scope.form = documentTemplateService.activeTemplate.getModel();
 				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
-					//$exceptionHandler(reason);
 				}).finally(function() {
 					system.hideLoader();
 				});
