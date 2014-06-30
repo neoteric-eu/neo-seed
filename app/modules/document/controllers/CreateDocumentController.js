@@ -16,7 +16,7 @@
 			// TODO: remove HARDCODE
 			/* jshint unused:false */
 			var mocked = {
-				'id': 'MOCKED_DOC_ID_2',
+				'id': '',
 				'templateId': null,
 				'templateName': null,
 				'templateVersion': null,
@@ -130,7 +130,12 @@
 					'validationPattern': null,
 					'required': false,
 					'composite': [],
-					'value': 'MOCKED_DOC_ID_22'
+					'value': {
+						name: 'lorem ipsum dolor sit amet',
+						icon: 'fa-file-text-o',
+						id: '53abfa2be4b020def9bc14c4',
+						version: 1
+					}
 				}
 				],
 				'version': 12,
@@ -214,10 +219,9 @@
 				documentService.getDocumentById(documentId).then(function(data) {
 					$scope.editMode = true;
 					documentService.activeDocument.setModel(data);
-					documentService.previewDocument.setModel(data);
-					// $scope.document = documentService.activeDocument.getModel();
-					//TODO: Mocked data
-					$scope.document = mocked;
+					// documentService.previewDocument.setModel(data);
+
+					$scope.document = documentService.activeDocument.getModel();
 
 				}, function() {
 					appMessages.error(locale.getT('Operation_failed'));
@@ -227,30 +231,6 @@
 					system.hideLoader();
 				});
 			};
-
-
-			/**
-			 *	@name getDocumentById
-			 *
-			 *	@param {String} documentId
-			 *	@description get document by id
-			 *	@return {object}
-			 */
-/*			$scope.getDocumentById = function(documentId) {
-				return documentService.getDocumentById(documentId).then(function(data) {
-					console.log('aaa', data);
-					$scope.document = mocked;
-
-				}, function() {
-					appMessages.error(locale.getT('Operation_failed'));
-
-				}).finally(function() {
-					$scope.readyToShow = true;
-					system.hideLoader();
-				});
-			};*/
-
-
 
 			/**
 			 *	@name createNewByTemplateCreator
@@ -345,7 +325,6 @@
 
 
 			$scope.docPreviewModal = function(activeDocument, previewVersion) {
-
 				var modalInstance = $modal.open({
 					templateUrl: documentModulePath + 'views/modals/docPreview.html',
 					controller: 'PreviewModalController',

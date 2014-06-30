@@ -365,18 +365,13 @@
 			};
 
 			$scope.getDocumentsList = function() {
-
 				return documentService.getDocuments().then(function() {
 					return documentService.documents.getModel();
 				});
 			};
 
-			$scope.attachmentSelected = function(field) {
-				field.documentSelected = true;
-			};
-
 			$scope.reSearch = function(field) {
-				field.documentSelected = false;
+				field.value = null;
 			};
 
 			$scope.docPreviewModal = function(previewDocument) {

@@ -1,28 +1,30 @@
 <div class="form-group">
-	<label class="col-md-2 control-label">
+	<label class="col-md-2 col-sm-3 control-label">
 		<span ng-show="field.required" class="text-danger">* </span>
 		{{field.fieldName}}
 	</label>
 
-	<div class="col-sm-3">
+	<div class="col-md-7 col-sm-6">
+
+
 		<div class="input-group">
-			<span class="input-group" ng-hide="field.documentSelected">
-				<input type="text" class="form-control" placeholder="{{ t('Search_document') }}"
+			<span class="input-group" ng-hide="field.value">
+				<input type="text" class="form-control" placeholder="{{ t('Search') }}"
 				ng-model="field.value"
 				ng-required="field.required"
 				typeahead-editable="false"
 				typeahead="doc as doc.name for doc in getDocumentsList() | filter:{name:$viewValue} | limitTo:8"
 				typeahead-loading="loadingLocations"
-				typeahead-template-url="attachment-template.html"
-				typeahead-on-select="attachmentSelected(field)">
+				typeahead-template-url="attachment-template.html">
+				<!-- typeahead-on-select="attachmentSelected(field)"> -->
 
 				<span class="input-group-addon">
 					<i ng-hide="loadingLocations" class="fa fa-search"></i>
 					<i ng-show="loadingLocations" class="fa fa-spin fa-refresh"></i>
 				</span>
 			</span>
-			<div class="input-group control-label" ng-show="field.documentSelected">
-				<span><i class="fa {{ field.value.icon }}"></i> <em>{{ field.value.name }}</em></span>
+			<div class="input-group control-label" ng-show="field.value">
+				<span><i class="fa {{ field.value.icon }}"></i> <em>{{ field.value.name }} </em> <span class="muted">| {{t('Version')}}: {{field.value.version}}</span></span>
 			</div>
 		</div>
 	</div>
@@ -30,10 +32,12 @@
 
 	<div>
 		<div class="icon-on-hover pull-right" ng-if="templateMode">
-			<button type="button" class="close pull-left" ng-click="docPreviewModal(field.value)" ng-show="field.documentSelected"><i class="fa fa-search-plus"></i></button>
-			<button type="button" class="close pull-left" ng-click="reSearch(field)" ng-show="field.documentSelected"><i class="fa fa-refresh"></i></button>
 			<button type="button" class="close pull-left" ng-click="editModal(field)"><i class="fa fa-edit"></i></button>
 			<button type="button" class="close pull-left" ng-click="removeField(field, form.metaFields, form.composite)">&times;</button>
+		</div>
+		<div class="icon-on-hover pull-right" ng-show="field.value">
+			<button type="button" class="close pull-left" ng-click="docPreviewModal(field.value, field.value.version)"><i class="fa fa-search-plus"></i></button>
+			<button type="button" class="close pull-left" ng-click="reSearch(field)"><i class="fa fa-refresh"></i></button>
 		</div>
 	</div>
 </div>
