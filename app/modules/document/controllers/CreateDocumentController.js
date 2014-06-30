@@ -13,6 +13,7 @@
 			$scope.readyToShow = false;
 			$scope.templateCreatorMode = false;
 
+			$scope.isIconEditable = false;
 			/**
 			 *	@name init
 			 *

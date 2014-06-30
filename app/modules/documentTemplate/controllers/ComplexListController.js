@@ -29,6 +29,7 @@
 				documentTemplateService.getFieldTypes().then(
 					function() {
 						$scope.complexFieldTypes = documentTemplateService.complexFieldTypes.getModel();
+						console.log($scope.complexFieldTypes);
 						$scope.complexTable = $scope.ngTableBuilder($scope.complexFieldTypes);
 					}, function() {
 						appMessages.error(locale.getT('Operation_failed'));

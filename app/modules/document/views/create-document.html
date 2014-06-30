@@ -1,14 +1,25 @@
 <section ng-controller="CreateDocumentController" ng-init="init()">
 	<div class="contianer">
 
-		<div class="jarviswidget well">
+		<div class="jarviswidget well" ng-controller="CreateTemplateController" ng-init="templateMode = editMode; form = document">
 			<div class="widget-body">
 
 				<div class="row">
 
-					<div class="col-xs-1">
-						<i class="fa {{ document.icon }} fa-4x hidden-xs"></i>
+					<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 text-center" ng-if="templateCreatorMode === false">
+						<i class="fa {{ document.icon }} fa-4x "></i> <!-- hidden-xs -->
 					</div>
+
+					
+					<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 text-center" ng-if="templateCreatorMode === true">		<!-- col-xs-4 col-sm-3 col-md-2 col-lg-2 -->
+						<div><i class="fa {{document.icon}} fa-5x" ng-model="document.icon"></i></div>
+						<div class="text-center">
+							<i class="fa fa-caret-left fa-3x margin-lr-5 unselectable pointer" ng-class="{'disabledArrow': disableLeftArrow}" ng-click="switchIcon(-1)"></i>
+							<i class="fa fa-caret-right fa-3x margin-lr-5 unselectable pointer" ng-class="{'disabledArrow': disableRightArrow}" ng-click="switchIcon(1)"></i>
+						</div>
+					</div>
+					
+
 
 					<div class="col-xs-7 col-md-8 form-properties">
 
@@ -38,7 +49,7 @@
 								<legend>Metadane</legend>
 
 									<form name="documentForm" role="form">
-										<section ng-controller="CreateTemplateController" ng-init="templateMode = editMode; form = document">
+										<section>
 											<ul class="list-unstyled sortable-list form-horizontal"
 											ng-if="templateCreatorMode"
 											ui-sortable=""

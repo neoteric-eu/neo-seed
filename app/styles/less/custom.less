@@ -276,7 +276,7 @@
 }
 
 .icon-on-hover button {
-	padding: 8px 12px 0 0;
+	padding: 8px 6px 0 0;
 }
 
 .icon-muted-hover {
@@ -363,9 +363,9 @@ table.versionList {
   width: 70%;
   margin: auto;
   table {
-  	tr {
+	tr {
 		cursor: pointer;
-  	}
+	}
   }
 }
 
@@ -373,9 +373,9 @@ table.versionList {
   width: 90%;
   margin: auto;
   table {
-  	tr {
+	tr {
 		cursor: pointer;
-  	}
+	}
   }
 }
 
@@ -386,10 +386,15 @@ table.versionList {
 body .ng-table th {
 	text-align: left;
 }
-
-body .infoColor {
+body .infoColor.close {
+	opacity: 1;
+}
+body .infoColor i {
 	color: #57889c;
 	opacity: 0.8;
+}
+body .infoColor .tooltip {
+	opacity: 1;
 }
 
 /*.docPreview {
@@ -407,6 +412,13 @@ body .infoColor {
 		}
 	}
 }*/
+.scrollable-textarea {
+	height: 100px;
+	width: 100%;
+	resize: none;
+	overflow-y: auto;
+	max-height: 100px;
+}
 
 .docPreview {
 	.modal-dialog {
@@ -428,13 +440,6 @@ body .infoColor {
 		margin-top: 0;
 		margin-bottom: 0;
 		padding-top: 7px;
-	}
-	.scrollable-textarea {
-		height: 100px;
-		width: 100%;
-		resize: none;
-		overflow-y: scroll;
-		max-height: 100px;
 	}
 	a {
 		cursor: pointer;
@@ -475,4 +480,40 @@ body .infoColor {
 	i {
 		color: #bfbfbf;
 	}
+}
+
+.table-responsive.custom-table-responsive {
+	width: 100%;
+	margin-bottom: 15px;
+	overflow-y: hidden;
+	overflow-x: auto;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+	border: 1px solid #DDD;
+	-webkit-overflow-scrolling: touch;
+}
+
+.neodoc-table {	//default outer class for table styling
+	.col-width-40px {
+		width: 40px;
+		min-width: 40px;
+	}
+	.col-width-70px {
+		width: 70px;
+		min-width: 70px;
+	}
+	.col-width-120px {
+		width: 120px;
+		min-width: 120px;
+	}	
+	.col-width-135px {
+		width: 70px;
+	}
+		min-width: 70px;
+	.col-min-width-200px {
+		min-width: 200px;
+	}
+}
+
+.pointer {
+	cursor: pointer;
 }

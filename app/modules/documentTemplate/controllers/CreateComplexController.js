@@ -27,7 +27,7 @@
 			 */
 			function fieldFactory(addOptions, selectedType) {
 				var newField = {
-					'id' : null,
+					'id' : '343243244324jfsdfsd343ff',
 					'fieldName' : selectedType.label,
 					'fieldDescription' : selectedType.fieldDescription || '',
 					'fieldTypeId' : selectedType.id,
@@ -154,12 +154,16 @@
 			 *	@name removeField
 			 *
 			 *	@param {object} field
+			 *	@param {undefined} metaFields - undefined in complex field creation mode
+			 *	@param {array} composite
+
 			 *	@descrtiption Remove filed from model
 			 */
-			$scope.removeField = function(field, metaFields) {
-				var index = _.indexOf(metaFields, field);
+			$scope.removeField = function(field, metaFields, composite) {
+				console.log('sdasd', field, composite);
+				var index = _.indexOf(composite, field);
 				if ( index > -1 ) {
-					metaFields.splice(index, 1);
+					composite.splice(index, 1);
 				}
 			};
 
