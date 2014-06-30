@@ -6,22 +6,23 @@
 
 				<div class="row">
 
-					<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 text-center" ng-if="templateCreatorMode === false">
-						<i class="fa {{ document.icon }} fa-4x "></i> <!-- hidden-xs -->
-					</div>
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-1 text-center">
+						<div ng-if="!templateCreatorMode">
+							<i class="fa {{ document.icon }} fa-4x "></i>
+						</div>
 
-					
-					<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 text-center" ng-if="templateCreatorMode === true">		<!-- col-xs-4 col-sm-3 col-md-2 col-lg-2 -->
-						<div><i class="fa {{document.icon}} fa-5x" ng-model="document.icon"></i></div>
-						<div class="text-center">
-							<i class="fa fa-caret-left fa-3x margin-lr-5 unselectable pointer" ng-class="{'disabledArrow': disableLeftArrow}" ng-click="switchIcon(-1)"></i>
-							<i class="fa fa-caret-right fa-3x margin-lr-5 unselectable pointer" ng-class="{'disabledArrow': disableRightArrow}" ng-click="switchIcon(1)"></i>
+						<div ng-if="templateCreatorMode">
+							<div><i class="fa {{document.icon}} fa-5x" ng-model="document.icon"></i></div>
+							<div class="text-center">
+								<i class="fa fa-caret-left fa-3x margin-lr-5 unselectable pointer" ng-class="{'disabledArrow': disableLeftArrow}" ng-click="switchIcon(-1)"></i>
+								<i class="fa fa-caret-right fa-3x margin-lr-5 unselectable pointer" ng-class="{'disabledArrow': disableRightArrow}" ng-click="switchIcon(1)"></i>
+							</div>
 						</div>
 					</div>
-					
 
 
-					<div class="col-xs-7 col-md-8 form-properties">
+
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-9 form-properties">
 
 						<div class="form-group form-template">
 							<input type="text" name="form-name" ng-model="document.name" class="form-title form-control">
@@ -32,7 +33,7 @@
 
 
 
-					<div class="col-xs-4 col-md-3 muted text-right">
+					<div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 muted text-right">
 						<span ng-show="document.timestamp">Ostatnia modyfikacja: {{ document.timestamp | date : dateFormat }}</span><br>
 						<span ng-show="document.version">{{ t('Version') }}: {{ document.version }}</span><br>
 					</div>
