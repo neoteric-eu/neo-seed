@@ -35,8 +35,8 @@
 				var deferred = $q.defer();
 
 				documentResource.getDocumentById({documentId: id, version: version}, function(data) {
-					self.activeDocument.setModel(data);
-					self.previewDocument.setModel(data);
+				// self.activeDocument.setModel(data);
+				// self.previewDocument.setModel(data);
 					deferred.resolve(data);
 				}, function(reason) {
 					deferred.reject(reason);
@@ -100,10 +100,8 @@
 
 			this.restoreDocumentVersion = function(id, version) {
 				var deferred = $q.defer();
-				console.log('sss');
 				documentResource.updateDocument({documentId: id, version: version}, {}, function(data) {
 					self.previewDocument.setModel(data);
-					//console.log('success w restore doc version');
 					deferred.resolve(data);
 				},function(reason) {
 					deferred.reject(reason);
