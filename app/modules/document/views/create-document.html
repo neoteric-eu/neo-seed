@@ -49,7 +49,7 @@
 								<legend>Metadane</legend>
 
 									<form name="documentForm" role="form">
-										<section>
+										<section ng-controller="CreateTemplateController" ng-init="getFieldTypes(); templateMode = editMode; form = document">
 											<ul class="list-unstyled sortable-list form-horizontal"
 											ng-if="templateCreatorMode"
 											ui-sortable=""
@@ -76,9 +76,9 @@
 													<div class="form-inline text-center padding-25-0">
 														<div class="form-group">
 															<label class="sr-only" for="exampleInputEmail2">{{t('Field_Type')}}</label>
-															<select ng-model="docSelectedType" class="form-control" ng-options="type as type.label group by type.classLabel for type in fieldTypes"></select>
+															<select ng-model="selectedType" class="form-control" ng-options="type as type.label group by type.classLabel for type in fieldTypes"></select>
 														</div>
-														<button type="button" class="btn btn-info" ng-click="addNewField(document.metaFields, docSelectedType)"><i class="fa fa-plus"></i> {{t('Add_Field')}}</button>
+														<button type="button" class="btn btn-info" ng-click="addNewField(document.metaFields, selectedType)"><i class="fa fa-plus"></i> {{t('Add_Field')}}</button>
 
 													</div>
 												</div>
@@ -235,14 +235,15 @@
 						<tab-heading><i class="fa fa-fw fa-lg fa-info"></i> Aktywność</tab-heading>
 
 					</tab>
-					<tab ng-if="document.version" active="true">
+					<!-- TODO: remove active attr -->
+					<tab ng-if="document.version" active="readyToShow">
 						<tab-heading>
 							<i class="fa fa-fw fa-lg fa-repeat"></i> Historia
 						</tab-heading>
 
 
 						<table class="versionList">
-							<tr ng-repeat="item in document.versions | orderBy:'version':true" ng-mouseover="isActive = true" ng-mouseleave="isActive = false" ng-click="docPreviewModal(document,item)">
+							<tr ng-repeat="item in document.versions | orderBy:'version':true" ng-mouseover="isActive = true" ng-mouseleave="isActive = false" ng-click="docPreviewModal(document, item)">
 								<td>
 									<strong>WERSJA {{item.version}}</strong> została utworzona przez <strong>{{item.author | uppercase}}</strong> dnia {{item.timestamp | date:dateFormat}}
 									<button class="btn btn-primary btn-xs" type="button"

@@ -1,5 +1,5 @@
 <div class="jarviswidget modal-body" ng-init="initModal()">
-	<div class="widget-body">
+	<div class="widget-body" ng-show="readyToShow">
 
 		<div class="row">
 			<div class="col-xs-1 text-center">
@@ -15,8 +15,6 @@
 				<span>Ostatnia modyfikacja: {{ previewDocument.timestamp | date : dateFormat }}</span><br>
 				<span>wersja: {{ previewDocument.version }}</span><br>
 			</div>
- <!-- 			<div class="col-xs-1 col-md-1 muted text-right">
- 			</div> -->
 		</div>
 
 		<hr>
@@ -54,58 +52,58 @@
 					<fieldset>
 						<legend>Załączniki</legend>
 
-								<section ng-controller="UploaderController" ng-file-drop>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="table-responsive">
-												<table class="table table-hover" ng-show="uploader.queue.length">
-													<thead>
-														<tr>
-															<th width="50%">Name</th>
-															<th ng-show="uploader.isHTML5">Size</th>
-															<th ng-show="uploader.isHTML5">Progress</th>
-															<th>Status</th>
-															<th>Actions</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr ng-repeat="item in uploader.queue">
-															<td><strong>{{ item.file.name }}</strong></td>
-															<td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
-															<td ng-show="uploader.isHTML5">
-																<div class="progress" style="margin-bottom: 0;">
-																	<div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
-																</div>
-															</td>
-															<td class="text-center">
-																<span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-																<span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-																<span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-															</td>
-															<td nowrap>
-																<button type="button" class="btn btn-success btn-xs" ng-click="item.reUpload(item)" ng-disabled="item.isReady || item.isUploading">
-																	<span class="glyphicon glyphicon-upload"></span> Re-upload
-																</button>
-																<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
-																	<span class="glyphicon glyphicon-ban-circle"></span> Cancel
-																</button>
-																<button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-																	<span class="glyphicon glyphicon-trash"></span> Remove
-																</button>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
+						<section ng-controller="UploaderController" ng-file-drop>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="table-responsive">
+										<table class="table table-hover" ng-show="uploader.queue.length">
+											<thead>
+												<tr>
+													<th width="50%">Name</th>
+													<th ng-show="uploader.isHTML5">Size</th>
+													<th ng-show="uploader.isHTML5">Progress</th>
+													<th>Status</th>
+													<th>Actions</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr ng-repeat="item in uploader.queue">
+													<td><strong>{{ item.file.name }}</strong></td>
+													<td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+													<td ng-show="uploader.isHTML5">
+														<div class="progress" style="margin-bottom: 0;">
+															<div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+														</div>
+													</td>
+													<td class="text-center">
+														<span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+														<span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+														<span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+													</td>
+													<td nowrap>
+														<button type="button" class="btn btn-success btn-xs" ng-click="item.reUpload(item)" ng-disabled="item.isReady || item.isUploading">
+															<span class="glyphicon glyphicon-upload"></span> Re-upload
+														</button>
+														<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+															<span class="glyphicon glyphicon-ban-circle"></span> Cancel
+														</button>
+														<button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+															<span class="glyphicon glyphicon-trash"></span> Remove
+														</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
+								</div>
+							</div>
 
-									<div class="row">
-										<div class="col-md-12">
-											<div class="text-center" ng-if="!uploader.queue.length">Brak załączonych plików</div>
-										</div>
-									</div>
-								</section>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="text-center" ng-if="!uploader.queue.length">Brak załączonych plików</div>
+								</div>
+							</div>
+						</section>
 
 					</fieldset>
 				</div>
@@ -123,7 +121,10 @@
 				<div class="col-md-2">
 					<button class="btn btn-primary btn-block" type="button"
 					data-keep="ND_DOC_UPDATE"
-					ng-click="restoreDocumentVersion(previewDocument, previewVersion)">{{t('Restore')}}</button>
+					ng-click="restoreDocumentVersion(previewDocument, previewVersion)"
+					ng-disabled="showSpinner">
+						{{t('Restore')}} <i ng-show="showSpinner" class="fa fa-refresh fa-spin"></i>
+					</button>
 				</div>
 				<div class="col-md-5">
 					<a class="pull-right" ng-class="{'disabledLink': disableNextLink}"ng-click="switchVersion(previewDocument, 1)">Następna wersja</a>
