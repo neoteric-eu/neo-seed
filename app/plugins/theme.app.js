@@ -2,9 +2,10 @@
 
 /* --------  Fix page and nav height ---------- */
 function nav_page_height() {
+	$.left_panel = $('#left-panel');
 	var setHeight = $('#root-wrapper').height();
 	setHeight += 100;
-	// var menuHeight = $.left_panel.height();
+	var menuHeight = $.left_panel.height();
 	var windowHeight = $(window).height() - $.navbar_height;
 	//set height
 	if (setHeight > windowHeight) {// if content height exceedes actual window height and menuHeight
@@ -13,6 +14,10 @@ function nav_page_height() {
 	} else {
 		$.left_panel.css('min-height', windowHeight + 'px');
 		$.root_.css('min-height', windowHeight + 'px');
+	}
+
+	if (menuHeight < windowHeight) {
+		$.left_panel.css('min-height', windowHeight + 'px');
 	}
 }
 
