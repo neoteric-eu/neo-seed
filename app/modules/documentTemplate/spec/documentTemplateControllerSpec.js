@@ -95,7 +95,7 @@
 					createCreateTemplateController();
 				}));
 
-
+				
 				it('should addNewField()', function() {
 					spyOn(scope, 'showAddOptions').andReturn(true);
 					var array = [];
@@ -561,6 +561,345 @@
 			});  // END OF DESCRIBE
 
 
+			describe('CreateComplexController', function() {
+
+				beforeEach(inject(function($injector) {
+					var $controller = $injector.get('$controller');
+					function createComplexController() {
+						return $controller('CreateComplexController', {
+							'$scope' : scope,
+							'documentTemplateService': documentTemplateService,
+							'$System': $System,
+							'$modal': modalMock,
+							'$routeParams': $routeParams
+						});
+					}
+					createComplexController();
+				}));
+
+				it('should addNewField()', function() {
+
+					spyOn(scope, 'showAddOptions').andReturn(true);
+					var array = [];
+					var selectedType = 'RADIO';
+					expect(array.length).toEqual(0);
+					scope.addNewField(array, selectedType);
+					expect(array.length).toEqual(1);
+				});
+
+
+				it('should isValidationPattern()', function() {
+					var validationPattern = '//';
+					scope.isValidationPattern(validationPattern);
+				});
+
+
+				it('should initComplex()', function() {
+
+					var deferred = $q.defer();
+					var primitiveFieldTypes = ['raz', 'dwa'];
+					
+					spyOn(documentTemplateService, 'getFieldTypes').andReturn(deferred.promise);
+					spyOn(documentTemplateService.primitiveFieldTypes, 'getModel').andReturn(primitiveFieldTypes);
+					scope.initComplex();
+					deferred.resolve();
+					scope.$digest();
+
+					expect(documentTemplateService.primitiveFieldTypes.getModel).toHaveBeenCalled();
+					expect(scope.selectedType).toEqual('raz');
+					expect(scope.editMode).toEqual(0);
+				});
+
+
+
+				it('should initComplex()', function() {
+					
+					$routeParams.complexId = '000';
+					var deferred = $q.defer();
+					var deferred2 = $q.defer();
+					var activeComplexField = {
+						id: '0000',
+						metaFields: [
+							{validationPattern: 'a'},
+							{validationPattern: 'b'},
+							{validationPattern: null}
+						]
+					};
+					spyOn(documentTemplateService, 'getFieldTypes').andReturn(deferred.promise);
+					spyOn(documentTemplateService, 'getComplexById').andReturn(deferred2.promise);
+					spyOn(documentTemplateService.activeComplexField, 'getModel').andReturn(activeComplexField);
+
+					scope.initComplex();
+					deferred.resolve();
+					deferred2.resolve();
+					scope.$digest();
+
+					expect($System.showLoader).toHaveBeenCalled();
+					expect($System.hideLoader).toHaveBeenCalled();
+				});
+
+				it('should fail initComplex()', function() {
+					
+					$routeParams.complexId = '000';
+					var deferred = $q.defer();
+					var deferred2 = $q.defer();
+
+					spyOn(documentTemplateService, 'getFieldTypes').andReturn(deferred.promise);
+					spyOn(documentTemplateService, 'getComplexById').andReturn(deferred2.promise);
+
+					scope.initComplex();
+					deferred.resolve();
+					deferred2.reject();
+					scope.$digest();
+
+					expect($System.showLoader).toHaveBeenCalled();
+					expect($System.hideLoader).toHaveBeenCalled();
+					expect(appMessages.error).toHaveBeenCalled();
+				});
+
+
+
+
+				it('should saveComplexField()', function() {
+
+					var deferred = $q.defer();
+					var form = {};
+					var changeLocation = {};
+
+					spyOn(documentTemplateService, 'createComplexField').andReturn(deferred.promise);
+					scope.saveComplexField(form, changeLocation);
+					deferred.resolve();
+					scope.$digest();
+
+					expect($System.showLoader).toHaveBeenCalled();
+					expect(appMessages.success).toHaveBeenCalled();
+					expect($System.hideLoader).toHaveBeenCalled();
+					expect($location.path()).toEqual('/complex/');
+				});
+
+				it('should fail to saveComplexField()', function() {
+
+					var deferred = $q.defer();
+					var form = {};
+					spyOn(documentTemplateService, 'createComplexField').andReturn(deferred.promise);
+					scope.saveComplexField(form);
+					deferred.reject();
+					scope.$digest();
+
+					expect($System.showLoader).toHaveBeenCalled();
+					expect(appMessages.error).toHaveBeenCalled();
+					expect($System.hideLoader).toHaveBeenCalled();
+				});
+
+				it('should editModal()', function() {
+
+					scope.editModal();
+					modalDfd.resolve();
+					scope.$digest();
+					expect(modalMock.open).toHaveBeenCalled();
+
+				});
+
+
+				it('should removeField()', function() {
+				
+					var field = 'field';
+					var composite = ['raz', 'field', 'trzy'];
+					var x = 'a';
+					expect(composite.length).toEqual(3);
+					scope.removeField(field, x, composite);
+					expect(composite.length).toEqual(2);
+				
+				});
+
+				it('should addOption()', function() {
+					var field = {};
+					scope.addOption(field);
+					expect(field.options.length).not.toEqual(0);
+				});
+
+
+				it('should deleteOption()', function() {
+					var index = 1;
+					var field = {
+						options: ['raz', 'dwa', 'trzy']
+					};
+					expect(field.options.length).toEqual(3);
+					scope.deleteOption(field, index);
+					expect(field.options.length).toEqual(2);
+				});
+
+				it('should showAddOptions()', function() {
+					var field = {typeName: 'DATE'};
+					expect(scope.showAddOptions(field)).toEqual(false);
+				});
+
+				it('should showAddOptions()', function() {
+					var field = {fieldTypeName: 'RADIO'};
+					expect(scope.showAddOptions(field)).toEqual(true);
+				});
+
+				it('should showAddOptions()', function() {
+					var field = {fieldTypeName: 'DATE'};
+					expect(scope.showAddOptions(field)).toEqual(false);
+				});
+
+
+
+				it('should showHelpText()', function() {
+					var field = {fieldTypeName: ''};
+					expect(scope.showHelpText(field)).toEqual(true);
+				});
+
+				it('should showValidationInput()', function() {
+					var field = {fieldTypeName: ''};
+					expect(scope.showValidationInput(field)).toEqual(false);
+					field.fieldTypeName = 'TEXTFIELD';
+					expect(scope.showValidationInput(field)).toEqual(true);
+				});
+
+			
+			});  // END OF DESCRIBE
+
+			describe('ComplexListController', function() {
+
+				beforeEach(inject(function($injector) {
+					var $controller = $injector.get('$controller');
+					function createComplexListController() {
+						return $controller('ComplexListController', {
+							'$scope' : scope,
+							'documentTemplateService': documentTemplateService,
+							'system': $System,
+							'$modal': modalMock,
+							'$routeParams': $routeParams
+						});
+					}
+					createComplexListController();
+				}));
+
+
+				it('should getComplexFields()', function() {
+
+					var deferred = $q.defer();
+					var templates = [{},{},{}];
+					spyOn(documentTemplateService, 'getFieldTypes').andReturn(deferred.promise);
+					spyOn(documentTemplateService.complexFieldTypes, 'getModel').andReturn(templates);
+
+					scope.getComplexFields();
+					deferred.resolve();
+					scope.$digest();
+					expect($System.showLoader).toHaveBeenCalled();
+					expect(scope.complexFieldTypes).toEqual(templates);
+					expect(documentTemplateService.getFieldTypes).toHaveBeenCalled();
+					expect(documentTemplateService.complexFieldTypes.getModel).toHaveBeenCalled();
+					expect($System.hideLoader).toHaveBeenCalled();
+				});
+
+				it('should fail to getComplexFields()', function() {
+
+					var deferred = $q.defer();
+					var templates = [{},{},{}];
+					spyOn(documentTemplateService, 'getFieldTypes').andReturn(deferred.promise);
+					spyOn(documentTemplateService.complexFieldTypes, 'getModel').andReturn(templates);
+
+					scope.getComplexFields();
+					deferred.reject();
+					scope.$digest();
+					expect($System.showLoader).toHaveBeenCalled();
+					expect(scope.complexFieldTypes).toEqual(undefined);
+					expect(appMessages.error).toHaveBeenCalled();
+					
+				});
+
+				it('should refreshComplexList()', function() {
+
+					var templates = [{},{},{}];
+					spyOn(documentTemplateService.complexFieldTypes, 'getModel').andReturn(templates);
+					scope.refreshComplexList();
+					expect(documentTemplateService.complexFieldTypes.getModel).toHaveBeenCalled();
+					expect(scope.complexFieldTypes.length).toEqual(3);
+				});
+
+				
+				it ('should editComplex()', function() {
+
+					var document = {id: '00000'};
+					scope.editComplex(document);
+					expect($location.path()).toEqual('/complex/edit/00000');
+				});
+
+
+				it ('should open removeComplexModal()', function() {
+					spyOn(scope, 'removeComplexField');
+
+					scope.removeComplexModal();
+					modalDfd.resolve();
+					scope.$digest();
+
+					expect(modalMock.open).toHaveBeenCalled();
+					expect(scope.removeComplexField).toHaveBeenCalled();
+				});
+
+
+
+				it ('should removeComplexField()', function() {
+					var template = {};
+					scope.complexTable = {
+						reload: function() {}
+					};
+					var deferred = $q.defer();
+					spyOn(documentTemplateService, 'removeComplexField').andReturn(deferred.promise);
+					spyOn(scope.complexTable, 'reload');
+
+					scope.removeComplexField(template);
+					deferred.resolve(template);
+					scope.$digest();
+
+					expect($System.showLoader).toHaveBeenCalled();
+					expect(documentTemplateService.removeComplexField).toHaveBeenCalled();
+					expect(scope.complexTable.reload).toHaveBeenCalled();
+					expect(appMessages.success).toHaveBeenCalled();
+					expect(locale.getT).toHaveBeenCalled();
+				});
+
+
+				it ('should fail to removeComplexField()', function() {
+					var deferred = $q.defer();
+					spyOn(documentTemplateService, 'removeComplexField').andReturn(deferred.promise);
+
+					scope.removeComplexField();
+					deferred.reject();
+					scope.$digest();
+
+					expect($System.showLoader).toHaveBeenCalled();
+					expect(appMessages.error).toHaveBeenCalled();
+					expect(locale.getT).toHaveBeenCalled();
+				});
+
+							
+			});  // END OF DESCRIBE
+
+
+			describe('ViewTemplateController', function() {
+
+				beforeEach(inject(function($injector) {
+					var $controller = $injector.get('$controller');
+					function viewTemplateController() {
+						return $controller('ComplexListController', {
+							'$scope' : scope,
+							'documentTemplateService': documentTemplateService,
+							'system': $System,
+							'$modal': modalMock,
+							'$routeParams': $routeParams
+						});
+					}
+					viewTemplateController ();
+				}));
+						
+			});  // END OF DESCRIBE
+			
+			
 		});	// END OF OUTER DESCRIBE
 	});
+
 }());
