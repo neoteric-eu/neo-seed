@@ -173,8 +173,14 @@ function (angular, globalSettings) {
 		setDefaultsHeaders.setContentType('application/json');
 		$rootScope.appReady = false;
 
+		// Constance
+		$rootScope.APP_NAME = globalSettings.get('APP_NAME');
+		$rootScope.DOMAIN = globalSettings.get('DOMAIN');
+		$rootScope.EMAILS = angular.fromJson(globalSettings.get('EMAILS'));
+		$rootScope.LANGUAGES = globalSettings.get('LANGUAGES');
+		$rootScope.LOGIN_DATA = angular.fromJson(globalSettings.get('LOGIN_DATA'));
+
 		// Locale
-		$rootScope.languages = globalSettings.get('LANGUAGES');
 		var lang = $cookieStore.get('lang') || globalSettings.get('DEFAULT_LANGUAGE');
 		session.setLocale(lang);
 
