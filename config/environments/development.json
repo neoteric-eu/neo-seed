@@ -1,6 +1,23 @@
 {
-  "baseUrl": "http://ntrc-delta.neoteric.eu:9000/api/v1/",
-  "DEBUG": true,
-  "sentryApiKey": "",
-  "sentryOptions": {}
+	"baseUrl": "http://ntrc-delta.neoteric.eu:9100/api/v1/",
+	"DEBUG": true,
+	"SENTRY_API_KEY": "",
+	"SENTRY_OPTIONS": {},
+	"LOGIN_DATA": [
+		{
+			"user": "admin@neoteric.eu",
+			"password": "abc123"
+		},{
+			"user": "test@neoteric.eu",
+			"password": "abc123"
+		},{
+			"user": "jmach@neoteric.eu",
+			"password": "abc123"
+		}
+	],
+	"EMAILS": {
+		"CONTACT": "contact@neoteric.eu",
+		"INFO": "info@neoteric.eu",
+		"SUPPORT": "support@neoteric.eu"
+	}
 }

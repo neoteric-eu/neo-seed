@@ -1,6 +1,11 @@
 {
-  "baseUrl": "http://ntrc-delta.neoteric.eu:9100/api/v1/",
-  "DEBUG": true,
-  "sentryApiKey": "",
-  "sentryOptions": {}
+	"baseUrl": "http://ntrc-delta.neoteric.eu:9100/api/v1/",
+	"DEBUG": true,
+	"SENTRY_API_KEY": "",
+	"SENTRY_OPTIONS": {},
+	"EMAILS": {
+		"CONTACT": "contact@neoteric.eu",
+		"INFO": "info@neoteric.eu",
+		"SUPPORT": "support@neoteric.eu"
+	}
 }

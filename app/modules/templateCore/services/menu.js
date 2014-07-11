@@ -1,13 +1,13 @@
 (function() {
 	'use strict';
 	define([], function() {
-		var menu = function(locale, permissions){
+		var menu = function(permissions, gettextCatalog){
 			return {
 
 				menu: [
 
-					{ href: 'start', title: 'Dashboard', icon: 'fa fa-lg fa-fw fa-list-ul'},
-					// { href: 'templates', title: 'Szablony', icon: 'fa fa-lg fa-fw fa-list-ul'},
+					{ href: 'start', title: gettextCatalog.getString('Dashboard'), icon: 'fa fa-lg fa-fw fa-list-ul'},
+					// { href: 'templates', title: 'Szablony', icon: 'fa fa-lg fa-fw fa-list-ul', accesss: 'SM_USER_GET'},
 
 				],
 
@@ -19,6 +19,6 @@
 				},
 			};
 		};
-		return ['locale', 'permissions', menu];
+		return ['permissions', 'gettextCatalog', menu];
 	});
 }());

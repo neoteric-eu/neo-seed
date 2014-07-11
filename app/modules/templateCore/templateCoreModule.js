@@ -6,7 +6,10 @@
 		'./services/menu',
 		'./services/enums',
 		'./directives/height-watch',
-		'./templateCoreUrls'
+		'./templateCoreUrls',
+
+		// Add module gettextCatalog
+		'./locale/translations'
 
 	], function(angular, menu, enums, heightWatch, templateCoreUrls ) {
 

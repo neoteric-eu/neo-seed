@@ -1,12 +1,10 @@
-/* jshint unused: false, undef: false, quotmark:false */
-/* global t:true */
-var t = { pl: {}, en: {}};
-
+/* jshint quotmark:false, undef:false */
 define([
 	'angular',
 	'globalSettings',
 	'underscore',
 	'angularResource',
+	'angularGettext',
 
 	'../modules/miniCore/miniCoreModule',
 	'../modules/templateCore/templateCoreModule'
@@ -22,6 +20,7 @@ function (angular, globalSettings) {
 		'xeditable',
 		'ngTable',
 		'sentryClient',
+		'gettext',
 
 		'miniCore',
 		'miniCore.controllers',
@@ -94,7 +93,7 @@ function (angular, globalSettings) {
 				return {
 					'request': function(request) {
 						if(permissions.clearCache && IS_HTML_PAGE.test(request.url)) {
-							_.each(modifiedTemplates, function(val, key, list) {
+							_.each(modifiedTemplates, function(val, key) {
 								$templateCache.remove(key);
 							});
 							modifiedTemplates = {};
@@ -163,19 +162,33 @@ function (angular, globalSettings) {
 		]);
 	}])
 	.run(['$rootScope', '$location', '$route', '$cookieStore', 'session',
-		'template', 'permissions', 'setDefaultsHeaders', 'appMessages', 'menu',
-		'locale', 'enums',
-		function($rootScope, $location, $route, $cookieStore, session, template,
-		permissions, setDefaultsHeaders, appMessages, menu, locale, enums) {
+		'permissions', 'setDefaultsHeaders', 'appMessages', 'menu', 'enums',
+		'editableOptions', 'gettextCatalog', 'gettext', 'template',
+		function($rootScope, $location, $route, $cookieStore, session,
+		permissions, setDefaultsHeaders, appMessages, menu, enums,
+		editableOptions, gettextCatalog, gettext, template) {
+
+		editableOptions.theme = 'bs3';
 
 		setDefaultsHeaders.setContentType('application/json');
 		$rootScope.appReady = false;
 
+		// Constance
+		$rootScope.APP_NAME = globalSettings.get('APP_NAME');
+		$rootScope.DOMAIN = globalSettings.get('DOMAIN');
+		$rootScope.EMAILS = angular.fromJson(globalSettings.get('EMAILS'));
+		$rootScope.LANGUAGES = globalSettings.get('LANGUAGES');
+		$rootScope.LOGIN_DATA = angular.fromJson(globalSettings.get('LOGIN_DATA'));
+
 		// Locale
-		$rootScope.t = locale.getT;
-		$rootScope.languages = globalSettings.get('LANGUAGES');
-		var lang = $cookieStore.get('lang') || $rootScope.languages[0].code;
-		session.locale.setModel(lang);
+		var lang = $cookieStore.get('lang') || globalSettings.get('DEFAULT_LANGUAGE');
+		session.setLocale(lang);
+
+		// Get translation text
+		gettext('Polish');
+		gettext('English');
+
+
 
 		/**
 		 *	@name redirectMgr
@@ -258,7 +271,7 @@ function (angular, globalSettings) {
 			}
 		});
 
-		$rootScope.$on('$viewContentLoaded', function(event){
+		$rootScope.$on('$viewContentLoaded', function(){
 			pageSetUp();
 		});
 

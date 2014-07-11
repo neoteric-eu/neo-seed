@@ -2,7 +2,8 @@
   "name": "Neoteric",
   "version": "0.0.0",
   "dependencies": {
-    "karma-coverage": "~0.2.1"
+    "karma-coverage": "~0.2.1",
+    "grunt-angular-gettext": "~0.2.14"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
