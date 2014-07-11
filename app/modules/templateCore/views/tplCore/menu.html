@@ -2,7 +2,7 @@
 
 	<span class="user-data">
 		<img src="images/male.png" alt="me" class="offline">
-		<a href="#/account">{{ user.email }}</a>
+		<a href="#/account">{{ user.email | limitTo: 20}}</a>
 	</span>
 </div>
 
@@ -10,7 +10,7 @@
 	<ul>
 		<li ng-repeat="item in menu">
 			<a href="#/{{item.href}}" title="{{item.title}}">
-				<i class="{{item.icon}}"></i> <span class="menu-item-parent"> {{item.title}}</span>
+				<i class="{{item.icon}}"></i> <span class="menu-item-parent"> {{ item.title }}</span>
 			</a>
 		</li>
 	</ul>

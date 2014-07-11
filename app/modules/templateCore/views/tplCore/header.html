@@ -6,14 +6,14 @@
 
 
 
-<div class="ribbon-button-alignment pull-right" ng-if="languages.length > 1">
+<div class="ribbon-button-alignment pull-right" ng-if="LANGUAGES.length > 1">
 	<ul class="list-inline">
 		<li class="dropdown">
 			<a class="btn btn-ribbon dropdown-toggle" data-toggle="dropdown" href="#">
 				<span class="no-shadow light-color">{{ lang|uppercase }}</span>
 			</a>
 			<ul class="dropdown-menu">
-				<li ng-repeat="item in languages" ng-class="{'active': lang == item.code}" >
+				<li ng-repeat="item in LANGUAGES" ng-class="{'active': lang == item.code}" >
 					<a href="javascript:void(0)" ng-click="switchLang(item.code)"><i class="fa fa-globe"></i> {{ item.name | translate }}</a>
 				</li>
 			</ul>

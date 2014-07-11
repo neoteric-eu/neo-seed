@@ -12,21 +12,13 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: app/modules/templateCore/views/login/form.html
-msgid "Account admin"
-msgstr "Admin"
-
-#: app/modules/templateCore/views/login/form.html
-msgid "Account user"
-msgstr "User"
-
 #: app/modules/templateCore/views/tplCore/header.html
 msgid "Available profiles"
 msgstr "Dostępne profile"
 
 #: app/modules/templateCore/views/login-page.html
-msgid "Contact"
-msgstr "Kontakt"
+msgid "Contact support"
+msgstr "Skontaktuj się z obsługą"
 
 #: app/modules/templateCore/services/menu.js
 msgid "Dashboard"
@@ -68,3 +60,13 @@ msgstr "Hasło"
 #: app/modules/templateCore/views/login/form.html
 msgid "Wrong e-mail or password."
 msgstr "Nieprawidłowy e-mail bądź hasło."
+
+#: app/modules/templateCore/views/login-page.html
+msgid "question"
+msgstr "pytanie"
+
+#~ msgid "Account admin"
+#~ msgstr "Admin"
+
+#~ msgid "Account user"
+#~ msgstr "User"

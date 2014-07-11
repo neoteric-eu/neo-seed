@@ -3,20 +3,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: app/modules/templateCore/views/login/form.html
-msgid "Account admin"
-msgstr ""
-
-#: app/modules/templateCore/views/login/form.html
-msgid "Account user"
-msgstr ""
-
 #: app/modules/templateCore/views/tplCore/header.html
 msgid "Available profiles"
 msgstr ""
 
 #: app/modules/templateCore/views/login-page.html
-msgid "Contact"
+msgid "Contact support"
 msgstr ""
 
 #: app/modules/templateCore/services/menu.js
@@ -58,4 +50,8 @@ msgstr ""
 
 #: app/modules/templateCore/views/login/form.html
 msgid "Wrong e-mail or password."
+msgstr ""
+
+#: app/modules/templateCore/views/login-page.html
+msgid "question"
 msgstr ""
