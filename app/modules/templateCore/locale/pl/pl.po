@@ -1,21 +1,70 @@
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: Budmore <jmach@neoteri.eu>\n"
 "Language-Team: \n"
-"MIME-Version: 1.0\n"
-"X-Generator: Poedit 1.5.4\n"
 "Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: app/scripts/app.js
-msgid "English"
-msgstr "Angielski"
+#: app/modules/templateCore/views/login/form.html
+msgid "Account admin"
+msgstr "Admin"
 
-#: app/scripts/app.js
-msgid "Polish"
-msgstr "Polski"
+#: app/modules/templateCore/views/login/form.html
+msgid "Account user"
+msgstr "User"
+
+#: app/modules/templateCore/views/tplCore/header.html
+msgid "Available profiles"
+msgstr "Dostępne profile"
+
+#: app/modules/templateCore/views/login-page.html
+msgid "Contact"
+msgstr "Kontakt"
+
+#: app/modules/templateCore/services/menu.js
+msgid "Dashboard"
+msgstr "Start"
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Email"
+msgstr "Email"
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Enter your email address."
+msgstr "Podaj swój adres email"
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Enter your password."
+msgstr "Podaj hasło"
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Forgot password?"
+msgstr "Zaponiałeś hasła?"
+
+#: app/modules/templateCore/views/login-page.html
+#: app/modules/templateCore/views/login/form.html
+msgid "Log in"
+msgstr "Zaloguj się"
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Login as"
+msgstr "Zaloguj się jako"
+
+#: app/modules/templateCore/views/tplCore/header.html
+msgid "Logout"
+msgstr "Wyloguj"
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Password"
+msgstr "Hasło"
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Wrong e-mail or password."
+msgstr "Nieprawidłowy e-mail bądź hasło."

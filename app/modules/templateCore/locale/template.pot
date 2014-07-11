@@ -3,14 +3,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: app/modules/templateCore/views/login/form.html
+msgid "Account admin"
+msgstr ""
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Account user"
+msgstr ""
+
 #: app/modules/templateCore/views/tplCore/header.html
 msgid "Available profiles"
+msgstr ""
+
+#: app/modules/templateCore/views/login-page.html
+msgid "Contact"
 msgstr ""
 
 #: app/modules/templateCore/services/menu.js
 msgid "Dashboard"
 msgstr ""
 
+#: app/modules/templateCore/views/login/form.html
+msgid "Email"
+msgstr ""
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Enter your email address."
+msgstr ""
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Enter your password."
+msgstr ""
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Forgot password?"
+msgstr ""
+
+#: app/modules/templateCore/views/login-page.html
+#: app/modules/templateCore/views/login/form.html
+msgid "Log in"
+msgstr ""
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Login as"
+msgstr ""
+
 #: app/modules/templateCore/views/tplCore/header.html
 msgid "Logout"
+msgstr ""
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Password"
+msgstr ""
+
+#: app/modules/templateCore/views/login/form.html
+msgid "Wrong e-mail or password."
 msgstr ""
