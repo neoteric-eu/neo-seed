@@ -48,7 +48,6 @@
     "grunt-replace": "^0.7.8",
     "grunt-cli": "^0.1.13",
     "bower": "^1.3.5",
-    "yo": "^1.2.0",
     "generator-env-config": "0.0.2",
     "grunt-open": "^0.2.3"
   },
