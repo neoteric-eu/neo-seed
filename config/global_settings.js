@@ -21,6 +21,8 @@
 					{code: 'en', name:'English'}
 				],
 
+				DEFAULT_LANGUAGE: 'pl',
+
 				EMAILS: '@@EMAILS',
 
 				DOMAIN: 'neoteric.eu',

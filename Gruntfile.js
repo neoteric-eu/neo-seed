@@ -336,9 +336,9 @@ module.exports = function (grunt) {
 		nggettext_extract: {
 			pot: {
 				files: {
-					'<%= yeoman.app %>/modules/templateCore/locale/global-template.pot': '<%= yeoman.app %>/scripts/{,*/}*.js',
-					'<%= yeoman.app %>/modules/templateCore/locale/template.pot': '<%= yeoman.app %>/modules/templateCore/{,**/}*.*',
-					'<%= yeoman.app %>/modules/miniCore/locale/template.pot': '<%= yeoman.app %>/modules/miniCore/{,**/}*.*'
+					'<%= yeoman.app %>/modules/miniTemplate/locale/global-template.pot': '<%= yeoman.app %>/scripts/{,*/}*.js',
+					'<%= yeoman.app %>/modules/miniTemplate/locale/template.pot': '<%= yeoman.app %>/modules/miniTemplate/{,**/}*.{html,js}',
+					'<%= yeoman.app %>/modules/miniCore/locale/template.pot': '<%= yeoman.app %>/modules/miniCore/{,**/}*.{html,js}'
 				}
 			},
 		},
@@ -350,7 +350,7 @@ module.exports = function (grunt) {
 					modulePath: 'app'
 				},
 				files: {
-					'<%= yeoman.app %>/modules/templateCore/locale/translations.js': ['<%= yeoman.app %>/modules/{,**/}*.po',]
+					'<%= yeoman.app %>/modules/miniTemplate/locale/translations.js': ['<%= yeoman.app %>/modules/{,**/}*.po',]
 				}
 			},
 		}
@@ -396,6 +396,7 @@ module.exports = function (grunt) {
 		'less:dev',
 		'concat',
 		'ngmin',
+		'nggettext_compile',
 		// Below task commented out as r.js (via grunt-contrib-requirejs) will take care of this
 		//'uglify',
 		'rev',

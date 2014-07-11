@@ -12,68 +12,68 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: app/modules/templateCore/views/tplCore/header.html
+#: app/modules/miniTemplate/views/tplCore/header.html
 msgid "Available profiles"
 msgstr "Dostępne profile"
 
-#: app/modules/templateCore/views/modals/chooseCustomerModal.html
+#: app/modules/miniTemplate/views/modals/chooseCustomerModal.html
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: app/modules/templateCore/views/login-page.html
+#: app/modules/miniTemplate/views/login-page.html
 msgid "Contact support"
 msgstr "Skontaktuj się z obsługą"
 
-#: app/modules/templateCore/services/menu.js
+#: app/modules/miniTemplate/services/menu.js
 msgid "Dashboard"
 msgstr "Start"
 
-#: app/modules/templateCore/views/login/login-form.html
+#: app/modules/miniTemplate/views/login/login-form.html
 msgid "Email"
 msgstr "Email"
 
-#: app/modules/templateCore/views/login/login-form.html
+#: app/modules/miniTemplate/views/login/login-form.html
 msgid "Enter your email address."
 msgstr "Podaj swój adres email"
 
-#: app/modules/templateCore/views/login/login-form.html
+#: app/modules/miniTemplate/views/login/login-form.html
 msgid "Enter your password."
 msgstr "Podaj hasło"
 
-#: app/modules/templateCore/views/login/login-form.html
+#: app/modules/miniTemplate/views/login/login-form.html
 msgid "Forgot password?"
 msgstr "Zaponiałeś hasła?"
 
-#: app/modules/templateCore/views/login-page.html
-#: app/modules/templateCore/views/login/login-form.html
+#: app/modules/miniTemplate/views/login-page.html
+#: app/modules/miniTemplate/views/login/login-form.html
 msgid "Log in"
 msgstr "Zaloguj się"
 
-#: app/modules/templateCore/views/login/login-form.html
+#: app/modules/miniTemplate/views/login/login-form.html
 msgid "Login as"
 msgstr "Zaloguj się jako"
 
-#: app/modules/templateCore/views/tplCore/header.html
+#: app/modules/miniTemplate/views/tplCore/header.html
 msgid "Logout"
 msgstr "Wyloguj"
 
-#: app/modules/templateCore/views/login/login-form.html
+#: app/modules/miniTemplate/views/login/login-form.html
 msgid "Password"
 msgstr "Hasło"
 
-#: app/modules/templateCore/views/modals/chooseCustomerModal.html
+#: app/modules/miniTemplate/views/modals/chooseCustomerModal.html
 msgid "Select"
 msgstr "Wybierz"
 
-#: app/modules/templateCore/views/modals/chooseCustomerModal.html
+#: app/modules/miniTemplate/views/modals/chooseCustomerModal.html
 msgid "Select customer to login"
 msgstr "Wybierz profil do zalogowania"
 
-#: app/modules/templateCore/views/login/login-form.html
+#: app/modules/miniTemplate/views/login/login-form.html
 msgid "Wrong e-mail or password."
 msgstr "Nieprawidłowy e-mail bądź hasło."
 
-#: app/modules/templateCore/views/login-page.html
+#: app/modules/miniTemplate/views/login-page.html
 msgid "question"
 msgstr "pytanie"
 
