@@ -20,7 +20,8 @@ require.config({
 		angularResource: '../bower_components/angular-resource/angular-resource',
 		angularMocks: '../bower_components/angular-mocks/angular-mocks',
 		underscore: '../bower_components/underscore/underscore',
-		globalSettings: '../modules/global_settings'
+		globalSettings: '../modules/global_settings',
+		angularGettext: '../bower_components/angular-gettext/dist/angular-gettext.min'
 		// sentryClient: '../plugins/sentry-client/sentry-client',
 		// 'raven-js': '../bower_components/raven-js/dist/raven.min',
 		// 'ravenInstall': '../plugins/sentry-client/raven-install',
@@ -38,6 +39,7 @@ require.config({
 			'exports':'angular.mock'
 		},
 		'underscore': {'exports': '_'},
+		'angularGettext': { deps: ['angular'] }
 		// 'ui.bootstrap': { deps: ['angular'] }
 	},
 	priority: [
