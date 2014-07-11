@@ -10,7 +10,6 @@
 module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
-	grunt.loadNpmTasks('grunt-githooks');
 	grunt.loadNpmTasks('grunt-replace');
 
 	// Load grunt tasks automatically
@@ -99,6 +98,7 @@ module.exports = function (grunt) {
 				jshintrc: '.jshintrc',
 				ignores: [
 					'<%= yeoman.app %>/scripts/*.js',
+					'<%= yeoman.app %>/modules/{,**/}translations.js'
 				],
 				reporter: require('jshint-stylish')
 			},
@@ -266,7 +266,7 @@ module.exports = function (grunt) {
 
 				preprocessors: {
 					// 'app/modules/**/*.js': 'coverage',
-					'app/modules/**/**/*.js': 'coverage',
+					'app/modules/{,**/}*.js': 'coverage',
 				},
 
 				// with coverage, but with bad line numbers in tests reports
@@ -331,7 +331,30 @@ module.exports = function (grunt) {
 					dest: '<%= yeoman.app %>/scripts/services/'
 				}]
 			}
+		},
+
+		nggettext_extract: {
+			pot: {
+				files: {
+					'<%= yeoman.app %>/modules/templateCore/locale/global-template.pot': '<%= yeoman.app %>/scripts/{,*/}*.js',
+					'<%= yeoman.app %>/modules/templateCore/locale/template.pot': '<%= yeoman.app %>/modules/templateCore/{,**/}*.*',
+					'<%= yeoman.app %>/modules/miniCore/locale/template.pot': '<%= yeoman.app %>/modules/miniCore/{,**/}*.*'
+				}
+			},
+		},
+
+		nggettext_compile: {
+			all: {
+				options: {
+					requirejs: true,
+					modulePath: 'app'
+				},
+				files: {
+					'<%= yeoman.app %>/modules/templateCore/locale/translations.js': ['<%= yeoman.app %>/modules/{,**/}*.po',]
+				}
+			},
 		}
+
 	});
 
 	grunt.registerTask('serve', function (target) {

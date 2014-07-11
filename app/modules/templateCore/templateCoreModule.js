@@ -6,7 +6,8 @@
 		'./services/menu',
 		'./services/enums',
 		'./directives/height-watch',
-		'./templateCoreUrls'
+		'./templateCoreUrls',
+		'./locale/translations'
 
 	], function(angular, menu, enums, heightWatch, templateCoreUrls ) {
 
