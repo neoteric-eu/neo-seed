@@ -21,7 +21,7 @@
 					{code: 'en', name:'English'}
 				],
 
-				DEFAULT_LANGUAGE: 'pl',
+				DEFAULT_LANG: 'pl',
 
 				EMAILS: '@@EMAILS',
 

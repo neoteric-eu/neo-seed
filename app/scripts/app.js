@@ -181,10 +181,11 @@ function (angular, globalSettings) {
 		$rootScope.LOGIN_DATA = angular.fromJson(globalSettings.get('LOGIN_DATA'));
 
 		// Locale
-		var lang = $cookieStore.get('lang') || globalSettings.get('DEFAULT_LANGUAGE');
+		var lang = $location.search().language || $cookieStore.get('lang') || globalSettings.get('DEFAULT_LANG');
 		session.setLocale(lang);
 
-		// Get translation text
+
+		// Add words for translation
 		gettext('Polish');
 		gettext('English');
 
@@ -228,8 +229,8 @@ function (angular, globalSettings) {
 		 */
 		$rootScope.initUserData = function() {
 			$rootScope.currentCustomer = session.currentCustomer.getModel();
-			$rootScope.customers = session.userData.getModel().user.customers;
-			$rootScope.user = session.userData.getModel().user;
+			$rootScope.customers = session.userData.getModel().data.user.customers;
+			$rootScope.user = session.userData.getModel().data.user;
 			$rootScope.lang = session.locale.getModel();
 			$route.reload();
 		};
@@ -255,8 +256,6 @@ function (angular, globalSettings) {
 					$rootScope.redirectMgr();
 				}
 			).finally(function() {
-				var lang = $location.search().language || undefined;
-				session.setLocale(lang);
 				$rootScope.menu = menu.getMenu();
 				$rootScope.appReady = true;
 			});
