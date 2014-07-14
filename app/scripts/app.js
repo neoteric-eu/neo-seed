@@ -7,7 +7,7 @@ define([
 	'angularGettext',
 
 	'../modules/miniCore/miniCoreModule',
-	'../modules/templateCore/templateCoreModule'
+	'../modules/miniTemplate/miniTemplateModule'
 ],
 function (angular, globalSettings) {
 	'use strict';
@@ -27,9 +27,9 @@ function (angular, globalSettings) {
 		'miniCore.directives',
 		'miniCore.services',
 
-		'templateCore',
-		'templateCore.services',
-		'templateCore.directives'
+		'miniTemplate',
+		'miniTemplate.services',
+		'miniTemplate.directives'
 	])
 
 	.config(['$httpProvider', function($httpProvider) {
@@ -181,10 +181,11 @@ function (angular, globalSettings) {
 		$rootScope.LOGIN_DATA = angular.fromJson(globalSettings.get('LOGIN_DATA'));
 
 		// Locale
-		var lang = $cookieStore.get('lang') || globalSettings.get('DEFAULT_LANGUAGE');
+		var lang = $location.search().language || $cookieStore.get('lang') || globalSettings.get('DEFAULT_LANG');
 		session.setLocale(lang);
 
-		// Get translation text
+
+		// Add words for translation
 		gettext('Polish');
 		gettext('English');
 
@@ -228,11 +229,12 @@ function (angular, globalSettings) {
 		 */
 		$rootScope.initUserData = function() {
 			$rootScope.currentCustomer = session.currentCustomer.getModel();
-			$rootScope.customers = session.userData.getModel().user.customers;
-			$rootScope.user = session.userData.getModel().user;
+			$rootScope.customers = session.userData.getModel().data.user.customers;
+			$rootScope.user = session.userData.getModel().data.user;
 			$rootScope.lang = session.locale.getModel();
 			$route.reload();
 		};
+
 
 		/**
 		 *	@name checkSession
@@ -241,17 +243,20 @@ function (angular, globalSettings) {
 		$rootScope.checkSession = function() {
 			session.checkSession().then(
 				function() {
-					var path = localStorage.getItem('prevRoute') || $route.routes[null].redirectTo;
-					$rootScope.mainTemplate = template.get('main', 'logged');
 
+					var path = $location.url();
+					if(path === "") {
+						path = $route.routes[null].redirectTo;
+					}
+					$rootScope.mainTemplate = template.get('main', 'logged');
 					$rootScope.redirectMgr(path);
-					$rootScope.menu = menu.getMenu();
 					$rootScope.initUserData();
 				}, function() {
 					$rootScope.mainTemplate = template.get('main', 'not-logged');
 					$rootScope.redirectMgr();
 				}
 			).finally(function() {
+				$rootScope.menu = menu.getMenu();
 				$rootScope.appReady = true;
 			});
 
@@ -263,14 +268,6 @@ function (angular, globalSettings) {
 			session.clearSession();
 			$rootScope.checkSession();
 		});
-
-		$rootScope.$on('$locationChangeStart', function(event, nextRoute, currentRoute){
-			var route = currentRoute.split('#');
-			if(angular.isDefined(route[1])) {
-				localStorage.setItem('prevRoute',route[1]);
-			}
-		});
-
 		$rootScope.$on('$viewContentLoaded', function(){
 			pageSetUp();
 		});

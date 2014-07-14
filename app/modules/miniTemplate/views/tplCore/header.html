@@ -10,10 +10,10 @@
 	<ul class="list-inline">
 		<li class="dropdown">
 			<a class="btn btn-ribbon dropdown-toggle" data-toggle="dropdown" href="#">
-				<span class="no-shadow light-color">{{ lang|uppercase }}</span>
+				<span class="no-shadow light-color">{{ lang.data }}</span>
 			</a>
 			<ul class="dropdown-menu">
-				<li ng-repeat="item in LANGUAGES" ng-class="{'active': lang == item.code}" >
+				<li ng-repeat="item in LANGUAGES" ng-class="{'active': lang.data == item.code}" >
 					<a href="javascript:void(0)" ng-click="switchLang(item.code)"><i class="fa fa-globe"></i> {{ item.name | translate }}</a>
 				</li>
 			</ul>
