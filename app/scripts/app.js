@@ -181,7 +181,7 @@ function (angular, globalSettings) {
 		$rootScope.LOGIN_DATA = angular.fromJson(globalSettings.get('LOGIN_DATA'));
 
 		// Locale
-		var lang = $location.search().language || $cookieStore.get('lang') || globalSettings.get('DEFAULT_LANG');
+		var lang = $location.search().language || $cookieStore.get('lang');
 		session.setLocale(lang);
 
 
