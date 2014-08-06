@@ -6,22 +6,37 @@
 			system, appMessages, locale, documentService, documentModulePath,
 			ngTableParams, permissions, enums) {
 
+
+
+			$scope.$watch('tableFilter', function () {
+				if (angular.isDefined($scope.docsTable)) {
+					$scope.docsTable.reload();
+					$scope.docsTable.page(1);
+				}
+			});
+
 			/*jshint newcap: false */
 			$scope.ngTableBuilder = function(data) {
 				return new ngTableParams({
 					page: 1,
 					count: 10,
 					sorting: {
-						'timestamp': 'desc' //FIXME
+						'versions[0].timestamp': 'desc'
 					}
 				}, {
 					total: data.length,
 					getData: function($defer, params) {
-						var orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
+						var filteredData = $filter('filter')(data, $scope.tableFilter);
+						var orderedData = params.sorting() ?
+												$filter('orderBy')(filteredData, params.orderBy()) :
+												filteredData;
 						$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
 					}
 				});
 			};
+
+
+
 
 			$scope.getDocuments = function(){
 				system.showLoader();

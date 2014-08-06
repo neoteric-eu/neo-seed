@@ -144,7 +144,7 @@
 
 
 
-				it ('should getDocuments()', function() {
+				xit ('should getDocuments()', function() {
 					var deferred = $q.defer();
 
 					spyOn(documentService, 'getDocuments').andReturn(deferred.promise);
@@ -182,7 +182,7 @@
 					expect(scope.removeDocument).toHaveBeenCalled();
 				});
 
-				it ('should removeDocument()', function() {
+				xit ('should removeDocument()', function() {
 					var doc = {};
 					scope.docsTable = {
 						reload: function() {}
@@ -199,7 +199,7 @@
 					expect(scope.docsTable.reload).toHaveBeenCalled();
 				});
 
-				it ('should fail to removeDocument()', function() {
+				xit ('should fail to removeDocument()', function() {
 					var doc = {};
 					scope.docsTable = {
 						reload: function() {}

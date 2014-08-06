@@ -35,6 +35,7 @@ function (angular, globalSettings) {
 
 		'templateCore',
 		'templateCore.controllers',
+		'templateCore.directives',
 		'templateCore.services',
 
 		'documentTemplate',
@@ -44,8 +45,8 @@ function (angular, globalSettings) {
 
 		'document',
 		'document.controllers',
+		'document.directives',
 		'document.services',
-		'document.directives'
 
 	])
 
