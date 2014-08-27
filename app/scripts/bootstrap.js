@@ -9,6 +9,7 @@ define([
 	'sentryClient',
 	'../modules/miniCore/miniCoreModule',
 	'../modules/miniTemplate/miniTemplateModule',
+	'../modules/smRegistration/smRegistrationModule',
 	'angularGettext',
 	'angularRoute',
 	'angularCookies',

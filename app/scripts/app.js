@@ -7,7 +7,8 @@ define([
 	'angularGettext',
 
 	'../modules/miniCore/miniCoreModule',
-	'../modules/miniTemplate/miniTemplateModule'
+	'../modules/miniTemplate/miniTemplateModule',
+	'../modules/smRegistration/smRegistrationModule'
 ],
 function (angular, globalSettings) {
 	'use strict';
@@ -29,7 +30,11 @@ function (angular, globalSettings) {
 
 		'miniTemplate',
 		'miniTemplate.services',
-		'miniTemplate.directives'
+		'miniTemplate.directives',
+
+		'smRegistration',
+		'smRegistration.controllers',
+		'smRegistration.services'
 	])
 
 	.config(['$httpProvider', function($httpProvider) {
@@ -181,7 +186,7 @@ function (angular, globalSettings) {
 		$rootScope.LOGIN_DATA = angular.fromJson(globalSettings.get('LOGIN_DATA'));
 
 		// Locale
-		var lang = $location.search().language || $cookieStore.get('lang') || globalSettings.get('DEFAULT_LANG');
+		var lang = $location.search().language || $cookieStore.get('lang');
 		session.setLocale(lang);
 
 

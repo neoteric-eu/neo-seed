@@ -10,7 +10,7 @@
 	<ul class="list-inline">
 		<li class="dropdown">
 			<a class="btn btn-ribbon dropdown-toggle" data-toggle="dropdown" href="#">
-				<span class="no-shadow light-color">{{ lang.data }}</span>
+				<span class="no-shadow light-color">{{ lang.data | uppercase }}</span>
 			</a>
 			<ul class="dropdown-menu">
 				<li ng-repeat="item in LANGUAGES" ng-class="{'active': lang.data == item.code}" >
