@@ -152,9 +152,11 @@ module.exports = function (grunt) {
 					// optimization: 2,
 				},
 				files: {
-					'<%= yeoman.app %>/styles/css/bootstrap-custom.css': '<%= yeoman.app %>/styles/less/bootstrap.less',
+					'<%= yeoman.app %>/styles/css/bootstrap.css': '<%= yeoman.app %>/styles/less/bootstrap.less',
 					'<%= yeoman.app %>/styles/css/smartadmin-production.css': '<%= yeoman.app %>/styles/less/smartadmin-production.less',
-					'<%= yeoman.app %>/styles/css/overrides.css': '<%= yeoman.app %>/styles/less/overrides.less',
+					'<%= yeoman.app %>/styles/css/smartadmin-production-plugins.css': '<%= yeoman.app %>/styles/less/smartadmin-production-plugins.less',
+					'<%= yeoman.app %>/styles/css/font-awesome.css': '<%= yeoman.app %>/styles/less/library/fontawesome/font-awesome.less',
+					'<%= yeoman.app %>/styles/css/smartadmin-skins.css': '<%= yeoman.app %>/styles/less/smartadmin-skin/smartadmin-skins.less'
 				}
 			}
 		},

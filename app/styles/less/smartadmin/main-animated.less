@@ -25,13 +25,11 @@
 
 /* All dropdowns */
 .open > .dropdown-menu {
-	-webkit-animation-name: flipInX;
-	-moz-animation-name: flipInX;
-	-o-animation-name: flipInX;
-	animation-name: flipInX;
-}
-
-.open > .dropdown-menu {
+	-webkit-animation-name: @animation-type;
+	-moz-animation-name: @animation-type;
+	-o-animation-name: @animation-type;
+	animation-name: @animation-type;
+	
 	-webkit-animation-duration: .4s;
 	-moz-animation-duration: .4s;
 	-o-animation-duration: .4s;
@@ -43,10 +41,10 @@
 }
 
 .active + .ajax-dropdown {
-	-webkit-animation-name: flipInY;
-	-moz-animation-name: flipInY;
-	-o-animation-name: flipInY;
-	animation-name: flipInY;
+	-webkit-animation-name: @animation-ajax-dropdown;
+	-moz-animation-name: @animation-ajax-dropdown;
+	-o-animation-name: @animation-ajax-dropdown;
+	animation-name: @animation-ajax-dropdown;
 	-webkit-animation-duration: .7s;
 	-moz-animation-duration: .7s;
 	-o-animation-duration: .7s;

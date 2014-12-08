@@ -1,10 +1,15 @@
 /* jshint quotmark:false, undef:false */
 define([
 	'angular',
+	'angular-couch-potato',
+	'angular-resource',
+	'angular-ui-router',
+	'angular-animate',
+	'angular-bootstrap',
+	'angular-gettext',
+	'smartwidgets',
+	'notification',
 	'globalSettings',
-	'underscore',
-	'angularResource',
-	'angularGettext',
 
 	'../modules/miniCore/miniCoreModule',
 	'../modules/miniTemplate/miniTemplateModule',

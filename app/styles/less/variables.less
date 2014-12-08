@@ -25,8 +25,9 @@
 // Links
 // -------------------------
 
-@link-color:            @brand-primary;
-@link-hover-color:      darken(@link-color, 15%);
+@link-color:            	@brand-primary;
+@link-hover-color:          darken(@link-color, 15%);
+@link-hover-decoration:     none;
 
 // Typography
 // -------------------------
@@ -60,6 +61,8 @@
 
 @icon-font-path:          "../fonts/";
 @icon-font-name:          "glyphicons-halflings-regular";
+@icon-font-svg-id:		  "glyphicons_halflingsregular";
+
 
 
 // Components
@@ -85,10 +88,14 @@
 @border-radius-large:            3px;
 @border-radius-small:            2px;
 
+//** Global color for active items (e.g., navs or dropdowns).
 @component-active-color:         #fff;
+//** Global background color for active items (e.g., navs or dropdowns).
 @component-active-bg:            @brand-primary;
 
+//** Width of the `border` for generating carets that indicator dropdowns.
 @caret-width-base:               4px;
+//** Carets increase slightly in size for larger components.
 @caret-width-large:              5px;
 
 // Tables
@@ -103,6 +110,8 @@
 @table-bg-active:                    @table-bg-hover;
 
 @table-border-color:                 #ddd; // table and cell border
+
+
 
 
 // Buttons
@@ -148,10 +157,13 @@
 @input-border-radius:            0px;
 @input-border-focus:             #66afe9;
 
+@input-border-radius-large:      @border-radius-large;
+@input-border-radius-small:      @border-radius-small;
+
 @input-color-placeholder:        @gray-light;
 
 @input-height-base:              (@line-height-computed + (@padding-base-vertical * 2) + 2);
-@input-height-large:             (floor(@font-size-large * @line-height-large) + (@padding-large-vertical * 2) + 2);
+@input-height-large:             (ceil(@font-size-large * @line-height-large) + (@padding-large-vertical * 2) + 2);
 @input-height-small:             (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) + 2);
 
 @legend-color:                   @gray-dark;
@@ -160,6 +172,7 @@
 @input-group-addon-bg:           @gray-lighter;
 @input-group-addon-border-color: @input-border;
 
+@cursor-disabled:                not-allowed;
 
 // Dropdowns
 // -------------------------
@@ -181,7 +194,6 @@
 @dropdown-header-color:          @gray-light;
 
 @dropdown-caret-color:           #000;
-
 
 // COMPONENT VARIABLES
 // --------------------------------------------------
@@ -255,12 +267,14 @@
 // Basics of a navbar
 @navbar-height:                    50px;
 @navbar-margin-bottom:             @line-height-computed;
+@navbar-border-radius:             @border-radius-base;
+@navbar-padding-horizontal:        floor((@grid-gutter-width / 2));
+@navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
+@navbar-collapse-max-height:       340px;
+
 @navbar-default-color:             #777;
 @navbar-default-bg:                #f8f8f8;
 @navbar-default-border:            darken(@navbar-default-bg, 6.5%);
-@navbar-border-radius:             @border-radius-base;
-@navbar-padding-horizontal:        floor(@grid-gutter-width / 2);
-@navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
 
 // Navbar links
 @navbar-default-link-color:                #777;
@@ -349,22 +363,36 @@
 // Pagination
 // -------------------------
 
+@pagination-color:                     @link-color;
 @pagination-bg:                        #fff;
 @pagination-border:                    #ddd;
 
+@pagination-hover-color:               @link-hover-color;
 @pagination-hover-bg:                  @gray-lighter;
+@pagination-hover-border:              #ddd;
 
-@pagination-active-bg:                 @brand-primary;
 @pagination-active-color:              #fff;
+@pagination-active-bg:                 @brand-primary;
+@pagination-active-border:             @brand-primary;
 
 @pagination-disabled-color:            @gray-light;
+@pagination-disabled-bg:               #fff;
+@pagination-disabled-border:           #ddd;
 
 
 // Pager
 // -------------------------
 
+@pager-bg:                             @pagination-bg;
+@pager-border:                         @pagination-border;
 @pager-border-radius:                  15px;
-@pager-disabled-color:                 @gray-light;
+
+@pager-hover-bg:                       @pagination-hover-bg;
+
+@pager-active-bg:                      @pagination-active-bg;
+@pager-active-color:                   @pagination-active-color;
+
+@pager-disabled-color:                 @pagination-disabled-color;
 
 
 // Jumbotron
@@ -380,17 +408,17 @@
 // Form states and alerts
 // -------------------------
 
-@state-warning-text:             #6B6D31;
-@state-warning-bg:               #ECDFB0;
-@state-warning-border:           darken(spin(@state-warning-bg, -10), 7%);
+@state-warning-text:             #c09853;
+@state-warning-bg:               #fcf8e3;
+@state-warning-border:           #DBAB57;
 
-@state-danger-text:              #FFF;
-@state-danger-bg:                #C46A69;
-@state-danger-border:            darken(spin(@state-danger-bg, -10), 18%);
+@state-danger-text:              #b94a48;
+@state-danger-bg:                #f2dede;
+@state-danger-border:            #b94a48;
 
-@state-success-text:             #296829;
-@state-success-bg:               #CEE0CF;
-@state-success-border:           darken(spin(@state-success-bg, -10), 22%);
+@state-success-text:             #468847;
+@state-success-bg:               #dff0d8;
+@state-success-border:           #468847;
 
 @state-info-text:                #346597;
 @state-info-bg:                  #D6DDE7;
@@ -402,6 +430,7 @@
 @tooltip-max-width:           200px;
 @tooltip-color:               #fff;
 @tooltip-bg:                  #000;
+@tooltip-opacity:             .9;
 
 @tooltip-arrow-width:         5px;
 @tooltip-arrow-color:         @tooltip-bg;
@@ -444,14 +473,18 @@
 
 @modal-title-padding:         15px;
 @modal-title-line-height:     @line-height-base;
-
 @modal-content-bg:                             #fff;
 @modal-content-border-color:                   rgba(0,0,0,.2);
 @modal-content-fallback-border-color:          #999;
 
 @modal-backdrop-bg:           #000;
+@modal-backdrop-opacity:      .5;
 @modal-header-border-color:   #e5e5e5;
 @modal-footer-border-color:   @modal-header-border-color;
+
+@modal-lg:                    900px;
+@modal-md:                    600px;
+@modal-sm:                    300px;
 
 
 // Alerts
@@ -481,6 +514,7 @@
 // -------------------------
 @progress-bg:                 #f5f5f5;
 @progress-bar-color:          #fff;
+@progress-border-radius:      @border-radius-base;
 
 @progress-bar-bg:             @brand-primary;
 @progress-bar-success-bg:     @brand-success;
@@ -491,24 +525,34 @@
 
 // List group
 // -------------------------
-@list-group-bg:               #fff;
-@list-group-border:           #ddd;
-@list-group-border-radius:    @border-radius-base;
 
-@list-group-hover-bg:         #f5f5f5;
-@list-group-active-color:     #fff;
-@list-group-active-bg:        @component-active-bg;
-@list-group-active-border:    @list-group-active-bg;
+@list-group-bg:                 #fff;
+@list-group-border:             #ddd;
+@list-group-border-radius:      @border-radius-base;
 
-@list-group-link-color:          #555;
-@list-group-link-heading-color:  #333;
+@list-group-hover-bg:           #f5f5f5;
+@list-group-active-color:       @component-active-color;
+@list-group-active-bg:          @component-active-bg;
+@list-group-active-border:      @list-group-active-bg;
+@list-group-active-text-color:  lighten(@list-group-active-bg, 40%);
 
+@list-group-disabled-color:      @gray-light;
+@list-group-disabled-bg:         @gray-lighter;
+@list-group-disabled-text-color: @list-group-disabled-color;
+
+@list-group-link-color:         #555;
+@list-group-link-hover-color:   @list-group-link-color;
+@list-group-link-heading-color: #333;
 
 // Panels
 // -------------------------
 @panel-bg:                    #fff;
-@panel-inner-border:          #ddd;
+@panel-body-padding:          15px;
+@panel-heading-padding:       10px 15px;
+@panel-footer-padding:        @panel-heading-padding;
 @panel-border-radius:         @border-radius-base;
+
+@panel-inner-border:          #ddd;
 @panel-footer-bg:             #f5f5f5;
 
 @panel-default-text:          @gray-dark;
@@ -523,6 +567,10 @@
 @panel-success-border:        @state-success-border;
 @panel-success-heading-bg:    @state-success-bg;
 
+@panel-info-text:             @state-info-text;
+@panel-info-border:           @state-info-border;
+@panel-info-heading-bg:       @state-info-bg;
+
 @panel-warning-text:          @state-warning-text;
 @panel-warning-border:        @state-warning-border;
 @panel-warning-heading-bg:    @state-warning-bg;
@@ -530,10 +578,6 @@
 @panel-danger-text:           @state-danger-text;
 @panel-danger-border:         @state-danger-border;
 @panel-danger-heading-bg:     @state-danger-bg;
-
-@panel-info-text:             @state-info-text;
-@panel-info-border:           @state-info-border;
-@panel-info-heading-bg:       @state-info-bg;
 
 
 // Thumbnails
@@ -550,6 +594,7 @@
 // Wells
 // -------------------------
 @well-bg:                     #f5f5f5;
+@well-border:                 darken(@well-bg, 7%);
 
 
 // Badges
@@ -568,10 +613,13 @@
 
 // Breadcrumbs
 // -------------------------
-@breadcrumb-bg:               #f5f5f5;
-@breadcrumb-color:            #ccc;
-@breadcrumb-active-color:     @gray-light;
-@breadcrumb-separator:        "/";
+
+@breadcrumb-padding-vertical:   8px;
+@breadcrumb-padding-horizontal: 15px;
+@breadcrumb-bg:                 #f5f5f5;
+@breadcrumb-color:              #ccc;
+@breadcrumb-active-color:       @gray-light;
+@breadcrumb-separator:          "/";
 
 // Carousel
 // ------------------------
@@ -601,6 +649,9 @@
 @code-color:                  #c7254e;
 @code-bg:                     #f9f2f4;
 
+@kbd-color:                   #fff;
+@kbd-bg:                      #333;
+
 @pre-bg:                      #f5f5f5;
 @pre-color:                   @gray-dark;
 @pre-border-color:            #ccc;
@@ -612,8 +663,10 @@
 @abbr-border-color:           @gray-light;
 @headings-small-color:        @gray-light;
 @blockquote-small-color:      @gray-light;
+@blockquote-font-size:        (@font-size-base * 1.25);
 @blockquote-border-color:     @gray-lighter;
 @page-header-border-color:    @gray-lighter;
+@dl-horizontal-offset:        @component-offset-horizontal;
 
 // Miscellaneous
 // -------------------------
@@ -643,6 +696,7 @@
 
 /*
  * SMARTADMIN VARIABLES
+ * All variables related specifically to the theme starts from here:
  */
 
 // Main Theme Values
@@ -676,25 +730,31 @@
 @yellow: 						#b09b5b;
 @orange: 						#C79121;
 @orangeDark: 					#A57225;
-@pink: 							#ac5287;
+@orangeBright:					#ffc40d;
+@pink: 							#ac5287; 
 @pinkDark: 						#a8829f;
 @purple: 						#6E587A;
 @darken: 						#404040;
 @lighten: 						#d5e7ec;
 @white: 						#ffffff;
 @greyDark: 						#525252;
-@magenta: 						#6e3671;
+@magenta: 						#6e3671; 
 @teal: 							#568a89;
 @redLight: 						#a65858;
 @redBright:						#ed1c24;
 @tealLight:						#0AA66E;
 
+// DROPDOWN ANIMATIONS (GLOBAL)
+// for full animation list go to: http://daneden.github.io/animate.css/
+// --------------------------------------------------
+@animation-type:				~"flipInX";
+@animation-ajax-dropdown:		~"flipInY";
+
 // IMAGE PATH & BACKGROUNDS
 // --------------------------------------------------
 
-@base-url: 						"../../images";
-@relative-url: 					"../../../../images";
-//urage: background-image: url("@{base-url}/images/bg.png");
+@base-url: 						"../img";
+//usage: background-image: url("@{base-url}/images/bg.png");
 
 @html-background-image:			"mybg.png";
 @html-background-color:			@white;
@@ -705,9 +765,15 @@
 
 // HEADER
 // --------------------------------------------------
-@smart-navbar-height:			0; // also be sure to change [$.navbar_height] variable in the app.js
+@smart-navbar-height:			49px; 
 @smart-navbar-color-start:		#f3f3f3;
 @smart-navbar-color-end:		#e2e2e2;
+
+// FOOTER
+// --------------------------------------------------
+@smart-footer-height: 52px;
+@smart-footer-padding: 15px (@grid-gutter-width/2) 0;
+@smart-footer-background: @asideColor-start;
 
 // RIBBON
 // --------------------------------------------------
@@ -735,7 +801,7 @@
 @asideColor-start:				#2A2725; /* left side */
 @asideColor-end:				#3A3633; /* right side */
 
-@asideLinkColor:				#A8A8A8;
+@asideLinkColor:				lighten(@asideColor-start, 58%);
 @asideLinkColorHover:			@white;
 @asideLinkColorFocus:			#C9C9C9;
 @asideNavActiveBGColor:			#616161; /* the color that flashes when you click on the first nav element */
@@ -743,20 +809,33 @@
 @asideNavFontSizeSecondLevel:	@asideNavFontSize;
 @asideNavFontSizeThirdLevel:	@asideNavFontSize;
 
+@asideNavExpanIconPush-x:		10px; /* the plus icon that appears on the parent nav when expanding and collapsing */
+@asideNavExpanIconPush-y:		10px; /* these values will only address the first parent in the entire nav */
+
+@asideExpanIconSize:			11px; /* the plus & minus icons */
+@asideExpanIconMT:				2px;  /* margin top */
 
 // SMARTADMIN ZINDEX
 // -------------------------
 // Used for a bird's eye view of components dependent on the z-axis
 // Try to avoid customizing these :)
 
-@fixed-navigation-zindex:		998;
-@fixed-ribbon-zindex:			999;
-@morris-hover:					1001;
-@left-panel-zindex:				1002;
-@hidden-lefthand-menu-zindex:	@left-panel-zindex;
-@ajax-dropdown-zindex:			1003;
-@pace-zindex:					2000;
+@fixed-navigation-zindex:		900; 
+@fixed-ribbon-zindex:			@fixed-navigation-zindex+1; //901
+@fixed-footer-zindex:			@fixed-navigation-zindex+1; //901
+@morris-hover:					@fixed-navigation-zindex+3; //903
+@left-panel-zindex:				@fixed-navigation-zindex+4; //904
+@hidden-lefthand-menu-zindex:	@fixed-navigation-zindex+3; //903
+@ajax-dropdown-zindex:			@fixed-navigation-zindex+5; //905
+@ui-widget-overlay:				@fixed-navigation-zindex+49; //949
+@widget-fullscreen-zindex:		@ui-widget-overlay+101; // 1050
+@pace-zindex:					2000; 
 @tooltip-zindex:				9999;
+
+// WIDGET TUNING
+// -------------------------
+
+@widgetContentOverflow:			visible;
 
 // BOOTSTRAP WIZARD
 // -------------------------
@@ -799,3 +878,4 @@
 
 @table-header-color-start:		#f2f2f2;
 @table-header-color-end:		#fafafa;
+

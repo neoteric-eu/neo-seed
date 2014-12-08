@@ -7,8 +7,8 @@
 .ui-widget-overlay {
 	background-image:none;
 	background: #AAA;
-	height: 200%;
-	z-index: 9999;
+	height: 100%;
+	z-index: @ui-widget-overlay !important;
 	position:fixed;
 	top:0px;
 	left:0px;
@@ -152,6 +152,9 @@
 	text-indent:0px !important;
 }
 
+.ui-datepicker .ui-datepicker-next span, .ui-datepicker .ui-datepicker-prev span {
+	background:none !important;
+}
 
 /*
  * JS SLIDER
@@ -363,9 +366,6 @@
 width:19px;
 }
 
-.ui-widget-content .ui-icon {
-background:none !important;
-}
 
 /* spinner both */
 
@@ -443,4 +443,8 @@ background:none !important;
 	padding: 19px 15px 20px;
 	text-align: right;
 	border-top: 1px solid @gray-lighter;	
+}
+
+.ui-autocomplete {
+	z-index: @ajax-dropdown-zindex !important;
 }
