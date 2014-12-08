@@ -5,6 +5,7 @@ nbproject/
 app/styles/css
 app/modules/global_settings.js
 dist
+npm-debug.log
 
 .sass-cache
 .todo
