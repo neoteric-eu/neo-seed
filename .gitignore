@@ -11,3 +11,4 @@ dist
 .ask
 .tmp
 *.sublime*
+*.idea
