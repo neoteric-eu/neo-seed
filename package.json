@@ -6,7 +6,7 @@
     "grunt-angular-gettext": "~0.2.14"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
+    "grunt": "~0.4.5",
     "grunt-autoprefixer": "~0.4.0",
     "grunt-bower-install": "~0.7.0",
     "grunt-concurrent": "~0.4.1",
@@ -26,7 +26,7 @@
     "grunt-google-cdn": "~0.2.0",
     "grunt-karma": "^0.6.2",
     "grunt-newer": "~0.5.4",
-    "grunt-ngmin": "~0.0.2",
+    "grunt-ng-annotate": "~0.8.0",
     "grunt-rev": "~0.1.0",
     "grunt-svgmin": "~0.2.0",
     "grunt-usemin": "~2.0.0",
@@ -43,7 +43,6 @@
     "karma-requirejs": "^0.2.1",
     "karma-script-launcher": "^0.1.0",
     "load-grunt-tasks": "~0.2.0",
-    "requirejs": "^2.1.11",
     "time-grunt": "~0.2.1",
     "grunt-replace": "^0.7.8",
     "grunt-cli": "^0.1.13",
