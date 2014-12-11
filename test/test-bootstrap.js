@@ -2,7 +2,7 @@ var tests = [];
 for (var file in window.__karma__.files) {
 	if (window.__karma__.files.hasOwnProperty(file)) {
 		// Grab all files path with "Spec" end naming
-		if (/Spec\.js$/.test(file)) {
+		if (/\.spec\.js$/.test(file)) {
 			tests.push(file);
 		}
 	}
@@ -10,18 +10,18 @@ for (var file in window.__karma__.files) {
 
 require.config({
 	// Karma serves files from '/base'
-	baseUrl: '/base/app/scripts',
+	baseUrl: '/base/app',
 
 	paths: {
-		angular: '../bower_components/angular/angular',
-		angularRoute: '../bower_components/angular-route/angular-route',
-		angularCookies: '../bower_components/angular-cookies/angular-cookies',
-		angularSanitize: '../bower_components/angular-sanitize/angular-sanitize',
-		angularResource: '../bower_components/angular-resource/angular-resource',
-		angularMocks: '../bower_components/angular-mocks/angular-mocks',
-		underscore: '../bower_components/underscore/underscore',
-		globalSettings: '../modules/global_settings',
-		angularGettext: '../bower_components/angular-gettext/dist/angular-gettext.min'
+		angular: '../app/bower_components/angular/angular',
+		angularRoute: '../app/bower_components/angular-route/angular-route',
+		angularCookies: '../app/bower_components/angular-cookies/angular-cookies',
+		angularSanitize: '../app/bower_components/angular-sanitize/angular-sanitize',
+		angularResource: '../app/bower_components/angular-resource/angular-resource',
+		angularMocks: '../app/bower_components/angular-mocks/angular-mocks',
+		lodash: '../app/bower_components/lodash/dist/lodash.min',
+		globalSettings: '../app/modules/global_settings',
+		angularGettext: '../app/bower_components/angular-gettext/dist/angular-gettext.min'
 		// sentryClient: '../plugins/sentry-client/sentry-client',
 		// 'raven-js': '../bower_components/raven-js/dist/raven.min',
 		// 'ravenInstall': '../plugins/sentry-client/raven-install',
@@ -38,7 +38,7 @@ require.config({
 			deps:['angular'],
 			'exports':'angular.mock'
 		},
-		'underscore': {'exports': '_'},
+		'lodash': {'exports': '_'},
 		'angularGettext': { deps: ['angular'] }
 		// 'ui.bootstrap': { deps: ['angular'] }
 	},
