@@ -19,7 +19,32 @@ module.exports = function (grunt) {
 	// require('time-grunt')(grunt);
 
 	// Define the configuration for all the tasks
+	//noinspection JSUnresolvedFunction,JSUnresolvedVariable
 	grunt.initConfig({
+
+		// Command line actions configuration
+		shell: {
+			// Command line conf
+			options: {
+				stdout: true
+			},
+			// Selenium runner
+			selenium: {
+				command: './selenium/start',
+				options: {
+					stdout: false,
+					async: true
+				}
+			},
+			// Protractor update
+			webdriver_update: {
+				command: 'node ./node_modules/protractor/bin/webdriver-manager update',
+				options: {
+					stdout: false,
+					async: true
+				}
+			}
+		},
 
 		// Project settings
 		yeoman: {
@@ -32,7 +57,7 @@ module.exports = function (grunt) {
 		watch: {
 			js: {
 				files: ['<%= yeoman.app %>/scripts/{,*/}*.js', '<%= yeoman.app %>/modules/{,**/}*.js'],
-				tasks: ['newer:jshint:all'],
+				tasks: ['newer:jshint:all']
 				// options: {
 				// 	livereload: true
 				// }
@@ -47,7 +72,7 @@ module.exports = function (grunt) {
 			},
 			gruntfile: {
 				files: ['Gruntfile.js']
-			},
+			}
 			// livereload: {
 			// 	options: {
 			// 		livereload: '<%= connect.options.livereload %>'
@@ -89,6 +114,13 @@ module.exports = function (grunt) {
 						'<%= yeoman.app %>'
 					]
 				}
+			},
+			coverage: {
+				options: {
+					base: 'coverage/',
+					port: 9020,
+					keepalive: true
+				}
 			}
 		},
 
@@ -97,27 +129,46 @@ module.exports = function (grunt) {
 			options: {
 				jshintrc: '.jshintrc',
 				ignores: [
-					'<%= yeoman.app %>/scripts/*.js',
-					'<%= yeoman.app %>/modules/{,**/}translations.js'
+					'app/api/**/*.js',
+					'app/auth/**/*.js',
+					'app/bower_components/**/*.js',
+					'app/components/**/*.js',
+					'app/dashboard/**/*.js',
+					'app/layout/**/*.js',
+					'app/modules/app-views/**/*.js',
+					'app/modules/forms/**/*.js',
+					'app/modules/graphs/**/*.js',
+					'app/modules/maps/**/*.js',
+					'app/modules/miniTemplate/locale/**/*.js',
+					'app/modules/misc/**/*.js',
+					'app/modules/smart-admin/**/*.js',
+					'app/modules/tables/**/*.js',
+					'app/modules/ui/**/*.js',
+					'app/modules/widgets/**/*.js',
+					'app/plugins/**/*.js',
+					'dist/**/*.js',
+					'node_modules/**/*.js'
 				],
 				reporter: require('jshint-stylish')
 			},
 			all: [
 				'Gruntfile.js',
-				'<%= yeoman.app %>/scripts/{,*/}*.js',
-				'<%= yeoman.app %>/modules/{,**/}*.js'
+				'<%= yeoman.app %>/**/*.js'
 			],
 			test: {
 				options: {
 					jshintrc: 'test/.jshintrc'
 				},
-				src: ['test/spec/{,*/}*.js']
+				src: ['test/**/*.js']
 			}
 		},
 
 		open: {
 			server: {
 				url: 'http://localhost:<%= connect.serve.options.port %>'
+			},
+			coverage: {
+				url: 'http://localhost:<%= connect.coverage.options.port %>'
 			}
 		},
 
@@ -194,6 +245,15 @@ module.exports = function (grunt) {
 			}
 		},
 
+		protractor: {
+			options: {
+				configFile: './test/protractor.conf.js',
+				keepAlive: false,
+				noColor: true
+			},
+			singlerun: {}
+		},
+
 		// Allow the use of non-minsafe AngularJS files. Automatically makes it
 		// minsafe compatible so Uglify does not destroy the ng references
 		ngAnnotate: {
@@ -240,26 +300,17 @@ module.exports = function (grunt) {
 		},
 
 		concat: {
-		  dist: {}
+			dist: {}
 		},
 
 		// Test settings
 		karma: {
 			unit: {
-				configFile: 'test/karma.conf.js',
-				browsers: ['PhantomJS'],
-				autoWatch: true,
-			},
-			preCommit: {
-				configFile: 'test/karma.conf.js',
-				browsers: ['PhantomJS'],
-				autoWatch: false,
-				singleRun: true
+				configFile: 'test/karma.conf.js'
 			},
 			coverage: {
 				configFile: 'test/karma.conf.js',
-				browsers: ['PhantomJS'],
-				plugins:[
+				plugins: [
 					'karma-jasmine',
 					'karma-requirejs',
 					'karma-coverage',
@@ -267,22 +318,22 @@ module.exports = function (grunt) {
 				],
 
 				preprocessors: {
-					// 'app/modules/**/*.js': 'coverage',
-					'app/modules/{,**/}*.js': 'coverage',
+					'app/modules/**/*.js': 'coverage'
 				},
 
-				// with coverage, but with bad line numbers in tests reports
-				reporters: ['progress', 'dots', 'coverage'],
-
-				// without coverage
-				// reporters: ['progress', 'dots'],
+				reporters: ['coverage'],
 
 				coverageReporter: {
-					type : 'html',
-					dir : 'coverage/'
+					type: 'html',
+					dir: 'coverage/',
+					subdir: '.'
 				},
-				singleRun: false,
-				autoWatch: true
+				singleRun: true,
+				autoWatch: false
+			},
+			preCommit: {
+				configFile: 'test/karma.conf.js'
+
 			}
 		},
 
@@ -342,7 +393,7 @@ module.exports = function (grunt) {
 					'<%= yeoman.app %>/modules/miniTemplate/locale/template.pot': '<%= yeoman.app %>/modules/miniTemplate/{,**/}*.{html,js}',
 					'<%= yeoman.app %>/modules/miniCore/locale/template.pot': '<%= yeoman.app %>/modules/miniCore/{,**/}*.{html,js}'
 				}
-			},
+			}
 		},
 
 		nggettext_compile: {
@@ -352,9 +403,9 @@ module.exports = function (grunt) {
 					modulePath: 'app'
 				},
 				files: {
-					'<%= yeoman.app %>/modules/miniTemplate/locale/translations.js': ['<%= yeoman.app %>/modules/{,**/}*.po',]
+					'<%= yeoman.app %>/modules/miniTemplate/locale/translations.js': ['<%= yeoman.app %>/modules/{,**/}*.po']
 				}
-			},
+			}
 		}
 
 	});
@@ -382,13 +433,26 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('test', [
 		'clean:server',
+		'jshint',
 		'connect:test',
+		'test:e2e',
+		'test:unit'
+	]);
+
+	grunt.registerTask('test:unit', [
 		'karma:unit'
 	]);
+
+	grunt.registerTask('test:e2e', [
+		'connect:serve',
+		'shell:webdriver_update',
+		'protractor:singlerun'
+	]);
+
 	grunt.registerTask('coverage', [
-		'clean:server',
-		'connect:test',
-		'karma:coverage'
+		'karma:coverage',
+		'open:coverage',
+		'connect:coverage'
 	]);
 
 	grunt.registerTask('build', [
@@ -403,7 +467,7 @@ module.exports = function (grunt) {
 		//'uglify',
 		'rev',
 		'usemin',
-		'copy:dist',
+		'copy:dist'
 	]);
 
 	grunt.registerTask('staging', [

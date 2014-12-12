@@ -4,5 +4,12 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="angularjs-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="node_modules" level="project" />
+    <orderEntry type="library" name="Angular" level="project" />
+    <orderEntry type="library" name="Jasmine" level="project" />
+    <orderEntry type="library" name="angular-smartadmin-seed node_modules" level="project" />
+    <orderEntry type="library" name="angular-smartadmin-seed-1.5.2 node_modules" level="project" />
+    <orderEntry type="library" name="angular-smartadmin-seed node_modules" level="project" />
   </component>
 </module>

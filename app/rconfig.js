@@ -1,7 +1,7 @@
-var require = {
+// jshint unused: false
+var requirejs = {
 	waitSeconds: 0,
 	paths: {
-
 		'jquery': [
 			'//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min',
 			'bower_components/jquery/dist/jquery.min'
@@ -30,7 +30,7 @@ var require = {
 		'angular-easyfb': 'bower_components/angular-easyfb/angular-easyfb.min',
 		'angular-google-plus': 'bower_components/angular-google-plus/dist/angular-google-plus.min',
 
-		'pace':'bower_components/pace/pace.min',
+		'pace': 'bower_components/pace/pace.min',
 
 		'fastclick': 'bower_components/fastclick/lib/fastclick',
 
@@ -76,8 +76,8 @@ var require = {
 		'datatables-responsive': 'bower_components/datatables-responsive/files/1.10/js/datatables.responsive',
 
 
-		'jqgrid':'bower_components/jqgrid/js/minified/jquery.jqGrid.min',
-		'jqgrid-locale-en':'bower_components/jqgrid/js/i18n/grid.locale-en',
+		'jqgrid': 'bower_components/jqgrid/js/minified/jquery.jqGrid.min',
+		'jqgrid-locale-en': 'bower_components/jqgrid/js/i18n/grid.locale-en',
 
 
 		'jquery-maskedinput': 'bower_components/jquery-maskedinput/dist/jquery.maskedinput.min',
@@ -132,100 +132,100 @@ var require = {
 	shim: {
 		'angular': {'exports': 'angular', deps: ['jquery']},
 
-		'angular-animate': { deps: ['angular'] },
-		'angular-resource': { deps: ['angular'] },
-		'angular-cookies': { deps: ['angular'] },
-		'angular-sanitize': { deps: ['angular'] },
-		'angular-bootstrap': { deps: ['angular'] },
-		'angular-ui-router': { deps: ['angular'] },
-		'angular-google-maps': { deps: ['angular'] },
-		'angular-gettext': { deps: ['angular'] },
+		'angular-animate': {deps: ['angular']},
+		'angular-resource': {deps: ['angular']},
+		'angular-cookies': {deps: ['angular']},
+		'angular-sanitize': {deps: ['angular']},
+		'angular-bootstrap': {deps: ['angular']},
+		'angular-ui-router': {deps: ['angular']},
+		'angular-google-maps': {deps: ['angular']},
+		'angular-gettext': {deps: ['angular']},
 
-		'angular-couch-potato': { deps: ['angular'] },
+		'angular-couch-potato': {deps: ['angular']},
 
-		'socket.io': { deps: ['angular'] },
+		'socket.io': {deps: ['angular']},
 
-		'anim-in-out': { deps: ['angular-animate'] },
-		'angular-easyfb': { deps: ['angular'] },
-		'angular-google-plus': { deps: ['angular'] },
+		'anim-in-out': {deps: ['angular-animate']},
+		'angular-easyfb': {deps: ['angular']},
+		'angular-google-plus': {deps: ['angular']},
 
-		'select2': { deps: ['jquery']},
-		'summernote': { deps: ['jquery']},
+		'select2': {deps: ['jquery']},
+		'summernote': {deps: ['jquery']},
 
 		'to-markdown': {deps: ['he']},
 
-		'bootstrap-markdown': { deps: ['jquery', 'markdown', 'to-markdown']},
+		'bootstrap-markdown': {deps: ['jquery', 'markdown', 'to-markdown']},
 
-		'ckeditor': { deps: ['jquery']},
+		'ckeditor': {deps: ['jquery']},
 
-		'moment': { exports: 'moment'},
-		'moment-timezone': { deps: ['moment']},
-		'moment-timezone-data': { deps: ['moment']},
-		'moment-helper': { deps: ['moment-timezone-data']},
-		'bootstrap-daterangepicker': { deps: ['jquery', 'moment']},
+		'moment': {exports: 'moment'},
+		'moment-timezone': {deps: ['moment']},
+		'moment-timezone-data': {deps: ['moment']},
+		'moment-helper': {deps: ['moment-timezone-data']},
+		'bootstrap-daterangepicker': {deps: ['jquery', 'moment']},
 
-		'flot': { deps: ['jquery']},
-		'flot-resize': { deps: ['flot']},
-		'flot-fillbetween': { deps: ['flot']},
-		'flot-orderBar': { deps: ['flot']},
-		'flot-pie': { deps: ['flot']},
-		'flot-time': { deps: ['flot']},
-		'flot-tooltip': { deps: ['flot']},
+		'flot': {deps: ['jquery']},
+		'flot-resize': {deps: ['flot']},
+		'flot-fillbetween': {deps: ['flot']},
+		'flot-orderBar': {deps: ['flot']},
+		'flot-pie': {deps: ['flot']},
+		'flot-time': {deps: ['flot']},
+		'flot-tooltip': {deps: ['flot']},
 
 		'morris': {deps: ['raphael']},
 
-		'datatables':{deps: ['jquery']},
-		'datatables-colvis':{deps: ['datatables']},
-		'datatables-tools':{deps: ['datatables']},
-		'datatables-bootstrap':{deps: ['datatables','datatables-tools','datatables-colvis']},
+		'datatables': {deps: ['jquery']},
+		'datatables-colvis': {deps: ['datatables']},
+		'datatables-tools': {deps: ['datatables']},
+		'datatables-bootstrap': {deps: ['datatables', 'datatables-tools', 'datatables-colvis']},
 		'datatables-responsive': {deps: ['datatables']},
 
-		'jqgrid' : {deps: ['jquery']},
-		'jqgrid-locale-en' : {deps: ['jqgrid']},
+		'jqgrid': {deps: ['jquery']},
+		'jqgrid-locale-en': {deps: ['jqgrid']},
 
-		'jquery-maskedinput':{deps: ['jquery']},
-		'jquery-validation':{deps: ['jquery']},
-		'jquery-form':{deps: ['jquery']},
-		'jquery-color':{deps: ['jquery']},
+		'jquery-maskedinput': {deps: ['jquery']},
+		'jquery-validation': {deps: ['jquery']},
+		'jquery-form': {deps: ['jquery']},
+		'jquery-color': {deps: ['jquery']},
 
-		'jcrop':{deps: ['jquery-color']},
+		'jcrop': {deps: ['jquery-color']},
 
-		'bootstrap-validator':{deps: ['jquery']},
+		'bootstrap-validator': {deps: ['jquery']},
 
-		'bootstrap-timepicker':{deps: ['jquery']},
-		'clockpicker':{deps: ['jquery']},
-		'nouislider':{deps: ['jquery']},
-		'ionslider':{deps: ['jquery']},
-		'bootstrap-duallistbox':{deps: ['jquery']},
-		'bootstrap-colorpicker':{deps: ['jquery']},
-		'jquery-knob':{deps: ['jquery']},
-		'bootstrap-slider':{deps: ['jquery']},
-		'bootstrap-tagsinput':{deps: ['jquery']},
-		'x-editable':{deps: ['jquery']},
+		'bootstrap-timepicker': {deps: ['jquery']},
+		'clockpicker': {deps: ['jquery']},
+		'nouislider': {deps: ['jquery']},
+		'ionslider': {deps: ['jquery']},
+		'bootstrap-duallistbox': {deps: ['jquery']},
+		'bootstrap-colorpicker': {deps: ['jquery']},
+		'jquery-knob': {deps: ['jquery']},
+		'bootstrap-slider': {deps: ['jquery']},
+		'bootstrap-tagsinput': {deps: ['jquery']},
+		'x-editable': {deps: ['jquery']},
 
-		'fuelux-wizard':{deps: ['jquery']},
-		'bootstrap':{deps: ['jquery']},
+		'fuelux-wizard': {deps: ['jquery']},
+		'bootstrap': {deps: ['jquery']},
 
-		'magnific-popup': { deps: ['jquery']},
-		'modules-includes': { deps: ['angular']},
-		'sparkline': { deps: ['jquery']},
-		'easy-pie': { deps: ['jquery']},
-		'jquery-jvectormap': { deps: ['jquery']},
-		'jquery-jvectormap-world-mill-en': { deps: ['jquery']},
+		'magnific-popup': {deps: ['jquery']},
+		'modules-includes': {deps: ['angular']},
+		'sparkline': {deps: ['jquery']},
+		'easy-pie': {deps: ['jquery']},
+		'jquery-jvectormap': {deps: ['jquery']},
+		'jquery-jvectormap-world-mill-en': {deps: ['jquery']},
 
-		'dropzone': { deps: ['jquery']},
+		'dropzone': {deps: ['jquery']},
 
-		'bootstrap-progressbar': { deps: ['bootstrap']},
+		'bootstrap-progressbar': {deps: ['bootstrap']},
 
 
-		'jquery-ui': { deps: ['jquery']},
-		'jquery-nestable': { deps: ['jquery']},
+		'jquery-ui': {deps: ['jquery']},
+		'jquery-nestable': {deps: ['jquery']},
 
-		'superbox': { deps: ['jquery']},
+		'superbox': {deps: ['jquery']},
 
-		'notification': { deps: ['jquery']},
+		'notification': {deps: ['jquery']},
 
-		'smartwidgets': { deps: ['jquery-ui']}
+		'smartwidgets': {deps: ['jquery-ui']}
 
 	},
 	priority: [

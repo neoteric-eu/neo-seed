@@ -43,7 +43,10 @@
     "ngSanitize": false,
     "ngCookies": false,
     "ngResource": false,
-    "xit": false
+    "xit": false,
+	 /* Protractor */
+	"element" : false,
+	"by" : false
   }
 }
 

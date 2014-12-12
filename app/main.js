@@ -1,5 +1,5 @@
 // Defer AngularJS bootstrap
-window.name = "NG_DEFER_BOOTSTRAP!";
+window.name = 'NG_DEFER_BOOTSTRAP!';
 
 define([
 	'require',

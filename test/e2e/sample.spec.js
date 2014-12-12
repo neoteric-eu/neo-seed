@@ -10,5 +10,4 @@ describe('Sample E2E test', function () {
 		expect(element(by.binding('latest')).getText()).
 				toEqual('3');
 	});
-
 });

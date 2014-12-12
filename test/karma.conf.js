@@ -18,27 +18,26 @@ module.exports = function(config) {
 			{pattern: 'app/bower_components/angular-cookies/angular-cookies.js', included: false },
 			{pattern: 'app/bower_components/angular-sanitize/angular-sanitize.js', included: false },
 			{pattern: 'app/bower_components/angular-route/angular-route.js', included: false },
-			{pattern: 'app/bower_components/underscore/underscore.js', included: false },
 			{pattern: 'app/bower_components/angular-gettext/dist/angular-gettext.min.js', included: false },
+			{pattern: 'app/bower_components/angular-couch-potato/dist/angular-couch-potato.js', included: false },
+			{pattern: 'app/bower_components/angular-ui-router/release/angular-ui-router.min.js', included: false },
 			// {pattern: 'app/bower_components/raven-js/dist/raven.min.js', included: false },
 			// {pattern: 'app/plugins/sentry-client/*.js', included: false },
-			{pattern: 'app/scripts/*.js', included: false },
-			{pattern: 'app/scripts/**/*.js', included: false },
-			{pattern: 'app/modules/**/*.js', included: false },
-			// {pattern: 'app/modules/**/**/*.js', included: false },
+			{pattern: 'app/modules/app-views/module.js', included: false},
+			{pattern: 'app/modules/app-views/.js', included: false},
+			{pattern: 'app/modules/**/test/unit/**/*.spec.js', included: false },
+			{pattern: 'test/unit/**/*.spec.js', included: false },
 
 			// http://karma-runner.github.io/0.10/plus/requirejs.html
 			'test/test-bootstrap.js'
 		],
 
 		// list of files / patterns to exclude
-		exclude: [
-			'app/scripts/bootstrap.js',
-			'app/scripts/main.js'
-		],
+		//exclude: [
+		//],
 
 		// web server port
-		// port: 8080,
+		//port: 9000,
 
 		// level of logging
 		// possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
@@ -61,10 +60,12 @@ module.exports = function(config) {
 
 
 		// without coverage
-		// reporters: ['progress', 'dots'],
+		reporters: ['progress'],
 
 		// Continuous Integration mode
 		// if true, it capture browsers, run tests and exit
-		singleRun: false
+		singleRun: true,
+
+		colors: true
 	});
 };

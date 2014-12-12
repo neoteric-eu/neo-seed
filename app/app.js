@@ -58,8 +58,8 @@ define([
                 $.bigBox({
                     title: rejection.status + ' ' + rejection.statusText,
                     content: rejection.data,
-                    color: "#C46A69",
-                    icon: "fa fa-warning shake animated",
+                    color: '#C46A69',
+                    icon: 'fa fa-warning shake animated',
                     number: ++errorCounter,
                     timeout: 6000
                 });
