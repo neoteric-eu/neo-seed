@@ -26,12 +26,12 @@
 				EMAILS: '@@EMAILS',
 
 				DOMAIN: 'neoteric.eu',
-				APP_NAME: 'Neoteric',
+				APP_NAME: 'Neoteric'
 
 			},
 			get: function(element) {
 				return this.cfg[element];
-			},
+			}
 		};
 	});
 }());
