@@ -10,92 +10,108 @@
  */
 
 define([
-    'angular',
-    'angular-couch-potato',
-    'angular-ui-router',
-    'angular-animate',
-    'angular-bootstrap',
-    'smartwidgets',
-    'notification'
+	'angular',
+	'angular-couch-potato',
+	'angular-resource',
+	'angular-ui-router',
+	'angular-animate',
+	'angular-bootstrap',
+	'angular-gettext',
+	'smartwidgets',
+	'notification',
+	'modules/miniCore/miniCoreModule',
 ], function (ng, couchPotato) {
 
-    var app = ng.module('app', [
-        'ngSanitize',
+	var app = ng.module('app', [
+		'ngSanitize',
+		'ngCookies',
+		'ngResource',
+		'ngRoute',
+		'xeditable',
+		'ngTable',
+		'sentryClient',
+		'gettext',
 
-        'scs.couch-potato',
-        'ngAnimate',
-        'ui.router',
-        'ui.bootstrap',
-        // App
-        'app.auth',
-        'app.layout',
-        'app.chat',
-        'app.dashboard',
-        'app.calendar',
-        'app.inbox',
-        'app.graphs',
-        'app.tables',
-        'app.forms',
-        'app.ui',
-        'app.widgets',
-        'app.maps',
-        'app.appViews',
-        'app.misc',
-        'app.smartAdmin'
-    ]);
+		'scs.couch-potato',
+		'ngAnimate',
+		'ui.router',
+		'ui.bootstrap',
+		// App
+		'app.auth',
+		'app.layout',
+		'app.chat',
+		'app.dashboard',
+		'app.calendar',
+		'app.inbox',
+		'app.graphs',
+		'app.tables',
+		'app.forms',
+		'app.ui',
+		'app.widgets',
+		'app.maps',
+		'app.appViews',
+		'app.misc',
+		'app.smartAdmin',
 
-    couchPotato.configureApp(app);
+		'miniCore',
+		'miniCore.controllers',
+		'miniCore.directives',
+		'miniCore.services'
+	]);
 
-    app.config(function ($provide, $httpProvider) {
+	couchPotato.configureApp(app);
+
+	app.config(function ($provide, $httpProvider) {
 
 
 
-        // Intercept http calls.
-        $provide.factory('ErrorHttpInterceptor', function ($q) {
-            var errorCounter = 0;
-            function notifyError(rejection){
-                console.log(rejection);
-                $.bigBox({
-                    title: rejection.status + ' ' + rejection.statusText,
-                    content: rejection.data,
-                    color: '#C46A69',
-                    icon: 'fa fa-warning shake animated',
-                    number: ++errorCounter,
-                    timeout: 6000
-                });
-            }
+		// Intercept http calls.
+		$provide.factory('ErrorHttpInterceptor', function ($q) {
+			var errorCounter = 0;
 
-            return {
-                // On request failure
-                requestError: function (rejection) {
-                    // show notification
-                    notifyError(rejection);
+			function notifyError(rejection) {
+				console.log(rejection);
+				$.bigBox({
+					title: rejection.status + ' ' + rejection.statusText,
+					content: rejection.data,
+					color: '#C46A69',
+					icon: 'fa fa-warning shake animated',
+					number: ++errorCounter,
+					timeout: 6000
+				});
+			}
 
-                    // Return the promise rejection.
-                    return $q.reject(rejection);
-                },
+			return {
+				// On request failure
+				requestError: function (rejection) {
+					// show notification
+					notifyError(rejection);
 
-                // On response failure
-                responseError: function (rejection) {
-                    // show notification
-                    notifyError(rejection);
-                    // Return the promise rejection.
-                    return $q.reject(rejection);
-                }
-            };
-        });
+					// Return the promise rejection.
+					return $q.reject(rejection);
+				},
 
-        // Add the interceptor to the $httpProvider.
-        $httpProvider.interceptors.push('ErrorHttpInterceptor');
+				// On response failure
+				responseError: function (rejection) {
+					// show notification
+					notifyError(rejection);
+					// Return the promise rejection.
+					return $q.reject(rejection);
+				}
+			};
+		});
 
-    });
+		// Add the interceptor to the $httpProvider.
+		$httpProvider.interceptors.push('ErrorHttpInterceptor');
 
-    app.run(function ($couchPotato, $rootScope, $state, $stateParams) {
-        app.lazy = $couchPotato;
-        $rootScope.$state = $state;
-        $rootScope.$stateParams = $stateParams;
-        // editableOptions.theme = 'bs3';
-    });
+	});
 
-    return app;
+	app.run(function ($couchPotato, $rootScope, $state, $stateParams) {
+		app.lazy = $couchPotato;
+		$rootScope.$state = $state;
+		$rootScope.$stateParams = $stateParams;
+		// editableOptions.theme = 'bs3';
+	});
+
+	return app;
 });

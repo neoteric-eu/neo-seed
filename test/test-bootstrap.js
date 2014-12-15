@@ -2,7 +2,7 @@ var tests = [];
 for (var file in window.__karma__.files) {
 	if (window.__karma__.files.hasOwnProperty(file)) {
 		// Grab all files path with "Spec" end naming
-		if (/\.js$/.test(file)) {
+		if (/\.spec\.js$/.test(file)) {
 			tests.push(file);
 		}
 	}
@@ -15,17 +15,37 @@ require.config({
 	paths: {
 		'jquery': [
 			'//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min',
-			'../app/bower_components/jquery/dist/jquery.min'
+			'bower_components/jquery/dist/jquery.min'
 		],
-		'jquery-ui': ['//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min'],
-
-		'bootstrap': ['//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min'],
-
-		'angular': ['//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular'],
-		'angular-cookies': ['//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-cookies.min'],
-		'angular-resource': ['//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-resource.min'],
-		'angular-sanitize': ['//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-sanitize.min'],
-		'angular-animate': ['//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-animate.min'],
+		'jquery-ui': [
+			'//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min',
+			'bower_components/jquery-ui/jquery-ui.min.js'
+		],
+		'bootstrap': [
+			'//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min',
+			'bower_components/bootstrap/dist/js/bootstrap.min.js'
+		],
+		'angular': [
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular',
+			'bower_components/angular/angular.min.js'
+		],
+		'angular-cookies': [
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-cookies.min',
+			'bower_components/angular-cookies/angular-cookies.min.js'
+		],
+		'angular-resource': [
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-resource.min',
+			'bower_components/angular-resource/angular-resource.min.js'
+		],
+		'angular-sanitize': [
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-sanitize.min',
+			'bower_components/angular-sanitize/angular-sanitize.min.js'
+		],
+		'angular-animate': [
+			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-animate.min',
+			'bower_components/angular-animate/angular-animate.min.js'
+		],
+		'angular-mocks': 'bower_components/angular-mocks/angular-mocks',
 
 
 		'domReady': '../app/bower_components/requirejs-domready/domReady',
@@ -140,6 +160,7 @@ require.config({
 		'angular': {'exports': 'angular', deps: ['jquery']},
 
 		'angular-animate': {deps: ['angular']},
+		'angular-mocks': {deps: ['angular']},
 		'angular-resource': {deps: ['angular']},
 		'angular-cookies': {deps: ['angular']},
 		'angular-sanitize': {deps: ['angular']},

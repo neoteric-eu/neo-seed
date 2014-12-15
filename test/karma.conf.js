@@ -5,6 +5,7 @@ module.exports = function(config) {
 	'use strict';
 	config.set({
 		// base path, that will be used to resolve files and exclude
+		urlArgs: (new Date()).getTime(),
 		basePath: '../',
 
 		// testing framework to use (jasmine/mocha/qunit/...)
@@ -13,6 +14,7 @@ module.exports = function(config) {
 		// list of files / patterns to load in the browser
 		files: [
 			{pattern: 'app/bower_components/angular/angular.js', included: false },
+			{pattern: 'app/bower_components/lodash/dist/lodash.min.js', included: false},
 			{pattern: 'app/bower_components/angular-mocks/angular-mocks.js', included: false },
 			{pattern: 'app/bower_components/angular-resource/angular-resource.js', included: false },
 			{pattern: 'app/bower_components/angular-cookies/angular-cookies.js', included: false },
@@ -21,10 +23,21 @@ module.exports = function(config) {
 			{pattern: 'app/bower_components/angular-gettext/dist/angular-gettext.min.js', included: false },
 			{pattern: 'app/bower_components/angular-couch-potato/dist/angular-couch-potato.js', included: false },
 			{pattern: 'app/bower_components/angular-ui-router/release/angular-ui-router.min.js', included: false },
+			{
+				pattern: 'app/plugins/template_smart-admin/DEVELOPER/AngularJS_version/public/smartadmin-plugin/smartwidgets/jarvis.widget.min.js',
+				included: false
+			},
+			{
+				pattern: 'app/plugins/template_smart-admin/DEVELOPER/AngularJS_version/public/smartadmin-plugin/notification/SmartNotification.min.js',
+				included: false
+			},
+			{pattern: 'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js', included: false},
+			{pattern: 'app/app.js', included: false},
+			{pattern: 'app/modules/global_settings.js', included: false},
+			{pattern: 'app/modules/miniCore/**/*.js', included: false},
 			// {pattern: 'app/bower_components/raven-js/dist/raven.min.js', included: false },
 			// {pattern: 'app/plugins/sentry-client/*.js', included: false },
-			{pattern: 'app/modules/app-views/module.js', included: false},
-			{pattern: 'app/modules/app-views/.js', included: false},
+
 			{pattern: 'app/modules/**/test/unit/**/*.spec.js', included: false },
 			{pattern: 'test/unit/**/*.spec.js', included: false },
 
