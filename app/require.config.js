@@ -138,9 +138,9 @@ var requirejs = {
 
 		'magnific-popup': 'bower_components/magnific-popup/dist/jquery.magnific-popup',
 
-		'fullcalendar': 'plugins/template_smart-admin/DEVELOPER/AngularJS_version/public/smartadmin-plugin/fullcalendar/jquery.fullcalendar.min',
-		'smartwidgets': 'plugins/template_smart-admin/DEVELOPER/AngularJS_version/public/smartadmin-plugin/smartwidgets/jarvis.widget.min',
-		'notification': 'plugins/template_smart-admin/DEVELOPER/AngularJS_version/public/smartadmin-plugin/notification/SmartNotification.min',
+		'fullcalendar': 'plugins/fullcalendar/jquery.fullcalendar.min',
+		'smartwidgets': 'plugins/smartwidgets/jarvis.widget.min',
+		'notification': 'plugins/notification/SmartNotification.min',
 
 		// app js file includes
 		'appConfig': 'plugins/app.config',

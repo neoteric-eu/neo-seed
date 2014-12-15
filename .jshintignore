@@ -15,6 +15,7 @@ app/modules/tables
 app/modules/ui
 app/modules/widgets
 app/plugins
+coverage
 dist
 node_modules
 

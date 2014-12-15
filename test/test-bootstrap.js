@@ -147,9 +147,9 @@ require.config({
 		'lodash': '../app/bower_components/lodash/dist/lodash.min',
 		'angular-gettext': '../app/bower_components/angular-gettext/dist/angular-gettext.min',
 
-		'fullcalendar': '../app/plugins/template_smart-admin/DEVELOPER/AngularJS_version/public/smartadmin-plugin/fullcalendar/jquery.fullcalendar.min',
-		'smartwidgets': '../app/plugins/template_smart-admin/DEVELOPER/AngularJS_version/public/smartadmin-plugin/smartwidgets/jarvis.widget.min',
-		'notification': '../app/plugins/template_smart-admin/DEVELOPER/AngularJS_version/public/smartadmin-plugin/notification/SmartNotification.min',
+		'fullcalendar': '../app/plugins/fullcalendar/jquery.fullcalendar.min',
+		'smartwidgets': '../app/plugins/smartwidgets/jarvis.widget.min',
+		'notification': '../app/plugins/notification/SmartNotification.min',
 
 		// app js file includes
 		'appConfig': '../app/plugins/app.config',
