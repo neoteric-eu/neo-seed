@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	define([], function() {
+	define(['angular'], function(angular) {
 
 		return {
 			cfg: {
@@ -30,7 +30,7 @@
 
 			},
 			get: function(element) {
-				return this.cfg[element];
+				return angular.fromJson(this.cfg[element]);
 			}
 		};
 	});

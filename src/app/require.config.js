@@ -71,21 +71,21 @@ var requirejs = {
 		'sparkline': '../vendor/bower_components/relayfoods-jquery.sparkline/dist/jquery.sparkline.min',
 		'easy-pie': '../vendor/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min',
 
-		'flot': '../vendor/smart-admin-1.5.2/plugins/flot/jquery.flot.cust.min',
-		'flot-resize': '../vendor/smart-admin-1.5.2/plugins/flot/jquery.flot.resize.min',
-		'flot-fillbetween': '../vendor/smart-admin-1.5.2/plugins/flot/jquery.flot.fillbetween.min',
-		'flot-orderBar': '../vendor/smart-admin-1.5.2/plugins/flot/jquery.flot.orderBar.min',
-		'flot-pie': '../vendor/smart-admin-1.5.2/plugins/flot/jquery.flot.pie.min',
-		'flot-time': '../vendor/smart-admin-1.5.2/plugins/flot/jquery.flot.time.min',
-		'flot-tooltip': '../vendor/smart-admin-1.5.2/plugins/flot/jquery.flot.tooltip.min',
+		'flot': '../vendor/smart-admin-plugins/flot/jquery.flot.cust.min',
+		'flot-resize': '../vendor/smart-admin-plugins/flot/jquery.flot.resize.min',
+		'flot-fillbetween': '../vendor/smart-admin-plugins/flot/jquery.flot.fillbetween.min',
+		'flot-orderBar': '../vendor/smart-admin-plugins/flot/jquery.flot.orderBar.min',
+		'flot-pie': '../vendor/smart-admin-plugins/flot/jquery.flot.pie.min',
+		'flot-time': '../vendor/smart-admin-plugins/flot/jquery.flot.time.min',
+		'flot-tooltip': '../vendor/smart-admin-plugins/flot/jquery.flot.tooltip.min',
 
-		'raphael': '../vendor/smart-admin-1.5.2/plugins/morris/raphael.min',
-		'morris': '../vendor/smart-admin-1.5.2/plugins/morris/morris.min',
+		'raphael': '../vendor/smart-admin-plugins/morris/raphael.min',
+		'morris': '../vendor/smart-admin-plugins/morris/morris.min',
 
-		'dygraphs': '../vendor/smart-admin-1.5.2/plugins/dygraphs/dygraph-combined.min',
-		'dygraphs-demo': '../vendor/smart-admin-1.5.2/plugins/dygraphs/demo-data.min',
+		'dygraphs': '../vendor/smart-admin-plugins/dygraphs/dygraph-combined.min',
+		'dygraphs-demo': '../vendor/smart-admin-plugins/dygraphs/demo-data.min',
 
-		'chartjs': '../vendor/smart-admin-1.5.2/plugins/chartjs/chart.min',
+		'chartjs': '../vendor/smart-admin-plugins/chartjs/chart.min',
 
 		'datatables': '../vendor/bower_components/datatables/media/js/jquery.dataTables.min',
 		'datatables-bootstrap': '../vendor/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap',
@@ -126,10 +126,10 @@ var requirejs = {
 		'bootstrap-progressbar': '../vendor/bower_components/bootstrap-progressbar/bootstrap-progressbar.min',
 		'jquery-nestable': '../vendor/bower_components/jquery-nestable/jquery.nestable',
 
-		'superbox': '../vendor/smart-admin-1.5.2/plugins/superbox/superbox.min',
+		'superbox': '../vendor/smart-admin-plugins/superbox/superbox.min',
 
-		'jquery-jvectormap': '../vendor/smart-admin-1.5.2/plugins/vectormap/jquery-jvectormap-1.2.2.min',
-		'jquery-jvectormap-world-mill-en': '../vendor/smart-admin-1.5.2/plugins/vectormap/jquery-jvectormap-world-mill-en',
+		'jquery-jvectormap': '../vendor/smart-admin-plugins/vectormap/jquery-jvectormap-1.2.2.min',
+		'jquery-jvectormap-world-mill-en': '../vendor/smart-admin-plugins/vectormap/jquery-jvectormap-world-mill-en',
 
 
 		'lodash': '../vendor/bower_components/lodash/dist/lodash.min',
@@ -137,12 +137,12 @@ var requirejs = {
 
 		'magnific-popup': '../vendor/bower_components/magnific-popup/dist/jquery.magnific-popup',
 
-		'fullcalendar': '../vendor/smart-admin-1.5.2/plugins/fullcalendar/jquery.fullcalendar.min',
-		'smartwidgets': '../vendor/smart-admin-1.5.2/plugins/smartwidgets/jarvis.widget.min',
-		'notification': '../vendor/smart-admin-1.5.2/plugins/notification/SmartNotification.min',
+		'fullcalendar': '../vendor/smart-admin-plugins/fullcalendar/jquery.fullcalendar.min',
+		'smartwidgets': '../vendor/smart-admin-plugins/smartwidgets/jarvis.widget.min',
+		'notification': '../vendor/smart-admin-plugins/notification/SmartNotification.min',
 
 		// app js file includes
-		'appConfig': '../vendor/smart-admin-1.5.2/plugins/app.config',
+		'appConfig': '../vendor/smart-admin-plugins/app.config',
 		'globalSettings': '../app/modules/global_settings'
 	},
 	shim: {

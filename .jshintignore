@@ -1,4 +1,4 @@
-src/app/api
+src/app-demo
 src/vendor/
 src/app/modules/miniTemplate/locale/translations.js
 coverage

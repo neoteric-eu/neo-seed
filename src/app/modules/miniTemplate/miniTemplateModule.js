@@ -1,33 +1,38 @@
-(function () {
+define([
+	'angular',
+	'angular-couch-potato',
+	'angular-ui-router'
+], function (ng, couchPotato) {
 	'use strict';
 
-	define([
-		'angular',
-		'./services/menu',
-		'./services/enums',
-		'./directives/height-watch',
-		'./miniTemplateUrls',
+	var module = ng.module('app.layout', ['ui.router']);
+	couchPotato.configureApp(module);
 
-		// Add module gettextCatalog
-		'./locale/translations'
-
-	], function (angular, menu, enums, heightWatch, miniTemplateUrls) {
-
-		var moduleName = 'miniTemplate';
-		var directives = moduleName + '.directives';
-		var services = moduleName + '.services';
-
-
-		angular.module(moduleName, [])
-				.constant('PATH_MINITEMPLATE', './modules/miniTemplate/')
-				.config(miniTemplateUrls);
-
-		angular.module(directives, [])
-				.directive('heightWatch', heightWatch);
-
-		angular.module(services, [])
-				.service('menu', menu)
-				.service('enums', enums);
-
+	module.config(function ($stateProvider, $couchPotatoProvider, $urlRouterProvider) {
+		$stateProvider
+			.state('app', {
+				abstract: true,
+				views: {
+					root: {
+						templateUrl: 'app/layout/layout.tpl.html',
+						resolve: {
+							deps: $couchPotatoProvider.resolveDependencies([
+								//'auth/directives/loginInfo',
+								'modules/graphs/directives/inline/sparklineContainer',
+								'components/inbox/directives/unreadMessagesCount',
+								'components/chat/api/ChatApi',
+								'components/chat/directives/asideChatWidget'
+							])
+						}
+					}
+				}
+			});
+		$urlRouterProvider.otherwise('/dashboard');
 	});
-}());
+
+	module.run(function ($couchPotato) {
+		module.lazy = $couchPotato;
+	});
+
+	return module;
+});

@@ -10,6 +10,7 @@ define([
 	//'pace',
 	'bootstrap',
 	'appConfig',
+	'includes',
 	'app'
 ], function (require, $, ng, domReady) {
 	'use strict';

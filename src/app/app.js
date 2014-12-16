@@ -12,6 +12,7 @@
 define([
 	'angular',
 	'angular-couch-potato',
+	'angular-resource',
 	'angular-ui-router',
 	'angular-sanitize',
 	'angular-animate',
@@ -19,38 +20,23 @@ define([
 	'angular-gettext',
 	'smartwidgets',
 	'notification',
-	'modules/miniCore/miniCoreModule'
 ], function (ng, couchPotato) {
 
 	var app = ng.module('app', [
 		'ngSanitize',
+		'ngResource',
 
 		'scs.couch-potato',
 		'ngAnimate',
 		'ui.router',
 		'ui.bootstrap',
 
-		// App
-		//'app.auth',
-		//'app.layout',
-		//'app.chat',
-		//'app.dashboard',
-		//'app.calendar',
-		//'app.inbox',
-		//'app.graphs',
-		//'app.tables',
-		//'app.forms',
-		//'app.ui',
-		//'app.widgets',
-		//'app.maps',
-		//'app.appViews',
-		//'app.misc',
-		//'app.smartAdmin',
-
+		// App modules
 		'miniCore',
-		'miniCore.controllers',
-		'miniCore.directives',
-		'miniCore.services'
+		'layout',
+		'app.auth',
+		'app.forms'
+		//'miniTemplate'
 	]);
 
 	couchPotato.configureApp(app);

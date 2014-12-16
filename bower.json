@@ -2,6 +2,7 @@
 	"name": "Neoteric",
 	"version": "0.0.0",
 	"private": true,
+	"appPath": "src/app",
 	"dependencies": {
 		"requirejs-domready": "~2.0.1",
 		"angular": "~1.2.25",
