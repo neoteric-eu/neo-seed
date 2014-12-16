@@ -1,44 +1,44 @@
 define(['angular',
-    'angular-couch-potato',
-    'angular-ui-router'], function (ng, couchPotato) {
+	'angular-couch-potato',
+	'angular-ui-router'], function (ng, couchPotato) {
 
-    "use strict";
-
-
-    var module = ng.module('app.layout', ['ui.router']);
+	"use strict";
 
 
-    couchPotato.configureApp(module);
-
-    module.config(function ($stateProvider, $couchPotatoProvider, $urlRouterProvider) {
+	var module = ng.module('app.layout', ['ui.router']);
 
 
-        $stateProvider
-            .state('app', {
-                abstract: true,
-                views: {
-                    root: {
-                        templateUrl: 'app-demo/layout/layout.tpl.html',
-                        resolve: {
-                            deps: $couchPotatoProvider.resolveDependencies([
-                                //'auth/directives/loginInfo',
-                                'modules/graphs/directives/inline/sparklineContainer',
-                                'components/inbox/directives/unreadMessagesCount',
-                                'components/chat/api/ChatApi',
-                                'components/chat/directives/asideChatWidget'
-                            ])
-                        }
-                    }
-                }
-            });
-        $urlRouterProvider.otherwise('/dashboard');
+	couchPotato.configureApp(module);
 
-    });
+	module.config(function ($stateProvider, $couchPotatoProvider, $urlRouterProvider) {
 
-    module.run(function ($couchPotato) {
-        module.lazy = $couchPotato;
-    });
 
-    return module;
+		$stateProvider
+				.state('app', {
+					abstract: true,
+					views: {
+						root: {
+							templateUrl: 'app-demo/layout/layout.tpl.html',
+							resolve: {
+								deps: $couchPotatoProvider.resolveDependencies([
+									//'auth/directives/loginInfo',
+									'modules/graphs/directives/inline/sparklineContainer',
+									'components/inbox/directives/unreadMessagesCount',
+									'components/chat/api/ChatApi',
+									'components/chat/directives/asideChatWidget'
+								])
+							}
+						}
+					}
+				});
+		$urlRouterProvider.otherwise('/dashboard');
+
+	});
+
+	module.run(function ($couchPotato) {
+		module.lazy = $couchPotato;
+	});
+
+	return module;
 
 });

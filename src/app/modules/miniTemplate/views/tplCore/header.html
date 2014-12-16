@@ -5,7 +5,6 @@
 </span>
 
 
-
 <div class="ribbon-button-alignment pull-right" ng-if="LANGUAGES.length > 1">
 	<ul class="list-inline">
 		<li class="dropdown">
@@ -13,8 +12,9 @@
 				<span class="no-shadow light-color">{{ lang.data | uppercase }}</span>
 			</a>
 			<ul class="dropdown-menu">
-				<li ng-repeat="item in LANGUAGES" ng-class="{'active': lang.data == item.code}" >
-					<a href="javascript:void(0)" ng-click="switchLang(item.code)"><i class="fa fa-globe"></i> {{ item.name | translate }}</a>
+				<li ng-repeat="item in LANGUAGES" ng-class="{'active': lang.data == item.code}">
+					<a href="javascript:void(0)" ng-click="switchLang(item.code)"><i class="fa fa-globe"></i> {{
+						item.name | translate }}</a>
 				</li>
 			</ul>
 
@@ -31,7 +31,8 @@
 			</a>
 			<ul class="dropdown-menu">
 				<li class="nav-header">{{ 'Available profiles' | translate}}</li>
-				<li ng-repeat="customer in customers" ng-class="{'active': customer.customerName == currentCustomer.data.customerName}">
+				<li ng-repeat="customer in customers"
+					ng-class="{'active': customer.customerName == currentCustomer.data.customerName}">
 					<a href ng-click="switchCustomer(customer)">{{customer.customerName}}</a>
 				</li>
 				<li><a href ng-click="logout()"><i class="icon-off"></i> {{ 'Logout' | translate }}</a></li>

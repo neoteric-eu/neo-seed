@@ -1,35 +1,35 @@
 define(['angular',
-    'angular-couch-potato',
-    'angular-ui-router'], function (ng, couchPotato) {
+	'angular-couch-potato',
+	'angular-ui-router'], function (ng, couchPotato) {
 
-    "use strict";
-
-
-    var module = ng.module('app.calendar', ['ngResource','ui.router']);
+	"use strict";
 
 
-    couchPotato.configureApp(module);
+	var module = ng.module('app.calendar', ['ngResource', 'ui.router']);
 
-    module.config(function ($stateProvider, $couchPotatoProvider) {
 
-        $stateProvider
-            .state('app.calendar', {
-                url: '/calendar',
-                views: {
-                    content: {
-                        templateUrl: 'app-demo/components/calendar/views/calendar.tpl.html'
-                    }
-                },
-                data:{
-                    title: 'Calendar'
-                }
-            });
-    });
+	couchPotato.configureApp(module);
 
-    module.run(function ($couchPotato) {
-        module.lazy = $couchPotato;
-    });
+	module.config(function ($stateProvider, $couchPotatoProvider) {
 
-    return module;
+		$stateProvider
+				.state('app.calendar', {
+					url: '/calendar',
+					views: {
+						content: {
+							templateUrl: 'app-demo/components/calendar/views/calendar.tpl.html'
+						}
+					},
+					data: {
+						title: 'Calendar'
+					}
+				});
+	});
+
+	module.run(function ($couchPotato) {
+		module.lazy = $couchPotato;
+	});
+
+	return module;
 
 });

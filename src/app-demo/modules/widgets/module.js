@@ -1,35 +1,35 @@
 define(['angular',
-    'angular-couch-potato',
-    'angular-ui-router'], function (ng, couchPotato) {
+	'angular-couch-potato',
+	'angular-ui-router'], function (ng, couchPotato) {
 
-    "use strict";
-
-
-    var module = ng.module('app.widgets', ['ui.router']);
+	"use strict";
 
 
-    couchPotato.configureApp(module);
+	var module = ng.module('app.widgets', ['ui.router']);
 
-    module.config(function ($stateProvider, $couchPotatoProvider) {
 
-        $stateProvider
-            .state('app.widgets', {
-                url: '/widgets',
-                data: {
-                    title: 'Widgets'
-                },
-                views: {
-                    "content@app": {
-                        templateUrl: 'app-demo/modules/widgets/views/widgets-demo.html'
-                    }
-                }
-            })
-    });
+	couchPotato.configureApp(module);
 
-    module.run(function ($couchPotato) {
-        module.lazy = $couchPotato;
-    });
+	module.config(function ($stateProvider, $couchPotatoProvider) {
 
-    return module;
+		$stateProvider
+				.state('app.widgets', {
+					url: '/widgets',
+					data: {
+						title: 'Widgets'
+					},
+					views: {
+						"content@app": {
+							templateUrl: 'app-demo/modules/widgets/views/widgets-demo.html'
+						}
+					}
+				})
+	});
+
+	module.run(function ($couchPotato) {
+		module.lazy = $couchPotato;
+	});
+
+	return module;
 
 });

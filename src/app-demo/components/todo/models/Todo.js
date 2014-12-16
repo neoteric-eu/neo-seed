@@ -1,13 +1,13 @@
 define(['app'], function (app) {
 
-    "use strict";
+	"use strict";
 
-    return app.factory('Todo', function ($resource) {
+	return app.factory('Todo', function ($resource) {
 
 
-        return $resource('app-demo/api/todos.json', {'id': '@_id'});
+		return $resource('app-demo/api/todos.json', {'id': '@_id'});
 
-    });
+	});
 
 
 });
