@@ -49,7 +49,7 @@ module.exports = function (grunt) {
 		// Project settings
 		yeoman: {
 			// configurable paths
-			app: require('./bower.json').appPath || 'app',
+			app: require('./bower.json').appPath || 'src',
 			dist: 'dist'
 		},
 
@@ -129,23 +129,9 @@ module.exports = function (grunt) {
 			options: {
 				jshintrc: '.jshintrc',
 				ignores: [
-					'app/api/**/*.js',
-					'app/auth/**/*.js',
-					'app/bower_components/**/*.js',
-					'app/components/**/*.js',
-					'app/dashboard/**/*.js',
-					'app/layout/**/*.js',
-					'app/modules/app-views/**/*.js',
-					'app/modules/forms/**/*.js',
-					'app/modules/graphs/**/*.js',
-					'app/modules/maps/**/*.js',
-					'app/modules/miniTemplate/locale/**/*.js',
-					'app/modules/misc/**/*.js',
-					'app/modules/smart-admin/**/*.js',
-					'app/modules/tables/**/*.js',
-					'app/modules/ui/**/*.js',
-					'app/modules/widgets/**/*.js',
-					'app/plugins/**/*.js',
+					'src/app/api/**/*.js',
+					'src/app/modules/miniTemplate/locale/**/*.js',
+					'src/app/vendor/**/*.js',
 					'dist/**/*.js',
 					'node_modules/**/*.js'
 				],

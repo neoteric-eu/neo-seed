@@ -1,0 +1,84 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Budmore <jmach@neoteri.eu>\n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: app/modules/miniTemplate/views/tplCore/header.html
+msgid "Available profiles"
+msgstr "Dostępne profile"
+
+#: app/modules/miniTemplate/views/modals/chooseCustomerModal.html
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: app/modules/miniTemplate/views/login-page.html
+msgid "Contact support"
+msgstr "Skontaktuj się z obsługą"
+
+#: app/modules/miniTemplate/services/menu.js
+msgid "Dashboard"
+msgstr "Start"
+
+#: app/modules/miniTemplate/views/login/login-form.html
+msgid "Email"
+msgstr "Email"
+
+#: app/modules/miniTemplate/views/login/login-form.html
+msgid "Enter your email address."
+msgstr "Podaj swój adres email"
+
+#: app/modules/miniTemplate/views/login/login-form.html
+msgid "Enter your password."
+msgstr "Podaj hasło"
+
+#: app/modules/miniTemplate/views/login/login-form.html
+msgid "Forgot password?"
+msgstr "Zaponiałeś hasła?"
+
+#: app/modules/miniTemplate/views/login-page.html
+#: app/modules/miniTemplate/views/login/login-form.html
+msgid "Log in"
+msgstr "Zaloguj się"
+
+#: app/modules/miniTemplate/views/login/login-form.html
+msgid "Login as"
+msgstr "Zaloguj się jako"
+
+#: app/modules/miniTemplate/views/tplCore/header.html
+msgid "Logout"
+msgstr "Wyloguj"
+
+#: app/modules/miniTemplate/views/login/login-form.html
+msgid "Password"
+msgstr "Hasło"
+
+#: app/modules/miniTemplate/views/modals/chooseCustomerModal.html
+msgid "Select"
+msgstr "Wybierz"
+
+#: app/modules/miniTemplate/views/modals/chooseCustomerModal.html
+msgid "Select customer to login"
+msgstr "Wybierz profil do zalogowania"
+
+#: app/modules/miniTemplate/views/login/login-form.html
+msgid "Wrong e-mail or password."
+msgstr "Nieprawidłowy e-mail bądź hasło."
+
+#: app/modules/miniTemplate/views/login-page.html
+msgid "question"
+msgstr "pytanie"
+
+#~ msgid "Account admin"
+#~ msgstr "Admin"
+
+#~ msgid "Account user"
+#~ msgstr "User"

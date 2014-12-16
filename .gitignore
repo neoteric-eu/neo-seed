@@ -1,9 +1,8 @@
-app/bower_components
+src/vendor/bower_components
 coverage
 node_modules
 nbproject/
-app/styles/css
-app/modules/global_settings.js
+src/app/modules/global_settings.js
 dist
 npm-debug.log
 

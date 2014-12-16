@@ -1,6 +1,7 @@
 {
 	"name": "Neoteric",
 	"version": "0.0.0",
+	"private": true,
 	"dependencies": {
 		"requirejs-domready": "~2.0.1",
 		"angular": "~1.2.25",
