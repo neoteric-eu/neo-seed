@@ -11,7 +11,7 @@ module.exports = {
 				'.htaccess',
 				'*.html',
 				'views/{,*/}*.html',
-				'bower_components/**/*',
+				'vendor/bower_components/**/*',
 				'images/{,*/}*.{webp}',
 				'fonts/*'
 			]
@@ -21,6 +21,10 @@ module.exports = {
 			dest: '<%= yeoman.dist %>/images',
 			src: ['generated/*']
 		}]
+	},
+	requirejs: {
+		src: '<%= yeoman.app %>/vendor/bower_components/requirejs/require.js',
+		dest: '<%= yeoman.dist %>/vendor/bower_components/requirejs/require.js'
 	},
 	styles: {
 		expand: true,

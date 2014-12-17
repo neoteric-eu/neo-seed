@@ -19,11 +19,11 @@ require.config({
 		],
 		'jquery-ui': [
 			'//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min',
-			'bower_components/jquery-ui/jquery-ui.min.js'
+			'bower_components/jquery-ui/jquery-ui.min'
 		],
 		'bootstrap': [
 			'//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min',
-			'bower_components/bootstrap/dist/js/bootstrap.min.js'
+			'bower_components/bootstrap/dist/js/bootstrap.min'
 		],
 		'angular': [
 			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular',
@@ -31,19 +31,19 @@ require.config({
 		],
 		'angular-cookies': [
 			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-cookies.min',
-			'bower_components/angular-cookies/angular-cookies.min.js'
+			'bower_components/angular-cookies/angular-cookies.min'
 		],
 		'angular-resource': [
 			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-resource.min',
-			'bower_components/angular-resource/angular-resource.min.js'
+			'bower_components/angular-resource/angular-resource.min'
 		],
 		'angular-sanitize': [
 			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-sanitize.min',
-			'bower_components/angular-sanitize/angular-sanitize.min.js'
+			'bower_components/angular-sanitize/angular-sanitize.min'
 		],
 		'angular-animate': [
 			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-animate.min',
-			'bower_components/angular-animate/angular-animate.min.js'
+			'bower_components/angular-animate/angular-animate.min'
 		],
 		'angular-mocks': 'vendor/bower_components/angular-mocks/angular-mocks',
 

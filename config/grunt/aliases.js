@@ -2,22 +2,18 @@ module.exports = {
 	'serve': [
 		'clean:server',
 		'bower-install',
-		'connect:serve',
-		'replace:development',
-		// 'open',
+		'connect:server',
 		'watch'
 	],
 
 	'coverage': [
 		'karma:coverage',
-		'open:coverage',
 		'connect:coverage'
 	],
 
 	'test': [
 		'clean:server',
-		'jshint',
-		'connect:test',
+		'jshint:test',
 		'test:e2e',
 		'test:unit'
 	],
@@ -25,7 +21,7 @@ module.exports = {
 		'karma:unit'
 	],
 	'test:e2e': [
-		'connect:serve',
+		'connect:test',
 		'shell:webdriver_update',
 		'protractor:singlerun'
 	],
@@ -33,16 +29,23 @@ module.exports = {
 	'build': [
 		'clean:dist',
 		'bower-install',
-		'useminPrepare',
 		'less:dev',
-		'concat',
-		'ngAnnotate',
 		'nggettext_compile',
-		// Below task commented out as r.js (via grunt-contrib-requirejs) will take care of this
-		//'uglify',
+		'useminPrepare',
+		'ngAnnotate',
+		'ngtemplates:dist',
+		'requirejs',
+		'concat',
+		'cssmin',
+		//// 'uglify:dist',
+		'copy:requirejs',
+		'copy:dist',
+		//// 'uglify:requirejs',
+		//// 'uglify:generated',
+		//// Below task commented out as r.js (via grunt-contrib-requirejs) will take care of this
+		////'uglify',
 		'rev',
-		'usemin',
-		'copy:dist'
+		'usemin'
 	],
 
 	'staging': [
@@ -56,7 +59,7 @@ module.exports = {
 	],
 
 	'default': [
-		'newer:jshint',
+		'newer:jshint:app',
 		'test',
 		'build'
 	]

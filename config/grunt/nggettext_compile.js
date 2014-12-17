@@ -5,7 +5,7 @@ module.exports = {
 			modulePath: 'app'
 		},
 		files: {
-			'<%= yeoman.app %>/modules/miniTemplate/locale/translations.js': ['<%= yeoman.app %>/modules/{,**/}*.po']
+			'<%= yeoman.app %>/app/modules/miniTemplate/locale/translations.js': ['<%= yeoman.app %>/app/modules/{,**/}*.po']
 		}
 	}
 };

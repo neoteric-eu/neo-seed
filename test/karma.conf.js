@@ -33,12 +33,11 @@ module.exports = function (config) {
 			{pattern: 'test/unit/**/*.spec.js', included: false},
 
 			// http://karma-runner.github.io/0.10/plus/requirejs.html
-			'test/test-bootstrap.js'
+			'test/require.config.js'
 		],
 
 		// list of files / patterns to exclude
-		//exclude: [
-		//],
+		//exclude: [],
 
 		// web server port
 		//port: 9000,
@@ -47,10 +46,8 @@ module.exports = function (config) {
 		// possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
 		logLevel: config.LOG_INFO,
 
-
 		// enable / disable watching file and executing tests whenever any file changes
 		autoWatch: false,
-
 
 		// Start these browsers, currently available:
 		// - Chrome

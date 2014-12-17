@@ -8,31 +8,31 @@ var requirejs = {
 		],
 		'jquery-ui': [
 			'//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min',
-			'../vendor/bower_components/jquery-ui/jquery-ui.min.js'
+			'../vendor/bower_components/jquery-ui/jquery-ui.min'
 		],
 		'bootstrap': [
 			'//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min',
-			'../vendor/bower_components/bootstrap/dist/js/bootstrap.min.js'
+			'../vendor/bower_components/bootstrap/dist/js/bootstrap.min'
 		],
 		'angular': [
 			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular',
-			'../vendor/bower_components/angular/angular.min.js'
+			'../vendor/bower_components/angular/angular.min'
 		],
 		'angular-cookies': [
 			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-cookies.min',
-			'../vendor/bower_components/angular-cookies/angular-cookies.min.js'
+			'../vendor/bower_components/angular-cookies/angular-cookies.min'
 		],
 		'angular-resource': [
 			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-resource.min',
-			'../vendor/bower_components/angular-resource/angular-resource.min.js'
+			'../vendor/bower_components/angular-resource/angular-resource.min'
 		],
 		'angular-sanitize': [
 			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-sanitize.min',
-			'../vendor/bower_components/angular-sanitize/angular-sanitize.min.js'
+			'../vendor/bower_components/angular-sanitize/angular-sanitize.min'
 		],
 		'angular-animate': [
 			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-animate.min',
-			'../vendor/bower_components/angular-animate/angular-animate.min.js'
+			'../vendor/bower_components/angular-animate/angular-animate.min'
 		],
 
 		'domReady': '../vendor/bower_components/requirejs-domready/domReady',

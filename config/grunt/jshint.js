@@ -11,14 +11,19 @@ module.exports = {
 		],
 		reporters: [require('jshint-stylish')]
 	},
-	all: [
-		'Gruntfile.js',
-		'<%= yeoman.app %>/app/**/*.js'
-	],
+	app: {
+		src: [
+			'Gruntfile.js',
+			'<%= yeoman.app %>/app/**/*.js'
+		]
+	},
 	test: {
 		options: {
 			jshintrc: 'test/.jshintrc'
 		},
-		src: ['test/**/*.js']
+		src: [
+			'test/**/*.spec.js',
+			'<%= yeoman.app %>/app/**/*.spec.js'
+		]
 	}
 };

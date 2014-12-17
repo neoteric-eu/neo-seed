@@ -1,37 +1,27 @@
 // The actual grunt server settings
 module.exports = {
-	// livereload: {
-	// 	options: {
-	// 		open: true,
-	// 		base: [
-	// 			'.tmp',
-	// 			'<%= yeoman.app %>'
-	// 		]
-	// 	}
-	// },
-	serve: {
+	server: {
 		options: {
+			hostname: 'localhost',
 			port: 9000,
-			hostname: '0.0.0.0',
-			base: [
-				'<%= yeoman.app %>'
-			]
+			base: '<%= yeoman.app %>',
+			open: true,
+			keepalive: true
 		}
 	},
 	test: {
 		options: {
+			hostname: 'localhost',
 			port: 9010,
-			base: [
-				'.tmp',
-				'test',
-				'<%= yeoman.app %>'
-			]
+			base: '<%= yeoman.app %>'
 		}
 	},
 	coverage: {
 		options: {
-			base: 'coverage/',
+			hostname: 'localhost',
 			port: 9020,
+			base: '<%= yeoman.coverage %>',
+			open: true,
 			keepalive: true
 		}
 	}

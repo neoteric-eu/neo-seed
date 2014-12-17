@@ -1,31 +1,24 @@
 // Watches files for changes and runs tasks based on the changed files
 module.exports = {
 	js: {
-		files: ['<%= yeoman.app %>/scripts/{,*/}*.js', '<%= yeoman.app %>/modules/{,**/}*.js'],
-		tasks: ['newer:jshint:all']
-		// options: {
-		// 	livereload: true
-		// }
+		files: ['<%= yeoman.app %>/app/**/*.js'],
+		tasks: 'newer:jshint:all'
 	},
-	jsTest: {
-		files: ['<%= yeoman.app %>/scripts/{,*/}*.js', '<%= yeoman.app %>/modules/{,**/}*.js'],
-		tasks: ['newer:jshint:test']
+	js_test: {
+		files: ['test/**/*.spec.js'],
+		tasks: 'newer:jshint:test'
 	},
-	styles: {
-		files: '<%= yeoman.app %>/{,**/}*.less',
+	styles_less: {
+		files: '<%= yeoman.app %>/styles/less/**/*.less',
 		tasks: 'less:dev'
 	},
+	styles_scss: {
+		files: '<%= yeoman.app %>/styles/scss/**/*.scss'
+	},
 	gruntfile: {
-		files: ['Gruntfile.js']
+		files: [ 'Gruntfile.js', 'grunt/*.js'],
+		options: {
+			reload: true
+		}
 	}
-	// livereload: {
-	// 	options: {
-	// 		livereload: '<%= connect.options.livereload %>'
-	// 	},
-	// 	files: [
-	// 		'<%= yeoman.app %>/{,*/}*.html',
-	// 		'.tmp/styles/{,*/}*.css',
-	// 		'<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-	// 	]
-	// }
 };
