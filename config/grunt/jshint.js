@@ -3,17 +3,17 @@ module.exports = {
 	options: {
 		jshintrc: '.jshintrc',
 		ignores: [
-			'src/app/api/**/*.js',
-			'src/app/modules/miniTemplate/locale/**/*.js',
-			'src/app/vendor/**/*.js',
-			'dist/**/*.js',
+			'<%= yeoman.app %>/app/api/**/*.js',
+			'<%= yeoman.app %>/app/modules/miniTemplate/locale/**/*.js',
+			'<%= yeoman.app %>/vendor/**/*.js',
+			'<%= yeoman.dist %>/**/*.js',
 			'node_modules/**/*.js'
 		],
-		reporter: require('jshint-stylish')
+		reporters: [require('jshint-stylish')]
 	},
 	all: [
 		'Gruntfile.js',
-		'<%= yeoman.app %>/**/*.js'
+		'<%= yeoman.app %>/app/**/*.js'
 	],
 	test: {
 		options: {

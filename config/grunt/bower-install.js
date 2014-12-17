@@ -1,6 +1,6 @@
 // Automatically inject Bower components into the app
 module.exports = {
-	app: {
+	options: {
 		html: '<%= yeoman.app %>/index.html',
 		ignorePath: '<%= yeoman.app %>/'
 	}

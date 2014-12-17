@@ -1,4 +1,4 @@
 module.exports = {
-	app: 'src/app',
-	dist: 'dist/app'
+	app: 'src/',
+	dist: 'dist/'
 };
