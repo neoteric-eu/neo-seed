@@ -10,10 +10,9 @@ module.exports = {
 				'*.{ico,png,txt}',
 				'.htaccess',
 				'*.html',
-				'views/{,*/}*.html',
-				'vendor/bower_components/**/*',
-				'images/{,*/}*.{webp}',
-				'fonts/*'
+				'styles/css/*',
+				'styles/fonts/*',
+				'styles/img/*'
 			]
 		}, {
 			expand: true,
@@ -21,15 +20,5 @@ module.exports = {
 			dest: '<%= yeoman.dist %>/images',
 			src: ['generated/*']
 		}]
-	},
-	requirejs: {
-		src: '<%= yeoman.app %>/vendor/bower_components/requirejs/require.js',
-		dest: '<%= yeoman.dist %>/vendor/bower_components/requirejs/require.js'
-	},
-	styles: {
-		expand: true,
-		cwd: '<%= yeoman.app %>/styles',
-		dest: '.tmp/styles/',
-		src: '{,*/}*.css'
 	}
 };

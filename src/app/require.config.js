@@ -2,38 +2,23 @@
 var requirejs = {
 	waitSeconds: 0,
 	paths: {
-		'jquery': [
-			'//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min',
-			'../vendor/bower_components/jquery/dist/jquery.min'
-		],
-		'jquery-ui': [
-			'//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min',
-			'../vendor/bower_components/jquery-ui/jquery-ui.min'
-		],
-		'bootstrap': [
-			'//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min',
-			'../vendor/bower_components/bootstrap/dist/js/bootstrap.min'
-		],
-		'angular': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular',
-			'../vendor/bower_components/angular/angular.min'
-		],
-		'angular-cookies': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-cookies.min',
-			'../vendor/bower_components/angular-cookies/angular-cookies.min'
-		],
-		'angular-resource': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-resource.min',
-			'../vendor/bower_components/angular-resource/angular-resource.min'
-		],
-		'angular-sanitize': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-sanitize.min',
-			'../vendor/bower_components/angular-sanitize/angular-sanitize.min'
-		],
-		'angular-animate': [
-			'//ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular-animate.min',
-			'../vendor/bower_components/angular-animate/angular-animate.min'
-		],
+		'jquery': '../vendor/bower_components/jquery/jquery',
+
+		'jquery-ui': '../vendor/bower_components/jquery-ui/jquery-ui.min',
+
+		'bootstrap': '../vendor/bower_components/bootstrap/dist/js/bootstrap.min',
+
+		'angular': '../vendor/bower_components/angular/angular.min',
+
+		'angular-cookies': '../vendor/bower_components/angular-cookies/angular-cookies.min',
+
+		'angular-resource': '../vendor/bower_components/angular-resource/angular-resource.min',
+
+		'angular-sanitize': '../vendor/bower_components/angular-sanitize/angular-sanitize.min',
+
+		'angular-animate': '../vendor/bower_components/angular-animate/angular-animate.min',
+
+		'almond': '../vendor/bower_components/almond/almond',
 
 		'domReady': '../vendor/bower_components/requirejs-domready/domReady',
 
@@ -143,7 +128,8 @@ var requirejs = {
 
 		// app js file includes
 		'appConfig': '../vendor/smart-admin-plugins/app.config',
-		'globalSettings': '../app/modules/global_settings'
+		'globalSettings': 'modules/global_settings',
+		'templates': 'templates/module'
 	},
 	shim: {
 		'angular': {'exports': 'angular', deps: ['jquery']},
@@ -159,12 +145,13 @@ var requirejs = {
 
 		'angular-couch-potato': {deps: ['angular']},
 
-		'socket.io': {deps: ['angular']},
+		'templates': {deps: ['angular']},
 
+		'socket.io': {deps: ['angular']},
 		'anim-in-out': {deps: ['angular-animate']},
 		'angular-easyfb': {deps: ['angular']},
-		'angular-google-plus': {deps: ['angular']},
 
+		'angular-google-plus': {deps: ['angular']},
 		'select2': {deps: ['jquery']},
 		'summernote': {deps: ['jquery']},
 

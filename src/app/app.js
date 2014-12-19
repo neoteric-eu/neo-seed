@@ -8,7 +8,6 @@
  *
  * Main module of the application.
  */
-
 define([
 	'angular',
 	'angular-couch-potato',
@@ -18,8 +17,9 @@ define([
 	'angular-animate',
 	'angular-bootstrap',
 	'angular-gettext',
+	'templates',
 	'smartwidgets',
-	'notification',
+	'notification'
 ], function (ng, couchPotato) {
 
 	var app = ng.module('app', [
@@ -32,18 +32,16 @@ define([
 		'ui.bootstrap',
 
 		// App modules
-		'miniCore',
 		'layout',
 		'app.auth',
-		'app.forms'
-		//'miniTemplate'
+		'app.forms',
+		'miniCore',
+		'app.templates'
 	]);
 
 	couchPotato.configureApp(app);
 
 	app.config(function ($provide, $httpProvider) {
-
-
 
 		// Intercept http calls.
 		$provide.factory('ErrorHttpInterceptor', function ($q) {

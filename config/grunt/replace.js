@@ -13,7 +13,7 @@ module.exports = function (grunt) {
 				expand: true,
 				flatten: true,
 				src: ['./config/global_settings.js'],
-				dest: '<%= yeoman.app %>/modules/'
+				dest: '<%= yeoman.app %>/app/modules/'
 			}]
 		},
 		staging: {
@@ -25,8 +25,8 @@ module.exports = function (grunt) {
 			files: [{
 				expand: true,
 				flatten: true,
-				src: ['./config/config.js'],
-				dest: '<%= yeoman.app %>/scripts/services/'
+				src: ['./config/global_settings.js'],
+				dest: '<%= yeoman.app %>/app/modules/'
 			}]
 		},
 		production: {
@@ -38,8 +38,8 @@ module.exports = function (grunt) {
 			files: [{
 				expand: true,
 				flatten: true,
-				src: ['./config/config.js'],
-				dest: '<%= yeoman.app %>/scripts/services/'
+				src: ['./config/global_settings.js'],
+				dest: '<%= yeoman.app %>/app/modules/'
 			}]
 		}
 	}

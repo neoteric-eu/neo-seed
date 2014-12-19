@@ -4,9 +4,9 @@ module.exports = {
 	options: {
 		files: [{
 			expand: true,
-			cwd: '.tmp/concat/scripts',
+			cwd: 'src/app',
 			src: '*.js',
-			dest: '.tmp/concat/scripts'
+			dest: 'tmp/app'
 		}],
 		singleQuotes: true,
 		add: false,

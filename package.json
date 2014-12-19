@@ -34,11 +34,12 @@
     "grunt-open": "^0.2.3",
     "grunt-protractor-runner": "^1.1.4",
     "grunt-replace": "^0.7.8",
+    "grunt-requirejs": "^0.4.2",
     "grunt-rev": "~0.1.0",
     "grunt-shell": "^1.1.1",
     "grunt-shell-spawn": "^0.3.0",
     "grunt-svgmin": "~0.2.0",
-    "grunt-usemin": "~2.0.0",
+    "grunt-usemin": "~3.0.0",
     "jasmine": "^2.1.1",
     "jshint-stylish": "~0.1.3",
     "karma": "^0.10.9",
@@ -60,10 +61,10 @@
   },
   "scripts": {
     "install": [
-      "node node_modules/protractor/bin/webdriver-manager update",
       "grunt bower-install",
+      "node node_modules/protractor/bin/webdriver-manager update",
       "grunt githooks",
-      "grunt replace:deveopment"
+      "grunt config:development"
     ],
     "test": "grunt test"
   }

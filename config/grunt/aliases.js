@@ -29,31 +29,29 @@ module.exports = {
 	'build': [
 		'clean:dist',
 		'bower-install',
+		'config:production',
 		'less:dev',
 		'nggettext_compile',
 		'useminPrepare',
 		'ngAnnotate',
 		'ngtemplates:dist',
-		'requirejs',
-		'concat',
-		'cssmin',
-		//// 'uglify:dist',
-		'copy:requirejs',
 		'copy:dist',
-		//// 'uglify:requirejs',
-		//// 'uglify:generated',
-		//// Below task commented out as r.js (via grunt-contrib-requirejs) will take care of this
-		////'uglify',
+		'requirejs:dist',
+		'cssmin',
+		'concat',
 		'rev',
 		'usemin'
 	],
 
-	'staging': [
+	'config:development': [
+		'replace:development'
+	],
+	'config:staging': [
 		'replace:staging'
 		// Add further deploy related tasks here
 	],
 
-	'production': [
+	'config:production': [
 		'replace:production'
 		// Add further deploy related tasks here
 	],

@@ -61,7 +61,7 @@ define([
 				url: '/register',
 				views: {
 					root: {
-						templateUrl: 'app-demo/auth/views/register.html'
+						templateUrl: 'app/auth/views/register.html'
 					}
 				},
 				data: {
@@ -79,7 +79,7 @@ define([
 				url: '/forgot-password',
 				views: {
 					root: {
-						templateUrl: 'app-demo/auth/views/forgot-password.html'
+						templateUrl: 'app/auth/views/forgot-password.html'
 					}
 				},
 				data: {
@@ -88,7 +88,7 @@ define([
 				},
 				resolve: {
 					deps: $couchPotatoProvider.resolveDependencies([
-						'modules/forms/directives/validate/smartValidateForm'
+						'app/modules/forms/directives/validate/smartValidateForm'
 					])
 				}
 			})
@@ -97,7 +97,7 @@ define([
 				url: '/lock',
 				views: {
 					root: {
-						templateUrl: 'app-demo/auth/views/lock.html'
+						templateUrl: 'app/auth/views/lock.html'
 					}
 				},
 				data: {
