@@ -16,7 +16,7 @@ module.exports = {
 			},
 			htmlmin: {
 				removeCommentsFromCDATA: true,
-				// watch out for comment directives!
+				// Do not use COMMENT DIRECTIVES!
 				removeComments: true,
 				collapseBooleanAttributes: true,
 				collapseWhitespace: true,

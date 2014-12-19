@@ -9,10 +9,12 @@ module.exports = {
 			src: [
 				'*.{ico,png,txt}',
 				'.htaccess',
-				'*.html',
+				'index.html',
+				'404.html',
 				'styles/css/*',
-				'styles/fonts/*',
-				'styles/img/*'
+				'images/**/*',
+				'styles/fonts/**/*',
+				'styles/img/**/*'
 			]
 		}, {
 			expand: true,

@@ -145,8 +145,6 @@ var requirejs = {
 
 		'angular-couch-potato': {deps: ['angular']},
 
-		'templates': {deps: ['angular']},
-
 		'socket.io': {deps: ['angular']},
 		'anim-in-out': {deps: ['angular-animate']},
 		'angular-easyfb': {deps: ['angular']},
@@ -228,7 +226,9 @@ var requirejs = {
 
 		'notification': {deps: ['jquery']},
 
-		'smartwidgets': {deps: ['jquery-ui']}
+		'smartwidgets': {deps: ['jquery-ui']},
+
+		'templates': {deps: ['angular']}
 
 	},
 	priority: [
