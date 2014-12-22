@@ -1,4 +1,7 @@
 // The actual grunt server settings
+
+var modRewrite = require('connect-modrewrite');
+
 module.exports = {
 	server: {
 		options: {
@@ -6,7 +9,30 @@ module.exports = {
 			port: 9000,
 			base: '<%= yeoman.app %>',
 			open: true,
-			livereload: true
+			livereload: true,
+			middleware: function (connect, options) {
+				var middlewares = [],
+					rules = [
+					"!\\.html|\\.js|\\.css|\\.svg|\\.jp(e?)g|\\.png|\\.gif$ /index.html"
+				];
+
+				middlewares.push( modRewrite( rules ) );
+
+				if (!Array.isArray(options.base)) {
+					options.base = [options.base];
+				}
+
+				var directory = options.directory || options.base[options.base.length - 1];
+				options.base.forEach(function (base) {
+					// Serve static files.
+					middlewares.push(connect.static(base));
+				});
+
+				// Make directory browse-able.
+				middlewares.push(connect.directory(directory));
+
+				return middlewares;
+			}
 		}
 	},
 	test: {

@@ -11,6 +11,7 @@
 define([
 	'angular',
 	'angular-couch-potato',
+	'globalSettings',
 	'angular-resource',
 	'angular-ui-router',
 	'angular-sanitize',
@@ -20,7 +21,7 @@ define([
 	'smartwidgets',
 	'notification',
 	'angular-templates'
-], function (ng, couchPotato) {
+], function (ng, couchPotato, globalSettings) {
 
 	var app = ng.module('app', [
 		'ngSanitize',
@@ -41,7 +42,9 @@ define([
 
 	couchPotato.configureApp(app);
 
-	app.config(function ($provide, $httpProvider) {
+	app.config(function ($provide, $httpProvider, $locationProvider) {
+
+		$locationProvider.html5Mode(globalSettings.get('MOD_REWRITE'));
 
 		// Intercept http calls.
 		$provide.factory('ErrorHttpInterceptor', function ($q) {

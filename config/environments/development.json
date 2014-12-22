@@ -19,5 +19,6 @@
 		"CONTACT": "contact@neoteric.eu",
 		"INFO": "info@neoteric.eu",
 		"SUPPORT": "support@neoteric.eu"
-	}
+	},
+	"MOD_REWRITE": "true"
 }

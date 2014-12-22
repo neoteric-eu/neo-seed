@@ -26,7 +26,9 @@
 				EMAILS: '@@EMAILS',
 
 				DOMAIN: 'neoteric.eu',
-				APP_NAME: 'Neoteric'
+				APP_NAME: 'Neoteric',
+
+				MOD_REWRITE: '@@MOD_REWRITE'
 
 			},
 			get: function(element) {
