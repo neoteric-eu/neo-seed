@@ -33,6 +33,7 @@ var requirejs = {
 		'angular-google-plus': '../vendor/libs/angular-google-plus/angular-google-plus',
 		'angular-gettext': '../vendor/libs/angular-gettext/angular-gettext',
 		'angular-mocks': '../../src/vendor/libs/angular-mocks/angular-mocks',
+		'angular-cookie': '../vendor/libs/angular-cookie/angular-cookie',
 
 		// Bootstrap dependencies
 		'bootstrap': '../vendor/libs/bootstrap/bootstrap',
@@ -128,6 +129,7 @@ var requirejs = {
 		'angular-resource': {deps: ['angular']},
 		'angular-sanitize': {deps: ['angular']},
 		'angular-ui-router': {deps: ['angular']},
+		'angular-cookie': {deps: ['angular']},
 
 		// Bootstrap dependencies
 		'bootstrap': {deps: ['jquery']},

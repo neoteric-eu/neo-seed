@@ -11,7 +11,7 @@ define([
 	'bootstrap',
 	'appConfig',
 	'includes',
-	'app'
+	'app',
 ], function (require, $, ng, domReady) {
 	'use strict';
 

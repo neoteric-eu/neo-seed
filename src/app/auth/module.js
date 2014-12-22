@@ -2,6 +2,7 @@ define([
 	'angular',
 	'angular-couch-potato',
 	'angular-ui-router',
+	'angular-gettext',
 	'angular-google-plus',
 	'angular-easyfb'
 ], function (ng, couchPotato) {
@@ -43,7 +44,7 @@ define([
 				url: '/login',
 				views: {
 					root: {
-						templateUrl: 'app/auth/views/login.html'
+						templateUrl: 'app/modules/miniTemplate/views/login-page.html'
 					}
 				},
 				data: {

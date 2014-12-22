@@ -18,6 +18,7 @@ define([
 	'angular-animate',
 	'angular-bootstrap',
 	'angular-gettext',
+	'angular-cookie',
 	'smartwidgets',
 	'notification',
 	'angular-templates'
@@ -26,6 +27,7 @@ define([
 	var app = ng.module('app', [
 		'ngSanitize',
 		'ngResource',
+		'gettext',
 
 		'scs.couch-potato',
 		'ngAnimate',
@@ -33,11 +35,12 @@ define([
 		'ui.bootstrap',
 
 		// App modules
-		'layout',
+		// 'layout',
+		'app.miniCore',
 		'app.auth',
 		'app.forms',
-		'miniCore',
-		'app.templates'
+		'app.templates',
+		'app.miniTemplate'
 	]);
 
 	couchPotato.configureApp(app);

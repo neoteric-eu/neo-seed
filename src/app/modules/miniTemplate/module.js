@@ -1,6 +1,7 @@
 define([
 	'angular',
-	'angular-couch-potato'
+	'angular-couch-potato',
+	'angular-ui-router'
 ], function (ng, couchPotato) {
 
 	'use strict';
@@ -9,12 +10,12 @@ define([
 	couchPotato.configureApp(module);
 
 	module.config(function ($stateProvider, $couchPotatoProvider, $urlRouterProvider) {
-		$stateProvider
+		/*$stateProvider
 			.state('app.miniTemplate', {
 				abstract: true,
 				views: {
 					root: {
-						templateUrl: 'app/layout/layout.tpl.html',
+						templateUrl: 'app/modules/miniTemplate/views/layout.tpl.html',
 						resolve: {
 							deps: $couchPotatoProvider.resolveDependencies([
 								//'auth/directives/loginInfo',
@@ -26,8 +27,8 @@ define([
 						}
 					}
 				}
-			});
-		$urlRouterProvider.otherwise('/dashboard');
+			});*/
+		$urlRouterProvider.otherwise('/login');
 	});
 
 	module.run(function ($couchPotato) {
