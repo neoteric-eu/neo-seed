@@ -64,8 +64,9 @@ module.exports = {
 	install: [
 		'bowercopy',
 		'shell:webdriver_update',
-		'githooks',
-		'config:development'
+		//'githooks',
+		'config:development',
+		'shell:disable_tracking_templates'
 	]
 };
 

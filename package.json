@@ -55,9 +55,6 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "install": [
-      "grunt install",
-      "git update-index --assume-unchanged src/app/modules/templates/module.js"
-    ]
+    "postinstall": "grunt install"
   }
 }
