@@ -9,5 +9,5 @@
 #	- modules/forms/directives/validate/smartValidateForm
 ##
 - main
-- app-templates
+- angular-templates
 - modules/forms/directives/validate/smartValidateForm

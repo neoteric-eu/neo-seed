@@ -28,17 +28,17 @@ module.exports = {
 
 	'build': [
 		'clean:dist',
-		'bower-install',
 		'less:dev',
 		'nggettext_compile',
 		'useminPrepare',
 		'ngtemplates:dist',
+		'concat',
+		'cssmin',
 		'copy:dist',
 		'requirejs:dist',
-		'cssmin',
-		'concat',
 		'rev',
-		'usemin'
+		'usemin',
+		'clean:server'
 	],
 
 	'config:development': [
@@ -59,6 +59,13 @@ module.exports = {
 		'newer:jshint:app',
 		'test',
 		'build'
+	],
+
+	install: [
+		'bowercopy',
+		'shell:webdriver_update',
+		'githooks',
+		'config:development'
 	]
 };
 

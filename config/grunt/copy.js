@@ -11,10 +11,10 @@ module.exports = {
 				'.htaccess',
 				'index.html',
 				'404.html',
-				'styles/css/*',
 				'images/**/*',
 				'styles/fonts/**/*',
-				'styles/img/**/*'
+				'styles/img/**/*',
+				'styles/sounds/**/*'
 			]
 		}, {
 			expand: true,

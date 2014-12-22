@@ -56,12 +56,8 @@
   },
   "scripts": {
     "install": [
-      "grunt bower-install",
-      "node node_modules/protractor/bin/webdriver-manager update",
-      "grunt githooks",
-      "grunt config:development",
+      "grunt install",
       "git update-index --assume-unchanged src/app/modules/templates/module.js"
-    ],
-    "test": "grunt test"
+    ]
   }
 }

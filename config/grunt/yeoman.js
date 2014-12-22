@@ -1,5 +1,6 @@
 module.exports = {
 	app: 'src',
 	dist: 'dist',
-	coverage: 'coverage'
+	coverage: 'coverage',
+	tmp: '.tmp'
 };
