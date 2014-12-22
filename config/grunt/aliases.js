@@ -1,7 +1,7 @@
 module.exports = {
 	'serve': [
 		'clean:server',
-		'bower-install',
+		'ngtemplates:dist',
 		'connect:server',
 		'watch'
 	],
@@ -29,11 +29,9 @@ module.exports = {
 	'build': [
 		'clean:dist',
 		'bower-install',
-		'config:production',
 		'less:dev',
 		'nggettext_compile',
 		'useminPrepare',
-		'ngAnnotate',
 		'ngtemplates:dist',
 		'copy:dist',
 		'requirejs:dist',
@@ -46,6 +44,7 @@ module.exports = {
 	'config:development': [
 		'replace:development'
 	],
+
 	'config:staging': [
 		'replace:staging'
 		// Add further deploy related tasks here

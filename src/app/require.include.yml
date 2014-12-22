@@ -1,0 +1,13 @@
+##
+#	This file include all defined coach-potato lazy loaded
+#	modules that needs to be pulled into main.js on deploy
+#
+#   @example
+#	If you see on build code error like this:
+#	Uncaught Error: undefined missing modules/forms/directives/validate/smartValidateForm
+#	Add missing file here to manually inform r.js optimiser to include it in:
+#	- modules/forms/directives/validate/smartValidateForm
+##
+- main
+- app-templates
+- modules/forms/directives/validate/smartValidateForm

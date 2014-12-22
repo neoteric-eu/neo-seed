@@ -5,15 +5,11 @@
   "dependencies": {},
   "devDependencies": {
     "bower": "^1.3.5",
-    "generator-env-config": "0.0.2",
     "grunt": "~0.4.5",
     "grunt-angular-gettext": "~0.2.14",
     "grunt-angular-templates": "^0.5.7",
-    "grunt-autoprefixer": "~0.4.0",
-    "grunt-bower-install": "~0.7.0",
-    "grunt-bower-requirejs": "^1.1.1",
+    "grunt-bowercopy": "^1.2.0",
     "grunt-cli": "^0.1.13",
-    "grunt-concurrent": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-compass": "~0.6.0",
     "grunt-contrib-concat": "~0.3.0",
@@ -38,7 +34,6 @@
     "grunt-rev": "~0.1.0",
     "grunt-shell": "^1.1.1",
     "grunt-shell-spawn": "^0.3.0",
-    "grunt-svgmin": "~0.2.0",
     "grunt-usemin": "~3.0.0",
     "jasmine": "^2.1.1",
     "jshint-stylish": "~0.1.3",
@@ -64,7 +59,8 @@
       "grunt bower-install",
       "node node_modules/protractor/bin/webdriver-manager update",
       "grunt githooks",
-      "grunt config:development"
+      "grunt config:development",
+      "git update-index --assume-unchanged src/app/modules/templates/module.js"
     ],
     "test": "grunt test"
   }

@@ -20,7 +20,7 @@ exports.config = {
 	// find chromedriver. This will be passed to the selenium jar as
 	// the system property webdriver.chrome.driver. If null, selenium will
 	// attempt to find chromedriver using PATH.
-	chromeDriver: '../node_modules/protractor/selenium/chromedriver',
+	chromeDriver: '../node_modules/protractor/selenium/chromedriver_2.12.zip',
 
 	// Additional command line options to pass to selenium. For example,
 	// if you need to change the browser timeout, use
@@ -31,7 +31,8 @@ exports.config = {
 	//
 	// Spec patterns are relative to the location of this config.
 	specs: [
-		'./e2e/**/*.js'
+		'./e2e/**/*.spec.js',
+		'../src/app/modules/**/test/e2e/**/*.spec.js'
 	],
 
 	// ----- Capabilities to be passed to the webdriver instance ----

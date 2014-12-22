@@ -6,7 +6,7 @@ module.exports = {
 			port: 9000,
 			base: '<%= yeoman.app %>',
 			open: true,
-			keepalive: true
+			livereload: true
 		}
 	},
 	test: {

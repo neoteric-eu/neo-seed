@@ -17,9 +17,9 @@ define([
 	'angular-animate',
 	'angular-bootstrap',
 	'angular-gettext',
-	'templates',
 	'smartwidgets',
-	'notification'
+	'notification',
+	'angular-templates'
 ], function (ng, couchPotato) {
 
 	var app = ng.module('app', [

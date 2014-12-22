@@ -12,7 +12,7 @@ module.exports = {
 		],
 
 		preprocessors: {
-			'app/modules/**/*.js': 'coverage'
+			'src/app/modules/**/*.js': 'coverage'
 		},
 
 		reporters: ['coverage'],
@@ -27,6 +27,5 @@ module.exports = {
 	},
 	preCommit: {
 		configFile: 'test/karma.conf.js'
-
 	}
 };

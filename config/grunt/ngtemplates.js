@@ -8,7 +8,7 @@ module.exports = {
 		options: {
 			source: function (code) {
 				// Remove all whitespaces
-				code = String(code).replace(/\s/g, '');
+				code = String(code).replace(/\t+|\n+|\r+/g, '');
 				return code;
 			},
 			bootstrap: function (module, script) {

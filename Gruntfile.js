@@ -1,11 +1,5 @@
 'use strict';
 
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
-
 module.exports = function (grunt) {
 	var path = require('path');
 
@@ -14,11 +8,10 @@ module.exports = function (grunt) {
 
 	// Load grunt config automatically
 	require('load-grunt-config')(grunt, {
-		// path to task.js files, defaults to grunt dir
+		// Path to task.js files, defaults to grunt dir
 		configPath: path.join(process.cwd(), 'config/grunt'),
 
-		// can optionally pass options to load-grunt-tasks.
-		// If you set to false, it will disable auto loading tasks.
+		// Pass config to load-grunt-tasks.
 		loadGruntTasks: {
 			config: require('./package.json'),
 			scope: 'devDependencies'
