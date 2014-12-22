@@ -1,16 +1,16 @@
 define([
 	'angular',
-	'angular-couch-potato',
-	'angular-ui-router'
+	'angular-couch-potato'
 ], function (ng, couchPotato) {
+
 	'use strict';
 
-	var module = ng.module('app.layout', ['ui.router']);
+	var module = ng.module('app.miniTemplate', ['ui.router']);
 	couchPotato.configureApp(module);
 
 	module.config(function ($stateProvider, $couchPotatoProvider, $urlRouterProvider) {
 		$stateProvider
-			.state('app', {
+			.state('app.miniTemplate', {
 				abstract: true,
 				views: {
 					root: {
