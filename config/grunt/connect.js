@@ -11,12 +11,9 @@ module.exports = {
 			open: true,
 			livereload: true,
 			middleware: function (connect, options) {
-				var middlewares = [],
-					rules = [
-					"!\\.html|\\.js|\\.css|\\.svg|\\.jp(e?)g|\\.png|\\.gif$ /index.html"
-				];
+				var middlewares = [];
 
-				middlewares.push( modRewrite( rules ) );
+				middlewares.push(modRewrite(['^[^\\.]*$ /index.html [L]']));
 
 				if (!Array.isArray(options.base)) {
 					options.base = [options.base];
