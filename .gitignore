@@ -1,10 +1,12 @@
-src/vendor/bower_components
+src/vendor/libs
 coverage
 node_modules
 nbproject/
 src/app/modules/global_settings.js
 dist
+
 npm-debug.log
+src/app/templates/module.js
 
 .sass-cache
 .todo
