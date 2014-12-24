@@ -17,6 +17,7 @@
 	"strict": true,
 	"trailing": true,
 	"smarttabs": true,
+	"es5": false,
 	"globals": {
 		"angular": false,
 		/* AMD */

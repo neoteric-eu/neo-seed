@@ -1,11 +1,13 @@
 define([
 	// account
+	'layout/module',
+	'layout/includes',
+	
 	'modules/miniCore/module',
 	'modules/miniCore/includes',
 
-	//'layout/module',
-	//'layout/includes',
 	'modules/miniTemplate/module',
+	'modules/miniTemplate/includes',
 
 	'auth/module',
 	'modules/forms/module'

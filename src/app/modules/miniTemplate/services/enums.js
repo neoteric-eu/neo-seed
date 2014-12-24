@@ -1,7 +1,8 @@
-(function() {
-	'use strict';
-	define([], function() {
-		var enums = function() {
+
+	define(['miniTemplate/module'], function(module) {
+		'use strict';
+
+		module.registerService('enums', function() {
 			return {
 
 				features: {
@@ -29,14 +30,11 @@
 
 					// User
 					SM_USER_GET: 'SM_USER_GET',
-					SM_USER_UPDATE: 'SM_USER_UPDATE',
+					SM_USER_UPDATE: 'SM_USER_UPDATE'
 
-				},
+				}
 
 			};
 
-		};
-
-		return [enums];
+		});
 	});
-}());

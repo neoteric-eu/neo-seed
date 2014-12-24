@@ -35,9 +35,9 @@ define([
 		'ui.bootstrap',
 
 		// App modules
-		// 'layout',
-		'app.miniCore',
 		'app.auth',
+		'app.layout',
+		'app.miniCore',
 		'app.forms',
 		'app.templates',
 		'app.miniTemplate'

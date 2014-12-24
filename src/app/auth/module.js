@@ -44,7 +44,7 @@ define([
 				url: '/login',
 				views: {
 					root: {
-						templateUrl: 'app/modules/miniTemplate/views/login-page.html'
+						templateUrl: 'app/auth/views/login.html'
 					}
 				},
 				data: {
@@ -53,6 +53,7 @@ define([
 				},
 				resolve: {
 					deps: $couchPotatoProvider.resolveDependencies([
+						'modules/miniCore/directives/neoLoginForm/neoLoginForm',
 						'modules/forms/directives/validate/smartValidateForm'
 					])
 				}

@@ -1,4 +1,6 @@
-define([
+define(
+	'layout/module',
+[
 	'angular',
 	'angular-couch-potato',
 	'angular-ui-router'
@@ -6,7 +8,7 @@ define([
 
 	'use strict';
 
-	var module = ng.module('layout', ['ui.router']);
+	var module = ng.module('app.layout', ['ui.router']);
 	couchPotato.configureApp(module);
 
 	module.config(function ($stateProvider, $couchPotatoProvider, $urlRouterProvider) {

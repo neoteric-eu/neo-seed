@@ -32,7 +32,11 @@
 
 			},
 			get: function(element) {
-				return angular.fromJson(this.cfg[element]);
+				try {
+					return angular.fromJson(this.cfg[element]);
+				} catch(e) {
+					return this.cfg[element];
+				}
 			}
 		};
 	});
