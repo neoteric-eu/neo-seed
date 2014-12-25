@@ -7,12 +7,15 @@ module.exports = {
 		}],
 		options: {
 			source: function (code) {
+				'use strict';
 				// Remove all whitespaces
 				code = String(code).replace(/\t+|\n+|\r+/g, '');
 				return code;
 			},
 			bootstrap: function (module, script) {
-				return 'define(["angular"], function(angular) { return angular.module("app.templates",[]).run(function ($templateCache) {' + script + ' });});';
+				'use strict';
+				script = script.replace('\'use strict\';', '');
+				return 'define([\'angular\'], function(angular) { /*jshint quotmark: false*/ "use strict"; return angular.module("app.templates",[]).run(function ($templateCache) {' + script + ' });});';
 			},
 			htmlmin: {
 				removeCommentsFromCDATA: true,
