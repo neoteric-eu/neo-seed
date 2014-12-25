@@ -7,10 +7,10 @@ module.exports = {
 		files: '<%= yeoman.app %>/app/**/*.js'
 		//tasks: 'newer:jshint:app'
 	},
-	//html: {
-		//files: '<%= yeoman.app %>/app/**/*.html',
-		//tasks: 'ngtemplates:dist'
-	//},
+	html: {
+		files: '<%= yeoman.app %>/app/**/*.html',
+		tasks: 'ngtemplates:dist'
+	},
 	js_test: {
 		files: 'test/**/*.spec.js',
 		tasks: 'newer:jshint:test'

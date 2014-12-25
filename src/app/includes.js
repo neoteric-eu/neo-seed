@@ -2,7 +2,7 @@ define([
 	// account
 	'layout/module',
 	'layout/includes',
-	
+
 	'modules/miniCore/module',
 	'modules/miniCore/includes',
 
@@ -10,7 +10,12 @@ define([
 	'modules/miniTemplate/includes',
 
 	'auth/module',
-	'modules/forms/module'
+	'modules/forms/module',
+
+	'dashboard/module',
+	'dashboard/includes',
+
+	'components/includes'
 ], function () {
 	'use strict';
 });

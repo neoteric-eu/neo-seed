@@ -19,8 +19,8 @@
 				<input type="password" name="password" placeholder="{{'Password'|translate}}" ng-model="user.password" required>
 				<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> {{'Enter your password.'|translate}}</b>
 			</label>
-			<div class="note" ng-controller="ResetPasswordController">
-				<a href ng-click="gotoResetPassword()">{{'Forgot password?'|translate}}</a>
+			<div class="note">
+				<a ui-sref="forgotPassword">{{'Forgot password?'|translate}}</a>
 			</div>
 		</section>
 	</fieldset>
@@ -35,7 +35,7 @@
 				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
-				<li ng-repeat="item in LOGIN_DATA">
+				<li ng-repeat="item in loginData">
 					<a href ng-click="loginAs(item)">{{ item.user }}</a>
 				</li>
 			</ul>

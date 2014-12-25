@@ -40,7 +40,9 @@ define([
 		'app.miniCore',
 		'app.forms',
 		'app.templates',
-		'app.miniTemplate'
+		'app.miniTemplate',
+
+		'app.dashboard'
 	]);
 
 	couchPotato.configureApp(app);

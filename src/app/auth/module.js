@@ -16,31 +16,8 @@ define([
 	couchPotato.configureApp(module);
 
 	module.config(function ($stateProvider, $couchPotatoProvider) {
-		$stateProvider.state('realLogin', {
-			url: '/real-login',
 
-			views: {
-				root: {
-					templateUrl: "auth/login/login.html",
-					controller: 'LoginCtrl',
-					resolve: {
-						deps: $couchPotatoProvider.resolveDependencies([
-							'auth/models/User',
-							'auth/directives/loginInfo',
-
-							'auth/login/LoginCtrl',
-							'auth/login/directives/facebookSignin',
-							'auth/login/directives/googleSignin'
-						])
-					}
-				}
-			},
-			data: {
-				title: 'Login',
-				rootId: 'extra-page'
-			}
-
-		}).state('login', {
+		$stateProvider.state('login', {
 				url: '/login',
 				views: {
 					root: {

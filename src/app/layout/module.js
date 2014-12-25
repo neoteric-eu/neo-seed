@@ -18,20 +18,20 @@ define(
 					abstract: true,
 					views: {
 						root: {
-							templateUrl: 'app/layout/layout.tpl.html',
+							templateUrl: 'app/layout/layout.html',
 							resolve: {
 								deps: $couchPotatoProvider.resolveDependencies([
-									//'auth/directives/loginInfo',
-									'modules/graphs/directives/inline/sparklineContainer',
-									'components/inbox/directives/unreadMessagesCount',
-									'components/chat/api/ChatApi',
-									'components/chat/directives/asideChatWidget'
+									'auth/directives/loginInfo',
+									//'modules/graphs/directives/inline/sparklineContainer',
+									//'components/inbox/directives/unreadMessagesCount',
+									//'components/chat/api/ChatApi',
+									//'components/chat/directives/asideChatWidget'
 								])
 							}
 						}
 					}
 				});
-		$urlRouterProvider.otherwise('/login');
+		$urlRouterProvider.otherwise('/dashboard');
 
 	});
 
