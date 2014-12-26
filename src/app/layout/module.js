@@ -13,24 +13,29 @@ define(
 
 	module.config(function ($stateProvider, $couchPotatoProvider, $urlRouterProvider) {
 
-		$stateProvider
-				.state('app', {
-					abstract: true,
-					views: {
-						root: {
-							templateUrl: 'app/layout/layout.html',
-							resolve: {
-								deps: $couchPotatoProvider.resolveDependencies([
-									'auth/directives/loginInfo',
-									//'modules/graphs/directives/inline/sparklineContainer',
-									//'components/inbox/directives/unreadMessagesCount',
-									//'components/chat/api/ChatApi',
-									//'components/chat/directives/asideChatWidget'
-								])
-							}
-						}
+		$stateProvider.state('app', {
+			abstract: true,
+			data: {
+				permissions: {
+					only: ['user'],
+					redirectTo: 'auth.login'
+				}
+			},
+			views: {
+				root: {
+					templateUrl: 'app/layout/layout.html',
+					resolve: {
+						deps: $couchPotatoProvider.resolveDependencies([
+							'auth/directives/loginInfo',
+							//'modules/graphs/directives/inline/sparklineContainer',
+							//'components/inbox/directives/unreadMessagesCount',
+							//'components/chat/api/ChatApi',
+							//'components/chat/directives/asideChatWidget'
+						])
 					}
-				});
+				}
+			}
+		});
 		$urlRouterProvider.otherwise('/dashboard');
 
 	});

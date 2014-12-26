@@ -138,7 +138,7 @@ define(['../module', 'lodash'], function (module, _) {
 
                 $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
                     //console.log(1, '$stateChangeStart', event, toState, toParams, fromState, fromParams);
-
+					console.count();
                     handleHtmlId(toState);
                     detachOnResize();
                 });

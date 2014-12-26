@@ -19,6 +19,7 @@ define([
 	'angular-bootstrap',
 	'angular-gettext',
 	'angular-cookie',
+	'angular-permission',
 	'smartwidgets',
 	'notification',
 	'angular-templates'
@@ -28,6 +29,7 @@ define([
 		'ngSanitize',
 		'ngResource',
 		'gettext',
+		'permission',
 
 		'scs.couch-potato',
 		'ngAnimate',
@@ -92,11 +94,16 @@ define([
 
 	});
 
-	app.run(function ($couchPotato, $rootScope, $state, $stateParams) {
+	app.run(function (
+		$couchPotato,
+		$rootScope,
+		$state,
+		$stateParams,
+		session
+	) {
 		app.lazy = $couchPotato;
 		$rootScope.$state = $state;
 		$rootScope.$stateParams = $stateParams;
-		// editableOptions.theme = 'bs3';
 	});
 
 	return app;

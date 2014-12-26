@@ -27,6 +27,7 @@ module.exports = {
 			'angular-ui-router/angular-ui-router.js': 'angular-ui-router/release/angular-ui-router.js',
 			'angular-xeditable/dist/js/xeditable.js': 'angular-xeditable/dist/js/xeditable.js',
 			'angular-cookie/angular-cookie.js': 'angular-cookie/angular-cookie.js',
+			'angular-permission/angular-permission.js': 'angular-permission/dist/angular-permission.js',
 
 			'bootstrap/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
 			'bootstrap-timepicker/bootstrap-timepicker.js': 'bootstrap3-fontawesome-timepicker/js/bootstrap-timepicker.js',

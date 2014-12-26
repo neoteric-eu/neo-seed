@@ -28,7 +28,8 @@
 				DOMAIN: 'neoteric.eu',
 				APP_NAME: 'Neoteric',
 
-				MOD_REWRITE: '@@MOD_REWRITE'
+				MOD_REWRITE: '@@MOD_REWRITE',
+				COOKIE_DOMAIN: '@@COOKIE_DOMAIN'
 
 			},
 			get: function(element) {
