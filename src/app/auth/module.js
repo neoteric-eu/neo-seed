@@ -1,11 +1,12 @@
 define([
 	'angular',
 	'angular-couch-potato',
+	'globalSettings',
 	'angular-ui-router',
 	'angular-gettext',
 	'angular-google-plus',
 	'angular-easyfb'
-], function (ng, couchPotato) {
+], function (ng, couchPotato, globalSettings) {
 
 	'use strict';
 
@@ -82,12 +83,10 @@ define([
 		});
 	});
 
-	module.run(function($couchPotato, $state, Permission, session) {
+	module.run(function($couchPotato, $state, Permission, session, $log) {
 		module.lazy = $couchPotato;
 
-		Permission.defineRole('anonymous', function() {
-			return true;
-		}).defineRole('user', function() {
+		Permission.defineRole('user', function(params) {
 			return session.checkSession();
 		});
 	});

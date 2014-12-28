@@ -1,14 +1,26 @@
-define(['dashboard/module'], function(module) {
+define(
+	[
+		'dashboard/module',
+		'moment'
+	],
+	function(
+		module,
+		moment
+	) {
+
 	'use strict';
 
 	/**
 	 * @constructor
 	 */
-	function DashboardCtrl($scope) {
-		$scope.hi = 'yo';
+	function DashboardCtrl(
+		$scope,
+		$window
+	) {
+		$scope.date = moment().format('lll');
 
-		this.yo = function() {
-			'łacap?';
+		this.sayHello = function() {
+			$window.alert('Hello World');
 		};
 	}
 

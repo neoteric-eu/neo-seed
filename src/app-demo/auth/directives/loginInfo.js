@@ -5,7 +5,7 @@ define(['auth/module'], function (module) {
 
 		return {
 			restrict: 'A',
-			templateUrl: 'app-demo/app/auth/directives/login-info.tpl.html',
+			templateUrl: 'app-demo/auth/directives/login-info.tpl.html',
 			link: function (scope, element) {
 				User.initialized.then(function () {
 					scope.user = User

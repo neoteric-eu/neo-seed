@@ -14,7 +14,9 @@
 		"angular-animate": "~1.2.26",
 		"angular-touch": "~1.2.0",
 		"angular-route": "~1.2.0",
-		"angular-ui-router": "~0.2.11",
+		"angular-ui-router": "~0.2.13",
+		"angular-cookie": "^4.0.6",
+		"angular-moment": "~0.8.3",
 		"jquery": "~2.1.1",
 		"jquery.easy-pie-chart": "~2.1.4",
 		"angular-bootstrap": "~0.11.0",
@@ -67,9 +69,7 @@
 		"angular-gettext": "~0.4.0",
 		"jqgrid": "4.7.0",
 		"pace": "~1.0.2",
-		"magnific-popup": "~1.0.0",
-		"angular-cookie": "^4.0.6",
-		"angular-permission": "^0.1.6"
+		"magnific-popup": "~1.0.0"
 	},
 	"devDependencies": {
 		"angular-mocks": "~1.2.0",

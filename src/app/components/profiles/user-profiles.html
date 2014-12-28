@@ -2,13 +2,16 @@
 
 	<span class="label">{{'Profiles'|translate}}:</span>
 	<span class="project-selector dropdown-toggle">
-		{{'Select profile'|translate}}
-		<i ng-if="projects.length" class="fa fa-angle-down"></i>
+		<span ng-bind="currentProfile.data.customerName"></span>
+		<i ng-show="profiles.length" class="fa fa-angle-down"></i>
 	</span>
 
-	<ul class="dropdown-menu" ng-if="profiles.length">
+	<ul class="dropdown-menu" ng-show="profiles.length">
 		<li ng-repeat="profile in profiles">
-			<a href="{{profile.href}}">{{profile.title}}</a>
+			<a ng-click="changeProfile(profile)">
+				<i ng-show="profile.id === currentProfile.data.id" class="fa fa-hand-o-right"></i>
+				<span ng-bind="profile.customerName"></span>
+			</a>
 		</li>
 	</ul>
 

@@ -1,24 +1,28 @@
 define(['app'], function(app){
 	'use strict';
 
-	return app.directive('userProfiles', function(){
+	return app.directive('userProfiles', function($state, session){
 		return {
 			restrict: 'EA',
 			replace: true,
 			templateUrl: 'app/components/profiles/user-profiles.html',
-			scope: true,
+			scope: {},
 			link: function(scope){
 
-				scope.profile = [];
+				scope.changeProfile = function(customer) {
+					session.switchCustomer(customer);
+					$state.reload();
+				};
 
-				/*Project.list.then(function(response){
-				 scope.projects = response.data;
-
-				 });
-
-				 scope.clearProjects = function(){
-				 scope.projects = [];
-				 };*/
+				var unbindWatch = scope.$watch(function() {
+					return session.userData.getModel();
+				}, function (userData) {
+					if(!_.isEmpty(userData)) {
+						scope.profiles = userData.user.customers;
+						scope.currentProfile = session.currentCustomer.getModel();
+						unbindWatch();
+					}
+				});
 			}
 		};
 	});

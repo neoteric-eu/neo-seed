@@ -34,7 +34,8 @@ var requirejs = {
 		'angular-gettext': '../vendor/libs/angular-gettext/angular-gettext',
 		'angular-mocks': '../../src/vendor/libs/angular-mocks/angular-mocks',
 		'angular-cookie': '../vendor/libs/angular-cookie/angular-cookie',
-		'angular-permission': '../vendor/libs/angular-permission/angular-permission',
+		'angular-permission': '../vendor/angular-permission/angular-permission',
+		'angular-moment': '../vendor/libs/angular-moment/angular-moment',
 
 		// Bootstrap dependencies
 		'bootstrap': '../vendor/libs/bootstrap/bootstrap',
@@ -88,6 +89,7 @@ var requirejs = {
 		'markdown': '../vendor/libs/markdown/markdown',
 		'ckeditor': '../vendor/libs/ckeditor/ckeditor',
 		'moment': '../vendor/libs/moment/moment',
+		'momentjs': '../vendor/moment/moment',
 		'moment-timezone': '../vendor/libs/moment-timezone/moment-timezone',
 		'domReady': '../vendor/libs/requirejs-domready/requirejs-domready',
 		'fuelux-wizard': '../vendor/libs/fuelux/wizard',
@@ -171,10 +173,9 @@ var requirejs = {
 		// Other libs
 		'ckeditor': {deps: ['jquery']},
 		'fuelux-wizard': {deps: ['jquery']},
-		'moment': {exports: 'moment'},
 		'moment-timezone': {deps: ['moment']},
-		'moment-timezone-data': {deps: ['moment']},
-		'moment-helper': {deps: ['moment-timezone-data']},
+		'momentjs': {deps: ['moment-timezone']},
+		'angular-moment': {deps: ['angular', 'momentjs']},
 		'morris': {deps: ['raphael']},
 		'select2': {deps: ['jquery']},
 		'summernote': {deps: ['jquery']},
@@ -188,5 +189,10 @@ var requirejs = {
 		'jquery',
 		'bootstrap',
 		'angular'
-	]
+	],
+	config: {
+		moment: {
+			noGlobal: true
+		}
+	}
 };

@@ -1,7 +1,7 @@
 define(['angular'], function(angular) { /*jshint quotmark: false*/ "use strict"; return angular.module("app.templates",[]).run(function ($templateCache) {  
 
-  $templateCache.put('app/auth/directives/login-info.tpl.html',
-    "<div class=\"login-info ng-cloak\"><span><a href=\"\" toggle-shortcut><img ng-src={{user.picture}} alt=me class=online> <span>{{user.username}}</span> <i class=\"fa fa-angle-down\"></i></a></span></div>"
+  $templateCache.put('app/auth/directives/login-info.html',
+    "<div class=\"login-info ng-cloak\"><span><a href=\"\" toggle-shortcut><span>{{user.email}}</span> <i class=\"fa fa-angle-down\"></i></a></span></div>"
   );
 
 
@@ -55,8 +55,13 @@ define(['angular'], function(angular) { /*jshint quotmark: false*/ "use strict";
   );
 
 
+  $templateCache.put('app/components/language/language-selector.html',
+    "<ul class=\"header-dropdown-list hidden-xs ng-cloak\" ng-controller=LanguagesCtrl><li class=dropdown><a class=dropdown-toggle href><img src=styles/img/blank.gif class=\"flag flag-{{currentLanguage.code}}\"> <span>{{currentLanguage.name}}</span> <i class=\"fa fa-angle-down\"></i></a><ul class=\"dropdown-menu pull-right\"><li ng-class=\"{active: language==currentLanguage}\" ng-repeat=\"language in languages\"><a ng-click=selectLanguage(language)><img src=styles/img/blank.gif class=\"flag flag-{{language.code}}\"> {{language.name}}</a></li></ul></li></ul>"
+  );
+
+
   $templateCache.put('app/components/profiles/user-profiles.html',
-    "<div class=\"project-context hidden-xs dropdown\"><span class=label>{{'Profiles'|translate}}:</span> <span class=\"project-selector dropdown-toggle\">{{'Select profile'|translate}} <i ng-if=projects.length class=\"fa fa-angle-down\"></i></span><ul class=dropdown-menu ng-if=profiles.length><li ng-repeat=\"profile in profiles\"><a href={{profile.href}}>{{profile.title}}</a></li></ul></div>"
+    "<div class=\"project-context hidden-xs dropdown\"><span class=label>{{'Profiles'|translate}}:</span> <span class=\"project-selector dropdown-toggle\"><span ng-bind=currentProfile.data.customerName></span> <i ng-show=profiles.length class=\"fa fa-angle-down\"></i></span><ul class=dropdown-menu ng-show=profiles.length><li ng-repeat=\"profile in profiles\"><a ng-click=changeProfile(profile)><i ng-show=\"profile.id === currentProfile.data.id\" class=\"fa fa-hand-o-right\"></i> <span ng-bind=profile.customerName></span></a></li></ul></div>"
   );
 
 
@@ -66,7 +71,7 @@ define(['angular'], function(angular) { /*jshint quotmark: false*/ "use strict";
 
 
   $templateCache.put('app/dashboard/views/dashboard.html',
-    "<div id=content ng-controller=DashboardCtrl><div class=row><big-breadcrumbs items=\"['Dashboard', 'My Dashboard']\" class=\"col-xs-12 col-sm-7 col-md-7 col-lg-4\"></big-breadcrumbs></div></div>"
+    "<div id=content><div class=row><big-breadcrumbs items=\"['Dashboard', 'My Dashboard']\" class=\"col-xs-12 col-sm-7 col-md-7 col-lg-4\"></big-breadcrumbs></div><a data-keep=SM_USER_GET ng-click=dashboard.sayHello()>say hello</a><h1 ng-bind=date></h1></div>"
   );
 
 
@@ -81,12 +86,12 @@ define(['angular'], function(angular) { /*jshint quotmark: false*/ "use strict";
 
 
   $templateCache.put('app/layout/partials/header.html',
-    "<header id=header><div id=logo-group><span id=logo><img src=../../../styles/img/logo.png alt=SmartAdmin></span></div><user-profiles></user-profiles><div class=pull-right><div id=hide-menu class=\"btn-header pull-right\"><span><a toggle-menu title=\"Collapse Menu\"><i class=\"fa fa-reorder\"></i></a></span></div><ul id=mobile-profile-img class=\"header-dropdown-list hidden-xs padding-5\"><li><a href=# class=\"dropdown-toggle no-margin userdropdown\" data-toggle=dropdown><img src=../../../styles/img/avatars/sunny.png alt=\"John Doe\" class=\"online\"></a><ul class=\"dropdown-menu pull-right\"><li><a href-void class=\"padding-10 padding-top-0 padding-bottom-0\"><i class=\"fa fa-cog\"></i> Setting</a></li><li class=divider></li><li><a ui-sref=app.appViews.profileDemo class=\"padding-10 padding-top-0 padding-bottom-0\"><i class=\"fa fa-user\"></i> <u>P</u>rofile</a></li><li class=divider></li><li><a href-void class=\"padding-10 padding-top-0 padding-bottom-0\" data-action=toggleShortcut><i class=\"fa fa-arrow-down\"></i> <u>S</u>hortcut</a></li><li class=divider></li><li><a href-void class=\"padding-10 padding-top-0 padding-bottom-0\" data-action=launchFullscreen><i class=\"fa fa-arrows-alt\"></i> Full <u>S</u>creen</a></li><li class=divider></li><li><a href=#/login class=\"padding-10 padding-top-5 padding-bottom-5\" data-action=userLogout><i class=\"fa fa-sign-out fa-lg\"></i> <strong><u>L</u>ogout</strong></a></li></ul></li></ul><div id=logout class=\"btn-header transparent pull-right\"><span><a ng-click=logout() title=\"{{'Sign Out'|translate}}\"><i class=\"fa fa-sign-out\"></i></a></span></div><language-selector></language-selector></div></header>"
+    "<header id=header><div id=logo-group><span id=logo><img src=../../../styles/img/logo.png alt=SmartAdmin></span></div><user-profiles></user-profiles><div class=pull-right><div id=hide-menu class=\"btn-header pull-right\"><span><a toggle-menu title=\"Collapse Menu\"><i class=\"fa fa-reorder\"></i></a></span></div><ul id=mobile-profile-img class=\"header-dropdown-list hidden-xs padding-5\"><li><a href=# class=\"dropdown-toggle no-margin userdropdown\" data-toggle=dropdown><img src=../../../styles/img/avatars/sunny.png alt=\"John Doe\" class=\"online\"></a><ul class=\"dropdown-menu pull-right\"><li><a href-void class=\"padding-10 padding-top-0 padding-bottom-0\"><i class=\"fa fa-cog\"></i> Setting</a></li><li class=divider></li><li><a ui-sref=app.appViews.profileDemo class=\"padding-10 padding-top-0 padding-bottom-0\"><i class=\"fa fa-user\"></i> <u>P</u>rofile</a></li><li class=divider></li><li><a href-void class=\"padding-10 padding-top-0 padding-bottom-0\" data-action=toggleShortcut><i class=\"fa fa-arrow-down\"></i> <u>S</u>hortcut</a></li><li class=divider></li><li><a href-void class=\"padding-10 padding-top-0 padding-bottom-0\" data-action=launchFullscreen><i class=\"fa fa-arrows-alt\"></i> Full <u>S</u>creen</a></li><li class=divider></li><li><a href=#/login class=\"padding-10 padding-top-5 padding-bottom-5\" data-action=userLogout><i class=\"fa fa-sign-out fa-lg\"></i> <strong><u>L</u>ogout</strong></a></li></ul></li></ul><div id=logout class=\"btn-header transparent pull-right\"><span><a ng-click=$root.logout() title=\"{{'Sign Out'|translate}}\"><i class=\"fa fa-sign-out\"></i></a></span></div><language-selector></language-selector></div></header>"
   );
 
 
   $templateCache.put('app/layout/partials/navigation.html',
-    "<aside id=left-panel><div login-info></div><nav><ul data-smart-menu><li data-ui-sref-active=active><a data-ui-sref=app.dashboard title=Dashboard><i class=\"fa fa-lg fa-fw fa-home\"></i> <span class=menu-item-parent>{{'Dashboard'|translate}}</span></a></li></ul></nav><span class=minifyme data-action=minifyMenu minify-menu><i class=\"fa fa-arrow-circle-left hit\"></i></span></aside>"
+    "<aside id=left-panel><div login-info></div><nav><ul data-smart-menu class=ng-cloak><li data-ui-sref-active=active><a data-ui-sref=app.dashboard title=Dashboard><i class=\"fa fa-lg fa-fw fa-home\"></i> <span class=menu-item-parent>{{'Dashboard'|translate}}</span></a></li></ul></nav><span class=minifyme data-action=minifyMenu minify-menu><i class=\"fa fa-arrow-circle-left hit\"></i></span></aside>"
   );
 
 

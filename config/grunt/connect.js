@@ -11,6 +11,8 @@ module.exports = {
 			open: true,
 			livereload: true,
 			middleware: function (connect, options) {
+				'use strict';
+
 				var middlewares = [];
 
 				middlewares.push(modRewrite(['^[^\\.]*$ /index.html [L]']));
@@ -27,6 +29,17 @@ module.exports = {
 
 				// Make directory browse-able.
 				middlewares.push(connect.directory(directory));
+
+				middlewares.unshift(function(req, res, next) {
+					if (req.url === '/') {
+						res.writeHead(301, {
+							'Location': '/login'
+						});
+						res.end();
+					} else {
+						next();
+					}
+				});
 
 				return middlewares;
 			}

@@ -17436,3 +17436,12 @@ a[ng-click]:hover {
 .menu-on-top aside#left-panel .collapse-sign {
   display: none;
 }
+.flag.flag-en {
+  background-position: -240px -33px;
+}
+.login-info a {
+  line-height: 2em;
+}
+.login-info a span {
+  text-transform: none;
+}

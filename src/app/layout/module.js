@@ -23,10 +23,14 @@ define(
 			},
 			views: {
 				root: {
+					controller: 'RootController',
 					templateUrl: 'app/layout/layout.html',
 					resolve: {
 						deps: $couchPotatoProvider.resolveDependencies([
-							'auth/directives/loginInfo',
+							'modules/miniCore/controllers/RootController',
+							'modules/miniCore/directives/neoKeep/neoKeep',
+							'modules/miniCore/directives/neoOmit/neoOmit',
+							'modules/miniCore/services/appMessages'
 							//'modules/graphs/directives/inline/sparklineContainer',
 							//'components/inbox/directives/unreadMessagesCount',
 							//'components/chat/api/ChatApi',
@@ -36,12 +40,17 @@ define(
 				}
 			}
 		});
-		$urlRouterProvider.otherwise('/dashboard');
+		$urlRouterProvider.otherwise('/login');
 
 	});
 
-	module.run(function ($couchPotato) {
+	module.run(function ($rootScope, $couchPotato, appMessages) {
 		module.lazy = $couchPotato;
+
+		$rootScope.$on('$routeChangeSuccess', function () {
+			appMessages.apply();
+			console.log('hello');
+		});
 	});
 
 	return module;
