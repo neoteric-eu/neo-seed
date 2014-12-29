@@ -36,6 +36,7 @@ var requirejs = {
 		'angular-cookie': '../vendor/libs/angular-cookie/angular-cookie',
 		'angular-permission': '../vendor/angular-permission/angular-permission',
 		'angular-moment': '../vendor/libs/angular-moment/angular-moment',
+		'angular-logx': '../vendor/libs/angular-logx/angular-logx',
 
 		// Bootstrap dependencies
 		'bootstrap': '../vendor/libs/bootstrap/bootstrap',
@@ -100,6 +101,13 @@ var requirejs = {
 		'globalSettings': 'modules/global_settings',
 		'angular-templates': 'templates/module'
 	},
+	bundles: {
+		'angular-logx': [
+			'mindspace/logger/ExternalLogger',
+			'mindspace/utils/supplant',
+			'mindspace/utils/makeTryCatch'
+		]
+	},
 	shim: {
 		// jQuery dependencies
 		'dropzone': {deps: ['jquery']},
@@ -134,6 +142,7 @@ var requirejs = {
 		'angular-ui-router': {deps: ['angular']},
 		'angular-cookie': {deps: ['angular']},
 		'angular-permission': {deps: ['angular']},
+		'angular-logx': {deps: ['angular']},
 
 		// Bootstrap dependencies
 		'bootstrap': {deps: ['jquery']},

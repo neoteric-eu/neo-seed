@@ -1,8 +1,5 @@
 // Automatically inject Bower components into the app
 module.exports = {
-	options: {
-		clean: true
-	},
 	install: {
 		options: {
 			destPrefix: 'src/vendor/libs'
@@ -28,6 +25,7 @@ module.exports = {
 			'angular-xeditable/dist/js/xeditable.js': 'angular-xeditable/dist/js/xeditable.js',
 			'angular-cookie/angular-cookie.js': 'angular-cookie/angular-cookie.js',
 			'angular-moment/angular-moment.js': 'angular-moment/angular-moment.js',
+			'angular-logx/angular-logx.js': 'angular-logX/release/amd/angular-logX.js',
 
 			'bootstrap/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
 			'bootstrap-timepicker/bootstrap-timepicker.js': 'bootstrap3-fontawesome-timepicker/js/bootstrap-timepicker.js',

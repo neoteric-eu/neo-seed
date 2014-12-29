@@ -23,7 +23,8 @@ define([
 	'angular-moment',
 	'smartwidgets',
 	'notification',
-	'angular-templates'
+	'angular-templates',
+	'angular-logx'
 ], function (ng, couchPotato, globalSettings) {
 
 	var app = ng.module('app', [
@@ -37,6 +38,7 @@ define([
 		'ngAnimate',
 		'ui.router',
 		'ui.bootstrap',
+		'mindspace.logX',
 
 		// App modules
 		'app.auth',
@@ -45,7 +47,6 @@ define([
 		'app.forms',
 		'app.templates',
 		'app.miniTemplate',
-
 		'app.dashboard'
 	]);
 
@@ -174,6 +175,7 @@ define([
 		session,
 		$urlRouter
 	) {
+
 		app.lazy = $couchPotato;
 		$rootScope.appReady = false;
 		$rootScope.$state = $state;
