@@ -12,7 +12,7 @@ module.exports = {
 	disable_tracking_templates: {
 		command: 'git update-index --assume-unchanged <%= yeoman.app %>/app/templates/module.js'
 	},
-	git_submodule_: {
+	git_submodule_init: {
 		command: 'git submodule init'
 	},
 	git_submodule_update: {
