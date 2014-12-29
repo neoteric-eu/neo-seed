@@ -66,7 +66,9 @@ module.exports = {
 		'shell:webdriver_update',
 		//'githooks',
 		'config:development',
-		'shell:disable_tracking_templates'
+		'shell:disable_tracking_templates',
+		'git_submodule_init',
+		'git_submodule_update'
 	]
 };
 
