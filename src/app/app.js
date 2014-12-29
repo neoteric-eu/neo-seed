@@ -173,10 +173,14 @@ define([
 		$stateParams,
 		gettextCatalog,
 		session,
-		$urlRouter
+		$urlRouter,
+		$log
 	) {
-
 		app.lazy = $couchPotato;
+		app.name = globalSettings.get('APP_NAME');
+
+		$log = $log.getInstance(app.name);
+
 		$rootScope.appReady = false;
 		$rootScope.$state = $state;
 		$rootScope.$stateParams = $stateParams;
@@ -193,6 +197,7 @@ define([
 
 		$rootScope.$on('$stateChangeStart', function () {
 			$rootScope.appReady = true;
+			$log.debug('Starting main application');
 		});
 	});
 

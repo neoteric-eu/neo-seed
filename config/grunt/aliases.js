@@ -64,12 +64,12 @@ module.exports = {
 
 	install: [
 		'bower:install',
-		'shell:webdriver_update',
+		'shell:webdriver-update',
 		//'githooks',
 		'config:development',
-		'shell:disable_tracking_templates',
-		'shell:git_submodule_init',
-		'shell:git_submodule_update'
+		'shell:git-disable-tracking-templates',
+		'shell:git-submodule-init',
+		'shell:git-submodule-update'
 	]
 };
 

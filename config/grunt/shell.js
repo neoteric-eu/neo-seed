@@ -6,16 +6,16 @@ module.exports = {
 		async: true
 	},
 	// Protractor drivers update
-	webdriver_update: {
+	'webdriver-update': {
 		command: 'node ./node_modules/protractor/bin/webdriver-manager update'
 	},
-	disable_tracking_templates: {
+	'git-disable-tracking-templates': {
 		command: 'git update-index --assume-unchanged <%= yeoman.app %>/app/templates/module.js'
 	},
-	git_submodule_init: {
+	'git-submodule-init': {
 		command: 'git submodule init'
 	},
-	git_submodule_update: {
+	'git-submodule-update': {
 		command: 'git submodule update'
 	}
 };

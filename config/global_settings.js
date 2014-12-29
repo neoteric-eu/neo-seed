@@ -48,7 +48,7 @@
 				EMAILS: '@@EMAILS',
 
 				DOMAIN: 'neoteric.eu',
-				APP_NAME: 'Neoteric',
+				APP_NAME: 'NeotericApp',
 
 				COOKIE_DOMAIN: '@@COOKIE_DOMAIN'
 			},
