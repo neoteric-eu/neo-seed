@@ -31,7 +31,7 @@
 
 					if (permissions) {
 						//@TODO how to fix this prev default?
-						//event.preventDefault();
+						event.preventDefault();
 						Permission.authorize(permissions, toParams).then(function () {
 							// If authorized, use call state.go without triggering the event.
 							// Then trigger $stateChangeSuccess manually to resume the rest of the process

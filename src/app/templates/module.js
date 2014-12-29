@@ -71,7 +71,7 @@ define(['angular'], function(angular) { /*jshint quotmark: false*/ "use strict";
 
 
   $templateCache.put('app/dashboard/views/dashboard.html',
-    "<div id=content><div class=row><big-breadcrumbs items=\"['Dashboard', 'My Dashboard']\" class=\"col-xs-12 col-sm-7 col-md-7 col-lg-4\"></big-breadcrumbs></div><a data-keep=SM_USER_GET ng-click=dashboard.sayHello()>say hello</a><h1 ng-bind=date></h1></div>"
+    "<div id=content><div class=row><big-breadcrumbs items=\"['Dashboard', 'My Dashboard']\" class=\"col-xs-12 col-sm-7 col-md-7 col-lg-4\"></big-breadcrumbs></div><a data-neo-keep=SM_USER_GET ng-click=dashboard.sayHello()>say hello</a><h1 ng-bind=date></h1></div>"
   );
 
 

@@ -67,8 +67,8 @@ module.exports = {
 		//'githooks',
 		'config:development',
 		'shell:disable_tracking_templates',
-		'git_submodule_init',
-		'git_submodule_update'
+		'shell:git_submodule_init',
+		'shell:git_submodule_update'
 	]
 };
 

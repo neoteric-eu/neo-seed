@@ -143,7 +143,6 @@ define([
 							var hasFeature = !!Permission.hasPermission(features.split(','));
 
 							/* jshint bitwise: false */
-							console.log('wtf');
 							if (features.length && (keep ^ hasFeature)) {
 								element.remove();
 							}
@@ -172,7 +171,8 @@ define([
 		$state,
 		$stateParams,
 		gettextCatalog,
-		session
+		session,
+		$urlRouter
 	) {
 		app.lazy = $couchPotato;
 		$rootScope.appReady = false;
@@ -181,6 +181,13 @@ define([
 
 		gettextCatalog.debug = globalSettings.get('DEBUG');
 		session.setLocale();
+
+		$rootScope.$on('$locationChangeSuccess', function(evt) {
+			evt.preventDefault();
+			if(!$rootScope.appReady){
+				$urlRouter.sync();
+			}
+		});
 
 		$rootScope.$on('$stateChangeStart', function () {
 			$rootScope.appReady = true;
