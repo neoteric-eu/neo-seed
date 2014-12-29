@@ -31,7 +31,7 @@ module.exports = {
 		'less:dev',
 		'gettext-extract',
 		'gettext-compile',
-		'usemin-prepare',
+		'useminPrepare',
 		'templates:dist',
 		'concat',
 		'cssmin',

@@ -20,7 +20,6 @@ module.exports = function (grunt) {
 
 	grunt.task.renameTask('bowercopy', 'bower');
 	grunt.task.renameTask('ngtemplates', 'templates');
-	grunt.task.renameTask('useminPrepare', 'usemin-prepare');
 	grunt.task.renameTask('nggettext_compile', 'gettext-compile');
 	grunt.task.renameTask('nggettext_extract', 'gettext-extract');
 };
