@@ -11,7 +11,7 @@
 	'use strict';
 
 	angular.module('permission', ['ui.router'])
-		.run(['$rootScope', 'Permission', '$state', '$urlRouter', function ($rootScope, Permission, $state, $urlRouter) {
+		.run(['$rootScope', 'Permission', '$state', '$urlRouter', '$log', function ($rootScope, Permission, $state, $urlRouter, $log) {
 			$rootScope.$on('$stateChangeStart',
 				function (event, toState, toParams, fromState, fromParams) {
 					// If there are permissions set then prevent default and attempt to authorize
@@ -23,8 +23,8 @@
 						 * This way of defining permissions will be depracated in v1. Should use
 						 * `data` key instead
 						 */
-						console.log('Deprecation Warning: permissions should be set inside the `data` key ');
-						console.log('Setting permissions for a state outside `data` will be depracated in' +
+						$log.info('Deprecation Warning: permissions should be set inside the `data` key ');
+						$log.info('Setting permissions for a state outside `data` will be depracated in' +
 						' version 1');
 						permissions = toState.permissions;
 					}
@@ -48,7 +48,6 @@
 							// If not authorized, redirect to wherever the route has defined, if defined at all
 							var redirectTo = permissions.redirectTo;
 							if (redirectTo) {
-								console.log('Brak uprawnien, idz w cholerę', $state.get(redirectTo));
 								$state.go($state.get(redirectTo), toParams, {notify: true}).then(function() {
 									//$state.go($state.get(redirectTo), toParams, {notify: true});
 									$rootScope
@@ -88,7 +87,7 @@
 				return this;
 			};
 
-			this.$get = ['$q', function ($q) {
+			this.$get = ['$q', '$log', function ($q, $log) {
 				var Permission = {
 					features: [],
 					_promiseify: function (value) {
@@ -175,16 +174,14 @@
 						});
 					},
 					resolveIfMatch: function (rolesArray, toParams) {
-						console.log('resolve if match');
 						var roles = angular.copy(rolesArray);
 						var deferred = $q.defer();
 						Permission._findMatchingRole(roles, toParams).then(function () {
-							// Found role match
-							console.log('resolve if match OK');
+							$log.debug('Resolve permission match:', roles);
 							deferred.resolve();
 						}, function () {
 							// No match
-							console.log('resolve if match FAIL');
+							$log.debug('Resolve permission fail:', roles);
 							deferred.reject();
 						});
 						return deferred.promise;
@@ -202,7 +199,6 @@
 					},
 					roleValidations: roleValidationConfig,
 					authorize: function (roleMap, toParams) {
-						console.log('Authorize');
 						var deferred = $q.defer();
 						// Validate input
 						Permission._validateRoleMap(roleMap);
