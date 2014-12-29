@@ -8,6 +8,6 @@
 		"INFO": "info@neoteric.eu",
 		"SUPPORT": "support@neoteric.eu"
 	},
-	"MOD_REWRITE": "true",
+  "MOD_REWRITE": true,
 	"COOKIE_DOMAIN": ""
 }
