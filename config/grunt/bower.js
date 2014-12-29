@@ -3,7 +3,7 @@ module.exports = {
 	options: {
 		clean: true
 	},
-	js: {
+	install: {
 		options: {
 			destPrefix: 'src/vendor/libs'
 		},

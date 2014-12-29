@@ -9,7 +9,7 @@ module.exports = {
 	},
 	html: {
 		files: '<%= yeoman.app %>/app/**/*.html',
-		tasks: 'ngtemplates:dist'
+		tasks: 'templates:dist'
 	},
 	js_test: {
 		files: 'test/**/*.spec.js',

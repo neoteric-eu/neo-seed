@@ -1,7 +1,7 @@
 module.exports = {
 	'serve': [
 		'clean:server',
-		'ngtemplates:dist',
+		'templates:dist',
 		'connect:server',
 		'watch'
 	],
@@ -29,9 +29,10 @@ module.exports = {
 	'build': [
 		'clean:dist',
 		'less:dev',
-		'nggettext_compile',
-		'useminPrepare',
-		'ngtemplates:dist',
+		'gettext-extract',
+		'gettext-compile',
+		'usemin-prepare',
+		'templates:dist',
 		'concat',
 		'cssmin',
 		'copy:dist',
@@ -62,7 +63,7 @@ module.exports = {
 	],
 
 	install: [
-		'bowercopy',
+		'bower:install',
 		'shell:webdriver_update',
 		//'githooks',
 		'config:development',
