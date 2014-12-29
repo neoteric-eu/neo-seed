@@ -1,5 +1,4 @@
 {
-  "baseUrl": "http://ntrc-delta.neoteric.eu:9100/api/v1/",
   "DEBUG": true,
   "SENTRY_API_KEY": "",
   "SENTRY_OPTIONS": {},
