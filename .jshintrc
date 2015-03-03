@@ -1,38 +1,48 @@
 {
+	/* Settings */
+	"passfail": false,
+	/* Environment */
 	"node": true,
 	"browser": true,
+	"phantom": true,
+	"jasmine": true,
+	"jquery": true,
+	"es3": false,
+	"strict": true,
+	/* Code Style */
 	"esnext": true,
 	"bitwise": true,
 	"curly": true,
 	"eqeqeq": true,
 	"immed": true,
 	"latedef": true,
-	"newcap": true,
+	"newcap": false,
 	"noarg": true,
-	"sub": true,
 	"quotmark": "single",
 	"regexp": true,
-	"undef": true,
-	"unused": true,
-	"strict": true,
-	"trailing": true,
 	"smarttabs": true,
-	"es5": false,
+	"sub": true,
+	"trailing": true,
+	"undef": false,
+	"unused": true,
+	/* Global variables */
 	"globals": {
 		"angular": false,
 		/* AMD */
 		"define": false,
 		"require": false,
+		"requirejs": false,
 		/* Custom */
 		"ngRoutes": false,
 		"ngSanitize": false,
 		"ngCookies": false,
 		"ngResource": false,
-		"camelcase": false,
 		"appConfig": false,
+		"module": true,
 		"_": false,
 		"$": false,
 		"t": false,
+		"supplant": false,
 		/* Tests */
 		"after": false,
 		"afterEach": false,
@@ -48,7 +58,6 @@
 		"iit": false,
 		"jasmine": false,
 		"spyOn": false,
-		"angular": false,
 		"xit": false
 	}
 }

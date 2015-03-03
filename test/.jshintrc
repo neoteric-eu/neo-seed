@@ -36,6 +36,7 @@
 		"jasmine": false,
 		"spyOn": false,
 		"angular": false,
+		"beforeAll": false,
 		/* AMD */
 		"define": false,
 		/* Custom */

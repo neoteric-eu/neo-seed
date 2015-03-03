@@ -5,10 +5,21 @@ module.exports = {
 			dot: true,
 			src: [
 				'.tmp',
+				'doc',
 				'<%= yeoman.dist %>/*',
 				'!<%= yeoman.dist %>/.git*'
 			]
 		}]
 	},
-	server: '.tmp'
+	test: 'test/results',
+	doc: 'doc',
+	server: '.tmp',
+	bower: {
+		files: [{
+			src: [
+				'bower_components',
+				'<%= yeoman.app %>/vendor/libs'
+			]
+		}]
+	}
 };

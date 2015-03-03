@@ -1,14 +1,19 @@
 define([
-	'./activities/activities-controller',
-	'./activities/activities-dropdown-toggle-directive',
-	'./activities/activities-service',
+	'components/activities/activities-controller',
+	'components/activities/activities-dropdown-toggle-directive',
+	'components/activities/activities-service',
 
 	'components/profiles/userProfiles',
 
-	'./shortcut/shortcut-directive',
+	'components/shortcut/shortcut-directive',
+	'text!components/tables/smart-footer.html',
 
-	'components/language/languageSelector',
-	'components/language/language-controller',
+	'components/language/controllers/LanguageController',
+	'components/language/directives/languageSelector',
+	'components/language/services/LanguageAPI',
+	'components/language/models/Language',
+
+	'components/_locale/translation'
 ], function() {
 	'use strict';
 });

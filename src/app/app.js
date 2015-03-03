@@ -1,31 +1,31 @@
-'use strict';
-
-/**
- * @ngdoc overview
- * @name app [smartadminApp]
- * @description
- * # app [smartadminApp]
- *
- * Main module of the application.
- */
 define([
 	'angular',
 	'angular-couch-potato',
 	'globalSettings',
+	'angular-local-storage',
 	'angular-resource',
 	'angular-ui-router',
+	'angular-ui-router-extras-core',
+	'angular-ui-router-extras-dsr',
+	'angular-ui-router-extras-transition',
+	'angular-ui-router-extras-previous',
+	'angular-ui-router-extras-sticky',
 	'angular-sanitize',
-	'angular-animate',
 	'angular-bootstrap',
+	'angular-ui-select',
 	'angular-gettext',
 	'angular-cookie',
 	'angular-permission',
 	'angular-moment',
-	'smartwidgets',
-	'notification',
+	'angular-debounce',
 	'angular-templates',
-	'angular-logx'
+	'angular-restmod',
+	'angular-restmod-preload',
+	'angular-restmod-find-many',
+	'smartwidgets',
+	'notification'
 ], function (ng, couchPotato, globalSettings) {
+	'use strict';
 
 	var app = ng.module('app', [
 		'ngSanitize',
@@ -33,172 +33,96 @@ define([
 		'gettext',
 		'permission',
 		'angularMoment',
-
+		'restmod',
+		'debounce',
+		'LocalStorageModule',
 		'scs.couch-potato',
-		'ngAnimate',
-		'ui.router',
+
 		'ui.bootstrap',
-		'mindspace.logX',
+		'ui.select',
+
+		'ui.router',
+		'ct.ui.router.extras.core',
+		'ct.ui.router.extras.dsr',
+		'ct.ui.router.extras.transition',
+		'ct.ui.router.extras.previous',
+		'ct.ui.router.extras.sticky',
 
 		// App modules
+		'app.core',
 		'app.auth',
 		'app.layout',
-		'app.miniCore',
 		'app.forms',
-		'app.templates',
-		'app.miniTemplate',
-		'app.dashboard'
+		'app.graphs',
+		'app.widgets',
+		'app.dashboard',
+		'app.tasks'
 	]);
 
 	couchPotato.configureApp(app);
 
-	app.config(function (
-		$provide,
-		$httpProvider,
-		$locationProvider,
-		$logProvider
-	) {
+	app.config(function ($provide,
+											 $httpProvider,
+											 $locationProvider,
+											 localStorageServiceProvider,
+											 $logProvider,
+											 restmodProvider,
+											 uiSelectConfig) {
+
+		restmodProvider.rebase(
+			'restmod.Preload', 'DefaultPacker', {
+				$config: {
+					urlPrefix: globalSettings.get('baseUrl'),
+					style: 'NeoStyle'
+				},
+				$extend: {
+					Model: {
+						/**
+						 * Description
+						 * @method encodeUrlName
+						 * @param {String} _name
+						 * @return _name
+						 */
+						encodeUrlName: function (_name) {
+							return _name;
+						}
+					}
+				}
+			});
+
+		uiSelectConfig.theme = 'bootstrap';
 
 		$locationProvider.html5Mode(globalSettings.get('MOD_REWRITE'));
 		$logProvider.debugEnabled(globalSettings.get('DEBUG'));
+		localStorageServiceProvider
+			.setPrefix('neo')
+			.setStorageType('sessionStorage');
 
-		// Intercept http calls.
-		$provide.factory('ErrorHttpInterceptor', function ($q, $log, $exceptionHandler) {
-			function notifyError(rejection) {
-				$log.error(rejection);
-				var exception = {
-					message: rejection.data,
-					method: rejection.config.method,
-					headers: rejection.config.header,
-					url: rejection.config.url,
-					data: rejection.data,
-					status: rejection.status
-				};
-
-				$exceptionHandler(exception);
-			}
-
-			return {
-				// On request failure
-				requestError: function (rejection) {
-					// show notification
-					notifyError(rejection);
-
-					// Return the promise rejection.
-					return $q.reject(rejection);
-				},
-
-				// On response failure
-				responseError: function (rejection) {
-					// show notification
-					notifyError(rejection);
-					// Return the promise rejection.
-					return $q.reject(rejection);
-				}
-			};
-		});
-
-		// Add the interceptor to the $httpProvider.
-		$httpProvider.interceptors.push('ErrorHttpInterceptor');
-
-		$provide.decorator('$state', function ($delegate, $stateParams) {
-			$delegate.reload = function () {
-				return $delegate.go($delegate.current, $stateParams, {
-					reload: true,
-					inherit: false,
-					notify: true
-				});
-			};
-			return $delegate;
-		});
-
-		$provide.factory('HttpResponseInterceptor', function ($templateCache, Permission) {
-			// Keep track which HTML templates have already been modified.
-			var modifiedTemplates = {};
-
-			// Tests if there are any keep/omit attributes.
-			var HAS_FLAGS_EXP = /data-(keep|omit)/;
-
-			// Tests if the requested url is a html page.
-			var IS_HTML_PAGE = /\.html$|\.html\?/i;
-
-			return {
-				'response': function(response) {
-					var url = response.config.url,
-						responseData = response.data;
-
-					if (!modifiedTemplates[url] && IS_HTML_PAGE.test(url) &&
-						HAS_FLAGS_EXP.test(responseData)) {
-
-						// Create a DOM fragment from the response HTML.
-						var template = $('<div>').append(responseData);
-
-						// Find and parse the keep/omit attributes in the view.
-						template.find('[data-keep],[data-omit]').each(function() {
-							var element = $(this),
-								data = element.data(),
-								keep = !!data.keep,
-								features = data.keep || data.omit || '';
-
-							// Check if the user has all of the specified features.
-							var hasFeature = !!Permission.hasPermission(features.split(','));
-
-							/* jshint bitwise: false */
-							if (features.length && (keep ^ hasFeature)) {
-								element.remove();
-							}
-						});
-
-						// Set the modified template.
-						response.data = template.html();
-
-						// Replace the template in the template cache, and mark the
-						// template as modified.
-						$templateCache.put(url, response.data);
-						modifiedTemplates[url] = true;
-					}
-
-					return response;
-				}
-			};
-		});
-
-		$httpProvider.interceptors.push('HttpResponseInterceptor');
+		// Add the interceptors to the $httpProvider.
+		$httpProvider.interceptors.push('HttpErrorInterceptor');
+		$httpProvider.interceptors.push('HttpRequestInterceptor');
 	});
 
-	app.run(function (
-		$couchPotato,
-		$rootScope,
-		$state,
-		$stateParams,
-		gettextCatalog,
-		session,
-		$urlRouter,
-		$log
-	) {
+	app.run(function ($couchPotato,
+										$rootScope,
+										$state,
+										gettextCatalog,
+										LanguageAPI,
+										$urlRouter,
+										$log) {
+
+		$log.debug('Setting up application configuration');
+
 		app.lazy = $couchPotato;
 		app.name = globalSettings.get('APP_NAME');
 
-		$log = $log.getInstance(app.name);
-
-		$rootScope.appReady = false;
-		$rootScope.$state = $state;
-		$rootScope.$stateParams = $stateParams;
+		LanguageAPI.initiate();
 
 		gettextCatalog.debug = globalSettings.get('DEBUG');
-		session.setLocale();
 
-		$rootScope.$on('$locationChangeSuccess', function(evt) {
-			evt.preventDefault();
-			if(!$rootScope.appReady){
-				$urlRouter.sync();
-			}
-		});
+		$rootScope.appReady = true;
 
-		$rootScope.$on('$stateChangeStart', function () {
-			$rootScope.appReady = true;
-			$log.debug('Starting main application');
-		});
+		$log.debug('Starting application');
 	});
 
 	return app;

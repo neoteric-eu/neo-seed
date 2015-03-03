@@ -1,60 +1,71 @@
-src/vendor/libs
-coverage
-node_modules
-nbproject/
-src/app/modules/global_settings.js
+### Directories ###
 dist
+docs
+node_modules
+bower_components
+test/results
+src/vendor/libs
+src/styles/less/vendor/libs
+src/styles/css
 
-npm-debug.log
-src/app/templates/module.js
-
-.sass-cache
+### Extensions ###
 .todo
 .ask
 .tmp
-*.sublime*
-*.idea
+.mo
+.pot
+
+### Files ###
+src/app/modules/global_settings.js
+npm-debug.log
+src/app/templates/module.js
+src/app/require.js
+
+### SublimeText ###
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# workspace files are user-specific
+*.sublime-workspace
+
+# project files should be checked into the repository, unless a significant
+# proportion of contributors will probably not be using SublimeText
+*.sublime-project
+
+# sftp configuration file
+sftp-config.json
+
 
 ### WebStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
-
 *.iml
 
-## Directory-based project format:
-#.idea/
-# if you remove the above rule, at least ignore the following:
-
 # User-specific stuff:
- .idea/workspace.xml
- .idea/tasks.xml
- .idea/dictionaries
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
 
 # Sensitive or high-churn files:
- .idea/dataSources.ids
- .idea/dataSources.xml
- .idea/sqlDataSources.xml
- .idea/dynamic.xml
- .idea/uiDesigner.xml
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
 
 # Gradle:
- .idea/gradle.xml
- .idea/libraries
+.idea/gradle.xml
+.idea/libraries
 
 # Mongo Explorer plugin:
- .idea/mongoSettings.xml
+.idea/mongoSettings.xml
 
-## File-based project format:
+# File-based project format:
 *.ipr
 *.iws
 
-## Plugin-specific files:
-
-# IntelliJ
-out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
+# Plugin-specific files:
 # JIRA plugin
 atlassian-ide-plugin.xml
 
@@ -62,3 +73,4 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
+

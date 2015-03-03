@@ -1,6 +1,6 @@
 define([], function () {
 
-	describe('Sample Unit Test', function () {
+	describe('module: ~sampleModule', function () {
 
 		beforeEach(function () {
 			// Create test set-up

@@ -1,1 +1,0 @@
-define(["../module","bootstrap"],function(a){"use strict";return a.registerDirective("smartRideCarousel",function(){return{restrict:"A",compile:function(a){a.removeAttr("smart-ride-carousel data-smart-ride-carousel"),a.carousel(a.data())}}})});

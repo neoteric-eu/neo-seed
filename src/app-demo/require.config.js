@@ -21,10 +21,8 @@ var requirejs = {
 
 		// Angular dependencies
 		'angular': '../vendor/libs/angular/angular',
-		'angular-cookies': '../vendor/libs/angular-cookies/angular-cookies',
 		'angular-resource': '../vendor/libs/angular-resource/angular-resource',
 		'angular-sanitize': '../vendor/libs/angular-sanitize/angular-sanitize',
-		'angular-animate': '../vendor/libs/angular-animate/angular-animate',
 		'angular-ui-router': '../vendor/libs/angular-ui-router/angular-ui-router',
 		'angular-google-maps': '../vendor/libs/angular-google-maps/angular-google-maps',
 		'angular-bootstrap': '../vendor/libs/angular-bootstrap/ui-bootstrap-tpls',
@@ -62,10 +60,8 @@ var requirejs = {
 		'jquery-jvectormap': '../vendor/smart-admin-plugins/vectormap/jquery-jvectormap-1.2.2.min',
 		'jquery-jvectormap-world-mill-en': '../vendor/smart-admin-plugins/vectormap/jquery-jvectormap-world-mill-en',
 		'fullcalendar': '../vendor/smart-admin-plugins/fullcalendar/jquery.fullcalendar.min',
-		'smartwidgets': '../vendor/smart-admin-plugins/smartwidgets/jarvis.widget.min',
-		'notification': '../vendor/smart-admin-plugins/notification/SmartNotification.min',
-		'raphael': '../vendor/smart-admin-plugins/morris/raphael.min',
-		'morris': '../vendor/smart-admin-plugins/morris/morris.min',
+		'smartwidgets': '../vendor/smart-admin-plugins/smartwidgets/jarvis.widget',
+		'notification': '../vendor/smart-admin-plugins/notification/SmartNotification',
 		'flot': '../vendor/smart-admin-plugins/flot/jquery.flot.cust.min',
 		'flot-resize': '../vendor/smart-admin-plugins/flot/jquery.flot.resize.min',
 		'flot-fillbetween': '../vendor/smart-admin-plugins/flot/jquery.flot.fillbetween.min',
@@ -90,9 +86,11 @@ var requirejs = {
 		'domReady': '../vendor/libs/requirejs-domready/requirejs-domready',
 		'fuelux-wizard': '../vendor/libs/fuelux/wizard',
 		'lodash': '../vendor/libs/lodash/lodash',
+		'raphael': '../vendor/libs/raphael/raphael',
+		'morris': '../vendor/libs/morris/morris',
 
 		// App paths
-		'appConfig': '../vendor/smart-admin-plugins/app.config',
+		'appConfig': 'app.conf',
 		'globalSettings': 'modules/global_settings'
 	},
 	shim: {
@@ -116,9 +114,7 @@ var requirejs = {
 
 		// Angular dependencies
 		'angular': {'exports': 'angular', deps: ['jquery']},
-		'angular-animate': {deps: ['angular']},
 		'angular-bootstrap': {deps: ['angular']},
-		'angular-cookies': {deps: ['angular']},
 		'angular-couch-potato': {deps: ['angular']},
 		'angular-easyfb': {deps: ['angular']},
 		'angular-gettext': {deps: ['angular']},

@@ -7,6 +7,11 @@ define(['auth/module'], function (module) {
 			restrict: 'A',
 			templateUrl: 'app/auth/directives/login-info.html',
 			scope: {},
+			/**
+			 * Description
+			 * @method link
+			 * @param {} scope
+			 */
 			link: function (scope) {
 				var unbindWatch = scope.$watch(function() {
 					return session.userData.getModel();

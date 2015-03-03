@@ -1,92 +1,104 @@
 define([
 	'angular',
-	'angular-couch-potato',
-	'globalSettings',
-	'angular-ui-router',
-	'angular-gettext',
-	'angular-google-plus',
-	'angular-easyfb'
-], function (ng, couchPotato, globalSettings) {
-
+	'angular-couch-potato'
+], function (ng, couchPotato) {
 	'use strict';
 
 	var module = ng.module('app.auth', [
+		'ipCookie',
 		'ui.router'
 	]);
 
 	couchPotato.configureApp(module);
 
-	module.config(function ($stateProvider, $couchPotatoProvider) {
+	module.config(function ($stateProvider, $couchPotatoProvider, gettext) {
 
-		$stateProvider.state('auth', {
-			abstract: true,
-			data: {
-				permissions: {
-					except: ['user'],
-					redirectTo: 'app.dashboard'
+		$stateProvider
+			.state('auth', {
+				abstract: true,
+				data: {
+					permissions: {
+						except: ['user'],
+						redirectTo: 'app.dashboard'
+					}
+				},
+				views: {
+					root: {
+						template: '<div data-ui-view="auth"></div>'
+					}
 				}
-			},
-			views: {
-				root: {
-					template: '<div data-ui-view="auth"></div>'
+			})
+
+			.state('auth.login', {
+				url: '/login',
+				views: {
+					auth: {
+						controller: 'LoginController',
+						templateUrl: 'app/auth/views/login/login.html'
+					}
+				},
+				data: {
+					title: gettext('Login'),
+					htmlId: 'extr-page'
+				},
+				resolve: {
+					deps: $couchPotatoProvider.resolveDependencies([
+						// Controllers
+						'auth/controllers/LoginController',
+						// Models
+						'auth/models/User',
+						// Services
+						'core/services/BaseAPI',
+						'auth/services/UserAPI',
+						// Directives
+						'modules/forms/directives/validate/smartValidateForm'
+					])
 				}
-			}
-		}).state('auth.login', {
-			url: '/login',
-			views: {
-				auth: {
-					templateUrl: 'app/auth/views/login.html'
+			})
+
+			.state('auth.register', {
+				url: '/register',
+				views: {
+					auth: {
+						controller: 'RegisterController',
+						templateUrl: 'app/auth/views/register/register.html'
+					}
+				},
+				data: {
+					title: gettext('Register'),
+					htmlId: 'extr-page'
+				},
+				resolve: {
+					deps: $couchPotatoProvider.resolveDependencies([
+						'auth/controllers/RegisterController',
+						'modules/forms/directives/validate/smartValidateForm'
+					])
 				}
-			},
-			data: {
-				title: 'Login',
-				htmlId: 'extr-page'
-			},
-			resolve: {
-				deps: $couchPotatoProvider.resolveDependencies([
-					'modules/miniCore/directives/neoLoginForm/neoLoginForm',
-					'modules/forms/directives/validate/smartValidateForm'
-				])
-			}
-		}).state('auth.register', {
-			url: '/register',
-			views: {
-				root: {
-					templateUrl: 'app/auth/views/register.html'
+			})
+
+			.state('auth.forgotPassword', {
+				url: '/forgot-password',
+				views: {
+					auth: {
+						templateUrl: 'app/auth/views/forgot-password.html'
+					}
+				},
+				data: {
+					title: gettext('Forgot Password'),
+					htmlId: 'extr-page'
+				},
+				resolve: {
+					deps: $couchPotatoProvider.resolveDependencies([
+						'modules/forms/directives/validate/smartValidateForm'
+					])
 				}
-			},
-			data: {
-				title: 'Register',
-				htmlId: 'extr-page'
-			},
-			resolve: {
-				deps: $couchPotatoProvider.resolveDependencies([
-					'modules/forms/directives/validate/smartValidateForm'
-				])
-			}
-		}).state('auth.forgotPassword', {
-			url: '/forgot-password',
-			views: {
-				root: {
-					templateUrl: 'app/auth/views/forgot-password.html'
-				}
-			},
-			data: {
-				title: 'Forgot Password',
-				htmlId: 'extr-page'
-			},
-			resolve: {
-				deps: $couchPotatoProvider.resolveDependencies([
-					'modules/forms/directives/validate/smartValidateForm'
-				])
-			}
-		});
+			});
 	});
 
-	module.run(function($couchPotato, $state, Permission, session, $log) {
+	module.run(function ($couchPotato, $state, Permission, session) {
 		module.lazy = $couchPotato;
 
-		Permission.defineRole('user', function(params) {
+		Permission.defineRole('user', function () {
 			return session.checkSession();
 		});
 	});

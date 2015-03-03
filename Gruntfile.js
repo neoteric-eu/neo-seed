@@ -1,6 +1,6 @@
-'use strict';
-
 module.exports = function (grunt) {
+	'use strict';
+
 	var path = require('path');
 
 	// Time how long tasks take. Can help when optimizing build times
@@ -16,6 +16,12 @@ module.exports = function (grunt) {
 			config: require('./package.json'),
 			scope: 'devDependencies'
 		}
+	});
+
+	grunt.registerTask('logo', 'Display company logo', function () {
+		grunt.log.write(
+			grunt.file.read('config/logo/logo.txt')
+		);
 	});
 
 	grunt.task.renameTask('bowercopy', 'bower');

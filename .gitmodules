@@ -1,3 +1,0 @@
-[submodule "src/app/modules/miniCore"]
-	path = src/app/modules/miniCore
-	url = git@gitlab.neoteric.eu:developers/angular-seed-minicore.git

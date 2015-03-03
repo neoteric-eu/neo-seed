@@ -1,17 +1,21 @@
 define(['modules/forms/module', 'bootstrap-slider'], function (module) {
+	'use strict';
 
-    'use strict';
+	return module.registerDirective('smartUislider', function () {
+		return {
+			restrict: 'A',
+			/**
+			 * Description
+			 * @method compile
+			 * @param {} tElement
+			 */
+			compile: function (tElement) {
+				tElement.removeAttr('smart-uislider data-smart-uislider');
 
-    return module.registerDirective('smartUislider', function ($parse) {
-        return {
-            restrict: 'A',
-            compile: function (tElement, tAttributes) {
-                tElement.removeAttr('smart-uislider data-smart-uislider');
+				tElement.bootstrapSlider();
 
-                tElement.bootstrapSlider();
-
-                $(tElement.data('bootstrapSlider').sliderElem).prepend(tElement)
-            }
-        }
-    });
+				$(tElement.data('bootstrapSlider').sliderElem).prepend(tElement);
+			}
+		};
+	});
 });

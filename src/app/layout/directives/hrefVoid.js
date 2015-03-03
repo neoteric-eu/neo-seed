@@ -1,17 +1,22 @@
-define(['../module'], function (module) {
+define(['layout/module'], function (module) {
+	'use strict';
 
-    'use strict';
-
-    module.registerDirective('hrefVoid', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, element, attributes) {
-                element.attr('href','#');
-                element.on('click', function(e){
-                    e.preventDefault();
-                    e.stopPropagation();
-                })
-            }
-        }
-    });
+	module.registerDirective('hrefVoid', function () {
+		return {
+			restrict: 'A',
+			/**
+			 * Description
+			 * @method link
+			 * @param {} scope
+			 * @param {} element
+			 */
+			link: function (scope, element) {
+				element.attr('href', '#');
+				element.on('click', function (e) {
+					e.preventDefault();
+					e.stopPropagation();
+				});
+			}
+		};
+	});
 });

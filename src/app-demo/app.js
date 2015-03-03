@@ -14,7 +14,6 @@ define([
 	'angular-couch-potato',
 	'angular-ui-router',
 	'angular-sanitize',
-	'angular-animate',
 	'angular-bootstrap',
 	'angular-gettext',
 	'smartwidgets',
@@ -25,7 +24,6 @@ define([
 		'ngSanitize',
 
 		'scs.couch-potato',
-		'ngAnimate',
 		'ui.router',
 		'ui.bootstrap',
 

@@ -8,23 +8,26 @@
  */
 
 
-define(['../module'], function (module) {
+define(['layout/module'], function (module) {
+	'use strict';
 
-    'use strict';
+	module.registerDirective('smartDeviceDetect', function () {
+		return {
+			restrict: 'A',
+			/**
+			 * Description
+			 * @method compile
+			 * @param {} tElement
+			 */
+			compile: function (tElement) {
+				tElement.removeAttr('smart-device-detect data-smart-device-detect');
 
-    module.registerDirective('smartDeviceDetect', function () {
-        return {
-            restrict: 'A',
-            compile: function (tElement, tAttributes) {
-                tElement.removeAttr('smart-device-detect data-smart-device-detect');
+				var isMobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
 
-                var isMobile = (/iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
+				tElement.toggleClass('desktop-detected', !isMobile);
+				tElement.toggleClass('mobile-detected', isMobile);
 
-                tElement.toggleClass('desktop-detected', !isMobile);
-                tElement.toggleClass('mobile-detected', isMobile);
-
-
-            }
-        }
-    });
+			}
+		};
+	});
 });

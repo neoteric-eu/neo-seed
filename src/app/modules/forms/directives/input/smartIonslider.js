@@ -1,15 +1,19 @@
 define(['modules/forms/module', 'ionslider'], function (module) {
+	'use strict';
 
-    'use strict';
+	return module.registerDirective('smartIonslider', function () {
+		return {
+			restrict: 'A',
+			/**
+			 * Description
+			 * @method compile
+			 * @param {} tElement
+			 */
+			compile: function (tElement) {
+				tElement.removeAttr('smart-ionslider data-smart-ionslider');
 
-    return module.registerDirective('smartIonslider', function () {
-        return {
-            restrict: 'A',
-            compile: function (tElement, tAttributes) {
-                tElement.removeAttr('smart-ionslider data-smart-ionslider');
-
-                tElement.ionRangeSlider();
-            }
-        }
-    });
+				tElement.ionRangeSlider();
+			}
+		};
+	});
 });

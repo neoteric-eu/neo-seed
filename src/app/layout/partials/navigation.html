@@ -10,12 +10,35 @@
 		traditional href="" links. See documentation for details.
 		-->
 
-		<ul data-smart-menu class="ng-cloak">
-			<li data-ui-sref-active="active">
-				<a data-ui-sref="app.dashboard" title="Dashboard">
-						<i class="fa fa-lg fa-fw fa-home"></i>
+		<ul data-smart-menu>
+			<li ui-sref-active="active">
+				<a ui-sref="app.dashboard" title="{{'Dashboard'|translate}}">
+					<i class="fa fa-lg fa-fw fa-home"></i>
 					<span class="menu-item-parent">{{'Dashboard'|translate}}</span>
 				</a>
+			</li>
+			<li data-menu-collapse>
+				<a href="#" title="Tasks">
+					<i class="fa fa-lg fa-fw fa-suitcase"></i>
+					<span class="menu-item-parent">{{'Tasks'|translate}}</span>
+				</a>
+				<ul>
+					<li ui-sref-active="active">
+						<a ui-sref="app.tasks.tracker" title="{{'Tracker'|translate}}">
+							<span>{{'Tracker'|translate}}</span>
+						</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.tasks.reporter" title="{{'Reporter'|translate}}">
+							<span>{{'Reporter'|translate}}</span>
+						</a>
+					</li>
+					<li ui-sref-active="active">
+						<a ui-sref="app.tasks.planner" title="{{'Planner'|translate}}">
+							<span>{{'Planner'|translate}}</span>
+						</a>
+					</li>
+				</ul>
 			</li>
 		</ul>
 	</nav>

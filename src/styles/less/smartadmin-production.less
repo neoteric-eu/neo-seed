@@ -6,63 +6,65 @@
  */
 
 // Core variables and mixins
-@import "variables.less";
-@import "3.3.1/mixins.less";
-@import "elements/elements.less";
-@import "custom.less"; // custom variable overrides
+@import "custom/_variables.less";
+@import "vendor/libs/bootstrap/mixins";
+@import "vendor/libs/elements/elements.less";
+@import "custom/_includes.less";
+// custom variable overrides
 
 // Plugins have been moved to "smartadmin-production-plugins.less" file (because IE cannot handle more than 4096 selectors in a stylesheet)
 
 // Libraries (Remove if not needed)
-@import "library/animation/animation-engine.less";
-@import "library/jqueryui/jquery-ui-1.10.3.custom.less";
-@import "library/flags/flags.less";
-@import "library/cursors/cursors.less";
+@import "vendor/libs/animate/animate";
+@import "vendor/libs-custom/jquery-ui/jquery-ui-1.10.3.custom.less";
+@import "vendor/libs-custom/flags/flags.less";
+@import "vendor/libs-custom/cursors/cursors.less";
 
 // Individual pages, sections, and components.  You can remove any of these sections you don't use
 
 // Components
-@import "smartadmin/component-fullscreen.less";
-@import "smartadmin/component-jqueryui.less"; // dependency: jquery-ui-1.10.3.custom.less
-@import "smartadmin/component-pricingtable.less";
-@import "smartadmin/component-pace.less";
-@import "smartadmin/component-smartchat.less";
-@import "smartadmin/component-smartforms.less";
+@import "vendor/smartadmin/component-fullscreen.less";
+@import "vendor/smartadmin/component-jqueryui.less";
+// dependency: jquery-ui-1.10.3.custom.less
+@import "vendor/smartadmin/component-pricingtable.less";
+@import "vendor/smartadmin/component-pace.less";
+@import "vendor/smartadmin/component-smartchat.less";
+@import "vendor/smartadmin/component-smartforms.less";
 
 // Pages
-@import "smartadmin/page-error.less";
-@import "smartadmin/page-extr.less";
+@import "vendor/smartadmin/page-error.less";
+@import "vendor/smartadmin/page-extr.less";
 
 // Sections
-@import "smartadmin/section-nestables.less";
-@import "smartadmin/section-calendar.less";
-@import "smartadmin/section-inbox.less";
-@import "smartadmin/section-profile.less";
-@import "smartadmin/section-search.less";
-@import "smartadmin/section-todo.less";
-@import "smartadmin/section-timeline.less";
-@import "smartadmin/section-forum.less";
-@import "smartadmin/section-ajax-msg.less";
-@import "smartadmin/section-projects.less";
+@import "vendor/smartadmin/section-nestables.less";
+@import "vendor/smartadmin/section-calendar.less";
+@import "vendor/smartadmin/section-inbox.less";
+@import "vendor/smartadmin/section-profile.less";
+@import "vendor/smartadmin/section-search.less";
+@import "vendor/smartadmin/section-todo.less";
+@import "vendor/smartadmin/section-timeline.less";
+@import "vendor/smartadmin/section-forum.less";
+@import "vendor/smartadmin/section-ajax-msg.less";
+@import "vendor/smartadmin/section-projects.less";
 
 // Main THEME (Imports by order - do not change order)
-@import "smartadmin/main.less";
-@import "smartadmin/main-progress.less";
-@import "smartadmin/main-container-fix.less";
-@import "smartadmin/main-special-class.less";
-@import "smartadmin/main-form-radiocheck.less";
-@import "smartadmin/main-animated.less";
-@import "smartadmin/main-colorpallet.less";
-@import "smartadmin/main-colorblind.less";
-@import "smartadmin/main-page-footer.less";
-@import "smartadmin/main-responsive.less";
+@import "vendor/smartadmin/main.less";
+@import "vendor/smartadmin/main-progress.less";
+@import "vendor/smartadmin/main-container-fix.less";
+@import "vendor/smartadmin/main-special-class.less";
+@import "vendor/smartadmin/main-form-radiocheck.less";
+@import "vendor/smartadmin/main-animated.less";
+@import "vendor/smartadmin/main-colorpallet.less";
+@import "vendor/smartadmin/main-colorblind.less";
+@import "vendor/smartadmin/main-page-footer.less";
+@import "vendor/smartadmin/main-responsive.less";
 
 // Patches
-@import "smartadmin/ie-fix.less";
+@import "vendor/smartadmin/ie-fix.less";
 
 // UI (overrides and new)
-@import "smartadmin/top-menu.less";
-@import "smartadmin/no-menu.less";
+@import "vendor/smartadmin/top-menu.less";
+@import "vendor/smartadmin/no-menu.less";
 
 // Overrides
-@import "overrides.less";
+@import "custom/_overrides.less";

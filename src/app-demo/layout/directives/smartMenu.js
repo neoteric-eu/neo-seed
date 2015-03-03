@@ -1,4 +1,4 @@
-define(['layout/module', 'jquery'], function (module) {
+define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig) {
 
     "use strict";
 

@@ -8,6 +8,7 @@ module.exports = {
 			dest: '<%= yeoman.dist %>',
 			src: [
 				'*.{ico,png,txt}',
+				'app/require.js',
 				'.htaccess',
 				'index.html',
 				'404.html',

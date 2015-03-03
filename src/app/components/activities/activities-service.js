@@ -1,45 +1,55 @@
-define(['app'], function(app){
+define(['app'], function (app) {
 	'use strict';
 
-	return app.factory('activityService', function($http,$log) {
+	return app.factory('activityService', function ($http, $log) {
 
-		function getActivities(callback){
-
-			$http.get('app-demo/api/activities/activity.json').success(function(data){
-
+		/**
+		 * Description
+		 * @method getActivities
+		 * @param {} callback
+		 */
+		function getActivities(callback) {
+			$http.get('app-demo/api/activities/activity.json').success(function (data) {
 				callback(data);
-
-			}).error(function(){
-
+			}).error(function () {
 				$log.log('Error');
 				callback([]);
-
 			});
-
 		}
 
-		function getActivitiesByType(type, callback){
-
-			$http.get('app-demo/api/activities/activity-' + type + '.json').success(function(data){
-
+		/**
+		 * Description
+		 * @method getActivitiesByType
+		 * @param {} type
+		 * @param {} callback
+		 */
+		function getActivitiesByType(type, callback) {
+			$http.get('app-demo/api/activities/activity-' + type + '.json').success(function (data) {
 				callback(data);
-
-			}).error(function(){
-
+			}).error(function () {
 				$log.log('Error');
 				callback([]);
-
 			});
-
 		}
 
-		return{
-			get:function(callback){
+		return {
+			/**
+			 * Description
+			 * @method get
+			 * @param {} callback
+			 */
+			get: function (callback) {
 				getActivities(callback);
 			},
-			getbytype:function(type,callback){
+			/**
+			 * Description
+			 * @method getbytype
+			 * @param {} type
+			 * @param {} callback
+			 */
+			getbytype: function (type, callback) {
 				getActivitiesByType(type, callback);
 			}
 		};
 	});
-})
+});

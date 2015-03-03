@@ -1,15 +1,19 @@
 define(['modules/forms/module', 'ckeditor'], function (module) {
+	'use strict';
 
-    'use strict';
+	module.registerDirective('smartCkEditor', function () {
+		return {
+			restrict: 'A',
+			/**
+			 * Description
+			 * @method compile
+			 * @param {} tElement
+			 */
+			compile: function (tElement) {
+				tElement.removeAttr('smart-ck-editor data-smart-ck-editor');
 
-    module.registerDirective('smartCkEditor', function () {
-        return {
-            restrict: 'A',
-            compile: function ( tElement) {
-                tElement.removeAttr('smart-ck-editor data-smart-ck-editor');
-
-                CKEDITOR.replace( tElement.attr('name'), { height: '380px', startupFocus : true} );
-            }
-        }
-    });
+				CKEDITOR.replace(tElement.attr('name'), {height: '380px', startupFocus: true});
+			}
+		};
+	});
 });

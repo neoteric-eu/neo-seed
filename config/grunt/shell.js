@@ -2,8 +2,7 @@
 module.exports = {
 	// Command line conf
 	options: {
-		stdout: false,
-		async: true
+		async: false
 	},
 	// Protractor drivers update
 	'webdriver-update': {
@@ -12,10 +11,7 @@ module.exports = {
 	'git-disable-tracking-templates': {
 		command: 'git update-index --assume-unchanged <%= yeoman.app %>/app/templates/module.js'
 	},
-	'git-submodule-init': {
-		command: 'git submodule init'
-	},
-	'git-submodule-update': {
-		command: 'git submodule update'
+	'smart-comments': {
+		command: 'node ./node_modules/smartcomments/bin/smartcomments -g -t <%= yeoman.app %>/app --config config/comments/comments.conf.json'
 	}
 };

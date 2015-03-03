@@ -11,7 +11,9 @@ define(
 	'use strict';
 
 	/**
-	 * @constructor
+	 * @constructor* @method DashboardCtrl
+	 * @param {} $window
+	 * @param {} $window
 	 */
 	function DashboardCtrl(
 		$scope,
@@ -19,6 +21,10 @@ define(
 	) {
 		$scope.date = moment().format('lll');
 
+		/**
+		 * Description
+		 * @method sayHello
+		 */
 		this.sayHello = function() {
 			$window.alert('Hello World');
 		};

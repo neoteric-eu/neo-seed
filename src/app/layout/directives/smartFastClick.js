@@ -12,22 +12,29 @@
  *
  */
 
-define(['../module' , 'require', 'fastclick'], function (module, require) {
+define(['layout/module', 'require', 'fastclick'], function (module, require) {
 
-    'use strict';
+	'use strict';
 
-    module.registerDirective('smartFastClick', function () {
-        var FastClick = require('fastclick');
-        return {
-            restrict: 'A',
-            compile: function (tElement, tAttributes) {
-                tElement.removeAttr('smart-fast-click data-smart-fast-click');
+	module.registerDirective('smartFastClick', function () {
+		var FastClick = require('fastclick');
+		return {
+			restrict: 'A',
+			/**
+			 * Description
+			 * @method compile
+			 * @param {} tElement
+			 */
+			compile: function (tElement) {
+				tElement.removeAttr('smart-fast-click data-smart-fast-click');
 
-                FastClick.attach(tElement);
+				FastClick.attach(tElement);
 
-                if(!FastClick.notNeeded())
-                    tElement.addClass('needsclick')
-            }
-        }
-    });
+				if (!FastClick.notNeeded()) {
+					tElement.addClass('needsclick');
+				}
+
+			}
+		};
+	});
 });

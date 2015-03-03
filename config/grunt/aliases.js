@@ -1,5 +1,6 @@
 module.exports = {
 	'serve': [
+		'logo',
 		'clean:server',
 		'templates:dist',
 		'connect:server',
@@ -7,12 +8,11 @@ module.exports = {
 	],
 
 	'coverage': [
-		'karma:coverage',
-		'connect:coverage'
+		'karma:coverage'
 	],
 
 	'test': [
-		'clean:server',
+		'clean:test',
 		'jshint:test',
 		'test:e2e',
 		'test:unit'
@@ -22,11 +22,12 @@ module.exports = {
 	],
 	'test:e2e': [
 		'connect:test',
-		'shell:webdriver_update',
+		'shell:webdriver-update',
 		'protractor:singlerun'
 	],
 
 	'build': [
+		'logo',
 		'clean:dist',
 		'less:dev',
 		'gettext-extract',
@@ -39,7 +40,17 @@ module.exports = {
 		'requirejs:dist',
 		'rev',
 		'usemin',
-		'clean:server'
+		'clean:server',
+		'jsdoc'
+	],
+
+	'code:auto-comment': [
+		'shell:smart-comments'
+	],
+
+	'docs': [
+		'clean:doc',
+		'jsdoc'
 	],
 
 	'config:development': [
@@ -63,13 +74,13 @@ module.exports = {
 	],
 
 	install: [
-		'bower:install',
+		'logo',
+		'clean:bower',
+		'bower',
 		'shell:webdriver-update',
-		//'githooks',
+		'githooks',
 		'config:development',
-		'shell:git-disable-tracking-templates',
-		'shell:git-submodule-init',
-		'shell:git-submodule-update'
+		'shell:git-disable-tracking-templates'
 	]
 };
 

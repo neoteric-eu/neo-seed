@@ -8,11 +8,11 @@ define([
 	'domReady',
 
 	//'pace',
-	'bootstrap',
 	'appConfig',
+	'bootstrap',
 	'app',
 	'includes'
-], function (require, $, ng, domReady) {
+], function (require, $, ng, domReady, appConfig) {
 	'use strict';
 
 	$.sound_path = appConfig.sound_path;

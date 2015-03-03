@@ -1,9 +1,9 @@
 src/app-demo
 src/vendor/
-src/app/modules/miniTemplate/locale/translations.js
-coverage
+src/test/results
 dist
 node_modules
-
+bower_components
+_locale
 
 

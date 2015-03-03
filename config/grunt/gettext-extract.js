@@ -1,9 +1,16 @@
-module.exports = {
-	pot: {
-		files: {
-			'<%= yeoman.app %>/modules/miniTemplate/locale/global-template.pot': '<%= yeoman.app %>/scripts/{,*/}*.js',
-			'<%= yeoman.app %>/modules/miniTemplate/locale/template.pot': '<%= yeoman.app %>/modules/miniTemplate/{,**/}*.{html,js}',
-			'<%= yeoman.app %>/modules/miniCore/locale/template.pot': '<%= yeoman.app %>/modules/miniCore/{,**/}*.{html,js}'
+module.exports = function (grunt) {
+	'use strict';
+	var files = {};
+
+	grunt.file
+		.expand({filter: 'isDirectory'}, ['src/app/*'])
+		.forEach(function (path) {
+			files[path + '/_locale/template.pot'] = path + '/**/*@(.html|.js)';
+		});
+
+	return {
+		pot: {
+			files: files
 		}
-	}
+	};
 };

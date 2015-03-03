@@ -1,46 +1,107 @@
-define(['modules/forms/module', 'jquery-ui'], function (module) {
-    "use strict";
+define([
+	'modules/forms/module',
+	'moment',
+	'jquery-ui/datepicker',
+	'jquery-ui/i18n/datepicker-pl',
+	'jquery-ui/i18n/datepicker-en-GB'
+], function (module, moment) {
+	'use strict';
 
-    return module.registerDirective('smartDatepicker', function () {
-        return {
-            restrict: 'A',
-            compile: function (tElement, tAttributes) {
-                tElement.removeAttr('smartDatepicker');
+	return module.registerDirective('smartDatepicker', function () {
+		return {
+			restrict: 'A',
+			scope: {
+				defaultDate: '='
+			},
+			/**
+			 * Directive rendering method
+			 * @method link
+			 * @param {Object} scope Current scope provider
+			 * @param {Object} element HTML element reference
+			 * @param {Object} attributes HTML element attributes
+			 */
+			link: function (scope, element, attributes) {
+				element.removeAttr('smartDatepicker');
 
-                var onSelectCallbacks = [];
-                if (tAttributes.minRestrict) {
-                    onSelectCallbacks.push(function (selectedDate) {
-                        $(tAttributes.minRestrict).datepicker('option', 'minDate', selectedDate);
-                    });
-                }
-                if (tAttributes.maxRestrict) {
-                    onSelectCallbacks.push(function (selectedDate) {
-                        $(tAttributes.maxRestrict).datepicker('option', 'maxDate', selectedDate);
-                    });
-                }
+				var onSelectCallbacks = [];
 
-                var options = {
-                    prevText: '<i class="fa fa-chevron-left"></i>',
-                    nextText: '<i class="fa fa-chevron-right"></i>',
-                    onSelect: function (selectedDate) {
-                        angular.forEach(onSelectCallbacks, function (callback) {
-                            callback.call(this, selectedDate)
-                        })
-                    }
-                };
+				if (attributes.minRestrict) {
+					onSelectCallbacks.push(function (selectedDate) {
+						$(attributes.minRestrict)
+							.datepicker('option', 'minDate', selectedDate);
+					});
+				}
 
+				if (attributes.maxRestrict) {
+					onSelectCallbacks.push(function (selectedDate) {
+						$(attributes.maxRestrict)
+							.datepicker('option', 'maxDate', selectedDate);
+					});
+				}
 
-                if (tAttributes.numberOfMonths) options.numberOfMonths = parseInt(tAttributes.numberOfMonths);
+				var options = {
+					prevText: '<i class="fa fa-chevron-left"></i>',
+					nextText: '<i class="fa fa-chevron-right"></i>',
+					/**
+					 * Select date when clicked
+					 * @method onSelect
+					 * @param {Object} selectedDate
+					 */
+					onSelect: function (selectedDate) {
+						angular.forEach(onSelectCallbacks, function (callback) {
+							callback.call(this, selectedDate);
+						});
 
-                if (tAttributes.dateFormat) options.dateFormat = tAttributes.dateFormat;
+						scope.defaultDate = moment(selectedDate, 'L');
+					}
+				};
 
-                if (tAttributes.defaultDate) options.defaultDate = tAttributes.defaultDate;
+				if (attributes.numberOfMonths) {
+					options.numberOfMonths = parseInt(attributes.numberOfMonths);
+				}
 
-                if (tAttributes.changeMonth) options.changeMonth = tAttributes.changeMonth == "true";
+				if (attributes.changeMonth) {
+					options.changeMonth = attributes.changeMonth === 'true';
+				}
 
+				/**
+				 * Custom jquery.ui -> moment.js parser
+				 * @param format Ignored parameter
+				 * @param value String to be formatted
+				 * @returns {*}
+				 */
+				$.datepicker.parseDate = function (format, value) {
+					return moment(value, 'L').toDate();
+				};
 
-                tElement.datepicker(options)
-            }
-        }
-    })
+				/**
+				 * Custom jquery.ui -> moment.js date formatter
+				 * @param {String} format Ignored parameter
+				 * @param {String} value String to be formatted
+				 * @returns {*}
+				 */
+				$.datepicker.formatDate = function (format, value) {
+					return moment(value).format('L');
+				};
+
+				/**
+				 * Listen to any upcoming date changes and reflect them
+				 * in input calendar values
+				 * @type {Function|function()|*}
+				 */
+				var unwatch = scope.$watch('defaultDate', function (newValue) {
+					element.datepicker('setDate', newValue.format('L'));
+				}, true);
+
+				/**
+				 * Destroy watch when finished
+				 */
+				scope.$on('destroy', function () {
+					unwatch();
+				});
+
+				element.datepicker(_.extend($.datepicker.regional[moment.locale()], options));
+			}
+		};
+	});
 });

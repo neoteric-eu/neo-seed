@@ -1,20 +1,24 @@
-define(['modules/forms/module', 'lodash', 'bootstrap-colorpicker'], function (module, _) {
+define(['modules/forms/module', 'bootstrap-colorpicker'], function (module) {
 
-    'use strict';
+	'use strict';
 
-    return module.registerDirective('smartColorpicker', function () {
-        return {
-            restrict: 'A',
-            compile: function (tElement, tAttributes) {
-                tElement.removeAttr('smart-colorpicker data-smart-colorpicker');
+	return module.registerDirective('smartColorpicker', function () {
+		return {
+			restrict: 'A',
+			/**
+			 * Description
+			 * @method compile
+			 * @param {} tElement
+			 * @param {} tAttributes
+			 */
+			compile: function (tElement, tAttributes) {
+				tElement.removeAttr('smart-colorpicker data-smart-colorpicker');
 
+				var aOptions = _.pick(tAttributes, ['']);
+				var options = _.extend(aOptions, {});
 
-                var aOptions = _.pick(tAttributes, ['']);
-
-                var options = _.extend(aOptions, {});
-
-                tElement.colorpicker(options);
-            }
-        }
-    });
+				tElement.colorpicker(options);
+			}
+		};
+	});
 });

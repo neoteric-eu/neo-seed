@@ -1,6 +1,6 @@
 module.exports = {
 	options: {
-		configFile: './test/protractor.conf.js',
+		configFile: './config/protractor/protractor.conf.js',
 		keepAlive: false,
 		noColor: true
 	},

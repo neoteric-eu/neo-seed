@@ -1,18 +1,12 @@
-define(['../module', 'jquery'], function (module, $) {
-
-    'use strict';
+define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig) {
+	'use strict';
 
 	$.root_ = $('body');
 	var root = window;
 
-
-
-    if (appConfig.voice_command) {
-
-        var commands = appConfig.commands;
-
-    };
-
+	if (appConfig.voice_command) {
+		var commands = appConfig.commands;
+	}
 
 	/*
 	 * SMART VOICE
@@ -22,13 +16,18 @@ define(['../module', 'jquery'], function (module, $) {
 
 	var SpeechRecognition = root.SpeechRecognition || root.webkitSpeechRecognition || root.mozSpeechRecognition || root.msSpeechRecognition || root.oSpeechRecognition;
 
-	// ref: http://updates.html5rocks.com/2013/01/Voice-Driven-Web-Apps-Introduction-to-the-Web-Speech-API
+	// ref:
+	// http://updates.html5rocks.com/2013/01/Voice-Driven-Web-Apps-Introduction-to-the-Web-Speech-API
 
 
 	// function
-	$.speechApp = (function(speech) {
+	$.speechApp = (function (speech) {
 
-		speech.start = function() {
+		/**
+		 * Description
+		 * @method start
+		 */
+		speech.start = function () {
 
 			// Add our commands to smartSpeechRecognition
 			smartSpeechRecognition.addCommands(commands);
@@ -37,7 +36,7 @@ define(['../module', 'jquery'], function (module, $) {
 				// activate plugin
 				smartSpeechRecognition.start();
 				// add btn class
-				$.root_.addClass("voice-command-active");
+				$.root_.addClass('voice-command-active');
 				// play sound
 				$.speechApp.playON();
 				// set localStorage when switch is on manually
@@ -47,17 +46,21 @@ define(['../module', 'jquery'], function (module, $) {
 
 			} else {
 				// if plugin not found
-				alert("speech plugin not loaded");
+				alert('speech plugin not loaded');
 			}
 
 		};
-		speech.stop = function() {
+		/**
+		 * Description
+		 * @method stop
+		 */
+		speech.stop = function () {
 
 			if (smartSpeechRecognition) {
 				// deactivate plugin
 				smartSpeechRecognition.abort();
 				// remove btn class
-				$.root_.removeClass("voice-command-active");
+				$.root_.removeClass('voice-command-active');
 				// sound
 				$.speechApp.playOFF();
 				// del localStorage when switch if off manually
@@ -73,17 +76,23 @@ define(['../module', 'jquery'], function (module, $) {
 		};
 
 		// play sound
-		speech.playON = function() {
+		/**
+		 * Description
+		 * @method playON
+		 */
+		speech.playON = function () {
 
 			var audioElement = document.createElement('audio');
 
-			if (navigator.userAgent.match('Firefox/'))
-				audioElement.setAttribute('src', appConfig.sound_path + 'voice_on' + ".ogg");
-			else
-				audioElement.setAttribute('src', appConfig.sound_path + 'voice_on' + ".mp3");
+			if (navigator.userAgent.match('Firefox/')) {
+				audioElement.setAttribute('src', appConfig.sound_path + 'voice_on' + '.ogg');
+			}
+			else {
+				audioElement.setAttribute('src', appConfig.sound_path + 'voice_on' + '.mp3');
+			}
 
 			//$.get();
-			audioElement.addEventListener("load", function() {
+			audioElement.addEventListener('load', function () {
 				audioElement.play();
 			}, true);
 
@@ -93,17 +102,23 @@ define(['../module', 'jquery'], function (module, $) {
 			}
 		};
 
-		speech.playOFF = function() {
+		/**
+		 * Description
+		 * @method playOFF
+		 */
+		speech.playOFF = function () {
 
 			var audioElement = document.createElement('audio');
 
-			if (navigator.userAgent.match('Firefox/'))
-				audioElement.setAttribute('src', appConfig.sound_path + 'voice_off' + ".ogg");
-			else
-				audioElement.setAttribute('src', appConfig.sound_path + 'voice_off' + ".mp3");
+			if (navigator.userAgent.match('Firefox/')) {
+				audioElement.setAttribute('src', appConfig.sound_path + 'voice_off' + '.ogg');
+			}
+			else {
+				audioElement.setAttribute('src', appConfig.sound_path + 'voice_off' + '.mp3');
+			}
 
 			$.get();
-			audioElement.addEventListener("load", function() {
+			audioElement.addEventListener('load', function () {
 				audioElement.play();
 			}, true);
 
@@ -113,17 +128,23 @@ define(['../module', 'jquery'], function (module, $) {
 			}
 		};
 
-		speech.playConfirmation = function() {
+		/**
+		 * Description
+		 * @method playConfirmation
+		 */
+		speech.playConfirmation = function () {
 
 			var audioElement = document.createElement('audio');
 
-			if (navigator.userAgent.match('Firefox/'))
-				audioElement.setAttribute('src', appConfig.sound_path + 'voice_alert' + ".ogg");
-			else
-				audioElement.setAttribute('src', appConfig.sound_path + 'voice_alert' + ".mp3");
+			if (navigator.userAgent.match('Firefox/')) {
+				audioElement.setAttribute('src', appConfig.sound_path + 'voice_alert' + '.ogg');
+			}
+			else {
+				audioElement.setAttribute('src', appConfig.sound_path + 'voice_alert' + '.mp3');
+			}
 
 			$.get();
-			audioElement.addEventListener("load", function() {
+			audioElement.addEventListener('load', function () {
 				audioElement.play();
 			}, true);
 
@@ -138,7 +159,6 @@ define(['../module', 'jquery'], function (module, $) {
 	})({});
 
 
-
 	/*
 	 * SPEECH RECOGNITION ENGINE
 	 * Copyright (c) 2013 Tal Ater
@@ -146,7 +166,7 @@ define(['../module', 'jquery'], function (module, $) {
 	 * All modifications made are hereby copyright (c) 2014 MyOrange
 	 */
 
-	(function(undefined) {"use strict";
+	(function (undefined) { // jshint ignore:line
 
 		// Check browser support
 		// This is done as early as possible, to make it as fast as possible for unsupported browsers
@@ -155,50 +175,76 @@ define(['../module', 'jquery'], function (module, $) {
 			return undefined;
 		}
 
+		/**
+		 * Description
+		 * @method commandToRegExp
+		 * @param {} command NewExpression
+		 */
 		var commandsList = [], recognition, callbacks = {
-			start : [],
-			error : [],
-			end : [],
-			result : [],
-			resultMatch : [],
-			resultNoMatch : [],
-			errorNetwork : [],
-			errorPermissionBlocked : [],
-			errorPermissionDenied : []
-		}, autoRestart, lastStartedAt = 0,
+				start: [],
+				error: [],
+				end: [],
+				result: [],
+				resultMatch: [],
+				resultNoMatch: [],
+				errorNetwork: [],
+				errorPermissionBlocked: [],
+				errorPermissionDenied: []
+			}, autoRestart, lastStartedAt = 0,
 		//debugState = false, // decleared in app.appConfig.js
 		//appConfig.debugStyle = 'font-weight: bold; color: #00f;', // decleared in app.appConfig.js
 
-		// The command matching code is a modified version of Backbone.Router by Jeremy Ashkenas, under the MIT license.
-		optionalParam = /\s*\((.*?)\)\s*/g, optionalRegex = /(\(\?:[^)]+\))\?/g, namedParam = /(\(\?)?:\w+/g, splatParam = /\*\w+/g, escapeRegExp = /[\-{}\[\]+?.,\\\^$|#]/g, commandToRegExp = function(command) {
-			command = command.replace(escapeRegExp, '\\$&').replace(optionalParam, '(?:$1)?').replace(namedParam, function(match, optional) {
-				return optional ? match : '([^\\s]+)';
-			}).replace(splatParam, '(.*?)').replace(optionalRegex, '\\s*$1?\\s*');
-			return new RegExp('^' + command + '$', 'i');
-		};
+		// The command matching code is a modified version of Backbone.Router by Jeremy Ashkenas, under
+		// the MIT license.
+			optionalParam = /\s*\((.*?)\)\s*/g, optionalRegex = /(\(\?:[^)]+\))\?/g, namedParam = /(\(\?)?:\w+/g, splatParam = /\*\w+/g, escapeRegExp = /[\-{}\[\]+?.,\\\^$|#]/g, commandToRegExp = function (command) {
+				command = command.replace(escapeRegExp, '\\$&').replace(optionalParam, '(?:$1)?').replace(namedParam, function (match, optional) {
+					return optional ? match : '([^\\s]+)';
+				}).replace(splatParam, '(.*?)').replace(optionalRegex, '\\s*$1?\\s*');
+				return new RegExp('^' + command + '$', 'i');
+			};
 
 		// This method receives an array of callbacks to iterate over, and invokes each of them
-		var invokeCallbacks = function(callbacks) {
-			callbacks.forEach(function(callback) {
+		/**
+		 * Description
+		 * @method invokeCallbacks
+		 * @param {} callbacks
+		 */
+		var invokeCallbacks = function (callbacks) {
+			callbacks.forEach(function (callback) {
 				callback.callback.apply(callback.context);
 			});
 		};
 
-		var initIfNeeded = function() {
+		/**
+		 * Description
+		 * @method initIfNeeded
+		 */
+		var initIfNeeded = function () {
 			if (!isInitialized()) {
 				root.smartSpeechRecognition.init({}, false);
 			}
 		};
 
-		var isInitialized = function() {
+		/**
+		 * Description
+		 * @method isInitialized BinaryExpression
+		 */
+		var isInitialized = function () {
 			return recognition !== undefined;
 		};
 
 		root.smartSpeechRecognition = {
 			// Initialize smartSpeechRecognition with a list of commands to recognize.
 			// e.g. smartSpeechRecognition.init({'hello :name': helloFunction})
-			// smartSpeechRecognition understands commands with named variables, splats, and optional words.
-			init : function(commands, resetCommands) {
+			// smartSpeechRecognition understands commands with named variables, splats, and optional
+			// words.
+			/**
+			 * Description
+			 * @method init
+			 * @param {} commands
+			 * @param {} resetCommands
+			 */
+			init: function (commands, resetCommands) {
 
 				// resetCommands defaults to true
 				if (resetCommands === undefined) {
@@ -218,21 +264,31 @@ define(['../module', 'jquery'], function (module, $) {
 				// Set the max number of alternative transcripts to try and match with a command
 				recognition.maxAlternatives = 5;
 				recognition.continuous = true;
-				// Sets the language to the default 'en-US'. This can be changed with smartSpeechRecognition.setLanguage()
+				// Sets the language to the default 'en-US'. This can be changed with
+				// smartSpeechRecognition.setLanguage()
 				recognition.lang = appConfig.voice_command_lang || 'en-US';
 
-				recognition.onstart = function() {
+				/**
+				 * Description
+				 * @method onstart
+				 */
+				recognition.onstart = function () {
 					invokeCallbacks(callbacks.start);
 					//debugState
 					if (appConfig.debugState) {
 						root.console.log('%c ✔ SUCCESS: User allowed access the microphone service to start ', appConfig.debugStyle_success);
 						root.console.log('Language setting is set to: ' + recognition.lang, appConfig.debugStyle);
 					}
-					$.root_.removeClass("service-not-allowed");
-					$.root_.addClass("service-allowed");
+					$.root_.removeClass('service-not-allowed');
+					$.root_.addClass('service-allowed');
 				};
 
-				recognition.onerror = function(event) {
+				/**
+				 * Description
+				 * @method onerror
+				 * @param {} event
+				 */
+				recognition.onerror = function (event) {
 					invokeCallbacks(callbacks.error);
 					switch (event.error) {
 						case 'network':
@@ -242,8 +298,8 @@ define(['../module', 'jquery'], function (module, $) {
 						case 'service-not-allowed':
 							// if permission to use the mic is denied, turn off auto-restart
 							autoRestart = false;
-							$.root_.removeClass("service-allowed");
-							$.root_.addClass("service-not-allowed");
+							$.root_.removeClass('service-allowed');
+							$.root_.addClass('service-not-allowed');
 							//debugState
 							if (appConfig.debugState) {
 								root.console.log('%c WARNING: Microphone was not detected (either user denied access or it is not installed properly) ', appConfig.debugStyle_warning);
@@ -253,17 +309,23 @@ define(['../module', 'jquery'], function (module, $) {
 								invokeCallbacks(callbacks.errorPermissionBlocked);
 							} else {
 								invokeCallbacks(callbacks.errorPermissionDenied);
-								//console.log("You need your mic to be active")
+								//console.log('You need your mic to be active')
 							}
 							break;
 					}
 				};
 
-				recognition.onend = function() {
+				/**
+				 * Description
+				 * @method onend
+				 */
+				recognition.onend = function () {
 					invokeCallbacks(callbacks.end);
-					// smartSpeechRecognition will auto restart if it is closed automatically and not by user action.
+					// smartSpeechRecognition will auto restart if it is closed automatically and not by user
+					// action.
 					if (autoRestart) {
-						// play nicely with the browser, and never restart smartSpeechRecognition automatically more than once per second
+						// play nicely with the browser, and never restart smartSpeechRecognition automatically
+						// more than once per second
 						var timeSinceLastStart = new Date().getTime() - lastStartedAt;
 						if (timeSinceLastStart < 1000) {
 							setTimeout(root.smartSpeechRecognition.start, 1000 - timeSinceLastStart);
@@ -273,12 +335,18 @@ define(['../module', 'jquery'], function (module, $) {
 					}
 				};
 
-				recognition.onresult = function(event) {
+				/**
+				 * Description
+				 * @method onresult
+				 * @param {} event Literal
+				 */
+				recognition.onresult = function (event) {
 					invokeCallbacks(callbacks.result);
 
 					var results = event.results[event.resultIndex], commandText;
 
-					// go over each of the 5 results and alternative results received (we've set maxAlternatives to 5 above)
+					// go over each of the 5 results and alternative results received (we've set
+					// maxAlternatives to 5 above)
 					for (var i = 0; i < results.length; i++) {
 						// the text recognized
 						commandText = results[i].transcript.trim();
@@ -301,20 +369,20 @@ define(['../module', 'jquery'], function (module, $) {
 								commandsList[j].callback.apply(this, parameters);
 								invokeCallbacks(callbacks.resultMatch);
 
-								// for commands "sound on", "stop" and "mute" do not play sound or display message
+								// for commands 'sound on', 'stop' and 'mute' do not play sound or display message
 								//var myMatchedCommand = commandsList[j].originalPhrase;
 
-								var ignoreCallsFor = ["sound on", "mute", "stop"];
+								var ignoreCallsFor = ['sound on', 'mute', 'stop'];
 
 								if (ignoreCallsFor.indexOf(commandsList[j].originalPhrase) < 0) {
 									// play sound when match found
 									console.log(2);
 									$.smallBox({
-										title : (commandsList[j].originalPhrase),
-										content : "loading...",
-										color : "#333",
-										sound_file : 'voice_alert',
-										timeout : 2000
+										title: (commandsList[j].originalPhrase),
+										content: 'loading...',
+										color: '#333',
+										sound_file: 'voice_alert',
+										timeout: 2000
 									});
 
 									if ($('#speech-btn .popover').is(':visible')) {
@@ -328,13 +396,13 @@ define(['../module', 'jquery'], function (module, $) {
 					}// end for
 
 					invokeCallbacks(callbacks.resultNoMatch);
-					//console.log("no match found for: " + commandText)
+					//console.log('no match found for: ' + commandText)
 					$.smallBox({
-						title : "Error: <strong>" + ' " ' + commandText + ' " ' + "</strong> no match found!",
-						content : "Please speak clearly into the microphone",
-						color : "#a90329",
-						timeout : 5000,
-						icon : "fa fa-microphone"
+						title: 'Error: <strong>' + ' " ' + commandText + ' " ' + '</strong> no match found!',
+						content: 'Please speak clearly into the microphone',
+						color: '#a90329',
+						timeout: 5000,
+						icon: 'fa fa-microphone'
 					});
 					if ($('#speech-btn .popover').is(':visible')) {
 						$('#speech-btn .popover').fadeOut(250);
@@ -355,7 +423,12 @@ define(['../module', 'jquery'], function (module, $) {
 			// Call this after you've initialized smartSpeechRecognition with commands.
 			// Receives an optional options object:
 			// { autoRestart: true }
-			start : function(options) {
+			/**
+			 * Description
+			 * @method start
+			 * @param {} options
+			 */
+			start: function (options) {
 				initIfNeeded();
 				options = options || {};
 				if (options.autoRestart !== undefined) {
@@ -368,7 +441,11 @@ define(['../module', 'jquery'], function (module, $) {
 			},
 
 			// abort the listening session (aka stop)
-			abort : function() {
+			/**
+			 * Description
+			 * @method abort
+			 */
+			abort: function () {
 				autoRestart = false;
 				if (isInitialized) {
 					recognition.abort();
@@ -376,7 +453,12 @@ define(['../module', 'jquery'], function (module, $) {
 			},
 
 			// Turn on output of debug messages to the console. Ugly, but super-handy!
-			debug : function(newState) {
+			/**
+			 * Description
+			 * @method debug
+			 * @param {} newState
+			 */
+			debug: function (newState) {
 				if (arguments.length > 0) {
 					appConfig.debugState = !!newState;
 				} else {
@@ -386,13 +468,24 @@ define(['../module', 'jquery'], function (module, $) {
 
 			// Set the language the user will speak in. If not called, defaults to 'en-US'.
 			// e.g. 'fr-FR' (French-France), 'es-CR' (Español-Costa Rica)
-			setLanguage : function(language) {
+			/**
+			 * Description
+			 * @method setLanguage
+			 * @param {} language
+			 */
+			setLanguage: function (language) {
 				initIfNeeded();
 				recognition.lang = language;
 			},
 
-			// Add additional commands that smartSpeechRecognition will respond to. Similar in syntax to smartSpeechRecognition.init()
-			addCommands : function(commands) {
+			// Add additional commands that smartSpeechRecognition will respond to. Similar in syntax to
+			// smartSpeechRecognition.init()
+			/**
+			 * Description
+			 * @method addCommands
+			 * @param {} commands
+			 */
+			addCommands: function (commands) {
 				var cb, command;
 
 				initIfNeeded();
@@ -400,16 +493,16 @@ define(['../module', 'jquery'], function (module, $) {
 				for (var phrase in commands) {
 					if (commands.hasOwnProperty(phrase)) {
 						cb = root[commands[phrase]] || commands[phrase];
-						if ( typeof cb !== 'function') {
+						if (typeof cb !== 'function') {
 							continue;
 						}
 						//convert command to regex
 						command = commandToRegExp(phrase);
 
 						commandsList.push({
-							command : command,
-							callback : cb,
-							originalPhrase : phrase
+							command: command,
+							callback: cb,
+							originalPhrase: phrase
 						});
 					}
 				}
@@ -418,14 +511,20 @@ define(['../module', 'jquery'], function (module, $) {
 				}
 			},
 
-			// Remove existing commands. Called with a single phrase, array of phrases, or methodically. Pass no params to remove all commands.
-			removeCommands : function(commandsToRemove) {
+			// Remove existing commands. Called with a single phrase, array of phrases, or methodically.
+			// Pass no params to remove all commands.
+			/**
+			 * Description
+			 * @method removeCommands
+			 * @param {} commandsToRemove
+			 */
+			removeCommands: function (commandsToRemove) {
 				if (commandsToRemove === undefined) {
 					commandsList = [];
 					return;
 				}
 				commandsToRemove = Array.isArray(commandsToRemove) ? commandsToRemove : [commandsToRemove];
-				commandsList = commandsList.filter(function(command) {
+				commandsList = commandsList.filter(function (command) {
 					for (var i = 0; i < commandsToRemove.length; i++) {
 						if (commandsToRemove[i] === command.originalPhrase) {
 							return false;
@@ -436,26 +535,37 @@ define(['../module', 'jquery'], function (module, $) {
 			},
 
 			// Lets the user add a callback of one of 9 types:
-			// start, error, end, result, resultMatch, resultNoMatch, errorNetwork, errorPermissionBlocked, errorPermissionDenied
-			// Can also optionally receive a context for the callback function as the third argument
-			addCallback : function(type, callback, context) {
+			// start, error, end, result, resultMatch, resultNoMatch, errorNetwork,
+			// errorPermissionBlocked, errorPermissionDenied Can also optionally receive a context for
+			// the callback function as the third argument
+			/**
+			 * Description
+			 * @method addCallback
+			 * @param {} type
+			 * @param {} callback
+			 * @param {} context
+			 */
+			addCallback: function (type, callback, context) {
 				if (callbacks[type] === undefined) {
 					return;
 				}
 				var cb = root[callback] || callback;
-				if ( typeof cb !== 'function') {
+				if (typeof cb !== 'function') {
 					return;
 				}
 				callbacks[type].push({
-					callback : cb,
-					context : context || this
+					callback: cb,
+					context: context || this
 				});
 			}
 		};
 
 	}).call(this);
 
-	var autoStart = function() {
+	/**
+	 * Description* @method autoStart
+	 */
+	var autoStart = function () {
 
 		smartSpeechRecognition.addCommands(commands);
 
@@ -463,7 +573,7 @@ define(['../module', 'jquery'], function (module, $) {
 			// activate plugin
 			smartSpeechRecognition.start();
 			// add btn class
-			$.root_.addClass("voice-command-active");
+			$.root_.addClass('voice-command-active');
 			// set localStorage when switch is on manually
 			if (appConfig.voice_localStorage) {
 				localStorage.setItem('sm-setautovoice', 'true');
@@ -471,11 +581,11 @@ define(['../module', 'jquery'], function (module, $) {
 
 		} else {
 			// if plugin not found
-			alert("speech plugin not loaded");
+			alert('speech plugin not loaded');
 		}
-	}
+	};
 	// if already running with localstorage
-	if (SpeechRecognition && appConfig.voice_command && localStorage.getItem('sm-setautovoice') == 'true') {
+	if (SpeechRecognition && appConfig.voice_command && localStorage.getItem('sm-setautovoice') === 'true') {
 		autoStart();
 	}
 
@@ -485,21 +595,27 @@ define(['../module', 'jquery'], function (module, $) {
 	}
 
 
-    module.registerDirective('speechRecognition', function ($log) {
+	module.registerDirective('speechRecognition', function () {
 
-    	var link = function(scope, element) {
+		/**
+		 * Description
+		 * @method link
+		 * @param {} scope
+		 * @param {} element
+		 */
+		var link = function (scope, element) {
 
 
 			if (SpeechRecognition && appConfig.voice_command) {
 
 				// create dynamic modal instance
-				var modal = $('<div class="modal fade" id="voiceModal" tabindex="-1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"></div></div></div>');
+				var modal = $('<div class="modal fade" id="voiceModal" tabindex="- 1" role="dialog" aria-labelledby="remoteModalLabel" aria-hidden="true"><div class="modal dialog"><div class="modal content"></div></div></div>');
 				// attach to body
-				modal.appendTo("body");
+				modal.appendTo('body');
 
-				element.on("click", function(e) {
+				element.on('click', function (e) {
 
-                	if ($.root_.hasClass("voice-command-active")) {
+					if ($.root_.hasClass('voice-command-active')) {
 						$.speechApp.stop();
 						//$('#speech-btn > span > a > i').removeClass().addClass('fa fa-microphone-slash');
 					} else {
@@ -512,36 +628,34 @@ define(['../module', 'jquery'], function (module, $) {
 
 					e.preventDefault();
 
-                });
+				});
 
 				//remove popover
-				$(document).mouseup(function(e) {
+				$(document).mouseup(function (e) {
 					if (!$('#speech-btn .popover').is(e.target) && $('#speech-btn .popover').has(e.target).length === 0) {
 						$('#speech-btn .popover').fadeOut(250);
 					}
 				});
 
 
-				$("#speech-help-btn").on("click", function() {
+				$('#speech-help-btn').on('click', function () {
 					commands.help();
 				});
 
 			}
 			else {
-				$("#speech-btn").addClass("display-none");
+				$('#speech-btn').addClass('display-none');
 			}
 
 
-    	}
+		};
 
 
-
-        return {
-            restrict: 'AE',
-            link: link
-        }
-    });
-
+		return {
+			restrict: 'AE',
+			link: link
+		};
+	});
 
 
 });

@@ -1,26 +1,26 @@
 // Defer AngularJS bootstrap
 window.name = 'NG_DEFER_BOOTSTRAP!';
 
-define([
-	'require',
-	'jquery',
-	'angular',
-	'domReady',
-
-	//'pace',
-	'bootstrap',
-	'appConfig',
-	'includes',
-	'app',
-], function (require, $, ng, domReady) {
+requirejs(['require.conf'], function () {
 	'use strict';
 
-	$.sound_path = appConfig.sound_path;
-	$.sound_on = appConfig.sound_on;
+	requirejs([
+		'require',
+		'jquery',
+		'angular',
+		'domReady',
+		'appConfig',
+		'bootstrap',
+		'includes',
+		'app',
+		'text'
+	], function (require, $, ng, domReady, appConfig) {
+		$.sound_path = appConfig.sound_path;
+		$.sound_on = appConfig.sound_on;
 
-
-	domReady(function (document) {
-		ng.bootstrap(document, ['app']);
-		ng.resumeBootstrap();
+		domReady(function (document) {
+			ng.bootstrap(document, ['app']);
+			ng.resumeBootstrap();
+		});
 	});
 });

@@ -1,16 +1,38 @@
 define(['modules/forms/module', 'jquery-maskedinput'], function (module) {
-    "use strict";
+	'use strict';
 
-    return module.registerDirective('smartMaskedInput', function(){
-        return {
-            restrict: 'A',
-            compile: function(tElement, tAttributes){
-                tElement.removeAttr('smart-masked-input data-smart-masked-input');
+	/**
+	 * Adds custom masking to the input value
+	 * @example
+	 * smart-masked-input="aaa"
+	 * mask-placeholder= "*"
+	 * @method smartMaskedInput
+	 * @return ObjectExpression
+	 */
+	function smartMaskedInput() {
+		return {
+			restrict: 'A',
+			/**
+			 * Description
+			 * @method compile
+			 * @param {} tElement
+			 * @param {} tAttributes
+			 */
+			compile: function (tElement, tAttributes) {
 
-                var options = {};
-                if(tAttributes.maskPlaceholder) options.placeholder =  tAttributes.maskPlaceholder;
-                tElement.mask(tAttributes.smartMaskedInput, options);
-            }
-        }
-    })
+				// Capitalized letter only masking
+				$.mask.definitions['A'] = '[A-Z]';
+
+				tElement.removeAttr('smart-masked-input data-smart-masked-input');
+
+				var options = {};
+				if (_.has(tAttributes, 'maskPlaceholder')) {
+					options.placeholder = tAttributes.maskPlaceholder;
+				}
+				tElement.mask(tAttributes.smartMaskedInput, options);
+			}
+		};
+	}
+
+	return module.registerDirective('smartMaskedInput', smartMaskedInput);
 });

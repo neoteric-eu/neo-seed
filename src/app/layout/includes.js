@@ -20,6 +20,8 @@ define([
 	'./directives/smartPageTitle',
 	'./directives/hrefVoid',
 	'./service/SmartCss',
+
+	'layout/_locale/translation'
 ], function() {
 	'use strict';
 });

@@ -1,4 +1,4 @@
-(function() {
+(function () {
 	'use strict';
 
 	/**
@@ -12,7 +12,7 @@
 	 * @see http://en.wikipedia.org/wiki/Locale
 	 * @see http://en.wikipedia.org/wiki/ISO_639-1
 	 */
-	define(['angular'], function(angular) {
+	define(['angular'], function (angular) {
 
 		return {
 			cfg: {
@@ -29,18 +29,30 @@
 
 				// Language code for this installation. All choices can be found here:
 				// http://www.i18nguy.com/unicode/language-identifiers.html
-				LANGUAGES: [{
-					name:'Polish',
-					code: 'pl',
-					locale: 'pl_PL'
-				},{
-					name:'English',
-					code: 'gb',
-					locale: 'en_GB'
-				}],
+				LANGUAGES: [
+					{
+						name: 'Polski',
+						code: 'pl',
+						locale: 'pl_PL'
+					},
+					{
+						name: 'English',
+						code: 'gb',
+						locale: 'en_GB'
+
+					}
+				],
+
+				cookieOptions: {
+					domain: '@@COOKIE_DOMAIN',
+					path: '/',
+					expires: 720,
+					expirationUnit: 'hours',
+					secure: false
+				},
 
 				DEFAULT_LANG: {
-					name:'Polish',
+					name: 'Polish',
 					code: 'pl',
 					locale: 'pl_PL'
 				},
@@ -48,14 +60,12 @@
 				EMAILS: '@@EMAILS',
 
 				DOMAIN: 'neoteric.eu',
-				APP_NAME: 'NeotericApp',
-
-				COOKIE_DOMAIN: '@@COOKIE_DOMAIN'
+				APP_NAME: 'NeotericApp'
 			},
-			get: function(element) {
+			get: function (element) {
 				try {
 					return angular.fromJson(this.cfg[element]);
-				} catch(e) {
+				} catch (e) {
 					return this.cfg[element];
 				}
 			}

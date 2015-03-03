@@ -1,24 +1,29 @@
 define(['modules/forms/module', 'summernote'], function (module) {
+	'use strict';
 
-    'use strict';
+	module.registerDirective('smartSummernoteEditor', function () {
+		return {
+			restrict: 'A',
+			/**
+			 * Description
+			 * @method compile
+			 * @param {} tElement
+			 * @param {} tAttributes
+			 */
+			compile: function (tElement, tAttributes) {
+				tElement.removeAttr('smart-summernote-editor data-smart-summernote-editor');
 
-    module.registerDirective('smartSummernoteEditor', function () {
-        return {
-            restrict: 'A',
-            compile: function (tElement, tAttributes) {
-                tElement.removeAttr('smart-summernote-editor data-smart-summernote-editor');
+				var options = {
+					focus: true,
+					tabsize: 2
+				};
 
-                var options = {
-                    focus : true,
-                    tabsize : 2
-                };
+				if (tAttributes.height) {
+					options.height = tAttributes.height;
+				}
 
-                if(tAttributes.height){
-                    options.height = tAttributes.height;
-                }
-
-                tElement.summernote(options);
-            }
-        }
-    });
+				tElement.summernote(options);
+			}
+		};
+	});
 });

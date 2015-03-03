@@ -1,22 +1,31 @@
-define(['../module'], function (module) {
-    "use strict";
+define(['layout/module'], function (module) {
+	'use strict';
 
-    module.registerDirective('minifyMenu', function(){
-        return {
-            restrict: 'A',
-            link: function(scope, element){
-                    var $body = $('body');
-                var minifyMenu = function() {
-                    if (!$body.hasClass("menu-on-top")) {
-                        $body.toggleClass("minified");
-                        $body.removeClass("hidden-menu");
-                        $('html').removeClass("hidden-menu-mobile-lock");
-                    }
-                };
+	module.registerDirective('minifyMenu', function () {
+		return {
+			restrict: 'A',
+			/**
+			 * Description
+			 * @method link
+			 * @param {} scope
+			 * @param {} element
+			 */
+			link: function (scope, element) {
+				var $body = $('body');
+				/**
+				 * Description
+				 * @method minifyMenu
+				 */
+				var minifyMenu = function () {
+					if (!$body.hasClass('menu-on-top')) {
+						$body.toggleClass('minified');
+						$body.removeClass('hidden-menu');
+						$('html').removeClass('hidden-menu-mobile-lock');
+					}
+				};
 
-                element.on('click', minifyMenu);
-            }
-        }
-    })
-
+				element.on('click', minifyMenu);
+			}
+		};
+	});
 });

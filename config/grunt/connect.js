@@ -1,53 +1,61 @@
-// The actual grunt server settings
+module.exports = function () {
+	'use strict';
 
-var modRewrite = require('connect-modrewrite');
+	var modRewrite = require('connect-modrewrite'),
+		middleware = function (connect, options) {
 
-module.exports = {
-	server: {
-		options: {
-			hostname: 'localhost',
-			port: 9000,
-			base: '<%= yeoman.app %>',
-			open: true,
-			livereload: true,
-			middleware: function (connect, options) {
-				'use strict';
+			var middlewares = [];
 
-				var middlewares = [];
+			middlewares.push(modRewrite([
+				'^[^\\.]*$ /index.html [L]'
+			]));
 
-				middlewares.push(modRewrite(['^[^\\.]*$ /index.html [L]']));
+			if (!Array.isArray(options.base)) {
+				options.base = [options.base];
+			}
 
-				if (!Array.isArray(options.base)) {
-					options.base = [options.base];
-				}
+			var directory = options.directory || options.base[options.base.length - 1];
 
-				var directory = options.directory || options.base[options.base.length - 1];
-				options.base.forEach(function (base) {
-					// Serve static files.
-					middlewares.push(connect.static(base));
-				});
+			options.base.forEach(function (base) {
+				// Serve static files.
+				middlewares.push(connect.static(base));
+			});
 
-				// Make directory browse-able.
-				middlewares.push(connect.directory(directory));
+			// Make directory browse-able.
+			middlewares.push(connect.directory(directory));
 
-				return middlewares;
+			return middlewares;
+		};
+
+	return {
+		server: {
+			options: {
+				hostname: 'localhost',
+				port: 9000,
+				base: '<%= yeoman.app %>',
+				open: true,
+				livereload: true,
+				useAvailablePort: true,
+				middleware: middleware
+			}
+		},
+		test: {
+			options: {
+				hostname: 'localhost',
+				port: 7357,
+				base: '<%= yeoman.app %>',
+				middleware: middleware
+			}
+		},
+		dist: {
+			options: {
+				hostname: 'localhost',
+				port: 9040,
+				base: '<%= yeoman.dist %>',
+				open: true,
+				keepalive: true,
+				middleware: middleware
 			}
 		}
-	},
-	test: {
-		options: {
-			hostname: 'localhost',
-			port: 9010,
-			base: '<%= yeoman.app %>'
-		}
-	},
-	coverage: {
-		options: {
-			hostname: 'localhost',
-			port: 9020,
-			base: '<%= yeoman.coverage %>',
-			open: true,
-			keepalive: true
-		}
-	}
+	};
 };

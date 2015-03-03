@@ -1,18 +1,18 @@
-define(['layout/module', 'jquery'], function (module, $) {
+define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig) {
 
     'use strict';
 
 	$.root_ = $('body');
 	var root = window;
 
-	
 
-    if (appConfig.voice_command) {
-            
-        var commands = appConfig.commands;
-        
-    };
-    
+	if (appConfig.voice_command) {
+
+		var commands = appConfig.commands;
+
+	}
+	;
+
 
 	/*
 	 * SMART VOICE
@@ -22,7 +22,8 @@ define(['layout/module', 'jquery'], function (module, $) {
 
 	var SpeechRecognition = root.SpeechRecognition || root.webkitSpeechRecognition || root.mozSpeechRecognition || root.msSpeechRecognition || root.oSpeechRecognition;
 
-	// ref: http://updates.html5rocks.com/2013/01/Voice-Driven-Web-Apps-Introduction-to-the-Web-Speech-API
+	// ref:
+	// http://updates.html5rocks.com/2013/01/Voice-Driven-Web-Apps-Introduction-to-the-Web-Speech-API
 
 
 	// function
@@ -137,7 +138,6 @@ define(['layout/module', 'jquery'], function (module, $) {
 
 	})({});
 
-	
 
 	/*
 	 * SPEECH RECOGNITION ENGINE
@@ -169,7 +169,8 @@ define(['layout/module', 'jquery'], function (module, $) {
 		//debugState = false, // decleared in app.appConfig.js
 		//appConfig.debugStyle = 'font-weight: bold; color: #00f;', // decleared in app.appConfig.js
 
-		// The command matching code is a modified version of Backbone.Router by Jeremy Ashkenas, under the MIT license.
+		// The command matching code is a modified version of Backbone.Router by Jeremy Ashkenas, under
+		// the MIT license.
 		optionalParam = /\s*\((.*?)\)\s*/g, optionalRegex = /(\(\?:[^)]+\))\?/g, namedParam = /(\(\?)?:\w+/g, splatParam = /\*\w+/g, escapeRegExp = /[\-{}\[\]+?.,\\\^$|#]/g, commandToRegExp = function(command) {
 			command = command.replace(escapeRegExp, '\\$&').replace(optionalParam, '(?:$1)?').replace(namedParam, function(match, optional) {
 				return optional ? match : '([^\\s]+)';
@@ -197,7 +198,8 @@ define(['layout/module', 'jquery'], function (module, $) {
 		root.smartSpeechRecognition = {
 			// Initialize smartSpeechRecognition with a list of commands to recognize.
 			// e.g. smartSpeechRecognition.init({'hello :name': helloFunction})
-			// smartSpeechRecognition understands commands with named variables, splats, and optional words.
+			// smartSpeechRecognition understands commands with named variables, splats, and optional
+			// words.
 			init : function(commands, resetCommands) {
 
 				// resetCommands defaults to true
@@ -218,7 +220,8 @@ define(['layout/module', 'jquery'], function (module, $) {
 				// Set the max number of alternative transcripts to try and match with a command
 				recognition.maxAlternatives = 5;
 				recognition.continuous = true;
-				// Sets the language to the default 'en-US'. This can be changed with smartSpeechRecognition.setLanguage()
+				// Sets the language to the default 'en-US'. This can be changed with
+				// smartSpeechRecognition.setLanguage()
 				recognition.lang = appConfig.voice_command_lang || 'en-US';
 
 				recognition.onstart = function() {
@@ -261,9 +264,11 @@ define(['layout/module', 'jquery'], function (module, $) {
 
 				recognition.onend = function() {
 					invokeCallbacks(callbacks.end);
-					// smartSpeechRecognition will auto restart if it is closed automatically and not by user action.
+					// smartSpeechRecognition will auto restart if it is closed automatically and not by user
+					// action.
 					if (autoRestart) {
-						// play nicely with the browser, and never restart smartSpeechRecognition automatically more than once per second
+						// play nicely with the browser, and never restart smartSpeechRecognition automatically
+						// more than once per second
 						var timeSinceLastStart = new Date().getTime() - lastStartedAt;
 						if (timeSinceLastStart < 1000) {
 							setTimeout(root.smartSpeechRecognition.start, 1000 - timeSinceLastStart);
@@ -278,7 +283,8 @@ define(['layout/module', 'jquery'], function (module, $) {
 
 					var results = event.results[event.resultIndex], commandText;
 
-					// go over each of the 5 results and alternative results received (we've set maxAlternatives to 5 above)
+					// go over each of the 5 results and alternative results received (we've set
+					// maxAlternatives to 5 above)
 					for (var i = 0; i < results.length; i++) {
 						// the text recognized
 						commandText = results[i].transcript.trim();
@@ -391,7 +397,8 @@ define(['layout/module', 'jquery'], function (module, $) {
 				recognition.lang = language;
 			},
 
-			// Add additional commands that smartSpeechRecognition will respond to. Similar in syntax to smartSpeechRecognition.init()
+			// Add additional commands that smartSpeechRecognition will respond to. Similar in syntax to
+			// smartSpeechRecognition.init()
 			addCommands : function(commands) {
 				var cb, command;
 
@@ -418,7 +425,8 @@ define(['layout/module', 'jquery'], function (module, $) {
 				}
 			},
 
-			// Remove existing commands. Called with a single phrase, array of phrases, or methodically. Pass no params to remove all commands.
+			// Remove existing commands. Called with a single phrase, array of phrases, or methodically.
+			// Pass no params to remove all commands.
 			removeCommands : function(commandsToRemove) {
 				if (commandsToRemove === undefined) {
 					commandsList = [];
@@ -436,8 +444,9 @@ define(['layout/module', 'jquery'], function (module, $) {
 			},
 
 			// Lets the user add a callback of one of 9 types:
-			// start, error, end, result, resultMatch, resultNoMatch, errorNetwork, errorPermissionBlocked, errorPermissionDenied
-			// Can also optionally receive a context for the callback function as the third argument
+			// start, error, end, result, resultMatch, resultNoMatch, errorNetwork,
+			// errorPermissionBlocked, errorPermissionDenied Can also optionally receive a context for
+			// the callback function as the third argument
 			addCallback : function(type, callback, context) {
 				if (callbacks[type] === undefined) {
 					return;

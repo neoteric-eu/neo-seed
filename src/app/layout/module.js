@@ -27,10 +27,10 @@ define(
 					templateUrl: 'app/layout/layout.html',
 					resolve: {
 						deps: $couchPotatoProvider.resolveDependencies([
-							'modules/miniCore/controllers/RootController',
-							'modules/miniCore/directives/neoKeep/neoKeep',
-							'modules/miniCore/directives/neoOmit/neoOmit',
-							'modules/miniCore/services/appMessages'
+							'core/controllers/RootController',
+							'auth/directives/neoKeep/neoKeep',
+							'auth/directives/neoOmit/neoOmit',
+							'auth/services/appMessages'
 							//'modules/graphs/directives/inline/sparklineContainer',
 							//'components/inbox/directives/unreadMessagesCount',
 							//'components/chat/api/ChatApi',
@@ -49,7 +49,6 @@ define(
 
 		$rootScope.$on('$routeChangeSuccess', function () {
 			appMessages.apply();
-			console.log('hello');
 		});
 	});
 

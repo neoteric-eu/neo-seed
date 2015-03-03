@@ -1,168 +1,198 @@
-define(['../module', 'lodash'], function (module, _) {
+define(['layout/module'], function (module) {
+	'use strict';
 
-    'use strict';
+	module.registerDirective('smartLayout', function ($rootScope, $timeout, $interval, $q, $log) {
 
-    var _debug = 0;
+		var initialized = false, initializedResolver = $q.defer();
+		initializedResolver.promise.then(function () {
+			initialized = true;
+		});
 
-    function getDocHeight() {
-        var D = document;
-        return Math.max(
-            D.body.scrollHeight, D.documentElement.scrollHeight,
-            D.body.offsetHeight, D.documentElement.offsetHeight,
-            D.body.clientHeight, D.documentElement.clientHeight
-        );
-    }
-
-
-    module.registerDirective('smartLayout', function ($rootScope, $timeout, $interval, $q, SmartCss) {
-
-        var initialized = false, initializedResolver = $q.defer();
-        initializedResolver.promise.then(function () {
-            initialized = true;
-        });
-
-        var $window = $(window),
-            $document = $(document),
-            $html = $('html'),
-            $body = $('body'),
-            $navigation ,
-            $menu,
-            $ribbon,
-            $footer,
-            $contentAnimContainer;
+		var $window = $(window),
+			$html = $('html'),
+			$body = $('body'),
+			$navigation,
+			$menu,
+			$ribbon,
+			$footer;
 
 
-        (function cacheElements() {
-            $navigation = $('#header');
-            $menu = $('#left-panel');
-            $ribbon = $('#ribbon');
-            $footer = $('.page-footer');
-            if (_.every([$navigation, $menu, $ribbon, $footer], function ($it) {
-                return angular.isNumber($it.height())
-            })) {
-                initializedResolver.resolve();
-            } else {
-                $timeout(cacheElements, 100);
-            }
-        })();
+		(function cacheElements() {
+			$navigation = $('#header');
+			$menu = $('#left-panel');
+			$ribbon = $('#ribbon');
+			$footer = $('.page-footer');
+			if (_.every(
+					[$navigation, $menu, $ribbon, $footer],
+					function ($it) {
+						return angular.isNumber($it.height());
+					})
+			) {
+				initializedResolver.resolve();
+			} else {
+				$timeout(cacheElements, 100);
+			}
+		})();
 
 
-        return {
-            priority: 2014,
-            restrict: 'A',
-            compile: function (tElement, tAttributes) {
-                tElement.removeAttr('smart-layout data-smart-layout');
+		return {
+			priority: 2014,
+			restrict: 'A',
+			/**
+			 * Description
+			 * @method compile
+			 * @param {} tElement
+			 */
+			compile: function (tElement) {
+				tElement.removeAttr('smart-layout data-smart-layout');
 
-                var appViewHeight = 0 ,
-                    appViewWidth = 0,
-                    calcWidth,
-                    calcHeight,
-                    deltaX,
-                    deltaY;
+				var appViewHeight = 0,
+					appViewWidth = 0,
+					calcWidth,
+					calcHeight,
+					deltaX,
+					deltaY;
 
-                var forceResizeTrigger = false;
+				var forceResizeTrigger = false;
 
-                function resizeListener() {
+				/**
+				 * Description
+				 * @method resizeListener
+				 */
+				function resizeListener() {
 
-//                    full window height appHeight = Math.max($menu.outerHeight() - 10, getDocHeight() - 10);
+					var menuHeight = $body.hasClass('menu-on-top') &&
+					$menu.is(':visible') ? $menu.height() : 0;
+					var menuWidth = !$body.hasClass('menu-on-top') && $menu.is(':visible') ? $menu.width() +
+					$menu.offset().left : 0;
 
-                    var menuHeight = $body.hasClass('menu-on-top') && $menu.is(':visible') ? $menu.height() : 0;
-                    var menuWidth = !$body.hasClass('menu-on-top') && $menu.is(':visible') ? $menu.width() + $menu.offset().left : 0;
-
-                    var $content = $('#content');
-                    var contentXPad = $content.outerWidth(true) - $content.width();
-                    var contentYPad = $content.outerHeight(true) - $content.height();
-
-
-                    calcWidth = $window.width() - menuWidth - contentXPad;
-                    calcHeight = $window.height() - menuHeight - contentYPad - $navigation.height() - $ribbon.height() - $footer.height();
-
-                    deltaX = appViewWidth - calcWidth;
-                    deltaY = appViewHeight - calcHeight;
-                    if (Math.abs(deltaX) || Math.abs(deltaY) || forceResizeTrigger) {
-
-                        //console.log('exec', calcWidth, calcHeight);
-                        $rootScope.$broadcast('$smartContentResize', {
-                            width: calcWidth,
-                            height: calcHeight,
-                            deltaX: deltaX,
-                            deltaY: deltaY
-                        });
-                        appViewWidth = calcWidth;
-                        appViewHeight = calcHeight;
-                        forceResizeTrigger = false;
-                    }
-                }
+					var $content = $('#content');
+					var contentXPad = $content.outerWidth(true) - $content.width();
+					var contentYPad = $content.outerHeight(true) - $content.height();
 
 
-                var looping = false;
-                $interval(function () {
-                    if (looping) loop();
-                }, 300);
+					calcWidth = $window.width() - menuWidth - contentXPad;
+					calcHeight = $window.height() -
+					menuHeight -
+					contentYPad -
+					$navigation.height() -
+					$ribbon.height() -
+					$footer.height();
 
-                var debouncedRun = _.debounce(function () {
-                    run(300)
-                }, 300);
+					deltaX = appViewWidth - calcWidth;
+					deltaY = appViewHeight - calcHeight;
+					if (Math.abs(deltaX) || Math.abs(deltaY) || forceResizeTrigger) {
 
-                function run(delay) {
-                    initializedResolver.promise.then(function () {
-                        attachOnResize(delay);
-                    });
-                }
+						$rootScope.$broadcast('$smartContentResize', {
+							width: calcWidth,
+							height: calcHeight,
+							deltaX: deltaX,
+							deltaY: deltaY
+						});
+						appViewWidth = calcWidth;
+						appViewHeight = calcHeight;
+						forceResizeTrigger = false;
+					}
+				}
 
-                run(10);
 
-                function detachOnResize() {
-                    looping = false;
-                }
+				var looping = false;
+				$interval(function () {
+					if (looping) {
+						loop();
+					}
+				}, 300);
 
-                function attachOnResize(delay) {
-                    $timeout(function () {
-                        looping = true;
-                    }, delay);
-                }
+				var debouncedRun = _.debounce(function () {
+					run(300);
+				}, 300);
 
-                function loop() {
-                    $body.toggleClass('mobile-view-activated', $window.width() < 979);
+				/**
+				 * Description
+				 * @method run
+				 * @param {} delay
+				 */
+				function run(delay) {
+					initializedResolver.promise.then(function () {
+						attachOnResize(delay);
+					});
+				}
 
-                    if ($window.width() < 979)
-                        $body.removeClass('minified');
+				run(10);
 
-                    resizeListener();
-                }
+				/**
+				 * Description
+				 * @method detachOnResize
+				 */
+				function detachOnResize() {
+					looping = false;
+				}
 
-                function handleHtmlId(toState) {
-                    if (toState.data && toState.data.htmlId) $html.attr('id', toState.data.htmlId);
-                    else $html.removeAttr('id');
-                }
+				/**
+				 * Description
+				 * @method attachOnResize
+				 * @param {} delay
+				 */
+				function attachOnResize(delay) {
+					$timeout(function () {
+						looping = true;
+					}, delay);
+				}
 
-                $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-                    //console.log(1, '$stateChangeStart', event, toState, toParams, fromState, fromParams);
-                    handleHtmlId(toState);
-                    detachOnResize();
-                });
+				/**
+				 * Description
+				 * @method loop
+				 */
+				function loop() {
+					$body.toggleClass('mobile-view-activated', $window.width() < 979);
 
-                // initialized with 1 cause we came here with one $viewContentLoading request
-                var viewContentLoading = 1;
-                $rootScope.$on('$viewContentLoading', function (event, viewConfig) {
-                    //console.log(2, '$viewContentLoading', event, viewConfig);
-                    viewContentLoading++;
-                });
+					if ($window.width() < 979) {
+						$body.removeClass('minified');
+					}
 
-                $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-                    //console.log(3, '$stateChangeSuccess', event, toState, toParams, fromState, fromParams);
-                    forceResizeTrigger = true;
-                });
+					resizeListener();
+				}
 
-                $rootScope.$on('$viewContentLoaded', function (event) {
-                    //console.log(4, '$viewContentLoaded', event);
-                    viewContentLoading--;
+				/**
+				 * Description
+				 * @method handleHtmlId
+				 * @param {} toState
+				 */
+				function handleHtmlId(toState) {
+					if (toState.data && toState.data.htmlId) {
+						$html.attr('id', toState.data.htmlId);
+					}
+					else {
+						$html.removeAttr('id');
+					}
+				}
 
-                    if (viewContentLoading == 0 && initialized) {
-                        debouncedRun();
-                    }
-                });
-            }
-        }
-    });
+				$rootScope.$on('$stateChangeStart', function (event, toState) {
+					handleHtmlId(toState);
+					detachOnResize();
+				});
+
+				// initialized with 1 cause we came here with one $viewContentLoading request
+				var viewContentLoading = 1;
+				$rootScope.$on('$viewContentLoading', function () {
+					$log.debug('$viewContentLoading');
+					viewContentLoading++;
+				});
+
+				$rootScope.$on('$stateChangeSuccess', function () {
+					$log.debug('$stateChangeSuccess');
+					forceResizeTrigger = true;
+				});
+
+				$rootScope.$on('$viewContentLoaded', function () {
+					$log.debug('$viewContentLoaded');
+					viewContentLoading--;
+
+					if (viewContentLoading === 0 && initialized) {
+						debouncedRun();
+					}
+				});
+			}
+		};
+	});
 });

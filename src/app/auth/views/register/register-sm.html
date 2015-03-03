@@ -1,0 +1,117 @@
+<div role="main" ng-controller="RegisterController">
+
+	<!-- MAIN CONTENT -->
+	<div id="content" class="container">
+		<div class="row" style="margin: 100px 0 50px 0">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+				<div class="text-center">
+					<img ng-src="images/logo-{{ APP_NAME | lowercase }}.png" alt="{{ APP_NAME }} logo">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+				<div
+					class="text-center">
+					<h1 class="font-xxl">{{'Register'|translate}}</h1>
+				</div>
+				<div class="alert alert-danger fade in" ng-if="!user.reflink">
+					<i class="fa-fw fa fa-times"></i>
+					<strong>{{'Error!'|translate}}</strong>
+					{{'The reflink is invalid.'|translate}}
+				</div>
+				<div class="well no-padding" ng-if="!submitted">
+					<form ng-submit="register(user)" name="form" class="smart-form client-form" novalidate>
+						<fieldset ng-show="!submitted">
+							<section ng-show="formError">
+								<p class="alert alert-danger" ng-model="formError">
+									<button type="button" class="close" data-dismiss="alert">&times;</button>
+									{{error}}
+								</p>
+							</section>
+							<section>
+								<div class="alert alert-info fade in">
+									<i class="fa-fw fa fa-info"></i>
+									{{'Referral'|translate}}: <strong>{{user.reflink}}</strong>
+								</div>
+							</section>
+							<section>
+								<label class="input" ng-class="{
+											'state-error' : !form.email.$pristine && form.email.$invalid,
+											'state-success': !form.email.$pristine && form.email.$valid
+										}"> <i class="icon-append fa fa-envelope"></i>
+									<input type="email" name="email" placeholder="{{'Email address'|translate}}" ng-model="user.email"
+												 required>
+									<b class="tooltip tooltip-bottom-right">{{'Needed to verify your account'|translate}}</b> </label>
+								<em ng-show="!form.email.$pristine && form.email.$error.required" for="email" class="invalid">
+									{{'Please enter your email address'|translate}}</em>
+								<em ng-show="!form.email.$pristine && form.email.$error.email" for="email" class="invalid">
+									{{'Please enter a VALID email address'|translate}}</em>
+							</section>
+
+							<section>
+								<label class="input" ng-class="{
+											'state-error' : !form.password.$pristine && form.password.$invalid,
+											'state-success': !form.password.$pristine && form.password.$valid
+										}"> <i class="icon-append fa fa-lock"></i>
+									<input type="password" name="password" placeholder="{{'Password'|translate}}" id="password"
+												 ng-minlength="6"
+												 ng-model="user.password" required>
+									<b class="tooltip tooltip-bottom-right">{{'Do not tell anyone your password!'|translate}}</b> </label>
+								<em ng-show="!form.password.$pristine && form.password.$error.minlength" for="password" class="invalid">
+									{{'Password must have at least 6 characters.'|translate}}</em>
+							</section>
+
+							<section>
+								<label class="input" ng-class="{
+											'state-error' : !form.passwordConfirm.$pristine && form.passwordConfirm.$error.dontMatch,
+											'state-success': !form.passwordConfirm.$pristine && !form.passwordConfirm.$error.dontMatch
+										}"> <i class="icon-append fa fa-lock"></i>
+									<input type="password" name="passwordConfirm" placeholder="{{'Confirm password'|translate}}"
+												 ng-model="user.passwordConfirm" ng-change="checkPassword()" required>
+									<b class="tooltip tooltip-bottom-right">{{'Confirm password'|translate}}</b> </label>
+								<em ng-show="!form.passwordConfirm.$pristine && form.passwordConfirm.$error.dontMatch" for="password"
+										class="invalid">{{'Passwords do not match.'|translate}}</em>
+							</section>
+							<section>
+								<label class="select">
+									<select name="language" ng-model="user.language" required>
+										<option disabled value="">{{'Language'|translate}}</option>
+										<option value="EN">{{'English'|translate}}</option>
+										<option value="PL">{{'Polish'|translate}}</option>
+									</select> <i></i> </label>
+							</section>
+						</fieldset>
+						<footer>
+							<button type="submit" class="btn btn-primary" ng-disabled="isRegisterDisabled()">
+								{{'Register'|translate}} <i class="fa fa-spinner fa-spin" ng-show="spinner"></i>
+							</button>
+						</footer>
+					</form>
+				</div>
+				<div ng-if="submitted">
+					<div class="col-sm-12 col-md-12 col-lg-12">
+						<div class="well well-lg bg-color-teal txt-color-white text-center">
+							<div class="jumbotron bg-color-teal">
+								<h1>{{'Thank you!'|translate}}</h1>
+
+								<p>
+									{{'Please check your email account for further details on how to activate your account.'|translate}}
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+				<div class="text-center">
+					<div class="note">
+						<a href="mailto:support@preiscoin.com?Subject={{'Preiscoin%20question'|translate}}" target="_top">{{'Contact
+							support'|translate}}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

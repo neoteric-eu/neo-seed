@@ -4,8 +4,14 @@ module.exports = {
 		livereload: true
 	},
 	js: {
-		files: '<%= yeoman.app %>/app/**/*.js'
+		files: [
+			'<%= yeoman.app %>/app/**/**/*.js',
+			'!<%= yeoman.app %>/app/**/*.spec.js'
+		]
 		//tasks: 'newer:jshint:app'
+	},
+	json: {
+		files: '<%= yeoman.app %>/app/**/**/*.json'
 	},
 	html: {
 		files: '<%= yeoman.app %>/app/**/*.html',
@@ -16,12 +22,8 @@ module.exports = {
 		tasks: 'newer:jshint:test'
 	},
 	styles_less: {
-		files: '<%= yeoman.app %>/styles/less/**/*.less',
+		files: '<%= yeoman.app %>/styles/less/**/**/*.less',
 		tasks: 'less:dev'
-	},
-	styles_scss: {
-		files: '<%= yeoman.app %>/styles/scss/**/*.scss',
-		tasks: 'compass:dev'
 	},
 	gruntfile: {
 		files: ['Gruntfile.js', 'grunt/*.js'],

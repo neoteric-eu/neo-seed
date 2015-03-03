@@ -1,7 +1,6 @@
-/**
- * Created by default on 17.12.14.
- */
 module.exports = function (grunt) {
+	'use strict';
+
 	return {
 		development: {
 			options: {
@@ -42,5 +41,5 @@ module.exports = function (grunt) {
 				dest: '<%= yeoman.app %>/app/modules/'
 			}]
 		}
-	}
+	};
 };
