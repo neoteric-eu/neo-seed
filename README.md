@@ -21,7 +21,7 @@ Local server can by run by command:
 grunt serve
 ```
 
-## Creating distribution version
+## Deploy
 You can locally create production version of code by running:
 
 ```javascript
@@ -78,5 +78,5 @@ grunt test
 ```
 
 ## Reference
-Addidtional documentation available on [Redmine](http://redmine.neoteric.eu:3010/projects/angularjs-baza-wiedzy)
+Additional documentation available on [Redmine](http://redmine.neoteric.eu:3010/projects/angularjs-baza-wiedzy)
 

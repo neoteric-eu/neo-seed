@@ -7,23 +7,19 @@ module.exports = {
 		files: [
 			'<%= yeoman.app %>/app/**/**/*.js',
 			'!<%= yeoman.app %>/app/**/*.spec.js'
-		]
-		//tasks: 'newer:jshint:app'
+		],
+		tasks: 'newer:jshint:app'
 	},
 	json: {
 		files: '<%= yeoman.app %>/app/**/**/*.json'
 	},
 	html: {
 		files: '<%= yeoman.app %>/app/**/*.html',
-		tasks: 'templates:dist'
-	},
-	js_test: {
-		files: 'test/**/*.spec.js',
-		tasks: 'newer:jshint:test'
+		tasks: 'templates'
 	},
 	styles_less: {
 		files: '<%= yeoman.app %>/styles/less/**/**/*.less',
-		tasks: 'less:dev'
+		tasks: 'less'
 	},
 	gruntfile: {
 		files: ['Gruntfile.js', 'grunt/*.js'],
