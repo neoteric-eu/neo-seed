@@ -1,34 +1,12 @@
-define(
-	[
-		'dashboard/module',
-		'moment'
-	],
-	function(
-		module,
-		moment
-	) {
-
-	'use strict';
-
-	/**
-	 * @constructor* @method DashboardCtrl
-	 * @param {} $window
-	 * @param {} $window
-	 */
-	function DashboardCtrl(
-		$scope,
-		$window
-	) {
-		$scope.date = moment().format('lll');
+define(['dashboard/module'],
+	function (module) {
+		'use strict';
 
 		/**
-		 * Description
-		 * @method sayHello
+		 * @constructor DashboardCtrl
 		 */
-		this.sayHello = function() {
-			$window.alert('Hello World');
-		};
-	}
+		function DashboardCtrl() {
+		}
 
-	module.registerController('DashboardCtrl', DashboardCtrl);
-});
+		module.registerController('DashboardCtrl', DashboardCtrl);
+	});

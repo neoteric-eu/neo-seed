@@ -57,15 +57,28 @@
 				media="screen and (max-device-width: 320px)">
 
 </head>
-<body
-	data-smart-device-detect
-	data-smart-fast-click
-	data-smart-layout
-	data-smart-page-title="">
+<body ng-app="app"
+			data-smart-device-detect
+			data-smart-fast-click
+			data-smart-layout
+			data-smart-page-title="">
 
-<div ng-if="appReady">
-	<div data-ui-view="root" data-autoscroll="false"></div>
+<div data-ui-view="root"
+		 data-autoscroll="false"
+		 ng-show="appReady">
+
 </div>
+
+<div id="app-loader"
+		 ng-hide="appReady">
+	<img src="styles/img/neoteric-logo.png"/>
+
+	<div class="loader">
+		<span></span>
+	</div>
+</div>
+
+
 <!--[if lt IE 9]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a
 	href="http://browsehappy.com/">upgrade

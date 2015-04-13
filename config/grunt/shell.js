@@ -11,6 +11,12 @@ module.exports = {
 	'git-disable-tracking-templates': {
 		command: 'git update-index --assume-unchanged <%= yeoman.app %>/app/templates/module.js'
 	},
+	'git-submodule-init': {
+		command: 'git submodule update --init'
+	},
+	'git-submodule-update': {
+		command: 'git submodule update --remote'
+	},
 	'smart-comments': {
 		command: 'node ./node_modules/smartcomments/bin/smartcomments -g -t <%= yeoman.app %>/app --config config/comments/comments.conf.json'
 	}

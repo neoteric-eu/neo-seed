@@ -6,20 +6,16 @@ requirejs(['require.conf'], function () {
 
 	requirejs([
 		'require',
-		'jquery',
 		'angular',
 		'domReady',
+		'lodash',
+		'lodash-extensions',
 		'appConfig',
 		'bootstrap',
-		'includes',
-		'app',
-		'text'
-	], function (require, $, ng, domReady, appConfig) {
-		$.sound_path = appConfig.sound_path;
-		$.sound_on = appConfig.sound_on;
-
-		domReady(function (document) {
-			ng.bootstrap(document, ['app']);
+		'_includes',
+		'app'
+	], function (require, ng, domReady) {
+		domReady(function () {
 			ng.resumeBootstrap();
 		});
 	});

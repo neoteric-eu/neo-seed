@@ -1,75 +1,69 @@
-(function () {
+define(['angular'], function (ng) {
 	'use strict';
 
-	/**
-	 * @example
-	 * {
-	 *		name:'Polish', // this is the language name
-	 *		code: 'pl', // this is a country code
-	 *		locale: 'pl_PL' // this is an locale code
-	 * }
-	 *
-	 * @see http://en.wikipedia.org/wiki/Locale
-	 * @see http://en.wikipedia.org/wiki/ISO_639-1
-	 */
-	define(['angular'], function (angular) {
+	return {
+		cfg: {
+			// URL FOR REST CLIENT
+			API_URL: '@@API_URL',
 
-		return {
-			cfg: {
-				// URL FOR REST CLIENT
-				baseUrl: '@@baseUrl',
+			DEBUG: '@@DEBUG',
+			MOD_REWRITE: '@@MOD_REWRITE',
 
-				DEBUG: '@@DEBUG',
-				MOD_REWRITE: '@@MOD_REWRITE',
+			SENTRY_API_KEY: '@@SENTRY_API_KEY',
+			SENTRY_OPTIONS: '@@SENTRY_OPTIONS',
 
-				SENTRY_API_KEY: '@@SENTRY_API_KEY',
-				SENTRY_OPTIONS: '@@SENTRY_OPTIONS',
+			LOGIN_DATA: '@@LOGIN_DATA',
 
-				LOGIN_DATA: '@@LOGIN_DATA',
-
-				// Language code for this installation. All choices can be found here:
-				// http://www.i18nguy.com/unicode/language-identifiers.html
-				LANGUAGES: [
-					{
-						name: 'Polski',
-						code: 'pl',
-						locale: 'pl_PL'
-					},
-					{
-						name: 'English',
-						code: 'gb',
-						locale: 'en_GB'
-
-					}
-				],
-
-				cookieOptions: {
-					domain: '@@COOKIE_DOMAIN',
-					path: '/',
-					expires: 720,
-					expirationUnit: 'hours',
-					secure: false
-				},
-
-				DEFAULT_LANG: {
-					name: 'Polish',
+			LANGUAGES: [
+				{
+					name: 'Polski',
 					code: 'pl',
 					locale: 'pl_PL'
 				},
-
-				EMAILS: '@@EMAILS',
-
-				DOMAIN: 'neoteric.eu',
-				APP_NAME: 'NeotericApp'
-			},
-			get: function (element) {
-				try {
-					return angular.fromJson(this.cfg[element]);
-				} catch (e) {
-					return this.cfg[element];
+				{
+					name: 'English',
+					code: 'gb',
+					locale: 'en_GB'
 				}
+			],
+
+			cookieOptions: {
+				domain: '@@COOKIE_DOMAIN',
+				path: '/',
+				expires: 720,
+				expirationUnit: 'hours',
+				secure: false
+			},
+
+			/**
+			 * @example
+			 * {
+			 *		name:'Polish', // this is the language name
+			 *		code: 'pl', // this is a country code
+			 *		locale: 'pl_PL' // this is an locale code
+			 * }
+			 * @see http://en.wikipedia.org/wiki/Locale
+			 * @see http://en.wikipedia.org/wiki/ISO_639-1
+			 */
+			DEFAULT_LANG: {
+				name: 'Polish',
+				code: 'pl',
+				locale: 'pl_PL'
+			},
+
+			EMAILS: '@@EMAILS',
+
+			DOMAIN: 'neoteric.eu',
+			APP_NAME: '@@APP_NAME'
+		},
+
+		get: function (element) {
+			try {
+				return ng.fromJson(this.cfg[element]);
+			} catch (e) {
+				return this.cfg[element];
 			}
-		};
-	});
-}());
+		}
+	};
+});
 

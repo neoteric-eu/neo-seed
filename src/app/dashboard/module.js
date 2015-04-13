@@ -1,17 +1,12 @@
-define(
-	'dashboard/module',
-[
+define([
 	'angular',
 	'angular-couch-potato',
-	'angular-ui-router',
-	'angular-resource',
-	'angular-gettext',
+	'angular-templates'
 ], function (ng, couchPotato) {
 	'use strict';
 
 	var module = ng.module('app.dashboard', [
 		'ui.router',
-		'ngResource',
 		'gettext'
 	]);
 

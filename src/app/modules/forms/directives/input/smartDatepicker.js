@@ -21,7 +21,6 @@ define([
 			 * @param {Object} attributes HTML element attributes
 			 */
 			link: function (scope, element, attributes) {
-				element.removeAttr('smartDatepicker');
 
 				var onSelectCallbacks = [];
 
@@ -40,6 +39,7 @@ define([
 				}
 
 				var options = {
+					regional: $.datepicker.regional[moment.locale()],
 					prevText: '<i class="fa fa-chevron-left"></i>',
 					nextText: '<i class="fa fa-chevron-right"></i>',
 					/**
@@ -89,18 +89,18 @@ define([
 				 * in input calendar values
 				 * @type {Function|function()|*}
 				 */
-				var unwatch = scope.$watch('defaultDate', function (newValue) {
+				scope.$watch('defaultDate', function (newValue) {
 					element.datepicker('setDate', newValue.format('L'));
 				}, true);
 
 				/**
 				 * Destroy watch when finished
 				 */
-				scope.$on('destroy', function () {
-					unwatch();
-				});
+					//scope.$on('destroy', function () {
+					//	unwatch();
+					//});
 
-				element.datepicker(_.extend($.datepicker.regional[moment.locale()], options));
+				element.datepicker(options);
 			}
 		};
 	});

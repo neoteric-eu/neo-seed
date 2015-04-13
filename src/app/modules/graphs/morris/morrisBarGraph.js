@@ -3,16 +3,12 @@ define(['modules/graphs/module', 'morris'], function (module) {
 
 	/**
 	 * Creates line bar with morris library
-	 *  restrict: string,
-	 *  replace: boolean,
-	 *  template: string,
-	 *  scope: {graphConfig: string},
-	 *  link: Function
-	 * }}
+	 * @constructor morrisBarGraph
+	 *
 	 * @link https://github.com/morrisjs/morris.js
-	 * @example <morris-bar-graph graph-config="configObject"></morris-bar-graph>
-	 * @method morrisBarGraph
-	 * @return ObjectExpression
+	 * @example
+	 *  <morris-bar-graph graph-config="configObject"></morris-bar-graph>
+	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string}, link: Function}}
 	 */
 	function morrisBarGraph() {
 		return {

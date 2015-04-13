@@ -1,8 +1,7 @@
 module.exports = {
 	'serve': [
-		'logo',
 		'clean:server',
-		'templates:dist',
+		'templates',
 		'connect:server',
 		'watch'
 	],
@@ -26,22 +25,27 @@ module.exports = {
 		'protractor:singlerun'
 	],
 
-	'build': [
-		'logo',
+	'dist': [
 		'clean:dist',
-		'less:dev',
-		'gettext-extract',
-		'gettext-compile',
+		'config:production',
+		'less',
 		'useminPrepare',
-		'templates:dist',
+		'templates',
 		'concat',
 		'cssmin',
-		'copy:dist',
-		'requirejs:dist',
+		'copy',
+		'requirejs',
 		'rev',
 		'usemin',
 		'clean:server',
 		'jsdoc'
+	],
+
+	release: [
+		'changelog',
+		'bump:minor',
+		'compress',
+		'nexus'
 	],
 
 	'code:auto-comment': [
@@ -70,7 +74,7 @@ module.exports = {
 	'default': [
 		'newer:jshint:app',
 		'test',
-		'build'
+		'dist'
 	],
 
 	install: [
@@ -80,7 +84,10 @@ module.exports = {
 		'shell:webdriver-update',
 		'githooks',
 		'config:development',
-		'shell:git-disable-tracking-templates'
+		'shell:git-disable-tracking-templates',
+		'shell:git-submodule-init',
+		'shell:git-submodule-update',
+		'less'
 	]
 };
 

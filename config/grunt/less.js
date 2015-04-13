@@ -1,10 +1,5 @@
 module.exports = {
-	dev: {
-		options: {
-			// compress: true,
-			// yuicompress: true,
-			// optimization: 2,
-		},
+	default: {
 		files: {
 			'<%= yeoman.app %>/styles/css/vendor/bootstrap/bootstrap.css': '<%= yeoman.app %>/styles/less/custom/bootstrap.less',
 			'<%= yeoman.app %>/styles/css/smartadmin-production.css': '<%= yeoman.app %>/styles/less/smartadmin-production.less',

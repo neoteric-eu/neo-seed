@@ -1,9 +1,14 @@
 define([
 	'angular',
-	'angular-couch-potato'
+	'angular-couch-potato',
+	'angular-templates'
 ], function (ng, couchPotato) {
 	'use strict';
 
+	/**
+	 * @class
+	 * @memberOf app.auth
+	 */
 	var module = ng.module('app.auth', [
 		'ipCookie',
 		'ui.router'
@@ -45,11 +50,6 @@ define([
 					deps: $couchPotatoProvider.resolveDependencies([
 						// Controllers
 						'auth/controllers/LoginController',
-						// Models
-						'auth/models/User',
-						// Services
-						'core/services/BaseAPI',
-						'auth/services/UserAPI',
 						// Directives
 						'modules/forms/directives/validate/smartValidateForm'
 					])

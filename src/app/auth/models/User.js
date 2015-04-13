@@ -1,8 +1,7 @@
 define(['auth/module'], function (module) {
 	'use strict';
 
-	module.registerFactory('User', function (restmod) {
-
+	function User(restmod) {
 		/**
 		 * Data model
 		 * @example
@@ -37,7 +36,7 @@ define(['auth/module'], function (module) {
 		 */
 		return restmod
 			.model('/users')
-			.mix('BaseModel', 'UserPacker', {
+			.mix('UserPacker', {
 				customers: {
 					hasMany: 'Profile'
 				},
@@ -52,7 +51,7 @@ define(['auth/module'], function (module) {
 						/**
 						 * Description
 						 * @method $login
-						 * @return CallExpression
+						 * @return {CommonApi}
 						 */
 						$login: function () {
 							return this.$send({
@@ -67,7 +66,7 @@ define(['auth/module'], function (module) {
 						/**
 						 * Description
 						 * @method $logout
-						 * @return CallExpression
+						 * @return {CommonApi}
 						 */
 						$logout: function () {
 							return this.$send({
@@ -84,7 +83,7 @@ define(['auth/module'], function (module) {
 						/**
 						 * Description
 						 * @method $authInfo
-						 * @return CallExpression
+						 * @return {CommonApi}
 						 */
 						$authInfo: function () {
 							return this.$send({
@@ -101,8 +100,9 @@ define(['auth/module'], function (module) {
 
 					Record: {
 						/**
-						 * Description
+						 * Return user's concatenated name and surname
 						 * @method getFullName
+						 * @return {string}
 						 */
 						getFullName: function () {
 							if (this.firstName && this.lastName) {
@@ -112,5 +112,7 @@ define(['auth/module'], function (module) {
 					}
 				}
 			});
-	});
+	}
+
+	module.registerFactory('User', User);
 });

@@ -3,8 +3,8 @@ define(['app', 'globalSettings'], function (app) {
 
 	/**
 	 * Description* @method LanguagesController
-	 * @param {} $state
-	 * @param {} $state
+	 * @param $scope
+	 * @param $rootScope
 	 * @param {} $state
 	 * @param {} LanguageAPI
 	 */

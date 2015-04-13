@@ -1,4 +1,4 @@
-define(['app', 'core/packers/PackerUtils'], function (app, PackerUtils) {
+define(['app', 'helpers/restmod/packers/PackerUtils'], function (app, PackerUtils) {
 	'use strict';
 
 	app.registerFactory(

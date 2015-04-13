@@ -123,7 +123,7 @@ define(['auth/module'], function (module) {
 						var fn = $[msgObj.boxType];
 						fn.call(undefined, {
 							title: msgObj.title || gettextCatalog.getString(type.key),
-							content: msgObj.message,
+							content: msgObj.message || gettextCatalog.getString('Internal server error'),
 							color: msgObj.color || type.color,
 							timeout: msgObj.timeout || appMessages.hideTime,
 							sound: msgObj.sound || false,

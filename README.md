@@ -1,4 +1,4 @@
-![Neoteric Logo](src/styles/img/logo-app.png)
+![Neoteric Logo](src/styles/img/neoteric-logo.png)
 Angular Seed Template 1.5.2 (alpha)
 ================
 

@@ -20,9 +20,7 @@ module.exports = {
 			'angular-mocks/angular-mocks.js': 'angular-mocks/angular-mocks.js',
 			'angular-moment/angular-moment.js': 'angular-moment/angular-moment.js',
 			'angular-resource/angular-resource.js': 'angular-resource/angular-resource.js',
-			'angular-route/angular-route.js': 'angular-route/angular-route.js',
 			'angular-sanitize/angular-sanitize.js': 'angular-sanitize/angular-sanitize.js',
-			'angular-touch/angular-touch.js': 'angular-touch/angular-touch.js',
 			'angular-ui-date/angular-ui-date.js': 'angular-ui-date/src/date.js',
 			'angular-ui-router/angular-ui-router.js': 'angular-ui-router/release/angular-ui-router.js',
 			'angular-ui-router-extras': 'ui-router-extras/release/modular',
@@ -72,7 +70,6 @@ module.exports = {
 			'jquery-magnificpopup/jquery-magnificpopup.js': 'magnific-popup/dist/jquery.magnific-popup.js',
 
 			'requirejs-domready/requirejs-domready.js': 'requirejs-domready/domReady.js',
-			'requirejs-text/requirejs-text.js': 'requirejs-text/text.js',
 
 			'es5-shim/es5-shim.min.js': 'es5-shim/es5-shim.min.js',
 			'json3/json3.min.js': 'json3/lib/json3.min.js',
@@ -85,6 +82,7 @@ module.exports = {
 			'he/he.js': 'he/he.js',
 			'ionslider/ionslider.js': 'ion.rangeSlider/js/ion.rangeSlider.js',
 			'lodash/lodash.js': 'lodash/lodash.js',
+			'lodash-deep/lodash-deep.js': 'lodash-deep/lodash-deep.js',
 			'markdown/markdown.js': 'markdown/lib/markdown.js',
 			'moment/moment.js': 'moment/min/moment-with-locales.js',
 			'moment-timezone/moment-timezone.js': 'moment-timezone/builds/moment-timezone-with-data.js',
@@ -124,6 +122,7 @@ module.exports = {
 			'bootstrap': 'bootstrap/less',
 			'elements/elements.less': 'less-elements/elements.less',
 			'animate/animate.less': 'animate.less/animate.less',
+			'animate/source': 'animate.less/source',
 			'font-awesome/': 'fontawesome/less'
 		}
 	},

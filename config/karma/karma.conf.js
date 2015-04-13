@@ -13,11 +13,13 @@ module.exports = function (config) {
 
 		// list of files / patterns to load in the browser
 		files: [
+			// Load libs
 			{pattern: 'src/vendor/**/*.js', included: false},
-			{pattern: 'src/app/**/!(*.spec.js)', included: false},
-			// {pattern: 'app/bower_components/raven-js/dist/raven.min.js', included: false },
-			// {pattern: 'app/plugins/sentry-client/*.js', included: false },
 
+			// Load app files
+			{pattern: 'src/app/**/!(*.spec).js', included: false},
+
+			//Load test files
 			{pattern: 'src/app/**/unit/*.spec.js', included: false},
 			{pattern: 'test/unit/**/*.spec.js', included: false},
 
@@ -51,8 +53,13 @@ module.exports = function (config) {
 		// - IE (only Windows)
 		browsers: ['PhantomJS'],
 
+		// Allow Webstorm IDE to visualize code coverage
+		preprocessors: {
+			'src/app/**/!(*.spec).js': ['coverage']
+		},
+
 		// without coverage
-		reporters: ['dots', 'progress', 'junit'],
+		reporters: ['dots', 'progress', 'junit', 'coverage'],
 
 		// Continuous Integration mode
 		// if true, it capture browsers, run tests and exit

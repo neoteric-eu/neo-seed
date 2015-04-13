@@ -1,5 +1,5 @@
 module.exports = {
-	dist: {
+	default: {
 		files: [{
 			src: 'app/**/*.html',
 			cwd: '<%= yeoman.app %>/',

@@ -23,6 +23,7 @@ requirejs.config({
 
 		// Angular dependencies
 		'angular': '../vendor/libs/angular/angular',
+		'angular-animate': '../vendor/libs/angular-animate/angular-animate',
 		'angular-cookie': '../vendor/libs/angular-cookie/angular-cookie',
 		'angular-ui-router': '../vendor/libs/angular-ui-router/angular-ui-router',
 		'angular-ui-router-extras-core': '../vendor/libs/angular-ui-router-extras/ct-ui-router-extras.core',
@@ -40,7 +41,6 @@ requirejs.config({
 		'angular-local-storage': '../vendor/libs/angular-local-storage/angular-local-storage',
 		'angular-moment': '../vendor/libs/angular-moment/angular-moment',
 		'angular-permission': '../vendor/libs-custom/angular-permission/angular-permission',
-		'angular-resource': '../vendor/libs/angular-resource/angular-resource',
 		'angular-restmod': '../vendor/libs/angular-restmod/angular-restmod',
 		'angular-restmod-preload': '../vendor/libs/angular-restmod/plugins/preload.min',
 		'angular-restmod-find-many': '../vendor/libs/angular-restmod/plugins/find-many.min',
@@ -100,9 +100,10 @@ requirejs.config({
 		'moment': '../vendor/libs/moment/moment',
 		'moment-timezone': '../vendor/libs/moment-timezone/moment-timezone',
 		'domReady': '../vendor/libs/requirejs-domready/requirejs-domready',
-		'text': '../vendor/libs/requirejs-text/requirejs-text',
 		'fuelux-wizard': '../vendor/libs/fuelux/wizard',
 		'lodash': '../vendor/libs/lodash/lodash',
+		'lodash-deep': '../vendor/libs/lodash-deep/lodash-deep',
+		'lodash-extensions': '../vendor/libs-custom/lodash-extensions/lodash-extensions',
 		'raphael': '../vendor/libs/raphael/raphael',
 		'morris': '../vendor/libs/morris/morris',
 
@@ -136,6 +137,7 @@ requirejs.config({
 			'exports': 'angular', deps: ['jquery']
 		},
 
+		'angular-animate': ['angular'],
 		'angular-bootstrap': ['angular'],
 		'angular-cookie': ['angular'],
 		'angular-couch-potato': ['angular'],
@@ -146,17 +148,16 @@ requirejs.config({
 		'angular-google-plus': ['angular'],
 		'angular-local-storage': ['angular'],
 		'angular-mocks': ['angular'],
-		'angular-resource': ['angular'],
 		'angular-restmod': ['angular'],
 		'angular-restmod-preload': ['angular-restmod'],
 		'angular-restmod-find-many': ['angular-restmod'],
 		'angular-sanitize': ['angular'],
 		'angular-ui-router': ['angular'],
 		'angular-ui-router-extras-core': ['angular', 'angular-ui-router'],
-		'angular-ui-router-extras-dsr': ['angular', 'angular-ui-router'],
-		'angular-ui-router-extras-previous': ['angular', 'angular-ui-router'],
-		'angular-ui-router-extras-transition': ['angular', 'angular-ui-router'],
-		'angular-ui-router-extras-sticky': ['angular', 'angular-ui-router'],
+		'angular-ui-router-extras-dsr': ['angular', 'angular-ui-router', 'angular-ui-router-extras-core'],
+		'angular-ui-router-extras-previous': ['angular', 'angular-ui-router', 'angular-ui-router-extras-core', 'angular-ui-router-extras-transition'],
+		'angular-ui-router-extras-transition': ['angular', 'angular-ui-router', 'angular-ui-router-extras-core'],
+		'angular-ui-router-extras-sticky': ['angular', 'angular-ui-router', 'angular-ui-router-extras-core'],
 		'angular-ui-select': ['angular'],
 		'angular-ui-date': ['angular'],
 		'angular-permission': ['angular'],
@@ -207,6 +208,9 @@ requirejs.config({
 		'select2': ['jquery'],
 		'summernote': ['jquery'],
 		'to-markdown': ['he'],
+		'lodash-deep': ['lodash'],
+		'lodash-extensions': ['lodash'],
+
 
 		// App paths
 		'angular-templates': ['angular']

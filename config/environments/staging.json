@@ -1,14 +1,15 @@
 {
-  "baseUrl": "http://ntrc-delta.neoteric.eu:9100/api/v1/",
-  "DEBUG": true,
-  "MOD_REWRITE": true,
-  "SENTRY_API_KEY": "",
-  "SENTRY_OPTIONS": {},
-  "LOGIN_DATA": [],
-  "EMAILS": {
-	"CONTACT": "contact@neoteric.eu",
-	"INFO": "info@neoteric.eu",
-	"SUPPORT": "support@neoteric.eu"
-  },
-  "COOKIE_DOMAIN": ""
+	"APP_NAME": "Neoteric Application",
+	"API_URL": "http://ntrc-delta.neoteric.eu:9100/api/v1/",
+	"DEBUG": true,
+	"MOD_REWRITE": true,
+	"SENTRY_API_KEY": "",
+	"SENTRY_OPTIONS": {},
+	"LOGIN_DATA": [],
+	"EMAILS": {
+		"CONTACT": "contact@neoteric.eu",
+		"INFO": "info@neoteric.eu",
+		"SUPPORT": "support@neoteric.eu"
+	},
+	"COOKIE_DOMAIN": ""
 }

@@ -1,9 +1,8 @@
-define(
-	'layout/module',
-[
+define('layout/module', [
 	'angular',
 	'angular-couch-potato',
-	'angular-ui-router'
+	'angular-ui-router',
+	'angular-templates'
 ], function (ng, couchPotato) {
 
 	'use strict';
@@ -27,21 +26,17 @@ define(
 					templateUrl: 'app/layout/layout.html',
 					resolve: {
 						deps: $couchPotatoProvider.resolveDependencies([
-							'core/controllers/RootController',
-							'auth/directives/neoKeep/neoKeep',
-							'auth/directives/neoOmit/neoOmit',
-							'auth/services/appMessages'
-							//'modules/graphs/directives/inline/sparklineContainer',
-							//'components/inbox/directives/unreadMessagesCount',
-							//'components/chat/api/ChatApi',
-							//'components/chat/directives/asideChatWidget'
+							'helpers/controllers/RootController'
 						])
 					}
 				}
 			}
 		});
-		$urlRouterProvider.otherwise('/login');
 
+		$urlRouterProvider.otherwise(function ($injector) {
+			var $state = $injector.get('$state');
+			$state.go('auth.login');
+		});
 	});
 
 	module.run(function ($rootScope, $couchPotato, appMessages) {

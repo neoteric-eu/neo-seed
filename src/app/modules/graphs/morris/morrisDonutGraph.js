@@ -3,16 +3,12 @@ define(['modules/graphs/module', 'morris'], function (module) {
 
 	/**
 	 * Creates area graph with morris library
-	 *  restrict: string,
-	 *  replace: boolean,
-	 *  template: string,
-	 *  scope: {graphConfig: string},
-	 *  link: Function
-	 * }}
+	 * @constructor morrisDonutGraph
+	 *
 	 * @link https://github.com/morrisjs/morris.js
-	 * @example <morris-donut-graph graph-config="configObject"></morris-donut-graph>
-	 * @method morrisDonutGraph
-	 * @return ObjectExpression
+	 * @example
+	 * <morris-donut-graph graph-config="configObject"></morris-donut-graph>
+	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string}, link: Function}}
 	 */
 	function morrisDonutGraph() {
 		return {

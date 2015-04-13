@@ -23,7 +23,9 @@ module.exports = {
 		],
 
 		preprocessors: {
-			'src/app/**/*.js': 'coverage'
+			'src/app/components/**/*.js': 'coverage',
+			'src/app/auth/**/*.js': 'coverage',
+			'src/app/helpers/**/*.js': 'coverage'
 		},
 
 		reporters: ['coverage'],
@@ -35,8 +37,5 @@ module.exports = {
 		},
 		singleRun: true,
 		autoWatch: false
-	},
-	preCommit: {
-		configFile: 'config/karma/karma.conf.js'
 	}
 };

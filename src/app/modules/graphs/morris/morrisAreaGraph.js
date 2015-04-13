@@ -3,16 +3,12 @@ define(['modules/graphs/module', 'morris'], function (module) {
 
 	/**
 	 * Creates area graph with morris library
-	 *  restrict: string,
-	 *  replace: boolean,
-	 *  template: string,
-	 *  scope: {graphConfig: string},
-	 *  link: Function
-	 * }}
+	 * @constructor morrisAreaGraph
+	 *
 	 * @link https://github.com/morrisjs/morris.js
-	 * @example <morris-area-graph graph-config="configObject"></morris-area-graph>
-	 * @method morrisAreaGraph
-	 * @return ObjectExpression
+	 * @example
+	 *  <morris-area-graph graph-config="configObject"></morris-area-graph>
+	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string}, link: Function}}
 	 */
 	function morrisAreaGraph() {
 		return {
@@ -34,16 +30,12 @@ define(['modules/graphs/module', 'morris'], function (module) {
 				}, scope.graphConfig));
 
 				// listen to data changes
-				var unwatch = scope.$watch('graphConfig.data', function (newData, oldData) {
+				scope.$watch('graphConfig.data', function (newData, oldData) {
 					if (newData !== oldData) {
 						morris.setData(newData);
 					}
 				});
 
-				// destroy watch with scope
-				scope.$on('destroy', function () {
-					unwatch();
-				});
 			}
 		};
 	}

@@ -2,8 +2,9 @@ define([
 	'angular',
 	'angular-couch-potato',
 	'globalSettings',
+	'angular-templates',
+	'angular-animate',
 	'angular-local-storage',
-	'angular-resource',
 	'angular-ui-router',
 	'angular-ui-router-extras-core',
 	'angular-ui-router-extras-dsr',
@@ -18,7 +19,6 @@ define([
 	'angular-permission',
 	'angular-moment',
 	'angular-debounce',
-	'angular-templates',
 	'angular-restmod',
 	'angular-restmod-preload',
 	'angular-restmod-find-many',
@@ -29,7 +29,8 @@ define([
 
 	var app = ng.module('app', [
 		'ngSanitize',
-		'ngResource',
+		'ngAnimate',
+
 		'gettext',
 		'permission',
 		'angularMoment',
@@ -49,14 +50,14 @@ define([
 		'ct.ui.router.extras.sticky',
 
 		// App modules
-		'app.core',
+		'app.templates',
+		'app.components',
 		'app.auth',
 		'app.layout',
 		'app.forms',
 		'app.graphs',
 		'app.widgets',
-		'app.dashboard',
-		'app.tasks'
+		'app.dashboard'
 	]);
 
 	couchPotato.configureApp(app);
@@ -69,26 +70,7 @@ define([
 											 restmodProvider,
 											 uiSelectConfig) {
 
-		restmodProvider.rebase(
-			'restmod.Preload', 'DefaultPacker', {
-				$config: {
-					urlPrefix: globalSettings.get('baseUrl'),
-					style: 'NeoStyle'
-				},
-				$extend: {
-					Model: {
-						/**
-						 * Description
-						 * @method encodeUrlName
-						 * @param {String} _name
-						 * @return _name
-						 */
-						encodeUrlName: function (_name) {
-							return _name;
-						}
-					}
-				}
-			});
+		restmodProvider.rebase('NeoStyleAPI');
 
 		uiSelectConfig.theme = 'bootstrap';
 
@@ -119,8 +101,8 @@ define([
 		LanguageAPI.initiate();
 
 		gettextCatalog.debug = globalSettings.get('DEBUG');
-
 		$rootScope.appReady = true;
+		$rootScope.$state = $state;
 
 		$log.debug('Starting application');
 	});

@@ -18,7 +18,8 @@ module.exports = {
 		files: [{
 			src: [
 				'bower_components',
-				'<%= yeoman.app %>/vendor/libs'
+				'<%= yeoman.app %>/vendor/libs',
+				'<%= yeoman.app %>/styles/libs'
 			]
 		}]
 	}

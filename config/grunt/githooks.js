@@ -1,6 +1,5 @@
 module.exports = {
 	all: {
-		'pre-commit': 'jshint:app',
-		'post-pull': 'bower'
+		'pre-commit': 'jshint:app'
 	}
 };

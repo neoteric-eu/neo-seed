@@ -5,7 +5,7 @@ define(['auth/module'], function (module) {
 
 		return restmod
 			.model()
-			.mix('BaseModel', {
+			.mix({
 				$extend: {
 					Record: {
 						/**

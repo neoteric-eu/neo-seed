@@ -1,9 +1,6 @@
-module.exports = function (grunt) {
-	'use strict';
-
-	//noinspection JSUnresolvedFunction
+module.exports = function () {
 	return {
-		dist: {
+		default: {
 			options: {
 				baseUrl: 'src/app',
 				optimize: 'uglify2',
@@ -23,7 +20,7 @@ module.exports = function (grunt) {
 				uglify2: {
 					mangle: false
 				},
-				include: grunt.file.readYAML('src/app/require.include.yml'),
+				include: ['main'],
 				wrap: true
 			}
 		}

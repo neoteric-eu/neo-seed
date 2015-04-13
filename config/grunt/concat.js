@@ -1,6 +1,6 @@
 module.exports = function () {
 	return {
-		dist: {
+		default: {
 			src: ['<%= yeoman.app %>/styles/css/*.css'],
 			dest: '<%= yeoman.tmp %>/styles/css/style.css'
 		}

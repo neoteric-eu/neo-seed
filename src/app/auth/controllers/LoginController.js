@@ -5,7 +5,8 @@ define([
 	'use strict';
 
 	/**
-	 * Description* @method LoginController
+	 * Description
+	 * @class
 	 * @param {Object} $log
 	 * @param {Object} ipCookie
 	 * @param {Object} session
@@ -84,9 +85,10 @@ define([
 		};
 
 		/**
-		 * @name ChooseCustomerModalController
-		 * @description Modal controller
-		 * @method ChooseCustomerModalController
+		 * Modal controller
+		 * @method
+		 * @memberOf app.auth.LoginController
+		 *
 		 * @param {Object} $modalInstance
 		 * @param {Object} $modalInstance
 		 * @param {Array} customers
