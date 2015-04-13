@@ -21,6 +21,19 @@ Local server can by run by command:
 grunt serve
 ```
 
+## Creating distribution version
+You can locally create production version of code by running:
+
+```javascript
+grunt dist
+```
+
+Then run in order to test working app in browser:
+
+```javascript
+connect:dist
+```
+
 
 ## Documentation
 
