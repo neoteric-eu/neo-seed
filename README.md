@@ -1,7 +1,9 @@
-![Neoteric Logo](src/styles/img/neoteric-logo.png)
-Angular Seed Template 1.5.2 (alpha)
+![Neoteric Logo](http://burczu-programator.pl/wp-content/uploads/2015/02/yeoman_io.png)
+
+Angular Seed Template 1.5.2 (beta)
 ================
 
+[![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com)
 ## Installation
 Project requires having installed:
 
