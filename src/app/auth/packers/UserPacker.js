@@ -1,15 +1,14 @@
 define(['app', 'helpers/restmod/packers/PackerUtils'], function (app, PackerUtils) {
 	'use strict';
 
-	app.registerFactory(
-		'UserPacker',
+	app.registerFactory('UserPacker',
 		function (restmod, RMPackerCache) {
 
 			return restmod.mixin(function () {
 				this.define('Model.unpack', function (_resource, _raw) {
 					var name,
-						links = this.getProperty('jsonLinks', 'linked'),
-						meta = this.getProperty('jsonMeta', '.');
+					    links = this.getProperty('jsonLinks', 'included'),
+					    meta  = this.getProperty('jsonMeta', 'token');
 
 					if (_resource.$isCollection) {
 						//noinspection JSValidateTypes
@@ -17,7 +16,8 @@ define(['app', 'helpers/restmod/packers/PackerUtils'], function (app, PackerUtil
 						this.getProperty('jsonRoot') ||
 						this.getProperty('plural');
 					} else {
-						if (_resource.$response.config.url.match(/authInfo$/)) {
+						if (_resource.$response.config.url.match(/authInfo$/) ||
+							_resource.$response.config.url.match(/login$/)) {
 							name = 'user';
 						}
 					}

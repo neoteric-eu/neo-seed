@@ -4,10 +4,7 @@ module.exports = {
 		livereload: true
 	},
 	js: {
-		files: [
-			'<%= yeoman.app %>/app/**/**/*.js',
-			'!<%= yeoman.app %>/app/**/*.spec.js'
-		],
+		files: '<%= yeoman.app %>/app/**/*.js',
 		tasks: 'newer:jshint:app'
 	},
 	json: {

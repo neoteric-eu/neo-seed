@@ -3,15 +3,16 @@ define(['auth/module'], function (module) {
 
 	/**
 	 * Description* @method ActivationController
-	 * @param {} $rootScope
-	 * @param {} $rootScope
-	 * @param {} $rootScope
-	 * @param {} $rootScope
-	 * @param {} session
-	 * @param {} smRegistrationService
-	 * @param {} appMessages
-	 * @param {} SM_REGISTRATION_PATH
-	 * @param {} gettextCatalog
+	 * @param $scope
+	 * @param $location
+	 * @param $modal
+	 * @param $rootScope
+	 * @param session
+	 * @param smRegistrationService
+	 * @param appMessages
+	 * @param SM_REGISTRATION_PATH
+	 * @param gettextCatalog
+	 * @return {*|string}
 	 */
 	var ActivationController = function ($scope,
 																			 $location,
@@ -81,7 +82,6 @@ define(['auth/module'], function (module) {
 					$scope.submited = true;
 					appMessages.set('success', gettextCatalog.getString('Your account has been successfully activated.'));
 					session.setSession(data.user.customers[0].customerId);
-					$rootScope.checkSession();
 				}, function (why) {
 					$scope.spinner = false;
 					$scope.submited = false;

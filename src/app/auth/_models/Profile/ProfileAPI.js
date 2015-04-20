@@ -8,18 +8,25 @@ define(['auth/module'], function (module) {
 	 * @param session
 	 * @param Permission
 	 */
-	var ProfileAPI = function (Profile, session, Permission) {
+	var ProfileAPI = function (Profile, BaseAPI, session, Permission) {
+
+		var api = new BaseAPI(Profile);
+
 		/**
 		 * Description
 		 * @method setSelected
 		 * @param {} profile
 		 */
-		this.setSelected = function (profile) {
+		api.setSelected = function (profile) {
 			Profile.$setSelected(profile);
 
 			session.setSession(profile.customerId);
 			Permission.setFeatures(profile.featureKeys);
 		};
+
+		return api;
+
+
 	};
 
 	module.registerService('ProfileAPI', ProfileAPI);

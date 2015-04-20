@@ -95,11 +95,11 @@ define([
 			});
 	});
 
-	module.run(function ($couchPotato, $state, Permission, session) {
+	module.run(function ($couchPotato, Permission, ipCookie) {
 		module.lazy = $couchPotato;
 
 		Permission.defineRole('user', function () {
-			return session.checkSession();
+			return ipCookie('customerId');
 		});
 	});
 	return module;

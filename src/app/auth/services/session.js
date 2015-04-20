@@ -2,18 +2,14 @@ define(['auth/module', 'globalSettings'], function (module, globalSettings) {
 	'use strict';
 
 	/**
-	 * @constructor* @return
-	 * @method session
-	 * @param {} $q
-	 * @param {} ipCookie
+	 *
+	 * @param $q
+	 * @param ipCookie
 	 * @param UserAPI
-	 * @param {} setDefaultsHeaders
-	 * @param {} Permission
+	 * @param setDefaultsHeaders
+	 * @param Permission
 	 */
-	var session = function ($q, ipCookie, UserAPI, setDefaultsHeaders,
-													Permission) {
-		var self = this;
-
+	var session = function ($q, ipCookie, UserAPI, setDefaultsHeaders, Permission) {
 		/**
 		 * @description
 		 * Setup user session: cookie, http headers, current customer,
@@ -48,37 +44,7 @@ define(['auth/module', 'globalSettings'], function (module, globalSettings) {
 			ipCookie.remove('customerId');
 		};
 
-		/**
-		 * Description
-		 * @method checkSession MemberExpression
-		 */
-		this.checkSession = function () {
-			var dfd = $q.defer();
-
-			var token, customerId;
-			token = ipCookie('token');
-			customerId = ipCookie('customerId');
-
-			if (token) {
-				setDefaultsHeaders.setAuthToken(token);
-
-				UserAPI
-					.authInfo()
-					.then(function (user) {
-						self.setSession(_.first(user.customers) || customerId, token);
-						dfd.resolve();
-					})
-					.catch(function (reason) {
-						dfd.reject(reason);
-						self.clearSession();
-					});
-			} else {
-				self.clearSession();
-				dfd.reject();
-			}
-
-			return dfd.promise;
-		};
+		return this;
 	};
 
 	module.registerService('session', session);

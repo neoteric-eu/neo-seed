@@ -7,12 +7,12 @@ define([
 	'auth/services/session',
 	'auth/services/setDefaultsHeaders',
 
-	'auth/models/User',
-	'auth/models/Profile',
+	'./_models/User/User',
+	'./_models/User/UserAPI',
+	'./_models/Profile/Profile',
+	'./_models/Profile/ProfileAPI',
 
 	'helpers/restmod/models/BaseAPI',
-	'auth/services/UserAPI',
-	'auth/services/ProfileAPI',
 
 	'auth/packers/UserPacker',
 

@@ -34,6 +34,7 @@ define(['auth/module'], function (module) {
 		 *    ]
 		 *  }
 		 */
+		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
 			.mix('UserPacker', {
@@ -43,58 +44,31 @@ define(['auth/module'], function (module) {
 				language: {
 					hasOne: 'Language'
 				},
-
-				volatile: 'password',
+				password: {
+					volatile: true
+				},
 
 				$extend: {
 					Resource: {
-						/**
-						 * Description
-						 * @method $login
-						 * @return {CommonApi}
-						 */
 						$login: function () {
+							//noinspection JSUnresolvedFunction
 							return this.$send({
 								method: 'POST',
 								url: this.$scope.$url() + '/login',
 								data: this
 							}, function (_data) {
-								this.$unwrap(_data.data);
-							});
+								this.$unwrap(_data.data, null);
+							}, null);
 						},
 
-						/**
-						 * Description
-						 * @method $logout
-						 * @return {CommonApi}
-						 */
 						$logout: function () {
+							//noinspection JSUnresolvedFunction
 							return this.$send({
 								method: 'POST',
-								url: this.$scope.$url() + '/logout',
-								data: {
-									token: localStorage.getItem('token')
-								}
+								url: this.$scope.$url() + '/logout'
 							}, function (_data) {
-								this.$unwrap(_data.data);
-							});
-						},
-
-						/**
-						 * Description
-						 * @method $authInfo
-						 * @return {CommonApi}
-						 */
-						$authInfo: function () {
-							return this.$send({
-								method: 'GET',
-								url: this.$scope.$url() + '/authInfo',
-								data: {
-									token: localStorage.getItem('token')
-								}
-							}, function (_data) {
-								this.$unwrap(_data.data);
-							});
+								this.$unwrap(_data.data, null);
+							}, null);
 						}
 					},
 

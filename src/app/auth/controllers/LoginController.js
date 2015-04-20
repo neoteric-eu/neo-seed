@@ -5,17 +5,16 @@ define([
 	'use strict';
 
 	/**
-	 * Description
-	 * @class
-	 * @param {Object} $log
-	 * @param {Object} ipCookie
-	 * @param {Object} session
-	 * @param {Object} UserAPI
-	 * @param {Object} Profile
-	 * @param {Object} $q
-	 * @param {Object} $scope
-	 * @param {Object} $modal
-	 * @param {Object} $state
+	 *
+	 * @param $q
+	 * @param $scope
+	 * @param $modal
+	 * @param $state
+	 * @param $log
+	 * @param ipCookie
+	 * @param session
+	 * @param UserAPI
+	 * @constructor loginController
 	 */
 	function LoginController($q,
 													 $scope,
@@ -24,10 +23,9 @@ define([
 													 $log,
 													 ipCookie,
 													 session,
-													 UserAPI,
-													 Profile) {
+													 UserAPI) {
 		$scope.formError = false;
-		$scope.user = {};
+		$scope.user = UserAPI.build();
 		$scope.loginData = globalSettings.get('LOGIN_DATA');
 
 		/**
@@ -36,10 +34,6 @@ define([
 		 * @param {Object} loginData
 		 */
 		$scope.loginAs = function (loginData) {
-			if (_.isEmpty(loginData)) {
-				return;
-			}
-
 			$scope.user = loginData;
 			$scope.login();
 		};
@@ -111,7 +105,7 @@ define([
 			 * Description
 			 * @method setSelected
 			 */
-			$scope.setSelected = function () {
+			$scope.selectCustomer = function () {
 				$modalInstance.close($scope.$selected);
 			};
 
@@ -135,14 +129,14 @@ define([
 				customer = null;
 
 			if (angular.isDefined(customerId)) {
-				customer = Profile.$findById(customerId);
-				$scope.setCustomer(customer);
+				customer = _.where(customers, {id: customerId});
+				$scope.$selected = customer;
 				dfd.resolve(customer);
 
 			} else if (customers.length > 1) {
 
 				var modalInstance = $modal.open({
-					templateUrl: 'src/app/auth/views/modals/chooseCustomerModal.html',
+					templateUrl: '/app/auth/views/modals/chooseCustomerModal.html',
 					controller: ChooseCustomerModalController,
 					resolve: {
 						/**

@@ -177,7 +177,7 @@ define([], function () {
 							deferred.resolve();
 						}, function () {
 							// No match
-							$log.error('Resolve permission fail: ' + roles);
+							$log.debug('Resolve permission fail: ' + roles);
 							deferred.reject();
 						});
 						return deferred.promise;

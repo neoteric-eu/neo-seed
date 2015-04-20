@@ -1,32 +1,25 @@
-(function () {
+define(['globalSettings'], function (globalSettings) {
 	'use strict';
-	define(['globalSettings'], function (globalSettings) {
-		/**
-		 * Description
-		 * @method smRegistrationResource
-		 * @param {} $resource CallExpression
-		 */
-		var smRegistrationResource = function ($resource) {
-			return $resource(globalSettings.get('baseUrl') + ':service/:action/:id',
-				{
-					service: 'registration',
-					id: '@registrationId',
+
+	var smRegistrationResource = function ($resource) {
+		return $resource(globalSettings.get('baseUrl') + ':service/:action/:id',
+			{
+				service: 'registration',
+				id: '@registrationId'
+			},
+			{
+				register: {
+					method: 'POST'
 				},
-				{
-					register: {
-						method: 'POST'
-					},
 
-					activate: {
-						method: 'POST',
-						params: {
-							action: 'activate'
-						}
-					},
-
+				activate: {
+					method: 'POST',
+					params: {
+						action: 'activate'
+					}
 				}
-			);
-		};
-		return ['$resource', smRegistrationResource];
-	});
-}());
+			}
+		);
+	};
+	return ['$resource', smRegistrationResource];
+});
