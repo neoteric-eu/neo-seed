@@ -1,0 +1,12 @@
+<table ng-table="tableParams"
+			 template-pagination="app/components/tables/directives/neo-footer.html"
+			 class="table table-striped table-bordered table-hover">
+	<tbody>
+	<tr ng-repeat="dataRow in $data">
+		<td ng-repeat="viewRow in table.view.getFields">
+			{{dataRow[viewRow.dataIndex]}}
+		</td>
+	</tr>
+	</tbody>
+	<tfoor></tfoor>
+</table>

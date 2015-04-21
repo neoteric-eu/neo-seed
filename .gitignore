@@ -1,13 +1,76 @@
-app/bower_components
-coverage
-node_modules
-nbproject/
-app/styles/css
-app/modules/global_settings.js
+### Directories ###
 dist
+docs
+node_modules
+bower_components
+test/results
+src/vendor/libs
+src/styles/less/vendor/libs
+src/styles/css
 
-.sass-cache
+### Extensions ###
 .todo
 .ask
 .tmp
-*.sublime*
+.mo
+.pot
+
+### Files ###
+src/app/modules/global_settings.js
+npm-debug.log
+src/app/templates/module.js
+src/app/require.js
+
+### SublimeText ###
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# workspace files are user-specific
+*.sublime-workspace
+
+# project files should be checked into the repository, unless a significant
+# proportion of contributors will probably not be using SublimeText
+*.sublime-project
+
+# sftp configuration file
+sftp-config.json
+
+
+### WebStorm ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+*.iml
+
+# User-specific stuff:
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+
+# Sensitive or high-churn files:
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+
+# Gradle:
+.idea/gradle.xml
+.idea/libraries
+
+# Mongo Explorer plugin:
+.idea/mongoSettings.xml
+
+# File-based project format:
+*.ipr
+*.iws
+
+# Plugin-specific files:
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+

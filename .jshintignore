@@ -1,0 +1,9 @@
+src/app-demo
+src/vendor/
+src/test/results
+dist
+node_modules
+bower_components
+_locale
+
+
