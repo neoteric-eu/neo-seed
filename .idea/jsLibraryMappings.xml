@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{angularjs-DefinitelyTyped, jasmine-DefinitelyTyped, requirejs-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{angular-couch-potato, angularjs-DefinitelyTyped, jasmine-DefinitelyTyped, lodash-DefinitelyTyped, requirejs-DefinitelyTyped}" />
   </component>
 </project>

@@ -1,16 +1,15 @@
-define(['app', 'globalSettings', 'moment'], function (module, globalSettings, moment) {
+define(['auth/module', 'globalSettings', 'moment'], function (module, globalSettings, moment) {
 	'use strict';
 
 	/**
-	 * Description* @constructs LanguageAPI
 	 * @method LanguageAPI
 	 * @param Language
 	 * @param $rootScope
-	 * @param ipCookie
+	 * @param localStorageService
 	 * @param gettextCatalog
 	 * @param amMoment
 	 */
-	var LanguageAPI = function (Language, $rootScope, ipCookie, gettextCatalog, amMoment) {
+	var LanguageAPI = function (Language, $rootScope, localStorageService, gettextCatalog, amMoment) {
 
 		this.languageCollection = [];
 
@@ -28,9 +27,7 @@ define(['app', 'globalSettings', 'moment'], function (module, globalSettings, mo
 				.$asPromise()
 				.then(function (data) {
 					self.languageCollection = data;
-					self.setLanguage(
-						ipCookie('lang') || globalSettings.get('DEFAULT_LANG')
-					);
+					self.setLanguage(localStorageService.get('lang') || globalSettings.get('DEFAULT_LANG'));
 				});
 		};
 
@@ -48,7 +45,7 @@ define(['app', 'globalSettings', 'moment'], function (module, globalSettings, mo
 			this.languageCollection.$setSelected(language);
 
 			// Write locale to cookie
-			ipCookie('lang', language.code, angular.copy(globalSettings.cookieOptions));
+			localStorageService.set('lang', language.code);
 
 			// Update libraries locale settings
 			gettextCatalog.setCurrentLanguage(language.locale);
@@ -61,7 +58,7 @@ define(['app', 'globalSettings', 'moment'], function (module, globalSettings, mo
 		 * @method getLanguage language
 		 */
 		this.getLanguage = function () {
-			var language = this.languageCollection.$selected || ipCookie('lang');
+			var language = this.languageCollection.$selected || localStorageService.get('lang');
 
 			if (!_.isObject(language)) {
 				language = this.languageCollection.$findByCode(language);

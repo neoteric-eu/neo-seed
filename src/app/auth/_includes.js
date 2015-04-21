@@ -11,6 +11,8 @@ define([
 	'./_models/User/UserAPI',
 	'./_models/Profile/Profile',
 	'./_models/Profile/ProfileAPI',
+	'./_models/Language/LanguageAPI',
+	'./_models/Language/Language',
 
 	'helpers/restmod/models/BaseAPI',
 

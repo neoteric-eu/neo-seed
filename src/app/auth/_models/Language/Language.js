@@ -1,10 +1,9 @@
-define(['app'],
+define(['auth/module'],
 	function (module) {
 		'use strict';
 
 
 		/**
-		 * Data model
 		 * @example
 		 *  {
 		 *    "data": [

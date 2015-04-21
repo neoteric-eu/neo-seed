@@ -1,4 +1,4 @@
-define('layout/module', [
+define([
 	'angular',
 	'angular-couch-potato',
 	'angular-ui-router',
@@ -10,7 +10,7 @@ define('layout/module', [
 	var module = ng.module('app.layout', ['ui.router']);
 	couchPotato.configureApp(module);
 
-	module.config(function ($stateProvider, $couchPotatoProvider, $urlRouterProvider) {
+	module.config(function ($stateProvider, $urlRouterProvider) {
 
 		$stateProvider.state('app', {
 			abstract: true,
@@ -22,13 +22,7 @@ define('layout/module', [
 			},
 			views: {
 				root: {
-					controller: 'RootController',
-					templateUrl: 'app/layout/layout.html',
-					resolve: {
-						deps: $couchPotatoProvider.resolveDependencies([
-							'helpers/controllers/RootController'
-						])
-					}
+					templateUrl: 'app/layout/layout.html'
 				}
 			}
 		});
@@ -39,12 +33,18 @@ define('layout/module', [
 		});
 	});
 
-	module.run(function ($rootScope, $couchPotato, appMessages) {
+	module.run(function ($rootScope, $couchPotato, localStorageService, $http) {
 		module.lazy = $couchPotato;
 
-		$rootScope.$on('$routeChangeSuccess', function () {
-			appMessages.apply();
-		});
+		// @todo this is awfully ugly but works at last - refactor logging in
+		$rootScope.user = localStorageService.get('user');
+		$rootScope.token = localStorageService.get('token');
+
+		if ($rootScope.user) {
+			$http.defaults.headers.common['X-Customer-Id'] = localStorageService.get('activeProfile').customerId;
+			$http.defaults.headers.common['Authorization'] = 'token ' + $rootScope.token;
+		}
+
 	});
 
 	return module;

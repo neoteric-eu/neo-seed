@@ -20,6 +20,7 @@ define([
 	'./directives/smartPageTitle',
 	'./directives/hrefVoid',
 	'./service/SmartCss',
+	'auth/services/setDefaultsHeaders',
 
 	'layout/_locale/translation'
 ], function() {

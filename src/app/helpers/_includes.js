@@ -4,8 +4,6 @@ define([
 
 	'./enums/BaseEnum',
 
-	'./controllers/RootController',
-
 	'./restmod/serializers/datetime/DatetimeDecodeFilter',
 	'./restmod/serializers/datetime/DatetimeEncodeFilter',
 	'./restmod/serializers/date/DateDecodeFilter',

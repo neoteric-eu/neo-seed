@@ -1,39 +1,25 @@
 define(['app'], function (app) {
 	'use strict';
 
-	return app.directive('userProfiles', function ($state, Profile, $rootScope) {
+	var userProfiles = function ($window, Profile, localStorageService) {
 		return {
 			restrict: 'EA',
-			replace: true,
 			templateUrl: 'app/components/profiles/user-profiles.html',
-			scope: {},
-			/**
-			 * Description
-			 * @method link
-			 * @param {} scope
-			 */
-			link: function (scope) {
+			scope: true,
+			controllerAs: 'vm',
+			controller: function () {
+				var vm = this;
+				vm.profiles = localStorageService.get('user').customers;
+				vm.selectedProfile = localStorageService.get('activeProfile');
+				vm.changeProfile = changeProfile;
 
-				/**
-				 * Description
-				 * @method changeProfile
-				 * @param {} customer
-				 */
-				scope.changeProfile = function (customer) {
-					Profile.switchProfile(customer);
-					$state.reload();
-				};
-
-				var unbindWatch = scope.$watch(function () {
-					return $rootScope.user;
-				}, function (user) {
-					if (!_.isEmpty(user)) {
-						scope.profiles = user.customers;
-						scope.currentProfile = Profile.$selected;
-						unbindWatch();
-					}
-				});
+				function changeProfile(profile) {
+					localStorageService.set('activeProfile', profile);
+					$window.location.reload();
+				}
 			}
 		};
-	});
+	};
+
+	app.registerDirective('userProfiles', userProfiles);
 });

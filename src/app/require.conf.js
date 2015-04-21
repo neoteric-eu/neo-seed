@@ -24,7 +24,6 @@ requirejs.config({
 		// Angular dependencies
 		'angular': '../vendor/libs/angular/angular',
 		'angular-animate': '../vendor/libs/angular-animate/angular-animate',
-		'angular-cookie': '../vendor/libs/angular-cookie/angular-cookie',
 		'angular-ui-router': '../vendor/libs/angular-ui-router/angular-ui-router',
 		'angular-ui-router-extras-core': '../vendor/libs/angular-ui-router-extras/ct-ui-router-extras.core',
 		'angular-ui-router-extras-dsr': '../vendor/libs/angular-ui-router-extras/ct-ui-router-extras.dsr',

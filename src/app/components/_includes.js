@@ -10,8 +10,6 @@ define([
 
 	'./language/controllers/LanguageController',
 	'./language/directives/languageSelector',
-	'./language/services/LanguageAPI',
-	'./language/models/Language',
 
 	'./_locale/translation'
 ], function () {

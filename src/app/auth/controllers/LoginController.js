@@ -5,23 +5,24 @@ define([
 	'use strict';
 
 	/**
+	 * @constructor LoginController
+	 * @memberOf app.auth
 	 *
 	 * @param $q
 	 * @param $scope
 	 * @param $modal
 	 * @param $state
 	 * @param $log
-	 * @param ipCookie
+	 * @param localStorageService
 	 * @param session
 	 * @param UserAPI
-	 * @constructor loginController
 	 */
 	function LoginController($q,
 													 $scope,
 													 $modal,
 													 $state,
 													 $log,
-													 ipCookie,
+													 localStorageService,
 													 session,
 													 UserAPI) {
 		$scope.formError = false;
@@ -125,25 +126,17 @@ define([
 		 */
 		$scope.selectCustomerList = function (customers) {
 			var dfd = $q.defer(),
-				customerId = ipCookie('customerId'),
-				customer = null;
+			    customerId = localStorageService.cookie.get('customerId');
 
-			if (angular.isDefined(customerId)) {
-				customer = _.where(customers, {id: customerId});
-				$scope.$selected = customer;
+			if (!_.isNull(customerId)) {
+				var customer = _.where(customers, {id: customerId});
 				dfd.resolve(customer);
 
 			} else if (customers.length > 1) {
-
 				var modalInstance = $modal.open({
 					templateUrl: '/app/auth/views/modals/chooseCustomerModal.html',
 					controller: ChooseCustomerModalController,
 					resolve: {
-						/**
-						 * Provides customers to modal
-						 * @method customers
-						 * @return customers
-						 */
 						customers: function () {
 							return customers;
 						}

@@ -9,10 +9,7 @@ define([
 	 * @class
 	 * @memberOf app.auth
 	 */
-	var module = ng.module('app.auth', [
-		'ipCookie',
-		'ui.router'
-	]);
+	var module = ng.module('app.auth', ['ui.router']);
 
 	couchPotato.configureApp(module);
 
@@ -56,6 +53,27 @@ define([
 				}
 			})
 
+			.state('auth.logout', {
+				url: '/logout',
+				data: {
+					permissions: {
+						only: ['user'],
+						redirectTo: 'auth.login'
+					}
+				},
+				views: {
+					auth: {
+						controller: function ($state, UserAPI) {
+							UserAPI
+								.logout()
+								.then(function () {
+									$state.go('auth.login');
+								});
+						}
+					}
+				}
+			})
+
 			.state('auth.register', {
 				url: '/register',
 				views: {
@@ -95,11 +113,11 @@ define([
 			});
 	});
 
-	module.run(function ($couchPotato, Permission, ipCookie) {
+	module.run(function ($couchPotato, Permission, localStorageService) {
 		module.lazy = $couchPotato;
 
 		Permission.defineRole('user', function () {
-			return ipCookie('customerId');
+			return localStorageService.get('user');
 		});
 	});
 	return module;

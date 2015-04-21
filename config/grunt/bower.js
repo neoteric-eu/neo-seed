@@ -9,7 +9,6 @@ module.exports = {
 			'angular-animate/angular-animate.js': 'angular-animate/angular-animate.js',
 			'angular-bootstrap/ui-bootstrap.js': 'angular-bootstrap/ui-bootstrap.js',
 			'angular-bootstrap/ui-bootstrap-tpls.js': 'angular-bootstrap/ui-bootstrap-tpls.js',
-			'angular-cookie/angular-cookie.js': 'angular-cookie/angular-cookie.js',
 			'angular-couch-potato/angular-couch-potato.js': 'angular-couch-potato/dist/angular-couch-potato.js',
 			'angular-debounce/angular-debounce.js': 'ng-debounce/angular-debounce.js',
 			'angular-easyfb/angular-easyfb.js': 'angular-easyfb/angular-easyfb.js',

@@ -27,14 +27,6 @@ define(['angular'], function (ng) {
 				}
 			],
 
-			cookieOptions: {
-				domain: '@@COOKIE_DOMAIN',
-				path: '/',
-				expires: 720,
-				expirationUnit: 'hours',
-				secure: false
-			},
-
 			/**
 			 * @example
 			 * {
