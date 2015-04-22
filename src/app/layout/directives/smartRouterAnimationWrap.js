@@ -71,10 +71,14 @@ define(['layout/module', 'lodash'], function (module, _) {
 					contentViewAnimEnd();
 				});
 
+				var destroyForEndless = $rootScope.$on('$stateChangeSuccess', function () {
+					contentViewAnimEnd();
+				});
+
 				element.on('$destroy', function () {
 					destroyForStart();
 					destroyForEnd();
-
+					destroyForEndless();
 				});
 			}
 		};
