@@ -1,0 +1,31 @@
+<div class="form-group">
+
+	<label class="col-xs-3 col-sm-2 col-md-2 col-lg-2 control-label ng-binding">
+		<span ng-show="field.required" class="text-danger">* </span>
+		{{field.fieldName}}
+	</label>
+
+	<div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+		<div class="input-group">
+			<span class="input-group">
+				<input type="text" class="form-control"
+							 datepicker-popup="" ng-model="field.value" datepicker-options="dateOptions"
+							 ng-required="field.required"
+							 close-text="Zamknij" current-text="Dziś" toggle-weeks-text="Tygodnie"
+							 clear-text="Wyczyść">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</span>
+		</div>
+	</div>
+
+
+	<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+		<div class="icon-on-hover pull-right" ng-if="templateMode && field.fieldTypeName">
+			<button type="button" class="close pull-left" ng-click="editModal(field)"><i
+				class="fa fa-edit"></i></button>
+			<button type="button" class="close pull-left"
+							ng-click="removeField(field, form.metaFields, form.composite)">&times;</button>
+		</div>
+	</div>
+
+</div>

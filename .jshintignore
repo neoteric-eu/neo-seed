@@ -5,5 +5,6 @@ dist
 node_modules
 bower_components
 _locale
+src/app/docs_old
 
 

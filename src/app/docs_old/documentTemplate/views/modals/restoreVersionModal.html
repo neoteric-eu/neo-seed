@@ -1,0 +1,13 @@
+<div class="modal-header">
+	<h4> {{t('Restore_version')}}</h4>
+</div>
+<div class="modal-body">
+	<p>{{t('Do_you_want_to_restore_template_to_version')}} <strong>{{ version.version }}</strong>?
+		<br> {{ t('Any_unsaved_changes_will_be_lost') }}.
+
+	</p>
+</div>
+<div class="modal-footer">
+	<button class="btn" ng-click="$dismiss()">{{t('No')}}</button>
+	<button class="btn btn-danger" ng-click="$close()">{{t('Restore')}}</button>
+</div>

@@ -1,0 +1,45 @@
+<span class="ribbon-button-alignment">
+	<span ng-click="refreshRoute()" class="btn btn-ribbon" title="refresh"><i
+		class="fa fa-refresh"></i></span>
+	<span class="hide-menu hidden-lg hidden-md btn btn-ribbon">  <i
+		class="fa fa-bars fa-lg"></i></span>
+</span>
+
+<div class="ribbon-button-alignment pull-right" ng-if="languages.length > 1">
+	<ul class="list-inline">
+		<li class="dropdown">
+			<a class="btn btn-ribbon dropdown-toggle" data-toggle="dropdown" href="#">
+				<span class="no-shadow light-color">{{ lang|uppercase }}</span>
+			</a>
+			<ul class="dropdown-menu">
+				<li ng-repeat="item in languages" ng-class="{'active': lang == item.code}">
+					<a href="javascript:void(0)" ng-click="switchLang(item.code)"><i class="fa fa-globe"></i>
+						{{t(item.name)}}</a>
+				</li>
+			</ul>
+
+		</li>
+	</ul>
+</div>
+
+
+<div class="ribbon-button-alignment pull-right">
+	<ul class="list-inline">
+		<li class="dropdown">
+			<a class="btn btn-ribbon dropdown-toggle" data-toggle="dropdown" href="#">
+				<span class="no-shadow light-color">{{ currentCustomer.customerName }}</span>
+				<i class="fa fa-angle-down"></i>
+			</a>
+			<ul class="dropdown-menu">
+				<li class="nav-header">{{t('Available_profiles')}}</li>
+				<!-- ng-class="{'active current': isCurrentCustomer(customer)}" -->
+				<li ng-repeat="customer in customers"
+						ng-class="{'active': customer.customerName == currentCustomer.customerName}">
+					<!-- <a ng-if="isCurrentCustomer(customer)" href>{{customer.customerName}}</a> -->
+					<a href ng-click="switchCustomerHeader(customer)">{{customer.customerName}}</a>
+				</li>
+				<li><a href ng-click="logout()"><i class="icon-off"></i> {{t('Logout')}}</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>

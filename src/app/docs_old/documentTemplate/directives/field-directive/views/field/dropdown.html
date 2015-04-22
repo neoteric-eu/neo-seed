@@ -1,0 +1,26 @@
+<div class="form-group">
+
+	<label class="col-xs-3 col-sm-2 col-md-2 col-lg-2 control-label">
+		<span ng-show="field.required" class="text-danger" for="select-{{ field.id }}">* </span>
+		{{ field.fieldName }}
+	</label>
+
+	<div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+
+		<select class="form-control" id="select-{{ field.id }}" ng-model="field.value"
+						ng-options="o as o for o in field.options"
+						sng-required="field.required"></select>
+
+	</div>
+
+
+	<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
+		<div class="icon-on-hover pull-right" ng-if="templateMode && field.fieldTypeName">
+			<button type="button" class="close pull-left" ng-click="editModal(field)"><i
+				class="fa fa-edit"></i></button>
+			<button type="button" class="close pull-left"
+							ng-click="removeField(field, form.metaFields, form.composite)">&times;</button>
+		</div>
+	</div>
+
+</div>

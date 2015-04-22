@@ -1,0 +1,72 @@
+<div ng-class="{templateListContainer: complexFieldTypes.length}"
+		 ng-controller="ComplexListController" ng-init="getComplexFields()">
+	<div class="row" ng-if="complexFieldTypes.length">
+		<div class="col-xs-12">
+			<h1 class="page-title txt-color-blueDark">
+				<i class="glyphicon glyphicon-list-alt"></i>
+				Lista pól złożonych
+				<span>>
+					Moje pola złożone
+				</span>
+			</h1>
+		</div>
+	</div>
+	<section id="widget-grid" ng-if="complexFieldTypes.length">
+
+		<div class="row">
+
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="jarviswidget jarviswidget-color-blueDark">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-inbox"></i> </span>
+
+						<h2>Lista pól złożonych</h2>
+
+						<div class="pull-right">
+							<a class="" href="#/complex/create">
+								<i class="addButton fa fa-lg fa-plus"
+									 tooltip-html-unsafe="Utwórz nowe pole złożone"
+									 tooltip-placement="left"></i>
+							</a>
+						</div>
+					</header>
+
+					<div class="widget-body">
+						<div class="table-responsive custom-table-responsive">
+							<table ng-table="complexTable" class="table table-hover neodoc-table">
+								<tbody>
+								<!-- no edit functionality at this stage-->
+								<tr ng-repeat="complex in $data" ng-click="editComplex(complex)">
+									<td class="col-min-width-200px" data-title="'Nazwa pola złożonego'"
+											sortable="'name'">{{ complex.fieldName }}
+									</td>
+									<td class="col-min-width-200px" data-title="'Opis pola złożonego'"
+											sortable="'description'">{{ complex.fieldDescription }}
+									</td>
+									<!-- <td width="15%" data-title="'Data modyfikacji'" sortable="'timestamp'">{{ complex.timestamp | date:dateFormat}}</td> -->
+									<td class="col-width-40px">
+										<div class="pull-right">
+											<div class="">
+												<button type="button" class="close x-button" data-keep="ND_DOC_TPL_DELETE"
+																ng-click="removeComplexModal(complex); $event.stopPropagation()">×
+												</button>
+											</div>
+										</div>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div ng-if="!complexFieldTypes.length">
+		<div class="text-align-center alert alert-info">
+			<p><strong>Brak dostępnych pól złożonych.</strong> <br>
+				<span data-keep="ND_DOC_TPL_CREATE">Aby dodać pole złożone, kliknij <a
+					href="#template/create" title="Dodaj dokument" class="capitalize">tutaj</a><span></p>
+		</div>
+	</div>
+</div>

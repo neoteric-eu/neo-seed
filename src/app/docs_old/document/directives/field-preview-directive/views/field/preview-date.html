@@ -1,0 +1,12 @@
+<div class="form-group">
+	<label class="col-sm-2 control-label ng-binding">
+		<span ng-show="field.required" class="text-danger">* </span>
+		{{field.fieldName}}
+	</label>
+
+	<div class="col-sm-2">
+		<div class="preview-values">
+			<span class="s">{{field.value | date:dateFormat}}</span>
+		</div>
+	</div>
+</div>
