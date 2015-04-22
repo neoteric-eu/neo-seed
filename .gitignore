@@ -1,12 +1,12 @@
 ### Directories ###
-dist
-docs
-node_modules
-bower_components
-test/results
-src/vendor/libs
-src/styles/less/vendor/libs
-src/styles/css
+/dist
+/docs
+/node_modules
+/bower_components
+/test/results
+/src/vendor/libs
+/src/styles/less/vendor/libs
+/src/styles/css
 
 ### Extensions ###
 .todo
