@@ -1,0 +1,100 @@
+<div id="docs-document-list-widget"
+		 data-jarvis-widget
+		 data-widget-colorbutton="false"
+		 data-widget-editbutton="false"
+		 data-widget-deletebutton="false"
+		 data-widget-sortable="false"
+		 data-widget-fullscreenbutton="false">
+
+	<header>
+		<span class="widget-icon"> <i class="fa fa-inbox"></i> </span>
+
+		<h2>Document list</h2>
+	</header>
+
+	<div class="widget-body">
+
+		<div class="widget-body-toolbar bg-color-white">
+			<section class="col-sm-offset-10">
+				<div class="smart-form">
+					<label class="input input-sm">
+						<i class="icon-append fa fa-search"></i>
+						<input type="text"
+									 placeholder="{{'Search'|translate}}"
+									 ng-model="documentsTableOptions.filter().name"
+									 debounce="200">
+					</label>
+				</div>
+			</section>
+		</div>
+
+		<table ng-table="documentsTableOptions"
+					 template-pagination="app/components/tables/directives/neo-footer.html"
+					 class="table table-striped table-bordered table-hover no-margin">
+
+			<thead>
+			<tr>
+				<th class="col-sm-2">{{'Task'|translate}}</th>
+				<th class="col-sm-6">{{'Name'|translate}}</th>
+				<th class="col-sm-2 hidden-xs hidden-sm">{{'Status'|translate}}</th>
+				<th class="col-sm-2">{{'Project'|translate}}</th>
+				<th class="text-align-right">{{'Actions'|translate}}</th>
+			</tr>
+			</thead>
+
+			<tbody ng-show="$data.length">
+			<tr ng-repeat="task in $data">
+				<td>
+					<type-icon type="task.type" show-label="false"></type-icon>
+					<priority-icon priority="task.priority" show-label="false"></priority-icon>
+					<a ui-sref="app.tasks.task.edit({id: task.id})">
+						<small>{{task.shortName}}</small>
+					</a>
+				</td>
+				<td ng-bind-html="task.name | highlight: filter.taskName"></td>
+				<td class="hidden-xs hidden-sm">
+					<status-icon status="task.status" show-label="true"></status-icon>
+				</td>
+				<td>{{task.project.name}}</td>
+				<td>
+					<div class="btn-group pull-right" style="display: flex;">
+						<button class="btn btn-default btn-xs" title="Continue work"
+										type="button">
+							<i class="fa fa-play text-danger"></i>
+						</button>
+
+						<a class="btn dropdown-toggle btn-xs btn-default"
+							 data-toggle="dropdown">
+							<i class="fa fa-cog"></i>
+							<span class="caret"> </span>
+						</a>
+						<ul class="dropdown-menu pull-right">
+							<li>
+								<a href-void ui-sref="app.tasks.task.edit({id: task.id})">
+									<i class="fa fa-pencil"></i>
+									{{'Edit task'|translate}}
+								</a>
+							</li>
+							<li>
+								<a href-void ng-click="deleteTask(task)">
+									<i class="fa fa-trash-o"></i>
+									{{'Remove task'|translate}}
+								</a>
+							</li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+
+			<tbody ng-hide="$data.length">
+			<tr>
+				<td colspan="6" class="text-align-center text-muted">
+					{{'No tasks'|translate}}
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+	</div>
+</div>

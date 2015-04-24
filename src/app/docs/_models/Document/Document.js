@@ -1,8 +1,9 @@
 define(['docs/module'], function (module) {
 	'use strict';
 
+	//noinspection JSClosureCompilerSyntax
 	/**
-	 * @class DocumentTemplate
+	 * @class Document
 	 * @implements {app.BaseModel}
 	 * @memberOf app.docs
 	 *
@@ -10,15 +11,15 @@ define(['docs/module'], function (module) {
 	 * @param gettext Translation service
 	 * @return {*|Model}
 	 */
-	function DocumentTemplate(restmod, gettext) {
+	function Document(restmod, gettext) {
 		return restmod
-			.model('/document-templates')
-			.mix({
+			.model('/document')
+			.mix('DocumentTemplate', {
 				type: {
-					init: gettext('document template')
+					init: gettext('document')
 				}
 			});
 	}
 
-	module.registerFactory('DocumentTemplate', DocumentTemplate);
+	module.registerFactory('Document', Document);
 });

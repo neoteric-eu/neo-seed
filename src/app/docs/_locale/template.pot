@@ -1,0 +1,22 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+
+#: src/app/docs/templates/documents/module.js:27
+msgid "Documents"
+msgstr ""
+
+#: src/app/docs/templates/fields/module.js:27
+msgid "Fields"
+msgstr ""
+
+#: src/app/docs/documents/module.js:27
+#: src/app/docs/templates/module.js:29
+msgid "Template"
+msgstr ""
+
+#: src/app/docs/_models/Template/Template.js:18
+msgid "project"
+msgstr ""

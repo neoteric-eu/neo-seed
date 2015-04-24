@@ -2,7 +2,7 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
-	 * @class DocumentTemplate
+	 * @class FieldTemplate
 	 * @implements {app.BaseModel}
 	 * @memberOf app.docs
 	 *
@@ -10,15 +10,18 @@ define(['docs/module'], function (module) {
 	 * @param gettext Translation service
 	 * @return {*|Model}
 	 */
-	function DocumentTemplate(restmod, gettext) {
+	function FieldTemplate(restmod, gettext) {
 		return restmod
-			.model('/document-templates')
+			.model('/field-template')
 			.mix({
+				fields: {
+					hasMany: 'FieldTemplate'
+				},
 				type: {
-					init: gettext('document template')
+					init: gettext('field template')
 				}
 			});
 	}
 
-	module.registerFactory('DocumentTemplate', DocumentTemplate);
+	module.registerFactory('FieldTemplate', FieldTemplate);
 });
