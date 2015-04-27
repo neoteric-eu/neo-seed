@@ -4,19 +4,103 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
+#: src/app/docs/documents/widgets/document-list/docs-document-list.html:41
+msgid "Actions"
+msgstr ""
+
+#: src/app/docs/module.js:29
+msgid "Docs"
+msgstr ""
+
+#: src/app/docs/documents/module.js:31
 #: src/app/docs/templates/documents/module.js:27
 msgid "Documents"
 msgstr ""
 
-#: src/app/docs/templates/fields/module.js:27
-msgid "Fields"
+#: src/app/docs/documents/widgets/document-list/docs-document-list.html:75
+msgid "Edit task"
 msgstr ""
 
-#: src/app/docs/documents/module.js:27
+#: src/app/docs/templates/fields/module.js:32
+msgid "Field"
+msgstr ""
+
+#: src/app/docs/documents/widgets/document-list/docs-document-list.html:38
+msgid "Name"
+msgstr ""
+
+#: src/app/docs/templates/fields/module.js:44
+msgid "New"
+msgstr ""
+
+#: src/app/docs/documents/widgets/document-list/docs-document-list.html:93
+msgid "No tasks"
+msgstr ""
+
+#: src/app/docs/documents/widgets/document-list/docs-document-list.html:40
+msgid "Project"
+msgstr ""
+
+#: src/app/docs/documents/widgets/document-list/docs-document-list.html:81
+msgid "Remove task"
+msgstr ""
+
+#: src/app/docs/documents/widgets/document-list/docs-document-list.html:23
+msgid "Search"
+msgstr ""
+
+#: src/app/docs/documents/widgets/document-list/docs-document-list.html:39
+msgid "Status"
+msgstr ""
+
+#: src/app/docs/documents/widgets/document-list/docs-document-list.html:37
+msgid "Task"
+msgstr ""
+
 #: src/app/docs/templates/module.js:29
 msgid "Template"
 msgstr ""
 
-#: src/app/docs/_models/Template/Template.js:18
-msgid "project"
+#: src/app/docs/_enums/DocumentInputTypesEnum.js:41
+msgid "color"
+msgstr ""
+
+#: src/app/docs/_enums/DocumentInputTypesEnum.js:29
+msgid "date"
+msgstr ""
+
+#: src/app/docs/_enums/DocumentInputTypesEnum.js:37
+msgid "datetime"
+msgstr ""
+
+#: src/app/docs/_models/Document/Document.js:19
+msgid "document"
+msgstr ""
+
+#: src/app/docs/_models/DocumentTemplate/DocumentTemplate.js:18
+msgid "document template"
+msgstr ""
+
+#: src/app/docs/_enums/DocumentInputTypesEnum.js:17
+msgid "email"
+msgstr ""
+
+#: src/app/docs/_models/Field/Field.js:21
+msgid "field"
+msgstr ""
+
+#: src/app/docs/_models/FieldTemplate/FieldTemplate.js:21
+msgid "field template"
+msgstr ""
+
+#: src/app/docs/_enums/DocumentInputTypesEnum.js:25
+msgid "number"
+msgstr ""
+
+#: src/app/docs/_enums/DocumentInputTypesEnum.js:33
+msgid "time"
+msgstr ""
+
+#: src/app/docs/_enums/DocumentInputTypesEnum.js:21
+msgid "url"
 msgstr ""

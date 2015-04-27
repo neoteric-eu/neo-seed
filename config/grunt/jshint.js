@@ -1,11 +1,11 @@
 // Make sure code styles are up to par and there are no obvious mistakes
 module.exports = {
 	options: {
-		reporters: [require('jshint-stylish')]
+		reporters: [require('jshint-stylish')],
+		jshintrc: '.jshintrc'
 	},
 	app: {
 		options: {
-			jshintrc: '.jshintrc',
 			ignores: [
 				'<%= yeoman.app %>/app/require.js',
 				'<%= yeoman.app %>/app/**/_locale/*.js',
@@ -18,9 +18,6 @@ module.exports = {
 		]
 	},
 	test: {
-		options: {
-			jshintrc: 'test/.jshintrc'
-		},
 		src: [
 			'test/**/*.spec.js',
 			'<%= yeoman.app %>/app/**/*.spec.js'

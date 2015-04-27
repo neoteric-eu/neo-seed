@@ -1,5 +1,4 @@
 {
-	/* Settings */
 	"passfail": false,
 	/* Environment */
 	"node": true,
@@ -14,7 +13,8 @@
 	"curly": true,
 	"eqeqeq": true,
 	"immed": true,
-	"latedef": "nofunc",
+	/* "latedef": "nofunc" -- should work */
+	"latedef": false,
 	"newcap": false,
 	"noarg": true,
 	"quotmark": "single",

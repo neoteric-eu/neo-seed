@@ -1,11 +1,11 @@
 define([
 	'angular',
 	'angular-couch-potato',
-	'angular-templates'
+	'angular-table'
 ], function (ng, couchPotato) {
 	'use strict';
 
-	var module = ng.module('app.components', []);
+	var module = ng.module('app.components', ['ngTable']);
 
 	couchPotato.configureApp(module);
 

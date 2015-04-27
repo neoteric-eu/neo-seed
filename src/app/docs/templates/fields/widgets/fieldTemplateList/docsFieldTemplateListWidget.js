@@ -20,17 +20,14 @@ define(['docs/templates/fields/module'], function (module) {
 
 			/**
 			 * Widget business logic
-			 * @methodOf app.docs.templates.fields.docsDocumentListWidget
+			 * @method
+			 * @memberOf app.docs.templates.fields.docsDocumentListWidget
 			 */
 			controller: function () {
 				var vm = this;
 
 				vm.fieldTemplatesTableOptions = fieldTemplatesTableOptions;
 
-				/**
-				 * Custom configuration of the task table
-				 * @type {neoTableParams|*}
-				 */
 				var fieldTemplatesTableOptions = new neoTableParams(FieldTemplateAPI);
 			}
 		};

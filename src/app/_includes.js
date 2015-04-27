@@ -27,7 +27,11 @@ define([
 
 	// Dash
 	'dashboard/module',
-	'dashboard/_includes'
+	'dashboard/_includes',
+
+	// Docs
+	'docs/module',
+	'docs/_includes'
 ], function () {
 	'use strict';
 });

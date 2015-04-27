@@ -56,7 +56,8 @@ define([
 		'app.forms',
 		'app.graphs',
 		'app.widgets',
-		'app.dashboard'
+		'app.dashboard',
+		'app.docs'
 	]);
 
 	couchPotato.configureApp(app);

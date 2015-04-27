@@ -1,0 +1,28 @@
+<ul>
+	<li ui-sref-active="active">
+		<a ui-sref="app.docs.documents" title="{{'Documents'|translate}}">
+			<i class="fa fa-lg fa-fw fa-file-o"></i>
+			<span class="menu-item-parent">{{'Documents'|translate}}</span>
+		</a>
+	</li>
+	<li data-menu-collapse>
+		<a href="#" title="{{'Templates'|translate}}">
+			<i class="fa fa-lg fa-fw fa-edit"></i>
+			<span class="menu-item-parent">{{'Templates'|translate}}</span>
+		</a>
+		<ul>
+			<li ui-sref-active="active">
+				<a ui-sref="app.docs.templates.fields" title="{{'Fields'|translate}}">
+					<i class="fa fa-lg fa-fw fa-list"></i>
+					<span class="menu-item-parent">{{'Fields'|translate}}</span>
+				</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="app.docs.templates.documents" title="{{'Documents'|translate}}">
+					<i class="fa fa-lg fa-fw fa-files-o"></i>
+					<span class="menu-item-parent">{{'Documents'|translate}}</span>
+				</a>
+			</li>
+		</ul>
+	</li>
+</ul>

@@ -1,22 +1,8 @@
 define(['angular', 'app'], function (angular) {
-	angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
-		/* jshint -W100 */
-		gettextCatalog.setStrings('en_GB', {
-			"Dashboard": "Dashboard",
-			"Planner": "Planner",
-			"Reporter": "Reporter",
-			"Sign Out": "Sign Out",
-			"Tasks": "Tasks",
-			"Tracker": "Tracker"
-		});
-		gettextCatalog.setStrings('pl_PL', {
-			"Dashboard": "Panel",
-			"Planner": "Planer",
-			"Reporter": "Raporter",
-			"Sign Out": "Wyloguj",
-			"Tasks": "Zadania",
-			"Tracker": "Tracker"
-		});
-		/* jshint +W100 */
-	}]);
+angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
+/* jshint -W100 */
+    gettextCatalog.setStrings('en_GB', {"Dashboard":"Dashboard","Docs":"Docs","Documents":"Documents","Fields":"Fields","Sign Out":"Sign Out","Templates":"Templates"});
+    gettextCatalog.setStrings('pl_PL', {"Dashboard":"Panel","Docs":"Docs","Documents":"Dokumenty","Fields":"Pola","Sign Out":"Wyloguj","Templates":"Szablony"});
+/* jshint +W100 */
+}]);
 });
