@@ -1,5 +1,5 @@
 define([
-	'./DocumentInputTypesEnum'
+	'./DocumentFieldTypesEnum'
 ], function () {
 	'use strict';
 });

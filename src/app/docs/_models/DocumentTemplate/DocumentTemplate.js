@@ -13,7 +13,13 @@ define(['docs/module'], function (module) {
 	function DocumentTemplate(restmod, gettext) {
 		return restmod
 			.model('/document-templates')
-			.mix({
+			.mix('Document', {
+				name: {
+					init: ''
+				},
+				description: {
+					inti: ''
+				},
 				type: {
 					init: gettext('document template')
 				}

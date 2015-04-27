@@ -4,21 +4,30 @@ define(['docs/module'], function (module) {
 	/**
 	 * @class Field
 	 * @implements {app.BaseModel}
+	 * @mixin
 	 * @memberOf app.docs
 	 *
 	 * @param restmod Data model layer interface
-	 * @param gettext Translation service
 	 * @return {*|Model}
 	 */
-	function Field(restmod, gettext) {
+	function Field(restmod) {
 		return restmod
-			.model('/document-field')
-			.mix('FieldTemplate', {
-				fields: {
-					hasMany: 'Field'
+			.model()
+			.mix({
+				label: {
+					init: ''
 				},
-				type: {
-					init: gettext('field')
+				defaultValue: {
+					init: ''
+				},
+				note: {
+					init: ''
+				},
+				required: {
+					init: false
+				},
+				disabled: {
+					init: false
 				}
 			});
 	}

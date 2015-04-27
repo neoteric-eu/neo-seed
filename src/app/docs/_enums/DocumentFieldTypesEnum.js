@@ -2,7 +2,7 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
-	 * @class DocumentInputTypesEnum
+	 * @class DocumentFieldTypesEnum
 	 * @implements {app.BaseEnum}
 	 * @memberOf app.tasks
 	 *
@@ -10,38 +10,43 @@ define(['docs/module'], function (module) {
 	 * @param {Function} BaseEnum Augmentation of enum-type object
 	 * @return {Object} Enum instance
 	 */
-	function DocumentInputTypesEnum(BaseEnum, gettext) {
+	function DocumentFieldTypesEnum(BaseEnum, gettext) {
 		return new BaseEnum({
 			EMAIL: {
-				type: 'email',
 				label: gettext('email')
 			},
 			URL: {
-				type: 'url',
 				label: gettext('url')
 			},
 			NUMBER: {
-				type: 'number',
 				label: gettext('number')
 			},
 			DATE: {
-				type: 'date',
 				label: gettext('date')
 			},
+			TEXT: {
+				label: gettext('text')
+			},
 			TIME: {
-				type: 'time',
 				label: gettext('time')
 			},
 			DATETIME: {
-				type: 'datetime',
 				label: gettext('datetime')
 			},
 			COLOR: {
-				type: 'color',
-				label: gettext('color')
+				label: gettext('color picker')
+			},
+			SELECT: {
+				label: gettext('select')
+			},
+			MULTI_SELECT: {
+				label: gettext('multi-select')
+			},
+			TEXTAREA: {
+				label: gettext('textarea')
 			}
 		});
 	}
 
-	module.registerService('DocumentInputTypesEnum', DocumentInputTypesEnum);
+	module.registerService('DocumentInputTypesEnum', DocumentFieldTypesEnum);
 });

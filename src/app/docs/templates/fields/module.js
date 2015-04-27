@@ -11,21 +11,29 @@ define([
 	 */
 	var module = ng.module('app.docs.templates.fields', []);
 
+	/**
+	 * Module configuration options.fields
+	 */
+	module.constant('cfg', {
+		MODULE_PATH: '/app/docs/templates/fields'
+	});
+
 	couchPotato.configureApp(module);
+
 
 	/**
 	 * Stores additional module configuration
 	 * @method run
 	 * @memberof app.docs.templates.fields.module
 	 */
-	module.config(function ($stateProvider, gettext) {
+	module.config(function ($stateProvider, gettext, cfg) {
 
 		$stateProvider
 			.state('app.docs.templates.fields', {
 				url: '/docs/templates/fields',
 				views: {
 					'content@app': {
-						templateUrl: '/app/docs/templates/fields/views/list.html'
+						templateUrl: cfg.MODULE_PATH + '/views/list.html'
 					}
 				},
 				data: {
@@ -34,10 +42,10 @@ define([
 			})
 
 			.state('app.docs.templates.fields.new', {
-				url: '/docs/templates/fields/new',
+				url: '/new',
 				views: {
 					'content@app': {
-						templateUrl: '/app/docs/templates/fields/views/view.html'
+						templateUrl: cfg.MODULE_PATH + '/views/view.html'
 					}
 				},
 				data: {

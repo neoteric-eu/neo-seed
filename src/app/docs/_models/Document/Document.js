@@ -14,7 +14,7 @@ define(['docs/module'], function (module) {
 	function Document(restmod, gettext) {
 		return restmod
 			.model('/document')
-			.mix('DocumentTemplate', {
+			.mix({
 				type: {
 					init: gettext('document')
 				}

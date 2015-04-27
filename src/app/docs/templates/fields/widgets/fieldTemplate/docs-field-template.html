@@ -7,12 +7,66 @@
 		 data-widget-fullscreenbutton="false">
 
 	<header>
-		<span class="widget-icon"> <i class="fa fa-files-o"></i> </span>
+		<span class="widget-icon"> <i class="fa fa-list"></i> </span>
 
-		<h2>File template list</h2>
+		<h2>Field template</h2>
 	</header>
 
 	<div class="widget-body">
 
+		<div class="widget-body-toolbar bg-color-white">
+			<div class="btn-group btn-group-sm" dropdown>
+				<button type="button"
+								class="btn btn-default dropdown-toggle"
+								dropdown-toggle>
+					<i class="fa fa-fw fa-plus"></i>
+					Add form element <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li class="dropdown-header">Text</li>
+					<li><a href="#" ng-click="addField('input-text')">Input</a></li>
+					<li><a href="#">Text paragraph</a></li>
+					<li><a href="#">Email</a></li>
+					<li><a href="#">Url</a></li>
+					<li class="divider"></li>
+
+					<li class="dropdown-header">Date & Time</li>
+					<li><a href="#">Date</a></li>
+					<li><a href="#">Datetime</a></li>
+					<li><a href="#">Time</a></li>
+					<li class="divider"></li>
+
+					<li class="dropdown-header">Numeric</li>
+					<li><a href="#">Number</a></li>
+					<li class="divider"></li>
+
+					<li class="dropdown-header">Selection</li>
+					<li><a href="#">Select</a></li>
+					<li><a href="#">Multi-select</a></li>
+					<li class="divider"></li>
+
+					<li class="dropdown-header">Custom</li>
+					<li><a href="#">Color</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<form name="fieldTemplate">
+			<fieldset>
+				<!-- RECURSIVE_FIELD_TREE -->
+				<!-- WARNING! Magic happens here! -->
+				<div ng-repeat="field in vm.fieldTemplate"
+						 ng-include="'docs-field-level.html'"
+						 id="docs-field-level.html">
+
+					<docs-field></docs-field>
+
+					<div ng-if="field.composite.length"
+							 ng-repeat="field in field.composite"
+							 ng-include="docs-field-level.html"></div>
+				</div>
+				<!-- end:RECURSIVE_FIELD_TREE -->
+			</fieldset>
+		</form>
 	</div>
 </div>
