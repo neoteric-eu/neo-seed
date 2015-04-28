@@ -1,5 +1,6 @@
 define([
 	'./_models/_includes',
+	'./_enums/_includes',
 
 	// Documents
 	'./documents/module',

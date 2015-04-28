@@ -7,18 +7,14 @@ define(['docs/module'], function (module) {
 	 * @memberOf app.docs
 	 *
 	 * @param restmod Data model layer interface
-	 * @param DocumentFieldTypesEnum
 	 * @return {*|Model}
 	 */
-	function DatetimeField(restmod, DocumentFieldTypesEnum) {
+	function DatetimeField(restmod) {
 		return restmod
 			.model()
 			.mix('Field', {
 				fieldType: {
-					encode: 'EnumEncode',
-					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.DATETIME
+					init: 'DATETIME'
 				}
 			});
 	}

@@ -3,6 +3,7 @@ define(['app'], function (module) {
 
 	/**
 	 * Base interface for augmenting enum functionality in app
+	 * @todo Move functionality to seed
 	 * @class BaseEnum
 	 * @interface
 	 * @memberOf app
@@ -19,9 +20,7 @@ define(['app'], function (module) {
 		 * @param enumerable
 		 */
 		var Enum = function (enumerable) {
-			_.each(enumerable, function (value, key) {
-				this[key] = value;
-			}, this);
+			_.assign(this, enumerable);
 
 			Object.freeze(this);
 		};
@@ -34,6 +33,19 @@ define(['app'], function (module) {
 		Enum.prototype.getEnumAsArray = function () {
 			return _.toArray(this);
 		};
+		/**
+		 * Returns enum grouped by provided property
+		 * @abstract
+		 * @method groupBy
+		 * @param prop {String} Grouping property
+		 */
+		Enum.prototype.groupBy = function (prop) {
+			return _.transform(this, function (result, item, name) {
+				result[item[prop]] = result[item[prop]] || {};
+				result[item[prop]][name] = item;
+			});
+		};
+
 
 		/**
 		 * Return enum key based on provided object or its properties
@@ -52,7 +64,7 @@ define(['app'], function (module) {
 		 * Return enum value based on provided key
 		 * @abstract
 		 * @method getValueByKey
-		 * @param {string} key
+		 * @param {String} key
 		 */
 		Enum.prototype.getValueByKey = function (key) {
 			if (_.isString(key)) {

@@ -7,18 +7,14 @@ define(['docs/module'], function (module) {
 	 * @memberOf app.docs
 	 *
 	 * @param restmod Data model layer interface
-	 * @param DocumentFieldTypesEnum
 	 * @return {*|Model}
 	 */
-	function TextareaField(restmod, DocumentFieldTypesEnum) {
+	function TextareaField(restmod) {
 		return restmod
 			.model()
 			.mix('Field', {
 				fieldType: {
-					encode: 'EnumEncode',
-					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.TEXTAREA
+					init: 'TEXTAREA'
 				}
 			});
 	}

@@ -10,15 +10,12 @@ define(['docs/module'], function (module) {
 	 * @param DocumentFieldTypesEnum
 	 * @return {*|Model}
 	 */
-	function MultiselectField(restmod, DocumentFieldTypesEnum) {
+	function MultiselectField(restmod) {
 		return restmod
 			.model()
 			.mix('Field', {
 				fieldType: {
-					encode: 'EnumEncode',
-					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.MULTI_SELECT
+					init: 'MULTI_SELECT'
 				},
 				multiple: {
 					init: false

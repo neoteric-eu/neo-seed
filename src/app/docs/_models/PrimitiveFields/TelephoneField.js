@@ -2,25 +2,25 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
-	 * @class TextField
+	 * @class TelephoneField
 	 * @mixes {app.docs.Field}
 	 * @memberOf app.docs
 	 *
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function TextField(restmod) {
+	function TelephoneField(restmod) {
 		return restmod
 			.model()
 			.mix('Field', {
 				fieldType: {
-					init: 'TEXT'
+					init: 'NUMBER'
 				},
 				pattern: {
-					init: ''
+					init: undefined
 				}
 			});
 	}
 
-	module.registerFactory('TextField', TextField);
+	module.registerFactory('TelephoneField', TelephoneField);
 });

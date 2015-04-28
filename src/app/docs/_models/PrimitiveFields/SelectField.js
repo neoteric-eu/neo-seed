@@ -7,18 +7,17 @@ define(['docs/module'], function (module) {
 	 * @memberOf app.docs
 	 *
 	 * @param restmod Data model layer interface
-	 * @param DocumentFieldTypesEnum
 	 * @return {*|Model}
 	 */
-	function SelectField(restmod, DocumentFieldTypesEnum) {
+	function SelectField(restmod) {
 		return restmod
 			.model()
 			.mix('Field', {
 				fieldType: {
-					encode: 'EnumEncode',
-					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.SELECT
+					init: 'SELECT'
+				},
+				options: {
+					init: []
 				},
 				multiple: {
 					init: false

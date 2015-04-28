@@ -7,18 +7,14 @@ define(['docs/module'], function (module) {
 	 * @memberOf app.docs
 	 *
 	 * @param restmod Data model layer interface
-	 * @param DocumentFieldTypesEnum
 	 * @return {*|Model}
 	 */
-	function ColorField(restmod, DocumentFieldTypesEnum) {
+	function ColorField(restmod) {
 		return restmod
 			.model()
 			.mix('Field', {
 				fieldType: {
-					encode: 'EnumEncode',
-					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.COLOR
+					init: 'COLOR'
 				}
 			});
 	}

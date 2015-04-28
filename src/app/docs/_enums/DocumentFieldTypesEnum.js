@@ -6,47 +6,78 @@ define(['docs/module'], function (module) {
 	 * @implements {app.BaseEnum}
 	 * @memberOf app.tasks
 	 *
-	 * @param {Function} gettext Translation helper service
 	 * @param {Function} BaseEnum Augmentation of enum-type object
+	 * @param {Function} gettext Translation helper service
 	 * @return {Object} Enum instance
 	 */
-	function DocumentFieldTypesEnum(BaseEnum, gettext) {
+	function DocumentFieldTypesEnum(BaseEnum, gettext,
+	                                EmailField, UrlField, TextareaField,
+	                                TextField, NumberField, TelephoneField,
+	                                DateField, TimeField, DatetimeField,
+	                                ColorField, SelectField, MultiselectField) {
 		return new BaseEnum({
 			EMAIL: {
-				label: gettext('email')
+				class: EmailField,
+				label: gettext('Email'),
+				group: gettext('Text')
 			},
 			URL: {
-				label: gettext('url')
-			},
-			NUMBER: {
-				label: gettext('number')
-			},
-			DATE: {
-				label: gettext('date')
-			},
-			TEXT: {
-				label: gettext('text')
-			},
-			TIME: {
-				label: gettext('time')
-			},
-			DATETIME: {
-				label: gettext('datetime')
-			},
-			COLOR: {
-				label: gettext('color picker')
-			},
-			SELECT: {
-				label: gettext('select')
-			},
-			MULTI_SELECT: {
-				label: gettext('multi-select')
+				class: UrlField,
+				label: gettext('Url'),
+				group: gettext('Text')
 			},
 			TEXTAREA: {
-				label: gettext('textarea')
+				class: TextareaField,
+				label: gettext('Textarea'),
+				group: gettext('Text')
+			},
+			TEXT: {
+				class: TextField,
+				label: gettext('Text input'),
+				group: gettext('Text')
+			},
+			NUMBER: {
+				class: NumberField,
+				label: gettext('Number'),
+				group: gettext('Numeric')
+			},
+			TELEPHONE: {
+				class: TelephoneField,
+				label: gettext('Phone'),
+				group: gettext('Numeric')
+			},
+			DATE: {
+				class: DateField,
+				label: gettext('Date'),
+				group: gettext('Date & Time')
+			},
+			TIME: {
+				class: TimeField,
+				label: gettext('Time'),
+				group: gettext('Date & Time')
+			},
+			DATETIME: {
+				class: DatetimeField,
+				label: gettext('Datetime'),
+				group: gettext('Date & Time')
+			},
+			COLOR: {
+				class: ColorField,
+				label: gettext('Color picker'),
+				group: gettext('Custom')
+			},
+			SELECT: {
+				class: SelectField,
+				label: gettext('Select'),
+				group: gettext('Selection')
+			},
+			MULTI_SELECT: {
+				class: MultiselectField,
+				label: gettext('Multi-select'),
+				group: gettext('Selection')
 			}
 		});
 	}
 
-	module.registerService('DocumentInputTypesEnum', DocumentFieldTypesEnum);
+	module.registerService('DocumentFieldTypesEnum', DocumentFieldTypesEnum);
 });

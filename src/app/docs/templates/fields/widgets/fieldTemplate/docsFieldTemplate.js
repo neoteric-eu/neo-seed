@@ -8,10 +8,26 @@ define(['docs/templates/fields/module'], function (module) {
 	 *
 	 * @return {{restrict: string, templateUrl: string}}
 	 */
-	function docsFieldTemplateWidget() {
+	function docsFieldTemplateWidget(DocumentFieldTypesEnum, cfg, $log, FieldTemplateAPI) {
 		return {
 			restrict: 'EA',
-			templateUrl: '/app/docs/templates/fields/widgets/fieldTemplate/docs-field-template.html'
+			templateUrl: cfg.MODULE_PATH + '/widgets/fieldTemplate/docs-field-template.html',
+			controllerAs: 'vm',
+			controller: function () {
+				var vm = this;
+
+				vm.fieldTemplate = FieldTemplateAPI.build();
+				vm.fieldGroups = _.groupBy(DocumentFieldTypesEnum, 'group');
+				vm.addField = addField;
+
+				function addField(field){
+					vm.fieldTemplate.composite.$add(field.class.$build());
+					console.log(vm.fieldTemplate);
+					$log.debug('Added new field to form');
+				}
+
+				$log.debug('Initiated controller');
+			}
 		};
 	}
 

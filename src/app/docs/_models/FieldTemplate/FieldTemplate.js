@@ -3,7 +3,6 @@ define(['docs/module'], function (module) {
 
 	/**
 	 * @class FieldTemplate
-	 * @implements {app.BaseModel}
 	 * @mixin
 	 * @memberOf app.docs
 	 *
@@ -22,6 +21,9 @@ define(['docs/module'], function (module) {
 				},
 				composite: {
 					hasMany: 'FieldTemplate'
+				},
+				fieldType: {
+					init: 'composite'
 				}
 			});
 	}
