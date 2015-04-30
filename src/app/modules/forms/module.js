@@ -1,9 +1,12 @@
-define(['angular', 'angular-couch-potato'], function (ng, couchPotato) {
+define([
+	'angular',
+	'angular-couch-potato',
+	'form-validation',
+	'form-validation-bootstrap'
+], function (ng, couchPotato) {
 	'use strict';
 
-
 	var module = ng.module('app.forms', []);
-
 
 	couchPotato.configureApp(module);
 

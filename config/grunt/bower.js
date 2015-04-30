@@ -45,7 +45,7 @@ module.exports = {
 			'datatables/datatables.js': 'datatables/media/js/jquery.dataTables.js',
 			'datatables-colvis/datatables-colvis.js': 'datatables-colvis/js/dataTables.colVis.js',
 			'datatables-bootstrap/datatables-bootstrap.js': 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js',
-			'datatables-responsive/datatables-responsive.js': 'datatables-responsive/files/1.10/js/datatables.responsive.js',
+			'datatables-responsive/datatables-responsive.js': 'datatables-responsive/js/dataTables.responsive.js',
 			'datatables-tools/datatables-tools.js': 'datatables-tabletools/js/dataTables.tableTools.js',
 
 			'jquery/jquery.js': 'jquery/dist/jquery.js',
@@ -92,7 +92,11 @@ module.exports = {
 			'raven/raven.js': 'raven-js/dist/raven.js',
 			'select2/select2.js': 'select2/select2.js',
 			'summernote/summernote.js': 'summernote/dist/summernote.js',
-			'to-markdown/to-markdown.js': 'to-markdown/src/to-markdown.js'
+			'to-markdown/to-markdown.js': 'to-markdown/src/to-markdown.js',
+
+			'form-validation/form-validation.js': 'form.validation/dist/js/formValidation.js',
+			'form-validation/framework/bootstrap.js' : 'form.validation/dist/js/framework/bootstrap.js',
+			'form-validation/language/': 'form.validation/dist/js/language/'
 		}
 	},
 	require: {
@@ -108,6 +112,7 @@ module.exports = {
 			destPrefix: 'src/styles/css/vendor'
 		},
 		files: {
+			'form-validation/formValidation.css' : 'form.validation/dist/css/formValidation.css',
 			'select2/select2.css': 'select2/select2.css',
 			'select2/select2-bootstrap.css': 'select2/select2-bootstrap.css',
 			'ui-select/select.css': 'angular-ui-select/dist/select.css'

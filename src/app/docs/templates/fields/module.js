@@ -14,7 +14,7 @@ define([
 	/**
 	 * Module configuration options.fields
 	 */
-	module.constant('cfg', {
+	module.constant('fieldsConf', {
 		MODULE_PATH: '/app/docs/templates/fields'
 	});
 
@@ -26,14 +26,14 @@ define([
 	 * @method run
 	 * @memberof app.docs.templates.fields.module
 	 */
-	module.config(function ($stateProvider, gettext, cfg) {
+	module.config(function ($stateProvider, gettext, fieldsConf) {
 
 		$stateProvider
 			.state('app.docs.templates.fields', {
 				url: '/docs/templates/fields',
 				views: {
 					'content@app': {
-						templateUrl: cfg.MODULE_PATH + '/views/list.html'
+						templateUrl: fieldsConf.MODULE_PATH + '/views/list.html'
 					}
 				},
 				data: {
@@ -45,7 +45,7 @@ define([
 				url: '/new',
 				views: {
 					'content@app': {
-						templateUrl: cfg.MODULE_PATH + '/views/view.html'
+						templateUrl: fieldsConf.MODULE_PATH + '/views/view.html'
 					}
 				},
 				data: {

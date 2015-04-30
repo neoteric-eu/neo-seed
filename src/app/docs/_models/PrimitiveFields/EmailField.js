@@ -9,12 +9,40 @@ define(['docs/module'], function (module) {
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function EmailField(restmod) {
+	function EmailField(restmod, fieldsConf) {
 		return restmod
 			.model()
-			.mix('Field', {
-				fieldType: {
-					init: 'EMAIL'
+			.mix({
+				$templateUrl: {
+					init: fieldsConf.MODULE_PATH + '/forms/emailField/email-field-template.html'
+				},
+				label: {
+					init: 'Email'
+				},
+				defaultValue: {
+					init: ''
+				},
+				note: {
+					init: ''
+				},
+				required: {
+					init: false
+				},
+				disabled: {
+					init: false
+				},
+				validators: {
+					init: [
+						{
+							name: 'notEmpty',
+							message: 'The option required and cannot be empty'
+						},
+						{
+							name: 'stringLength',
+							max: 100,
+							message: 'The option must be less than 100 characters long'
+						}
+					]
 				}
 			});
 	}

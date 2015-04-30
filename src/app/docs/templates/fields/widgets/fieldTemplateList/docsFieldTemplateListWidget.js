@@ -34,5 +34,4 @@ define(['docs/templates/fields/module'], function (module) {
 	}
 
 	module.registerDirective('docsFieldTemplateListWidget', docsFieldTemplateListWidget);
-
 });

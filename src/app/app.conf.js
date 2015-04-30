@@ -1,12 +1,12 @@
 define([], function () {
 	'use strict';
 
-	var appConfig = {};
+	var cfg = {};
 
-	appConfig.menu_speed = 200;
-	appConfig.smartSkin = 'smart-style-0';
+	cfg.menu_speed = 200;
+	cfg.smartSkin = 'smart-style-0';
 
-	appConfig.skins = [
+	cfg.skins = [
 		{
 			name: 'smart-style-0',
 			logo: 'styles/img/logo.png',
@@ -56,8 +56,8 @@ define([], function () {
 		}
 	];
 
-	appConfig.sound_path = 'styles/sounds/';
-	appConfig.sound_on = true;
+	cfg.sound_path = 'styles/sounds/';
+	cfg.sound_on = true;
 
-	return appConfig;
+	return cfg;
 });

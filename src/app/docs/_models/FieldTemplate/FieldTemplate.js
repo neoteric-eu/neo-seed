@@ -12,18 +12,15 @@ define(['docs/module'], function (module) {
 	function FieldTemplate(restmod) {
 		return restmod
 			.model('/field-template')
-			.mix('Field', {
+			.mix({
 				name: {
 					init: ''
 				},
 				description: {
-					inti: ''
+					init: ''
 				},
 				composite: {
 					hasMany: 'FieldTemplate'
-				},
-				fieldType: {
-					init: 'composite'
 				}
 			});
 	}

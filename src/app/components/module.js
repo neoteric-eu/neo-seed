@@ -7,6 +7,10 @@ define([
 
 	var module = ng.module('app.components', ['ngTable']);
 
+	module.constant('componentsConf', {
+		MODULE_PATH: 'app/components'
+	});
+
 	couchPotato.configureApp(module);
 
 	module.run(function ($couchPotato) {

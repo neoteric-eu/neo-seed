@@ -34,14 +34,13 @@
 			</div>
 		</div>
 
-		<form name="fieldTemplate">
+		<form name="fieldTemplate" id="fieldTemplate" class="form-horizontal">
 			<fieldset>
 				<!-- RECURSIVE_FIELD_TREE -->
 				<!-- WARNING! Magic happens here! -->
-				<div ng-repeat="field in vm.fieldTemplate"
+				<div ng-repeat="field in vm.fieldTemplate.composite"
 						 id="docs-field-level.html">
-
-					<docs-field></docs-field>
+					<docs-field data-field="field"></docs-field>
 
 					<div ng-if="field.composite.length"
 							 ng-repeat="field in field.composite"

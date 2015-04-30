@@ -8,7 +8,19 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param {Function} BaseEnum Augmentation of enum-type object
 	 * @param {Function} gettext Translation helper service
-	 * @return {Object} Enum instance
+	 * @param EmailField
+	 * @param UrlField
+	 * @param TextareaField
+	 * @param TextField
+	 * @param NumberField
+	 * @param TelephoneField
+	 * @param DateField
+	 * @param TimeField
+	 * @param DatetimeField
+	 * @param ColorField
+	 * @param SelectField
+	 * @param MultiselectField
+	 * @return {Function} Enum instance
 	 */
 	function DocumentFieldTypesEnum(BaseEnum, gettext,
 	                                EmailField, UrlField, TextareaField,

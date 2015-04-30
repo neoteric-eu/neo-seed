@@ -8,8 +8,7 @@ define([
 	'./tables/directives/neoTable',
 	'./tables/factories/neoTableParams',
 
-	'./language/controllers/LanguageController',
-	'./language/directives/languageSelector',
+	'./language/languageSelector',
 
 	'./_locale/translation'
 ], function () {
