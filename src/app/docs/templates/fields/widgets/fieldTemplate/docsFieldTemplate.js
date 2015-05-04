@@ -30,9 +30,6 @@ define(['docs/templates/fields/module',
 							validating: 'fa fa-refresh'
 						},
 						trigger: 'focus blur'
-					})
-					.on('added.field.fv', function (e, data) {
-						$log.debug(data);
 					});
 
 				scope.addField = addField;
