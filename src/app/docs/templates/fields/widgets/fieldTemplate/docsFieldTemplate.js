@@ -10,13 +10,14 @@ define(['docs/templates/fields/module',
 	 *
 	 * @return {{restrict: string, templateUrl: string}}
 	 */
-	function docsFieldTemplateWidget($log, $compile, DocumentFieldTypesEnum,
+	function docsFieldTemplateWidget($log, DocumentFieldTypesEnum,
 	                                 fieldsConf, FieldTemplateAPI) {
 
 		return {
 			restrict: 'EA',
 			templateUrl: fieldsConf.MODULE_PATH + '/widgets/fieldTemplate/docs-field-template.html',
 			controllerAs: 'vm',
+			scope: true,
 			link: function (scope, element) {
 				var form = element.find('#fieldTemplate');
 
@@ -24,16 +25,19 @@ define(['docs/templates/fields/module',
 					.formValidation({
 						framework: 'bootstrap',
 						icon: {
-							valid: 'glyphicon glyphicon-ok',
-							invalid: 'glyphicon glyphicon-remove',
-							validating: 'glyphicon glyphicon-refresh'
-						}
+							valid: 'fa fa-check',
+							invalid: 'fa fa-times',
+							validating: 'fa fa-refresh'
+						},
+						trigger: 'focus blur'
 					});
 
 				scope.addField = addField;
 
-				function addField(fieldName, fieldOptions) {
-					form.formValidation('addField', fieldName, fieldOptions);
+				function addField(field) {
+					form.formValidation('addField', field.$pk, field);
+
+					$log.debug('Adding filed to validation list');
 				}
 			},
 
@@ -42,16 +46,18 @@ define(['docs/templates/fields/module',
 
 				vm.fieldTemplate = FieldTemplateAPI.build();
 				vm.fieldGroups = _.groupBy(DocumentFieldTypesEnum, 'group');
+
 				vm.addField = addField;
 
 				function addField(field) {
 					var model = field.class.$build();
 
-					$scope.addField('email', {
-						validators: _.indexBy(model.validators, 'name')
-					});
-
-					vm.fieldTemplate.composite.$add(model);
+					vm.fieldTemplate.composite
+						.$add(model)
+						.$asPromise()
+						.then(function () {
+							$scope.addField(model);
+						});
 
 					$log.debug('Added new field to form');
 				}

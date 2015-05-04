@@ -7,6 +7,8 @@ define([
 
 	'./Field/Field',
 	'./Field/FieldAPI',
+	'./Field/serializers/FieldValidatorDecodeFilter',
+	'./Field/serializers/FieldValidatorEncodeFilter',
 
 	'./FieldTemplate/FieldTemplate',
 	'./FieldTemplate/FieldTemplateAPI',

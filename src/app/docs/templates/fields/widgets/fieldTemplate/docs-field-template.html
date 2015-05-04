@@ -25,7 +25,8 @@
 				<ul class="dropdown-menu" role="menu">
 
 					<li ng-repeat-start="(groupName, group) in vm.fieldGroups"
-							class="dropdown-header">{{groupName|translate}}</li>
+							class="dropdown-header">{{groupName|translate}}
+					</li>
 					<li ng-repeat="field in group">
 						<a ng-click="vm.addField(field)">{{field.label|translate}}</a>
 					</li>
@@ -34,7 +35,7 @@
 			</div>
 		</div>
 
-		<form name="fieldTemplate" id="fieldTemplate" class="form-horizontal">
+		<form name="fieldTemplate" id="fieldTemplate">
 			<fieldset>
 				<!-- RECURSIVE_FIELD_TREE -->
 				<!-- WARNING! Magic happens here! -->

@@ -19,7 +19,7 @@ define(['docs/templates/fields/module'], function (module) {
 						element.html(data);
 						$compile(element.contents())(scope);
 
-						$log.debug('Recompiled view newly added field');
+						$log.debug('Recompiled view with newly added field');
 					});
 			}
 		};

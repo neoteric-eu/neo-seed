@@ -14,20 +14,20 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model()
 			.mix({
+				$pk: {
+					init: function(){
+						return _.uniqueId();
+					}
+				},
 				label: {
 					init: ''
 				},
 				defaultValue: {
 					init: ''
 				},
-				note: {
-					init: ''
-				},
-				required: {
-					init: false
-				},
-				disabled: {
-					init: false
+				validators: {
+					decode: 'FieldValidatorDecode',
+					encode: 'FieldValidatorEncode'
 				}
 			});
 	}
