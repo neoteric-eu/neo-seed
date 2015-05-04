@@ -10,7 +10,7 @@ define(['docs/templates/fields/module',
 	 *
 	 * @return {{restrict: string, templateUrl: string}}
 	 */
-	function docsFieldTemplateWidget($log, DocumentFieldTypesEnum,
+	function docsFieldTemplateWidget($log, $timeout, DocumentFieldTypesEnum,
 	                                 fieldsConf, FieldTemplateAPI) {
 
 		return {
@@ -30,6 +30,9 @@ define(['docs/templates/fields/module',
 							validating: 'fa fa-refresh'
 						},
 						trigger: 'focus blur'
+					})
+					.on('added.field.fv', function (e, data) {
+						$log.debug(data);
 					});
 
 				scope.addField = addField;
@@ -56,7 +59,9 @@ define(['docs/templates/fields/module',
 						.$add(model)
 						.$asPromise()
 						.then(function () {
-							$scope.addField(model);
+							$timeout(function () {
+								$scope.addField(model);
+							}, 500);
 						});
 
 					$log.debug('Added new field to form');
