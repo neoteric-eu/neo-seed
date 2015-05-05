@@ -18,7 +18,7 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.MODULE_PATH + '/views/fields/select-field-template.html'
+					init: fieldsConf.MODULE_PATH + '/views/fields/selectField/select-field-template.html'
 				},
 				options: {
 					init: []

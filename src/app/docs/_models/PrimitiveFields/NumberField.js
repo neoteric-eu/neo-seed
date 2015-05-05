@@ -18,7 +18,7 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.MODULE_PATH + '/views/fields/input-field-template.html'
+					init: fieldsConf.MODULE_PATH + '/views/fields/inputField/input-field-template.html'
 				},
 				inputType: {
 					init: 'number'
