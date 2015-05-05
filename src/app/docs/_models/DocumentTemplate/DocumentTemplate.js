@@ -6,11 +6,14 @@ define(['docs/module'], function (module) {
 	 * @implements {app.BaseModel}
 	 * @memberOf app.docs
 	 *
+	 * @param $log Console log provider
 	 * @param restmod Data model layer interface
 	 * @param gettext Translation service
 	 * @return {*|Model}
 	 */
-	function DocumentTemplate(restmod, gettext) {
+	function DocumentTemplate($log, restmod, gettext) {
+		$log.debug('Initiating model factory');
+
 		return restmod
 			.model('/document-templates')
 			.mix('Document', {
@@ -26,5 +29,5 @@ define(['docs/module'], function (module) {
 			});
 	}
 
-	module.registerFactory('DocumentTemplate', DocumentTemplate);
+	module.factory('DocumentTemplate', DocumentTemplate);
 });

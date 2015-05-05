@@ -38,6 +38,6 @@ define([
 		};
 	}
 
-	module.registerDirective('docsDocumentListWidget', docsDocumentListWidget);
+	module.directive('docsDocumentListWidget', docsDocumentListWidget);
 
 });

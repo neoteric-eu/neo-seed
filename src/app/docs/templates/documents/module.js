@@ -1,7 +1,6 @@
 define([
-	'angular',
-	'angular-couch-potato'
-], function (ng, couchPotato) {
+	'angular'
+], function (ng) {
 	'use strict';
 
 	/**
@@ -10,8 +9,6 @@ define([
 	 * @memberof app.docs
 	 */
 	var module = ng.module('app.docs.templates.documents', []);
-
-	couchPotato.configureApp(module);
 
 	/**
 	 * Stores additional module configuration
@@ -27,15 +24,6 @@ define([
 				title: gettext('Documents')
 			}
 		});
-	});
-
-	/**
-	 * Kicks off the module
-	 * @method run
-	 * @memberof app.docs.module
-	 */
-	module.run(function ($couchPotato) {
-		module.lazy = $couchPotato;
 	});
 
 	return module;

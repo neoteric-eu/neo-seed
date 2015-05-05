@@ -15,7 +15,7 @@ define(['docs/module'], function (module) {
 		return new BaseAPI(FieldTemplate);
 	}
 
-	module.registerService('FieldTemplateAPI', FieldTemplateAPI);
+	module.service('FieldTemplateAPI', FieldTemplateAPI);
 });
 
 

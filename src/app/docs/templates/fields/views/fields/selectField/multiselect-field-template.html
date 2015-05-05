@@ -1,0 +1,15 @@
+<div class="form-group">
+	<label class="control-label">{{field.label}}</label>
+
+	<ui-select theme="select2" multiple ng-model="field.value" style="width: 100%">
+
+		<ui-select-match>
+			<span>{{$item}}</span>
+		</ui-select-match>
+
+		<ui-select-choices repeat="option in field.options">
+			<span ng-bind-html="option | highlight:$select.search"></span>
+		</ui-select-choices>
+
+	</ui-select>
+</div>

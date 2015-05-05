@@ -6,25 +6,22 @@ define(['docs/module'], function (module) {
 	 * @mixes {app.docs.Field}
 	 * @memberOf app.docs
 	 *
+	 * @param $log Console log provider
+	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
-	 * @param fieldsConf module configuration
 	 * @return {*|Model}
 	 */
-	function EmailField(restmod, fieldsConf) {
+	function EmailField($log, restmod, fieldsConf) {
+		$log.debug('Initiating model factory');
+
 		return restmod
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.MODULE_PATH + '/forms/emailField/email-field-template.html'
+					init: fieldsConf.MODULE_PATH + '/forms/inputField/input-field-template.html'
 				},
-				fieldType: {
+				inputType: {
 					init: 'email'
-				},
-				label: {
-					init: 'Email'
-				},
-				defaultValue: {
-					init: ''
 				},
 				validators: {
 					init: {
@@ -34,5 +31,5 @@ define(['docs/module'], function (module) {
 			});
 	}
 
-	module.registerFactory('EmailField', EmailField);
+	module.factory('EmailField', EmailField);
 });

@@ -1,7 +1,4 @@
-define([
-	'angular',
-	'angular-couch-potato'
-], function (ng, couchPotato) {
+define(['angular'], function (ng) {
 	'use strict';
 
 	/**
@@ -17,9 +14,6 @@ define([
 	module.constant('fieldsConf', {
 		MODULE_PATH: '/app/docs/templates/fields'
 	});
-
-	couchPotato.configureApp(module);
-
 
 	/**
 	 * Stores additional module configuration
@@ -54,14 +48,6 @@ define([
 			});
 	});
 
-	/**
-	 * Kicks off the module
-	 * @method run
-	 * @memberof app.docs.templates.fields.module
-	 */
-	module.run(function ($couchPotato) {
-		module.lazy = $couchPotato;
-	});
 
 	return module;
 });

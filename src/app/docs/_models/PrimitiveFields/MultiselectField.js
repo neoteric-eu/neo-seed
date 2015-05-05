@@ -6,22 +6,33 @@ define(['docs/module'], function (module) {
 	 * @mixes {app.docs.Field}
 	 * @memberOf app.docs
 	 *
+	 * @param $log Console log provider
 	 * @param restmod Data model layer interface
-	 * @param DocumentFieldTypesEnum
+	 * @param fieldsConf Module configuration
 	 * @return {*|Model}
 	 */
-	function MultiselectField(restmod) {
+	function MultiselectField($log, restmod, fieldsConf) {
+		$log.debug('Initiating model factory');
+
 		return restmod
 			.model()
 			.mix('Field', {
-				fieldType: {
-					init: 'MULTI_SELECT'
+				$templateUrl: {
+					init: fieldsConf.MODULE_PATH + '/views/fields/multiselect-field-template.html'
+				},
+				options: {
+					init: []
 				},
 				multiple: {
-					init: false
+					init: true
+				},
+				validators: {
+					init: {
+						notEmpty: {}
+					}
 				}
 			});
 	}
 
-	module.registerFactory('MultiselectField', MultiselectField);
+	module.factory('MultiselectField', MultiselectField);
 });

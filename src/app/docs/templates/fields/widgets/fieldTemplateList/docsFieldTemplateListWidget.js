@@ -11,11 +11,10 @@ define(['docs/templates/fields/module'], function (module) {
 	 * @return {{restrict: string, templateUrl: string, scope: boolean, controllerAs: string,
 	 *   controller: Function}}
 	 */
-	function docsFieldTemplateListWidget(neoTableParams, FieldTemplateAPI) {
+	function docsFieldTemplateListWidget(neoTableParams, FieldTemplateAPI, fieldsConf) {
 		return {
 			restrict: 'EA',
-			templateUrl: '/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html',
-			scope: true,
+			templateUrl: fieldsConf.MODULE_PATH + '/widgets/fieldTemplateList/docs-field-template-list.html',
 			controllerAs: 'vm',
 
 			/**
@@ -26,12 +25,10 @@ define(['docs/templates/fields/module'], function (module) {
 			controller: function () {
 				var vm = this;
 
-				vm.fieldTemplatesTableOptions = fieldTemplatesTableOptions;
-
-				var fieldTemplatesTableOptions = new neoTableParams(FieldTemplateAPI);
+				vm.fieldTemplatesTableOptions = new neoTableParams(FieldTemplateAPI);
 			}
 		};
 	}
 
-	module.registerDirective('docsFieldTemplateListWidget', docsFieldTemplateListWidget);
+	module.directive('docsFieldTemplateListWidget', docsFieldTemplateListWidget);
 });

@@ -6,18 +6,30 @@ define(['docs/module'], function (module) {
 	 * @mixes {app.docs.Field}
 	 * @memberOf app.docs
 	 *
+	 * @param $log Console log provider
+	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function UrlField(restmod) {
+	function UrlField($log, restmod, fieldsConf) {
+		$log.debug('Initiating model factory');
+
 		return restmod
 			.model()
 			.mix('Field', {
-				fieldType: {
-					init: 'URL'
+				$templateUrl: {
+					init: fieldsConf.MODULE_PATH + '/views/fields/inputField/input-field-template.html'
+				},
+				inputType: {
+					init: 'url'
+				},
+				validators: {
+					init: {
+						uri: {}
+					}
 				}
 			});
 	}
 
-	module.registerFactory('UrlField', UrlField);
+	module.factory('UrlField', UrlField);
 });

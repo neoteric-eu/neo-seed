@@ -1,6 +1,8 @@
-define(['docs/templates/fields/module',
+define([
+	'docs/templates/fields/module',
 	'form-validation',
-	'form-validation-bootstrap'], function (module) {
+	'form-validation-bootstrap'
+], function (module) {
 	'use strict';
 
 	/**
@@ -17,7 +19,6 @@ define(['docs/templates/fields/module',
 			restrict: 'EA',
 			templateUrl: fieldsConf.MODULE_PATH + '/widgets/fieldTemplate/docs-field-template.html',
 			controllerAs: 'vm',
-			scope: true,
 			link: function (scope, element) {
 				var form = element.find('#fieldTemplate');
 
@@ -28,8 +29,7 @@ define(['docs/templates/fields/module',
 							valid: 'fa fa-check',
 							invalid: 'fa fa-times',
 							validating: 'fa fa-refresh'
-						},
-						trigger: 'focus blur'
+						}
 					});
 
 				scope.addField = addField;
@@ -50,7 +50,8 @@ define(['docs/templates/fields/module',
 				vm.addField = addField;
 
 				function addField(field) {
-					var model = field.class.$build();
+					var model = field.class.$build({label: field.label});
+					console.log(model);
 
 					vm.fieldTemplate.composite
 						.$add(model)
@@ -58,7 +59,7 @@ define(['docs/templates/fields/module',
 						.then(function () {
 							$timeout(function () {
 								$scope.addField(model);
-							}, 500);
+							}, 200);
 						});
 
 					$log.debug('Added new field to form');
@@ -69,5 +70,5 @@ define(['docs/templates/fields/module',
 		};
 	}
 
-	module.registerDirective('docsFieldTemplateWidget', docsFieldTemplateWidget);
+	module.directive('docsFieldTemplateWidget', docsFieldTemplateWidget);
 });

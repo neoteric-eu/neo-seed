@@ -15,7 +15,7 @@ define(['docs/module'], function (module) {
 		return new BaseAPI(DocumentTemplate);
 	}
 
-	module.registerService('DocumentTemplateAPI', DocumentTemplateAPI);
+	module.service('DocumentTemplateAPI', DocumentTemplateAPI);
 });
 
 

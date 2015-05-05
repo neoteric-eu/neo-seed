@@ -6,27 +6,30 @@ define(['docs/module'], function (module) {
 	 * @mixes {app.docs.Field}
 	 * @memberOf app.docs
 	 *
+	 * @param $log Console log provider
+	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function NumberField(restmod) {
+	function NumberField($log, restmod, fieldsConf) {
+		$log.debug('Initiating model factory');
+
 		return restmod
 			.model()
 			.mix('Field', {
-				fieldType: {
-					init: 'NUMBER'
+				$templateUrl: {
+					init: fieldsConf.MODULE_PATH + '/views/fields/input-field-template.html'
 				},
-				min: {
-					init: 0
+				inputType: {
+					init: 'number'
 				},
-				max: {
-					init: undefined
-				},
-				step: {
-					init: 1
+				validators: {
+					init: {
+						integer: {}
+					}
 				}
 			});
 	}
 
-	module.registerFactory('NumberField', NumberField);
+	module.factory('NumberField', NumberField);
 });

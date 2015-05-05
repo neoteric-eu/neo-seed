@@ -7,10 +7,13 @@ define(['docs/module'], function (module) {
 	 * @mixin
 	 * @memberOf app.docs
 	 *
+	 * @param $log Console log provider
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function Field(restmod) {
+	function Field($log, restmod) {
+		$log.debug('Initiating model factory');
+
 		return restmod
 			.model()
 			.mix({
@@ -32,5 +35,5 @@ define(['docs/module'], function (module) {
 			});
 	}
 
-	module.registerFactory('Field', Field);
+	module.factory('Field', Field);
 });

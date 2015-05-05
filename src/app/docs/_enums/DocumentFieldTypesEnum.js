@@ -8,25 +8,27 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param {Function} BaseEnum Augmentation of enum-type object
 	 * @param {Function} gettext Translation helper service
-	 * @param EmailField
-	 * @param UrlField
-	 * @param TextareaField
-	 * @param TextField
-	 * @param NumberField
-	 * @param TelephoneField
-	 * @param DateField
-	 * @param TimeField
-	 * @param DatetimeField
-	 * @param ColorField
-	 * @param SelectField
-	 * @param MultiselectField
+	 * @param $log {Object} Console log provider
+	 * @param EmailField {Object} Model factory
+	 * @param UrlField {Object} Model factory
+	 * @param TextareaField {Object} Model factory
+	 * @param TextField {Object} Model factory
+	 * @param NumberField {Object} Model factory
+	 * @param TelephoneField {Object} Model factory
+	 * @param DateField {Object} Model factory
+	 * @param TimeField {Object} Model factory
+	 * @param ColorField {Object} Model factory
+	 * @param SelectField {Object} Model factory
+	 * @param MultiselectField {Object} Model factory
 	 * @return {Function} Enum instance
 	 */
-	function DocumentFieldTypesEnum(BaseEnum, gettext,
+	function DocumentFieldTypesEnum($log, BaseEnum, gettext,
 	                                EmailField, UrlField, TextareaField,
 	                                TextField, NumberField, TelephoneField,
-	                                DateField, TimeField, DatetimeField,
+	                                DateField, TimeField,
 	                                ColorField, SelectField, MultiselectField) {
+		$log.debug('Initiated enum object');
+
 		return new BaseEnum({
 			EMAIL: {
 				class: EmailField,
@@ -68,11 +70,6 @@ define(['docs/module'], function (module) {
 				label: gettext('Time'),
 				group: gettext('Date & Time')
 			},
-			DATETIME: {
-				class: DatetimeField,
-				label: gettext('Datetime'),
-				group: gettext('Date & Time')
-			},
 			COLOR: {
 				class: ColorField,
 				label: gettext('Color picker'),
@@ -91,5 +88,5 @@ define(['docs/module'], function (module) {
 		});
 	}
 
-	module.registerService('DocumentFieldTypesEnum', DocumentFieldTypesEnum);
+	module.service('DocumentFieldTypesEnum', DocumentFieldTypesEnum);
 });

@@ -1,7 +1,4 @@
-define([
-	'angular',
-	'angular-couch-potato'
-], function (ng, couchPotato) {
+define(['angular'], function (ng) {
 	'use strict';
 
 	/**
@@ -14,8 +11,6 @@ define([
 		'app.docs.templates.fields'
 	]);
 
-	couchPotato.configureApp(module);
-
 	/**
 	 * Stores additional module configuration
 	 * @method run
@@ -23,21 +18,13 @@ define([
 	 */
 	module.config(function ($stateProvider, gettext) {
 
-		$stateProvider.state('app.docs.templates', {
-			abstract: true,
-			data: {
-				title: gettext('Template')
-			}
-		});
-	});
-
-	/**
-	 * Kicks off the module
-	 * @method run
-	 * @memberof app.docs.templates.module
-	 */
-	module.run(function ($couchPotato) {
-		module.lazy = $couchPotato;
+		$stateProvider
+			.state('app.docs.templates', {
+				abstract: true,
+				data: {
+					title: gettext('Template')
+				}
+			});
 	});
 
 	return module;

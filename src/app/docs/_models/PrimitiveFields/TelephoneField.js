@@ -6,21 +6,31 @@ define(['docs/module'], function (module) {
 	 * @mixes {app.docs.Field}
 	 * @memberOf app.docs
 	 *
+	 * @param $log Console log provider
+	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function TelephoneField(restmod) {
+	function TelephoneField($log, restmod, fieldsConf) {
+		$log.debug('Initiating model factory');
+
 		return restmod
 			.model()
 			.mix('Field', {
-				fieldType: {
-					init: 'NUMBER'
+				$templateUrl: {
+					init: fieldsConf.MODULE_PATH + '/views/fields/inputField/input-field-template.html'
 				},
-				pattern: {
-					init: undefined
+				inputType: {
+					init: 'text'
+				},
+				validators: {
+					init: {
+						phone: {}
+					}
 				}
 			});
+
 	}
 
-	module.registerFactory('TelephoneField', TelephoneField);
+	module.factory('TelephoneField', TelephoneField);
 });

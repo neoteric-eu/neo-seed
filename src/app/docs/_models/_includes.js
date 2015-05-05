@@ -20,7 +20,6 @@ define([
 	'./PrimitiveFields/TimeField',
 	'./PrimitiveFields/ColorField',
 	'./PrimitiveFields/DateField',
-	'./PrimitiveFields/DatetimeField',
 	'./PrimitiveFields/NumberField',
 	'./PrimitiveFields/TextField',
 	'./PrimitiveFields/UrlField',

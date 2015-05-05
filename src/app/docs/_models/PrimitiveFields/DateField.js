@@ -9,15 +9,25 @@ define(['docs/module'], function (module) {
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function DateField(restmod) {
+	function DateField($log, restmod, fieldsConf) {
+		$log.debug('Initiating model factory');
+
 		return restmod
 			.model()
 			.mix('Field', {
-				fieldType: {
-					init: 'DATE'
+				$templateUrl: {
+					init: fieldsConf.MODULE_PATH + '/views/fields/inputField/input-field-template.html'
+				},
+				inputType: {
+					init: 'date'
+				},
+				validators: {
+					init: {
+						date: {}
+					}
 				}
 			});
 	}
 
-	module.registerFactory('DateField', DateField);
+	module.factory('DateField', DateField);
 });

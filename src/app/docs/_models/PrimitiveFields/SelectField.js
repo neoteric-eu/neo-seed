@@ -6,18 +6,27 @@ define(['docs/module'], function (module) {
 	 * @mixes {app.docs.Field}
 	 * @memberOf app.docs
 	 *
+	 * @param $log Console log provider
+	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function SelectField(restmod) {
+	function SelectField($log, restmod, fieldsConf) {
+		$log.debug('Initiating model factory');
+
 		return restmod
 			.model()
 			.mix('Field', {
-				fieldType: {
-					init: 'SELECT'
+				$templateUrl: {
+					init: fieldsConf.MODULE_PATH + '/views/fields/select-field-template.html'
 				},
 				options: {
 					init: []
+				},
+				validators: {
+					init: {
+						notEmpty: {}
+					}
 				},
 				multiple: {
 					init: false
@@ -25,5 +34,5 @@ define(['docs/module'], function (module) {
 			});
 	}
 
-	module.registerFactory('SelectField', SelectField);
+	module.factory('SelectField', SelectField);
 });

@@ -10,7 +10,8 @@ define(['docs/templates/fields/module'], function (module) {
 			},
 			link: function (scope, element) {
 				if (!_.has(scope.field, '$templateUrl')) {
-					throw new TypeError('Unsupported field type');
+					$log.error('Unsupported field type');
+					return;
 				}
 
 				$http
@@ -25,5 +26,5 @@ define(['docs/templates/fields/module'], function (module) {
 		};
 	}
 
-	module.registerDirective('docsField', docsField);
+	module.directive('docsField', docsField);
 });
