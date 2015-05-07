@@ -1,0 +1,23 @@
+// Fixed collapsing menu in field template editor
+.form-actions.collapse:not(.in) {
+	display: none;
+}
+
+.form-actions[collapse]{
+	text-align: left;
+	margin-bottom: 13px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+// Allow proper validation icon placement along with buttons inside input
+// @see https://github.com/twbs/bootstrap/issues/12551
+.input-group-with-edit-button {
+	> .form-control {
+		padding-right: 40px;
+	}
+
+	~ .form-control-feedback {
+		top: 31px !important;
+		right: 44px;
+	}
+}

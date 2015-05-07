@@ -2,8 +2,7 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
-	 * @class SelectField
-	 * @mixes {app.docs.Field}
+	 * @class NotEmptyValidator
 	 * @memberOf app.docs
 	 *
 	 * @param $log Console log provider
@@ -11,20 +10,23 @@ define(['docs/module'], function (module) {
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function SelectField($log, restmod, fieldsConf) {
+	function NotEmptyValidator($log, fieldsConf, restmod) {
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model()
-			.mix('Field', {
-				$templateUrl: {
-					init: fieldsConf.MODULE_PATH + '/views/fields/selectField/select-field-template.html'
+			.mix({
+				validatorType: {
+					init: 'notEmpty'
 				},
-				options: {
-					init: []
+				$templateUrl: {
+					init: fieldsConf.MODULE_PATH + '/views/validators/notEmpty.html'
+				},
+				notEmpty: {
+					init: {}
 				}
 			});
 	}
 
-	module.factory('SelectField', SelectField);
+	module.factory('NotEmptyValidator', NotEmptyValidator);
 });

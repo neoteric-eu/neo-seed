@@ -22,9 +22,6 @@ define(['docs/module'], function (module) {
 				},
 				inputType: {
 					init: 'time'
-				},
-				validators:{
-
 				}
 			});
 	}

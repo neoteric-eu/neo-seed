@@ -22,11 +22,6 @@ define(['docs/module'], function (module) {
 				},
 				inputType: {
 					init: 'text'
-				},
-				validators: {
-					init: {
-						phone: {}
-					}
 				}
 			});
 

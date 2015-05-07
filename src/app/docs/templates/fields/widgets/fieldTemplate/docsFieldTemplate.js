@@ -37,7 +37,7 @@ define([
 				function addField(field) {
 					form.formValidation('addField', field.$pk, field);
 
-					$log.debug('Adding filed to validation list');
+					$log.debug('Added filed to validation list');
 				}
 			},
 
@@ -51,7 +51,6 @@ define([
 
 				function addField(field) {
 					var model = field.class.$build({label: field.label});
-					console.log(model);
 
 					vm.fieldTemplate.composite
 						.$add(model)

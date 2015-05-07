@@ -1,0 +1,33 @@
+<fieldset>
+	<legend>String length</legend>
+	<div class="row">
+		<div class="col-sm-4">
+			<label class="control-label">Minimum length</label>
+
+			<input class="form-control input-sm"
+						 type="number"
+						 ng-model="validator.min">
+		</div>
+
+		<div class="col-sm-4">
+			<label class="control-label">Maximum length</label>
+
+			<input class="form-control input-sm"
+						 type="number"
+						 ng-model="validator.max">
+		</div>
+
+		<div class="col-sm-4">
+			<label class="control-label"></label>
+
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" class="checkbox style-2" checked="checked"
+								 ng-model="validator.trim">
+					<span>Trim value to matching length?</span>
+				</label>
+			</div>
+		</div>
+	</div>
+	</fieldset>
+

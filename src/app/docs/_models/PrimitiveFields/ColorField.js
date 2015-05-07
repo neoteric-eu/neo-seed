@@ -9,9 +9,10 @@ define(['docs/module'], function (module) {
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
+	 * @param ColorValidator Validator data model
 	 * @return {*|Model}
 	 */
-	function ColorField($log, restmod, fieldsConf) {
+	function ColorField($log, restmod, fieldsConf, ColorValidator) {
 		$log.debug('Initiating model factory');
 
 		return restmod
@@ -25,9 +26,7 @@ define(['docs/module'], function (module) {
 				},
 				validators: {
 					init: {
-						color: {
-							type: 'hex'
-						}
+						color: ColorValidator.$build()
 					}
 				}
 			});

@@ -24,7 +24,14 @@ define([
 	'./PrimitiveFields/TextField',
 	'./PrimitiveFields/UrlField',
 	'./PrimitiveFields/SelectField',
-	'./PrimitiveFields/MultiselectField'
+	'./PrimitiveFields/MultiselectField',
+
+	'./Validators/EmailAddressValidator',
+	'./Validators/NotEmptyValidator',
+	'./Validators/DateValidator',
+	'./Validators/IntegerValidator',
+	'./Validators/ColorValidator',
+	'./Validators/Validator'
 ], function () {
 	'use strict';
 });

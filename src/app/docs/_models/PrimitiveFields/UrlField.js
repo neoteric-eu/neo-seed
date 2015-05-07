@@ -22,11 +22,6 @@ define(['docs/module'], function (module) {
 				},
 				inputType: {
 					init: 'url'
-				},
-				validators: {
-					init: {
-						uri: {}
-					}
 				}
 			});
 	}

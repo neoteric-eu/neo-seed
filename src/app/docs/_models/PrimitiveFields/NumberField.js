@@ -9,9 +9,10 @@ define(['docs/module'], function (module) {
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
+	 * @param IntegerValidator Validator data model
 	 * @return {*|Model}
 	 */
-	function NumberField($log, restmod, fieldsConf) {
+	function NumberField($log, restmod, fieldsConf, IntegerValidator) {
 		$log.debug('Initiating model factory');
 
 		return restmod
@@ -25,7 +26,7 @@ define(['docs/module'], function (module) {
 				},
 				validators: {
 					init: {
-						integer: {}
+						integer: IntegerValidator.$build()
 					}
 				}
 			});

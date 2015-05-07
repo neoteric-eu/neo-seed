@@ -9,9 +9,10 @@ define(['docs/module'], function (module) {
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
+	 * @param EmailAddressValidator Validator data model
 	 * @return {*|Model}
 	 */
-	function EmailField($log, restmod, fieldsConf) {
+	function EmailField($log, restmod, fieldsConf, EmailAddressValidator) {
 		$log.debug('Initiating model factory');
 
 		return restmod
@@ -25,7 +26,7 @@ define(['docs/module'], function (module) {
 				},
 				validators: {
 					init: {
-						emailAddress: {}
+						emailAddress: EmailAddressValidator.$build()
 					}
 				}
 			});

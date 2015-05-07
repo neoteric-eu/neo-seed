@@ -25,11 +25,6 @@ define(['docs/module'], function (module) {
 				},
 				multiple: {
 					init: true
-				},
-				validators: {
-					init: {
-						notEmpty: {}
-					}
 				}
 			});
 	}

@@ -1,8 +1,74 @@
-<div class="form-group">
-	<label class="control-label">{{field.label}}</label>
+<section>
+	<div class="form-group">
+		<label class="control-label">{{field.label}}</label>
 
-	<input class="form-control input-sm"
-				 name="{{field.$pk}}"
-				 type="{{field.inputType}}"
-				 ng-model="field.value">
-</div>
+		<div class="input-group input-group-sm input-group-with-edit-button">
+			<input class="form-control"
+						 name="{{field.$pk}}"
+						 type="{{field.inputType}}"
+						 value="field.value"
+						 ng-model="field.value">
+
+
+			<div dropdown class="input-group-btn">
+				<button dropdown-toggle
+								type="button"
+								class="btn btn-default">
+					<i class="fa fa-cog"></i>
+					<span class="caret"></span>
+				</button>
+
+				<ul class="dropdown-menu">
+					<li>
+						<a ng-click="field.$isEditorCollapsed = !field.$isEditorCollapsed">
+							<i class="fa fa-edit"></i>
+							Edit
+						</a>
+						<a ng-click="deleteField()">
+							<i class="fa fa-trash-o"></i>
+							Remove
+						</a>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+		<p ng-if="field.note" class="note"><strong>Note:</strong>{{field.note}}</p>
+	</div>
+
+	<div class="form-actions"
+			 collapse="field.$isEditorCollapsed">
+
+		<!-- VALIDATORS_LIST -->
+		<div ng-repeat="validator in field.validators">
+			<docs-validator validator="validator"></docs-validator>
+		</div>
+		<!-- end:VALIDATORS_LIST -->
+
+		<div class="row">
+			<div class="col-md-4 col-md-offset-2">
+				<div class="btn btn-default btn-block">
+					<i class="fa fa-plug"></i>
+					Add validator
+				</div>
+			</div>
+		</div>
+
+		<div class="form-actions">
+			<div class="row">
+				<div class="col-md-12">
+					<button
+						ng-click="field.$isEditorCollapsed = !field.$isEditorCollapsed"
+						class="btn btn-default"
+						type="button">
+						Cancel
+					</button>
+
+					<button class="btn btn-primary" type="submit">
+						<i class="fa fa-save"></i> Update
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -6,10 +6,13 @@ define(['docs/module'], function (module) {
 	 * @mixes {app.docs.Field}
 	 * @memberOf app.docs
 	 *
+	 * @param $log Console log provider
 	 * @param restmod Data model layer interface
+	 * @param fieldsConf Module configuration
+	 * @param DateValidator Validator data model
 	 * @return {*|Model}
 	 */
-	function DateField($log, restmod, fieldsConf) {
+	function DateField($log, restmod, fieldsConf, DateValidator) {
 		$log.debug('Initiating model factory');
 
 		return restmod
@@ -23,7 +26,7 @@ define(['docs/module'], function (module) {
 				},
 				validators: {
 					init: {
-						date: {}
+						date: DateValidator.$build()
 					}
 				}
 			});

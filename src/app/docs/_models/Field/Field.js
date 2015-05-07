@@ -17,6 +17,9 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model()
 			.mix({
+				$isEditorCollapsed: {
+					init: true
+				},
 				$pk: {
 					init: function(){
 						return _.uniqueId();
