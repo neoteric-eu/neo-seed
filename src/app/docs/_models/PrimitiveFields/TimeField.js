@@ -27,8 +27,11 @@ define(['docs/module'], function (module) {
 					init: 'time'
 				},
 				label: {
-					init: DocumentFieldTypesEnum.DATE.label
-				}
+					encode: 'EnumEncode',
+					decode: 'EnumDecode',
+					param: DocumentFieldTypesEnum,
+					init: DocumentFieldTypesEnum.TIME
+				},
 			});
 	}
 

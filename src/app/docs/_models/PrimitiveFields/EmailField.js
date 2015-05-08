@@ -28,7 +28,10 @@ define(['docs/module'], function (module) {
 					init: 'email'
 				},
 				label: {
-					init: DocumentFieldTypesEnum.DATE.label
+					encode: 'EnumEncode',
+					decode: 'EnumDecode',
+					param: DocumentFieldTypesEnum,
+					init: DocumentFieldTypesEnum.EMAIL
 				},
 				validators: {
 					init: {

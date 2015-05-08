@@ -28,7 +28,10 @@ define(['docs/module'], function (module) {
 					init: 'color'
 				},
 				label: {
-					init: DocumentFieldTypesEnum.COLOR.label
+					encode: 'EnumEncode',
+					decode: 'EnumDecode',
+					param: DocumentFieldTypesEnum,
+					init: DocumentFieldTypesEnum.COLOR
 				},
 				validators: {
 					init: {

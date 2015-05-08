@@ -16,7 +16,7 @@ define([
 	'./PrimitiveFields/EmailField',
 	'./PrimitiveFields/SelectField',
 	'./PrimitiveFields/TextareaField',
-	'./PrimitiveFields/TelephoneField',
+	'./PrimitiveFields/PhoneField',
 	'./PrimitiveFields/TimeField',
 	'./PrimitiveFields/ColorField',
 	'./PrimitiveFields/DateField',
@@ -29,6 +29,7 @@ define([
 	'./Validators/EmailAddressValidator',
 	'./Validators/NotEmptyValidator',
 	'./Validators/DateValidator',
+	'./Validators/PhoneValidator',
 	'./Validators/IntegerValidator',
 	'./Validators/ColorValidator',
 	'./Validators/Validator'

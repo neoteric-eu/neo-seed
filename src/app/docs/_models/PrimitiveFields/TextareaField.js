@@ -24,7 +24,10 @@ define(['docs/module'], function (module) {
 					init: fieldsConf.FIELD_TEMPLATES_PATH + '/textareaField/textarea.html'
 				},
 				label: {
-					init: DocumentFieldTypesEnum.DATE.label
+					encode: 'EnumEncode',
+					decode: 'EnumDecode',
+					param: DocumentFieldTypesEnum,
+					init: DocumentFieldTypesEnum.TEXTAREA
 				}
 			});
 	}

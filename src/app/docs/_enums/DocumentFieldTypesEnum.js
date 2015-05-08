@@ -40,8 +40,8 @@ define(['docs/module'], function (module) {
 				label: gettext('Number'),
 				group: gettext('Numeric')
 			},
-			TELEPHONE: {
-				class: 'TelephoneField',
+			PHONE: {
+				class: 'PhoneField',
 				label: gettext('Phone'),
 				group: gettext('Numeric')
 			},

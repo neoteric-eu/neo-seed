@@ -2,7 +2,7 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
-	 * @class TelephoneField
+	 * @class PhoneField
 	 * @mixes {app.docs.Field}
 	 * @memberOf app.docs
 	 *
@@ -10,10 +10,11 @@ define(['docs/module'], function (module) {
 	 * @param fieldsConf Module configuration
 	 * @param DocumentFieldTypesEnum Available primitive fields enum
 	 * @param restmod Data model layer interface
+	 * @param PhoneValidator
 	 * @return {*|Model}
 	 */
-	function TelephoneField($log, restmod,
-		DocumentFieldTypesEnum, fieldsConf) {
+	function PhoneField($log, restmod, DocumentFieldTypesEnum,
+		fieldsConf, PhoneValidator) {
 
 		$log.debug('Initiating model factory');
 
@@ -23,15 +24,23 @@ define(['docs/module'], function (module) {
 				$templateUrl: {
 					init: fieldsConf.FIELD_TEMPLATES_PATH + '/inputField/input.html'
 				},
-				label: {
-					init: DocumentFieldTypesEnum.DATE.label
-				},
 				inputType: {
 					init: 'text'
+				},
+				label: {
+					encode: 'EnumEncode',
+					decode: 'EnumDecode',
+					param: DocumentFieldTypesEnum,
+					init: DocumentFieldTypesEnum.PHONE
+				},
+				validators: {
+					init: {
+						phone: PhoneValidator.$build()
+					}
 				}
 			});
 
 	}
 
-	module.factory('TelephoneField', TelephoneField);
+	module.factory('PhoneField', PhoneField);
 });

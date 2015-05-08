@@ -27,7 +27,10 @@ define(['docs/module'], function (module) {
 					init: []
 				},
 				label: {
-					init: DocumentFieldTypesEnum.DATE.label
+					encode: 'EnumEncode',
+					decode: 'EnumDecode',
+					param: DocumentFieldTypesEnum,
+					init: DocumentFieldTypesEnum.MULTI_SELECT
 				},
 				multiple: {
 					init: true

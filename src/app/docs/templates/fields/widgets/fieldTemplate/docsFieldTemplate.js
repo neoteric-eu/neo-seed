@@ -6,18 +6,22 @@ define([
 	'use strict';
 
 	/**
-	 * Renders composite field editor
+	 * Renders composite field editor that allows to create complex
+	 * fields with custom validation.
 	 * @class docsFieldTemplateWidget
 	 * @memberOf app.docs.templates.fields
 	 *
-	 * @return {{restrict: string, templateUrl: string}}
+	 * @param $log
+	 * @param fieldsConf
+	 * @param CompositeFieldAPI
+	 * @return {{restrict: string, templateUrl: string, scope: boolean, controllerAs: string, link:
+	 *   Function, controller: Function}}
 	 */
-	function docsFieldTemplateWidget($log, $timeout, $injector,
-		DocumentFieldTypesEnum, fieldsConf, CompositeFieldAPI, FieldValidatorsEnum) {
-
+	function docsFieldTemplateWidget($log, fieldsConf, CompositeFieldAPI) {
 		return {
 			restrict: 'EA',
 			templateUrl: fieldsConf.MODULE_PATH + '/widgets/fieldTemplate/docs-field-template.html',
+			scope: true,
 			controllerAs: 'vm',
 			/**
 			 *
@@ -25,9 +29,9 @@ define([
 			 * @param element
 			 */
 			link: function (scope, element) {
-				var form = element.find('#fieldTemplate');
+				scope.form = element.find('#fieldTemplate');
 
-				$(form)
+				$(scope.form)
 					.formValidation({
 						framework: 'bootstrap',
 						icon: {
@@ -36,14 +40,6 @@ define([
 							validating: 'fa fa-refresh'
 						}
 					});
-
-				scope.addField = addField;
-
-				function addField(field) {
-					form.formValidation('addField', field.$pk, field);
-
-					$log.debug('Added filed to validation list');
-				}
 			},
 
 			/**
@@ -51,36 +47,7 @@ define([
 			 * @param $scope
 			 */
 			controller: function ($scope) {
-				var vm = this;
-
-				vm.compositeField = CompositeFieldAPI.build();
-				vm.fieldGroups = _.groupBy(DocumentFieldTypesEnum, 'group');
-				vm.fieldValidators = FieldValidatorsEnum;
-
-				vm.addField = addField;
-
-				function addField(field) {
-					var fieldClass;
-
-					if ($injector.has(field.class)) {
-						fieldClass = $injector.get(field.class);
-					} else {
-						$log.error('Unsupported injectable field class');
-					}
-
-					var model = fieldClass.$build();
-
-					vm.compositeField.composite
-						.$add(model)
-						.$asPromise()
-						.then(function () {
-							$timeout(function () {
-								$scope.addField(model);
-							}, 200);
-						});
-
-					$log.debug('Added new field to form');
-				}
+				$scope.compositeField = CompositeFieldAPI.build();
 
 				$log.debug('Initiated controller');
 			}

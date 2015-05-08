@@ -13,7 +13,7 @@ define(['docs/module'], function (module) {
 	 * @return {*|Model}
 	 */
 	function SelectField($log, restmod,
-		DocumentFieldTypesEnum,fieldsConf) {
+		DocumentFieldTypesEnum, fieldsConf) {
 
 		$log.debug('Initiating model factory');
 
@@ -24,7 +24,10 @@ define(['docs/module'], function (module) {
 					init: fieldsConf.FIELD_TEMPLATES_PATH + '/selectField/select.html'
 				},
 				label: {
-					init: DocumentFieldTypesEnum.DATE.label
+					encode: 'EnumEncode',
+					decode: 'EnumDecode',
+					param: DocumentFieldTypesEnum,
+					init: DocumentFieldTypesEnum.SELECT
 				},
 				options: {
 					init: []
