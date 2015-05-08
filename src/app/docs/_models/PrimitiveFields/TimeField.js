@@ -8,20 +8,26 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
+	 * @param DocumentFieldTypesEnum Available primitive fields enum
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function TimeField($log, restmod, fieldsConf) {
+	function TimeField($log, restmod,
+		DocumentFieldTypesEnum, fieldsConf) {
+
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.MODULE_PATH + '/views/fields/inputField/input-field-template.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + '/inputField/input.html'
 				},
 				inputType: {
 					init: 'time'
+				},
+				label: {
+					init: DocumentFieldTypesEnum.DATE.label
 				}
 			});
 	}

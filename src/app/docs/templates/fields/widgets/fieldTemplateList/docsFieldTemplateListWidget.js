@@ -7,11 +7,11 @@ define(['docs/templates/fields/module'], function (module) {
 	 * @memberOf app.docs.templates.fields
 	 *
 	 * @param neoTableParams {Function} Table configuration object.
-	 * @param FieldTemplateAPI {Object} API interface for server communication.
+	 * @param CompositeFieldAPI {Object} API interface for server communication.
 	 * @return {{restrict: string, templateUrl: string, scope: boolean, controllerAs: string,
 	 *   controller: Function}}
 	 */
-	function docsFieldTemplateListWidget(neoTableParams, FieldTemplateAPI, fieldsConf) {
+	function docsFieldTemplateListWidget(neoTableParams, CompositeFieldAPI, fieldsConf) {
 		return {
 			restrict: 'EA',
 			templateUrl: fieldsConf.MODULE_PATH + '/widgets/fieldTemplateList/docs-field-template-list.html',
@@ -20,12 +20,12 @@ define(['docs/templates/fields/module'], function (module) {
 			/**
 			 * Widget business logic
 			 * @method
-			 * @memberOf app.docs.templates.fields.docsDocumentListWidget
+			 * @memberOf app.docs.templates.fields.docsFieldTemplateListWidget
 			 */
 			controller: function () {
 				var vm = this;
 
-				vm.fieldTemplatesTableOptions = new neoTableParams(FieldTemplateAPI);
+				vm.fieldTemplatesTableOptions = new neoTableParams(CompositeFieldAPI);
 			}
 		};
 	}

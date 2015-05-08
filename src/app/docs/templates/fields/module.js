@@ -12,7 +12,9 @@ define(['angular'], function (ng) {
 	 * Module configuration options.fields
 	 */
 	module.constant('fieldsConf', {
-		MODULE_PATH: '/app/docs/templates/fields'
+		MODULE_PATH: '/app/docs/templates/fields',
+		FIELD_TEMPLATES_PATH: '/app/docs/templates/fields/_directives/docsField/fields',
+		VALIDATOR_TEMPLATES_PATH: '/app/docs/templates/fields/_directives/docsValidator/validators'
 	});
 
 	/**

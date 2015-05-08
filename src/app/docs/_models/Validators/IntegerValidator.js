@@ -3,23 +3,33 @@ define(['docs/module'], function (module) {
 
 	/**
 	 * @class IntegerValidator
+	 * @mixes {app.docs.Validator}
 	 * @memberOf app.docs
 	 *
-	 * @param $log Console log provider
-	 * @param restmod Data model layer interface
+	 * @example
+	 * {
+	 *  validatorType: 'integer'
+	 * }
+	 * @see {@link http://formvalidation.io/validators/integer/}
+	 * @param $log {Object} Console log provider
+	 * @param restmod {Object} Data model layer interface
+	 * @param FieldValidatorsEnum {Object} List of registered field validators
 	 * @return {*|Model}
 	 */
-	function IntegerValidator($log, restmod) {
+	function IntegerValidator($log, restmod, FieldValidatorsEnum) {
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model()
-			.mix({
+			.mix('Validator', {
 				validatorType: {
 					init: 'integer'
 				},
-				integer: {
-					init: {}
+				label: {
+					encode: 'EnumEncode',
+					decode: 'EnumDecode',
+					param: FieldValidatorsEnum,
+					init: FieldValidatorsEnum.INTEGER
 				}
 			});
 	}

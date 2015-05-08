@@ -2,7 +2,7 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
-	 * @class FieldTemplate
+	 * @class CompositeField
 	 * @mixin
 	 * @memberOf app.docs
 	 *
@@ -10,7 +10,7 @@ define(['docs/module'], function (module) {
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function FieldTemplate($log, restmod) {
+	function CompositeField($log, restmod) {
 		$log.debug('Initiating model factory');
 
 		return restmod
@@ -23,10 +23,10 @@ define(['docs/module'], function (module) {
 					init: ''
 				},
 				composite: {
-					hasMany: 'FieldTemplate'
+					hasMany: 'CompositeField'
 				}
 			});
 	}
 
-	module.factory('FieldTemplate', FieldTemplate);
+	module.factory('CompositeField', CompositeField);
 });

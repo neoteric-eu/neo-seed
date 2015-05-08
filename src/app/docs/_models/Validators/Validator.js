@@ -3,6 +3,7 @@ define(['docs/module'], function (module) {
 
 	/**
 	 * @class Validator
+	 * @mixin
 	 * @memberOf app.docs
 	 *
 	 * @param $log Console log provider

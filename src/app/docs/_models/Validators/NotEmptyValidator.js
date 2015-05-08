@@ -3,27 +3,37 @@ define(['docs/module'], function (module) {
 
 	/**
 	 * @class NotEmptyValidator
+	 * @mixes {app.docs.Validator}
 	 * @memberOf app.docs
 	 *
-	 * @param $log Console log provider
+	 * @example
+	 * {
+	 *  validatorType: 'integer'
+	 * }
+	 * @see {@link http://formvalidation.io/validators/notEmpty/}
+	 * @param $log {Object} Console log provider
+	 * @param restmod {Object} Data model layer interface
+	 * @param FieldValidatorsEnum {Object} List of registered field validators
 	 * @param fieldsConf Module configuration
-	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function NotEmptyValidator($log, fieldsConf, restmod) {
+	function NotEmptyValidator($log, fieldsConf, restmod, FieldValidatorsEnum) {
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model()
-			.mix({
+			.mix('Validator', {
+				$templateUrl: {
+					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + '/notEmpty.html'
+				},
 				validatorType: {
 					init: 'notEmpty'
 				},
-				$templateUrl: {
-					init: fieldsConf.MODULE_PATH + '/views/validators/notEmpty.html'
-				},
-				notEmpty: {
-					init: {}
+				label: {
+					encode: 'EnumEncode',
+					decode: 'EnumDecode',
+					param: FieldValidatorsEnum,
+					init: FieldValidatorsEnum.REQUIRED
 				}
 			});
 	}

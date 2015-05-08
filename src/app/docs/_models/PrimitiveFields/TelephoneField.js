@@ -8,17 +8,23 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
+	 * @param DocumentFieldTypesEnum Available primitive fields enum
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function TelephoneField($log, restmod, fieldsConf) {
+	function TelephoneField($log, restmod,
+		DocumentFieldTypesEnum, fieldsConf) {
+
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.MODULE_PATH + '/views/fields/inputField/input-field-template.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + '/inputField/input.html'
+				},
+				label: {
+					init: DocumentFieldTypesEnum.DATE.label
 				},
 				inputType: {
 					init: 'text'

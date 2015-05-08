@@ -6,19 +6,24 @@ define([
 	'use strict';
 
 	/**
-	 * Renders list of user's documents
+	 * Renders composite field editor
 	 * @class docsFieldTemplateWidget
 	 * @memberOf app.docs.templates.fields
 	 *
 	 * @return {{restrict: string, templateUrl: string}}
 	 */
-	function docsFieldTemplateWidget($log, $timeout, DocumentFieldTypesEnum,
-	                                 fieldsConf, FieldTemplateAPI) {
+	function docsFieldTemplateWidget($log, $timeout, $injector,
+		DocumentFieldTypesEnum, fieldsConf, CompositeFieldAPI, FieldValidatorsEnum) {
 
 		return {
 			restrict: 'EA',
 			templateUrl: fieldsConf.MODULE_PATH + '/widgets/fieldTemplate/docs-field-template.html',
 			controllerAs: 'vm',
+			/**
+			 *
+			 * @param scope
+			 * @param element
+			 */
 			link: function (scope, element) {
 				var form = element.find('#fieldTemplate');
 
@@ -41,18 +46,31 @@ define([
 				}
 			},
 
+			/**
+			 *
+			 * @param $scope
+			 */
 			controller: function ($scope) {
 				var vm = this;
 
-				vm.fieldTemplate = FieldTemplateAPI.build();
+				vm.compositeField = CompositeFieldAPI.build();
 				vm.fieldGroups = _.groupBy(DocumentFieldTypesEnum, 'group');
+				vm.fieldValidators = FieldValidatorsEnum;
 
 				vm.addField = addField;
 
 				function addField(field) {
-					var model = field.class.$build({label: field.label});
+					var fieldClass;
 
-					vm.fieldTemplate.composite
+					if ($injector.has(field.class)) {
+						fieldClass = $injector.get(field.class);
+					} else {
+						$log.error('Unsupported injectable field class');
+					}
+
+					var model = fieldClass.$build();
+
+					vm.compositeField.composite
 						.$add(model)
 						.$asPromise()
 						.then(function () {

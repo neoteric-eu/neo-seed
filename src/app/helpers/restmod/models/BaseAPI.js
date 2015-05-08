@@ -182,7 +182,7 @@ define(['app'], function (module) {
 		 * @method handleError
 		 * @memberOf app.BaseAPI
 		 * @param response CallExpression
-		 * @return {void|*|Array}
+		 * @return {i to void|*|Array}
 		 */
 		function handleError(response) {
 			appMessages.error({

@@ -25,12 +25,8 @@ define(['docs/module'], function (module) {
 						return _.uniqueId();
 					}
 				},
-				label: {
-					init: ''
-				},
-				defaultValue: {
-					init: ''
-				},
+				label: {},
+				defaultValue: {},
 				validators: {
 					decode: 'FieldValidatorDecode',
 					encode: 'FieldValidatorEncode'

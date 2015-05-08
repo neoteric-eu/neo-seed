@@ -8,14 +8,14 @@ define(['docs/module'], function (module) {
 	 * @memberOf app.docs
 	 *
 	 * @param BaseAPI
-	 * @param FieldTemplate
+	 * @param CompositeField
 	 * @return {*}
 	 */
-	function FieldTemplateAPI(BaseAPI, FieldTemplate) {
-		return new BaseAPI(FieldTemplate);
+	function CompositeFieldAPI(BaseAPI, CompositeField) {
+		return new BaseAPI(CompositeField);
 	}
 
-	module.service('FieldTemplateAPI', FieldTemplateAPI);
+	module.service('CompositeFieldAPI', CompositeFieldAPI);
 });
 
 

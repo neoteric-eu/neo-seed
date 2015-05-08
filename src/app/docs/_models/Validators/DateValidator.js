@@ -3,33 +3,46 @@ define(['docs/module'], function (module) {
 
 	/**
 	 * @class DateValidator
+	 * @mixes {app.docs.Validator}
 	 * @memberOf app.docs
 	 *
-	 * @param $log Console log provider
-	 * @param restmod Data model layer interface
+	 * @example
+	 * {
+	 *  validatorType: 'date'
+	 *  min: '10-03-2015'
+	 *  max: '21-03-2015'
+	 * }
+	 * @see {@link http://formvalidation.io/validators/date/}
+	 * @param $log {Object} Console log provider
+	 * @param restmod {Object} Data model layer interface
+	 * @param FieldValidatorsEnum {Object} List of registered field validators
+	 * @param fieldsConf Module configuration
 	 * @return {*|Model}
-	 * @param fieldsConf
 	 */
-	function DateValidator($log, restmod, fieldsConf) {
+	function DateValidator($log, restmod, fieldsConf, FieldValidatorsEnum) {
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model()
-			.mix({
+			.mix('Validator', {
 				$templateUrl: {
-					init: fieldsConf.MODULE_PATH + '/views/validators/date.html'
+					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + '/date.html'
 				},
 				validatorType: {
 					init: 'date'
 				},
-				value: {
-					encode: 'DateEncode',
-					decode: 'DateDecode'
+				label: {
+					encode: 'EnumEncode',
+					decode: 'EnumDecode',
+					param: FieldValidatorsEnum,
+					init: FieldValidatorsEnum.DATE
 				},
+				// The minimal acceptable date
 				min: {
 					encode: 'DateEncode',
 					decode: 'DateDecode'
 				},
+				// The maximal acceptable date
 				max: {
 					encode: 'DateEncode',
 					decode: 'DateDecode'

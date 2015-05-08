@@ -9,20 +9,26 @@ define(['docs/module'], function (module) {
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
+	 * @param DocumentFieldTypesEnum Available primitive fields enum
 	 * @param ColorValidator Validator data model
 	 * @return {*|Model}
 	 */
-	function ColorField($log, restmod, fieldsConf, ColorValidator) {
+	function ColorField($log, restmod, fieldsConf,
+		DocumentFieldTypesEnum, ColorValidator) {
+
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.MODULE_PATH + '/views/fields/inputField/input-field-template.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + '/inputField/input.html'
 				},
 				inputType: {
 					init: 'color'
+				},
+				label: {
+					init: DocumentFieldTypesEnum.COLOR.label
 				},
 				validators: {
 					init: {

@@ -10,8 +10,8 @@ define([
 	'./Field/serializers/FieldValidatorDecodeFilter',
 	'./Field/serializers/FieldValidatorEncodeFilter',
 
-	'./FieldTemplate/FieldTemplate',
-	'./FieldTemplate/FieldTemplateAPI',
+	'./CompositeField/CompositeField',
+	'./CompositeField/CompositeFieldAPI',
 
 	'./PrimitiveFields/EmailField',
 	'./PrimitiveFields/SelectField',

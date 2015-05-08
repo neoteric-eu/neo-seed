@@ -9,20 +9,26 @@ define(['docs/module'], function (module) {
 	 * @param $log Console log provider
 	 * @param restmod Data model layer interface
 	 * @param fieldsConf Module configuration
+	 * @param DocumentFieldTypesEnum Available primitive fields enum
 	 * @param DateValidator Validator data model
 	 * @return {*|Model}
 	 */
-	function DateField($log, restmod, fieldsConf, DateValidator) {
+	function DateField($log, restmod, fieldsConf,
+		DocumentFieldTypesEnum, DateValidator) {
+
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.MODULE_PATH + '/views/fields/inputField/input-field-template.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + '/inputField/input.html'
 				},
 				inputType: {
 					init: 'date'
+				},
+				label: {
+					init: DocumentFieldTypesEnum.DATE.label
 				},
 				validators: {
 					init: {

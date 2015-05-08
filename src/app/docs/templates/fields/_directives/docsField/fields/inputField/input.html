@@ -45,11 +45,21 @@
 		</div>
 		<!-- end:VALIDATORS_LIST -->
 
+
 		<div class="row">
 			<div class="col-md-4 col-md-offset-2">
-				<div class="btn btn-default btn-block">
-					<i class="fa fa-plug"></i>
-					Add validator
+				<div class="btn-group btn-group-sm" dropdown>
+					<button type="button"
+									class="btn btn-default dropdown-toggle"
+									dropdown-toggle>
+						<i class="fa fa-fw fa-plug"></i>
+						Add validator <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li ng-repeat="(validatorName, validator) in vm.fieldValidators"
+								class="dropdown-header">{{validator.label | translate}}
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>

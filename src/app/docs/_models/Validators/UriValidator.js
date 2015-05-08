@@ -3,20 +3,33 @@ define(['docs/module'], function (module) {
 
 	/**
 	 * @class ColorValidator
+	 * @mixes {app.docs.Validator}
 	 * @memberOf app.docs
 	 *
-	 * @param $log Console log provider
-	 * @param restmod Data model layer interface
+	 * @example
+	 * {
+	 *  validatorType: 'uri'
+	 * }
+	 * @see {@link http://formvalidation.io/validators/uri/}
+	 * @param $log {Object} Console log provider
+	 * @param restmod {Object} Data model layer interface
+	 * @param FieldValidatorsEnum {Object} List of registered field validators
 	 * @return {*|Model}
 	 */
-	function ColorValidator($log, restmod) {
+	function ColorValidator($log, restmod, FieldValidatorsEnum) {
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model()
-			.mix({
+			.mix('Validator', {
 				validatorType: {
 					init: 'uri'
+				},
+				label: {
+					encode: 'EnumEncode',
+					decode: 'EnumDecode',
+					param: FieldValidatorsEnum,
+					init: FieldValidatorsEnum.URI
 				}
 			});
 	}
