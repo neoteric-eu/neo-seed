@@ -8,12 +8,12 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
-	 * @param DocumentFieldTypesEnum Available primitive fields enum
+	 * @param FieldTypesEnum Available primitive fields enum
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
 	function TextField($log, restmod,
-		DocumentFieldTypesEnum, fieldsConf) {
+		FieldTypesEnum, fieldsConf) {
 
 		$log.debug('Initiating model factory');
 
@@ -23,14 +23,11 @@ define(['docs/module'], function (module) {
 				$templateUrl: {
 					init: fieldsConf.FIELD_TEMPLATES_PATH + '/inputField/input.html'
 				},
-				inputType: {
-					init: 'text'
-				},
 				label: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.TEXT
+					param: FieldTypesEnum,
+					init: FieldTypesEnum.TEXT
 				}
 			});
 	}

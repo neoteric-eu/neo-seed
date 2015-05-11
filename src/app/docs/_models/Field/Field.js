@@ -28,6 +28,7 @@ define(['docs/module'], function (module) {
 				label: {},
 				defaultValue: {},
 				validators: {
+					init: {},
 					decode: 'FieldValidatorDecode',
 					encode: 'FieldValidatorEncode'
 				}

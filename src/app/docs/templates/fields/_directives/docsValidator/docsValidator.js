@@ -1,15 +1,28 @@
 define(['docs/templates/fields/module'], function (module) {
 	'use strict';
 
+	/**
+	 *
+	 * @param $http
+	 * @param $compile
+	 * @param $log
+	 * @return {{restrict: string, scope: {validator: string}, link: Function, controller: Function}}
+	 */
 	function docsValidator($http, $compile, $log) {
 
 		return {
 			restrict: 'EA',
-			scope: {
-				validator: '='
-			},
+			controllerAs: 'vm',
+			require: '^docsFieldTemplateWidget',
+			/**
+			 *
+			 * @param scope
+			 * @param element
+			 */
 			link: function (scope, element) {
 				if (!_.has(scope.validator, '$templateUrl')) {
+					$log.error(scope.validator.validatorType +
+						' validator does not have $templateUrl attached');
 					return;
 				}
 
@@ -21,6 +34,40 @@ define(['docs/templates/fields/module'], function (module) {
 
 						$log.debug('Recompiled view with newly added validator');
 					});
+
+				scope.addField = addField;
+
+				function addField(field, validatorName) {
+					$('#fieldTemplate')
+						.formValidation('enableFieldValidators', field.$pk, false, validatorName)
+						.formValidation('revalidateField', field.$pk);
+
+					$log.debug('Added filed to validation list');
+				}
+			},
+			/**
+			 *
+			 * @param $scope
+			 */
+			controller: function ($scope) {
+				var vm = this;
+
+				vm.removeValidator = removeValidator;
+
+
+				function removeValidator(validatorName) {
+					$scope.validator.$destroy()
+						.$asPromise()
+						.then(function () {
+							delete $scope.field.validators[validatorName];
+							$scope.addField($scope.field, validatorName);
+							console.log($scope.field);
+						});
+
+					$log.debug('Removed validator form field validators list');
+				}
+
+				$log.debug('Initiated controller');
 			}
 		};
 	}

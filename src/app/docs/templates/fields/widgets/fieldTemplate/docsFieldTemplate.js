@@ -49,6 +49,15 @@ define([
 			controller: function ($scope) {
 				$scope.compositeField = CompositeFieldAPI.build();
 
+				var vm = this;
+
+				vm.save = save;
+
+				function save() {
+					$scope.compositeField.save();
+					$log.debug('Saved composite field');
+				}
+
 				$log.debug('Initiated controller');
 			}
 		};

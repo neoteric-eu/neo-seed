@@ -8,12 +8,12 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
-	 * @param DocumentFieldTypesEnum Available primitive fields enum
+	 * @param FieldTypesEnum Available primitive fields enum
 	 * @param restmod Data model layer interface
+	 * @param UriValidator Validator data model
 	 * @return {*|Model}
 	 */
-	function UrlField($log, restmod,
-		DocumentFieldTypesEnum, fieldsConf) {
+	function UrlField($log, restmod, FieldTypesEnum, fieldsConf, UriValidator) {
 
 		$log.debug('Initiating model factory');
 
@@ -29,9 +29,14 @@ define(['docs/module'], function (module) {
 				label: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.URL
+					param: FieldTypesEnum,
+					init: FieldTypesEnum.URL
 				},
+				validators: {
+					init: {
+						uri: UriValidator.$build({$isRemovable: false})
+					}
+				}
 			});
 	}
 

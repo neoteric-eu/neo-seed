@@ -11,28 +11,54 @@ define([
 	 * @param $log
 	 * @param fieldsConf
 	 * @param FieldValidatorsEnum
+	 * @param $injector
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope:
 	 *   {fieldValidators: string}, controller: Function}}
 	 */
-	function docsAddValidator($log, fieldsConf, FieldValidatorsEnum) {
+	function docsAddValidator($log, $injector, fieldsConf, FieldValidatorsEnum) {
 
 		return {
 			restrict: 'EA',
 			templateUrl: fieldsConf.MODULE_PATH + '/_directives/docsAddValidator/docs-add-validator.html',
 			controllerAs: 'vm',
-			scope: {
-				fieldValidators: '='
+			require: '^docsFieldTemplateWidget',
+			link: function (scope) {
+				scope.enableValidator = enableValidator;
+
+				function enableValidator() {
+					$('#fieldTemplate')
+						.formValidation('addField', scope.field.$pk, scope.field)
+						.formValidation('revalidateField', scope.field.$pk);
+
+					$log.debug('Added new validator to field list');
+				}
 			},
-			controller: function () {
+			controller: function ($scope) {
 				var vm = this;
 
 				vm.fieldValidators = FieldValidatorsEnum;
 
 				vm.addValidator = addValidator;
 
-				function addValidator() {
+				function addValidator(validator) {
 
-					$log.debug('Attached to field new validator');
+					var validatorClass;
+
+					if ($injector.has(validator.class)) {
+						validatorClass = $injector.get(validator.class);
+					} else {
+						$log.error('Unsupported injectable validator class');
+						return;
+					}
+
+					validatorClass
+						.$build()
+						.$asPromise()
+						.then(function (model) {
+							$scope.field.validators[model.validatorType] = model;
+							$scope.enableValidator();
+						});
+					$log.debug('Attached new validator to validator');
 				}
 
 				$log.debug('Initiated controller');

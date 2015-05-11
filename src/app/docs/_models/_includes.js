@@ -32,6 +32,7 @@ define([
 	'./Validators/PhoneValidator',
 	'./Validators/IntegerValidator',
 	'./Validators/ColorValidator',
+	'./Validators/UriValidator',
 	'./Validators/Validator'
 ], function () {
 	'use strict';

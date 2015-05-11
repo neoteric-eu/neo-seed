@@ -13,7 +13,11 @@ define(['docs/module'], function (module) {
 	function Validator($log, restmod) {
 		$log.debug('Initiating model factory');
 
-		return restmod.model();
+		return restmod.model().mix({
+			$isRemovable: {
+				init: true
+			}
+		});
 	}
 
 	module.factory('Validator', Validator);

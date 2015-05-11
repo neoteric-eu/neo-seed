@@ -1,6 +1,6 @@
 define([
-	'./DocumentFieldTypesEnum',
-	'./FieldValidatorEnum'
+	'./FieldTypesEnum',
+	'./FieldValidatorsEnum'
 ], function () {
 	'use strict';
 });

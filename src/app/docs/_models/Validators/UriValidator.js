@@ -2,7 +2,7 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
-	 * @class ColorValidator
+	 * @class UriValidator
 	 * @mixes {app.docs.Validator}
 	 * @memberOf app.docs
 	 *
@@ -16,7 +16,7 @@ define(['docs/module'], function (module) {
 	 * @param FieldValidatorsEnum {Object} List of registered field validators
 	 * @return {*|Model}
 	 */
-	function ColorValidator($log, restmod, FieldValidatorsEnum) {
+	function UriValidator($log, restmod, FieldValidatorsEnum) {
 		$log.debug('Initiating model factory');
 
 		return restmod
@@ -34,5 +34,5 @@ define(['docs/module'], function (module) {
 			});
 	}
 
-	module.factory('ColorValidator', ColorValidator);
+	module.factory('UriValidator', UriValidator);
 });

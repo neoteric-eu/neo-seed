@@ -9,12 +9,12 @@ define(['docs/module'], function (module) {
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
-	 * @param DocumentFieldTypesEnum Available primitive fields enum
+	 * @param FieldTypesEnum Available primitive fields enum
 	 * @param IntegerValidator Validator data model
 	 * @return {*|Model}
 	 */
 	function NumberField($log, restmod, fieldsConf,
-		DocumentFieldTypesEnum,IntegerValidator) {
+		FieldTypesEnum, IntegerValidator) {
 
 		$log.debug('Initiating model factory');
 
@@ -30,12 +30,12 @@ define(['docs/module'], function (module) {
 				label: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.NUMBER
+					param: FieldTypesEnum,
+					init: FieldTypesEnum.NUMBER
 				},
 				validators: {
 					init: {
-						integer: IntegerValidator.$build()
+						integer: IntegerValidator.$build({$isRemovable: false})
 					}
 				}
 			});

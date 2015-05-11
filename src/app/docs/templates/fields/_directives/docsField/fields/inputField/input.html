@@ -36,16 +36,15 @@
 		<p ng-if="field.note" class="note"><strong>Note:</strong>{{field.note}}</p>
 	</div>
 
-	<div class="form-actions"
-			 collapse="field.$isEditorCollapsed">
+	<div class="form-actions" collapse="field.$isEditorCollapsed">
 
 		<!-- VALIDATORS_LIST -->
-		<div ng-repeat="validator in field.validators">
-			<docs-validator validator="validator"></docs-validator>
+		<div ng-repeat="(validatorName, validator) in field.validators">
+			<docs-validator></docs-validator>
 		</div>
 		<!-- end:VALIDATORS_LIST -->
 
-		<docs-add-validator field-validators="field.validators"></docs-add-validator>
+		<docs-add-validator></docs-add-validator>
 
 		<div class="form-actions">
 			<div class="row">

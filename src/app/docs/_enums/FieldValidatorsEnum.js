@@ -40,14 +40,14 @@ define(['docs/module'], function (module) {
 				label: gettext('Phone')
 			},
 			DATE: {
-				class: 'StringLengthValidator',
+				class: 'DateValidator',
 				label: gettext('Date')
 			},
 			COLOR: {
 				class: 'ColorValidator',
 				label: gettext('Color')
 			},
-			REQUIRED: {
+			NOT_EMPTY: {
 				class: 'NotEmptyValidator',
 				label: gettext('Required')
 			}

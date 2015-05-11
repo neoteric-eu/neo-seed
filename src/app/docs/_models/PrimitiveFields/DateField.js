@@ -9,12 +9,12 @@ define(['docs/module'], function (module) {
 	 * @param $log Console log provider
 	 * @param restmod Data model layer interface
 	 * @param fieldsConf Module configuration
-	 * @param DocumentFieldTypesEnum Available primitive fields enum
+	 * @param FieldTypesEnum Available primitive fields enum
 	 * @param DateValidator Validator data model
 	 * @return {*|Model}
 	 */
 	function DateField($log, restmod, fieldsConf,
-		DocumentFieldTypesEnum, DateValidator) {
+		FieldTypesEnum, DateValidator) {
 
 		$log.debug('Initiating model factory');
 
@@ -30,12 +30,12 @@ define(['docs/module'], function (module) {
 				label: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.DATE
+					param: FieldTypesEnum,
+					init: FieldTypesEnum.DATE
 				},
 				validators: {
 					init: {
-						date: DateValidator.$build()
+						date: DateValidator.$build({$isRemovable: false})
 					}
 				}
 			});

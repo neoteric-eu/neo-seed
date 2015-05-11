@@ -5,9 +5,8 @@ define(['docs/templates/fields/module'], function (module) {
 
 		return {
 			restrict: 'EA',
-			scope: {
-				field: '='
-			},
+			transclude: true,
+			require: '^docsFieldTemplateWidget',
 			link: function (scope, element) {
 				if (!_.has(scope.field, '$templateUrl')) {
 					$log.error('Unsupported field type');

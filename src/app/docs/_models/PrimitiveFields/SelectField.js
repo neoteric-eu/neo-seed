@@ -8,12 +8,12 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
-	 * @param DocumentFieldTypesEnum Available primitive fields enum
+	 * @param FieldTypesEnum Available primitive fields enum
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
 	function SelectField($log, restmod,
-		DocumentFieldTypesEnum, fieldsConf) {
+		FieldTypesEnum, fieldsConf) {
 
 		$log.debug('Initiating model factory');
 
@@ -26,8 +26,8 @@ define(['docs/module'], function (module) {
 				label: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.SELECT
+					param: FieldTypesEnum,
+					init: FieldTypesEnum.SELECT
 				},
 				options: {
 					init: []

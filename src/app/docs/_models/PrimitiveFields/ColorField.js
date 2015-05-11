@@ -9,12 +9,12 @@ define(['docs/module'], function (module) {
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
-	 * @param DocumentFieldTypesEnum Available primitive fields enum
+	 * @param FieldValidatorsEnum Available primitive fields enum
 	 * @param ColorValidator Validator data model
 	 * @return {*|Model}
 	 */
 	function ColorField($log, restmod, fieldsConf,
-		DocumentFieldTypesEnum, ColorValidator) {
+		FieldValidatorsEnum, ColorValidator) {
 
 		$log.debug('Initiating model factory');
 
@@ -30,12 +30,12 @@ define(['docs/module'], function (module) {
 				label: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.COLOR
+					param: FieldValidatorsEnum,
+					init: FieldValidatorsEnum.COLOR
 				},
 				validators: {
 					init: {
-						color: ColorValidator.$build()
+						color: ColorValidator.$build({$isRemovable: false})
 					}
 				}
 			});

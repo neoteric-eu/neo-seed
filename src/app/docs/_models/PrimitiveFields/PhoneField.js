@@ -8,12 +8,12 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
-	 * @param DocumentFieldTypesEnum Available primitive fields enum
+	 * @param FieldTypesEnum Available primitive fields enum
 	 * @param restmod Data model layer interface
 	 * @param PhoneValidator
 	 * @return {*|Model}
 	 */
-	function PhoneField($log, restmod, DocumentFieldTypesEnum,
+	function PhoneField($log, restmod, FieldTypesEnum,
 		fieldsConf, PhoneValidator) {
 
 		$log.debug('Initiating model factory');
@@ -25,17 +25,17 @@ define(['docs/module'], function (module) {
 					init: fieldsConf.FIELD_TEMPLATES_PATH + '/inputField/input.html'
 				},
 				inputType: {
-					init: 'text'
+					init: 'tel'
 				},
 				label: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.PHONE
+					param: FieldTypesEnum,
+					init: FieldTypesEnum.PHONE
 				},
 				validators: {
 					init: {
-						phone: PhoneValidator.$build()
+						phone: PhoneValidator.$build({$isRemovable: false})
 					}
 				}
 			});

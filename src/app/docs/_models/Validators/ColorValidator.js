@@ -14,15 +14,19 @@ define(['docs/module'], function (module) {
 	 * @see {@link http://formvalidation.io/validators/color/}
 	 * @param $log {Object} Console log provider
 	 * @param restmod {Object} Data model layer interface
+	 * @param fieldsConf {Object} Module configuration
 	 * @param FieldValidatorsEnum {Object} List of registered field validators
 	 * @return {*|Model}
 	 */
-	function ColorValidator($log, restmod, FieldValidatorsEnum) {
+	function ColorValidator($log, restmod, fieldsConf, FieldValidatorsEnum) {
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model()
 			.mix('Validator', {
+				$templateUrl: {
+					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + '/color.html'
+				},
 				validatorType: {
 					init: 'color'
 				},

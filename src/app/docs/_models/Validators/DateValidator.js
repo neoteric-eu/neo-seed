@@ -15,8 +15,8 @@ define(['docs/module'], function (module) {
 	 * @see {@link http://formvalidation.io/validators/date/}
 	 * @param $log {Object} Console log provider
 	 * @param restmod {Object} Data model layer interface
+	 * @param fieldsConf {Object} Module configuration
 	 * @param FieldValidatorsEnum {Object} List of registered field validators
-	 * @param fieldsConf Module configuration
 	 * @return {*|Model}
 	 */
 	function DateValidator($log, restmod, fieldsConf, FieldValidatorsEnum) {

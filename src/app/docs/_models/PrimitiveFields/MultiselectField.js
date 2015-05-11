@@ -8,12 +8,12 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log Console log provider
 	 * @param restmod Data model layer interface
-	 * @param DocumentFieldTypesEnum Available primitive fields enum
+	 * @param FieldTypesEnum Available primitive fields enum
 	 * @param fieldsConf Module configuration
 	 * @return {*|Model}
 	 */
 	function MultiselectField($log, restmod,
-		DocumentFieldTypesEnum,fieldsConf) {
+		FieldTypesEnum, FieldValidatorsEnum, fieldsConf) {
 
 		$log.debug('Initiating model factory');
 
@@ -24,13 +24,13 @@ define(['docs/module'], function (module) {
 					init: fieldsConf.FIELD_TEMPLATES_PATH + '/selectField/multiselect.html'
 				},
 				options: {
-					init: []
+					init: {}
 				},
 				label: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.MULTI_SELECT
+					param: FieldTypesEnum,
+					init: FieldTypesEnum.MULTI_SELECT
 				},
 				multiple: {
 					init: true

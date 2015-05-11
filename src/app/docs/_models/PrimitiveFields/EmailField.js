@@ -9,12 +9,13 @@ define(['docs/module'], function (module) {
 	 * @param $log Console log provider
 	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
-	 * @param DocumentFieldTypesEnum Available primitive fields enum
+	 * @param FieldTypesEnum Available primitive fields enum
+	 * @param FieldValidatorsEnum
 	 * @param EmailAddressValidator Validator data model
 	 * @return {*|Model}
 	 */
 	function EmailField($log, restmod, fieldsConf,
-		DocumentFieldTypesEnum, EmailAddressValidator) {
+		FieldTypesEnum, FieldValidatorsEnum, EmailAddressValidator) {
 
 		$log.debug('Initiating model factory');
 
@@ -30,12 +31,12 @@ define(['docs/module'], function (module) {
 				label: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
-					param: DocumentFieldTypesEnum,
-					init: DocumentFieldTypesEnum.EMAIL
+					param: FieldTypesEnum,
+					init: FieldTypesEnum.EMAIL
 				},
 				validators: {
 					init: {
-						emailAddress: EmailAddressValidator.$build()
+						emailAddress: EmailAddressValidator.$build({$isRemovable: false})
 					}
 				}
 			});

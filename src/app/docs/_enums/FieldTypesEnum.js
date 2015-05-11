@@ -2,7 +2,10 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
-	 * @class DocumentFieldTypesEnum
+	 * List of all registered pre-defined field types that can be added to a form.
+	 * Used for fields listing and data dynamic form manipulation by mapping class
+	 * property to Angular models via Dependency Injection.
+	 * @class FieldTypesEnum
 	 * @implements {app.BaseEnum}
 	 * @memberOf app.tasks
 	 *
@@ -11,7 +14,7 @@ define(['docs/module'], function (module) {
 	 * @param $log {Object} Console log provider
 	 * @return {Function} Enum instance
 	 */
-	function DocumentFieldTypesEnum($log, BaseEnum, gettext) {
+	function FieldTypesEnum($log, BaseEnum, gettext) {
 		$log.debug('Initiated enum object');
 
 		return new BaseEnum({
@@ -73,5 +76,5 @@ define(['docs/module'], function (module) {
 		});
 	}
 
-	module.service('DocumentFieldTypesEnum', DocumentFieldTypesEnum);
+	module.service('FieldTypesEnum', FieldTypesEnum);
 });

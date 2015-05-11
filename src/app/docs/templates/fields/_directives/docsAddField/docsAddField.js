@@ -11,12 +11,12 @@ define([
 	 * @param $log
 	 * @param $timeout
 	 * @param $injector
-	 * @param DocumentFieldTypesEnum
+	 * @param FieldTypesEnum
 	 * @param fieldsConf
 	 * @return {{restrict: string, templateUrl: string, require: string, controllerAs: string, link:
 	 *   Function, controller: Function}}
 	 */
-	function docsAddField($log, $timeout, $injector, DocumentFieldTypesEnum, fieldsConf) {
+	function docsAddField($log, $timeout, $injector, FieldTypesEnum, fieldsConf) {
 
 		return {
 			restrict: 'EA',
@@ -46,7 +46,7 @@ define([
 			controller: function ($scope) {
 				var vm = this;
 
-				vm.fieldGroups = _.groupBy(DocumentFieldTypesEnum, 'group');
+				vm.fieldGroups = _.groupBy(FieldTypesEnum, 'group');
 				vm.addField = addField;
 
 				function addField(field) {
