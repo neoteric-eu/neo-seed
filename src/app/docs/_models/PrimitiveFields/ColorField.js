@@ -22,16 +22,16 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.FIELD_TEMPLATES_PATH + '/inputField/input.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + 'inputField/input.html'
 				},
-				inputType: {
-					init: 'color'
-				},
-				label: {
+				fieldType: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
 					param: FieldValidatorsEnum,
 					init: FieldValidatorsEnum.COLOR
+				},
+				$inputType: {
+					init: 'color'
 				},
 				validators: {
 					init: {

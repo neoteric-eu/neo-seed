@@ -1,0 +1,39 @@
+<fieldset>
+	<h3 class="margin-top-0 margin-bottom-10">Telephone
+		<small>Checks weather value is valid country phone number</small>
+		<i class="fa fa-trash-o pull-right"
+			 ng-if="validator.$isRemovable"
+			 ng-click="vm.removeValidator(validator.validatorType)"></i>
+	</h3>
+
+	<div class="row">
+		<div class="col-sm-3">
+			<label class="control-label">Country</label>
+			<select class="form-control"
+							ng-model="validator.country">
+				<option>Select Option</option>
+				<option value="US">United States</option>
+				<option value="AE">United Arab Emirates</option>
+				<option value="BG">Bulgaria</option>
+				<option value="BR">Brazil</option>
+				<option value="CN">China</option>
+				<option value="CZ">Czech Republic</option>
+				<option value="DK">Denmark</option>
+				<option value="FR">France</option>
+				<option value="DE">Germany</option>
+				<option value="IN">India</option>
+				<option value="MA">Morocco</option>
+				<option value="NL">Netherlands</option>
+				<option value="PK">Pakistan</option>
+				<option value="RU">Russia</option>
+				<option value="SK">Slovakia</option>
+				<option value="ES">Spain</option>
+				<option value="TH">Thailand</option>
+				<option value="GB">United Kingdom</option>
+				<option value="VE">Venezuela</option>
+			</select>
+		</div>
+	</div>
+
+</fieldset>
+<hr/>

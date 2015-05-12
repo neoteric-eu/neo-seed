@@ -12,8 +12,7 @@ define(['docs/module'], function (module) {
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function TextareaField($log, restmod,
-		FieldTypesEnum, fieldsConf) {
+	function TextareaField($log, restmod, FieldTypesEnum, fieldsConf) {
 
 		$log.debug('Initiating model factory');
 
@@ -21,9 +20,9 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.FIELD_TEMPLATES_PATH + '/textareaField/textarea.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + 'textareaField/textarea.html'
 				},
-				label: {
+				fieldType: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
 					param: FieldTypesEnum,

@@ -12,8 +12,7 @@ define(['docs/module'], function (module) {
 	 * @param fieldsConf Module configuration
 	 * @return {*|Model}
 	 */
-	function MultiselectField($log, restmod,
-		FieldTypesEnum, FieldValidatorsEnum, fieldsConf) {
+	function MultiselectField($log, restmod, FieldTypesEnum, fieldsConf) {
 
 		$log.debug('Initiating model factory');
 
@@ -21,16 +20,16 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.FIELD_TEMPLATES_PATH + '/selectField/multiselect.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + 'selectField/multiselect.html'
 				},
-				options: {
-					init: {}
-				},
-				label: {
+				fieldType: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
 					param: FieldTypesEnum,
 					init: FieldTypesEnum.MULTI_SELECT
+				},
+				options: {
+					init: {}
 				},
 				multiple: {
 					init: true

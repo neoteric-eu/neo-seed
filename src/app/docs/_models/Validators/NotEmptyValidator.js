@@ -24,7 +24,7 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Validator', {
 				$templateUrl: {
-					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + '/notEmpty.html'
+					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'notEmpty.html'
 				},
 				validatorType: {
 					init: 'notEmpty'

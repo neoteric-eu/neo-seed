@@ -13,8 +13,7 @@ define(['docs/module'], function (module) {
 	 * @param IntegerValidator Validator data model
 	 * @return {*|Model}
 	 */
-	function NumberField($log, restmod, fieldsConf,
-		FieldTypesEnum, IntegerValidator) {
+	function NumberField($log, restmod, fieldsConf, FieldTypesEnum, IntegerValidator) {
 
 		$log.debug('Initiating model factory');
 
@@ -22,16 +21,16 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.FIELD_TEMPLATES_PATH + '/inputField/input.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + 'inputField/input.html'
 				},
-				inputType: {
-					init: 'number'
-				},
-				label: {
+				fieldType: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
 					param: FieldTypesEnum,
 					init: FieldTypesEnum.NUMBER
+				},
+				$inputType: {
+					init: 'number'
 				},
 				validators: {
 					init: {

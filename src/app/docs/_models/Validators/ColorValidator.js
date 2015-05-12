@@ -25,7 +25,7 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Validator', {
 				$templateUrl: {
-					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + '/color.html'
+					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'color.html'
 				},
 				validatorType: {
 					init: 'color'

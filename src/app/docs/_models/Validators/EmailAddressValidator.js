@@ -16,12 +16,15 @@ define(['docs/module'], function (module) {
 	 * @param FieldValidatorsEnum {Object} List of registered field validators
 	 * @return {*|Model}
 	 */
-	function EmailAddressValidator($log, restmod, FieldValidatorsEnum) {
+	function EmailAddressValidator($log, restmod, fieldsConf, FieldValidatorsEnum) {
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model()
 			.mix('Validator', {
+				$templateUrl: {
+					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'emailAddress.html'
+				},
 				validatorType: {
 					init: 'emailAddress'
 				},

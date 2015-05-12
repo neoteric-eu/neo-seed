@@ -13,8 +13,7 @@ define(['docs/module'], function (module) {
 	 * @param DateValidator Validator data model
 	 * @return {*|Model}
 	 */
-	function DateField($log, restmod, fieldsConf,
-		FieldTypesEnum, DateValidator) {
+	function DateField($log, restmod, fieldsConf, FieldTypesEnum, DateValidator) {
 
 		$log.debug('Initiating model factory');
 
@@ -22,16 +21,16 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.FIELD_TEMPLATES_PATH + '/inputField/input.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + 'inputField/input.html'
 				},
-				inputType: {
-					init: 'date'
-				},
-				label: {
+				fieldType: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
 					param: FieldTypesEnum,
 					init: FieldTypesEnum.DATE
+				},
+				$inputType: {
+					init: 'date'
 				},
 				validators: {
 					init: {

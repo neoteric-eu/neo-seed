@@ -12,8 +12,7 @@ define(['docs/module'], function (module) {
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
-	function SelectField($log, restmod,
-		FieldTypesEnum, fieldsConf) {
+	function SelectField($log, restmod, FieldTypesEnum, fieldsConf) {
 
 		$log.debug('Initiating model factory');
 
@@ -21,9 +20,9 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.FIELD_TEMPLATES_PATH + '/selectField/select.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + 'selectField/select.html'
 				},
-				label: {
+				fieldType: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
 					param: FieldTypesEnum,

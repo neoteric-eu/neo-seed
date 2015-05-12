@@ -10,12 +10,10 @@ define(['docs/module'], function (module) {
 	 * @param fieldsConf Module configuration
 	 * @param restmod Data model layer interface
 	 * @param FieldTypesEnum Available primitive fields enum
-	 * @param FieldValidatorsEnum
 	 * @param EmailAddressValidator Validator data model
 	 * @return {*|Model}
 	 */
-	function EmailField($log, restmod, fieldsConf,
-		FieldTypesEnum, FieldValidatorsEnum, EmailAddressValidator) {
+	function EmailField($log, restmod, fieldsConf, FieldTypesEnum, EmailAddressValidator) {
 
 		$log.debug('Initiating model factory');
 
@@ -23,16 +21,16 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.FIELD_TEMPLATES_PATH + '/inputField/input.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + 'inputField/input.html'
 				},
-				inputType: {
-					init: 'email'
-				},
-				label: {
+				fieldType: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
 					param: FieldTypesEnum,
 					init: FieldTypesEnum.EMAIL
+				},
+				$inputType: {
+					init: 'email'
 				},
 				validators: {
 					init: {

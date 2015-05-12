@@ -26,7 +26,7 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Validator', {
 				$templateUrl: {
-					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + '/date.html'
+					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'date.html'
 				},
 				validatorType: {
 					init: 'date'

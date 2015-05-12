@@ -24,7 +24,7 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Validator', {
 				$templateUrl: {
-					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + '/integer.html'
+					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'integer.html'
 				},
 				validatorType: {
 					init: 'integer'

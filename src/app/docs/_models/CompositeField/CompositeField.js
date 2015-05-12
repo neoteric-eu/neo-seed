@@ -14,14 +14,13 @@ define(['docs/module'], function (module) {
 		$log.debug('Initiating model factory');
 
 		return restmod
-			.model('/field-template')
+			.model('/field-templates')
 			.mix({
-				name: {
-					init: ''
+				$config: {
+					urlPrefix: 'http://localhost:9000/docs/'
 				},
-				description: {
-					init: ''
-				},
+				name: {},
+				description: {},
 				composite: {
 					hasMany: 'CompositeField'
 				}

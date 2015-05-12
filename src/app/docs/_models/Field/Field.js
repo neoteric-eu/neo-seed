@@ -21,16 +21,16 @@ define(['docs/module'], function (module) {
 					init: true
 				},
 				$pk: {
-					init: function(){
+					init: function () {
 						return _.uniqueId();
 					}
 				},
 				label: {},
 				defaultValue: {},
 				validators: {
-					init: {},
-					decode: 'FieldValidatorDecode',
-					encode: 'FieldValidatorEncode'
+					init: {}
+					//decode: 'FieldValidatorDecode',
+					//encode: 'FieldValidatorEncode'
 				}
 			});
 	}

@@ -5,7 +5,6 @@ define(['docs/templates/fields/module'], function (module) {
 
 		return {
 			restrict: 'EA',
-			transclude: true,
 			require: '^docsFieldTemplateWidget',
 			link: function (scope, element) {
 				if (!_.has(scope.field, '$templateUrl')) {
@@ -21,6 +20,15 @@ define(['docs/templates/fields/module'], function (module) {
 
 						$log.debug('Recompiled view with newly added field');
 					});
+			},
+			controller: function () {
+				var vm = this;
+
+				vm.deleteField = deleteField;
+
+				function deleteField() {
+
+				}
 			}
 		};
 	}

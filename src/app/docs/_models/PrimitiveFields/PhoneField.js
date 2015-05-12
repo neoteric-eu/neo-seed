@@ -13,8 +13,7 @@ define(['docs/module'], function (module) {
 	 * @param PhoneValidator
 	 * @return {*|Model}
 	 */
-	function PhoneField($log, restmod, FieldTypesEnum,
-		fieldsConf, PhoneValidator) {
+	function PhoneField($log, restmod, FieldTypesEnum, fieldsConf, PhoneValidator) {
 
 		$log.debug('Initiating model factory');
 
@@ -22,16 +21,16 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.FIELD_TEMPLATES_PATH + '/inputField/input.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + 'inputField/input.html'
 				},
-				inputType: {
-					init: 'tel'
-				},
-				label: {
+				fieldType: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
 					param: FieldTypesEnum,
 					init: FieldTypesEnum.PHONE
+				},
+				$inputType: {
+					init: 'tel'
 				},
 				validators: {
 					init: {

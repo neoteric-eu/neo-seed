@@ -69,6 +69,8 @@ define([
 							}, 200);
 						});
 
+					console.log($scope.compositeField);
+
 
 					$log.debug('Added new field to form');
 				}
