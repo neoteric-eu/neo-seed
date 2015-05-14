@@ -15,15 +15,12 @@ define(['docs/module'], function (module) {
 
 		return restmod
 			.model('/field-templates')
-			.mix({
+			.mix('Field', {
 				$config: {
 					urlPrefix: 'http://localhost:9000/docs/'
 				},
 				name: {},
-				description: {},
-				composite: {
-					hasMany: 'CompositeField'
-				}
+				description: {}
 			});
 	}
 

@@ -27,10 +27,13 @@ define(['docs/module'], function (module) {
 				},
 				label: {},
 				defaultValue: {},
+				composite: {
+					hasMany: 'Field'
+				},
 				validators: {
-					init: {}
-					//decode: 'FieldValidatorDecode',
-					//encode: 'FieldValidatorEncode'
+					init: {},
+					decode: 'FieldValidatorDecode',
+					encode: 'FieldValidatorEncode'
 				}
 			});
 	}

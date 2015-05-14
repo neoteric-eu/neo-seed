@@ -15,6 +15,7 @@ define(['app'], function (app) {
 	 */
 	function FieldValidatorEncodeFilter($log) {
 		return function (val) {
+			var prop = 'fieldType';
 			$log.debug('Decoding FieldValidator values');
 			return _.transform(val, function (result, item, name) {
 				result[item[prop]] = result[item[prop]] || {};
