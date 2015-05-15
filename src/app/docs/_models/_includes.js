@@ -7,33 +7,34 @@ define([
 
 	'./Field/Field',
 	'./Field/FieldAPI',
-	'./Field/serializers/FieldValidatorDecodeFilter',
-	'./Field/serializers/FieldValidatorEncodeFilter',
+
+	'./Field/fieldsProperties/EmailFieldProperties',
+	'./Field/fieldsProperties/SelectFieldProperties',
+	'./Field/fieldsProperties/TextareaFieldProperties',
+	'./Field/fieldsProperties/PhoneFieldProperties',
+	'./Field/fieldsProperties/TimeFieldProperties',
+	'./Field/fieldsProperties/ColorFieldProperties',
+	'./Field/fieldsProperties/DateFieldProperties',
+	'./Field/fieldsProperties/NumberFieldProperties',
+	'./Field/fieldsProperties/TextFieldProperties',
+	'./Field/fieldsProperties/UrlFieldProperties',
+	'./Field/fieldsProperties/SelectFieldProperties',
+	'./Field/fieldsProperties/MultiselectFieldProperties',
 
 	'./CompositeField/CompositeField',
 	'./CompositeField/CompositeFieldAPI',
 
-	'./PrimitiveFields/EmailField',
-	'./PrimitiveFields/SelectField',
-	'./PrimitiveFields/TextareaField',
-	'./PrimitiveFields/PhoneField',
-	'./PrimitiveFields/TimeField',
-	'./PrimitiveFields/ColorField',
-	'./PrimitiveFields/DateField',
-	'./PrimitiveFields/NumberField',
-	'./PrimitiveFields/TextField',
-	'./PrimitiveFields/UrlField',
-	'./PrimitiveFields/SelectField',
-	'./PrimitiveFields/MultiselectField',
+	'./Validators/Validator',
+	'./Validators/ValidatorAPI',
 
-	'./Validators/EmailAddressValidator',
-	'./Validators/NotEmptyValidator',
-	'./Validators/DateValidator',
-	'./Validators/PhoneValidator',
-	'./Validators/IntegerValidator',
-	'./Validators/ColorValidator',
-	'./Validators/UriValidator',
-	'./Validators/Validator'
+
+	'./Validators/validatorsProperties/EmailAddressValidatorProperties',
+	'./Validators/validatorsProperties/NotEmptyValidatorProperties',
+	'./Validators/validatorsProperties/DateValidatorProperties',
+	'./Validators/validatorsProperties/PhoneValidatorProperties',
+	'./Validators/validatorsProperties/IntegerValidatorProperties',
+	'./Validators/validatorsProperties/ColorValidatorProperties',
+	'./Validators/validatorsProperties/UriValidatorProperties'
 ], function () {
 	'use strict';
 });

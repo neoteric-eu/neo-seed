@@ -3,73 +3,74 @@ define(['docs/module'], function (module) {
 
 	/**
 	 * List of all registered pre-defined field types that can be added to a form.
-	 * Used for fields listing and data dynamic form manipulation by mapping class
+	 * Used for fields listing and data dynamic form manipulation by mapping propertyClass
 	 * property to Angular models via Dependency Injection.
-	 * @class FieldTypesEnum
+	 * @propertyClass FieldTypesEnum
 	 * @implements {app.BaseEnum}
 	 * @memberOf app.tasks
 	 *
 	 * @param {Function} BaseEnum Augmentation of enum-type object
 	 * @param {Function} gettext Translation helper service
-	 * @param $log {Object} Console log provider
+	 * @param $log {Object} Logging service
 	 * @return {Function} Enum instance
 	 */
 	function FieldTypesEnum($log, BaseEnum, gettext) {
 		$log.debug('Initiated enum object');
 
 		return new BaseEnum({
+			COMPOSITE: {},
 			EMAIL: {
-				class: 'EmailField',
+				propertyClass: 'EmailFieldProperties',
 				label: gettext('Email'),
 				group: gettext('Text')
 			},
 			URL: {
-				class: 'UrlField',
+				propertyClass: 'UrlFieldProperties',
 				label: gettext('Url'),
 				group: gettext('Text')
 			},
 			TEXTAREA: {
-				class: 'TextareaField',
+				propertyClass: 'TextareaFieldProperties',
 				label: gettext('Textarea'),
 				group: gettext('Text')
 			},
 			TEXT: {
-				class: 'TextField',
+				propertyClass: 'TextField',
 				label: gettext('Text input'),
 				group: gettext('Text')
 			},
 			NUMBER: {
-				class: 'NumberField',
+				propertyClass: 'NumberFieldProperties',
 				label: gettext('Number'),
 				group: gettext('Numeric')
 			},
 			PHONE: {
-				class: 'PhoneField',
+				propertyClass: 'PhoneFieldProperties',
 				label: gettext('Phone'),
 				group: gettext('Numeric')
 			},
 			DATE: {
-				class: 'DateField',
+				propertyClass: 'DateFieldProperties',
 				label: gettext('Date'),
 				group: gettext('Date & Time')
 			},
 			TIME: {
-				class: 'TimeField',
+				propertyClass: 'TimeFieldProperties',
 				label: gettext('Time'),
 				group: gettext('Date & Time')
 			},
 			COLOR: {
-				class: 'ColorField',
+				propertyClass: 'ColorFieldProperties',
 				label: gettext('Color picker'),
 				group: gettext('Custom')
 			},
 			SELECT: {
-				class: 'SelectField',
+				propertyClass: 'SelectFieldProperties',
 				label: gettext('Select'),
 				group: gettext('Selection')
 			},
 			MULTI_SELECT: {
-				class: 'MultiselectField',
+				propertyClass: 'MultiselectFieldProperties',
 				label: gettext('Multi-select'),
 				group: gettext('Selection')
 			}

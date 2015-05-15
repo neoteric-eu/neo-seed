@@ -588,7 +588,9 @@ RMModule.factory('RMCollectionApi', ['RMUtils', function(Utils) {
 	     * inherited classes to the collection
 	     * @todo refactor this problem
 	     */
-       // Utils.assert(_obj.$type && _obj.$type === this.$type, 'Collection $add expects record of the same $type');
+	    Utils.assert(_obj.$type &&
+		    _obj.$type ===
+		    this.$type, 'Collection $add expects record of the same $type');
 
       return this.$action(function() {
         if(_obj.$position === undefined) {

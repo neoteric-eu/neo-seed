@@ -4,14 +4,14 @@ define(['docs/module'], function (module) {
 	/**
 	 * Contains all registered editable field validators.
 	 * Used for listing all available validators and as a reference
-	 * to actual classes via Angular Dependency Injection.
-	 * @class FieldValidatorsEnum
+	 * to actual propertyClasses via Angular Dependency Injection.
+	 * @propertyClass FieldValidatorsEnum
 	 * @implements {app.BaseEnum}
 	 * @memberOf app.tasks
 	 *
 	 * @param {Function} BaseEnum Augmentation of enum-type object
 	 * @param {Function} gettext Translation helper service
-	 * @param $log {Object} Console log provider
+	 * @param $log {Object} Logging service
 	 * @return {Function} Enum instance
 	 */
 	function FieldValidatorsEnum($log, BaseEnum, gettext) {
@@ -19,36 +19,36 @@ define(['docs/module'], function (module) {
 		$log.debug('Initiated enum object');
 
 		return new BaseEnum({
-			EMAIL: {
-				class: 'EmailAddressValidator',
+			EMAIL_ADDRESS: {
+				propertyClass: 'EmailAddressValidator',
 				label: gettext('Email')
 			},
 			URI: {
-				class: 'UriValidator',
+				propertyClass: 'UriValidator',
 				label: gettext('Uri')
 			},
 			INTEGER: {
-				class: 'IntegerValidator',
+				propertyClass: 'IntegerValidator',
 				label: gettext('Integer')
 			},
 			STRING_LENGTH: {
-				class: 'StringLengthValidator',
+				propertyClass: 'StringLengthValidator',
 				label: gettext('String length')
 			},
 			PHONE: {
-				class: 'PhoneValidator',
+				propertyClass: 'PhoneValidator',
 				label: gettext('Phone')
 			},
 			DATE: {
-				class: 'DateValidator',
+				propertyClass: 'DateValidator',
 				label: gettext('Date')
 			},
 			COLOR: {
-				class: 'ColorValidator',
+				propertyClass: 'ColorValidator',
 				label: gettext('Color')
 			},
 			NOT_EMPTY: {
-				class: 'NotEmptyValidator',
+				propertyClass: 'NotEmptyValidator',
 				label: gettext('Required')
 			}
 		});

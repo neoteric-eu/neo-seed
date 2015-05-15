@@ -9,17 +9,17 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param BaseAPI {Function} Base interface for REST communication with server
-	 * @param CompositeField {Object} Data model class
+	 * @param Validator {Object} Data model class
 	 * @return {*}
 	 */
-	function CompositeFieldAPI($log, BaseAPI, CompositeField) {
+	function ValidatorAPI($log, BaseAPI, Validator) {
 
 		$log.debug('Initiating API service');
 
-		return new BaseAPI(CompositeField);
+		return new BaseAPI(Validator);
 	}
 
-	module.service('CompositeFieldAPI', CompositeFieldAPI);
+	module.service('ValidatorAPI', ValidatorAPI);
 });
 
 

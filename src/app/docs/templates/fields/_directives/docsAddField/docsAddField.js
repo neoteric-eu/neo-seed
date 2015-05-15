@@ -8,65 +8,38 @@ define([
 	 * @class docsAddField
 	 * @memberOf app.docs.templates.fields
 	 *
-	 * @param $log
-	 * @param $timeout
-	 * @param $injector
-	 * @param FieldTypesEnum
-	 * @param fieldsConf
-	 * @return {{restrict: string, templateUrl: string, require: string, controllerAs: string, link:
-	 *   Function, controller: Function}}
+	 * @param $log {Object} Logging service
+	 * @param fieldsConf {Object} Module configuration
+	 * @param FieldTypesEnum {Object} List of all registered fields
+	 * @param FieldAPI {Object} Interface for REST communication with server
+	 * @return {{restrict: string, templateUrl: string, transclude: boolean, require: string,
+	 *   controllerAs: string, link: Function, controller: Function}}
 	 */
-	function docsAddField($log, $timeout, $injector, FieldTypesEnum, fieldsConf) {
+	function docsAddField($log, FieldTypesEnum, fieldsConf, FieldAPI) {
 
 		return {
 			restrict: 'EA',
-			templateUrl: fieldsConf.MODULE_PATH + '/_directives/docsAddField/docs-add-field.html',
+			templateUrl: fieldsConf.DIRECTIVES_PATH + 'docsAddField/docs-add-field.html',
 			transclude: true,
 			require: '^docsFieldTemplateWidget',
-			controllerAs: 'vm',
-			/**
-			 *
-			 * @param scope
-			 */
 			link: function (scope) {
-
-				scope.addField = addField;
-
-				function addField(field) {
-					scope.form.formValidation('addField', field.$pk, field);
-
-					$log.debug('Added filed to validation list');
-				}
-			},
-
-			/**
-			 *
-			 * @param $scope
-			 */
-			controller: function ($scope) {
-				var vm = this;
+				var vm = scope.vm;
 
 				vm.fieldGroups = _.groupBy(FieldTypesEnum, 'group');
 				vm.addField = addField;
 
-				function addField(field) {
-					var fieldClass;
+				function addField(fieldType) {
+					var model = FieldAPI.build({fieldType: fieldType});
 
-					if ($injector.has(field.class)) {
-						fieldClass = $injector.get(field.class);
-					} else {
-						$log.error('Unsupported injectable field class');
-					}
-
-					var model = fieldClass.$build();
-
-					$scope.compositeField.composite
+					scope.compositeField.composite
 						.$add(model)
 						.$asPromise()
 						.then(function () {
-							$timeout(function () {
-								$scope.addField(model);
-							}, 200);
+							$('#fieldTemplate').formValidation(
+								'addField', model.$name, model.$encapsulateValidators()
+							);
+
+							$log.debug('Added filed to validation list');
 						});
 
 					$log.debug('Added new field to form');

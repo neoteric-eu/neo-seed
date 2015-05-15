@@ -12,14 +12,15 @@ define(['docs/module'], function (module) {
 	 *  country: 'US'
 	 * }
 	 * @see {@link http://formvalidation.io/validators/phone/}
-	 * @param $log {Object} Console log provider
+	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Data model layer interface
 	 * @param fieldsConf Module configuration
 	 * @param FieldValidatorsEnum {Object} List of registered field validators
 	 * @return {*|Model}
 	 */
 	function PhoneValidator($log, restmod, fieldsConf, FieldValidatorsEnum) {
-		$log.debug('Initiating model factory');
+
+		$log.debug('Initiating properties factory');
 
 		return restmod
 			.model()

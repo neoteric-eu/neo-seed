@@ -14,29 +14,20 @@ define(['docs/module'], function (module) {
 	 *  trim: false
 	 * }
 	 * @see {@link http://formvalidation.io/validators/stringLength/}
-	 * @param $log {Object} Console log provider
-	 * @param restmod {Object} Data model layer interface
-	 * @param FieldValidatorsEnum {Object} List of registered field validators
+	 * @param $log {Object} Logging service
 	 * @param fieldsConf Module configuration
 	 * @return {*|Model}
 	 */
-	function StringLengthValidator($log, restmod, fieldsConf, FieldValidatorsEnum) {
-		$log.debug('Initiating model factory');
+	function StringLengthValidator($log, fieldsConf) {
 
-		return restmod
-			.model()
-			.mix('Validator', {
+		$log.debug('Initiating properties factory');
+
+		return {
 				$templateUrl: {
 					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'stringLength.html'
 				},
 				validatorType: {
 					init: 'stringLength'
-				},
-				label: {
-					encode: 'EnumEncode',
-					decode: 'EnumDecode',
-					param: FieldValidatorsEnum,
-					init: FieldValidatorsEnum.STRING_LENGTH
 				},
 				// The minimum length of the value
 				min: {},
@@ -46,7 +37,7 @@ define(['docs/module'], function (module) {
 				trim: {
 					init: false
 				}
-			});
+		};
 	}
 
 	module.factory('StringLengthValidator', StringLengthValidator);

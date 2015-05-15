@@ -10,54 +10,40 @@ define([
 	 *
 	 * @param $log
 	 * @param fieldsConf
+	 * @param ValidatorAPI
 	 * @param FieldValidatorsEnum
-	 * @param $injector
-	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope:
-	 *   {fieldValidators: string}, controller: Function}}
+	 * @return {{restrict: string, templateUrl: string, controllerAs: string, require: string, link:
+	 *   Function, controller: Function}}
 	 */
-	function docsAddValidator($log, $injector, fieldsConf, FieldValidatorsEnum) {
+	function docsAddValidator($log, fieldsConf, ValidatorAPI, FieldValidatorsEnum) {
 
 		return {
 			restrict: 'EA',
-			templateUrl: fieldsConf.MODULE_PATH + '/_directives/docsAddValidator/docs-add-validator.html',
-			controllerAs: 'vm',
+			templateUrl: fieldsConf.DIRECTIVES_PATH + 'docsAddValidator/docs-add-validator.html',
 			require: '^docsFieldTemplateWidget',
 			link: function (scope) {
-				scope.enableValidator = enableValidator;
-
-				function enableValidator() {
-					$('#fieldTemplate')
-						.formValidation('addField', scope.field.$pk, scope.field)
-						.formValidation('revalidateField', scope.field.$pk);
-
-					$log.debug('Added new validator to field list');
-				}
-			},
-			controller: function ($scope) {
-				var vm = this;
+				var vm = scope.vm;
 
 				vm.fieldValidators = FieldValidatorsEnum;
 
 				vm.addValidator = addValidator;
 
-				function addValidator(validator) {
+				function addValidator(validatorType) {
 
-					var validatorClass;
+					var validator = ValidatorAPI.build({validatorType: validatorType});
 
-					if ($injector.has(validator.class)) {
-						validatorClass = $injector.get(validator.class);
-					} else {
-						$log.error('Unsupported injectable validator class');
-						return;
-					}
-
-					validatorClass
-						.$build()
+					scope.field.validators
+						.$collection()
+						.$add(validator)
 						.$asPromise()
-						.then(function (model) {
-							$scope.field.validators[model.validatorType] = model;
-							$scope.enableValidator();
+						.then(function () {
+							$('#fieldTemplate')
+								.formValidation('addField', scope.field.$name, scope.field)
+								.formValidation('revalidateField', scope.field.$name);
+
+							$log.debug('Added new validator to validator list');
 						});
+
 					$log.debug('Attached new validator to validator');
 				}
 

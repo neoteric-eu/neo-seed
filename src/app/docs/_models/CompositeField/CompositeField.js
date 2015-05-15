@@ -6,7 +6,7 @@ define(['docs/module'], function (module) {
 	 * @mixin
 	 * @memberOf app.docs
 	 *
-	 * @param $log Console log provider
+	 * @param $log Logging service
 	 * @param restmod Data model layer interface
 	 * @return {*|Model}
 	 */
@@ -16,11 +16,9 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model('/field-templates')
 			.mix('Field', {
-				$config: {
-					urlPrefix: 'http://localhost:9000/docs/'
-				},
-				name: {},
-				description: {}
+				//$config: {
+				//	urlPrefix: 'http://192.168.1.23:9003/api/v1'
+				//},
 			});
 	}
 

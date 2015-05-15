@@ -14,10 +14,11 @@ define([
 	 * @param $log
 	 * @param fieldsConf
 	 * @param CompositeFieldAPI
-	 * @return {{restrict: string, templateUrl: string, scope: boolean, controllerAs: string, link:
-	 *   Function, controller: Function}}
+	 * @param FieldTypesEnum
+	 * @return {{restrict: string, templateUrl: string, scope: boolean, controllerAs: string,
+	 *   controller: Function}}
 	 */
-	function docsFieldTemplateWidget($log, fieldsConf, CompositeFieldAPI) {
+	function docsFieldTemplateWidget($log, fieldsConf, CompositeFieldAPI, FieldTypesEnum) {
 		return {
 			restrict: 'EA',
 			templateUrl: fieldsConf.MODULE_PATH + '/widgets/fieldTemplate/docs-field-template.html',
@@ -25,34 +26,19 @@ define([
 			controllerAs: 'vm',
 			/**
 			 *
-			 * @param scope
-			 * @param element
-			 */
-			link: function (scope, element) {
-				scope.form = element.find('#fieldTemplate');
-
-				$(scope.form)
-					.formValidation({
-						framework: 'bootstrap',
-						icon: {
-							valid: 'fa fa-check',
-							invalid: 'fa fa-times',
-							validating: 'fa fa-refresh'
-						}
-					});
-			},
-
-			/**
-			 *
 			 * @param $scope
 			 */
 			controller: function ($scope) {
-				$scope.compositeField = CompositeFieldAPI.build();
+				var vm = this;
 
-				$scope.save = function () {
+				vm.save = save;
+
+				$scope.compositeField = CompositeFieldAPI.build({fieldType: FieldTypesEnum.COMPOSITE});
+
+				function save() {
 					CompositeFieldAPI.save($scope.compositeField);
 					$log.debug('Saved composite field');
-				};
+				}
 
 				$log.debug('Initiated controller');
 			}

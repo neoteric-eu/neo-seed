@@ -3,10 +3,11 @@ define(['docs/templates/fields/module'], function (module) {
 
 	/**
 	 *
-	 * @param $http
-	 * @param $compile
-	 * @param $log
-	 * @return {{restrict: string, scope: {validator: string}, link: Function, controller: Function}}
+	 * @param $http HTTP communication service
+	 * @param $compile Template compilation service
+	 * @param $log Logging service
+	 * @return {{restrict: string, controllerAs: string, require: string, link: Function, controller:
+	 *   Function}}
 	 */
 	function docsValidator($http, $compile, $log) {
 
@@ -35,12 +36,12 @@ define(['docs/templates/fields/module'], function (module) {
 						$log.debug('Recompiled view with newly added validator');
 					});
 
-				scope.addField = addField;
+				scope.removeField = removeField;
 
-				function addField(field, validatorName) {
+				function removeField(field, validatorName) {
 					$('#fieldTemplate')
-						.formValidation('enableFieldValidators', field.$pk, false, validatorName)
-						.formValidation('revalidateField', field.$pk);
+						.formValidation('enableFieldValidators', field.$name, false, validatorName)
+						.formValidation('revalidateField', field.$name);
 
 					$log.debug('Added filed to validation list');
 				}
@@ -54,13 +55,12 @@ define(['docs/templates/fields/module'], function (module) {
 
 				vm.removeValidator = removeValidator;
 
-
 				function removeValidator(validatorName) {
 					$scope.validator.$destroy()
 						.$asPromise()
 						.then(function () {
-							delete $scope.field.validators[validatorName];
-							$scope.addField($scope.field, validatorName);
+							$scope.field.validators.$destroy(validatorName);
+							$scope.removeField($scope.field, validatorName);
 							console.log($scope.field);
 						});
 
