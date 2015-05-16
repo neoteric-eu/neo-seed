@@ -39,16 +39,14 @@
 	<div class="form-actions" collapse="field.$isEditorCollapsed">
 
 		<!-- FIELD PROPERTIES -->
-		<ng-include
-			src="'app/docs/templates/fields/_directives/docsField/fields/field-properties.html'"></ng-include>
-
+		<ng-include src="'app/docs/templates/fields/_directives/docsField/fields/field-properties.html'"></ng-include>
 		<!-- end:FIELD PROPERTIES -->
 
 		<hr/>
 
 		<!-- VALIDATORS_LIST -->
 		<div ng-repeat="(validatorName, validator) in field.validators">
-			<docs-validator></docs-validator>
+			<docs-validator validator="validator" container="field"></docs-validator>
 		</div>
 		<!-- end:VALIDATORS_LIST -->
 

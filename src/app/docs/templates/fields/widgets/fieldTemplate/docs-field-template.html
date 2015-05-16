@@ -21,9 +21,9 @@
 			<fieldset>
 				<!-- RECURSIVE_FIELD_TREE -->
 				<!-- WARNING! Magic happens here! -->
-				<div ng-repeat="field in compositeField.composite"
+				<div ng-repeat="field in vm.compositeField.composite"
 						 id="docs-field-level.html">
-					<docs-field data-field="field"></docs-field>
+					<docs-field field="field" container="vm.compositeField"></docs-field>
 
 					<div ng-if="field.composite.length"
 							 ng-repeat="field in field.composite"
@@ -34,7 +34,7 @@
 		</form>
 
 		<hr/>
-		<docs-add-field></docs-add-field>
+		<docs-add-field container="vm.compositeField"></docs-add-field>
 
 		<div class="form-actions">
 			<div class="row">

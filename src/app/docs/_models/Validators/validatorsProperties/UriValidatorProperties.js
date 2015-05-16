@@ -22,6 +22,9 @@ define(['docs/module'], function (module) {
 		return {
 			$templateUrl: {
 				init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'uri.html'
+			},
+			allowEmptyProtocol: {
+				init: false
 			}
 		};
 	}

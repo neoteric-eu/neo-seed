@@ -24,12 +24,16 @@ define(['docs/module'], function (module) {
 				init: 'number'
 			},
 			validators: {
-				init: [
-					ValidatorAPI.build({
-						validatorType: FieldValidatorsEnum.INTEGER,
-						$isRemovable: false
-					})
-				]
+				init: function () {
+					return this.validators
+						.$collection()
+						.$add(
+						ValidatorAPI.build({
+							validatorType: FieldValidatorsEnum.INTEGER,
+							$isRemovable: false
+						})
+					);
+				}
 			}
 		};
 	}

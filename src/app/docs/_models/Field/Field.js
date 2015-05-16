@@ -39,7 +39,17 @@ define(['docs/module'], function (module) {
 					hasMany: 'Field'
 				},
 				validators: {
-					hasMany: 'Validator'
+					hasMany: 'Validator',
+					init: function () {
+						return this.validators
+							.$collection()
+							.$add(
+							ValidatorAPI.build({
+								validatorType: FieldValidatorsEnum.COLOR,
+								isRemovable: false
+							})
+						);
+					}
 				},
 				fieldType: {
 					encode: 'EnumEncode',
@@ -71,11 +81,12 @@ define(['docs/module'], function (module) {
 								this.mix(additionalProperties);
 
 								$log.debug('Creating field extended by additional properties');
+
+								return this.$super(_init);
 							} else {
 								$log.error('Unsupported injectable field class');
 							}
 
-							return this.$super(_init);
 						}
 					},
 

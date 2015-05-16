@@ -1,9 +1,9 @@
 <fieldset>
 	<h3 class="margin-top-0 margin-bottom-10">Color
 		<small>Forces value to be hex formatted string</small>
-		<i class="fa fa-trash-o pull-right"
-			 ng-if="validator.$isRemovable"
-			 ng-click="vm.removeValidator(validator.validatorType)"></i>
+		<i class="fa fa-trash-o pull-right cursor-pointer"
+			 ng-if="validator.isRemovable"
+			 ng-click="vm.removeValidator()"></i>
 	</h3>
 </fieldset>
 <hr/>

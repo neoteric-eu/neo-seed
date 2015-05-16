@@ -5,29 +5,40 @@ define(['docs/templates/fields/module'], function (module) {
 
 		return {
 			restrict: 'EA',
-			require: '^docsFieldTemplateWidget',
-			link: function (scope, element) {
-				if (!_.has(scope.field, '$templateUrl')) {
-					$log.error('Unsupported field type');
-					return;
-				}
-
-				$http
-					.get(scope.field.$templateUrl)
-					.success(function (data) {
-						element.html(data);
-						$compile(element.contents())(scope);
-
-						$log.debug('Recompiled view with newly added field');
-					});
+			scope: {
+				field : '=',
+				container: '='
 			},
-			controller: function () {
-				var vm = this;
+			link: function (scope, element) {
+				var vm = scope.vm = scope.vm || {};
 
+				// variables
+				// functions
+				vm.init = init;
 				vm.deleteField = deleteField;
 
-				function deleteField() {
+				init();
 
+				function init() {
+					if (!_.has(scope.field, '$templateUrl')) {
+						$log.error('Unsupported field type');
+						return;
+					}
+
+					$http
+						.get(scope.field.$templateUrl)
+						.success(function (data) {
+							element.html(data);
+							$compile(element.contents())(scope);
+
+							$log.debug('Recompiled view with newly added field');
+						});
+				}
+
+				function deleteField() {
+					scope.container.composite.$remove(scope.field);
+
+					$log.debug('Removed field form container');
 				}
 			}
 		};

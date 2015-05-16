@@ -51,6 +51,5 @@ define(['angular'], function (ng) {
 			});
 	});
 
-
 	return module;
 });

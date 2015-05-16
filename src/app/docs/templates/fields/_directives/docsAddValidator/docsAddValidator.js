@@ -12,24 +12,23 @@ define([
 	 * @param fieldsConf
 	 * @param ValidatorAPI
 	 * @param FieldValidatorsEnum
-	 * @return {{restrict: string, templateUrl: string, controllerAs: string, require: string, link:
-	 *   Function, controller: Function}}
+	 * @return {{restrict: string, templateUrl: string, require: string, link: Function}}
 	 */
 	function docsAddValidator($log, fieldsConf, ValidatorAPI, FieldValidatorsEnum) {
 
 		return {
 			restrict: 'EA',
 			templateUrl: fieldsConf.DIRECTIVES_PATH + 'docsAddValidator/docs-add-validator.html',
-			require: '^docsFieldTemplateWidget',
 			link: function (scope) {
-				var vm = scope.vm;
+				var vm = scope.vm = scope.vm || {};
 
+				// variables
 				vm.fieldValidators = FieldValidatorsEnum;
 
+				// functions
 				vm.addValidator = addValidator;
 
 				function addValidator(validatorType) {
-
 					var validator = ValidatorAPI.build({validatorType: validatorType});
 
 					scope.field.validators

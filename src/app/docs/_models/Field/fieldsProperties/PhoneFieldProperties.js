@@ -24,12 +24,16 @@ define(['docs/module'], function (module) {
 				init: 'tel'
 			},
 			validators: {
-				init: [
-					ValidatorAPI.build({
-						validatorType: FieldValidatorsEnum.PHONE,
-						$isRemovable: false
-					})
-				]
+				init: function () {
+					return this.validators
+						.$collection()
+						.$add(
+						ValidatorAPI.build({
+							validatorType: FieldValidatorsEnum.PHONE,
+							$isRemovable: false
+						})
+					);
+				}
 			}
 		};
 	}

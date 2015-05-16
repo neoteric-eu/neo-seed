@@ -18,8 +18,9 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model()
 			.mix({
-				$isRemovable: {
-					init: true
+				isRemovable: {
+					init: true,
+					mask: true
 				},
 				validatorType: {
 					encode: 'EnumEncode',
@@ -42,6 +43,17 @@ define(['docs/module'], function (module) {
 							}
 
 							return this.$super(_init);
+						}
+					},
+
+					Collection: {
+						$add: function (_obj, _idx) {
+							if (_.findWhere(this, {validatorType: _obj.validatorType})) {
+								return this;
+							} else {
+								return this.$super(_obj, _idx);
+
+							}
 						}
 					}
 				}

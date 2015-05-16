@@ -6,68 +6,60 @@ define(['docs/templates/fields/module'], function (module) {
 	 * @param $http HTTP communication service
 	 * @param $compile Template compilation service
 	 * @param $log Logging service
-	 * @return {{restrict: string, controllerAs: string, require: string, link: Function, controller:
-	 *   Function}}
+	 * @return {{restrict: string, transclude: boolean, require: string, link: Function}}
+	 * @param FieldValidatorsEnum
 	 */
-	function docsValidator($http, $compile, $log) {
+	function docsValidator($http, $compile, $log, FieldValidatorsEnum) {
 
 		return {
 			restrict: 'EA',
-			controllerAs: 'vm',
-			require: '^docsFieldTemplateWidget',
-			/**
-			 *
-			 * @param scope
-			 * @param element
-			 */
-			link: function (scope, element) {
-				if (!_.has(scope.validator, '$templateUrl')) {
-					$log.error(scope.validator.validatorType +
-						' validator does not have $templateUrl attached');
-					return;
-				}
-
-				$http
-					.get(scope.validator.$templateUrl)
-					.success(function (data) {
-						element.html(data);
-						$compile(element.contents())(scope);
-
-						$log.debug('Recompiled view with newly added validator');
-					});
-
-				scope.removeField = removeField;
-
-				function removeField(field, validatorName) {
-					$('#fieldTemplate')
-						.formValidation('enableFieldValidators', field.$name, false, validatorName)
-						.formValidation('revalidateField', field.$name);
-
-					$log.debug('Added filed to validation list');
-				}
+			scope: {
+				validator: '=',
+				container: '='
 			},
 			/**
-			 *
-			 * @param $scope
+			 * Directive linking function
+			 * @param scope {Object} Local scope provider
+			 * @param element {Object} Directives' DOM attachment reference
 			 */
-			controller: function ($scope) {
-				var vm = this;
+			link: function (scope, element) {
+				var vm = scope.vm = scope.vm || {};
 
+				// variables
+
+				// functions
+				vm.init = init;
 				vm.removeValidator = removeValidator;
 
-				function removeValidator(validatorName) {
-					$scope.validator.$destroy()
-						.$asPromise()
-						.then(function () {
-							$scope.field.validators.$destroy(validatorName);
-							$scope.removeField($scope.field, validatorName);
-							console.log($scope.field);
+				init();
+
+				function init() {
+					if (!_.has(scope.validator, '$templateUrl')) {
+						$log.error(scope.validator.validatorType + ' validator does not have $templateUrl attached');
+						return;
+					}
+
+					$http
+						.get(scope.validator.$templateUrl)
+						.success(function (data) {
+							element.html(data);
+							$compile(element.contents())(scope);
+
+							$log.debug('Recompiled view with newly added validator');
 						});
+				}
+
+				function removeValidator() {
+					$('#fieldTemplate')
+						.formValidation('enableFieldValidators', scope.container.$name, false, FieldValidatorsEnum.getKeyByValue(scope.validator))
+						.formValidation('revalidateField', scope.container.$name);
+
+					scope.container.validators.$remove(scope.validator);
 
 					$log.debug('Removed validator form field validators list');
 				}
 
-				$log.debug('Initiated controller');
+				$log.debug('Initiated link');
 			}
 		};
 	}

@@ -1,8 +1,4 @@
-define([
-	'docs/templates/fields/module',
-	'form-validation',
-	'form-validation-bootstrap'
-], function (module) {
+define(['angular', 'docs/templates/fields/module'], function (ng, module) {
 	'use strict';
 
 	/**
@@ -24,19 +20,17 @@ define([
 			templateUrl: fieldsConf.MODULE_PATH + '/widgets/fieldTemplate/docs-field-template.html',
 			scope: true,
 			controllerAs: 'vm',
-			/**
-			 *
-			 * @param $scope
-			 */
-			controller: function ($scope) {
+			controller: function () {
 				var vm = this;
 
+				// variables
+				vm.compositeField = CompositeFieldAPI.build({fieldType: FieldTypesEnum.COMPOSITE});
+
+				// functions
 				vm.save = save;
 
-				$scope.compositeField = CompositeFieldAPI.build({fieldType: FieldTypesEnum.COMPOSITE});
-
 				function save() {
-					CompositeFieldAPI.save($scope.compositeField);
+					CompositeFieldAPI.save(vm.compositeField);
 					$log.debug('Saved composite field');
 				}
 

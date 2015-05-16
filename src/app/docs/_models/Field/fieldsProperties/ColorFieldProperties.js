@@ -10,7 +10,7 @@ define(['docs/module'], function (module) {
 	 * @param fieldsConf {Object} Module configuration
 	 * @param ValidatorAPI {Object} Interface for REST communication with server
 	 * @param FieldValidatorsEnum {Object} List of all registered field validators
-	 * @return {{$templateUrl: {init: string}, $inputType: {init: string}, validators: {init: *[]}}}
+	 * @return {{$templateUrl, $inputType, validators}}
 	 */
 	function ColorFieldProperties($log, fieldsConf, ValidatorAPI, FieldValidatorsEnum) {
 
@@ -24,12 +24,16 @@ define(['docs/module'], function (module) {
 				init: 'color'
 			},
 			validators: {
-				init: [
-					ValidatorAPI.build({
-						validatorType: FieldValidatorsEnum.COLOR,
-						$isRemovable: false
-					})
-				]
+				init: function () {
+					return this.validators
+						.$collection()
+						.$add(
+						ValidatorAPI.build({
+							validatorType: FieldValidatorsEnum.COLOR,
+							isRemovable: false
+						})
+					);
+				}
 			}
 		};
 	}
