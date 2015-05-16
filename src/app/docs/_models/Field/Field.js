@@ -39,17 +39,7 @@ define(['docs/module'], function (module) {
 					hasMany: 'Field'
 				},
 				validators: {
-					hasMany: 'Validator',
-					init: function () {
-						return this.validators
-							.$collection()
-							.$add(
-							ValidatorAPI.build({
-								validatorType: FieldValidatorsEnum.COLOR,
-								isRemovable: false
-							})
-						);
-					}
+					hasMany: 'Validator'
 				},
 				fieldType: {
 					encode: 'EnumEncode',
