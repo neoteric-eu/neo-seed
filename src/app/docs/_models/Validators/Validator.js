@@ -27,6 +27,7 @@ define(['docs/module'], function (module) {
 					decode: 'EnumDecode',
 					param: FieldValidatorsEnum
 				},
+
 				$extend: {
 					Scope: {
 						// Polymorphism based builder that enhances plain validators with
@@ -36,24 +37,35 @@ define(['docs/module'], function (module) {
 							// Ensure that injector has the reference class
 							if (_.deepHas(_init, 'validatorType.propertyClass') &&
 								$injector.has(_init.validatorType.propertyClass)) {
-								this.mix($injector.get(_init.validatorType.propertyClass));
-								$log.debug('Creating field extended by additional properties');
-							} else {
-								$log.error('Unsupported injectable field class');
-							}
+								// Create extended class
+								var extendedModel = $injector
+									.get(_init.validatorType.propertyClass)
+									.$build();
 
-							return this.$super(_init);
+								// Override type in order to make instances looks the same for collections
+								extendedModel.$type = this.$type;
+								// Make sure the polymorphic properties are rewritten
+								extendedModel.$extend(_init);
+
+								$log.debug('Created validator extended by additional properties');
+
+								return extendedModel;
+							} else {
+								$log.debug('Created plain model');
+
+								return this.$super(_init);
+							}
 						}
 					},
 
 					Collection: {
-						$add: function (_obj, _idx) {
-							if (_.findWhere(this, {validatorType: _obj.validatorType})) {
-								return this;
-							} else {
-								return this.$super(_obj, _idx);
+						// This method transforms validators collection to form accepted
+						// be formValidation jQuery library
+						$encapsulateValidators: function () {
 
-							}
+							var validators = _.object(_.deepPluck(this, 'validatorType.formValidationKey'), this);
+
+							return {validators: validators};
 						}
 					}
 				}

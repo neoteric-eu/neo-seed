@@ -1,5 +1,6 @@
 define([
-	'docs/templates/fields/module'
+	'docs/templates/fields/module',
+	'form-validation'
 ], function (module) {
 	'use strict';
 
@@ -9,12 +10,14 @@ define([
 	 * @memberOf app.docs.templates.fields
 	 *
 	 * @param $log {Object} Logging service
+	 * @param $timeout {Function} Timeout service
 	 * @param fieldsConf {Object} Module configuration
 	 * @param FieldTypesEnum {Object} List of all registered fields
 	 * @param FieldAPI {Object} Interface for REST communication with server
 	 * @return {{restrict: string, templateUrl: string, scope: {container: string}, link: Function}}
+
 	 */
-	function docsAddField($log, FieldTypesEnum, fieldsConf, FieldAPI) {
+	function docsAddField($log, $timeout, FieldTypesEnum, fieldsConf, FieldAPI) {
 
 		return {
 			restrict: 'EA',
@@ -36,18 +39,20 @@ define([
 
 					scope.container.composite
 						.$add(model)
-						.$asPromise()
-						.then(function () {
-							$('#fieldTemplate').formValidation(
-								'addField', model.$name, model.$encapsulateValidators()
-							);
-
-							$log.debug('Added filed to validation list');
+						.$then(
+						function () {
+							$timeout(function () {
+								$('#fieldTemplate')
+									.formValidation('addField', model.$name, model.validators.$encapsulateValidators());
+							}, 200);
+						}, function () {
+							$log.error('Error adding field to collection');
 						});
+
 					$log.debug('Added new field to form');
 				}
 
-				$log.debug('Initiated controller');
+				$log.debug('Initiated linking function');
 			}
 		};
 	}

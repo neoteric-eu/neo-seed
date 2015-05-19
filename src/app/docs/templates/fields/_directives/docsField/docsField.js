@@ -6,7 +6,7 @@ define(['docs/templates/fields/module'], function (module) {
 		return {
 			restrict: 'EA',
 			scope: {
-				field : '=',
+				field: '=',
 				container: '='
 			},
 			link: function (scope, element) {
@@ -36,6 +36,9 @@ define(['docs/templates/fields/module'], function (module) {
 				}
 
 				function deleteField() {
+					$('#fieldTemplate').formValidation('removeField', scope.field.$name);
+
+					scope.field.$destroy();
 					scope.container.composite.$remove(scope.field);
 
 					$log.debug('Removed field form container');

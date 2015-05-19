@@ -13,22 +13,25 @@ define(['docs/module'], function (module) {
 	 * }
 	 * @see {@link http://formvalidation.io/validators/color/}
 	 * @param $log {Object} Logging service
+	 * @param restmod {Object} Object Relational Mapper interface
 	 * @param fieldsConf {Object} Module configuration
 	 * @return {*|Model}
 	 */
-	function ColorValidator($log, fieldsConf) {
+	function ColorValidator($log, restmod, fieldsConf) {
 
-		$log.debug('Initiating properties factory');
+		$log.debug('Initialized model factory');
 
-		return {
-			$templateUrl: {
-				init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'color.html'
-			},
-			// The type of color
-			type: {
-				init: 'hex'
-			}
-		};
+		return restmod
+			.model()
+			.mix('Validator', {
+				$templateUrl: {
+					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'color.html'
+				},
+				// The type of color
+				type: {
+					init: 'hex'
+				}
+			});
 	}
 
 	module.factory('ColorValidator', ColorValidator);

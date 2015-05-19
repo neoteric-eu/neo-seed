@@ -20,17 +20,17 @@ define(['docs/module'], function (module) {
 		return new BaseEnum({
 			COMPOSITE: {},
 			EMAIL: {
-				propertyClass: 'EmailFieldProperties',
+				propertyClass: 'EmailField',
 				label: gettext('Email'),
 				group: gettext('Text')
 			},
 			URL: {
-				propertyClass: 'UrlFieldProperties',
+				propertyClass: 'UrlField',
 				label: gettext('Url'),
 				group: gettext('Text')
 			},
 			TEXTAREA: {
-				propertyClass: 'TextareaFieldProperties',
+				propertyClass: 'TextareaField',
 				label: gettext('Textarea'),
 				group: gettext('Text')
 			},
@@ -40,37 +40,37 @@ define(['docs/module'], function (module) {
 				group: gettext('Text')
 			},
 			NUMBER: {
-				propertyClass: 'NumberFieldProperties',
+				propertyClass: 'NumberField',
 				label: gettext('Number'),
 				group: gettext('Numeric')
 			},
 			PHONE: {
-				propertyClass: 'PhoneFieldProperties',
+				propertyClass: 'PhoneField',
 				label: gettext('Phone'),
 				group: gettext('Numeric')
 			},
 			DATE: {
-				propertyClass: 'DateFieldProperties',
+				propertyClass: 'DateField',
 				label: gettext('Date'),
 				group: gettext('Date & Time')
 			},
 			TIME: {
-				propertyClass: 'TimeFieldProperties',
+				propertyClass: 'TimeField',
 				label: gettext('Time'),
 				group: gettext('Date & Time')
 			},
 			COLOR: {
-				propertyClass: 'ColorFieldProperties',
+				propertyClass: 'ColorField',
 				label: gettext('Color picker'),
 				group: gettext('Custom')
 			},
 			SELECT: {
-				propertyClass: 'SelectFieldProperties',
+				propertyClass: 'SelectField',
 				label: gettext('Select'),
 				group: gettext('Selection')
 			},
 			MULTI_SELECT: {
-				propertyClass: 'MultiselectFieldProperties',
+				propertyClass: 'MultiselectField',
 				label: gettext('Multi-select'),
 				group: gettext('Selection')
 			}

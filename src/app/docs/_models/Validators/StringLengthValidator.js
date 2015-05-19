@@ -15,14 +15,17 @@ define(['docs/module'], function (module) {
 	 * }
 	 * @see {@link http://formvalidation.io/validators/stringLength/}
 	 * @param $log {Object} Logging service
+	 * @param restmod {Object} Object Relational Mapper interface
 	 * @param fieldsConf Module configuration
 	 * @return {*|Model}
 	 */
-	function StringLengthValidator($log, fieldsConf) {
+	function StringLengthValidator($log, restmod, fieldsConf) {
 
-		$log.debug('Initiating properties factory');
+		$log.debug('Initialized model factory');
 
-		return {
+		return restmod
+			.model()
+			.mix('Validator', {
 				$templateUrl: {
 					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'stringLength.html'
 				},
@@ -37,7 +40,7 @@ define(['docs/module'], function (module) {
 				trim: {
 					init: false
 				}
-		};
+			});
 	}
 
 	module.factory('StringLengthValidator', StringLengthValidator);

@@ -3,7 +3,7 @@ define(['docs/module'], function (module) {
 
 	/**
 	 * @class CompositeField
-	 * @mixin
+	 * @mixes {app.docs.Field}
 	 * @memberOf app.docs
 	 *
 	 * @param $log Logging service
@@ -18,7 +18,7 @@ define(['docs/module'], function (module) {
 			.mix('Field', {
 				//$config: {
 				//	urlPrefix: 'http://192.168.1.23:9003/api/v1'
-				//},
+				//}
 			});
 	}
 

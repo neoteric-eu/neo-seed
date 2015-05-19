@@ -21,34 +21,42 @@ define(['docs/module'], function (module) {
 		return new BaseEnum({
 			EMAIL_ADDRESS: {
 				propertyClass: 'EmailAddressValidator',
+				formValidationKey: 'email',
 				label: gettext('Email')
 			},
 			URI: {
 				propertyClass: 'UriValidator',
+				formValidationKey: 'uri',
 				label: gettext('Uri')
 			},
 			INTEGER: {
 				propertyClass: 'IntegerValidator',
+				formValidationKey: 'integer',
 				label: gettext('Integer')
 			},
 			STRING_LENGTH: {
 				propertyClass: 'StringLengthValidator',
+				formValidationKey: 'stringLength',
 				label: gettext('String length')
 			},
 			PHONE: {
 				propertyClass: 'PhoneValidator',
+				formValidationKey: 'phone',
 				label: gettext('Phone')
 			},
 			DATE: {
 				propertyClass: 'DateValidator',
+				formValidationKey: 'date',
 				label: gettext('Date')
 			},
 			COLOR: {
 				propertyClass: 'ColorValidator',
+				formValidationKey: 'color',
 				label: gettext('Color')
 			},
 			NOT_EMPTY: {
 				propertyClass: 'NotEmptyValidator',
+				formValidationKey: 'notEmpty',
 				label: gettext('Required')
 			}
 		});

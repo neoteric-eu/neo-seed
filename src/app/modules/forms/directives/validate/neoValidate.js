@@ -5,23 +5,24 @@ define([
 ], function (module) {
 	'use strict';
 
-	function neoValidate() {
+	function neoValidate($log) {
 		return {
 			restrict: 'A',
-			scope: {
-				validateOptions: '='
-			},
 			link: function (scope, form) {
 				$(form)
 					.formValidation({
 						framework: 'bootstrap',
+						err: {
+							container: 'tooltip'
+						},
 						icon: {
 							valid: 'fa fa-check',
 							invalid: 'fa fa-times',
 							validating: 'fa fa-refresh'
 						},
-						validators: scope.validateOptions
 					});
+
+				$log.debug('Initiated linking function');
 			}
 		};
 	}

@@ -12,7 +12,7 @@ define([
 	 * @param fieldsConf
 	 * @param ValidatorAPI
 	 * @param FieldValidatorsEnum
-	 * @return {{restrict: string, templateUrl: string, require: string, link: Function}}
+	 * @return {{restrict: string, templateUrl: string, link: Function}}
 	 */
 	function docsAddValidator($log, fieldsConf, ValidatorAPI, FieldValidatorsEnum) {
 
@@ -29,21 +29,27 @@ define([
 				vm.addValidator = addValidator;
 
 				function addValidator(validatorType) {
+					if (_.findWhere(scope.field.validators, {validatorType: validatorType})) {
+
+						$log.debug('Validator already enabled');
+						return;
+					}
+
 					var validator = ValidatorAPI.build({validatorType: validatorType});
 
 					scope.field.validators
-						.$collection()
 						.$add(validator)
 						.$asPromise()
 						.then(function () {
 							$('#fieldTemplate')
-								.formValidation('addField', scope.field.$name, scope.field)
-								.formValidation('revalidateField', scope.field.$name);
-
-							$log.debug('Added new validator to validator list');
+								.formValidation(
+								'addField',
+								scope.field.$name,
+								scope.field.validators.$encapsulateValidators()
+							);
 						});
 
-					$log.debug('Attached new validator to validator');
+					$log.debug('Added new validator to validator list');
 				}
 
 				$log.debug('Initiated controller');

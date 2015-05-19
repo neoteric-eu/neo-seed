@@ -3,25 +3,28 @@ define(['docs/module'], function (module) {
 
 	/**
 	 * @class TextField
-	 * @mixes {app.docs.Field}
+	 * @extends {app.docs.Field}
 	 * @memberOf app.docs
 	 *
 	 * @param $log {Object} Logging service
+	 * @param restmod {Object} Object Relational Mapper interface
 	 * @param fieldsConf {Object} Module configuration
-	 * @return {{$templateUrl: {init: string}, $inputType: {init: string}}}
+	 * @return {*|Model}
 	 */
-	function TextField($log, fieldsConf) {
+	function TextField($log, restmod, fieldsConf) {
 
-		$log.debug('Initiating properties factory');
+		$log.debug('Initialized model factory');
 
-		return {
+		return restmod
+			.model()
+			.mix('Field', {
 			$templateUrl: {
 				init: fieldsConf.FIELD_TEMPLATES_PATH + 'inputField/input.html'
 			},
 			$inputType: {
 				init: 'text'
 			}
-		};
+			});
 	}
 
 	module.factory('TextField', TextField);

@@ -12,18 +12,21 @@ define(['docs/module'], function (module) {
 	 * }
 	 * @see {@link http://formvalidation.io/validators/integer/}
 	 * @param $log {Object} Logging service
+	 * @param restmod {Object} Object Relational Mapper interface
 	 * @param fieldsConf {Object} Module configuration
 	 * @return {*|Model}
 	 */
-	function IntegerValidator($log, fieldsConf) {
+	function IntegerValidator($log, restmod, fieldsConf) {
 
-		$log.debug('Initiating properties factory');
+		$log.debug('Initialized model factory');
 
-		return {
+		return restmod
+			.model()
+			.mix('Validator', {
 			$templateUrl: {
 				init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'integer.html'
 			}
-		};
+			});
 	}
 
 	module.factory('IntegerValidator', IntegerValidator);

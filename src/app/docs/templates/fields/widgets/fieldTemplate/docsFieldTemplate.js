@@ -1,4 +1,7 @@
-define(['angular', 'docs/templates/fields/module'], function (ng, module) {
+define([
+	'angular',
+	'docs/templates/fields/module'
+], function (ng, module) {
 	'use strict';
 
 	/**

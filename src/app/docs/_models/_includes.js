@@ -8,18 +8,18 @@ define([
 	'./Field/Field',
 	'./Field/FieldAPI',
 
-	'./Field/fieldsProperties/EmailFieldProperties',
-	'./Field/fieldsProperties/SelectFieldProperties',
-	'./Field/fieldsProperties/TextareaFieldProperties',
-	'./Field/fieldsProperties/PhoneFieldProperties',
-	'./Field/fieldsProperties/TimeFieldProperties',
-	'./Field/fieldsProperties/ColorFieldProperties',
-	'./Field/fieldsProperties/DateFieldProperties',
-	'./Field/fieldsProperties/NumberFieldProperties',
-	'./Field/fieldsProperties/TextFieldProperties',
-	'./Field/fieldsProperties/UrlFieldProperties',
-	'./Field/fieldsProperties/SelectFieldProperties',
-	'./Field/fieldsProperties/MultiselectFieldProperties',
+	'./Field/EmailField',
+	'./Field/SelectField',
+	'./Field/TextareaField',
+	'./Field/PhoneField',
+	'./Field/TimeField',
+	'./Field/ColorField',
+	'./Field/DateField',
+	'./Field/NumberField',
+	'./Field/TextField',
+	'./Field/UrlField',
+	'./Field/SelectField',
+	'./Field/MultiselectField',
 
 	'./CompositeField/CompositeField',
 	'./CompositeField/CompositeFieldAPI',
@@ -28,13 +28,13 @@ define([
 	'./Validators/ValidatorAPI',
 
 
-	'./Validators/validatorsProperties/EmailAddressValidatorProperties',
-	'./Validators/validatorsProperties/NotEmptyValidatorProperties',
-	'./Validators/validatorsProperties/DateValidatorProperties',
-	'./Validators/validatorsProperties/PhoneValidatorProperties',
-	'./Validators/validatorsProperties/IntegerValidatorProperties',
-	'./Validators/validatorsProperties/ColorValidatorProperties',
-	'./Validators/validatorsProperties/UriValidatorProperties'
+	'./Validators/EmailAddressValidator',
+	'./Validators/NotEmptyValidator',
+	'./Validators/DateValidator',
+	'./Validators/PhoneValidator',
+	'./Validators/IntegerValidator',
+	'./Validators/ColorValidator',
+	'./Validators/UriValidator'
 ], function () {
 	'use strict';
 });

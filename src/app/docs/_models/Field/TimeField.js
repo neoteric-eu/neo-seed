@@ -2,27 +2,30 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
-	 * @class TimeFieldProperties
-	 * @mixes {app.docs.Field}
+	 * @class TimeField
+	 * @extends {app.docs.Field}
 	 * @memberOf app.docs
 	 *
 	 * @param $log {Object} Logging service
+	 * @param restmod {Object} Object Relational Mapper interface
 	 * @param fieldsConf {Object} Module configuration
-	 * @return {{$templateUrl: {init: string}, $inputType: {init: string}}}
+	 * @return {*|Model}
 	 */
-	function TimeFieldProperties($log, fieldsConf) {
+	function TimeField($log, restmod, fieldsConf) {
 
-		$log.debug('Initiating properties factory');
+		$log.debug('Initialized model factory');
 
-		return {
+		return restmod
+			.model()
+			.mix('Field', {
 			$templateUrl: {
 				init: fieldsConf.FIELD_TEMPLATES_PATH + 'inputField/input.html'
 			},
 			$inputType: {
 				init: 'time'
 			}
-		};
+			});
 	}
 
-	module.factory('TimeFieldProperties', TimeFieldProperties);
+	module.factory('TimeField', TimeField);
 });

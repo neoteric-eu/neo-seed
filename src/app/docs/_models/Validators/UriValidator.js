@@ -12,21 +12,24 @@ define(['docs/module'], function (module) {
 	 * }
 	 * @see {@link http://formvalidation.io/validators/uri/}
 	 * @param $log {Object} Logging service
+	 * @param restmod {Object} Object Relational Mapper interface
 	 * @param fieldsConf Module configuration
 	 * @return {*|Model}
 	 */
-	function UriValidator($log, fieldsConf) {
+	function UriValidator($log, restmod, fieldsConf) {
 
-		$log.debug('Initiating properties factory');
+		$log.debug('Initialized model factory');
 
-		return {
-			$templateUrl: {
-				init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'uri.html'
-			},
-			allowEmptyProtocol: {
-				init: false
-			}
-		};
+		return restmod
+			.model()
+			.mix('Validator', {
+				$templateUrl: {
+					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'uri.html'
+				},
+				allowEmptyProtocol: {
+					init: false
+				}
+			});
 	}
 
 	module.factory('UriValidator', UriValidator);

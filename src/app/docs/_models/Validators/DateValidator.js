@@ -14,14 +14,17 @@ define(['docs/module'], function (module) {
 	 * }
 	 * @see {@link http://formvalidation.io/validators/date/}
 	 * @param $log {Object} Logging service
+	 * @param restmod {Object} Object Relational Mapper interface
 	 * @param fieldsConf {Object} Module configuration
 	 * @return {*|Model}
 	 */
-	function DateValidator($log, fieldsConf) {
+	function DateValidator($log, restmod, fieldsConf) {
 
-		$log.debug('Initiating properties factory');
+		$log.debug('Initialized model factory');
 
-		return {
+		return restmod
+			.model()
+			.mix('Validator', {
 			$templateUrl: {
 				init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'date.html'
 			},
@@ -35,7 +38,7 @@ define(['docs/module'], function (module) {
 				encode: 'DateEncode',
 				decode: 'DateDecode'
 			}
-		};
+			});
 	}
 
 	module.factory('DateValidator', DateValidator);

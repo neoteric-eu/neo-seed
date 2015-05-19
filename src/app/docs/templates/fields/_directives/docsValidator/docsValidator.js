@@ -7,9 +7,8 @@ define(['docs/templates/fields/module'], function (module) {
 	 * @param $compile Template compilation service
 	 * @param $log Logging service
 	 * @return {{restrict: string, transclude: boolean, require: string, link: Function}}
-	 * @param FieldValidatorsEnum
 	 */
-	function docsValidator($http, $compile, $log, FieldValidatorsEnum) {
+	function docsValidator($http, $compile, $log) {
 
 		return {
 			restrict: 'EA',
@@ -35,7 +34,8 @@ define(['docs/templates/fields/module'], function (module) {
 
 				function init() {
 					if (!_.has(scope.validator, '$templateUrl')) {
-						$log.error(scope.validator.validatorType + ' validator does not have $templateUrl attached');
+						$log.error(scope.validator.validatorType +
+							' validator does not have $templateUrl attached');
 						return;
 					}
 
@@ -51,9 +51,9 @@ define(['docs/templates/fields/module'], function (module) {
 
 				function removeValidator() {
 					$('#fieldTemplate')
-						.formValidation('enableFieldValidators', scope.container.$name, false, FieldValidatorsEnum.getKeyByValue(scope.validator))
-						.formValidation('revalidateField', scope.container.$name);
+						.formValidation('enableFieldValidators', scope.container.$name, false, scope.validator.validatorType.formValidationKey);
 
+					scope.validator.$destroy();
 					scope.container.validators.$remove(scope.validator);
 
 					$log.debug('Removed validator form field validators list');
