@@ -19,7 +19,7 @@ define([
 							valid: 'fa fa-check',
 							invalid: 'fa fa-times',
 							validating: 'fa fa-refresh'
-						},
+						}
 					});
 
 				$log.debug('Initiated linking function');
