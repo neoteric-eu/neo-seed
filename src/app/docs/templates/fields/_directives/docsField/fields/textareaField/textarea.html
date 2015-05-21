@@ -1,11 +1,82 @@
 <div class="form-group">
-	<label class="control-label">{{field.label.label | translate}}</label>
+	<label class="control-label" ng-if="field.label">{{field.label}}:</label>
 
 	<div class="form-group">
-		<textarea class="form-control scrollable-textarea"
-							ng-model="field.value"
-							name="{{field.$pk}}">
 
-		</textarea>
+		<div class="input-group input-group-sm input-group-with-edit-button">
+			<textarea class="form-control scrollable-textarea"
+								rows="3"
+								name="{{field.$name}}"
+								type="{{field.$inputType}}"
+								ng-readonly="field.readOnly"
+								ng-model="field.value"
+								style="resize: none;">
+
+			</textarea>
+
+			<div dropdown class="input-group-btn" style="vertical-align: top">
+				<button dropdown-toggle
+								type="button"
+								class="btn btn-default">
+					<i class="fa fa-cog"></i>
+					<span class="caret"></span>
+				</button>
+
+				<ul class="dropdown-menu">
+					<li>
+						<a ng-click="field.$isEditorCollapsed = !field.$isEditorCollapsed">
+							<i class="fa fa-edit"></i>
+							Edit
+						</a>
+						<a ng-click="vm.deleteField()">
+							<i class="fa fa-trash-o"></i>
+							Remove
+						</a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+		<p ng-if="field.note" class="note"><strong>Note:</strong> {{field.note}}</p>
+	</div>
+
+	<div class="form-actions" collapse="field.$isEditorCollapsed">
+
+		<!-- FIELD PROPERTIES -->
+		<ng-include
+			src="'app/docs/templates/fields/_directives/docsField/fields/field-properties.html'"></ng-include>
+		<!-- end:FIELD PROPERTIES -->
+
+		<hr/>
+
+		<h3>Validators</h3>
+
+		<!-- VALIDATORS_LIST -->
+		<div ng-repeat="(validatorName, validator) in field.validators">
+			<docs-validator validator="validator" container="field"></docs-validator>
+		</div>
+		<!-- end:VALIDATORS_LIST -->
+
+		<!-- ADD_VALIDATOR -->
+		<div class="row">
+			<div class="col-sm-12">
+				<docs-add-validator class="pull-right"></docs-add-validator>
+			</div>
+		</div>
+		<!-- end:ADD_VALIDATOR -->
+
+		<div class="form-actions">
+			<div class="row">
+				<div class="col-md-12">
+					<button
+						ng-click="field.$isEditorCollapsed = !field.$isEditorCollapsed"
+						class="btn btn-default"
+						type="button">
+						<i class="fa fa-arrow-circle-up"></i>
+						Close
+					</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

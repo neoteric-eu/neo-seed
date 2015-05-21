@@ -13,7 +13,7 @@ define(['docs/module'], function (module) {
 	 * @param restmod {Object} Data model layer interface
 	 * @return {*|Model}
 	 */
-	function Field($log, $injector, restmod, FieldTypesEnum) {
+	function Field($log, $injector, $filter, restmod, FieldTypesEnum) {
 
 		$log.debug('Initiating model factory');
 
@@ -31,9 +31,7 @@ define(['docs/module'], function (module) {
 				readOnly: {
 					init: false
 				},
-				label: {
-					init: ''
-				},
+				label: {},
 				composite: {
 					hasMany: 'Field'
 				},
@@ -78,6 +76,10 @@ define(['docs/module'], function (module) {
 								extendedModel.$type = this.$type;
 								// Make sure the polymorphic properties are rewritten
 								extendedModel.$extend(_init);
+								// Provide default functionality
+								extendedModel.$extend({
+									label: $filter('translate')(_init.fieldType.label)
+								});
 
 								$log.debug('Created field extended by additional properties');
 

@@ -48,6 +48,18 @@ define(['angular'], function (ng) {
 				data: {
 					title: gettext('New')
 				}
+			})
+
+			.state('app.docs.templates.fields.edit', {
+				url: '/edit/:id',
+				views: {
+					'content@app': {
+						templateUrl: fieldsConf.MODULE_PATH + '/views/view.html'
+					}
+				},
+				data: {
+					title: gettext('Edit')
+				}
 			});
 	});
 

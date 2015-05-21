@@ -21,7 +21,7 @@ define(['docs/module'], function (module) {
 		return new BaseEnum({
 			EMAIL_ADDRESS: {
 				propertyClass: 'EmailAddressValidator',
-				formValidationKey: 'email',
+				formValidationKey: 'emailAddress',
 				label: gettext('Email')
 			},
 			URI: {

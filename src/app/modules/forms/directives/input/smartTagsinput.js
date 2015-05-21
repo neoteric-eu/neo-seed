@@ -10,6 +10,7 @@ define(['modules/forms/module', 'bootstrap-tagsinput'], function (module) {
 			 * @param {} tElement
 			 */
 			compile: function (tElement) {
+				console.log('Taging');
 				tElement.removeAttr('smart-tagsinput data-smart-tagsinput');
 				tElement.tagsinput();
 			}

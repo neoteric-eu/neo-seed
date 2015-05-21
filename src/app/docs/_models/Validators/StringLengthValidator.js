@@ -29,9 +29,6 @@ define(['docs/module'], function (module) {
 				$templateUrl: {
 					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'stringLength.html'
 				},
-				validatorType: {
-					init: 'stringLength'
-				},
 				// The minimum length of the value
 				min: {},
 				// The maximum length of the value

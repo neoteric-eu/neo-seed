@@ -1,6 +1,6 @@
 <section>
 	<div class="form-group">
-		<label class="control-label">{{field.label}}</label>
+		<label class="control-label" ng-if="field.label">{{field.label}}:</label>
 
 		<div class="input-group input-group-sm input-group-with-edit-button">
 			<input class="form-control"
@@ -30,19 +30,22 @@
 						</a>
 					</li>
 				</ul>
-
 			</div>
+
 		</div>
-		<p ng-if="field.note" class="note"><strong>Note:</strong>{{field.note}}</p>
+		<p ng-if="field.note" class="note"><strong>Note:</strong> {{field.note}}</p>
 	</div>
 
 	<div class="form-actions" collapse="field.$isEditorCollapsed">
 
 		<!-- FIELD PROPERTIES -->
-		<ng-include src="'app/docs/templates/fields/_directives/docsField/fields/field-properties.html'"></ng-include>
+		<ng-include
+			src="'app/docs/templates/fields/_directives/docsField/fields/field-properties.html'"></ng-include>
 		<!-- end:FIELD PROPERTIES -->
 
 		<hr/>
+
+		<h3>Validators</h3>
 
 		<!-- VALIDATORS_LIST -->
 		<div ng-repeat="(validatorName, validator) in field.validators">
@@ -51,7 +54,11 @@
 		<!-- end:VALIDATORS_LIST -->
 
 		<!-- ADD_VALIDATOR -->
-		<docs-add-validator></docs-add-validator>
+		<div class="row">
+			<div class="col-sm-12">
+				<docs-add-validator class="pull-right"></docs-add-validator>
+			</div>
+		</div>
 		<!-- end:ADD_VALIDATOR -->
 
 		<div class="form-actions">

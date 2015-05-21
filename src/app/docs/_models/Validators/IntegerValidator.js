@@ -23,7 +23,7 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model()
 			.mix('Validator', {
-			$templateUrl: {
+				$templateUrl: {
 				init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'integer.html'
 			}
 			});

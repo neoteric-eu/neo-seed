@@ -1,9 +1,11 @@
 <div class="btn-group btn-group-sm" dropdown>
 	<button type="button"
-					class="btn btn-default dropdown-toggle"
+					class="btn btn-labeled btn-success dropdown-toggle"
 					dropdown-toggle>
-		<i class="fa fa-fw fa-plus"></i>
-		Add form element <span class="caret"></span>
+		<span class="btn-label">
+			<i class="fa fa-fw fa-keyboard-o"></i>
+		</span>
+		Add field <span class="caret"></span>
 	</button>
 	<ul class="dropdown-menu" role="menu">
 
@@ -14,6 +16,5 @@
 			<a ng-click="vm.addField(field)">{{field.label|translate}}</a>
 		</li>
 		<li ng-if="!$last" ng-repeat-end class="divider"></li>
-
 	</ul>
 </div>

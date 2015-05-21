@@ -18,9 +18,9 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model()
 			.mix('Field', {
-			$templateUrl: {
-				init: fieldsConf.FIELD_TEMPLATES_PATH + 'textareaField/textarea.html'
-			}
+				$templateUrl: {
+					init: fieldsConf.FIELD_TEMPLATES_PATH + 'textareaField/textarea.html'
+				}
 			});
 	}
 

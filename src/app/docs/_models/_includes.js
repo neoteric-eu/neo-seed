@@ -29,6 +29,7 @@ define([
 
 
 	'./Validators/EmailAddressValidator',
+	'./Validators/StringLengthValidator',
 	'./Validators/NotEmptyValidator',
 	'./Validators/DateValidator',
 	'./Validators/PhoneValidator',
