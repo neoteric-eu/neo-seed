@@ -16,10 +16,11 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model('/field-templates')
 			.mix('Field', {
-				$config: {
-					urlPrefix: 'http://192.168.1.23:9003/api/v1'
-				},
-				description: {}
+				//$config: {
+				//	urlPrefix: 'http://192.168.1.23:9003/api/v1'
+				//},
+				description: {},
+				version: {}
 			});
 	}
 

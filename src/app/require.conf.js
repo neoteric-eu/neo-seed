@@ -30,8 +30,11 @@ requirejs.config({
 		'angular-ui-router-extras-transition': '../vendor/libs/angular-ui-router-extras/ct-ui-router-extras.transition',
 		'angular-ui-router-extras-previous': '../vendor/libs-custom/angular-ui-router-extras/ct-ui-router-extras.previous',
 		'angular-ui-router-extras-sticky': '../vendor/libs/angular-ui-router-extras/ct-ui-router-extras.sticky',
+		// @todo include Utils in seed
+		'angular-ui-utils': '../vendor/libs/angular-ui-utils/angular-ui-utils',
 		'angular-google-maps': '../vendor/libs/angular-google-maps/angular-google-maps',
-		'angular-bootstrap': '../vendor/libs/angular-bootstrap/ui-bootstrap-tpls',
+		'angular-bootstrap': '../vendor/libs/angular-bootstrap/ui-bootstrap',
+		'angular-bootstrap-tpls': '../vendor/libs/angular-bootstrap/ui-bootstrap-tpls',
 		'angular-couch-potato': '../vendor/libs/angular-couch-potato/angular-couch-potato',
 		'angular-debounce': '../vendor/libs/angular-debounce/angular-debounce',
 		'angular-easyfb': '../vendor/libs/angular-easyfb/angular-easyfb',
@@ -139,6 +142,7 @@ requirejs.config({
 		},
 
 		'angular-animate': ['angular'],
+		'angular-bootstrap-tpls': ['angular-bootstrap'],
 		'angular-bootstrap': ['angular'],
 		'angular-cookie': ['angular'],
 		'angular-couch-potato': ['angular'],
@@ -160,6 +164,7 @@ requirejs.config({
 		'angular-ui-router-extras-transition': ['angular', 'angular-ui-router', 'angular-ui-router-extras-core'],
 		'angular-ui-router-extras-sticky': ['angular', 'angular-ui-router', 'angular-ui-router-extras-core'],
 		'angular-ui-select': ['angular'],
+		'angular-ui-utils': ['angular'],
 		'angular-ui-date': ['angular'],
 		'angular-permission': ['angular'],
 		'angular-table': ['angular'],

@@ -16,6 +16,7 @@ define(['docs/templates/fields/module'], function (module) {
 				// functions
 				vm.init = init;
 				vm.deleteField = deleteField;
+				vm.toggleCollapse = toggleCollapse;
 
 				init();
 
@@ -26,7 +27,7 @@ define(['docs/templates/fields/module'], function (module) {
 					}
 
 					$http
-						.get(scope.field.$templateUrl)
+						.get(scope.field.$templateUrl.toString())
 						.success(function (data) {
 							element.html(data);
 							$compile(element.contents())(scope);
@@ -38,10 +39,16 @@ define(['docs/templates/fields/module'], function (module) {
 				function deleteField() {
 					$('#fieldTemplate').formValidation('removeField', scope.field.$name);
 
-					scope.field.$destroy();
 					scope.container.composite.$remove(scope.field);
+					scope.field.$destroy();
 
 					$log.debug('Removed field form container');
+				}
+
+				function toggleCollapse() {
+					scope.field.$isEditorCollapsed = !scope.field.$isEditorCollapsed;
+
+					$log.debug('Collapsed field editor');
 				}
 			}
 		};

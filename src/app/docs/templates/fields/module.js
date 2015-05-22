@@ -6,7 +6,7 @@ define(['angular'], function (ng) {
 	 * @constructor module
 	 * @memberof app.docs.templates.fields
 	 */
-	var module = ng.module('app.docs.templates.fields', []);
+	var module = ng.module('app.docs.templates.fields', ['ui.bootstrap.collapse']);
 
 	/**
 	 * Module configuration options.fields
@@ -51,14 +51,14 @@ define(['angular'], function (ng) {
 			})
 
 			.state('app.docs.templates.fields.edit', {
-				url: '/edit/:id',
+				url: '/edit',
 				views: {
 					'content@app': {
 						templateUrl: fieldsConf.MODULE_PATH + '/views/view.html'
 					}
 				},
 				data: {
-					title: gettext('Edit')
+					title: gettext('New')
 				}
 			});
 	});

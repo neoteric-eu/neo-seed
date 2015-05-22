@@ -1,20 +1,52 @@
-<div id="docs-field-template-form-widget"
-		 data-jarvis-widget
-		 data-widget-colorbutton="false"
-		 data-widget-editbutton="false"
-		 data-widget-deletebutton="false"
-		 data-widget-sortable="false"
-		 data-widget-fullscreenbutton="false">
+<div class="row">
+	<div class="col-sm-6">
+		<div class="well">
+			<h3 class="margin-top-0">
+				<i class="fa fa-stack-overflow"></i>
+				Field template
+				<small>fields</small>
+			</h3>
 
-	<header>
-		<span class="widget-icon"> <i class="fa fa-list"></i> </span>
+			<hr/>
 
-		<h2 class="title">Field template</h2>
-	</header>
+			<form id="fieldTemplate" neo-validate>
+				<fieldset>
+					<!-- RECURSIVE_FIELD_TREE -->
+					<!-- WARNING! Magic happens here! -->
+					<div ng-repeat="field in vm.compositeField.composite"
+							 id="docs-field-level.html">
+						<docs-field field="field" container="vm.compositeField"></docs-field>
 
-	<div class="widget-body">
+						<div ng-if="field.composite.length"
+								 ng-repeat="field in field.composite"
+								 ng-include="docs-field-level.html"></div>
+					</div>
+					<!-- end:RECURSIVE_FIELD_TREE -->
+				</fieldset>
+			</form>
 
-		<div class="widget-body-toolbar">
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="text-center">
+						<docs-add-field container="vm.compositeField"></docs-add-field>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="col-sm-3">
+		<div class="well">
+			<h3 class="margin-top-0">
+				<i class="fa fa-empire"></i>
+				Field template
+				<small>properties</small>
+			</h3>
+
+			<hr/>
+
 			<fieldset>
 				<div class="row">
 					<div class="col-sm-12">
@@ -30,53 +62,25 @@
 					<div class="col-sm-12">
 						<div class="form-group">
 							<label>Description</label>
-							<textarea class="form-control"
-												rows="3"
-												ng-model="vm.compositeField.description"
-												style="resize: none;">
-							</textarea>
+					<textarea class="form-control"
+										rows="3"
+										ng-model="vm.compositeField.description"
+										style="resize: none;">
+					</textarea>
 						</div>
 					</div>
 				</div>
 			</fieldset>
-		</div>
 
-		<legend>Form template</legend>
-
-		<!--<div ng-show="vm.compositeField" class="modal-backdrop fade in bg-color-white" style="position: absolute"></div>-->
-
-		<form id="fieldTemplate" neo-validate>
-			<fieldset>
-				<!-- RECURSIVE_FIELD_TREE -->
-				<!-- WARNING! Magic happens here! -->
-				<div ng-repeat="field in vm.compositeField.composite"
-						 id="docs-field-level.html">
-					<docs-field field="field" container="vm.compositeField"></docs-field>
-
-					<div ng-if="field.composite.length"
-							 ng-repeat="field in field.composite"
-							 ng-include="docs-field-level.html"></div>
-				</div>
-				<!-- end:RECURSIVE_FIELD_TREE -->
-			</fieldset>
-		</form>
-
-
-		<div class="row">
-			<div class="col-sm-12">
-				<docs-add-field class="pull-right" container="vm.compositeField"></docs-add-field>
-			</div>
-		</div>
-
-		<div class="form-actions">
-			<div class="row">
-				<div class="col-md-12">
-					<button class="btn btn-primary" type="button" ng-click="vm.save()">
-						<i class="fa fa-save"></i> Save
-					</button>
+			<div class="form-actions">
+				<div class="row">
+					<div class="col-md-12">
+						<button class="btn btn-primary" type="button" ng-click="vm.save()">
+							<i class="fa fa-save"></i> Save
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>

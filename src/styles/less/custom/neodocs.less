@@ -3,7 +3,7 @@
 	display: none;
 }
 
-.form-actions[collapse]{
+.form-actions[collapse] {
 	text-align: left;
 	margin-bottom: 13px;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -11,27 +11,34 @@
 
 // Allow proper validation icon placement along with buttons inside input
 // @see https://github.com/twbs/bootstrap/issues/12551
-.input-group-with-edit-button {
+.has-feedback {
 	> .form-control {
-		padding-right: 40px;
+		padding-right: 30px;
 	}
 
-	~ .form-control-feedback {
-		top: 31px !important;
-		right: 44px;
+	> .form-control-feedback {
+		top: 32px !important;
+		right: 1px;
 	}
 }
 
-// Allow narrower dropdown menu
-.dropdown-menu{
-	min-width: 50px;
-}
-
-.btn-group-sm > .btn.btn-labeled {
+.btn-group > .btn.btn-labeled {
 	padding-bottom: 0;
 	padding-top: 0;
 }
 
 .input-group textarea.form-control {
 	height: auto;
+}
+
+// Custom scrolling of the floating widgets
+[scrollfix-column].ui-scrollfix {
+	position: fixed;
+	top: 20px;
+}
+
+.smart-accordion-default .panel-title > a > i.fa {
+	display: block;
+	vertical-align: middle;
+	line-height: 20px;
 }

@@ -6,6 +6,8 @@ define([
 	'./_directives/docsValidator/docsValidator',
 	'./_directives/docsAddField/docsAddField',
 	'./_directives/docsAddValidator/docsAddValidator',
+	'./_directives/scrollfixColumn/scrollfixColumn',
+	'./_directives/hoverClass/hoverClass',
 
 	'modules/forms/directives/validate/neoValidate'
 ], function () {

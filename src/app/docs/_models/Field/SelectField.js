@@ -22,7 +22,7 @@ define(['docs/module'], function (module) {
 					init: fieldsConf.FIELD_TEMPLATES_PATH + 'selectField/select.html'
 				},
 				options: {
-					init: []
+					init: ['one', 'two', 'three']
 				}
 			});
 	}

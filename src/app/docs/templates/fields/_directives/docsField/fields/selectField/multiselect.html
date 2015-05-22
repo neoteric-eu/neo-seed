@@ -1,15 +1,42 @@
-<div class="form-group">
-	<label class="control-label">{{field.label.label | translate}}</label>
+<section>
+	<div class="form-group">
+		<div class="clearfix">
+			<label class="control-label pull-left" ng-if="field.label">{{field.label}}:</label>
 
-	<ui-select theme="select2" multiple ng-model="field.value" style="width: 100%">
+			<div class="pull-right">
+				<a href-void>
+					<i class="fa fa-fw fa-arrows text-muted" hover-class="text-primary"></i>
+				</a>
+				<a href-void ng-click="vm.toggleCollapse()">
+					<i class="fa fa-fw fa-edit text-muted" hover-class="text-info"></i>
+				</a>
+				<a href-void ng-click="vm.deleteField()">
+					<i class="fa fa-fw fa-trash-o text-muted" hover-class="text-danger"></i>
+				</a>
+			</div>
+		</div>
 
-		<ui-select-match>
-			<span>{{$item}}</span>
-		</ui-select-match>
+		<ui-select theme="select2"
+							 multiple
+							 class="display-block"
+							 ng-model="field.value">
 
-		<ui-select-choices repeat="option in field.options">
-			<span ng-bind-html="option | highlight:$select.search"></span>
-		</ui-select-choices>
+			<ui-select-match>
+				<span>{{$item}}</span>
+			</ui-select-match>
 
-	</ui-select>
-</div>
+			<ui-select-choices repeat="option in field.options">
+				<span ng-bind-html="option | highlight:$select.search"></span>
+			</ui-select-choices>
+
+		</ui-select>
+
+		<p ng-if="field.note" class="note"><strong>Note:</strong> {{field.note}}</p>
+	</div>
+
+	<!-- FIELD_EDITOR -->
+	<ng-include
+		src="'app/docs/templates/fields/_directives/docsField/fields/field-editor.html'"></ng-include>
+	<!-- end:FIELD_EDITOR -->
+
+</section>

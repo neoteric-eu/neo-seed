@@ -13,6 +13,7 @@ define([
 	'angular-ui-router-extras-sticky',
 	'angular-sanitize',
 	'angular-bootstrap',
+	'angular-bootstrap-tpls',
 	'angular-ui-select',
 	'angular-gettext',
 	'angular-permission',
@@ -21,6 +22,7 @@ define([
 	'angular-restmod',
 	'angular-restmod-preload',
 	'angular-restmod-find-many',
+	'angular-ui-utils',
 	'smartwidgets',
 	'notification'
 ], function (ng, couchPotato, globalSettings) {
@@ -40,6 +42,7 @@ define([
 
 		'ui.bootstrap',
 		'ui.select',
+		'ui.utils',
 
 		'ui.router',
 		'ct.ui.router.extras.core',

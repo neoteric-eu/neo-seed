@@ -22,10 +22,7 @@ define(['docs/module'], function (module) {
 					init: fieldsConf.FIELD_TEMPLATES_PATH + 'selectField/multiselect.html'
 				},
 				options: {
-					init: {}
-				},
-				multiple: {
-					init: true
+					init: ['one', 'two', 'three']
 				}
 			});
 	}

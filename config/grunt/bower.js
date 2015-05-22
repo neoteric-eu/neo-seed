@@ -24,6 +24,7 @@ module.exports = {
 			'angular-ui-router/angular-ui-router.js': 'angular-ui-router/release/angular-ui-router.js',
 			'angular-ui-router-extras': 'ui-router-extras/release/modular',
 			'angular-ui-select/angular-ui-select.js': 'angular-ui-select/dist/select.js',
+			'angular-ui-utils/angular-ui-utils.js': 'angular-ui-utils/ui-utils.js',
 			'angular-xeditable/dist/js/xeditable.js': 'angular-xeditable/dist/js/xeditable.js',
 			'angular-table/angular-table.js': 'ng-table/dist/ng-table.js',
 			'angular-restmod/angular-restmod.js': 'angular-restmod/dist/angular-restmod-bundle.js',

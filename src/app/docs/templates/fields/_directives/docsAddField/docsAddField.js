@@ -52,7 +52,7 @@ define([
 					$log.debug('Added new field to form');
 				}
 
-				$log.debug('Initiated linking function');
+				$log.debug('Called linking function');
 			}
 		};
 	}
