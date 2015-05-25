@@ -9,20 +9,22 @@
 
 			<hr/>
 
-			<form id="fieldTemplate" neo-validate>
-				<fieldset>
+			<form id="fieldTemplate" neo-validate novalidate>
 					<!-- RECURSIVE_FIELD_TREE -->
 					<!-- WARNING! Magic happens here! -->
-					<div ng-repeat="field in vm.compositeField.composite"
-							 id="docs-field-level.html">
+				<ul ui-sortable="vm.sortableOptions"
+						ng-model="vm.compositeField.composite"
+						class="no-padding list-unstyled">
+					<li ng-repeat="field in vm.compositeField.composite"
+							id="docs-field-level.html">
 						<docs-field field="field" container="vm.compositeField"></docs-field>
 
-						<div ng-if="field.composite.length"
-								 ng-repeat="field in field.composite"
-								 ng-include="docs-field-level.html"></div>
-					</div>
+					<li ng-if="field.composite.length"
+							ng-repeat="field in field.composite"
+							ng-include="docs-field-level.html"></li>
+					</li>
+				</ul>
 					<!-- end:RECURSIVE_FIELD_TREE -->
-				</fieldset>
 			</form>
 
 

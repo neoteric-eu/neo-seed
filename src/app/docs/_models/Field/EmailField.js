@@ -21,7 +21,7 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.FIELD_TEMPLATES_PATH + 'inputField/input.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + 'input.html'
 				},
 				$inputType: {
 					init: 'email'

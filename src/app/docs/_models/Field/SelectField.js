@@ -19,7 +19,7 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.FIELD_TEMPLATES_PATH + 'selectField/select.html'
+					init: fieldsConf.FIELD_TEMPLATES_PATH + 'select.html'
 				},
 				options: {
 					init: ['one', 'two', 'three']

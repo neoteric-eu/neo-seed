@@ -30,7 +30,16 @@ define(['docs/templates/fields/module'], function (module) {
 				var vm = this;
 
 				// variables
-				vm.compositeField = CompositeFieldAPI.build({fieldType: FieldTypesEnum.COMPOSITE});
+				vm.compositeField = CompositeFieldAPI.build({
+					fieldType: FieldTypesEnum.COMPOSITE
+				});
+
+				vm.sortableOptions = {
+					handle: '.drag-handle',
+					scroll: true,
+					axis: 'y',
+					opacity: 0.5
+				};
 
 				// functions
 				vm.init = init;
@@ -48,6 +57,8 @@ define(['docs/templates/fields/module'], function (module) {
 					if ($stateParams.id) {
 						vm.compositeField = CompositeFieldAPI.get($stateParams.id);
 					}
+
+					$log.debug('Initiated controller');
 				}
 
 				/**
@@ -55,12 +66,13 @@ define(['docs/templates/fields/module'], function (module) {
 				 * @method save
 				 */
 				function save() {
-					CompositeFieldAPI.save(vm.compositeField);
+					CompositeFieldAPI
+						.save(vm.compositeField)
+						.then(function () {
+							$previousState.go('caller');
+						});
 					$log.debug('Saved composite field');
 				}
-
-				$log.debug('Initiated controller');
-
 			}
 		};
 	}

@@ -1,9 +1,14 @@
 <fieldset>
 	<h3 class="margin-top-0 margin-bottom-10">Uri
 		<small>Forces the value to be uri web resource</small>
-		<i class="fa fa-trash-o pull-right cursor-pointer"
+
+		<a href-void
 			 ng-if="validator.isRemovable"
-			 ng-click="vm.removeValidator(validator.validatorType)"></i>
+			 ng-click="vm.removeValidator()"
+			 class="btn btn-xs btn-link pull-right">
+			<i class="fa fa-fw fa-trash-o text-muted"
+				 hover-class="text-danger"></i>
+		</a>
 	</h3>
 
 	<div class="row">

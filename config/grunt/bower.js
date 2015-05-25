@@ -20,6 +20,7 @@ module.exports = {
 			'angular-moment/angular-moment.js': 'angular-moment/angular-moment.js',
 			'angular-resource/angular-resource.js': 'angular-resource/angular-resource.js',
 			'angular-sanitize/angular-sanitize.js': 'angular-sanitize/angular-sanitize.js',
+			'angular-ui-sortable/angular-ui-sortable.js': 'angular-ui-sortable/sortable.js',
 			'angular-ui-date/angular-ui-date.js': 'angular-ui-date/src/date.js',
 			'angular-ui-router/angular-ui-router.js': 'angular-ui-router/release/angular-ui-router.js',
 			'angular-ui-router-extras': 'ui-router-extras/release/modular',

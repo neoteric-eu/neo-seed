@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4 class="panel-title">
+			<i class="fa fa-shield pull-left"></i> Validators
+		</h4>
+	</div>
+	<div class="panel-collapse">
+		<div class="panel-body">
+			<div ng-repeat="(validatorName, validator) in field.validators">
+				<docs-validator validator="validator" container="field"></docs-validator>
+			</div>
+
+			<!-- ADD_VALIDATOR -->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="text-center">
+						<docs-add-validator></docs-add-validator>
+					</div>
+				</div>
+			</div>
+			<!-- end:ADD_VALIDATOR -->
+		</div>
+	</div>
+</div>

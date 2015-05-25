@@ -79,6 +79,7 @@
     "ui-router-extras": "~0.0.13",
     "lodash-deep": "~1.6.0",
 		"form.validation": "*",
+		"angular-ui-sortable": "~0.13.3",
 		"angular-ui-utils": "~0.2.3"
   },
   "devDependencies": {

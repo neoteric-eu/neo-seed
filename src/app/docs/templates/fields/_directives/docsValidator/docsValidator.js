@@ -59,7 +59,7 @@ define(['docs/templates/fields/module'], function (module) {
 					$log.debug('Removed validator form field validators list');
 				}
 
-				$log.debug('Initiated link');
+				$log.debug('Initiated linking function');
 			}
 		};
 	}

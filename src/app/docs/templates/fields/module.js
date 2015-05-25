@@ -1,4 +1,7 @@
-define(['angular'], function (ng) {
+define([
+	'angular',
+	'angular-ui-sortable'
+], function (ng) {
 	'use strict';
 
 	/**
@@ -6,7 +9,7 @@ define(['angular'], function (ng) {
 	 * @constructor module
 	 * @memberof app.docs.templates.fields
 	 */
-	var module = ng.module('app.docs.templates.fields', ['ui.bootstrap.collapse']);
+	var module = ng.module('app.docs.templates.fields', ['ui.sortable']);
 
 	/**
 	 * Module configuration options.fields

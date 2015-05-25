@@ -34,6 +34,9 @@ define(['docs/templates/fields/module'], function (module) {
 
 							$log.debug('Recompiled view with newly added field');
 						});
+
+
+					$log.debug('Called linking function');
 				}
 
 				function deleteField() {
