@@ -23,7 +23,7 @@
 										 ng-model="field.defaultValue"
 										 style="width: 100%">
 
-						<ui-select-match>{{$item}}</ui-select-match>
+						<ui-select-match>{{$select.selected}}</ui-select-match>
 						<ui-select-choices repeat="option in field.options">
 							{{option}}
 						</ui-select-choices>
