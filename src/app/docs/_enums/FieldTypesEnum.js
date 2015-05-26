@@ -7,10 +7,10 @@ define(['docs/module'], function (module) {
 	 * property to Angular models via Dependency Injection.
 	 * @propertyClass FieldTypesEnum
 	 * @implements {app.BaseEnum}
-	 * @memberOf app.tasks
+	 * @memberOf {app.docs}
 	 *
-	 * @param {Function} BaseEnum Augmentation of enum-type object
-	 * @param {Function} gettext Translation helper service
+	 * @param BaseEnum {Function}  Augmentation of enum-type object
+	 * @param gettext {Function} Translation helper service
 	 * @param $log {Object} Logging service
 	 * @return {Function} Enum instance
 	 */
@@ -18,7 +18,9 @@ define(['docs/module'], function (module) {
 		$log.debug('Initiated enum object');
 
 		return new BaseEnum({
-			COMPOSITE: {},
+			COMPOSITE: {
+				group: gettext('Composite')
+			},
 			EMAIL: {
 				propertyClass: 'EmailField',
 				label: gettext('Email'),

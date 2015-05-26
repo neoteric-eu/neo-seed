@@ -15,16 +15,12 @@ define([
 	 * Module configuration options.fields
 	 */
 	module.constant('fieldsConf', {
-		MODULE_PATH: '/app/docs/templates/fields',
-		DIRECTIVES_PATH: '/app/docs/templates/fields/_directives/',
-		FIELD_TEMPLATES_PATH: '/app/docs/templates/fields/_directives/docsField/fields/',
-		VALIDATOR_TEMPLATES_PATH: '/app/docs/templates/fields/_directives/docsValidator/validators/'
+		MODULE_PATH: '/app/docs/templates/fields'
 	});
 
 	/**
 	 * Stores additional module configuration
 	 * @method run
-	 * @memberof app.docs.templates.fields.module
 	 */
 	module.config(function ($stateProvider, gettext, fieldsConf) {
 
@@ -54,7 +50,7 @@ define([
 			})
 
 			.state('app.docs.templates.fields.edit', {
-				url: '/edit',
+				url: '/edit/:id',
 				views: {
 					'content@app': {
 						templateUrl: fieldsConf.MODULE_PATH + '/views/view.html'

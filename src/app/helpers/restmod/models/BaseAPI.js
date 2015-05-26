@@ -10,7 +10,7 @@ define(['app'], function (module) {
 	 * @param $log {Object} Logging provider
 	 * @param gettextCatalog {Object} Translation service
 	 * @param appMessages {Object} Browser notifications wrapper
-	 * @return {API} REST interface for Restmod models
+	 * @return {Object} REST interface for Restmod models
 	 */
 	function BaseAPI($q, $log, gettextCatalog, appMessages) {
 
@@ -182,7 +182,7 @@ define(['app'], function (module) {
 		 * @method handleError
 		 * @memberOf app.BaseAPI
 		 * @param response CallExpression
-		 * @return {i to void|*|Array}
+		 * @return {*|Array|Promise}
 		 */
 		function handleError(response) {
 			appMessages.error({

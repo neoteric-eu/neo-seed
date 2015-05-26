@@ -1,4 +1,4 @@
 /**
- * @namespace app.docs.complexFields
- * @memberof app.docs
+ * @namespace app.docs.templates.fields
+ * @memberof app.docs.templates
  */

@@ -8,24 +8,18 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log Console log provider
 	 * @param restmod Data model layer interface
-	 * @param gettext Translation service
 	 * @return {*|Model}
 	 */
-	function DocumentTemplate($log, restmod, gettext) {
+	function DocumentTemplate($log, restmod) {
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model('/document-templates')
 			.mix('Document', {
-				name: {
-					init: ''
+				label: {
+					init: 'New document template'
 				},
-				description: {
-					inti: ''
-				},
-				type: {
-					init: gettext('document template')
-				}
+				description: {}
 			});
 	}
 

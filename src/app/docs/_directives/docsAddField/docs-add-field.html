@@ -10,7 +10,8 @@
 	<ul class="dropdown-menu" role="menu">
 
 		<li ng-repeat-start="(groupName, group) in vm.fieldGroups"
-				class="dropdown-header">{{groupName|translate}}
+				class="dropdown-header">
+			{{groupName|translate}}
 		</li>
 		<li ng-repeat="field in group">
 			<a ng-click="vm.addField(field)">{{field.label|translate}}</a>

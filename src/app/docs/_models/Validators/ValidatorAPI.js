@@ -14,7 +14,7 @@ define(['docs/module'], function (module) {
 	 */
 	function ValidatorAPI($log, BaseAPI, Validator) {
 
-		$log.debug('Initiating API service');
+		$log.debug('Instantiated API service');
 
 		return new BaseAPI(Validator);
 	}

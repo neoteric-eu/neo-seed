@@ -13,18 +13,18 @@ define(['docs/module'], function (module) {
 	 * @see {@link http://formvalidation.io/validators/notEmpty/}
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @param fieldsConf Module configuration
+	 * @param docsModuleConf Module configuration
 	 * @return {*|Model}
 	 */
-	function NotEmptyValidator($log, restmod, fieldsConf) {
+	function NotEmptyValidator($log, restmod, docsModuleConf) {
 
-		$log.debug('Initialized model factory');
+		$log.debug('Created new instance');
 
 		return restmod
 			.model()
 			.mix('Validator', {
 				$templateUrl: {
-					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'notEmpty.html'
+					init: docsModuleConf.VALIDATOR_TEMPLATES_PATH + 'notEmpty.html'
 				}
 			});
 	}

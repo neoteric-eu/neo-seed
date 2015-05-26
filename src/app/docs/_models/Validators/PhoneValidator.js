@@ -14,19 +14,19 @@ define(['docs/module'], function (module) {
 	 * @see {@link http://formvalidation.io/validators/phone/}
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @param fieldsConf Module configuration
+	 * @param docsModuleConf Module configuration
 	 * @param FieldValidatorsEnum {Object} List of registered field validators
 	 * @return {*|Model}
 	 */
-	function PhoneValidator($log, restmod, fieldsConf, FieldValidatorsEnum) {
+	function PhoneValidator($log, restmod, docsModuleConf, FieldValidatorsEnum) {
 
-		$log.debug('Initialized model factory');
+		$log.debug('Created new instance');
 
 		return restmod
 			.model()
 			.mix('Validator', {
 				$templateUrl: {
-					init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'phone.html'
+					init: docsModuleConf.VALIDATOR_TEMPLATES_PATH + 'phone.html'
 				},
 				validatorType: {
 					init: 'phone'

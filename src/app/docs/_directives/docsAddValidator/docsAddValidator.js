@@ -1,24 +1,23 @@
-define([
-	'docs/templates/fields/module'
-], function (module) {
+define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
-	 * Renders composite field editor
+	 * Renders list of available validators and handles adding them to composite layer
 	 * @class docsAddValidator
-	 * @memberOf app.docs.templates.fields
+	 * @memberOf app.docs
 	 *
-	 * @param $log
-	 * @param fieldsConf
-	 * @param ValidatorAPI
-	 * @param FieldValidatorsEnum
+	 * @param $log {Object} Logging service
+	 * @param docsModuleConf {Object} Module configuration
+	 * @param ValidatorAPI {Object} Interface for REST communication with server
+	 * @param FieldValidatorsEnum {Object} List of all registered validators
 	 * @return {{restrict: string, templateUrl: string, link: Function}}
 	 */
-	function docsAddValidator($log, fieldsConf, ValidatorAPI, FieldValidatorsEnum) {
+	function docsAddValidator($log, docsModuleConf, ValidatorAPI, FieldValidatorsEnum) {
+		$log.debug('Initiated directive');
 
 		return {
 			restrict: 'EA',
-			templateUrl: fieldsConf.DIRECTIVES_PATH + 'docsAddValidator/docs-add-validator.html',
+			templateUrl: docsModuleConf.DIRECTIVES_PATH + 'docsAddValidator/docs-add-validator.html',
 			link: function (scope) {
 				var vm = scope.vm = scope.vm || {};
 
@@ -28,6 +27,10 @@ define([
 				// functions
 				vm.addValidator = addValidator;
 
+				/**
+				 * @method
+				 * @param validatorType {Object} {FieldValidatorsEnum} property
+				 */
 				function addValidator(validatorType) {
 					if (_.findWhere(scope.field.validators, {validatorType: validatorType})) {
 
@@ -52,7 +55,7 @@ define([
 					$log.debug('Added new validator to validator list');
 				}
 
-				$log.debug('Initiated controller');
+				$log.debug('Called linking function');
 			}
 		};
 	}

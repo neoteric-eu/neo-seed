@@ -14,7 +14,7 @@ define(['docs/module'], function (module) {
 	 */
 	function FieldAPI($log, BaseAPI, Field) {
 
-		$log.debug('Initiating API service');
+		$log.debug('Instantiated API service');
 
 		return new BaseAPI(Field);
 	}

@@ -1,12 +1,12 @@
 define([
-	'docs/templates/fields/module'
+	'../../templates/fields/module'
 ], function (module) {
 	'use strict';
 
 	/**
 	 * Directive that adds class to element when mouse is over it
 	 * @class hoverClass
-	 * @memberOf app.docs.templates.fields
+	 * @memberOf app.docs
 	 *
 	 * @example
 	 * <div hover-class="underline"></div>

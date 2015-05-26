@@ -3,19 +3,21 @@ define(['docs/templates/fields/module'], function (module) {
 
 	/**
 	 * Renders list of user defined field templates
-	 * @class docsFieldTemplateListWidget
-	 * @memberOf app.docs.templates.fields
+	 * @class docsDocumentTemplateListWidget
+	 * @memberOf app.docs.templates.documents
 	 *
 	 * @param neoTableParams {Function} Table configuration object.
-	 * @param fieldsConf {Object} Module configuration
+	 * @param docsTemplatesDocumentsModuleConf {Object} Module configuration
 	 * @param CompositeFieldAPI {Object} API interface for server communication.
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function docsFieldTemplateListWidget(neoTableParams, CompositeFieldAPI, fieldsConf) {
+	function docsDocumentTemplateListWidget(neoTableParams, CompositeFieldAPI,
+		docsTemplatesDocumentsModuleConf) {
+
 		return {
 			restrict: 'EA',
-			templateUrl: fieldsConf.MODULE_PATH +
-			'/widgets/fieldTemplateList/docs-field-template-list.html',
+			templateUrl: docsTemplatesDocumentsModuleConf.MODULE_PATH +
+			'/widgets/documentTemplateList/docs-document-template-list.html',
 			controllerAs: 'vm',
 			controller: function () {
 				var vm = this;
@@ -33,5 +35,5 @@ define(['docs/templates/fields/module'], function (module) {
 		};
 	}
 
-	module.directive('docsFieldTemplateListWidget', docsFieldTemplateListWidget);
+	module.directive('docsDocumentTemplateListWidget', docsDocumentTemplateListWidget);
 });

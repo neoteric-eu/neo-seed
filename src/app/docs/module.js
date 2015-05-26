@@ -12,6 +12,17 @@ define(['angular'], function (ng) {
 	]);
 
 	/**
+	 * Module configuration options.fields
+	 */
+	module.constant('docsModuleConf', {
+		MODULE_PATH: '/app/docs',
+		DIRECTIVES_PATH: '/app/docs/_directives/',
+		FIELD_TEMPLATES_PATH: '/app/docs/_directives/docsField/fields/',
+		VALIDATOR_TEMPLATES_PATH: '/app/docs/_directives/docsValidator/validators/'
+	});
+
+
+	/**
 	 * Stores additional module configuration
 	 * @method run
 	 * @memberof app.docs.module

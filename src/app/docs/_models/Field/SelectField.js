@@ -8,18 +8,18 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @param fieldsConf {Object} Module configuration
+	 * @param docsModuleConf {Object} Module configuration
 	 * @return {*|Model}
 	 */
-	function SelectField($log, restmod, fieldsConf) {
+	function SelectField($log, restmod, docsModuleConf) {
 
-		$log.debug('Initialized model factory');
+		$log.debug('Created new instance');
 
 		return restmod
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: fieldsConf.FIELD_TEMPLATES_PATH + 'select.html'
+					init: docsModuleConf.FIELD_TEMPLATES_PATH + 'select.html'
 				},
 				options: {
 					init: ['one', 'two', 'three']

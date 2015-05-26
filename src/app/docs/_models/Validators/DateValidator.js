@@ -15,18 +15,18 @@ define(['docs/module'], function (module) {
 	 * @see {@link http://formvalidation.io/validators/date/}
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @param fieldsConf {Object} Module configuration
+	 * @param docsModuleConf {Object} Module configuration
 	 * @return {*|Model}
 	 */
-	function DateValidator($log, restmod, fieldsConf) {
+	function DateValidator($log, restmod, docsModuleConf) {
 
-		$log.debug('Initialized model factory');
+		$log.debug('Created new instance');
 
 		return restmod
 			.model()
 			.mix('Validator', {
 			$templateUrl: {
-				init: fieldsConf.VALIDATOR_TEMPLATES_PATH + 'date.html'
+				init: docsModuleConf.VALIDATOR_TEMPLATES_PATH + 'date.html'
 			},
 			// The minimal acceptable date
 			min: {

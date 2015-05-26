@@ -1,12 +1,15 @@
-define(['docs/templates/fields/module'], function (module) {
+define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
+	 * Directive responsible for rendering single field validator
+	 * @class docsValidator
+	 * @memberOf app.docs
 	 *
 	 * @param $http HTTP communication service
 	 * @param $compile Template compilation service
 	 * @param $log Logging service
-	 * @return {{restrict: string, transclude: boolean, require: string, link: Function}}
+	 * @return {{restrict: string, scope: {validator: string, container: string}, link: Function}}
 	 */
 	function docsValidator($http, $compile, $log) {
 
@@ -16,11 +19,6 @@ define(['docs/templates/fields/module'], function (module) {
 				validator: '=',
 				container: '='
 			},
-			/**
-			 * Directive linking function
-			 * @param scope {Object} Local scope provider
-			 * @param element {Object} Directives' DOM attachment reference
-			 */
 			link: function (scope, element) {
 				var vm = scope.vm = scope.vm || {};
 

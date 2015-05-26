@@ -7,10 +7,10 @@ define(['docs/module'], function (module) {
 	 * to actual propertyClasses via Angular Dependency Injection.
 	 * @propertyClass FieldValidatorsEnum
 	 * @implements {app.BaseEnum}
-	 * @memberOf app.tasks
+	 * @memberOf {app.docs}
 	 *
-	 * @param {Function} BaseEnum Augmentation of enum-type object
-	 * @param {Function} gettext Translation helper service
+	 * @param BaseEnum {Function} Augmentation of enum-type object
+	 * @param gettext {Function} Translation helper service
 	 * @param $log {Object} Logging service
 	 * @return {Function} Enum instance
 	 */

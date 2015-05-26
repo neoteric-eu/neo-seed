@@ -1,4 +1,4 @@
 /**
  * @namespace app.docs.templates.documents
- * @memberof app.docs
+ * @memberof app.docs.templates
  */

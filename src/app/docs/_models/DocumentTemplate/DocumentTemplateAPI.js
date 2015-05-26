@@ -12,6 +12,9 @@ define(['docs/module'], function (module) {
 	 * @return {*}
 	 */
 	function DocumentTemplateAPI(BaseAPI, DocumentTemplate) {
+
+		$log.debug('Instantiated API service');
+
 		return new BaseAPI(DocumentTemplate);
 	}
 

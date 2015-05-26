@@ -1,27 +1,28 @@
 define([
-	'docs/templates/fields/module',
+	'docs/module',
 	'form-validation'
 ], function (module) {
 	'use strict';
 
 	/**
-	 * Renders composite field editor
+	 * Renders list fo available fields and handles adding them to the composite layer
 	 * @class docsAddField
-	 * @memberOf app.docs.templates.fields
+	 * @memberOf app.docs
 	 *
 	 * @param $log {Object} Logging service
 	 * @param $timeout {Function} Timeout service
-	 * @param fieldsConf {Object} Module configuration
+	 * @param docsModuleConf {Object} Module configuration
 	 * @param FieldTypesEnum {Object} List of all registered fields
 	 * @param FieldAPI {Object} Interface for REST communication with server
 	 * @return {{restrict: string, templateUrl: string, scope: {container: string}, link: Function}}
 
 	 */
-	function docsAddField($log, $timeout, FieldTypesEnum, fieldsConf, FieldAPI) {
+	function docsAddField($log, $timeout, FieldTypesEnum, docsModuleConf, FieldAPI) {
+		$log.debug('Initiated directive');
 
 		return {
 			restrict: 'EA',
-			templateUrl: fieldsConf.DIRECTIVES_PATH + 'docsAddField/docs-add-field.html',
+			templateUrl: docsModuleConf.DIRECTIVES_PATH + 'docsAddField/docs-add-field.html',
 			scope: {
 				container: '='
 			},
@@ -34,6 +35,10 @@ define([
 				// functions
 				vm.addField = addField;
 
+				/**
+				 * Adds field do field list and triggers attached validators
+				 * @param fieldType {Object} Enum-based field type
+				 */
 				function addField(fieldType) {
 					var model = FieldAPI.build({fieldType: fieldType});
 
@@ -41,6 +46,7 @@ define([
 						.$add(model)
 						.$then(
 						function () {
+							// Should be replaced with asyncApply
 							$timeout(function () {
 								$('#fieldTemplate')
 									.formValidation('addField', model.$name, model.validators.$encapsulateValidators());

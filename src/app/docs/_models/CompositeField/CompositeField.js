@@ -11,14 +11,14 @@ define(['docs/module'], function (module) {
 	 * @return {*|Model}
 	 */
 	function CompositeField($log, restmod) {
-		$log.debug('Initiating model factory');
+		$log.debug('Created new instance');
 
 		return restmod
 			.model('/field-templates')
 			.mix('Field', {
-				//$config: {
-				//	urlPrefix: 'http://192.168.1.23:9003/api/v1'
-				//},
+				label: {
+					init: 'New field template'
+				},
 				description: {},
 				version: {}
 			});

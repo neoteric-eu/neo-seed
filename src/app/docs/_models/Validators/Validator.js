@@ -13,7 +13,7 @@ define(['docs/module'], function (module) {
 	 * @return {*|Model}
 	 */
 	function Validator($log, $injector, restmod, FieldValidatorsEnum) {
-		$log.debug('Initiating model factory');
+		$log.debug('Created new instance');
 
 		return restmod
 			.model()

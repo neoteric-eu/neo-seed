@@ -1,7 +1,18 @@
-define(['docs/templates/fields/module'], function (module) {
+define(['docs/module'], function (module) {
 	'use strict';
 
+	/**
+	 * Directive responsible for rendering single form field
+	 * @class docsField
+	 * @memberOf app.docs
+	 *
+	 * @param $http HTTP communication service
+	 * @param $compile Template compilation service
+	 * @param $log Logging service
+	 * @return {{restrict: string, scope: {field: string, container: string}, link: Function}}
+	 */
 	function docsField($http, $compile, $log) {
+		$log.debug('Initiated directive');
 
 		return {
 			restrict: 'EA',
@@ -12,7 +23,6 @@ define(['docs/templates/fields/module'], function (module) {
 			link: function (scope, element) {
 				var vm = scope.vm = scope.vm || {};
 
-				// variables
 				// functions
 				vm.init = init;
 				vm.deleteField = deleteField;
@@ -49,6 +59,7 @@ define(['docs/templates/fields/module'], function (module) {
 				}
 
 				function toggleCollapse() {
+					//noinspection JSPrimitiveTypeWrapperUsage
 					scope.field.$isEditorCollapsed = !scope.field.$isEditorCollapsed;
 
 					$log.debug('Collapsed field editor');
