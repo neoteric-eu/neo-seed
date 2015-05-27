@@ -9,12 +9,11 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param $injector {Object} Dependency Injector instance
-	 * @param $filter {Function} Angular filter provider
 	 * @param FieldTypesEnum {Object} Available primitive fields enum
 	 * @param restmod {Object} Data model layer interface
 	 * @return {*|Model}
 	 */
-	function Field($log, $injector, $filter, restmod, FieldTypesEnum) {
+	function Field($log, $injector, restmod, FieldTypesEnum) {
 
 		$log.debug('Created new instance');
 
@@ -28,10 +27,6 @@ define(['docs/module'], function (module) {
 			extendedModel.$type = _baseModel.$type;
 			// Make sure the polymorphic properties are rewritten
 			extendedModel.$extend(_initProperties);
-			// Provide default functionality
-			extendedModel.$extend({
-				label: $filter('translate')(_initProperties.fieldType.label)
-			});
 
 			$log.debug('Created field extended by additional properties');
 			return extendedModel;
@@ -69,10 +64,10 @@ define(['docs/module'], function (module) {
 					// saving with one request made
 					'before-render': function (raw) {
 						if (!_.isEmpty(this.composite)) {
-							raw.composite = this.composite.$encode();
+							raw.composite = this.composite.$encode(null);
 						}
 						if (!_.isEmpty(this.validators)) {
-							raw.validators = this.validators.$encode();
+							raw.validators = this.validators.$encode(null);
 						}
 					}
 				},
@@ -93,12 +88,12 @@ define(['docs/module'], function (module) {
 								// Check if field is expendable
 								if (_.deepHas(model, 'fieldType.propertyClass') &&
 									$injector.has(model.fieldType.propertyClass)) {
-									this[index] = buildExtendedModel(model, model);
+									this[index] = buildExtendedModel(this, model);
 								}
 							}, this);
 
-
 							this.$resolved = true;
+
 							return this;
 						},
 						// Polymorphism based builder that enhances plain field with

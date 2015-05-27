@@ -13,31 +13,35 @@
 	</header>
 
 	<div class="widget-body no-padding">
-		<div ng-hide="vm.fieldTemplatesTableOptions.data" class="alert alert-info no-margin">
-			<i class="fa-fw fa fa-info"></i>
-			Currently there are no available field templates.
-			Click <u ui-sref="app.docs.templates.fields.new"
-							 class="cursor-pointer">here</u>
-			to create new one.
+		<div class="widget-body-toolbar">
+			<div class="btn-group btn-group-sm">
+				<a ui-sref="app.docs.templates.fields.new"
+					 class="btn btn-success">
+					<i class="fa fa-plus"></i> {{'New'|translate}}
+				</a>
+			</div>
 		</div>
 
 		<table ng-table="vm.fieldTemplatesTableOptions"
 					 template-pagination="app/components/tables/directives/neo-footer.html"
 					 class="table table-striped table-bordered no-margin">
 
-			<thead>
-			<tr>
-				<th class="col-sm-3">Name</th>
-				<th class="col-sm-9">Description</th>
-				<th class="text-align-right">Actions</th>
-			</tr>
-			</thead>
-
 			<tbody ng-show="$data.length">
 			<tr ng-repeat="fieldTemplate in $data">
-				<td>{{fieldTemplate.label}}</td>
-				<td>{{fieldTemplate.description}}</td>
-				<td>
+				<td data-title="'Name'"
+						sortable="'name'"
+						class="col-sm-3">
+					{{fieldTemplate.label}}
+				</td>
+				<td data-title="'Description'"
+						sortable="'description'"
+						class="col-sm-9">
+					{{fieldTemplate.description}}
+				</td>
+				<td data-title="'Actions'"
+						width="150"
+						class="text-align-right">
+
 					<div class="btn-group pull-right">
 						<a class="btn dropdown-toggle btn-xs btn-default"
 							 data-toggle="dropdown">
@@ -49,17 +53,18 @@
 							<li>
 								<a ui-sref="app.docs.templates.fields.edit({id: fieldTemplate.id})">
 									<i class="fa fa-pencil"></i>
-									{{'Edit template'|translate}}
+									{{'Edit'|translate}}
 								</a>
 							</li>
 							<li>
 								<a ng-click="vm.removeFieldTemplate(fieldTemplate)">
 									<i class="fa fa-trash-o"></i>
-									{{'Delete template'|translate}}
+									{{'Delete'|translate}}
 								</a>
 							</li>
 						</ul>
 					</div>
+
 				</td>
 			</tr>
 			</tbody>

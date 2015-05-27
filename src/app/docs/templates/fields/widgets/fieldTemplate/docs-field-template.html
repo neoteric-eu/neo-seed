@@ -10,8 +10,8 @@
 			<hr/>
 
 			<form id="fieldTemplate" neo-validate novalidate>
-					<!-- RECURSIVE_FIELD_TREE -->
-					<!-- WARNING! Magic happens here! -->
+				<!-- RECURSIVE_FIELD_TREE -->
+				<!-- WARNING! Magic happens here! -->
 				<ul ui-sortable="vm.sortableOptions"
 						ng-model="vm.compositeField.composite"
 						class="no-padding list-unstyled">
@@ -24,13 +24,14 @@
 							ng-include="docs-field-level.html"></li>
 					</li>
 				</ul>
-					<!-- end:RECURSIVE_FIELD_TREE -->
+				<!-- end:RECURSIVE_FIELD_TREE -->
 			</form>
 
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="text-center">
 						<docs-add-field container="vm.compositeField"></docs-add-field>
+						<docs-add-composite-field container="vm.compositeField"></docs-add-composite-field>
 					</div>
 				</div>
 			</div>
