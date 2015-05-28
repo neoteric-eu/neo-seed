@@ -1,6 +1,5 @@
 define([
-	'docs/module',
-	'form-validation'
+	'docs/module'
 ], function (module) {
 	'use strict';
 
@@ -29,6 +28,7 @@ define([
 			link: function (scope) {
 				var vm = scope.vm = scope.vm || {};
 
+
 				// variables
 				CompositeFieldAPI
 					.fetch()
@@ -38,19 +38,23 @@ define([
 
 				// functions
 				vm.addField = addField;
+				vm.init = init;
 
 				/**
 				 * Adds field do field list and triggers attached validators
 				 * @param compositeField {Object} Composite field to be added to form
 				 */
 				function addField(compositeField) {
+
 					scope.container.composite
 						.$add(compositeField)
 						.$then(function () {
 							// Should be replaced with asyncApply
 							$timeout(function () {
-								$('#fieldTemplate')
-									.formValidation('addField', compositeField.$name, compositeField.validators.$encapsulateValidators());
+								_.each(compositeField.composite, function (element) {
+									$('#fieldTemplate')
+										.formValidation('addField', element.$name, element.validators.$encapsulateValidators());
+								});
 							}, 200);
 						}, function () {
 							$log.error('Error adding field to collection');

@@ -19,7 +19,7 @@ define(['docs/module'], function (module) {
 			// Create extended class
 			var extendedModel = $injector
 				.get(_initProperties.validatorType.propertyClass)
-				.$build();
+				.$new();
 
 			// Override type in order to make instances looks the same for collections
 			extendedModel.$type = _baseModel.$type;
@@ -45,29 +45,6 @@ define(['docs/module'], function (module) {
 
 				$extend: {
 					Scope: {
-						$decode: function (_raw, _mask) {
-							if (this.$resolved === false && this.$clear) {
-								this.$clear();
-							} // clear if not resolved.
-
-							// Instantiate normally the collection
-							this.$super(_raw, _mask);
-
-							// Replace the model if ought to extended
-							// Make sure we are not creating ghosts
-							_.each(this, function (model, index) {
-								// Check if field is expendable
-								if (_.deepHas(model, 'validatorType.propertyClass') &&
-									$injector.has(model.validatorType.propertyClass)) {
-
-									this[index] = buildExtendedModel(model, model);
-								}
-							}, this);
-
-
-							this.$resolved = true;
-							return this;
-						},
 						// Polymorphism based builder that enhances plain validators with
 						// extra properties based on provided validatorType using DI provided classes
 						$build: function (_init) {
@@ -82,6 +59,12 @@ define(['docs/module'], function (module) {
 
 								return this.$super(_init);
 							}
+						},
+						$buildRaw: function (_raw) {
+							var initProperties = _.extend(_raw, {
+								validatorType: FieldValidatorsEnum.getValueByKey(_raw.validatorType)
+							});
+							return this.$build(initProperties);
 						}
 					},
 
