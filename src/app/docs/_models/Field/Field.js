@@ -13,7 +13,7 @@ define(['docs/module'], function (module) {
 	 * @param restmod {Object} Data model layer interface
 	 * @return {*|Model}
 	 */
-	function Field($log, $injector, restmod, FieldTypesEnum) {
+	function Field($log, $injector, restmod, FieldTypesEnum, RMUtils) {
 
 		$log.debug('Created new instance');
 
@@ -58,16 +58,31 @@ define(['docs/module'], function (module) {
 				},
 
 				$extend: {
+					Collection: {
+						$decode: function (_raw, _mask) {
+							RMUtils.assert(_raw && angular.isArray(_raw), 'Collection $decode expected array');
+
+							_.each(_raw, function (rawField) {
+								var fieldType = FieldTypesEnum.getValueByKey(rawField.fieldType);
+
+								if (_.has(fieldType, 'propertyClass')) {
+
+									var extendedClass = $injector.get(fieldType.propertyClass);
+
+									var model = extendedClass.$buildRaw(rawField, _mask);
+									model.$type = this.$type;
+									this.$add(model);
+
+								} else {
+									this.$buildRaw(rawField, _mask).$reveal();
+								}
+							}, this);
+
+							this.$dispatch('after-feed-many', [_raw]);
+							return this;
+						}
+					},
 					Scope: {
-						$buildRaw: function (_raw) {
-							var initProperties = _.extend(_raw, {
-								fieldType: FieldTypesEnum.getValueByKey(_raw.fieldType)
-							});
-
-							var extendedModel = this.$build(initProperties);
-
-							return extendedModel;
-						},
 						// Polymorphism based builder that enhances plain field with
 						// extra properties based on provided fieldType using DI provided classes
 						$build: function (_init) {

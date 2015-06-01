@@ -12,7 +12,7 @@ define(['docs/module'], function (module) {
 	 * @param FieldValidatorsEnum {Object} List of registered field validators
 	 * @return {*|Model}
 	 */
-	function Validator($log, $injector, restmod, FieldValidatorsEnum) {
+	function Validator($log, $injector, restmod, FieldValidatorsEnum, RMUtils) {
 		$log.debug('Created new instance');
 
 		function buildExtendedModel(_baseModel, _initProperties) {
@@ -59,24 +59,40 @@ define(['docs/module'], function (module) {
 
 								return this.$super(_init);
 							}
-						},
-						$buildRaw: function (_raw) {
-							var initProperties = _.extend(_raw, {
-								validatorType: FieldValidatorsEnum.getValueByKey(_raw.validatorType)
-							});
-							return this.$build(initProperties);
 						}
 					},
 
 					Collection: {
-						// This method transforms validators collection to form accepted
-						// be formValidation jQuery library
-						$encapsulateValidators: function () {
+						$decode: function (_raw, _mask) {
+							RMUtils.assert(_raw && angular.isArray(_raw), 'Collection $decode expected array');
 
-							var validators = _.object(_.deepPluck(this, 'validatorType.formValidationKey'), this);
+							_.each(_raw, function (rawField) {
+								var fieldType = FieldValidatorsEnum.getValueByKey(rawField.validatorType);
 
-							return {validators: validators};
+								if (_.has(fieldType, 'propertyClass')) {
+
+									var extendedModel = $injector.get(fieldType.propertyClass);
+
+									var model = extendedModel.$buildRaw(rawField, _mask);
+									model.$type = this.$type;
+									this.$add(model);
+
+								} else {
+									this.$buildRaw(rawField, _mask).$reveal();
+								}
+							}, this);
+
+							this.$dispatch('after-feed-many', [_raw]);
+							return this;
 						}
+					},
+					// This method transforms validators collection to form accepted
+					// be formValidation jQuery library
+					$encapsulateValidators: function () {
+
+						var validators = _.object(_.deepPluck(this, 'validatorType.formValidationKey'), this);
+
+						return {validators: validators};
 					}
 				}
 			});

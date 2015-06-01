@@ -38,7 +38,6 @@ define([
 
 				// functions
 				vm.addField = addField;
-				vm.init = init;
 
 				/**
 				 * Adds field do field list and triggers attached validators
@@ -46,21 +45,27 @@ define([
 				 */
 				function addField(compositeField) {
 
+					compositeField.$type = scope.container.composite.$type;
+					compositeField.$position = undefined;
+
 					scope.container.composite
 						.$add(compositeField)
 						.$then(function () {
 							// Should be replaced with asyncApply
 							$timeout(function () {
 								_.each(compositeField.composite, function (element) {
-									$('#fieldTemplate')
-										.formValidation('addField', element.$name, element.validators.$encapsulateValidators());
+									if (element.validators.length) {
+										$('#fieldTemplate')
+											.formValidation('addField', element.$name,
+											element.validators.$encapsulateValidators());
+									}
 								});
+
+								$log.debug('Added new composite field to form');
 							}, 200);
 						}, function () {
 							$log.error('Error adding field to collection');
 						});
-
-					$log.debug('Added new composite field to form');
 				}
 
 				$log.debug('Called linking function');

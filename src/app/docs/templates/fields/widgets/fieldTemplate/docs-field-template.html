@@ -12,17 +12,18 @@
 			<form id="fieldTemplate" neo-validate novalidate>
 				<!-- RECURSIVE_FIELD_TREE -->
 				<!-- WARNING! Magic happens here! -->
+				<script type="text/ng-template" id="docsFieldLevel">
+					<docs-field field="field" container="vm.compositeField"></docs-field>
+					<li ng-repeat="field in field.composite track by $index"
+							ng-include="'docsFieldLevel'"></li>
+					</li>
+				</script>
+
 				<ul ui-sortable="vm.sortableOptions"
 						ng-model="vm.compositeField.composite"
 						class="no-padding list-unstyled">
-					<li ng-repeat="field in vm.compositeField.composite"
-							id="docs-field-level.html">
-						<docs-field field="field" container="vm.compositeField"></docs-field>
-
-					<li ng-if="field.composite.length"
-							ng-repeat="field in field.composite"
-							ng-include="docs-field-level.html"></li>
-					</li>
+					<li ng-repeat="field in vm.compositeField.composite track by $index"
+							ng-include="'docsFieldLevel'">
 				</ul>
 				<!-- end:RECURSIVE_FIELD_TREE -->
 			</form>
