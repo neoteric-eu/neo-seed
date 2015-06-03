@@ -59,21 +59,35 @@ define(['docs/module'], function (module) {
 
 								return this.$super(_init);
 							}
+						},
+						// This method transforms validators collection to form accepted
+						// be formValidation jQuery library
+						$encapsulateValidators: function () {
+
+							var validators = _.object(_.deepPluck(this, 'validatorType.formValidationKey'), this);
+
+							return {validators: validators};
 						}
 					},
 
 					Collection: {
+						// Polymorphic collection encoder that enhances plain validators with
+						// extra properties based on provided validatorType using DI provided classes
 						$decode: function (_raw, _mask) {
 							RMUtils.assert(_raw && angular.isArray(_raw), 'Collection $decode expected array');
 
 							_.each(_raw, function (rawField) {
-								var fieldType = FieldValidatorsEnum.getValueByKey(rawField.validatorType);
+								// Get enum value to check whether model should be expanded
+								var validatorType = FieldValidatorsEnum.getValueByKey(rawField.validatorType);
 
-								if (_.has(fieldType, 'propertyClass')) {
+								if (_.has(validatorType, 'propertyClass')) {
 
-									var extendedModel = $injector.get(fieldType.propertyClass);
+									// Inject extended class
+									var extendedClass = $injector.get(validatorType.propertyClass);
 
-									var model = extendedModel.$buildRaw(rawField, _mask);
+									// Build instance
+									var model = extendedClass.$buildRaw(rawField, _mask);
+									// Override type in order to make collection addable
 									model.$type = this.$type;
 									this.$add(model);
 
@@ -85,14 +99,6 @@ define(['docs/module'], function (module) {
 							this.$dispatch('after-feed-many', [_raw]);
 							return this;
 						}
-					},
-					// This method transforms validators collection to form accepted
-					// be formValidation jQuery library
-					$encapsulateValidators: function () {
-
-						var validators = _.object(_.deepPluck(this, 'validatorType.formValidationKey'), this);
-
-						return {validators: validators};
 					}
 				}
 			});

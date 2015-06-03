@@ -6,12 +6,13 @@ define(['docs/module'], function (module) {
 	 * @class docsField
 	 * @memberOf app.docs
 	 *
-	 * @param $http HTTP communication service
-	 * @param $compile Template compilation service
-	 * @param $log Logging service
+	 * @param $http HTTP {Object} communication service
+	 * @param $compile {Function} Template compilation service
+	 * @param $log {Object} Logging service
+	 * @param $timeout {Function} Timeout service
 	 * @return {{restrict: string, scope: {field: string, container: string}, link: Function}}
 	 */
-	function docsField($http, $compile, $log) {
+	function docsField($http, $compile, $log, $timeout) {
 		$log.debug('Initiated directive');
 
 		return {
@@ -27,12 +28,13 @@ define(['docs/module'], function (module) {
 				vm.init = init;
 				vm.deleteField = deleteField;
 				vm.toggleCollapse = toggleCollapse;
+				vm.isDraggable = isDraggable;
 
 				init();
 
 				function init() {
 					if (!_.has(scope.field, '$templateUrl')) {
-						$log.error('Unsupported field type');
+						$log.debug('Composite field without $templateUrl');
 						return;
 					}
 
@@ -42,11 +44,26 @@ define(['docs/module'], function (module) {
 							element.html(data);
 							$compile(element.contents())(scope);
 
+							// Should be replaced with asyncApply
+							$timeout(function () {
+								$('#fieldTemplate')
+									.data('formValidation')
+									.addField(scope.field.$name, scope.field.validators.$encapsulateValidators()
+								);
+							});
+
 							$log.debug('Recompiled view with newly added field');
+						})
+						.error(function () {
+							$log.error('Could not fetch filed template');
 						});
 
 
 					$log.debug('Called linking function');
+				}
+
+				function isDraggable() {
+					return _.isEmpty(scope.container.templateId);
 				}
 
 				function deleteField() {

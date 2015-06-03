@@ -14,9 +14,23 @@
 				<!-- WARNING! Magic happens here! -->
 				<script type="text/ng-template" id="docsFieldLevel">
 					<docs-field field="field" container="vm.compositeField"></docs-field>
-					<li ng-repeat="field in field.composite track by $index"
-							ng-include="'docsFieldLevel'"></li>
-					</li>
+
+					<div ng-if="field.composite.length">
+
+						<div class="pull-right display-block">
+							<a href-void class="drag-handle">
+								<i class="fa fa-fw fa-arrows text-muted" hover-class="text-primary"></i>
+							</a>
+							<a href-void ng-click="vm.deleteField()">
+								<i class="fa fa-fw fa-trash-o text-muted" hover-class="text-danger"></i>
+							</a>
+						</div>
+
+						<hr/>
+
+						<div ng-repeat="field in field.composite track by $index"
+								 ng-include="'docsFieldLevel'"></div>
+					</div>
 				</script>
 
 				<ul ui-sortable="vm.sortableOptions"
@@ -24,7 +38,10 @@
 						class="no-padding list-unstyled">
 					<li ng-repeat="field in vm.compositeField.composite track by $index"
 							ng-include="'docsFieldLevel'">
+
+					</li>
 				</ul>
+
 				<!-- end:RECURSIVE_FIELD_TREE -->
 			</form>
 

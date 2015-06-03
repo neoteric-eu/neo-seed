@@ -1,5 +1,4 @@
 define([
-	'./actions/minifyMenu',
 	'./actions/toggleMenu',
 	'./actions/fullScreen',
 	'./actions/resetWidgets',

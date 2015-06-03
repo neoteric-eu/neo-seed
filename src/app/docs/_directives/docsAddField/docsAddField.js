@@ -49,8 +49,9 @@ define([
 							// Should be replaced with asyncApply
 							$timeout(function () {
 								$('#fieldTemplate')
-									.formValidation('addField', model.$name, model.validators.$encapsulateValidators());
-							}, 200);
+									.data('formValidation')
+									.addField(model.$name, model.validators.$encapsulateValidators());
+							});
 						}, function () {
 							$log.error('Error adding field to collection');
 						});

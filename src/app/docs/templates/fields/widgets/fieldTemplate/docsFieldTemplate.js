@@ -30,14 +30,13 @@ define(['docs/templates/fields/module'], function (module) {
 				var vm = this;
 
 				// variables
-				vm.compositeField = CompositeFieldAPI.build({
-					fieldType: FieldTypesEnum.COMPOSITE
-				});
+				vm.compositeField = undefined;
 
 				vm.sortableOptions = {
 					handle: '.drag-handle',
 					scroll: true,
 					axis: 'y',
+					items: '> li',
 					opacity: 0.5
 				};
 
@@ -60,6 +59,11 @@ define(['docs/templates/fields/module'], function (module) {
 							.then(function (model) {
 								vm.compositeField = model;
 							});
+
+					} else {
+						vm.compositeField = CompositeFieldAPI.build({
+							fieldType: FieldTypesEnum.COMPOSITE
+						});
 					}
 
 					$log.debug('Initiated controller');

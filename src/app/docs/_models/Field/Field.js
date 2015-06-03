@@ -58,30 +58,6 @@ define(['docs/module'], function (module) {
 				},
 
 				$extend: {
-					Collection: {
-						$decode: function (_raw, _mask) {
-							RMUtils.assert(_raw && angular.isArray(_raw), 'Collection $decode expected array');
-
-							_.each(_raw, function (rawField) {
-								var fieldType = FieldTypesEnum.getValueByKey(rawField.fieldType);
-
-								if (_.has(fieldType, 'propertyClass')) {
-
-									var extendedClass = $injector.get(fieldType.propertyClass);
-
-									var model = extendedClass.$buildRaw(rawField, _mask);
-									model.$type = this.$type;
-									this.$add(model);
-
-								} else {
-									this.$buildRaw(rawField, _mask).$reveal();
-								}
-							}, this);
-
-							this.$dispatch('after-feed-many', [_raw]);
-							return this;
-						}
-					},
 					Scope: {
 						// Polymorphism based builder that enhances plain field with
 						// extra properties based on provided fieldType using DI provided classes
@@ -110,6 +86,36 @@ define(['docs/module'], function (module) {
 								return this.$super(_init);
 							}
 
+						}
+					},
+					Collection: {
+						// Polymorphic collection encoder that enhances plain validators with
+						// extra properties based on provided validatorType using DI provided classes
+						$decode: function (_raw, _mask) {
+							RMUtils.assert(_raw && angular.isArray(_raw), 'Collection $decode expected array');
+
+							_.each(_raw, function (rawField) {
+								// Get enum value to check whether model should be expanded
+								var fieldType = FieldTypesEnum.getValueByKey(rawField.fieldType);
+
+								if (_.has(fieldType, 'propertyClass')) {
+
+									// Inject extended class
+									var extendedClass = $injector.get(fieldType.propertyClass);
+
+									// Build instance
+									var model = extendedClass.$buildRaw(rawField, _mask);
+									// Override type in order to make collection addable
+									model.$type = this.$type;
+									this.$add(model);
+
+								} else {
+									this.$buildRaw(rawField, _mask).$reveal();
+								}
+							}, this);
+
+							this.$dispatch('after-feed-many', [_raw]);
+							return this;
 						}
 					}
 				}

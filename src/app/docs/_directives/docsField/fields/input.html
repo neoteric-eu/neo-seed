@@ -4,7 +4,7 @@
 			<label class="control-label pull-left" ng-if="field.label">{{field.label}}:</label>
 
 			<div class="pull-right">
-				<a href-void class="drag-handle">
+				<a href-void ng-if="vm.isDraggable()" class="drag-handle">
 					<i class="fa fa-fw fa-arrows text-muted" hover-class="text-primary"></i>
 				</a>
 				<a href-void ng-click="vm.toggleCollapse()">
