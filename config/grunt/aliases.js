@@ -1,93 +1,135 @@
+// @todo Add to seed
 module.exports = {
-	'serve': [
-		'clean:server',
-		'templates',
-		'connect:server',
-		'watch'
-	],
+	'serve': {
+		description: 'Runs locally server with application',
+		tasks: [
+			'clean:server',
+			'templates',
+			'connect:server',
+			'watch'
+		]
+	},
 
-	'coverage': [
-		'karma:coverage'
-	],
+	'coverage': {
+		description: 'Checks unit-test code coverage',
+		tasks: [
+			'karma:coverage'
+		]
+	},
 
-	'test': [
-		'clean:test',
-		'jshint:test',
-		'test:e2e',
-		'test:unit'
-	],
-	'test:unit': [
-		'karma:unit'
-	],
-	'test:e2e': [
-		'connect:test',
-		'shell:webdriver-update',
-		'protractor:singlerun'
-	],
+	'test': {
+		description: 'Executes complete app testing',
+		tasks: ['clean:test',
+			'jshint:test',
+			'test:e2e',
+			'test:unit'
+		]
+	},
+	'test:unit': {
+		description: 'Runs unit app testing',
+		tasks: [
+			'karma:unit'
+		]
+	},
+	'test:e2e': {
+		description: 'Runs e2e app testing',
+		tasks: [
+			'connect:test',
+			'shell:webdriver-update',
+			'protractor:singlerun'
+		]
+	},
 
-	'dist': [
-		'clean:dist',
-		'config:production',
-		'less',
-		'useminPrepare',
-		'templates',
-		'concat',
-		'cssmin',
-		'copy',
-		'requirejs',
-		'rev',
-		'usemin',
-		'clean:server',
-		'jsdoc'
-	],
+	'dist': {
+		description: 'Creates production version of code in /dist catalog',
+		tasks: [
+			'clean:dist',
+			'config:production',
+			'less',
+			'useminPrepare',
+			'templates',
+			'concat',
+			'cssmin',
+			'copy',
+			'requirejs',
+			'rev',
+			'usemin',
+			'clean:server',
+			'jsdoc'
+		]
+	},
 
-	release: [
-		'changelog',
-		'bump:minor',
-		'compress',
-		'nexus'
-	],
+	release: {
+		description: 'Deploy built app on nexus and bump version of code on master branch',
+		tasks: [
+			'changelog',
+			'bump:minor',
+			'compress',
+			'nexus'
+		]
+	},
 
-	'code:auto-comment': [
-		'shell:smart-comments'
-	],
+	'code:auto-comment': {
+		description: 'Automatically comments the code',
+		tasks: [
+			'shell:smart-comments'
+		]
+	},
 
-	'docs': [
-		'clean:doc',
-		'jsdoc'
-	],
+	'docs': {
+		description: 'Generates JSDoc documentation',
+		tasks: [
+			'clean:doc',
+			'jsdoc'
+		]
+	},
 
-	'config:development': [
-		'replace:development'
-	],
+	'config:development': {
+		description: 'Sets app configuration to development settings',
+		tasks: [
+			'replace:development'
+		]
+	},
 
-	'config:staging': [
-		'replace:staging'
-		// Add further deploy related tasks here
-	],
+	'config:staging': {
+		description: 'Sets app configuration to staging settings',
+		tasks: [
+			'replace:staging'
+			// Add further deploy related tasks here
+		]
+	},
 
-	'config:production': [
-		'replace:production'
-		// Add further deploy related tasks here
-	],
+	'config:production': {
+		description: 'Sets app configuration to production settings',
+		tasks: [
+			'replace:production'
+			// Add further deploy related tasks here
+		]
+	},
 
-	'default': [
-		'newer:jshint:app',
-		'test',
-		'dist'
-	],
+	'default': {
+		description: 'Create production version on app after testing',
+		tasks: [
+			'jshint:app',
+			'test',
+			'dist'
+		]
+	},
 
-	install: [
-		'logo',
-		'clean:bower',
-		'bower',
-		'shell:webdriver-update',
-		'githooks',
-		'config:development',
-		'shell:git-disable-tracking-templates',
-		'shell:git-submodule-init',
-		'shell:git-submodule-update',
-		'less'
-	]
+	install: {
+		description: 'Internally used form "npm install" installation task',
+		tasks: [
+			'logo',
+			'clean:bower',
+			'bower',
+			'shell:webdriver-update',
+			'githooks',
+			'config:development',
+			'shell:git-disable-tracking-templates',
+			'shell:git-submodule-init',
+			'shell:git-submodule-update',
+			'less'
+		]
+	}
 };
 
