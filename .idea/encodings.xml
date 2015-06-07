@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/bower.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/config/grunt/bower.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/app.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/auth/_includes.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/auth/_models/Language/LanguageAPI.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/auth/_models/Profile/ProfileAPI.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/auth/_models/User/User.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/auth/_models/User/UserAPI.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/auth/controllers/ActivationController.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/auth/controllers/LoginController.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/auth/controllers/RegisterController.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/auth/directives/loginInfo.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/auth/module.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/auth/services/neoRequestHeaders.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/auth/services/neoSession.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/components/profiles/user-profiles.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/components/profiles/userProfiles.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/helpers/restmod/models/BaseModel.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/layout/_includes.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/layout/module.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/main.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/app/require.conf.js" charset="UTF-8" />
+  </component>
 </project>

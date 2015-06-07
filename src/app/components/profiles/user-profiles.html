@@ -5,7 +5,7 @@
 
 	<div class="dropdown" dropdown>
 		<div class="project-selector dropdown-toggle" dropdown-toggle>
-			<span ng-bind="vm.selectedProfile.customerName"></span>
+			<span ng-bind-html="vm.selectedProfile.customerName"></span>
 			<i ng-show="vm.profiles.length" class="fa fa-angle-down"></i>
 		</div>
 

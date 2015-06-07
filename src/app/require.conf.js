@@ -17,7 +17,6 @@ requirejs.config({
 		'nouislider': '../vendor/libs/jquery-nouislider/jquery-nouislider',
 		'ionslider': '../vendor/libs/ionslider/ionslider',
 		'jquery-knob': '../vendor/libs/jquery-knob/jquery-knob',
-		'jquery-nestable': '../vendor/libs/jquery-nestable/jquery-nestable',
 		'jcrop': '../vendor/libs/jquery-jcrop/jquery-jcrop',
 		'magnific-popup': '../vendor/libs/jquery-magnificpopup/jquery-magnificpopup',
 
@@ -47,6 +46,7 @@ requirejs.config({
 		'angular-ui-select': '../vendor/libs/angular-ui-select/angular-ui-select',
 		'angular-ui-date': '../vendor/libs/angular-ui-date/angular-ui-date',
 		'angular-table': '../vendor/libs/angular-table/angular-table',
+		'angular-cookie': '../vendor/libs/angular-cookie/angular-cookie',
 
 		// Bootstrap dependencies
 		'bootstrap': '../vendor/libs/bootstrap/bootstrap',
@@ -123,7 +123,6 @@ requirejs.config({
 		'jquery-form': ['jquery'],
 		'jquery-knob': ['jquery'],
 		'jquery-maskedinput': ['jquery'],
-		'jquery-nestable': ['jquery'],
 		'jquery-validation': ['jquery'],
 		'jqgrid': ['jquery'],
 		'jqgrid-locale-en': ['jquery', 'jqgrid'],

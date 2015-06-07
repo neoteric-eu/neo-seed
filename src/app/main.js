@@ -16,7 +16,9 @@ requirejs(['require.conf'], function () {
 		'app'
 	], function (require, ng, domReady) {
 		domReady(function () {
-			ng.resumeBootstrap();
+			setTimeout(function () {
+				ng.resumeBootstrap();
+			}, 0);
 		});
 	});
 });

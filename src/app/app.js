@@ -4,7 +4,6 @@ define([
 	'globalSettings',
 	'angular-templates',
 	'angular-animate',
-	'angular-local-storage',
 	'angular-ui-router',
 	'angular-ui-router-extras-core',
 	'angular-ui-router-extras-dsr',
@@ -61,13 +60,7 @@ define([
 
 	couchPotato.configureApp(app);
 
-	app.config(function ($provide,
-	                     $httpProvider,
-	                     $locationProvider,
-	                     localStorageServiceProvider,
-	                     $logProvider,
-	                     restmodProvider,
-	                     uiSelectConfig) {
+	app.config(function ($provide, $httpProvider, $locationProvider, $logProvider, restmodProvider, uiSelectConfig) {
 
 		restmodProvider.rebase('NeoStyleAPI');
 
@@ -75,20 +68,13 @@ define([
 
 		$locationProvider.html5Mode(globalSettings.get('MOD_REWRITE'));
 		$logProvider.debugEnabled(globalSettings.get('DEBUG'));
-		localStorageServiceProvider.setPrefix('neo');
 
 		// Add the interceptors to the $httpProvider.
 		$httpProvider.interceptors.push('HttpErrorInterceptor');
 		$httpProvider.interceptors.push('HttpRequestInterceptor');
 	});
 
-	app.run(function ($couchPotato,
-	                  $rootScope,
-	                  $state,
-	                  gettextCatalog,
-	                  LanguageAPI,
-	                  $urlRouter,
-	                  $log) {
+	app.run(function ($couchPotato, $rootScope, $state, gettextCatalog, LanguageAPI, $urlRouter, $log) {
 
 		$log.debug('Setting up application configuration');
 

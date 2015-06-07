@@ -33,18 +33,11 @@ define([
 		});
 	});
 
-	module.run(function ($rootScope, $couchPotato, localStorageService, $http) {
+	module.run(function ($rootScope, $couchPotato) {
 		module.lazy = $couchPotato;
 
-		// @todo this is awfully ugly but works at last - refactor logging in
-		$rootScope.user = localStorageService.get('user');
-		$rootScope.token = localStorageService.get('token');
-
-		if ($rootScope.user) {
-			$http.defaults.headers.common['X-Customer-Id'] = localStorageService.get('activeProfile').customerId;
-			$http.defaults.headers.common['Authorization'] = 'token ' + $rootScope.token;
-		}
-
+		//$http.defaults.headers.common['X-Customer-Id'] = ipCookie('activeCustomer').customerId;
+		//$http.defaults.headers.common['Authorization'] = 'token ' + ipCookie('token');
 	});
 
 	return module;

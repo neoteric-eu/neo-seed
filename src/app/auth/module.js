@@ -1,7 +1,8 @@
 define([
 	'angular',
 	'angular-couch-potato',
-	'angular-templates'
+	'angular-local-storage',
+	'angular-cookie'
 ], function (ng, couchPotato) {
 	'use strict';
 
@@ -9,7 +10,7 @@ define([
 	 * @class
 	 * @memberOf app.auth
 	 */
-	var module = ng.module('app.auth', ['ui.router']);
+	var module = ng.module('app.auth', ['ui.router', 'ipCookie']);
 
 	couchPotato.configureApp(module);
 
@@ -63,10 +64,11 @@ define([
 				},
 				views: {
 					auth: {
-						controller: function ($state, UserAPI) {
+						controller: function ($rootScope, $state, UserAPI, neoSession) {
 							UserAPI
-								.logout()
+								.logout($rootScope.user)
 								.then(function () {
+									neoSession.clearSession();
 									$state.go('auth.login');
 								});
 						}
@@ -110,14 +112,28 @@ define([
 						'modules/forms/directives/validate/smartValidateForm'
 					])
 				}
+			})
+
+			.state('lock', {
+				url: '/lock',
+				views: {
+					root: {
+						templateUrl: 'app/auth/views/lock.html'
+					}
+				},
+				data: {
+					title: 'Locked Screen',
+					htmlId: 'lock-page'
+				}
 			});
 	});
 
-	module.run(function ($couchPotato, Permission, localStorageService) {
+	module.run(function ($couchPotato, $rootScope, Permission, neoSession) {
+
 		module.lazy = $couchPotato;
 
 		Permission.defineRole('user', function () {
-			return localStorageService.get('user');
+			return neoSession.checkSession();
 		});
 	});
 	return module;

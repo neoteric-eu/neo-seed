@@ -9,9 +9,11 @@ define(['app'], function (app) {
 	 * @memberOf app
 	 *
 	 * @param restmod
-	 * @returns {Object}
+	 * @returns {*|{$isAbstract, $$chain}}
+	 * @param $rootScope
+	 * @param ipCookie
 	 */
-	function BaseModel(restmod) {
+	function BaseModel($rootScope, restmod, ipCookie) {
 		return restmod.mixin({
 			createdAt: {
 				encode: 'DatetimeEncode',
@@ -35,6 +37,17 @@ define(['app'], function (app) {
 					 */
 					encodeUrlName: function (_name) {
 						return _name;
+					}
+				}
+			},
+
+			$hooks: {
+				'before-request': function (_req) {
+					if (_.has(ipCookie('activeCustomer'), 'customerId')) {
+						_req.headers = _.extend(_req.headers, {
+							'X-Customer-Id': localStorageService.cookie.get('activeCustomer').customerId,
+							'Authorization': 'token ' + $rootScope.token
+						});
 					}
 				}
 			}

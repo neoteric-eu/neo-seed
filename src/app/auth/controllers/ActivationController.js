@@ -7,7 +7,7 @@ define(['auth/module'], function (module) {
 	 * @param $location
 	 * @param $modal
 	 * @param $rootScope
-	 * @param session
+	 * @param neoSession
 	 * @param smRegistrationService
 	 * @param appMessages
 	 * @param SM_REGISTRATION_PATH
@@ -18,7 +18,7 @@ define(['auth/module'], function (module) {
 																			 $location,
 																			 $modal,
 																			 $rootScope,
-																			 session,
+																			 neoSession,
 																			 smRegistrationService,
 																			 appMessages,
 																			 SM_REGISTRATION_PATH,
@@ -81,7 +81,7 @@ define(['auth/module'], function (module) {
 					$scope.spinner = false;
 					$scope.submited = true;
 					appMessages.set('success', gettextCatalog.getString('Your account has been successfully activated.'));
-					session.setSession(data.user.customers[0].customerId);
+					neoSession.setSession(data.user.customers[0].customerId);
 				}, function (why) {
 					$scope.spinner = false;
 					$scope.submited = false;

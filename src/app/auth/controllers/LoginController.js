@@ -14,19 +14,12 @@ define([
 	 * @param $state
 	 * @param $log
 	 * @param localStorageService
-	 * @param session
+	 * @param neoSession
 	 * @param UserAPI
 	 */
-	function LoginController($q,
-													 $scope,
-													 $modal,
-													 $state,
-													 $log,
-													 localStorageService,
-													 session,
-													 UserAPI) {
+	function LoginController($q, $scope, $modal, $state, $log, localStorageService, neoSession, UserAPI, ipCookie) {
 		$scope.formError = false;
-		$scope.user = UserAPI.build();
+		var User = UserAPI.build();
 		$scope.loginData = globalSettings.get('LOGIN_DATA');
 
 		/**
@@ -35,7 +28,7 @@ define([
 		 * @param {Object} loginData
 		 */
 		$scope.loginAs = function (loginData) {
-			$scope.user = loginData;
+			User = loginData;
 			$scope.login();
 		};
 
@@ -51,7 +44,7 @@ define([
 			$log.debug('Login start');
 
 			UserAPI
-				.login($scope.user)
+				.login(User)
 				.then(function (user) {
 					$log.debug('login on_Success', 'start select customer');
 
@@ -60,7 +53,7 @@ define([
 						.then(function (customer) {
 							$log.debug('login on_Success', 'end select customer');
 
-							session.setSession(customer, user.$metadata.token);
+							neoSession.setSession(customer, ipCookie('token'));
 							$state.go('app.dashboard');
 						})
 						.catch(function (response) {
@@ -93,27 +86,14 @@ define([
 			$scope.customers = customers;
 			$scope.selected = _.first(customers);
 
-			/**
-			 * Description
-			 * @method setCustomer
-			 * @param {Object} customer
-			 */
 			$scope.setCustomer = function (customer) {
 				$scope.$selected = customer;
 			};
 
-			/**
-			 * Description
-			 * @method setSelected
-			 */
 			$scope.selectCustomer = function () {
 				$modalInstance.close($scope.$selected);
 			};
 
-			/**
-			 * Description
-			 * @method cancel
-			 */
 			$scope.cancel = function () {
 				$modalInstance.dismiss();
 			};
@@ -126,7 +106,7 @@ define([
 		 */
 		$scope.selectCustomerList = function (customers) {
 			var dfd = $q.defer(),
-			    customerId = localStorageService.cookie.get('customerId');
+				customerId = localStorageService.cookie.get('customerId');
 
 			if (!_.isNull(customerId)) {
 				var customer = _.where(customers, {id: customerId});
