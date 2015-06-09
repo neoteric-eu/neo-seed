@@ -16,29 +16,31 @@
 					<docs-field field="field" container="vm.compositeField"></docs-field>
 
 					<div ng-if="field.composite.length">
+						<div>
+							<strong>{{field.label}}</strong>
 
-						<div class="pull-right display-block">
-							<a href-void class="drag-handle">
-								<i class="fa fa-fw fa-arrows text-muted" hover-class="text-primary"></i>
-							</a>
-							<a href-void ng-click="vm.deleteField()">
-								<i class="fa fa-fw fa-trash-o text-muted" hover-class="text-danger"></i>
-							</a>
+							<div class="pull-right display-block">
+								<a href-void class="drag-handle">
+									<i class="fa fa-fw fa-arrows text-muted" hover-class="text-primary"></i>
+								</a>
+								<a href-void ng-click="vm.deleteField(field)">
+									<i class="fa fa-fw fa-trash-o text-muted" hover-class="text-danger"></i>
+								</a>
+							</div>
+							<hr class="margin-top-5"/>
 						</div>
-
-						<hr/>
 
 						<div ng-repeat="field in field.composite track by $index"
 								 ng-include="'docsFieldLevel'"></div>
 					</div>
+
 				</script>
 
 				<ul ui-sortable="vm.sortableOptions"
 						ng-model="vm.compositeField.composite"
 						class="no-padding list-unstyled">
-					<li ng-repeat="field in vm.compositeField.composite track by $index"
+					<li ng-repeat="field in vm.compositeField.composite"
 							ng-include="'docsFieldLevel'">
-
 					</li>
 				</ul>
 

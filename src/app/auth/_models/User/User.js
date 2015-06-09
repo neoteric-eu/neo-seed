@@ -48,6 +48,10 @@ define(['auth/module'], function (module) {
 					volatile: true
 				},
 
+				$config: {
+					urlPrefix: ' http://ntrc-delta.neoteric.eu:9000/api/v1/'
+				},
+
 				$extend: {
 					Resource: {
 						$login: function () {

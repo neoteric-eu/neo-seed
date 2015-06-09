@@ -89,6 +89,28 @@ define(['docs/module'], function (module) {
 						}
 					},
 					Collection: {
+						// Forces restmod to encode model using extended class pattens in place of replaced in
+						// building/decoding plain models
+						$encode: function (_mask) {
+							var raw = [];
+
+							_.each(this, function (field) {
+								// Ensure that injector has the reference class
+								if (_.deepHas(field, 'fieldType.propertyClass') &&
+									$injector.has(field.fieldType.propertyClass)) {
+									// Inject extended class
+									var extendedClass = $injector.get(field.fieldType.propertyClass);
+									// Replace model type
+									field.$type = extendedClass.$type;
+								}
+								// Encode properly
+								raw.push(field.$encode(_mask));
+							});
+
+							this.$dispatch('before-render-many', [raw]);
+							return raw;
+						},
+
 						// Polymorphic collection encoder that enhances plain validators with
 						// extra properties based on provided validatorType using DI provided classes
 						$decode: function (_raw, _mask) {

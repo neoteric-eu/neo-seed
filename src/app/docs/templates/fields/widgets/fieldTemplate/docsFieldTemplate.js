@@ -43,6 +43,7 @@ define(['docs/templates/fields/module'], function (module) {
 				// functions
 				vm.init = init;
 				vm.save = save;
+				vm.deleteField = deleteField;
 
 				init();
 
@@ -80,6 +81,15 @@ define(['docs/templates/fields/module'], function (module) {
 							$previousState.go('caller');
 						});
 					$log.debug('Saved composite field');
+				}
+
+				/**
+				 *
+				 */
+				function deleteField(field) {
+					vm.compositeField.composite.$remove(field);
+
+					$log.debug('Removed composite field form container');
 				}
 			}
 		};

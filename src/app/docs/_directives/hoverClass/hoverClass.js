@@ -1,5 +1,5 @@
 define([
-	'../../templates/fields/module'
+	'docs/module'
 ], function (module) {
 	'use strict';
 

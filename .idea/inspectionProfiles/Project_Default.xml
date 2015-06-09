@@ -12,6 +12,11 @@
       </option>
       <option name="myCustomValuesEnabled" value="true" />
     </inspection_tool>
+    <inspection_tool class="HtmlUnknownBooleanAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <myValues>
+        <item value="moment-date" />
+      </myValues>
+    </inspection_tool>
     <inspection_tool class="JSUnusedAssignment" enabled="true" level="INFO" enabled_by_default="true" />
   </profile>
 </component>

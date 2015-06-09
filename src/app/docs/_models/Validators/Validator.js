@@ -6,29 +6,15 @@ define(['docs/module'], function (module) {
 	 * @mixin
 	 * @memberOf app.docs
 	 *
-	 * @param $log Logging service
+	 * @param $log {Object} Logging service
 	 * @param $injector {Object} Dependency Injector instance
-	 * @param restmod Data model layer interface
+	 * @param restmod {Object} Data model layer interface
 	 * @param FieldValidatorsEnum {Object} List of registered field validators
+	 * @param RMUtils {Object} Restmod helper utils
 	 * @return {*|Model}
 	 */
 	function Validator($log, $injector, restmod, FieldValidatorsEnum, RMUtils) {
 		$log.debug('Created new instance');
-
-		function buildExtendedModel(_baseModel, _initProperties) {
-			// Create extended class
-			var extendedModel = $injector
-				.get(_initProperties.validatorType.propertyClass)
-				.$new();
-
-			// Override type in order to make instances looks the same for collections
-			extendedModel.$type = _baseModel.$type;
-			// Make sure the polymorphic properties are rewritten
-			extendedModel.$extend(_initProperties);
-
-			$log.debug('Created field extended by additional properties');
-			return extendedModel;
-		}
 
 		return restmod
 			.model()
@@ -40,6 +26,7 @@ define(['docs/module'], function (module) {
 				validatorType: {
 					encode: 'EnumEncode',
 					decode: 'EnumDecode',
+					chain: true,
 					param: FieldValidatorsEnum
 				},
 
@@ -53,7 +40,20 @@ define(['docs/module'], function (module) {
 							if (_.deepHas(_init, 'validatorType.propertyClass') &&
 								$injector.has(_init.validatorType.propertyClass)) {
 
-								return buildExtendedModel(this, _init);
+								// Create extended class
+								var extendedModel = $injector
+									.get(_init.validatorType.propertyClass)
+									.$new();
+
+								// Override type in order to make instances looks the same for collections
+								extendedModel.$type = this.$type;
+
+								// Make sure the polymorphic properties are rewritten
+								extendedModel.$extend(_init);
+
+								$log.debug('Created field extended by additional properties');
+								return extendedModel;
+
 							} else {
 								$log.debug('Created plain model');
 
@@ -71,6 +71,28 @@ define(['docs/module'], function (module) {
 					},
 
 					Collection: {
+						// Forces restmod to encode model using extended class pattens in place of replaced in
+						// building/decoding plain models
+						$encode: function (_mask) {
+							var raw = [];
+
+							_.each(this, function (validator) {
+								// Ensure that injector has the reference class
+								if (_.deepHas(validator, 'validatorType.propertyClass') &&
+									$injector.has(validator.validatorType.propertyClass)) {
+									// Inject extended class
+									var extendedClass = $injector.get(validator.validatorType.propertyClass);
+									// Replace model type
+									validator.$type = extendedClass.$type;
+								}
+								// Encode properly
+								raw.push(validator.$encode(_mask));
+							});
+
+							this.$dispatch('before-render-many', [raw]);
+							return raw;
+						},
+
 						// Polymorphic collection encoder that enhances plain validators with
 						// extra properties based on provided validatorType using DI provided classes
 						$decode: function (_raw, _mask) {
@@ -89,6 +111,7 @@ define(['docs/module'], function (module) {
 									var model = extendedClass.$buildRaw(rawField, _mask);
 									// Override type in order to make collection addable
 									model.$type = this.$type;
+
 									this.$add(model);
 
 								} else {

@@ -19,7 +19,10 @@ define(['docs/module'], function (module) {
 			restrict: 'EA',
 			scope: {
 				field: '=',
-				container: '='
+				container: '=',
+				hideEdit: '&',
+				hideRemove: '&',
+				hideMove: '&'
 			},
 			link: function (scope, element) {
 				var vm = scope.vm = scope.vm || {};
@@ -28,7 +31,7 @@ define(['docs/module'], function (module) {
 				vm.init = init;
 				vm.deleteField = deleteField;
 				vm.toggleCollapse = toggleCollapse;
-				vm.isDraggable = isDraggable;
+				vm.isCompositeElement = isCompositeElement;
 
 				init();
 
@@ -62,7 +65,7 @@ define(['docs/module'], function (module) {
 					$log.debug('Called linking function');
 				}
 
-				function isDraggable() {
+				function isCompositeElement() {
 					return _.isEmpty(scope.container.templateId);
 				}
 

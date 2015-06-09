@@ -4,13 +4,13 @@
 			<label class="control-label pull-left" ng-if="field.label">{{field.label}}:</label>
 
 			<div class="pull-right">
-				<a href-void ng-if="vm.isDraggable()" class="drag-handle">
+				<a href-void ng-if="vm.isCompositeElement()" class="drag-handle">
 					<i class="fa fa-fw fa-arrows text-muted" hover-class="text-primary"></i>
 				</a>
 				<a href-void ng-click="vm.toggleCollapse()">
 					<i class="fa fa-fw fa-edit text-muted" hover-class="text-info"></i>
 				</a>
-				<a href-void ng-click="vm.deleteField()">
+				<a href-void ng-if="vm.isCompositeElement()" ng-click="vm.deleteField()">
 					<i class="fa fa-fw fa-trash-o text-muted" hover-class="text-danger"></i>
 				</a>
 			</div>

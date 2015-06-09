@@ -2,7 +2,7 @@ define(['app', 'moment'], function (app) {
 	'use strict';
 
 	/**
-	 * @constructor dateDecodeFilter
+	 * @constructor DateEncodeFilter
 	 * @example
 	 *  angular.restmod('resource').mix({
 	 * 		createdAt: {

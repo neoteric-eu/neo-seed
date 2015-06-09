@@ -4,7 +4,8 @@ define([
 	'./docsAddField/docsAddField',
 	'./docsAddCompositeField/docsAddCompositeField',
 	'./docsAddValidator/docsAddValidator',
-	'./hoverClass/hoverClass'
+	'./hoverClass/hoverClass',
+	'./momentDate/momentDate'
 ], function () {
 	'use strict';
 });

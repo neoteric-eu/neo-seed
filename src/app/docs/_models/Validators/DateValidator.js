@@ -25,19 +25,20 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model()
 			.mix('Validator', {
-			$templateUrl: {
-				init: docsModuleConf.VALIDATOR_TEMPLATES_PATH + 'date.html'
-			},
-			// The minimal acceptable date
-			min: {
-				encode: 'DateEncode',
-				decode: 'DateDecode'
-			},
-			// The maximal acceptable date
-			max: {
-				encode: 'DateEncode',
-				decode: 'DateDecode'
-			}
+				$templateUrl: {
+					init: docsModuleConf.VALIDATOR_TEMPLATES_PATH + 'date.html'
+				},
+				format: 'YYYY-MM-DD',
+				// The minimal acceptable date
+				min: {
+					encode: 'DateEncode',
+					decode: 'DateDecode'
+				},
+				// The maximal acceptable date
+				max: {
+					encode: 'DateEncode',
+					decode: 'DateDecode'
+				}
 			});
 	}
 

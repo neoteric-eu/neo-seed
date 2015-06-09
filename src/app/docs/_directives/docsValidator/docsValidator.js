@@ -51,7 +51,6 @@ define(['docs/module'], function (module) {
 					$('#fieldTemplate')
 						.formValidation('enableFieldValidators', scope.container.$name, false, scope.validator.validatorType.formValidationKey);
 
-					scope.validator.$destroy();
 					scope.container.validators.$remove(scope.validator);
 
 					$log.debug('Removed validator form field validators list');
