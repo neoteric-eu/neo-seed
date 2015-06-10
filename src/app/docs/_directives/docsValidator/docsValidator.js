@@ -15,48 +15,49 @@ define(['docs/module'], function (module) {
 
 		return {
 			restrict: 'EA',
+			controllerAs: 'vm',
 			scope: {
 				validator: '=',
 				container: '='
 			},
-			link: function (scope, element) {
-				var vm = scope.vm = scope.vm || {};
+
+			controller: function ($scope) {
+				var vm = this;
 
 				// variables
-
 				// functions
-				vm.init = init;
 				vm.removeValidator = removeValidator;
-
-				init();
-
-				function init() {
-					if (!_.has(scope.validator, '$templateUrl')) {
-						$log.error(scope.validator.validatorType +
-							' validator does not have $templateUrl attached');
-						return;
-					}
-
-					$http
-						.get(scope.validator.$templateUrl)
-						.success(function (data) {
-							element.html(data);
-							$compile(element.contents())(scope);
-
-							$log.debug('Recompiled view with newly added validator');
-						});
-				}
 
 				function removeValidator() {
 					$('#fieldTemplate')
-						.formValidation('enableFieldValidators', scope.container.$name, false, scope.validator.validatorType.formValidationKey);
+						.formValidation('enableFieldValidators', $scope.container.$name, false, $scope.validator.validatorType.formValidationKey);
 
-					scope.container.validators.$remove(scope.validator);
+					$scope.container.validators.$remove($scope.validator);
 
 					$log.debug('Removed validator form field validators list');
 				}
 
-				$log.debug('Initiated linking function');
+				$log.debug('Initiated controller');
+			},
+
+			link: function (scope, element) {
+
+				if (!_.has(scope.validator, '$templateUrl')) {
+					$log.error(scope.validator.validatorType +
+						' validator does not have $templateUrl attached');
+					return;
+				}
+
+				$http
+					.get(scope.validator.$templateUrl)
+					.success(function (data) {
+						element.html(data);
+						$compile(element.contents())(scope);
+
+						$log.debug('Recompiled view with newly added validator');
+					});
+
+				$log.debug('Called linking function');
 			}
 		};
 	}

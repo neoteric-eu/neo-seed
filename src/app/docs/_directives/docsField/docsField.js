@@ -17,73 +17,73 @@ define(['docs/module'], function (module) {
 
 		return {
 			restrict: 'EA',
+			controllerAs: 'vm',
 			scope: {
 				field: '=',
-				container: '=',
-				hideEdit: '&',
-				hideRemove: '&',
-				hideMove: '&'
+				container: '='
 			},
+
 			link: function (scope, element) {
-				var vm = scope.vm = scope.vm || {};
+
+				if (!_.has(scope.field, '$templateUrl')) {
+					$log.debug('Composite field without $templateUrl');
+					return;
+				}
+
+				$http
+					.get(scope.field.$templateUrl.toString())
+					.success(function (data) {
+						element.html(data);
+						$compile(element.contents())(scope);
+
+						// Should be replaced with asyncApply
+						$timeout(function () {
+							$('#fieldTemplate')
+								.data('formValidation')
+								.addField(scope.field.$name, scope.field.validators.$encapsulateValidators()
+							);
+						});
+
+						$log.debug('Recompiled view with newly added field');
+					})
+					.error(function () {
+						$log.error('Could not fetch filed template');
+					});
+
+
+				$log.debug('Called linking function');
+			},
+
+			controller: function ($scope) {
+				var vm = this;
 
 				// functions
-				vm.init = init;
 				vm.deleteField = deleteField;
 				vm.toggleCollapse = toggleCollapse;
 				vm.isCompositeElement = isCompositeElement;
 
-				init();
-
-				function init() {
-					if (!_.has(scope.field, '$templateUrl')) {
-						$log.debug('Composite field without $templateUrl');
-						return;
-					}
-
-					$http
-						.get(scope.field.$templateUrl.toString())
-						.success(function (data) {
-							element.html(data);
-							$compile(element.contents())(scope);
-
-							// Should be replaced with asyncApply
-							$timeout(function () {
-								$('#fieldTemplate')
-									.data('formValidation')
-									.addField(scope.field.$name, scope.field.validators.$encapsulateValidators()
-								);
-							});
-
-							$log.debug('Recompiled view with newly added field');
-						})
-						.error(function () {
-							$log.error('Could not fetch filed template');
-						});
-
-
-					$log.debug('Called linking function');
-				}
 
 				function isCompositeElement() {
-					return _.isEmpty(scope.container.templateId);
+					return _.isEmpty($scope.container.templateId);
 				}
 
 				function deleteField() {
-					$('#fieldTemplate').formValidation('removeField', scope.field.$name);
+					$('#fieldTemplate').formValidation('removeField', $scope.field.$name);
 
-					scope.container.composite.$remove(scope.field);
-					scope.field.$destroy();
+					$scope.container.composite.$remove($scope.field);
+					$scope.field.$destroy();
 
 					$log.debug('Removed field form container');
 				}
 
 				function toggleCollapse() {
 					//noinspection JSPrimitiveTypeWrapperUsage
-					scope.field.$isEditorCollapsed = !scope.field.$isEditorCollapsed;
+					$scope.field.$isEditorCollapsed = !$scope.field.$isEditorCollapsed;
 
 					$log.debug('Collapsed field editor');
 				}
+
+				$log.debug('Initiated controller');
 			}
 		};
 	}

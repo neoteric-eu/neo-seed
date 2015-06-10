@@ -9,35 +9,47 @@ define([
 	 * @memberOf app.docs
 	 *
 	 * @param $log {Object} Logging service
-	 * @param $timeout {Function} Timeout service
 	 * @param docsModuleConf {Object} Module configuration
 	 * @param CompositeFieldAPI {Object} Interface for REST communication with server
-	 * @return {{restrict: string, templateUrl: string, scope: {container: string}, link: Function}}
-
+	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope: {container:
+	 *   string}, controller: Function}}
 	 */
-	function docsAddCompositeField($log, $timeout, docsModuleConf, CompositeFieldAPI) {
+	function docsAddCompositeField($log, docsModuleConf, CompositeFieldAPI) {
 		$log.debug('Initiated directive');
 
 		return {
 			restrict: 'EA',
 			templateUrl: docsModuleConf.DIRECTIVES_PATH +
 			'docsAddCompositeField/docs-add-composite-field.html',
+			controllerAs: 'vm',
 			scope: {
 				container: '='
 			},
-			link: function (scope) {
-				var vm = scope.vm = scope.vm || {};
 
+			controller: function ($scope) {
+				var vm = this;
 
-				// variables
-				CompositeFieldAPI
-					.fetch()
-					.then(function (collection) {
-						vm.compositeFields = collection;
-					});
+				//variables
+				vm.compositeFields = undefined;
 
 				// functions
+				vm.init = init;
 				vm.addField = addField;
+
+				init();
+
+				/**
+				 * Sets up controller
+				 */
+				function init() {
+					CompositeFieldAPI
+						.fetch()
+						.then(function (collection) {
+							vm.compositeFields = collection;
+						});
+
+					$log.debug('Initiated controller');
+				}
 
 				/**
 				 * Adds field do field list and triggers attached validators
@@ -45,30 +57,13 @@ define([
 				 */
 				function addField(compositeField) {
 
-					compositeField.$type = scope.container.composite.$type;
-					compositeField.$position = undefined;
+					// Remove field from template collection
+					vm.compositeFields.$remove(compositeField);
 
-					scope.container.composite
-						.$add(compositeField)
-						.$then(function () {
-							// Should be replaced with asyncApply
-							$timeout(function () {
-								_.each(compositeField.composite, function (element) {
-									if (element.validators.length) {
-										$('#fieldTemplate')
-											.formValidation('addField', element.$name,
-											element.validators.$encapsulateValidators());
-									}
-								});
+					$scope.container.composite.$add(compositeField);
 
-								$log.debug('Added new composite field to form');
-							}, 200);
-						}, function () {
-							$log.error('Error adding field to collection');
-						});
+					$log.debug('Added new composite field');
 				}
-
-				$log.debug('Called linking function');
 			}
 		};
 	}
