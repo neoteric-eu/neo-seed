@@ -1,6 +1,7 @@
 src/app-demo
 src/vendor/
 src/test/results
+src/app/templates/module.js
 dist
 node_modules
 bower_components

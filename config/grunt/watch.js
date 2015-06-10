@@ -11,7 +11,7 @@ module.exports = {
 		files: '<%= yeoman.app %>/app/**/**/*.json'
 	},
 	html: {
-		files: '<%= yeoman.app %>/app/**/*.html',
+		files: '<%= yeoman.app %>/app/**/**/*.html',
 		tasks: 'templates'
 	},
 	styles_less: {

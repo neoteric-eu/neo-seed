@@ -9,7 +9,8 @@ module.exports = {
 			ignores: [
 				'<%= yeoman.app %>/app/require.js',
 				'<%= yeoman.app %>/app/**/_locale/*.js',
-				'<%= yeoman.app %>/app/**/*.spec.js'
+				'<%= yeoman.app %>/app/**/*.spec.js',
+				'<%= yeoman.app %>/app/templates/module.js'
 			]
 		},
 		src: [

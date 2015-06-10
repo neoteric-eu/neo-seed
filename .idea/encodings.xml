@@ -15,7 +15,6 @@
     <file url="file://$PROJECT_DIR$/src/app/auth/directives/loginInfo.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/app/auth/module.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/app/auth/services/neoRequestHeaders.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/auth/services/neoSession.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/app/components/profiles/user-profiles.html" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/app/components/profiles/userProfiles.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/app/helpers/restmod/models/BaseModel.js" charset="UTF-8" />
