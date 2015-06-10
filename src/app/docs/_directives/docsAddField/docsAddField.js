@@ -27,7 +27,7 @@ define(['docs/module'], function (module) {
 				var vm = this;
 
 				// variables
-				vm.fieldGroups = _.groupBy(FieldTypesEnum, 'group');
+				vm.fieldGroups = _.groupBy(_.filter(FieldTypesEnum, 'propertyClass'), 'group');
 
 				// functions
 				vm.addField = addField;
