@@ -1,7 +1,4 @@
-define([
-	'docs/module',
-	'form-validation'
-], function (module) {
+define(['docs/module'], function (module) {
 	'use strict';
 
 	/**

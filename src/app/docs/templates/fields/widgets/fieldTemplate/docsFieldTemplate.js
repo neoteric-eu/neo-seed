@@ -83,11 +83,9 @@ define(['docs/templates/fields/module'], function (module) {
 					$log.debug('Saved composite field');
 				}
 
-				/**
-				 *
-				 */
 				function deleteField(field) {
 					vm.compositeField.composite.$remove(field);
+					field.$destroy();
 
 					$log.debug('Removed composite field form container');
 				}

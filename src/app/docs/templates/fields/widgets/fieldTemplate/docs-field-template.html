@@ -13,7 +13,7 @@
 				<!-- RECURSIVE_FIELD_TREE -->
 				<!-- WARNING! Magic happens here! -->
 				<script type="text/ng-template" id="docsFieldLevel">
-					<docs-field field="field" container="vm.compositeField"></docs-field>
+					<docs-field field="field" container="container"></docs-field>
 
 					<div ng-if="field.composite.length">
 						<div>
@@ -30,7 +30,8 @@
 							<hr class="margin-top-5"/>
 						</div>
 
-						<div ng-repeat="field in field.composite track by $index"
+						<div ng-init="container = field"
+								 ng-repeat="field in field.composite track by $index"
 								 ng-include="'docsFieldLevel'"></div>
 					</div>
 
@@ -39,9 +40,12 @@
 				<ul ui-sortable="vm.sortableOptions"
 						ng-model="vm.compositeField.composite"
 						class="no-padding list-unstyled">
-					<li ng-repeat="field in vm.compositeField.composite"
+
+					<li ng-init="container = vm.compositeField"
+							ng-repeat="field in vm.compositeField.composite"
 							ng-include="'docsFieldLevel'">
 					</li>
+
 				</ul>
 
 				<!-- end:RECURSIVE_FIELD_TREE -->

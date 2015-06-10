@@ -1,6 +1,4 @@
-define([
-	'docs/module'
-], function (module) {
+define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
@@ -39,7 +37,7 @@ define([
 				init();
 
 				/**
-				 * Sets up controller
+				 * Set up
 				 */
 				function init() {
 					CompositeFieldAPI
