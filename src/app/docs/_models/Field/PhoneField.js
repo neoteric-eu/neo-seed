@@ -2,6 +2,7 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
+	 * Defines extend class of Field holding phone field model initial properties
 	 * @class PhoneField
 	 * @extends {app.docs.Field}
 	 * @memberOf app.docs
@@ -10,7 +11,7 @@ define(['docs/module'], function (module) {
 	 * @param restmod {Object} Object Relational Mapper interface
 	 * @param ValidatorAPI {Object} Interface for REST communication with server
 	 * @param FieldValidatorsEnum {Object} List of all registered field validators
-	 * @return {*|Model}
+	 * @return {*|Model} Model instance
 	 */
 	function PhoneField($log, restmod, ValidatorAPI, FieldValidatorsEnum) {
 

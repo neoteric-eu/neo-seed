@@ -6,8 +6,8 @@ define(['docs/templates/fields/module'], function (module) {
 	 * @class docsFieldTemplateListWidget
 	 * @memberOf app.docs.templates.fields
 	 *
-	 * @param neoTableParams {Function} Table configuration object.
-	 * @param CompositeFieldAPI {Object} API interface for server communication.
+	 * @param neoTableParams {Function} Table configuration object
+	 * @param CompositeFieldAPI {Object} API interface for server communication
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
 	function docsFieldTemplateListWidget(neoTableParams, CompositeFieldAPI) {

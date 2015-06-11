@@ -5,7 +5,7 @@ define(['docs/module'], function (module) {
 	 * List of all registered pre-defined field types that can be added to a form.
 	 * Used for fields listing and data dynamic form manipulation by mapping propertyClass
 	 * property to Angular models via Dependency Injection.
-	 * @propertyClass FieldTypesEnum
+	 * @class FieldTypesEnum
 	 * @implements {app.BaseEnum}
 	 * @memberOf {app.docs}
 	 *

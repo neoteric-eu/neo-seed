@@ -2,6 +2,7 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
+	 * Defines extend class of Validator holding integer validator model initial properties
 	 * @class IntegerValidator
 	 * @mixes {app.docs.Validator}
 	 * @memberOf app.docs
@@ -13,7 +14,7 @@ define(['docs/module'], function (module) {
 	 * @see {@link http://formvalidation.io/validators/integer/}
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @return {*|Model}
+	 * @return {*|Model} Model instance
 	 */
 	function IntegerValidator($log, restmod) {
 

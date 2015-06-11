@@ -2,6 +2,7 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
+	 * Defines extend class of Validator holding email validator model initial properties
 	 * @class EmailAddressValidator
 	 * @mixes {app.docs.Validator}
 	 * @memberOf app.docs
@@ -13,7 +14,7 @@ define(['docs/module'], function (module) {
 	 * @see {@link http://formvalidation.io/validators/emailAddress/}
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @return {*|Model}
+	 * @return {*|Model} Model instance
 	 */
 	function EmailAddressValidator($log, restmod) {
 

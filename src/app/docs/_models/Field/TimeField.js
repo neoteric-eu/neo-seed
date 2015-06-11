@@ -2,13 +2,14 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
+	 * Defines extend class of Field holding time field model initial properties
 	 * @class TimeField
 	 * @extends {app.docs.Field}
 	 * @memberOf app.docs
 	 *
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @return {*|Model}
+	 * @return {*|Model} Model instance
 	 */
 	function TimeField($log, restmod) {
 

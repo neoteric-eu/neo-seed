@@ -5,7 +5,7 @@ define(['docs/module'], function (module) {
 	 * Contains all registered editable field validators.
 	 * Used for listing all available validators and as a reference
 	 * to actual propertyClasses via Angular Dependency Injection.
-	 * @propertyClass FieldValidatorsEnum
+	 * @class FieldValidatorsEnum
 	 * @implements {app.BaseEnum}
 	 * @memberOf {app.docs}
 	 *

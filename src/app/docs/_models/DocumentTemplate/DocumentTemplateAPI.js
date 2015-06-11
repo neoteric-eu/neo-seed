@@ -10,7 +10,7 @@ define(['docs/module'], function (module) {
 	 * @param $log {Object} Logging service
 	 * @param BaseAPI {Function} Base interface for REST communication with server
 	 * @param DocumentTemplate {Object} Data model class
-	 * @return {Function}
+	 * @return {Function} Instantiated service
 	 */
 	function DocumentTemplateAPI($log, BaseAPI, DocumentTemplate) {
 

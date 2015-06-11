@@ -10,7 +10,7 @@ define(['docs/module'], function (module) {
 	 * @param $log {Object} Logging service
 	 * @param BaseAPI {Function} Base interface for REST communication with server
 	 * @param Field {Object} Data model class
-	 * @return {*}
+	 * @return {Function} Instantiated service
 	 */
 	function FieldAPI($log, BaseAPI, Field) {
 

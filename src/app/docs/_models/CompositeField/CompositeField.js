@@ -8,7 +8,7 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log Logging service
 	 * @param restmod Data model layer interface
-	 * @return {*|Model}
+	 * @return {*|Model} Model instance
 	 */
 	function CompositeField($log, restmod) {
 		$log.debug('Created new instance');

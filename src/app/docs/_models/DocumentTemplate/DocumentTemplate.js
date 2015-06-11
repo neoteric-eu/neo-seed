@@ -8,7 +8,7 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Data model layer interface
-	 * @return {*|Model}
+	 * @return {*|Model} Model instance
 	 */
 	function DocumentTemplate($log, restmod) {
 		$log.debug('Initiating model factory');

@@ -7,11 +7,11 @@ define(['docs/templates/fields/module'], function (module) {
 	 * @class docsDocumentTemplateWidget
 	 * @memberOf app.docs.templates.documents
 	 *
-	 * @param $previousState
-	 * @param $stateParams
-	 * @param $log
-	 * @param DocumentTemplateAPI
-	 * @param FieldTypesEnum
+	 * @param $previousState {Object} Router state history service
+	 * @param $stateParams {Object} Current request param provider
+	 * @param $log {Object} Logging service
+	 * @param DocumentTemplateAPI {Object} API interface for server communication
+	 * @param FieldTypesEnum {Object} Registry of all available Fields
 	 * @return {{restrict: string, templateUrl: string, scope: boolean, controllerAs: string,
 	 *   controller: Function}}
 	 */
@@ -43,7 +43,7 @@ define(['docs/templates/fields/module'], function (module) {
 				init();
 
 				/**
-				 * Initialize all needed variables on controller set-up
+				 * Initializes controller on set-up
 				 * @method init
 				 */
 				function init() {

@@ -2,6 +2,7 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
+	 * Defines extend class of Validator holding date validator model initial properties
 	 * @class DateValidator
 	 * @mixes {app.docs.Validator}
 	 * @memberOf app.docs
@@ -15,7 +16,7 @@ define(['docs/module'], function (module) {
 	 * @see {@link http://formvalidation.io/validators/date/}
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @return {*|Model}
+	 * @return {*|Model} Model instance
 	 */
 	function DateValidator($log, restmod) {
 

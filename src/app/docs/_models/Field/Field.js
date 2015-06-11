@@ -2,7 +2,7 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
-	 * Polymorphic class storing all kind of field user can use in application.
+	 * Polymorphic class being base for all kind of field user can use in application
 	 * @class Field
 	 * @implements {app.BaseModel}
 	 * @memberOf app.docs
@@ -12,7 +12,7 @@ define(['docs/module'], function (module) {
 	 * @param FieldTypesEnum {Object} Available primitive fields enum
 	 * @param restmod {Object} Data model layer interface
 	 * @param RMUtils {Object} Restmod internal utils
-	 * @return {*|Model}
+	 * @return {*|Model} Model instance
 	 */
 	function Field($log, $injector, restmod, FieldTypesEnum, RMUtils) {
 

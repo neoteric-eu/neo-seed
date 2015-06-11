@@ -25,6 +25,11 @@ define(['docs/templates/fields/module'], function (module) {
 				// functions
 				vm.deleteDocumentTemplate = deleteDocumentTemplate;
 
+				/**
+				 * Removes selected document template
+				 * @method deleteDocumentTemplate
+				 * @param fieldTemplate {app.docs.DocumentTemplate} Model to be removed
+				 */
 				function deleteDocumentTemplate(fieldTemplate) {
 					DocumentTemplateAPI.remove(fieldTemplate);
 				}

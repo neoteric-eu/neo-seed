@@ -2,6 +2,7 @@ define(['docs/module'], function (module) {
 	'use strict';
 
 	/**
+	 * Polymorphic class being base for all kind of validators user can use in application
 	 * @class Validator
 	 * @mixin
 	 * @memberOf app.docs
