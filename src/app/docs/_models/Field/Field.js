@@ -11,6 +11,7 @@ define(['docs/module'], function (module) {
 	 * @param $injector {Object} Dependency Injector instance
 	 * @param FieldTypesEnum {Object} Available primitive fields enum
 	 * @param restmod {Object} Data model layer interface
+	 * @param RMUtils {Object} Restmod internal utils
 	 * @return {*|Model}
 	 */
 	function Field($log, $injector, restmod, FieldTypesEnum, RMUtils) {

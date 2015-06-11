@@ -8,10 +8,9 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @param docsModuleConf {Object} Module configuration
 	 * @return {*|Model}
 	 */
-	function TextareaField($log, restmod, docsModuleConf) {
+	function TextareaField($log, restmod) {
 
 		$log.debug('Created new instance');
 
@@ -19,7 +18,7 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: docsModuleConf.FIELD_TEMPLATES_PATH + 'textarea.html'
+					init: '/app/docs/_directives/docsField/fields/textarea.html'
 				}
 			});
 	}

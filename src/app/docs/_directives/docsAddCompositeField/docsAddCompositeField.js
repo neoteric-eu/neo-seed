@@ -7,18 +7,16 @@ define(['docs/module'], function (module) {
 	 * @memberOf app.docs
 	 *
 	 * @param $log {Object} Logging service
-	 * @param docsModuleConf {Object} Module configuration
 	 * @param CompositeFieldAPI {Object} Interface for REST communication with server
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope: {container:
 	 *   string}, controller: Function}}
 	 */
-	function docsAddCompositeField($log, docsModuleConf, CompositeFieldAPI) {
+	function docsAddCompositeField($log, CompositeFieldAPI) {
 		$log.debug('Initiated directive');
 
 		return {
 			restrict: 'EA',
-			templateUrl: docsModuleConf.DIRECTIVES_PATH +
-			'docsAddCompositeField/docs-add-composite-field.html',
+			templateUrl: '/app/docs/_directives/docsAddCompositeField/docs-add-composite-field.html',
 			controllerAs: 'vm',
 			scope: {
 				container: '='

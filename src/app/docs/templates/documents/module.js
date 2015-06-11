@@ -11,25 +11,18 @@ define([
 	var module = ng.module('app.docs.templates.documents', []);
 
 	/**
-	 * Module configuration options.fields
-	 */
-	module.constant('docsTemplatesDocumentsModuleConf', {
-		MODULE_PATH: '/app/docs/templates/documents/'
-	});
-
-	/**
 	 * Stores additional module configuration
 	 * @method run
 	 * @memberof app.docs.templates.fields.module
 	 */
-	module.config(function ($stateProvider, gettext, docsTemplatesDocumentsModuleConf) {
+	module.config(function ($stateProvider, gettext) {
 
 		$stateProvider
 			.state('app.docs.templates.documents', {
 				url: '/docs/templates/documents',
 				views: {
 					'content@app': {
-						templateUrl: docsTemplatesDocumentsModuleConf.MODULE_PATH + '/views/list.html'
+						templateUrl: '/app/docs/templates/documents/views/list.html'
 					}
 				},
 				data: {
@@ -41,7 +34,7 @@ define([
 				url: '/new',
 				views: {
 					'content@app': {
-						templateUrl: docsTemplatesDocumentsModuleConf.MODULE_PATH + '/views/view.html'
+						templateUrl: '/app/docs/templates/documents/views/view.html'
 					}
 				},
 				data: {
@@ -53,11 +46,11 @@ define([
 				url: '/edit',
 				views: {
 					'content@app': {
-						templateUrl: docsTemplatesDocumentsModuleConf.MODULE_PATH + '/views/view.html'
+						templateUrl: '/app/docs/templates/documents/views/view.html'
 					}
 				},
 				data: {
-					title: gettext('New')
+					title: gettext('Edit')
 				}
 			});
 	});

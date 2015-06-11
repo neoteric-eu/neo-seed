@@ -7,29 +7,26 @@ define(['docs/templates/fields/module'], function (module) {
 	 * @memberOf app.docs.templates.documents
 	 *
 	 * @param neoTableParams {Function} Table configuration object.
-	 * @param docsTemplatesDocumentsModuleConf {Object} Module configuration
-	 * @param CompositeFieldAPI {Object} API interface for server communication.
+	 * @param DocumentTemplateAPI {Object} API interface for server communication.
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function docsDocumentTemplateListWidget(neoTableParams, CompositeFieldAPI,
-		docsTemplatesDocumentsModuleConf) {
+	function docsDocumentTemplateListWidget(neoTableParams, DocumentTemplateAPI) {
 
 		return {
 			restrict: 'EA',
-			templateUrl: docsTemplatesDocumentsModuleConf.MODULE_PATH +
-			'/widgets/documentTemplateList/docs-document-template-list.html',
+			templateUrl: '/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html',
 			controllerAs: 'vm',
 			controller: function () {
 				var vm = this;
 
 				// variables
-				vm.fieldTemplatesTableOptions = new neoTableParams(CompositeFieldAPI);
+				vm.fieldTemplatesTableOptions = new neoTableParams(DocumentTemplateAPI);
 
-				// methods
-				vm.removeFieldTemplate = removeFieldTemplate;
+				// functions
+				vm.deleteDocumentTemplate = deleteDocumentTemplate;
 
-				function removeFieldTemplate(fieldTemplate) {
-					CompositeFieldAPI.remove(fieldTemplate);
+				function deleteDocumentTemplate(fieldTemplate) {
+					DocumentTemplateAPI.remove(fieldTemplate);
 				}
 			}
 		};

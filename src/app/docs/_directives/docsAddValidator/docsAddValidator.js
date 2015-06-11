@@ -7,17 +7,16 @@ define(['docs/module'], function (module) {
 	 * @memberOf app.docs
 	 *
 	 * @param $log {Object} Logging service
-	 * @param docsModuleConf {Object} Module configuration
 	 * @param ValidatorAPI {Object} Interface for REST communication with server
 	 * @param FieldValidatorsEnum {Object} List of all registered validators
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function docsAddValidator($log, docsModuleConf, ValidatorAPI, FieldValidatorsEnum) {
+	function docsAddValidator($log, ValidatorAPI, FieldValidatorsEnum) {
 		$log.debug('Initiated directive');
 
 		return {
 			restrict: 'EA',
-			templateUrl: docsModuleConf.DIRECTIVES_PATH + 'docsAddValidator/docs-add-validator.html',
+			templateUrl: '/app/docs/_directives/docsAddValidator/docs-add-validator.html',
 			controllerAs: 'vm',
 			controller: function ($scope) {
 				var vm = this;

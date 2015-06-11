@@ -7,15 +7,13 @@ define(['docs/templates/fields/module'], function (module) {
 	 * @memberOf app.docs.templates.fields
 	 *
 	 * @param neoTableParams {Function} Table configuration object.
-	 * @param fieldsConf {Object} Module configuration
 	 * @param CompositeFieldAPI {Object} API interface for server communication.
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function docsFieldTemplateListWidget(neoTableParams, CompositeFieldAPI, fieldsConf) {
+	function docsFieldTemplateListWidget(neoTableParams, CompositeFieldAPI) {
 		return {
 			restrict: 'EA',
-			templateUrl: fieldsConf.MODULE_PATH +
-			'/widgets/fieldTemplateList/docs-field-template-list.html',
+			templateUrl: '/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html',
 			controllerAs: 'vm',
 			controller: function () {
 				var vm = this;
@@ -24,9 +22,9 @@ define(['docs/templates/fields/module'], function (module) {
 				vm.fieldTemplatesTableOptions = new neoTableParams(CompositeFieldAPI);
 
 				// methods
-				vm.removeFieldTemplate = removeFieldTemplate;
+				vm.deleteFieldTemplate = deleteFieldTemplate;
 
-				function removeFieldTemplate(fieldTemplate) {
+				function deleteFieldTemplate(fieldTemplate) {
 					CompositeFieldAPI.remove(fieldTemplate);
 				}
 			}

@@ -14,10 +14,9 @@ define(['docs/module'], function (module) {
 	 * @see {@link http://formvalidation.io/validators/color/}
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @param docsModuleConf {Object} Module configuration
 	 * @return {*|Model}
 	 */
-	function ColorValidator($log, restmod, docsModuleConf) {
+	function ColorValidator($log, restmod) {
 
 		$log.debug('Created new instance');
 
@@ -25,7 +24,7 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Validator', {
 				$templateUrl: {
-					init: docsModuleConf.VALIDATOR_TEMPLATES_PATH + 'color.html'
+					init: '/app/docs/_directives/docsValidator/validators/color.html'
 				},
 				// The type of color
 				type: {

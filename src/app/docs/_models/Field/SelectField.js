@@ -8,10 +8,9 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @param docsModuleConf {Object} Module configuration
 	 * @return {*|Model}
 	 */
-	function SelectField($log, restmod, docsModuleConf) {
+	function SelectField($log, restmod) {
 
 		$log.debug('Created new instance');
 
@@ -19,7 +18,7 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: docsModuleConf.FIELD_TEMPLATES_PATH + 'select.html'
+					init: '/app/docs/_directives/docsField/fields/select.html'
 				},
 				options: {
 					init: ['one', 'two', 'three']

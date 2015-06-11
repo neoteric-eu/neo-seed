@@ -8,22 +8,21 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @param docsModuleConf {Object} Module configuration
 	 * @return {*|Model}
 	 */
-	function TextField($log, restmod, docsModuleConf) {
+	function TextField($log, restmod) {
 
 		$log.debug('Created new instance');
 
 		return restmod
 			.model()
 			.mix('Field', {
-			$templateUrl: {
-				init: docsModuleConf.FIELD_TEMPLATES_PATH + 'input.html'
-			},
-			$inputType: {
-				init: 'text'
-			}
+				$templateUrl: {
+					init: '/app/docs/_directives/docsField/fields/input.html'
+				},
+				$inputType: {
+					init: 'text'
+				}
 			});
 	}
 

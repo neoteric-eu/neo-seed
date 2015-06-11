@@ -12,24 +12,17 @@ define([
 	var module = ng.module('app.docs.templates.fields', ['ui.sortable']);
 
 	/**
-	 * Module configuration options.fields
-	 */
-	module.constant('fieldsConf', {
-		MODULE_PATH: '/app/docs/templates/fields'
-	});
-
-	/**
 	 * Stores additional module configuration
 	 * @method run
 	 */
-	module.config(function ($stateProvider, gettext, fieldsConf) {
+	module.config(function ($stateProvider, gettext) {
 
 		$stateProvider
 			.state('app.docs.templates.fields', {
 				url: '/docs/templates/fields',
 				views: {
 					'content@app': {
-						templateUrl: fieldsConf.MODULE_PATH + '/views/list.html'
+						templateUrl: '/app/docs/templates/fields/views/list.html'
 					}
 				},
 				data: {
@@ -41,7 +34,7 @@ define([
 				url: '/new',
 				views: {
 					'content@app': {
-						templateUrl: fieldsConf.MODULE_PATH + '/views/view.html'
+						templateUrl: '/app/docs/templates/fields/views/view.html'
 					}
 				},
 				data: {
@@ -53,7 +46,7 @@ define([
 				url: '/edit/:id',
 				views: {
 					'content@app': {
-						templateUrl: fieldsConf.MODULE_PATH + '/views/view.html'
+						templateUrl: '/app/docs/templates/fields/views/view.html'
 					}
 				},
 				data: {

@@ -10,30 +10,24 @@ define(['docs/templates/fields/module'], function (module) {
 	 * @param $previousState
 	 * @param $stateParams
 	 * @param $log
-	 * @param docsTemplatesDocumentsModuleConf
-	 * @param CompositeFieldAPI
+	 * @param DocumentTemplateAPI
 	 * @param FieldTypesEnum
 	 * @return {{restrict: string, templateUrl: string, scope: boolean, controllerAs: string,
 	 *   controller: Function}}
 	 */
-	function docsDocumentTemplateWidget($previousState, $stateParams, $log,
-		docsTemplatesDocumentsModuleConf, CompositeFieldAPI, FieldTypesEnum) {
+	function docsDocumentTemplateWidget($previousState, $stateParams, $log, DocumentTemplateAPI,
+		FieldTypesEnum) {
 
 		return {
 			restrict: 'EA',
-			templateUrl: docsTemplatesDocumentsModuleConf.MODULE_PATH +
-			'widgets/documentTemplate/docs-document-template.html',
+			templateUrl: '/app/docs/templates/documents/widgets/documentTemplate/docs-document-template.html',
 			scope: true,
 			controllerAs: 'vm',
 			controller: function () {
-				$previousState.memo('caller', 'app.docs.templates.fields');
-
 				var vm = this;
 
 				// variables
-				vm.compositeField = CompositeFieldAPI.build({
-					fieldType: FieldTypesEnum.COMPOSITE
-				});
+				vm.documentTemplate = undefined;
 
 				vm.sortableOptions = {
 					handle: '.drag-handle',
@@ -53,10 +47,14 @@ define(['docs/templates/fields/module'], function (module) {
 				 * @method init
 				 */
 				function init() {
-					$previousState.memo('caller', 'app.tasks.planner');
+					$previousState.memo('caller', 'app.docs.templates.fields');
 
 					if ($stateParams.id) {
-						vm.compositeField = CompositeFieldAPI.get($stateParams.id);
+						vm.documentTemplate = DocumentTemplateAPI.get($stateParams.id);
+					} else {
+						vm.documentTemplate = DocumentTemplateAPI.build({
+							fieldType: FieldTypesEnum.COMPOSITE
+						});
 					}
 
 					$log.debug('Initiated controller');
@@ -67,11 +65,12 @@ define(['docs/templates/fields/module'], function (module) {
 				 * @method save
 				 */
 				function save() {
-					CompositeFieldAPI
-						.save(vm.compositeField)
+					DocumentTemplateAPI
+						.save(vm.documentTemplate)
 						.then(function () {
 							$previousState.go('caller');
 						});
+
 					$log.debug('Saved composite field');
 				}
 			}

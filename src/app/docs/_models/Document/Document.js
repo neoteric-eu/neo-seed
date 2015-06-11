@@ -7,9 +7,9 @@ define(['docs/module'], function (module) {
 	 * @implements {app.BaseModel}
 	 * @memberOf app.docs
 	 *
-	 * @param $log Console log provider
-	 * @param restmod Data model layer interface
-	 * @param gettext Translation service
+	 * @param $log {Object} Console log provider
+	 * @param restmod {Object} Data model layer interface
+	 * @param gettext {Function} Translation service
 	 * @return {*|Model}
 	 */
 	function Document($log, restmod, gettext) {

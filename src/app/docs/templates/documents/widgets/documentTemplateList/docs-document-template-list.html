@@ -9,16 +9,17 @@
 	<header>
 		<span class="widget-icon"> <i class="fa fa-list"></i> </span>
 
-		<h2>Field template list</h2>
+		<h2>Document template list</h2>
 	</header>
 
 	<div class="widget-body no-padding">
-		<div ng-hide="vm.fieldTemplatesTableOptions.data" class="alert alert-info no-margin">
-			<i class="fa-fw fa fa-info"></i>
-			Currently there are no available field templates.
-			Click <u ui-sref="app.docs.templates.fields.new"
-							 class="cursor-pointer">here</u>
-			to create new one.
+		<div class="widget-body-toolbar">
+			<div class="btn-group btn-group-sm">
+				<a ui-sref="app.docs.templates.documents.new"
+					 class="btn btn-success">
+					<i class="fa fa-plus"></i> {{'New'|translate}}
+				</a>
+			</div>
 		</div>
 
 		<table ng-table="vm.fieldTemplatesTableOptions"
@@ -34,9 +35,9 @@
 			</thead>
 
 			<tbody ng-show="$data.length">
-			<tr ng-repeat="fieldTemplate in $data">
-				<td>{{fieldTemplate.label}}</td>
-				<td>{{fieldTemplate.description}}</td>
+			<tr ng-repeat="documentTemplate in $data">
+				<td>{{documentTemplate.label}}</td>
+				<td>{{documentTemplate.description}}</td>
 				<td>
 					<div class="btn-group pull-right">
 						<a class="btn dropdown-toggle btn-xs btn-default"
@@ -47,15 +48,15 @@
 
 						<ul class="dropdown-menu pull-right">
 							<li>
-								<a ui-sref="app.docs.templates.fields.edit({id: fieldTemplate.id})">
+								<a ui-sref="app.docs.templates.documents.edit({id: documentTemplate.id})">
 									<i class="fa fa-pencil"></i>
-									{{'Edit template'|translate}}
+									{{'Edit'|translate}}
 								</a>
 							</li>
 							<li>
-								<a ng-click="vm.removeFieldTemplate(fieldTemplate)">
+								<a ng-click="vm.deleteDocumentTemplate(documentTemplate)">
 									<i class="fa fa-trash-o"></i>
-									{{'Delete template'|translate}}
+									{{'Delete'|translate}}
 								</a>
 							</li>
 						</ul>

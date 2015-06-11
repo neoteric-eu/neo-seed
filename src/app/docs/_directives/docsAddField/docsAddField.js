@@ -7,18 +7,17 @@ define(['docs/module'], function (module) {
 	 * @memberOf app.docs
 	 *
 	 * @param $log {Object} Logging service
-	 * @param docsModuleConf {Object} Module configuration
 	 * @param FieldTypesEnum {Object} List of all registered fields
 	 * @param FieldAPI {Object} Interface for REST communication with server
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope: {container:
 	 *   string}, controller: Function}}
 	 */
-	function docsAddField($log, FieldTypesEnum, docsModuleConf, FieldAPI) {
+	function docsAddField($log, FieldTypesEnum, FieldAPI) {
 		$log.debug('Initiated directive');
 
 		return {
 			restrict: 'EA',
-			templateUrl: docsModuleConf.DIRECTIVES_PATH + 'docsAddField/docs-add-field.html',
+			templateUrl: '/app/docs/_directives/docsAddField/docs-add-field.html',
 			controllerAs: 'vm',
 			scope: {
 				container: '='

@@ -10,22 +10,20 @@ define(['docs/templates/fields/module'], function (module) {
 	 * @param $previousState
 	 * @param $stateParams
 	 * @param $log
-	 * @param fieldsConf
 	 * @param CompositeFieldAPI
 	 * @param FieldTypesEnum
 	 * @return {{restrict: string, templateUrl: string, scope: boolean, controllerAs: string,
 	 *   controller: Function}}
 	 */
-	function docsFieldTemplateWidget($previousState, $stateParams, $log, fieldsConf,
-		CompositeFieldAPI, FieldTypesEnum) {
+	function docsFieldTemplateWidget($previousState, $stateParams, $log, CompositeFieldAPI,
+		FieldTypesEnum) {
 
 		return {
 			restrict: 'EA',
-			templateUrl: fieldsConf.MODULE_PATH + '/widgets/fieldTemplate/docs-field-template.html',
+			templateUrl: '/app/docs/templates/fields/widgets/fieldTemplate/docs-field-template.html',
 			scope: true,
 			controllerAs: 'vm',
 			controller: function () {
-				$previousState.memo('caller', 'app.docs.templates.fields');
 
 				var vm = this;
 
@@ -52,7 +50,7 @@ define(['docs/templates/fields/module'], function (module) {
 				 * @method init
 				 */
 				function init() {
-					$previousState.memo('caller', 'app.tasks.planner');
+					$previousState.memo('caller', 'app.docs.templates.fields');
 
 					if ($stateParams.id) {
 						CompositeFieldAPI
@@ -80,6 +78,7 @@ define(['docs/templates/fields/module'], function (module) {
 						.then(function () {
 							$previousState.go('caller');
 						});
+
 					$log.debug('Saved composite field');
 				}
 

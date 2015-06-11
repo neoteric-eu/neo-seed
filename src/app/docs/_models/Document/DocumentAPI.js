@@ -7,11 +7,15 @@ define(['docs/module'], function (module) {
 	 * @implements {app.BaseAPI}
 	 * @memberOf app.docs
 	 *
-	 * @param BaseAPI
-	 * @param Document
+	 * @param $log {Object} Logging service
+	 * @param BaseAPI {Function} Base interface for REST communication with server
+	 * @param Document {Object} Data model class
 	 * @return {*}
 	 */
 	function DocumentAPI(BaseAPI, Document) {
+
+		$log.debug('Instantiated API service');
+
 		return new BaseAPI(Document);
 	}
 

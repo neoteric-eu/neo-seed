@@ -16,10 +16,9 @@ define(['docs/module'], function (module) {
 	 * @see {@link http://formvalidation.io/validators/stringLength/}
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
-	 * @param docsModuleConf Module configuration
 	 * @return {*|Model}
 	 */
-	function StringLengthValidator($log, restmod, docsModuleConf) {
+	function StringLengthValidator($log, restmod) {
 
 		$log.debug('Created new instance');
 
@@ -27,7 +26,7 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Validator', {
 				$templateUrl: {
-					init: docsModuleConf.VALIDATOR_TEMPLATES_PATH + 'stringLength.html'
+					init: '/app/docs/_directives/docsValidator/validators/stringLength.html'
 				},
 				// The minimum length of the value
 				min: {},

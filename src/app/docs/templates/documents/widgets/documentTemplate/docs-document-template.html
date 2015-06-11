@@ -3,8 +3,8 @@
 		<div class="well">
 			<h3 class="margin-top-0">
 				<i class="fa fa-stack-overflow"></i>
-				{{vm.compositeField.label}}
-				<small>{{vm.compositeField.description}}</small>
+				{{vm.documentTemplate.label}}
+				<small>{{vm.documentTemplate.description}}</small>
 			</h3>
 
 			<hr/>
@@ -12,26 +12,50 @@
 			<form id="fieldTemplate" neo-validate novalidate>
 				<!-- RECURSIVE_FIELD_TREE -->
 				<!-- WARNING! Magic happens here! -->
-				<ul ui-sortable="vm.sortableOptions"
-						ng-model="vm.compositeField.composite"
-						class="no-padding list-unstyled">
-					<li ng-repeat="field in vm.compositeField.composite"
-							id="docs-field-level.html">
-						<docs-field field="field" container="vm.compositeField"></docs-field>
+				<script type="text/ng-template" id="docsFieldLevel">
+					<docs-field field="field" container="container"></docs-field>
 
-					<li ng-if="field.composite.length"
-							ng-repeat="field in field.composite"
-							ng-include="docs-field-level.html"></li>
+					<div ng-if="field.composite.length">
+						<div>
+							<strong>{{field.label}}</strong>
+
+							<div class="pull-right display-block">
+								<a href-void class="drag-handle">
+									<i class="fa fa-fw fa-arrows text-muted" hover-class="text-primary"></i>
+								</a>
+								<a href-void ng-click="vm.deleteField(field)">
+									<i class="fa fa-fw fa-trash-o text-muted" hover-class="text-danger"></i>
+								</a>
+							</div>
+							<hr class="margin-top-5"/>
+						</div>
+
+						<div ng-init="container = field"
+								 ng-repeat="field in field.composite track by $index"
+								 ng-include="'docsFieldLevel'"></div>
+					</div>
+
+				</script>
+
+				<ul ui-sortable="vm.sortableOptions"
+						ng-model="vm.documentTemplate.composite"
+						class="no-padding list-unstyled">
+
+					<li ng-init="container = vm.documentTemplate"
+							ng-repeat="field in vm.documentTemplate.composite"
+							ng-include="'docsFieldLevel'">
 					</li>
+
 				</ul>
+
 				<!-- end:RECURSIVE_FIELD_TREE -->
 			</form>
-
 
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="text-center">
-						<docs-add-field container="vm.compositeField"></docs-add-field>
+						<docs-add-field container="vm.documentTemplate"></docs-add-field>
+						<docs-add-composite-field container="vm.documentTemplate"></docs-add-composite-field>
 					</div>
 				</div>
 			</div>
@@ -55,7 +79,7 @@
 							<label>Name:</label>
 							<input type="text"
 										 class="form-control input-sm"
-										 ng-model="vm.compositeField.label"/>
+										 ng-model="vm.documentTemplate.label"/>
 						</div>
 					</div>
 				</div>
@@ -65,7 +89,7 @@
 							<label>Description:</label>
 					<textarea class="form-control"
 										rows="3"
-										ng-model="vm.compositeField.description"
+										ng-model="vm.documentTemplate.description"
 										style="resize: none;">
 					</textarea>
 						</div>

@@ -6,8 +6,8 @@ define(['docs/module'], function (module) {
 	 * @implements {app.BaseModel}
 	 * @memberOf app.docs
 	 *
-	 * @param $log Console log provider
-	 * @param restmod Data model layer interface
+	 * @param $log {Object} Logging service
+	 * @param restmod {Object} Data model layer interface
 	 * @return {*|Model}
 	 */
 	function DocumentTemplate($log, restmod) {
@@ -15,7 +15,7 @@ define(['docs/module'], function (module) {
 
 		return restmod
 			.model('/document-templates')
-			.mix('Document', {
+			.mix('Field', {
 				label: {
 					init: 'New document template'
 				},
