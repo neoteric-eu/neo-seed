@@ -12,7 +12,7 @@ define(['docs/module'], function (module) {
 	 * @param Document {Object} Data model class
 	 * @return {*}
 	 */
-	function DocumentAPI(BaseAPI, Document) {
+	function DocumentAPI($log, BaseAPI, Document) {
 
 		$log.debug('Instantiated API service');
 
