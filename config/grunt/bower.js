@@ -31,6 +31,7 @@ module.exports = {
 			'angular-restmod/angular-restmod.js': 'angular-restmod/dist/angular-restmod-bundle.js',
 			'angular-restmod/styles/ams.js': 'angular-restmod/dist/styles/ams.js',
 			'angular-restmod/plugins': 'angular-restmod/dist/plugins/*.min.js',
+			'angular-gridster/angular-gridster.js': 'angular-gridster/src/angular-gridster.js',
 
 			'bootstrap/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
 			'bootstrap-timepicker/bootstrap-timepicker.js': 'bootstrap3-fontawesome-timepicker/js/bootstrap-timepicker.js',
@@ -69,6 +70,7 @@ module.exports = {
 			'jquery-sparkline/jquery-sparkline.js': 'relayfoods-jquery.sparkline/dist/jquery.sparkline.js',
 			'jquery-validation/jquery-validate.js': 'jquery-validation/dist/jquery.validate.js',
 			'jquery-magnificpopup/jquery-magnificpopup.js': 'magnific-popup/dist/jquery.magnific-popup.js',
+			'jquery-resize/jquery-resize.js': 'javascript-detect-element-resize/jquery.resize.js',
 
 			'requirejs-domready/requirejs-domready.js': 'requirejs-domready/domReady.js',
 
@@ -129,7 +131,8 @@ module.exports = {
 			'elements/elements.less': 'less-elements/elements.less',
 			'animate/animate.less': 'animate.less/animate.less',
 			'animate/source': 'animate.less/source',
-			'font-awesome/': 'fontawesome/less'
+			'font-awesome/': 'fontawesome/less',
+			'angular-gridster/angular-gridster.less': 'angular-gridster/src/angular-gridster.less'
 		}
 	},
 	fonts: {

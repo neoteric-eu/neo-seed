@@ -19,7 +19,10 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: '/app/docs/_directives/docsField/fields/textarea.html'
+					init: 'app/docs/_directives/docsField/fields/textarea.html'
+				},
+				$propertiesUrl: {
+					init: 'app/docs/_directives/docsFieldProperties/textarea-properties.html'
 				}
 			});
 	}

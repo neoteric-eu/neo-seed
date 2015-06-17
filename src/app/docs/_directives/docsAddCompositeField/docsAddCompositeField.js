@@ -56,6 +56,8 @@ define(['docs/module'], function (module) {
 					// Remove field from template collection
 					vm.compositeFields.$remove(compositeField);
 
+					compositeField.$type = $scope.container.composite.$type;
+
 					$scope.container.composite.$add(compositeField);
 
 					$log.debug('Added new composite field');

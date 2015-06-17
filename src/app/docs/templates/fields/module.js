@@ -9,7 +9,7 @@ define([
 	 * @constructor module
 	 * @memberof app.docs.templates.fields
 	 */
-	var module = ng.module('app.docs.templates.fields', ['ui.sortable']);
+	var module = ng.module('app.docs.templates.fields', ['gridster']);
 
 	/**
 	 * Stores additional module configuration
@@ -53,6 +53,32 @@ define([
 					title: gettext('New')
 				}
 			});
+	});
+
+	/**
+	 * Set up module's dependencies
+	 */
+	module.run(function (gridsterConfig) {
+		// Gridster configuration
+		//noinspection JSUnusedAssignment
+		gridsterConfig = _.extend(gridsterConfig, {
+			// Row height settings
+			rowHeight: 20,
+			minSizeY: 4,
+			defaultSizeY: 4,
+			// Row width settings
+			minSizeX: 2,
+			maxSizeX: 6,
+			defaultSizeX: 3,
+			resizable: {
+				enabled: true,
+				handles: ['se']
+			},
+			draggable: {
+				enabled: true,
+				handle: '.drag-handle'
+			}
+		});
 	});
 
 	return module;

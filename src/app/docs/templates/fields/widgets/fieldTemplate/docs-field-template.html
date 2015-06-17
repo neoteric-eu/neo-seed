@@ -32,17 +32,19 @@
 
 						<div ng-init="container = field"
 								 ng-repeat="field in field.composite track by $index"
-								 ng-include="'docsFieldLevel'"></div>
+								 ng-include="'docsFieldLevel'"
+								 gridster-item="field"></div>
 					</div>
 
 				</script>
 
-				<ul ui-sortable="vm.sortableOptions"
-						ng-model="vm.compositeField.composite"
-						class="no-padding list-unstyled">
+				<ul gridster class="no-padding list-unstyled margin-bottom-10">
 
 					<li ng-init="container = vm.compositeField"
 							ng-repeat="field in vm.compositeField.composite"
+							ng-if="vm.compositeField.composite"
+							gridster-item="field"
+							style="padding: 0 10px"
 							ng-include="'docsFieldLevel'">
 					</li>
 

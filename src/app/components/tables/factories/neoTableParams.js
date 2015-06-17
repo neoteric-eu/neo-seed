@@ -48,6 +48,10 @@ define(['components/module'], function (module) {
 				throw new Error('option "CollectionAPI" must be defined');
 			}
 
+			// @todo update in seed
+			// Make sure that parameters are defined object
+			parameters = parameters || {};
+
 			var defaults = {
 				params: {
 					page: 1,
@@ -61,7 +65,9 @@ define(['components/module'], function (module) {
 				onAfterResolve: undefined
 			};
 
-			var options = _.mergeDefaults(defaults, parameters);
+			// @todo update in seed
+			var options = _.mergeDefaults(parameters, defaults);
+
 
 			return new ngTableParams(options.params, {
 				total: 0,

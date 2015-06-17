@@ -1,5 +1,6 @@
 define([
 	'./docsField/docsField',
+	'./docsFieldProperties/docsFieldProperties',
 	'./docsValidator/docsValidator',
 	'./docsAddField/docsAddField',
 	'./docsAddCompositeField/docsAddCompositeField',

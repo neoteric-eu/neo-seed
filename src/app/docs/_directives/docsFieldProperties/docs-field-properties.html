@@ -1,0 +1,13 @@
+<div class="modal-body">
+	<!-- FIELD_PROPERTIES -->
+	<div ng-include="field.$propertiesUrl"></div>
+	<!-- end:FIELD_PROPERTIES -->
+
+	<!-- FIELD_VALIDATORS -->
+	<div ng-include="'app/docs/_directives/docsFieldProperties/validators.html'"></div>
+	<!-- end:FIELD_VALIDATORS -->
+
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" ng-click="vm.closeModal()">Close</button>
+</div>

@@ -19,7 +19,10 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: '/app/docs/_directives/docsField/fields/select.html'
+					init: 'app/docs/_directives/docsField/fields/select.html'
+				},
+				$propertiesUrl: {
+					init: 'app/docs/_directives/docsFieldProperties/select-properties.html'
 				},
 				options: {
 					init: ['one', 'two', 'three']

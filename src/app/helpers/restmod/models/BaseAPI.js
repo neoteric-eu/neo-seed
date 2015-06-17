@@ -46,15 +46,17 @@ define(['app'], function (module) {
 		 * @abstract
 		 * @param {String|Array} ids
 		 * @return {*}
+		 *
+		 * @todo add to seed
 		 */
-		API.prototype.get = function (ids) {
+		API.prototype.get = function (ids, params) {
 			if (!_.isString(ids) && !_.isArray(ids)) {
 				$log.error('Parameter "id" must be String or Array');
 				return $q.reject();
 			}
 
 			return this.model
-				.$find(ids)
+				.$find(ids, params)
 				.$asPromise()
 				.catch(handleError);
 		};

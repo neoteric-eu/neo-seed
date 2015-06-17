@@ -21,7 +21,10 @@ define(['docs/module'], function (module) {
 			.model()
 			.mix('Field', {
 				$templateUrl: {
-					init: '/app/docs/_directives/docsField/fields/input.html'
+					init: 'app/docs/_directives/docsField/fields/input.html'
+				},
+				$propertiesUrl: {
+					init: 'app/docs/_directives/docsFieldProperties/input-properties.html'
 				},
 				$inputType: {
 					init: 'email'

@@ -16,7 +16,7 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model('/document-templates')
 			.mix('Field', {
-				label: {
+				name: {
 					init: 'New document template'
 				},
 				description: {}

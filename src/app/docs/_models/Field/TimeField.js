@@ -18,12 +18,15 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model()
 			.mix('Field', {
-			$templateUrl: {
-				init: '/app/docs/_directives/docsField/fields/input.html'
-			},
-			$inputType: {
-				init: 'time'
-			}
+				$templateUrl: {
+					init: 'app/docs/_directives/docsField/fields/input.html'
+				},
+				$propertiesUrl: {
+					init: 'app/docs/_directives/docsFieldProperties/input-properties.html'
+				},
+				$inputType: {
+					init: 'time'
+				}
 			});
 	}
 

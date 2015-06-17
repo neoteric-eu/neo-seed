@@ -10,7 +10,7 @@
 				<a href-void ng-if="vm.isCompositeElement()" class="drag-handle">
 					<i class="fa fa-fw fa-arrows text-muted" hover-class="text-primary"></i>
 				</a>
-				<a href-void ng-click="vm.toggleCollapse()">
+				<a href-void ng-click="vm.openFieldPropertiesModal()">
 					<i class="fa fa-fw fa-edit text-muted" hover-class="text-info"></i>
 				</a>
 				<a href-void ng-if="vm.isCompositeElement()" ng-click="vm.deleteField()">
@@ -30,18 +30,6 @@
 	</textarea>
 
 		<p ng-if="field.note" class="note"><strong>Note:</strong> {{field.note}}</p>
-	</div>
-
-	<div class="panel-group" collapse="field.$isEditorCollapsed">
-		<!-- FIELD_PROPERTIES -->
-		<div class="margin-bottom-10"
-				 ng-include="'app/docs/_directives/docsField/fields/textarea-properties.html'"></div>
-		<!-- end:FIELD_PROPERTIES -->
-
-		<!-- FIELD_VALIDATORS -->
-		<div
-			ng-include="'app/docs/_directives/docsField/fields/validators.html'"></div>
-		<!-- end:FIELD_VALIDATORS -->
 	</div>
 </section>
 

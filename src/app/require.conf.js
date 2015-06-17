@@ -7,6 +7,8 @@ requirejs.config({
 		'jquery': '../vendor/libs/jquery/jquery',
 		'jquery-ui': '../vendor/libs/jquery-ui',
 		'jquery-color': '../vendor/libs/jquery-color/jquery-color',
+		// @todo add to seed
+		'jquery-resize': '../vendor/libs/jquery-resize/jquery-resize',
 		'jqgrid': '../vendor/libs/jquery-jqgrid/jquery-jqgrid',
 		'jqgrid-locale-en': '../vendor/libs/jquery-jqgrid/i18n/grid.locale-en',
 		'jquery-maskedinput': '../vendor/libs/jquery-maskedinput/jquery-maskedinput',
@@ -52,6 +54,7 @@ requirejs.config({
 		'angular-ui-select': '../vendor/libs/angular-ui-select/angular-ui-select',
 		'angular-ui-date': '../vendor/libs/angular-ui-date/angular-ui-date',
 		'angular-table': '../vendor/libs/angular-table/angular-table',
+		'angular-gridster': '../vendor/libs/angular-gridster/angular-gridster',
 
 		// Bootstrap dependencies
 		'bootstrap': '../vendor/libs/bootstrap/bootstrap',
@@ -132,6 +135,7 @@ requirejs.config({
 		'jquery-maskedinput': ['jquery'],
 		'jquery-nestable': ['jquery'],
 		'jquery-validation': ['jquery'],
+		'jquery-resize': ['jquery'],
 		'jqgrid': ['jquery'],
 		'jqgrid-locale-en': ['jquery', 'jqgrid'],
 		'magnific-popup': ['jquery'],
@@ -171,6 +175,8 @@ requirejs.config({
 		'angular-ui-date': ['angular'],
 		'angular-permission': ['angular'],
 		'angular-table': ['angular'],
+		// @todo add to seed
+		'angular-gridster': ['angular', 'jquery-resize'],
 
 		// Bootstrap dependencies
 		'bootstrap': ['jquery'],

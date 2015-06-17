@@ -3,8 +3,18 @@
 		<div class="well">
 			<h3 class="margin-top-0">
 				<i class="fa fa-stack-overflow"></i>
-				{{vm.documentTemplate.label}}
+				{{vm.documentTemplate.name}}
 				<small>{{vm.documentTemplate.description}}</small>
+
+				<ui-select ng-model="vm.documentTemplate.version"
+									 class="pull-right"
+									 on-select="vm.changeDocumentVersion($item, $model)"
+									 style="width: 80px">
+					<ui-select-match>v. {{$select.selected.version}}</ui-select-match>
+					<ui-select-choices repeat="version.version as version in vm.documentTemplate.versions">
+						v. {{version.version}}
+					</ui-select-choices>
+				</ui-select>
 			</h3>
 
 			<hr/>
@@ -15,7 +25,7 @@
 				<script type="text/ng-template" id="docsFieldLevel">
 					<docs-field field="field" container="container"></docs-field>
 
-					<div ng-if="field.composite.length">
+					<div ng-if="field.composite.length" class="clearfix">
 						<div>
 							<strong>{{field.label}}</strong>
 
@@ -30,19 +40,23 @@
 							<hr class="margin-top-5"/>
 						</div>
 
-						<div ng-init="container = field"
-								 ng-repeat="field in field.composite track by $index"
-								 ng-include="'docsFieldLevel'"></div>
+						<div gridster="vm.nestedGridsterOptions" class="no-padding">
+							<div ng-init="container = field"
+									 ng-repeat="field in field.composite track by $index"
+									 ng-include="'docsFieldLevel'"
+									 gridster-item="field"></div>
+						</div>
 					</div>
 
 				</script>
 
-				<ul ui-sortable="vm.sortableOptions"
-						ng-model="vm.documentTemplate.composite"
-						class="no-padding list-unstyled">
+				<ul gridster class="no-padding list-unstyled margin-bottom-10">
 
 					<li ng-init="container = vm.documentTemplate"
-							ng-repeat="field in vm.documentTemplate.composite"
+							ng-repeat="field in vm.documentTemplate.composite track by $index"
+							ng-if="vm.documentTemplate.composite"
+							gridster-item="field"
+							style="padding: 0 10px"
 							ng-include="'docsFieldLevel'">
 					</li>
 
@@ -79,7 +93,7 @@
 							<label>Name:</label>
 							<input type="text"
 										 class="form-control input-sm"
-										 ng-model="vm.documentTemplate.label"/>
+										 ng-model="vm.documentTemplate.name"/>
 						</div>
 					</div>
 				</div>

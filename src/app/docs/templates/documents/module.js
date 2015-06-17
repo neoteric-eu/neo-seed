@@ -1,5 +1,6 @@
 define([
-	'angular'
+	'angular',
+	'angular-gridster'
 ], function (ng) {
 	'use strict';
 
@@ -8,7 +9,7 @@ define([
 	 * @constructor module
 	 * @memberof app.docs
 	 */
-	var module = ng.module('app.docs.templates.documents', []);
+	var module = ng.module('app.docs.templates.documents', ['gridster']);
 
 	/**
 	 * Stores additional module configuration
@@ -43,7 +44,10 @@ define([
 			})
 
 			.state('app.docs.templates.documents.edit', {
-				url: '/edit',
+				url: '/edit/:id/:version',
+				params: {
+					version: null
+				},
 				views: {
 					'content@app': {
 						templateUrl: '/app/docs/templates/documents/views/view.html'
@@ -53,6 +57,31 @@ define([
 					title: gettext('Edit')
 				}
 			});
+	});
+
+	/**
+	 * Set up module's dependencies
+	 */
+	module.run(function (gridsterConfig) {
+		// Gridster configuration
+		//noinspection JSUnusedAssignment
+		gridsterConfig = _.extend(gridsterConfig, {
+			// Row height settings
+			rowHeight: 20,
+			minSizeY: 4,
+			defaultSizeY: 4,
+			// Row width settings
+			minSizeX: 2,
+			maxSizeX: 6,
+			defaultSizeX: 3,
+			resizable: {
+				enabled: true,
+				handles: ['se']
+			},
+			draggable: {
+				handle: '.drag-handle'
+			}
+		});
 	});
 
 	return module;

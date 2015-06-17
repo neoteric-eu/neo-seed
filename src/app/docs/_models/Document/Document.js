@@ -9,19 +9,14 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log {Object} Console log provider
 	 * @param restmod {Object} Data model layer interface
-	 * @param gettext {Function} Translation service
 	 * @return {*|Model}
 	 */
-	function Document($log, restmod, gettext) {
+	function Document($log, restmod) {
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model('/document')
-			.mix({
-				type: {
-					init: gettext('document')
-				}
-			});
+			.mix({});
 	}
 
 	module.factory('Document', Document);

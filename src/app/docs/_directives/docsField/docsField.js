@@ -10,9 +10,11 @@ define(['docs/module'], function (module) {
 	 * @param $timeout {Function} Timeout service
 	 * @param $compile {Function} Template compilation service
 	 * @param $log {Object} Logging service
-	 * @return {{restrict: string, scope: {field: string, container: string}, link: Function}}
+	 * @param $modal {Object} Bootstrap modal service
+	 * @return {{restrict: string, controllerAs: string, scope: {field: string, container: string},
+	 *   link: Function, controller: Function}}
 	 */
-	function docsField($http, $timeout, $compile, $log) {
+	function docsField($http, $timeout, $compile, $modal, $log) {
 		$log.debug('Initiated directive');
 
 		return {
@@ -24,7 +26,6 @@ define(['docs/module'], function (module) {
 			},
 
 			link: function (scope, element) {
-
 				if (!_.has(scope.field, '$templateUrl')) {
 					// If field is composite skip linking
 					$log.debug('Composite field without $templateUrl');
@@ -60,13 +61,20 @@ define(['docs/module'], function (module) {
 
 				// functions
 				vm.deleteField = deleteField;
-				vm.toggleCollapse = toggleCollapse;
 				vm.isCompositeElement = isCompositeElement;
+				vm.openFieldPropertiesModal = openFieldPropertiesModal;
 
+				/**
+				 * Checks if element has nested fields
+				 * @return {boolean} Truthy value
+				 */
 				function isCompositeElement() {
-					return $scope.container.composite.length;
+					return !!$scope.container.composite.length;
 				}
 
+				/**
+				 * Removes field from collection
+				 */
 				function deleteField() {
 					$('#fieldTemplate').formValidation('removeField', $scope.field.$name);
 
@@ -76,11 +84,19 @@ define(['docs/module'], function (module) {
 					$log.debug('Removed field form container');
 				}
 
-				function toggleCollapse() {
-					//noinspection JSPrimitiveTypeWrapperUsage
-					$scope.field.$isEditorCollapsed = !$scope.field.$isEditorCollapsed;
+				/**
+				 * Open modal with field properties
+				 */
+				function openFieldPropertiesModal() {
+					// $scope.modalInstance is required workaround to access injected $modalInstance
+					// functions (dismiss, close) inside directives
+					$scope.modalInstance = $modal.open({
+						template: '<docs-field-properties></docs-field-properties>',
+						size: 'lg',
+						scope: $scope
+					});
 
-					$log.debug('Collapsed field editor');
+					$log.debug('Opened modal with field properties');
 				}
 
 				$log.debug('Initiated controller');
