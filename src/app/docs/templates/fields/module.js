@@ -1,6 +1,7 @@
 define([
 	'angular',
-	'angular-ui-sortable'
+	'angular-gridster',
+	'angular-file-upload'
 ], function (ng) {
 	'use strict';
 
@@ -9,7 +10,7 @@ define([
 	 * @constructor module
 	 * @memberof app.docs.templates.fields
 	 */
-	var module = ng.module('app.docs.templates.fields', ['gridster']);
+	var module = ng.module('app.docs.templates.fields', ['gridster', 'ngFileUpload']);
 
 	/**
 	 * Stores additional module configuration

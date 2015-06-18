@@ -32,10 +32,8 @@ requirejs.config({
 		'angular-ui-router-extras-transition': '../vendor/libs/angular-ui-router-extras/ct-ui-router-extras.transition',
 		'angular-ui-router-extras-previous': '../vendor/libs-custom/angular-ui-router-extras/ct-ui-router-extras.previous',
 		'angular-ui-router-extras-sticky': '../vendor/libs/angular-ui-router-extras/ct-ui-router-extras.sticky',
-		// @todo include Utils in seed
-		'angular-ui-utils': '../vendor/libs/angular-ui-utils/angular-ui-utils',
 		// @todo include Sortable in seed
-		'angular-ui-sortable': '../vendor/libs/angular-ui-sortable/angular-ui-sortable',
+		'angular-file-upload': '../vendor/libs/angular-file-upload/angular-file-upload',
 		'angular-google-maps': '../vendor/libs/angular-google-maps/angular-google-maps',
 		'angular-bootstrap': '../vendor/libs/angular-bootstrap/ui-bootstrap',
 		'angular-bootstrap-tpls': '../vendor/libs/angular-bootstrap/ui-bootstrap-tpls',
@@ -163,7 +161,8 @@ requirejs.config({
 		'angular-restmod-preload': ['angular-restmod'],
 		'angular-restmod-find-many': ['angular-restmod'],
 		'angular-sanitize': ['angular'],
-		'angular-ui-sortable': {deps: ['angular', 'jquery-ui/sortable']},
+		// @todo add to seed
+		'angular-file-upload': {deps: ['angular']},
 		'angular-ui-router': ['angular'],
 		'angular-ui-router-extras-core': ['angular', 'angular-ui-router'],
 		'angular-ui-router-extras-dsr': ['angular', 'angular-ui-router', 'angular-ui-router-extras-core'],
@@ -171,7 +170,6 @@ requirejs.config({
 		'angular-ui-router-extras-transition': ['angular', 'angular-ui-router', 'angular-ui-router-extras-core'],
 		'angular-ui-router-extras-sticky': ['angular', 'angular-ui-router', 'angular-ui-router-extras-core'],
 		'angular-ui-select': ['angular'],
-		'angular-ui-utils': ['angular'],
 		'angular-ui-date': ['angular'],
 		'angular-permission': ['angular'],
 		'angular-table': ['angular'],

@@ -19,6 +19,14 @@ define(['docs/module'], function (module) {
 				name: {
 					init: 'New document template'
 				},
+				version: {
+					init: '1'
+				},
+				versions: {
+					init: [{
+						version: '1'
+					}]
+				},
 				description: {}
 			});
 	}

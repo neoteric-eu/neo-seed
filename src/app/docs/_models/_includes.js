@@ -13,6 +13,7 @@ define([
 	'./Field/TextareaField',
 	'./Field/PhoneField',
 	'./Field/TimeField',
+	'./Field/FileField',
 	'./Field/ColorField',
 	'./Field/DateField',
 	'./Field/NumberField',

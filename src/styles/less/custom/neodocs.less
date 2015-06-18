@@ -35,12 +35,6 @@
 	height: auto;
 }
 
-// Custom scrolling of the floating widgets
-[scrollfix-column].ui-scrollfix {
-	position: fixed;
-	top: 20px;
-}
-
 .smart-accordion-default .panel-title > a > i.fa {
 	display: block;
 	vertical-align: middle;
@@ -54,4 +48,20 @@
 .modal-content {
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+}
+
+// Add extra padding to fit gridster resizing
+.gridster li {
+	padding: 0 10px;
+}
+
+// Suppress adding padding when gridster item has sub-fields
+.gridster li.composite {
+	padding: 0 !important;
+}
+
+// Ensure that field without set labels has exact
+// same initial height as with them
+docs-field .form-group .clearfix {
+	min-height: 23px;
 }

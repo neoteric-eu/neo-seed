@@ -29,18 +29,9 @@ define(['docs/templates/fields/module'], function (module) {
 				// variables
 				vm.compositeField = undefined;
 
-				vm.sortableOptions = {
-					handle: '.drag-handle',
-					scroll: true,
-					axis: 'y',
-					items: '> li',
-					opacity: 0.5
-				};
-
 				// functions
 				vm.init = init;
 				vm.save = save;
-				vm.deleteField = deleteField;
 
 				init();
 
@@ -79,18 +70,6 @@ define(['docs/templates/fields/module'], function (module) {
 						});
 
 					$log.debug('Saved composite field');
-				}
-
-				/**
-				 * Deletes selected field
-				 * @method deleteField
-				 * @param field {app.docs.Field} Model to be removed
-				 */
-				function deleteField(field) {
-					vm.compositeField.composite.$remove(field);
-					field.$destroy();
-
-					$log.debug('Removed composite field form container');
 				}
 			}
 		};

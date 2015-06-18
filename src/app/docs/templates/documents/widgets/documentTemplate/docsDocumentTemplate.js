@@ -1,4 +1,4 @@
-define(['docs/templates/fields/module'], function (module) {
+define(['docs/templates/documents/module'], function (module) {
 	'use strict';
 
 	/**
@@ -28,27 +28,10 @@ define(['docs/templates/fields/module'], function (module) {
 
 				// variables
 				vm.documentTemplate = undefined;
-				vm.nestedGridsterOptions = {
-					// Row height settings
-					rowHeight: 20,
-					minSizeY: 4,
-					defaultSizeY: 4,
-					// Row width settings
-					minSizeX: 2,
-					maxSizeX: 6,
-					defaultSizeX: 3,
-					resizable: {
-						enabled: false
-					},
-					draggable: {
-						enabled: false
-					}
-				};
 
 				// functions
 				vm.init = init;
 				vm.save = save;
-				vm.deleteField = deleteField;
 				vm.changeDocumentVersion = changeDocumentVersion;
 
 				init();
@@ -98,20 +81,6 @@ define(['docs/templates/fields/module'], function (module) {
 						});
 
 					$log.debug('Saved composite field');
-				}
-
-				/**
-				 * Deletes selected field
-				 * @method deleteField
-				 * @param field {app.docs.Field} Model to be removed
-				 */
-				function deleteField(field) {
-					//noinspection JSUnresolvedVariable
-					vm.documentTemplate.composite.$remove(field);
-					//noinspection JSUnresolvedFunction
-					field.$destroy();
-
-					$log.debug('Removed composite field form container');
 				}
 
 				/**

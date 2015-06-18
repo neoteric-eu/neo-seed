@@ -21,9 +21,6 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model()
 			.mix({
-				$isEditorCollapsed: {
-					init: true
-				},
 				$name: {
 					init: function () {
 						return _.uniqueId('field_');

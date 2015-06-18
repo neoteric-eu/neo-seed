@@ -22,7 +22,6 @@ define([
 	'angular-restmod',
 	'angular-restmod-preload',
 	'angular-restmod-find-many',
-	'angular-ui-utils',
 	'smartwidgets',
 	'notification'
 ], function (ng, couchPotato, globalSettings) {
@@ -42,7 +41,6 @@ define([
 
 		'ui.bootstrap',
 		'ui.select',
-		'ui.utils',
 
 		'ui.router',
 		'ct.ui.router.extras.core',

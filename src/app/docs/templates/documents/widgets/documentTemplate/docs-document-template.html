@@ -20,49 +20,9 @@
 			<hr/>
 
 			<form id="fieldTemplate" neo-validate novalidate>
-				<!-- RECURSIVE_FIELD_TREE -->
-				<!-- WARNING! Magic happens here! -->
-				<script type="text/ng-template" id="docsFieldLevel">
-					<docs-field field="field" container="container"></docs-field>
-
-					<div ng-if="field.composite.length" class="clearfix">
-						<div>
-							<strong>{{field.label}}</strong>
-
-							<div class="pull-right display-block">
-								<a href-void class="drag-handle">
-									<i class="fa fa-fw fa-arrows text-muted" hover-class="text-primary"></i>
-								</a>
-								<a href-void ng-click="vm.deleteField(field)">
-									<i class="fa fa-fw fa-trash-o text-muted" hover-class="text-danger"></i>
-								</a>
-							</div>
-							<hr class="margin-top-5"/>
-						</div>
-
-						<div gridster="vm.nestedGridsterOptions" class="no-padding">
-							<div ng-init="container = field"
-									 ng-repeat="field in field.composite track by $index"
-									 ng-include="'docsFieldLevel'"
-									 gridster-item="field"></div>
-						</div>
-					</div>
-
-				</script>
-
-				<ul gridster class="no-padding list-unstyled margin-bottom-10">
-
-					<li ng-init="container = vm.documentTemplate"
-							ng-repeat="field in vm.documentTemplate.composite track by $index"
-							ng-if="vm.documentTemplate.composite"
-							gridster-item="field"
-							style="padding: 0 10px"
-							ng-include="'docsFieldLevel'">
-					</li>
-
-				</ul>
-
-				<!-- end:RECURSIVE_FIELD_TREE -->
+				<!-- DOCS_FIELD_EDITOR -->
+				<docs-editor container="vm.documentTemplate"></docs-editor>
+				<!-- end:DOCS_FIELD_EDITOR -->
 			</form>
 
 			<div class="row">

@@ -1,4 +1,4 @@
-define(['docs/templates/fields/module'], function (module) {
+define(['docs/templates/documents/module'], function (module) {
 	'use strict';
 
 	/**

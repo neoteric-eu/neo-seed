@@ -41,6 +41,11 @@ define(['docs/module'], function (module) {
 				label: gettext('Text input'),
 				group: gettext('Text')
 			},
+			FILE: {
+				propertyClass: 'FileField',
+				label: gettext('File'),
+				group: gettext('Custom')
+			},
 			NUMBER: {
 				propertyClass: 'NumberField',
 				label: gettext('Number'),
