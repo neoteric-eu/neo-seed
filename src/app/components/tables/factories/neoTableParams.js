@@ -42,11 +42,15 @@ define(['components/module'], function (module) {
 		 * @param parameters {Object} Factory options
 		 * @return {Object} ngTable library configuration instance
 		 */
-		var ngTableFactory = function (CollectionAPI, parameters) {
+		return function ngTableFactory(CollectionAPI, parameters) {
 
 			if (_.isUndefined(CollectionAPI)) {
 				throw new Error('option "CollectionAPI" must be defined');
 			}
+
+			// @todo update in seed
+			// Make sure that parameters are defined object
+			parameters = parameters || {};
 
 			var defaults = {
 				params: {
@@ -61,7 +65,7 @@ define(['components/module'], function (module) {
 				onAfterResolve: undefined
 			};
 
-			var options = _.mergeDefaults(defaults, parameters);
+			var options = _.mergeDefaults(parameters, defaults);
 
 			return new ngTableParams(options.params, {
 				total: 0,
@@ -95,8 +99,6 @@ define(['components/module'], function (module) {
 				}
 			});
 		};
-
-		return ngTableFactory;
 	}
 
 	module.registerFactory('neoTableParams', neoTableParams);
