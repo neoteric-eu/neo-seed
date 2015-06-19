@@ -48,6 +48,7 @@ requirejs.config({
 		'angular-restmod': '../vendor/libs/angular-restmod/angular-restmod',
 		'angular-restmod-preload': '../vendor/libs/angular-restmod/plugins/preload.min',
 		'angular-restmod-find-many': '../vendor/libs/angular-restmod/plugins/find-many.min',
+		'angular-restmod-nested-dirty': '../vendor/libs/angular-restmod/plugins/nested-dirty.min',
 		'angular-sanitize': '../vendor/libs/angular-sanitize/angular-sanitize',
 		'angular-ui-select': '../vendor/libs/angular-ui-select/angular-ui-select',
 		'angular-ui-date': '../vendor/libs/angular-ui-date/angular-ui-date',

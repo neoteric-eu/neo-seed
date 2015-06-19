@@ -1,4 +1,7 @@
-define(['docs/module'], function (module) {
+define([
+	'docs/module',
+	'angular-restmod-nested-dirty'
+], function (module) {
 	'use strict';
 
 	//noinspection JSClosureCompilerSyntax
@@ -15,8 +18,12 @@ define(['docs/module'], function (module) {
 		$log.debug('Initiating model factory');
 
 		return restmod
-			.model('/document')
-			.mix({});
+			.model('/documents')
+			.mix('DocumentTemplate', 'NestedDirtyModel', {
+				name: {
+					init: 'New document'
+				}
+			});
 	}
 
 	module.factory('Document', Document);

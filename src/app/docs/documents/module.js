@@ -20,11 +20,38 @@ define(['angular'], function (ng) {
 				url: '/docs/documents',
 				views: {
 					'content@app': {
-						templateUrl: '/app/docs/documents/views/list.html',
+						templateUrl: '/app/docs/documents/views/list.html'
 					}
 				},
 				data: {
 					title: gettext('Documents')
+				}
+			})
+
+			.state('app.docs.documents.new', {
+				url: '/new',
+				views: {
+					'content@app': {
+						templateUrl: '/app/docs/documents/views/view.html'
+					}
+				},
+				data: {
+					title: gettext('New')
+				}
+			})
+
+			.state('app.docs.documents.edit', {
+				url: '/edit/:id/:version',
+				params: {
+					version: null
+				},
+				views: {
+					'content@app': {
+						templateUrl: '/app/docs/documents/views/view.html'
+					}
+				},
+				data: {
+					title: gettext('New')
 				}
 			});
 	});

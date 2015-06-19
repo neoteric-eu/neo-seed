@@ -1,6 +1,4 @@
-define([
-	'docs/documents/module'
-], function (module) {
+define(['docs/documents/module'], function (module) {
 	'use strict';
 
 	/**
@@ -16,24 +14,27 @@ define([
 	function docsDocumentListWidget(neoTableParams, DocumentAPI) {
 		return {
 			restrict: 'EA',
-			templateUrl: '/app/docs/documents/widgets/document-list/docs-document-list.html',
+			templateUrl: '/app/docs/documents/widgets/documentListWidget/docsDocumentListWidget.html',
 			scope: true,
 			controllerAs: 'vm',
 
-			/**
-			 * Widget business logic
-			 * @methodOf app.docs.documents.docsDocumentListWidget
-			 */
 			controller: function () {
 				var vm = this;
 
-				vm.documentsTableOptions = documentsTableOptions;
+				// variables
+				vm.documentTableOptions = new neoTableParams(DocumentAPI);
+
+				// functions
+				vm.deleteDocumentTemplate = deleteDocumentTemplate;
 
 				/**
-				 * Custom configuration of the task table
-				 * @type {neoTableParams|*}
+				 * Removes selected document template
+				 * @method deleteDocumentTemplate
+				 * @param fieldTemplate {app.docs.DocumentTemplate} Model to be removed
 				 */
-				var documentsTableOptions = new neoTableParams(DocumentAPI);
+				function deleteDocumentTemplate(fieldTemplate) {
+					DocumentAPI.remove(fieldTemplate);
+				}
 			}
 		};
 	}

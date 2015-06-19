@@ -1,0 +1,85 @@
+<div class="row">
+	<div class="col-sm-6">
+		<div class="well">
+			<h3 class="margin-top-0">
+				<i class="fa fa-stack-overflow"></i>
+				{{vm.documentTemplate.name}}
+				<small>{{vm.documentTemplate.description}}</small>
+
+				<ui-select ng-model="vm.documentTemplate.version"
+									 class="pull-right"
+									 on-select="vm.changeDocumentVersion($item, $model)"
+									 style="width: 80px">
+					<ui-select-match>v. {{$select.selected.version}}</ui-select-match>
+					<ui-select-choices repeat="version.version as version in vm.documentTemplate.versions">
+						v. {{version.version}}
+					</ui-select-choices>
+				</ui-select>
+			</h3>
+
+			<hr/>
+
+			<form id="fieldTemplate" neo-validate>
+				<!-- DOCS_FIELD_EDITOR -->
+				<docs-editor container="vm.documentTemplate"></docs-editor>
+				<!-- end:DOCS_FIELD_EDITOR -->
+			</form>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="text-center">
+						<docs-add-field container="vm.documentTemplate"></docs-add-field>
+						<docs-add-composite-field container="vm.documentTemplate"></docs-add-composite-field>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="col-sm-3">
+		<div class="well">
+			<h3 class="margin-top-0">
+				<i class="fa fa-empire"></i>
+				Document properties
+			</h3>
+
+			<hr/>
+
+			<fieldset>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label>Name:</label>
+							<input type="text"
+										 class="form-control input-sm"
+										 ng-model="vm.documentTemplate.name"/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label>Description:</label>
+					<textarea class="form-control"
+										rows="3"
+										ng-model="vm.documentTemplate.description"
+										style="resize: none;">
+					</textarea>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+
+			<div class="form-actions">
+				<div class="row">
+					<div class="col-md-12">
+						<button class="btn btn-primary" type="button" ng-click="vm.save()">
+							<i class="fa fa-save"></i> Save
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
