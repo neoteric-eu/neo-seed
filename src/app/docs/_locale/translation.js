@@ -3,19 +3,22 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
 /* jshint -W100 */
 	gettextCatalog.setStrings('en_GB', {
 		"Actions": "Actions",
+		"Attachment": "Attachment",
 		"Color": "Color",
 		"Color picker": "Color picker",
+		"Composite": "Composite",
 		"Custom": "Custom",
 		"Date": "Date",
 		"Date & Time": "Date & Time",
-		"Delete template": "Delete template",
+		"Date picker": "Date picker",
+		"Delete": "Delete",
 		"Docs": "Docs",
 		"Documents": "Documents",
 		"Edit": "Edit",
 		"Edit task": "Edit task",
-		"Edit template": "Edit template",
 		"Email": "Email",
 		"Field": "Field",
+		"File": "File",
 		"Integer": "Integer",
 		"Multi-select": "Multi-select",
 		"Name": "Name",
@@ -38,10 +41,10 @@ angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
 		"Text input": "Text input",
 		"Textarea": "Textarea",
 		"Time": "Time",
+		"Time picker": "Time picker",
 		"Uri": "Uri",
 		"Url": "Url",
-		"document": "document",
-		"document template": "document template"
+		"Url address": "Url address"
 	});
 /* jshint +W100 */
 }]);

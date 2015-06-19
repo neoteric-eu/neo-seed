@@ -9,11 +9,12 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Object Relational Mapper interface
+	 * @param gettextCatalog {Object} Translated text's catalog provider
 	 * @param ValidatorAPI {Object} Interface for REST communication with server
 	 * @param FieldValidatorsEnum {Object} List of all registered field validators
 	 * @return {*|Model} Model instance
 	 */
-	function UrlField($log, restmod, ValidatorAPI, FieldValidatorsEnum) {
+	function UrlField($log, restmod, gettextCatalog, ValidatorAPI, FieldValidatorsEnum) {
 
 		$log.debug('Created new instance');
 
@@ -29,6 +30,13 @@ define(['docs/module'], function (module) {
 				$inputType: {
 					init: 'url'
 				},
+
+				label: {
+					init: function () {
+						return gettextCatalog.getString('Url address');
+					}
+				},
+
 				$hooks: {
 					'after-init': function () {
 						this.validators.$add(

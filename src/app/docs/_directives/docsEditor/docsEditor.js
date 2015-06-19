@@ -43,18 +43,16 @@ define(['docs/module'], function (module) {
 				};
 
 				// functions
-				vm.deleteField = deleteField;
+				vm.deleteCompositeField = deleteCompositeField;
 
 				/**
 				 * Deletes selected field
 				 * @method deleteField
 				 * @param field {app.docs.Field} Model to be removed
 				 */
-				function deleteField(field) {
+				function deleteCompositeField(field) {
 					//noinspection JSUnresolvedVariable
 					$scope.container.composite.$remove(field);
-					//noinspection JSUnresolvedFunction
-					field.$destroy();
 
 					$log.debug('Removed composite field form container');
 				}

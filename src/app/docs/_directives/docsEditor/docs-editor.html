@@ -11,7 +11,7 @@
 				<a href-void class="drag-handle">
 					<i class="fa fa-fw fa-arrows text-muted" hover-class="text-primary"></i>
 				</a>
-				<a href-void ng-click="vm.deleteField(field)">
+				<a href-void ng-click="vm.deleteCompositeField(field)">
 					<i class="fa fa-fw fa-trash-o text-muted" hover-class="text-danger"></i>
 				</a>
 			</div>
@@ -22,12 +22,13 @@
 		<div gridster="vm.nestedGridsterOptions">
 			<!-- ng-init:       Passes container of field -->
 			<!-- ng-repeat:     Iterates over fields -->
-			<!-- ng-if:         Reduces amount of ng-repeat iterations -->
+			<!-- ng-style:      Ensure that order of items with position absolute is kept / selects issue -->
 			<!-- gridster-item: Makes field draggable and resizable -->
 			<!-- ng-class:      Composite class removes padding for nested containers -->
 			<!-- ng-include:    Calls for recurrence invocation of script -->
 			<div ng-init="container = field"
 					 ng-repeat="field in field.composite track by $index"
+					 ng-style="{'z-index': 800 + $index}"
 					 ng-class="{'composite': field.composite.length}"
 					 ng-include="'docsFieldLevel'"
 					 gridster-item="field"></div>
@@ -39,11 +40,13 @@
 <ul gridster class="margin-bottom-10">
 	<!-- ng-repeat:     Iterates over fields -->
 	<!-- ng-if:         Reduces amount of ng-repeat iterations -->
+	<!-- ng-style:      Ensure that order of items with position absolute is kept / selects issue -->
 	<!-- gridster-item: Makes field draggable and resizable -->
 	<!-- ng-class:      Composite class removes padding for nested containers -->
 	<!-- ng-include:    Calls for recurrence invocation of script -->
 	<li ng-repeat="field in container.composite track by $index"
 			ng-if="container.composite"
+			ng-style="{'z-index': 500 - $index}"
 			ng-class="{'composite': field.composite.length}"
 			gridster-item="field"
 			ng-include="'docsFieldLevel'">

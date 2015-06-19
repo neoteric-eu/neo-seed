@@ -9,7 +9,9 @@ define([
 		return {
 			restrict: 'A',
 			link: function (scope, form) {
-				$(form)
+				form.attr('novalidate');
+
+				form
 					.on('init.form.fv', function () {
 						// Remove these irritating automatically added hidden submit buttons
 						form.find('.fv-hidden-submit').remove();

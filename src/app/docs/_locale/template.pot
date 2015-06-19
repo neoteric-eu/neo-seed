@@ -8,30 +8,45 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
+#: src/app/docs/_models/Field/FileField.js:34
+msgid "Attachment"
+msgstr ""
+
 #: src/app/docs/_enums/FieldValidatorsEnum.js:55
 msgid "Color"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:64
+#: src/app/docs/_enums/FieldTypesEnum.js:71
+#: src/app/docs/_models/Field/ColorField.js:36
 msgid "Color picker"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:65
+#: src/app/docs/_enums/FieldTypesEnum.js:22
+msgid "Composite"
+msgstr ""
+
+#: src/app/docs/_enums/FieldTypesEnum.js:47
+#: src/app/docs/_enums/FieldTypesEnum.js:72
 msgid "Custom"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:54
+#: src/app/docs/_enums/FieldTypesEnum.js:61
 #: src/app/docs/_enums/FieldValidatorsEnum.js:50
 msgid "Date"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:55
-#: src/app/docs/_enums/FieldTypesEnum.js:60
+#: src/app/docs/_enums/FieldTypesEnum.js:62
+#: src/app/docs/_enums/FieldTypesEnum.js:67
 msgid "Date & Time"
 msgstr ""
 
-#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:58
-msgid "Delete template"
+#: src/app/docs/_models/Field/DateField.js:36
+msgid "Date picker"
+msgstr ""
+
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:59
+#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:62
+msgid "Delete"
 msgstr ""
 
 #: src/app/docs/module.js:24
@@ -39,11 +54,12 @@ msgid "Docs"
 msgstr ""
 
 #: src/app/docs/documents/module.js:27
-#: src/app/docs/templates/documents/module.js:24
 msgid "Documents"
 msgstr ""
 
-#: src/app/docs/templates/fields/module.js:61
+#: src/app/docs/templates/documents/module.js:57
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:53
+#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:56
 msgid "Edit"
 msgstr ""
 
@@ -51,24 +67,27 @@ msgstr ""
 msgid "Edit task"
 msgstr ""
 
-#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:52
-msgid "Edit template"
-msgstr ""
-
-#: src/app/docs/_enums/FieldTypesEnum.js:24
+#: src/app/docs/_enums/FieldTypesEnum.js:26
 #: src/app/docs/_enums/FieldValidatorsEnum.js:25
+#: src/app/docs/_models/Field/EmailField.js:36
 msgid "Email"
 msgstr ""
 
-#: src/app/docs/templates/fields/module.js:37
+#: src/app/docs/templates/documents/module.js:30
+#: src/app/docs/templates/fields/module.js:30
 msgid "Field"
+msgstr ""
+
+#: src/app/docs/_enums/FieldTypesEnum.js:46
+msgid "File"
 msgstr ""
 
 #: src/app/docs/_enums/FieldValidatorsEnum.js:35
 msgid "Integer"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:74
+#: src/app/docs/_enums/FieldTypesEnum.js:81
+#: src/app/docs/_models/Field/MultiselectField.js:31
 msgid "Multi-select"
 msgstr ""
 
@@ -76,7 +95,11 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: src/app/docs/templates/fields/module.js:49
+#: src/app/docs/templates/documents/module.js:42
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:20
+#: src/app/docs/templates/fields/module.js:42
+#: src/app/docs/templates/fields/module.js:54
+#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:20
 msgid "New"
 msgstr ""
 
@@ -84,17 +107,19 @@ msgstr ""
 msgid "No tasks"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:44
+#: src/app/docs/_enums/FieldTypesEnum.js:51
+#: src/app/docs/_models/Field/NumberField.js:36
 msgid "Number"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:45
-#: src/app/docs/_enums/FieldTypesEnum.js:50
+#: src/app/docs/_enums/FieldTypesEnum.js:52
+#: src/app/docs/_enums/FieldTypesEnum.js:57
 msgid "Numeric"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:49
+#: src/app/docs/_enums/FieldTypesEnum.js:56
 #: src/app/docs/_enums/FieldValidatorsEnum.js:45
+#: src/app/docs/_models/Field/PhoneField.js:36
 msgid "Phone"
 msgstr ""
 
@@ -114,12 +139,13 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:69
+#: src/app/docs/_enums/FieldTypesEnum.js:76
+#: src/app/docs/_models/Field/SelectField.js:31
 msgid "Select"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:70
-#: src/app/docs/_enums/FieldTypesEnum.js:75
+#: src/app/docs/_enums/FieldTypesEnum.js:77
+#: src/app/docs/_enums/FieldTypesEnum.js:82
 msgid "Selection"
 msgstr ""
 
@@ -139,37 +165,39 @@ msgstr ""
 msgid "Template"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:25
-#: src/app/docs/_enums/FieldTypesEnum.js:30
-#: src/app/docs/_enums/FieldTypesEnum.js:35
-#: src/app/docs/_enums/FieldTypesEnum.js:40
+#: src/app/docs/_enums/FieldTypesEnum.js:27
+#: src/app/docs/_enums/FieldTypesEnum.js:32
+#: src/app/docs/_enums/FieldTypesEnum.js:37
+#: src/app/docs/_enums/FieldTypesEnum.js:42
+#: src/app/docs/_models/Field/TextField.js:34
 msgid "Text"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:39
+#: src/app/docs/_enums/FieldTypesEnum.js:41
 msgid "Text input"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:34
+#: src/app/docs/_enums/FieldTypesEnum.js:36
+#: src/app/docs/_models/Field/TextareaField.js:31
 msgid "Textarea"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:59
+#: src/app/docs/_enums/FieldTypesEnum.js:66
 msgid "Time"
+msgstr ""
+
+#: src/app/docs/_models/Field/TimeField.js:34
+msgid "Time picker"
 msgstr ""
 
 #: src/app/docs/_enums/FieldValidatorsEnum.js:30
 msgid "Uri"
 msgstr ""
 
-#: src/app/docs/_enums/FieldTypesEnum.js:29
+#: src/app/docs/_enums/FieldTypesEnum.js:31
 msgid "Url"
 msgstr ""
 
-#: src/app/docs/_models/Document/Document.js:22
-msgid "document"
-msgstr ""
-
-#: src/app/docs/_models/DocumentTemplate/DocumentTemplate.js:27
-msgid "document template"
+#: src/app/docs/_models/Field/UrlField.js:36
+msgid "Url address"
 msgstr ""
