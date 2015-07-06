@@ -22,6 +22,9 @@ define([
 			.mix('DocumentTemplate', 'NestedDirtyModel', {
 				name: {
 					init: 'New document'
+				},
+				versions: {
+					hasMany: 'Version'
 				}
 			});
 	}

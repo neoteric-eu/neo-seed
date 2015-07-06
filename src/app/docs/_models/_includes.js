@@ -28,7 +28,6 @@ define([
 	'./Validators/Validator',
 	'./Validators/ValidatorAPI',
 
-
 	'./Validators/EmailAddressValidator',
 	'./Validators/StringLengthValidator',
 	'./Validators/NotEmptyValidator',
@@ -36,7 +35,10 @@ define([
 	'./Validators/PhoneValidator',
 	'./Validators/IntegerValidator',
 	'./Validators/ColorValidator',
-	'./Validators/UriValidator'
+	'./Validators/UriValidator',
+
+	'./Version/Version',
+	'./Version/VersionAPI'
 ], function () {
 	'use strict';
 });
