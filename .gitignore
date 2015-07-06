@@ -7,6 +7,7 @@
 /src/vendor/libs
 /src/styles/less/vendor/libs
 /src/styles/css
+/src/styles/fonts
 
 ### Extensions ###
 .todo
@@ -46,6 +47,11 @@ sftp-config.json
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/dictionaries
+.idea/jsLibraryMappings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
