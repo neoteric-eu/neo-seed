@@ -1,4 +1,4 @@
-define(['../../module'], function (module) {
+define(['auth/module'], function (module) {
 	'use strict';
 
 	/**
@@ -7,24 +7,15 @@ define(['../../module'], function (module) {
 	 * @method UserAPI
 	 * @param User
 	 * @param $rootScope
-	 * @param $rootScope
-	 * @param setDefaultsHeaders
-	 * @param Permission
 	 * @param $log
 	 * @param BaseAPI
-	 * @param localStorageService
-	 * @return {Object} api
+	 * @param ipCookie
+	 * @return {*} api
 	 */
-	function UserAPI(BaseAPI, User, $log, $rootScope,
-	                 setDefaultsHeaders, Permission, localStorageService) {
+	function UserAPI(BaseAPI, User, $log, $rootScope, ipCookie) {
 
 		var api = new BaseAPI(User);
 
-		/**
-		 * Description
-		 * @method login
-		 * @param loginData CallExpression
-		 */
 		api.login = function (loginData) {
 			return User
 				// @TODO Find way to remove building model before calling
@@ -35,8 +26,23 @@ define(['../../module'], function (module) {
 					// Make user, customers accessible globally
 					$rootScope.user = user;
 
-					localStorageService.set('user', user);
-					localStorageService.set('token', user.$metadata.token);
+					ipCookie('token', user.$metadata.token);
+					return user;
+				})
+				.catch(function (response) {
+					$log.error('Could not login the user', response);
+				});
+		};
+
+		api.authInfo = function authInfo() {
+			return User
+				// @TODO Find way to remove building model before calling
+				.$build()
+				.$authInfo()
+				.$asPromise()
+				.then(function (user) {
+					// Make user, customers accessible globally
+					$rootScope.user = user;
 
 					return user;
 				})
@@ -45,24 +51,10 @@ define(['../../module'], function (module) {
 				});
 		};
 
-		/**
-		 * Description
-		 * @method logout CallExpression
-		 */
-		api.logout = function () {
-			return User
-				// @TODO Find way to remove building model before calling
-				.$build()
+		api.logout = function (user) {
+			return user
 				.$logout()
 				.$asPromise()
-				.then(function () {
-
-					localStorageService.clearAll();
-					localStorageService.cookie.clearAll();
-
-					setDefaultsHeaders.clearHeaders();
-					Permission.clearFeautres();
-				})
 				.catch(function (response) {
 					$log.error('Could not logout the user', response);
 				});

@@ -1,20 +1,27 @@
 define(['app'], function (app) {
 	'use strict';
 
-	var userProfiles = function ($window, Profile, localStorageService) {
+	var userProfiles = function ($log, $window, $rootScope, ipCookie) {
+		$log.debug('Initiated directive');
+
 		return {
 			restrict: 'EA',
 			templateUrl: 'app/components/profiles/user-profiles.html',
-			scope: true,
 			controllerAs: 'vm',
 			controller: function () {
 				var vm = this;
-				vm.profiles = localStorageService.get('user').customers;
-				vm.selectedProfile = localStorageService.get('activeProfile');
+
+				// Variables
+				vm.profiles = $rootScope.user.customers;
+				vm.selectedProfile = _.findWhere($rootScope.user.customers, {'customerId': ipCookie('activeCustomer')});
+
+				// Functions
 				vm.changeProfile = changeProfile;
 
 				function changeProfile(profile) {
-					localStorageService.set('activeProfile', profile);
+					ipCookie('activeCustomer', profile.customerId);
+					$log.debug('Changed profile');
+
 					$window.location.reload();
 				}
 			}

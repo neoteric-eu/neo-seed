@@ -1,7 +1,7 @@
 define(['auth/module'], function (module) {
 	'use strict';
 
-	return module.registerDirective('loginInfo', function (session) {
+	return module.registerDirective('loginInfo', function () {
 
 		return {
 			restrict: 'A',
@@ -13,9 +13,7 @@ define(['auth/module'], function (module) {
 			 * @param {} scope
 			 */
 			link: function (scope) {
-				var unbindWatch = scope.$watch(function () {
-					return session.userData.getModel();
-				}, function (newValue, oldValue) {
+				var unbindWatch = scope.$watch(scope.$root.user, function (newValue, oldValue) {
 					if (newValue !== oldValue) {
 						scope.user = newValue.user;
 						unbindWatch();

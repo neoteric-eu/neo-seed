@@ -77,6 +77,7 @@
     "angular-local-storage": "~0.1.5",
     "ui-router-extras": "~0.0.13",
     "lodash-deep": "~1.6.0",
+		"angular-cookie": "~4.0.6",
 		"form.validation": "*",
 		"angular-gridster": "~0.13.4",
 		"javascript-detect-element-resize": "~0.5.3",
