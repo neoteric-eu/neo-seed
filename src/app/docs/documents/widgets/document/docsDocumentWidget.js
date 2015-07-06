@@ -21,14 +21,14 @@ define(['docs/documents/module'], function (module) {
 
 		return {
 			restrict: 'EA',
-			templateUrl: 'app/docs/documents/widgets/documentWidget/docsDocumentWidget.html',
+			templateUrl: 'app/docs/documents/widgets/document/docsDocumentWidget.html',
 			controllerAs: 'vm',
 
 			controller: function () {
 				var vm = this;
 
 				// variables
-				vm.documentTemplate = undefined;
+				vm.document = undefined;
 
 				// functions
 				vm.init = init;
@@ -52,7 +52,7 @@ define(['docs/documents/module'], function (module) {
 								.then(function (model) {
 									//noinspection JSCheckFunctionSignatures
 									model.versions.$refresh();
-									vm.documentTemplate = model;
+									vm.document = model;
 								});
 						} else {
 							DocumentAPI
@@ -60,12 +60,12 @@ define(['docs/documents/module'], function (module) {
 								.then(function (model) {
 									//noinspection JSCheckFunctionSignatures
 									model.versions.$refresh();
-									vm.documentTemplate = model;
+									vm.document = model;
 								});
 						}
 
 					} else {
-						vm.documentTemplate = DocumentAPI.build({
+						vm.document = DocumentAPI.build({
 							fieldType: FieldTypesEnum.COMPOSITE
 						});
 					}
@@ -79,11 +79,11 @@ define(['docs/documents/module'], function (module) {
 				 */
 				function save() {
 					//Find files to upload
-					var fileInputs = findFileInputs(vm.documentTemplate);
+					var fileInputs = findFileInputs(vm.document);
 
 					// Send them to server
 					_.each(fileInputs, function (file) {
-						if (_.has(file, 'value')) {
+						if (!_.isNull(file.value)) {
 							Upload
 								.upload({
 									url: 'http://ntrc-delta.neoteric.eu:9035/api/v1/attachments',
@@ -100,7 +100,7 @@ define(['docs/documents/module'], function (module) {
 
 					//noinspection JSUnresolvedVariable
 					DocumentAPI
-						.save(vm.documentTemplate)
+						.save(vm.document)
 						.then(function () {
 							$previousState.go('caller');
 						});
@@ -110,19 +110,20 @@ define(['docs/documents/module'], function (module) {
 
 				/**
 				 * Switches between document versions
-				 * @param version {Object} version number to be changed to
+				 * @param newVersion {Object} version number to be changed to
+				 * @todo Fix version switching between models in next iteration
 				 */
-				function changeDocumentVersion(version) {
+				function changeDocumentVersion(newVersion) {
 					// If switching to newest version omit postfix version
 					//noinspection JSUnresolvedVariable
-					if (_.isNull(version.previousVersion)) {
-						$log.debug('Switching to document version: ' + version.version);
-
-						$state.go($state.current, {id: $stateParams.id, version: version.version});
-					} else {
+					if (_.isEqual(_.last(vm.document.versions), newVersion)) {
 						$log.debug('Switching to document newest version');
 
 						$state.go($state.current, {id: $stateParams.id, version: null});
+					} else {
+						$log.debug('Switching to document version: ' + newVersion.version);
+
+						$state.go($state.current, {id: $stateParams.id, version: newVersion.version});
 					}
 				}
 

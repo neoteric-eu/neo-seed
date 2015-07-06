@@ -14,7 +14,7 @@ define(['docs/documents/module'], function (module) {
 	function docsDocumentListWidget(neoTableParams, DocumentAPI) {
 		return {
 			restrict: 'EA',
-			templateUrl: '/app/docs/documents/widgets/documentListWidget/docsDocumentListWidget.html',
+			templateUrl: '/app/docs/documents/widgets/documentList/docsDocumentListWidget.html',
 			scope: true,
 			controllerAs: 'vm',
 

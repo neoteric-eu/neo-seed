@@ -1,6 +1,6 @@
 define([
-	'./widgets/documentListWidget/docsDocumentListWidget',
-	'./widgets/documentWidget/docsDocumentWidget'
+	'./widgets/documentList/docsDocumentListWidget',
+	'./widgets/document/docsDocumentWidget'
 ], function () {
 	'use strict';
 });

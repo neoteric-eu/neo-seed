@@ -8,6 +8,7 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Data model layer interface
+	 * @param VersionAPI {Object} Interface for REST communication with server
 	 * @return {*|Model} Model instance
 	 */
 	function DocumentTemplate($log, restmod) {

@@ -85,14 +85,21 @@ define(['docs/templates/documents/module'], function (module) {
 
 				/**
 				 * Switches between document versions
-				 * @param version {String} version number to be changed to
+				 * @param newVersion {Object} version number to be changed to
+				 * @todo Fix version switching between models in next iteration
 				 */
-				function changeDocumentVersion(version) {
+				function changeDocumentVersion(newVersion) {
+					// If switching to newest version omit postfix version
 					//noinspection JSUnresolvedVariable
-					$log.debug('Switching to document version: ' + version.version);
+					if (_.isEqual(_.last(vm.document.versions), newVersion)) {
+						$log.debug('Switching to document newest version');
 
-					//noinspection JSUnresolvedVariable
-					$state.go($state.current, {id: $stateParams.id, version: version.version});
+						$state.go($state.current, {id: $stateParams.id, version: null});
+					} else {
+						$log.debug('Switching to document version: ' + newVersion.version);
+
+						$state.go($state.current, {id: $stateParams.id, version: newVersion.version});
+					}
 				}
 			}
 		};
