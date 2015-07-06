@@ -5,10 +5,12 @@ define(['auth/module'], function (module) {
 	 * Description* @constructs ProfileAPI
 	 * @method ProfileAPI
 	 * @param Profile
-	 * @param session
+	 * @param neoSession
 	 * @param Permission
+	 * @param BaseAPI
+	 * @return {*}
 	 */
-	var ProfileAPI = function (Profile, BaseAPI, session, Permission) {
+	var ProfileAPI = function (Profile, BaseAPI, neoSession, Permission, ipCookie) {
 
 		var api = new BaseAPI(Profile);
 
@@ -20,13 +22,11 @@ define(['auth/module'], function (module) {
 		api.setSelected = function (profile) {
 			Profile.$setSelected(profile);
 
-			session.setSession(profile.customerId);
+			neoSession.setSession(profile, ipCookie('token'));
 			Permission.setFeatures(profile.featureKeys);
 		};
 
 		return api;
-
-
 	};
 
 	module.registerService('ProfileAPI', ProfileAPI);

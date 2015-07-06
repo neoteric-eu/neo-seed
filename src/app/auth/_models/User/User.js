@@ -1,7 +1,7 @@
 define(['auth/module'], function (module) {
 	'use strict';
 
-	function User(restmod) {
+	function User(restmod, ipCookie) {
 		/**
 		 * Data model
 		 * @example
@@ -59,7 +59,10 @@ define(['auth/module'], function (module) {
 							return this.$send({
 								method: 'POST',
 								url: this.$scope.$url() + '/login',
-								data: this
+								data: {
+									login: this.login,
+									password: this.password
+								}
 							}, function (_data) {
 								this.$unwrap(_data.data, null);
 							}, null);
@@ -72,6 +75,20 @@ define(['auth/module'], function (module) {
 								url: this.$scope.$url() + '/logout'
 							}, function (_data) {
 								this.$unwrap(_data.data, null);
+							}, null);
+						},
+
+						$authInfo: function () {
+							//noinspection JSUnresolvedFunction
+							return this.$send({
+								method: 'GET',
+								url: this.$scope.$url() + '/authInfo',
+								cache: true,
+								data: {
+									token: ipCookie('token')
+								}
+							}, function (_data) {
+								this.$unwrap(_data.data);
 							}, null);
 						}
 					},

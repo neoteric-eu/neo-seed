@@ -13,6 +13,7 @@ define(['docs/documents/module'], function (module) {
 	 * @param $log {Object} Logging service
 	 * @param DocumentAPI {Object} API interface for server communication
 	 * @param FieldTypesEnum {Object} Registry of all available Fields
+	 * @param Upload {Object} File upload service
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
 	function docsDocumentWidget($previousState, $stateParams, $state, $log,
@@ -49,12 +50,16 @@ define(['docs/documents/module'], function (module) {
 							DocumentAPI
 								.get($stateParams.id, {version: $stateParams.version})
 								.then(function (model) {
+									//noinspection JSCheckFunctionSignatures
+									model.versions.$refresh();
 									vm.documentTemplate = model;
 								});
 						} else {
 							DocumentAPI
 								.get($stateParams.id)
 								.then(function (model) {
+									//noinspection JSCheckFunctionSignatures
+									model.versions.$refresh();
 									vm.documentTemplate = model;
 								});
 						}
@@ -105,14 +110,20 @@ define(['docs/documents/module'], function (module) {
 
 				/**
 				 * Switches between document versions
-				 * @param version {String} version number to be changed to
+				 * @param version {Object} version number to be changed to
 				 */
 				function changeDocumentVersion(version) {
+					// If switching to newest version omit postfix version
 					//noinspection JSUnresolvedVariable
-					$log.debug('Switching to document version: ' + version.version);
+					if (_.isNull(version.previousVersion)) {
+						$log.debug('Switching to document version: ' + version.version);
 
-					//noinspection JSUnresolvedVariable
-					$state.go($state.current, {id: $stateParams.id, version: version.version});
+						$state.go($state.current, {id: $stateParams.id, version: version.version});
+					} else {
+						$log.debug('Switching to document newest version');
+
+						$state.go($state.current, {id: $stateParams.id, version: null});
+					}
 				}
 
 				/**

@@ -1,11 +1,11 @@
 define([
-	'auth/controllers/ActivationController',
-	'auth/controllers/LoginController',
-	'auth/controllers/RegisterController',
+	'./controllers/ActivationController',
+	'./controllers/LoginController',
+	'./controllers/RegisterController',
 
-	'auth/services/appMessages',
-	'auth/services/session',
-	'auth/services/setDefaultsHeaders',
+	'./services/appMessages',
+	'./services/neoSession',
+	'./services/neoRequestHeaders',
 
 	'./_models/User/User',
 	'./_models/User/UserAPI',

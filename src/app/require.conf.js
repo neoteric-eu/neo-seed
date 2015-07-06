@@ -53,6 +53,7 @@ requirejs.config({
 		'angular-ui-select': '../vendor/libs/angular-ui-select/angular-ui-select',
 		'angular-ui-date': '../vendor/libs/angular-ui-date/angular-ui-date',
 		'angular-table': '../vendor/libs/angular-table/angular-table',
+		'angular-cookie': '../vendor/libs/angular-cookie/angular-cookie',
 		'angular-gridster': '../vendor/libs/angular-gridster/angular-gridster',
 
 		// Bootstrap dependencies
