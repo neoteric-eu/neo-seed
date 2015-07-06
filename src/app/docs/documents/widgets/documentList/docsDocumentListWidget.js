@@ -25,14 +25,14 @@ define(['docs/documents/module'], function (module) {
 				vm.documentTableOptions = new neoTableParams(DocumentAPI);
 
 				// functions
-				vm.deleteDocumentTemplate = deleteDocumentTemplate;
+				vm.deleteDocument = deleteDocument;
 
 				/**
 				 * Removes selected document template
-				 * @method deleteDocumentTemplate
+				 * @method deleteDocument
 				 * @param fieldTemplate {app.docs.DocumentTemplate} Model to be removed
 				 */
-				function deleteDocumentTemplate(fieldTemplate) {
+				function deleteDocument(fieldTemplate) {
 					DocumentAPI.remove(fieldTemplate);
 				}
 			}
