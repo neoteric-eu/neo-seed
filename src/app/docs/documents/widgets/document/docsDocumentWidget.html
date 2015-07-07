@@ -6,15 +6,7 @@
 				{{vm.document.name}}
 				<small>{{vm.document.description}}</small>
 
-				<ui-select ng-model="vm.document.version"
-									 class="pull-right"
-									 on-select="vm.changeDocumentVersion($item, $model)"
-									 style="width: 80px">
-					<ui-select-match>v. {{$select.selected.version}}</ui-select-match>
-					<ui-select-choices repeat="version.version as version in vm.document.versions">
-						v. {{version.version}}
-					</ui-select-choices>
-				</ui-select>
+				<version-select model="vm.document" class="pull-right"></version-select>
 			</h3>
 
 			<hr/>

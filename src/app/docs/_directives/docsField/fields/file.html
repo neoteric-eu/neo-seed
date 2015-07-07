@@ -17,12 +17,20 @@
 		</div>
 
 		<input ngf-select
-					 class="form-control"
+					 class="form-control pull-left"
 					 name="{{field.$name}}"
 					 type="{{field.$inputType}}"
 					 ng-readonly="field.readOnly"
 					 ng-model="field.value">
 
 		<p ng-if="field.note" class="note"><strong>Note:</strong> {{field.note}}</p>
+
+		<a href="#" class="tempLinkAddress"></a>
+
+		<a ng-click="vm.downloadAttachment(field.value)"
+			 dowanload
+			 class="btn btn-sm btn-default">
+			<i class="fa fa-download"></i> Download
+		</a>
 	</div>
 </section>

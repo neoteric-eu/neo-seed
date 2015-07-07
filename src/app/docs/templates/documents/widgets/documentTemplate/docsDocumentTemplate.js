@@ -9,13 +9,12 @@ define(['docs/templates/documents/module'], function (module) {
 	 *
 	 * @param $previousState {Object} Router state history service
 	 * @param $stateParams {Object} Current request param provider
-	 * @param $state {Object} UI-Router state service
 	 * @param $log {Object} Logging service
 	 * @param DocumentTemplateAPI {Object} API interface for server communication
 	 * @param FieldTypesEnum {Object} Registry of all available Fields
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function docsDocumentTemplateWidget($previousState, $stateParams, $state, $log,
+	function docsDocumentTemplateWidget($previousState, $stateParams, $log,
 		DocumentTemplateAPI,
 		FieldTypesEnum) {
 
@@ -32,7 +31,6 @@ define(['docs/templates/documents/module'], function (module) {
 				// functions
 				vm.init = init;
 				vm.save = save;
-				vm.changeDocumentVersion = changeDocumentVersion;
 
 				init();
 
@@ -81,25 +79,6 @@ define(['docs/templates/documents/module'], function (module) {
 						});
 
 					$log.debug('Saved composite field');
-				}
-
-				/**
-				 * Switches between document versions
-				 * @param newVersion {Object} version number to be changed to
-				 * @todo Fix version switching between models in next iteration
-				 */
-				function changeDocumentVersion(newVersion) {
-					// If switching to newest version omit postfix version
-					//noinspection JSUnresolvedVariable
-					if (_.isEqual(_.last(vm.document.versions), newVersion)) {
-						$log.debug('Switching to document newest version');
-
-						$state.go($state.current, {id: $stateParams.id, version: null});
-					} else {
-						$log.debug('Switching to document version: ' + newVersion.version);
-
-						$state.go($state.current, {id: $stateParams.id, version: newVersion.version});
-					}
 				}
 			}
 		};

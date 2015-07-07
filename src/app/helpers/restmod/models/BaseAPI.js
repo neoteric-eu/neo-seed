@@ -193,6 +193,8 @@ define(['app'], function (module) {
 				timeout: 10000
 			});
 
+			$log.error('Server error: ' + JSON.stringify(response.$response.data));
+
 			return $q.reject(response);
 		}
 

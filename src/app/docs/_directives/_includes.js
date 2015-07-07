@@ -7,7 +7,8 @@ define([
 	'./docsAddCompositeField/docsAddCompositeField',
 	'./docsAddValidator/docsAddValidator',
 	'./hoverClass/hoverClass',
-	'./momentDate/momentDate'
+	'./momentDate/momentDate',
+	'./versionSelect/versionSelect'
 ], function () {
 	'use strict';
 });

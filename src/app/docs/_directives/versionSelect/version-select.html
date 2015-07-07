@@ -1,0 +1,8 @@
+<ui-select ng-model="model.version"
+					 on-select="vm.changeDocumentVersion($item, $model)"
+					 style="width: 80px">
+	<ui-select-match>v. {{$select.selected.version}}</ui-select-match>
+	<ui-select-choices repeat="version.version as version in model.versions">
+		v. {{version.version}}
+	</ui-select-choices>
+</ui-select>

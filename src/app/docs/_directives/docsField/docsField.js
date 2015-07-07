@@ -11,10 +11,11 @@ define(['docs/module'], function (module) {
 	 * @param $compile {Function} Template compilation service
 	 * @param $log {Object} Logging service
 	 * @param $modal {Object} Bootstrap modal service
+	 * @param AttachmentAPI {Object} API interface for server communication
 	 * @return {{restrict: string, controllerAs: string, scope: {field: string, container: string},
 	 *   link: Function, controller: Function}}
 	 */
-	function docsField($http, $timeout, $compile, $modal, $log) {
+	function docsField($http, $timeout, $compile, $modal, $log, AttachmentAPI) {
 		$log.debug('Initiated directive');
 
 		return {
@@ -63,6 +64,7 @@ define(['docs/module'], function (module) {
 				vm.deleteField = deleteField;
 				vm.isCompositeElement = isCompositeElement;
 				vm.openFieldPropertiesModal = openFieldPropertiesModal;
+				vm.downloadAttachment = downloadAttachment;
 
 				/**
 				 * Checks if element has nested fields
@@ -70,6 +72,22 @@ define(['docs/module'], function (module) {
 				 */
 				function isCompositeElement() {
 					return !!$scope.container.composite.length;
+				}
+
+
+				function downloadAttachment(attachmentId) {
+					AttachmentAPI
+						.download(attachmentId)
+						.then(function (attachment) {
+							var anchor = $('.tempLinkAddress').first();
+							var windowUrl = window.URL || window.webkitURL;
+							var blob = new Blob([attachment], {type: 'text/plain'});
+							var url = windowUrl.createObjectURL(blob);
+							anchor.attr('href', url);
+							anchor.attr('download', attachmentId);
+							anchor.get(0).click();
+							windowUrl.revokeObjectURL(url);
+						});
 				}
 
 				/**

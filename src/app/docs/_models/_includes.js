@@ -1,4 +1,7 @@
 define([
+	'./Attachment/Attachment',
+	'./Attachment/AttachmentAPI',
+
 	'./Document/Document',
 	'./Document/DocumentAPI',
 
