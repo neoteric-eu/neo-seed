@@ -1,4 +1,4 @@
-define(['docs/module'], function (module) {
+define(['docs/module', 'file-saver'], function (module, saveAs) {
 	'use strict';
 
 	/**

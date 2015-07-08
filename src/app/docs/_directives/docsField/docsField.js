@@ -65,6 +65,7 @@ define(['docs/module'], function (module) {
 				vm.isCompositeElement = isCompositeElement;
 				vm.openFieldPropertiesModal = openFieldPropertiesModal;
 				vm.downloadAttachment = downloadAttachment;
+				vm.clearAttachment = clearAttachment;
 
 				/**
 				 * Checks if element has nested fields
@@ -77,6 +78,10 @@ define(['docs/module'], function (module) {
 
 				function downloadAttachment(attachment) {
 					AttachmentAPI.download(attachment);
+				}
+
+				function clearAttachment(field) {
+					field.value = null;
 				}
 
 				/**

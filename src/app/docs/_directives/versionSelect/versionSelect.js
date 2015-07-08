@@ -27,17 +27,20 @@ define([
 			scope: {
 				model: '='
 			},
-
-			link: function (scope) {
-				if (scope.model) {
-					scope.model.versions.$refresh();
-				}
-
-				$log.debug('Called linking function');
-			},
-
 			controller: function ($scope) {
 				var vm = this;
+
+				$scope.$watch('model', function () {
+					// Check if model is already bound to scope
+					if (!_.isUndefined($scope.model)) {
+						$scope.model.versions
+							.$refresh({sorting: {'_id': 'desc'}})
+							.$asPromise()
+							.then(function () {
+								$log.debug('Fetched versions list from the server');
+							});
+					}
+				});
 
 				// variables
 				// functions

@@ -35,6 +35,9 @@ define(['docs/module'], function (module) {
 				$inputType: {
 					init: 'file'
 				},
+				$progress: {
+					init: 0
+				},
 				value: {
 					hasOne: 'Attachment'
 				},

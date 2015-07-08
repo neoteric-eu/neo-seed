@@ -15,8 +15,7 @@ define(['docs/templates/documents/module'], function (module) {
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
 	function docsDocumentTemplateWidget($previousState, $stateParams, $log,
-		DocumentTemplateAPI,
-		FieldTypesEnum) {
+		DocumentTemplateAPI, FieldTypesEnum) {
 
 		return {
 			restrict: 'EA',

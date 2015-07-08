@@ -30,9 +30,7 @@ define(['docs/module'], function (module) {
 					init: '1'
 				},
 				versions: {
-					init: [{
-						version: '1'
-					}]
+					hasMany: 'Version'
 				}
 
 				// HOOKS

@@ -120,6 +120,9 @@ define(['docs/documents/module'], function (module) {
 
 								AttachmentAPI
 									.upload(_.first(item.$file))
+									.progress(function (e) {
+										item.$progress = parseInt(100.0 * e.loaded / e.total);
+									})
 									.then(function (response) {
 										item.value = AttachmentAPI.build(response.data.data);
 										dfd.resolve();

@@ -31,9 +31,6 @@ define([
 				name: {
 					init: 'New document'
 				},
-				versions: {
-					hasMany: 'Version'
-				},
 				type: {
 					init: 'Document'
 				},

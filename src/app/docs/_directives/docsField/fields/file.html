@@ -16,7 +16,8 @@
 			</div>
 		</div>
 
-		<table class="table" ng-show="field.value">
+		<table class="table no-margin"
+					 ng-show="field.value">
 			<tr>
 				<td style="line-height: 32px">{{field.value.name}}</td>
 				<td>
@@ -26,7 +27,7 @@
 							<i class="fa fa-download"></i> Download
 						</a>
 
-						<a ng-click="vm.clearAttachment(field.value)"
+						<a ng-click="vm.clearAttachment(field)"
 							 ng-hide="field.$file"
 							 class="btn btn-sm btn-danger">
 							<i class="fa fa-trash-o"></i>
@@ -35,17 +36,26 @@
 				</td>
 			</tr>
 		</table>
+
 		<span class="label label-info"></span>
 
+		<div class="display-flex">
+			<input ngf-select
+						 ng-hide="field.value"
+						 class="form-control pull-left"
+						 name="{{field.$name}}"
+						 type="{{field.$inputType}}"
+						 ng-readonly="field.readOnly"
+						 ng-model="field.$file">
+		</div>
 
-		<input ngf-select
-					 ng-hide="field.value"
-					 class="form-control pull-left"
-					 name="{{field.$name}}"
-					 type="{{field.$inputType}}"
-					 ng-readonly="field.readOnly"
-					 ng-model="field.$file">
+		<div class="progress progress-micro"
+				 ng-hide="field.value">
+			<div class="progress-bar bg-color-blue" role="progressbar"
+					 ng-style="{width: field.$progress}"></div>
+		</div>
 
 		<p ng-if="field.note" class="note"><strong>Note:</strong> {{field.note}}</p>
+
 	</div>
 </section>
