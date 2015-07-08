@@ -23,12 +23,27 @@
 					<span class="menu-item-parent">{{'Docs'|translate}}</span>
 				</a>
 				<ul>
-					<li ui-sref-active="active">
-						<a ui-sref="app.docs.documents" title="{{'Documents'|translate}}">
+					<li data-menu-collapse>
+						<a href="#" title="{{'Documents'|translate}}">
 							<i class="fa fa-lg fa-fw fa-file-o"></i>
 							<span class="menu-item-parent">{{'Documents'|translate}}</span>
 						</a>
+						<ul>
+							<li ui-sref-active="active">
+								<a ui-sref="app.docs.documents.owned" title="{{'Owned'|translate}}">
+									<i class="fa fa-lg fa-fw fa-file-o"></i>
+									<span class="menu-item-parent">{{'Owned'|translate}}</span>
+								</a>
+							</li>
+							<li ui-sref-active="active">
+								<a ui-sref="app.docs.documents.shared" title="{{'Shared'|translate}}">
+									<i class="fa fa-lg fa-fw fa-files-o"></i>
+									<span class="menu-item-parent">{{'Shared'|translate}}</span>
+								</a>
+							</li>
+						</ul>
 					</li>
+
 					<li data-menu-collapse>
 						<a href="#" title="{{'Templates'|translate}}">
 							<i class="fa fa-lg fa-fw fa-edit"></i>

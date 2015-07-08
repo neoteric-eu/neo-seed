@@ -1,4 +1,4 @@
-define(['docs/documents/module'], function (module) {
+define(['docs/documents/shared/module'], function (module) {
 	'use strict';
 
 	/**
@@ -15,12 +15,12 @@ define(['docs/documents/module'], function (module) {
 	 * @param FieldTypesEnum {Object} Registry of all available Fields
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function docsDocumentWidget($previousState, $stateParams, $state, $log,
+	function docsSharedDocumentWidget($previousState, $stateParams, $state, $log,
 		DocumentAPI, FieldTypesEnum, Upload) {
 
 		return {
 			restrict: 'EA',
-			templateUrl: 'app/docs/documents/widgets/documentWidget/docsDocumentWidget.html',
+			templateUrl: 'app/docs/documents/shared/widgets/sharedDocumentWidget/docsSharedDocumentWidget.html',
 			controllerAs: 'vm',
 
 			controller: function () {
@@ -41,7 +41,7 @@ define(['docs/documents/module'], function (module) {
 				 * @method init
 				 */
 				function init() {
-					$previousState.memo('caller', 'app.docs.documents');
+					$previousState.memo('caller', 'app.docs.documents.shared');
 
 					if ($stateParams.id) {
 
@@ -139,5 +139,5 @@ define(['docs/documents/module'], function (module) {
 		};
 	}
 
-	module.directive('docsDocumentWidget', docsDocumentWidget);
+	module.directive('docsSharedDocumentWidget', docsSharedDocumentWidget);
 });

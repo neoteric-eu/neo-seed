@@ -1,4 +1,4 @@
-define(['docs/documents/module'], function (module) {
+define(['docs/documents/shared/module'], function (module) {
 	'use strict';
 
 	/**
@@ -7,14 +7,14 @@ define(['docs/documents/module'], function (module) {
 	 * @memberOf app.docs.documents
 	 *
 	 * @param neoTableParams {Function} Table configuration object.
-	 * @param DocumentAPI {Object} API interface for server communication.
+	 * @param SharedDocumentAPI {Object} API interface for server communication.
 	 * @return {{restrict: string, templateUrl: string, scope: boolean, controllerAs: string,
 	 *   controller: Function}}
 	 */
-	function docsDocumentListWidget(neoTableParams, DocumentAPI) {
+	function docsSharedDocumentListWidget(neoTableParams, SharedDocumentAPI) {
 		return {
 			restrict: 'EA',
-			templateUrl: '/app/docs/documents/widgets/documentListWidget/docsDocumentListWidget.html',
+			templateUrl: '/app/docs/documents/shared/widgets/sharedDocumentListWidget/docsSharedDocumentListWidget.html',
 			scope: true,
 			controllerAs: 'vm',
 
@@ -22,7 +22,7 @@ define(['docs/documents/module'], function (module) {
 				var vm = this;
 
 				// variables
-				vm.documentTableOptions = new neoTableParams(DocumentAPI);
+				vm.documentTableOptions = new neoTableParams(SharedDocumentAPI);
 
 				// functions
 				vm.deleteDocumentTemplate = deleteDocumentTemplate;
@@ -33,12 +33,12 @@ define(['docs/documents/module'], function (module) {
 				 * @param fieldTemplate {app.docs.DocumentTemplate} Model to be removed
 				 */
 				function deleteDocumentTemplate(fieldTemplate) {
-					DocumentAPI.remove(fieldTemplate);
+					SharedDocumentAPI.remove(fieldTemplate);
 				}
 			}
 		};
 	}
 
-	module.directive('docsDocumentListWidget', docsDocumentListWidget);
+	module.directive('docsSharedDocumentListWidget', docsSharedDocumentListWidget);
 
 });

@@ -1,6 +1,7 @@
 define([
 	'./FieldTypesEnum',
-	'./FieldValidatorsEnum'
+	'./FieldValidatorsEnum',
+	'./PermissionTypesEnum'
 ], function () {
 	'use strict';
 });

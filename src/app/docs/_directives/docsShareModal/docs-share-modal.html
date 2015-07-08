@@ -1,0 +1,37 @@
+<div class="modal-header">
+	<h3>{{ 'Share document' | translate}}</h3>
+</div>
+<div class="modal-body">
+	<div class="row mb5">
+		<div class="col-md-8">
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">@</span>
+				<input type="email" class="form-control ng-valid" placeholder="Email Address"
+							 aria-describedby="basic-addon1" ng-model="vm.documentSharing.value" required>		</div>
+			</div>
+		<div class="col-md-4">
+			<div class="btn-group btn-group-sm rig" dropdown>
+				<button type="button"
+								class="btn btn-block btn-labeled btn-success dropdown-toggle"
+								dropdown-toggle>
+				<span class="btn-label">
+					<i class="fa fa-fw fa-key"></i>
+				</span>
+					{{vm.documentSharing.privileges.label | translate}} <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li ng-repeat="privilege in vm.sharePrivileges">
+						<a ng-click="vm.choosePrivilege(privilege)">{{privilege.label | translate}}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-primary" ng-click="vm.shareToUser()" ng-disabled="!vm.documentSharing.value || vm.privilegeDisableCase">Share</button>
+	<button type="button" class="btn btn-default" ng-click="vm.closeModal()">Close</button>
+</div>
+

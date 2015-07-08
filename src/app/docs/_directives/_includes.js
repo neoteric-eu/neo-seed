@@ -6,6 +6,7 @@ define([
 	'./docsAddField/docsAddField',
 	'./docsAddCompositeField/docsAddCompositeField',
 	'./docsAddValidator/docsAddValidator',
+	'./docsShareModal/docsShareModal',
 	'./hoverClass/hoverClass',
 	'./momentDate/momentDate'
 ], function () {

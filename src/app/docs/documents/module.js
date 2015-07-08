@@ -4,54 +4,25 @@ define(['angular'], function (ng) {
 	/**
 	 * Instantiate the module
 	 * @constructor module
-	 * @memberof app.docs
+	 * @memberof app.docs.templates
 	 */
-	var module = ng.module('app.docs.documents', []);
+	var module = ng.module('app.docs.documents', [
+		'app.docs.documents.owned',
+		'app.docs.documents.shared'
+	]);
 
 	/**
 	 * Stores additional module configuration
 	 * @method run
-	 * @memberof app.docs.module
+	 * @memberof app.docs.documents.module
 	 */
 	module.config(function ($stateProvider, gettext) {
 
 		$stateProvider
 			.state('app.docs.documents', {
-				url: '/docs/documents',
-				views: {
-					'content@app': {
-						templateUrl: '/app/docs/documents/views/list.html'
-					}
-				},
+				abstract: true,
 				data: {
-					title: gettext('Documents')
-				}
-			})
-
-			.state('app.docs.documents.new', {
-				url: '/new',
-				views: {
-					'content@app': {
-						templateUrl: '/app/docs/documents/views/view.html'
-					}
-				},
-				data: {
-					title: gettext('New')
-				}
-			})
-
-			.state('app.docs.documents.edit', {
-				url: '/edit/:id/:version',
-				params: {
-					version: null
-				},
-				views: {
-					'content@app': {
-						templateUrl: '/app/docs/documents/views/view.html'
-					}
-				},
-				data: {
-					title: gettext('New')
+					title: gettext('Document')
 				}
 			});
 	});

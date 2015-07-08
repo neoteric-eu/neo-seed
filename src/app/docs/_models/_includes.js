@@ -2,6 +2,12 @@ define([
 	'./Document/Document',
 	'./Document/DocumentAPI',
 
+	'./DocumentSharing/DocumentSharing',
+	'./DocumentSharing/DocumentSharingAPI',
+
+	'./SharedDocument/SharedDocument',
+	'./SharedDocument/SharedDocumentAPI',
+
 	'./DocumentTemplate/DocumentTemplate',
 	'./DocumentTemplate/DocumentTemplateAPI',
 

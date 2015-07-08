@@ -5,7 +5,7 @@ define([
 
 	//noinspection JSClosureCompilerSyntax
 	/**
-	 * @class Document
+	 * @class SharedDocument
 	 * @implements {app.BaseModel}
 	 * @memberOf app.docs
 	 *
@@ -13,17 +13,13 @@ define([
 	 * @param restmod {Object} Data model layer interface
 	 * @return {*|Model}
 	 */
-	function Document($log, restmod) {
+	function SharedDocument($log, restmod) {
 		$log.debug('Initiating model factory');
 
 		return restmod
-			.model('/documents')
-			.mix('DocumentTemplate', {
-				name: {
-					init: 'New document'
-				}
-			});
+			.model('/documents/share/mine')
+			.mix('Document');
 	}
 
-	module.factory('Document', Document);
+	module.factory('SharedDocument', SharedDocument);
 });
