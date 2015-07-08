@@ -5,6 +5,7 @@ define(['app'], function (module) {
 	 * Base interface for REST communication with server
 	 * @interface
 	 * @memberOf app
+	 * @todo add to seed
 	 *
 	 * @param $q {Object} AngularJS promise object
 	 * @param $log {Object} Logging provider
@@ -25,6 +26,8 @@ define(['app'], function (module) {
 			}
 
 			this.model = model;
+
+			$log.debug('Model "' + this.model.name + '" constructed BaseAPI instance');
 		}
 
 		/**
@@ -38,6 +41,10 @@ define(['app'], function (module) {
 				$log.error('Parameter "initValues" must be Object');
 				return;
 			}
+
+			$log.debug('Model "' + this.model.name + '" called BaseAPI "build" method with params: ' +
+				JSON.stringify(initValues));
+
 			return this.model.$build(initValues);
 		};
 
@@ -45,15 +52,18 @@ define(['app'], function (module) {
 		 * Fetches single model from server
 		 * @abstract
 		 * @param {String|Array} ids
+		 * @param params {Object} Query parameters
 		 * @return {*}
-		 *
-		 * @todo add to seed
 		 */
 		API.prototype.get = function (ids, params) {
 			if (!_.isString(ids) && !_.isArray(ids)) {
 				$log.error('Parameter "id" must be String or Array');
 				return $q.reject();
 			}
+
+			$log.debug('Model "' + this.model.name + '" called BaseAPI "get" method with ID: ' +
+				JSON.stringify(ids) + ' and params: ' +
+				JSON.stringify(params));
 
 			return this.model
 				.$find(ids, params)
@@ -67,6 +77,9 @@ define(['app'], function (module) {
 		 * @return {any|*}
 		 */
 		API.prototype.fetch = function () {
+
+			$log.debug('Model "' + this.model.name + '" called BaseAPI "fetch" method');
+
 			return this.model
 				.$collection()
 				.$fetch()
@@ -81,6 +94,10 @@ define(['app'], function (module) {
 		 * @return {any|*}
 		 */
 		API.prototype.filter = function (query) {
+
+			$log.debug('Model "' + this.model.name + '" called BaseAPI "filter" method with params: ' +
+				JSON.stringify(query));
+
 			return this.model
 				.$collection()
 				.$search(query)
@@ -123,6 +140,10 @@ define(['app'], function (module) {
 				}
 			});
 
+			$log.debug('Model "' +
+				this.model.name +
+				'" called BaseAPI "remove" method to remove model with ID: ' + model.id);
+
 			return def.promise;
 		};
 
@@ -140,7 +161,16 @@ define(['app'], function (module) {
 
 			if (!_.has(model, 'id')) {
 				model = this.model.$build(model);
+
+				$log.debug('Model "' +
+					this.model.name +
+					'" called BaseAPI "save" method to create new model');
+			} else {
+				$log.debug('Model "' +
+					this.model.name +
+					'" called BaseAPI "save" method to update model');
 			}
+
 
 			return model
 				.$save()
@@ -169,6 +199,11 @@ define(['app'], function (module) {
 				$log.error('Parameter "parentProperty" must be defined');
 				return $q.reject();
 			}
+
+
+			$log.debug('Model "' + this.model.name + '" called BaseAPI "save" method to create model: ' +
+				JSON.stringify(model) + ' for parent property: ' +
+				JSON.stringify(parentProperty));
 
 			return parentProperty
 				.$create(model)

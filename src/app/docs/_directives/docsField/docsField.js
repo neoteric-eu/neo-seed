@@ -75,19 +75,8 @@ define(['docs/module'], function (module) {
 				}
 
 
-				function downloadAttachment(attachmentId) {
-					AttachmentAPI
-						.download(attachmentId)
-						.then(function (attachment) {
-							var anchor = $('.tempLinkAddress').first();
-							var windowUrl = window.URL || window.webkitURL;
-							var blob = new Blob([attachment], {type: 'text/plain'});
-							var url = windowUrl.createObjectURL(blob);
-							anchor.attr('href', url);
-							anchor.attr('download', attachmentId);
-							anchor.get(0).click();
-							windowUrl.revokeObjectURL(url);
-						});
+				function downloadAttachment(attachment) {
+					AttachmentAPI.download(attachment);
 				}
 
 				/**

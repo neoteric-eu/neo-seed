@@ -73,7 +73,7 @@ define([
 			// Row width settings
 			minSizeX: 2,
 			maxSizeX: 6,
-			defaultSizeX: 3,
+			defaultSizeX: 6,
 			resizable: {
 				enabled: true,
 				handles: ['se']

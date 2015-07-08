@@ -60,7 +60,6 @@ define(['docs/documents/module'], function (module) {
 									//noinspection JSCheckFunctionSignatures
 									model.versions.$refresh();
 									vm.document = model;
-									console.log(model);
 								});
 						}
 
@@ -104,31 +103,37 @@ define(['docs/documents/module'], function (module) {
 				 * @param document {Object} Document model
 				 */
 				function uploadAttachments(document) {
-					var deferred = $q.defer();
+					var promiseQuery = [];
 
 					_.each(document.composite, function (item) {
 
 						if (item.composite.length) {
+							// Go into recursion if fields are composite
 							uploadAttachments(item);
+
 						} else {
-							if (item.$inputType === 'file' && !_.isNull(item.value)) {
+							// Start upload when file attached only
+							if (item.$inputType === 'file' && !_.isEmpty(item.$file)) {
+								// Set up new promise for queuing uploading
+								var dfd = $q.defer(), promise = dfd.promise;
+								promiseQuery.push(promise);
 
 								AttachmentAPI
-									.upload(_.first(item.value))
+									.upload(_.first(item.$file))
 									.then(function (response) {
-										item.value = response.data.data.id;
-										deferred.resolve();
+										item.value = AttachmentAPI.build(response.data.data);
+										dfd.resolve();
 
-										$log.debug('Uploaded file with ID: ' + item.value);
+										$log.debug('Uploaded file with ID: ' + item.value.id);
 									})
 									.catch(function () {
-										deferred.reject();
+										dfd.reject();
 									});
 							}
 						}
 					});
 
-					return deferred.promise;
+					return $q.all(promiseQuery);
 				}
 			}
 		};

@@ -30,10 +30,20 @@ define(['docs/module'], function (module) {
 				});
 		};
 
-		api.download = function (id) {
-			$log.debug('Called AttachmentAPI "download" method to download file with ID: ' + id);
+		api.download = function (attachment) {
+			$log.debug('Called AttachmentAPI "download" method to download file with ID: ' +
+				attachment.id);
 
-			return api.get(id);
+			return attachment
+				.$download()
+				.$asPromise()
+				.then(function (attachment) {
+					var blob = new Blob([attachment.$response.data], {type: 'text/plain'});
+					saveAs(blob, attachment.name);
+				})
+				.catch(function () {
+					$log.error('Could not download the file');
+				});
 		};
 
 		return api;

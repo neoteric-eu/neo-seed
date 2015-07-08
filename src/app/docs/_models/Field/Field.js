@@ -21,6 +21,12 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model()
 			.mix({
+				// MODEL CONFIGURATION
+				$config: {
+					name: 'Field'
+				},
+
+				// ATTRIBUTE MODIFIERS AND RELATIONS
 				$name: {
 					init: function () {
 						return _.uniqueId('field_');
@@ -42,6 +48,7 @@ define(['docs/module'], function (module) {
 					param: FieldTypesEnum
 				},
 
+				// HOOKS
 				$hooks: {
 					// Ensure that composite models are encoded in order to allow recurrence
 					// saving with one request made
@@ -55,6 +62,7 @@ define(['docs/module'], function (module) {
 					}
 				},
 
+				// METHODS
 				$extend: {
 					Scope: {
 						// Polymorphism based builder that enhances plain field with

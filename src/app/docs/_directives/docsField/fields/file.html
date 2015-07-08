@@ -16,21 +16,36 @@
 			</div>
 		</div>
 
+		<table class="table" ng-show="field.value">
+			<tr>
+				<td style="line-height: 32px">{{field.value.name}}</td>
+				<td>
+					<div class="padding-bottom-10 btn-group btn-group-sm pull-right">
+						<a ng-click="vm.downloadAttachment(field.value)"
+							 class="btn btn-sm btn-default">
+							<i class="fa fa-download"></i> Download
+						</a>
+
+						<a ng-click="vm.clearAttachment(field.value)"
+							 ng-hide="field.$file"
+							 class="btn btn-sm btn-danger">
+							<i class="fa fa-trash-o"></i>
+						</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<span class="label label-info"></span>
+
+
 		<input ngf-select
+					 ng-hide="field.value"
 					 class="form-control pull-left"
 					 name="{{field.$name}}"
 					 type="{{field.$inputType}}"
 					 ng-readonly="field.readOnly"
-					 ng-model="field.value">
+					 ng-model="field.$file">
 
 		<p ng-if="field.note" class="note"><strong>Note:</strong> {{field.note}}</p>
-
-		<a href="#" class="tempLinkAddress"></a>
-
-		<a ng-click="vm.downloadAttachment(field.value)"
-			 dowanload
-			 class="btn btn-sm btn-default">
-			<i class="fa fa-download"></i> Download
-		</a>
 	</div>
 </section>

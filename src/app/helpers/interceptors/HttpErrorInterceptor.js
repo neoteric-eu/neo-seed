@@ -2,11 +2,11 @@ define(['app', 'globalSettings'], function (app, globalSettings) {
 	'use strict';
 
 	/**
-	 * Description
+	 * Handles globally server error exceptions
 	 * @method HttpErrorInterceptor
-	 * @param {} $exceptionHandler
-	 * @param {} $exceptionHandler
-	 * @return ObjectExpression
+	 * @param $q {Object} Angular promise provider
+	 * @param $exceptionHandler {Function} Exception handler
+	 * @return {{requestError: Function, responseError: Function}}
 	 */
 	function HttpErrorInterceptor($q, $exceptionHandler) {
 

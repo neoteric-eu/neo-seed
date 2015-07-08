@@ -21,13 +21,24 @@ define([
 		return restmod
 			.model('/documents')
 			.mix('DocumentTemplate', {
+
+				// MODEL CONFIGURATION
+				$config: {
+					name: 'Document'
+				},
+
+				// ATTRIBUTE MODIFIERS AND RELATIONS
 				name: {
 					init: 'New document'
 				},
 				versions: {
 					hasMany: 'Version'
 				},
+				type: {
+					init: 'Document'
+				},
 
+				// HOOKS
 				$hooks: {
 					'after-init': function () {
 						this.versions.$add(
@@ -37,6 +48,8 @@ define([
 						);
 					}
 				}
+
+				// METHODS
 			});
 	}
 

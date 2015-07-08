@@ -8,7 +8,6 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Data model layer interface
-	 * @param VersionAPI {Object} Interface for REST communication with server
 	 * @return {*|Model} Model instance
 	 */
 	function DocumentTemplate($log, restmod) {
@@ -17,6 +16,13 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model('/document-templates')
 			.mix('Field', {
+
+				// MODEL CONFIGURATION
+				$config: {
+					name: 'DocumentTemplate'
+				},
+
+				// ATTRIBUTE MODIFIERS AND RELATIONS
 				name: {
 					init: 'New document template'
 				},
@@ -27,8 +33,10 @@ define(['docs/module'], function (module) {
 					init: [{
 						version: '1'
 					}]
-				},
-				description: {}
+				}
+
+				// HOOKS
+				// METHODS
 			});
 	}
 

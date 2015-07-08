@@ -17,7 +17,31 @@ define([
 		$log.debug('Initiating model factory');
 
 		return restmod
-			.model('/attachments');
+			.model('/attachments')
+			.mix({
+
+				// MODEL CONFIGURATION
+				$config: {
+					name: 'Attachment'
+				},
+
+				// ATTRIBUTE MODIFIERS AND RELATIONS
+				// HOOKS
+
+				// METHODS
+				$extend: {
+					Record: {
+						$download: function () {
+							return this.$send({
+								method: 'GET',
+								responseType: 'arraybuffer',
+								url: this.$scope.$urlFor(this),
+								data: this
+							});
+						}
+					}
+				}
+			});
 	}
 
 	module.factory('Attachment', Attachment);

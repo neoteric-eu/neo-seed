@@ -21,6 +21,13 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model()
 			.mix('Field', {
+
+				// MODEL CONFIGURATION
+				$config: {
+					name: 'EmailField'
+				},
+
+				// ATTRIBUTE MODIFIERS AND RELATIONS
 				$templateUrl: {
 					init: 'app/docs/_directives/docsField/fields/input.html'
 				},
@@ -30,13 +37,13 @@ define(['docs/module'], function (module) {
 				$inputType: {
 					init: 'email'
 				},
-
 				label: {
 					init: function () {
 						return gettextCatalog.getString('Email');
 					}
 				},
 
+				// HOOKS
 				$hooks: {
 					'after-init': function () {
 						this.validators.$add(
@@ -47,6 +54,8 @@ define(['docs/module'], function (module) {
 						);
 					}
 				}
+
+				// METHODS
 			});
 	}
 

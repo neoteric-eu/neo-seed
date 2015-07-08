@@ -113,6 +113,7 @@ requirejs.config({
 		'lodash-extensions': '../vendor/libs-custom/lodash-extensions/lodash-extensions',
 		'raphael': '../vendor/libs/raphael/raphael',
 		'morris': '../vendor/libs/morris/morris',
+		'file-saver': '../vendor/libs/file-saver/file-saver',
 
 		'form-validation': '../vendor/libs/form-validation/form-validation',
 		'form-validation-bootstrap': '../vendor/libs/form-validation/framework/bootstrap',
