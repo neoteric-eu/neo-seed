@@ -18,7 +18,7 @@
 
 		<!-- UPLOADED_FILE -->
 		<table class="table no-margin docs-file-upload-table"
-					 ng-show="field.value">
+					 ng-show="field.value.$pk">
 			<tr style="min-height: 32px">
 				<td>
 					<p class="text-ellipsis">
@@ -48,7 +48,7 @@
 		<!-- FILE_UPLOADER -->
 		<div class="display-flex">
 			<input ngf-select
-						 ng-hide="field.value"
+						 ng-hide="field.value.$pk"
 						 class="form-control pull-left"
 						 name="{{field.$name}}"
 						 type="{{field.$inputType}}"

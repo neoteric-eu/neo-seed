@@ -20,9 +20,11 @@ define([
 			.model('/documents/share')
 			.mix({
 				privilege: {
+					type: {
 						encode: 'EnumEncode',
 						decode: 'EnumDecode',
 						param: PermissionTypesEnum
+					}
 				},
 				$extend: {
 					Record: {
