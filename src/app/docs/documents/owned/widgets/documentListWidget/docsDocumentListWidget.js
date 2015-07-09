@@ -33,7 +33,6 @@ define(['docs/documents/owned/module'], function (module) {
 				 * @method openShareModal
 				 * @param fieldTemplate {app.docs.DocumentTemplate} Model to be removed
 				 */
-
 				function openShareModal(documentId) {
 					// $scope.modalInstance is required workaround to access injected $modalInstance
 					// functions (dismiss, close) inside directives

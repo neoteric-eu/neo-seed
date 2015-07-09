@@ -1,4 +1,4 @@
-define(['docs/documents/owned/module'], function (module) {
+define(['docs/documents/module'], function (module) {
 	'use strict';
 
 	/**
@@ -7,32 +7,32 @@ define(['docs/documents/owned/module'], function (module) {
 	 * @class docsDocumentWidget
 	 * @memberOf app.docs.templates.documents
 	 *
+	 * @param $q {Object} Angular promise provider
 	 * @param $previousState {Object} Router state history service
 	 * @param $stateParams {Object} Current request param provider
-	 * @param $state {Object} UI-Router state service
 	 * @param $log {Object} Logging service
 	 * @param DocumentAPI {Object} API interface for server communication
+	 * @param AttachmentAPI {Object} API interface for server communication
 	 * @param FieldTypesEnum {Object} Registry of all available Fields
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function docsDocumentWidget($previousState, $stateParams, $state, $log,
-		DocumentAPI, FieldTypesEnum, Upload) {
+	function docsDocumentWidget($q, $previousState, $stateParams, $log,
+		DocumentAPI, AttachmentAPI, FieldTypesEnum) {
 
 		return {
 			restrict: 'EA',
-			templateUrl: 'app/docs/documents/owned/widgets/documentWidget/docsDocumentWidget.html',
+			templateUrl: 'app/docs/documents/owned/widgets/documentWidget/docsDocumentWidget.js',
 			controllerAs: 'vm',
 
-			controller: function () {
+			controller: function ($scope, $element) {
 				var vm = this;
 
 				// variables
-				vm.documentTemplate = undefined;
+				vm.document = undefined;
 
 				// functions
 				vm.init = init;
 				vm.save = save;
-				vm.changeDocumentVersion = changeDocumentVersion;
 
 				init();
 
@@ -49,18 +49,22 @@ define(['docs/documents/owned/module'], function (module) {
 							DocumentAPI
 								.get($stateParams.id, {version: $stateParams.version})
 								.then(function (model) {
-									vm.documentTemplate = model;
+									//noinspection JSCheckFunctionSignatures
+									model.versions.$refresh();
+									vm.document = model;
 								});
 						} else {
 							DocumentAPI
 								.get($stateParams.id)
 								.then(function (model) {
-									vm.documentTemplate = model;
+									//noinspection JSCheckFunctionSignatures
+									model.versions.$refresh();
+									vm.document = model;
 								});
 						}
 
 					} else {
-						vm.documentTemplate = DocumentAPI.build({
+						vm.document = DocumentAPI.build({
 							fieldType: FieldTypesEnum.COMPOSITE
 						});
 					}
@@ -73,67 +77,66 @@ define(['docs/documents/owned/module'], function (module) {
 				 * @method save
 				 */
 				function save() {
-					//Find files to upload
-					var fileInputs = findFileInputs(vm.documentTemplate);
+					var formValidation = $element.find('form').data('formValidation');
+					// Manually trigger validation on form
+					formValidation.validate();
 
-					// Send them to server
-					_.each(fileInputs, function (file) {
-						if (_.has(file, 'value')) {
-							Upload
-								.upload({
-									url: 'http://ntrc-delta.neoteric.eu:9035/api/v1/attachments',
-									sendFieldsAs: 'form',
-									file: _.first(file.value)
-								})
-								.then(function (response) {
-									file.value = response.url;
-								});
-						}
+					// Check if form is valid
+					if (formValidation.isValid()) {
+						// Upload attachments
+						uploadAttachments(vm.document)
+							.then(function () {
+								//noinspection JSUnresolvedVariable
+								DocumentAPI
+									.save(vm.document)
+									.then(function (model) {
+										$previousState.go('caller');
 
-						$log.debug('Saved composite field');
-					});
-
-					//noinspection JSUnresolvedVariable
-					DocumentAPI
-						.save(vm.documentTemplate)
-						.then(function () {
-							$previousState.go('caller');
-						});
-
-					$log.debug('Saved composite field');
-				}
-
-				/**
-				 * Switches between document versions
-				 * @param version {String} version number to be changed to
-				 */
-				function changeDocumentVersion(version) {
-					//noinspection JSUnresolvedVariable
-					$log.debug('Switching to document version: ' + version.version);
-
-					//noinspection JSUnresolvedVariable
-					$state.go($state.current, {id: $stateParams.id, version: version.version});
+										$log.debug('Saved document with ID:' + model.id);
+									});
+							});
+					}
 				}
 
 				/**
 				 * Traverse field structure and find array of file inputs
 				 * @param document {Object} Document model
-				 * @return {Array} List of found file field inputs
 				 */
-				function findFileInputs(document) {
-					var result = [];
+				function uploadAttachments(document) {
+					var promiseQuery = [];
+
 					_.each(document.composite, function (item) {
 
 						if (item.composite.length) {
-							findFileInputs(item);
-						}
+							// Go into recursion if fields are composite
+							uploadAttachments(item);
 
-						if (item.$inputType === 'file') {
-							result.push(item);
+						} else {
+							// Start upload when file attached only
+							if (item.$inputType === 'file' && !_.isEmpty(item.$file)) {
+								// Set up new promise for queuing uploading
+								var dfd = $q.defer(), promise = dfd.promise;
+								promiseQuery.push(promise);
+
+								AttachmentAPI
+									.upload(_.first(item.$file))
+									.progress(function (e) {
+										item.$progress = parseInt(100.0 * e.loaded / e.total);
+									})
+									.then(function (response) {
+										item.value = AttachmentAPI.build(response.data.data);
+										dfd.resolve();
+
+										$log.debug('Uploaded file with ID: ' + item.value.id);
+									})
+									.catch(function () {
+										dfd.reject();
+									});
+							}
 						}
 					});
 
-					return result;
+					return $q.all(promiseQuery);
 				}
 			}
 		};

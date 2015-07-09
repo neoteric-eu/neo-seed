@@ -6,6 +6,7 @@ define(['app', 'globalSettings'], function (app, globalSettings) {
 	 * @interface
 	 * @memberOf app
 	 * @param restmod
+	 * @todo IMPORT INTO SEED!!!
 	 * @return {*|{$isAbstract, $$chain}}
 	 */
 	function NeoStyleAPI(restmod) {
@@ -18,7 +19,7 @@ define(['app', 'globalSettings'], function (app, globalSettings) {
 					urlPrefix: globalSettings.get('API_URL'),
 					primaryKey: 'id',
 					jsonRoot: 'data',
-					jsonMeta: '.'
+					jsonMeta: 'meta'
 				}
 			});
 	}
