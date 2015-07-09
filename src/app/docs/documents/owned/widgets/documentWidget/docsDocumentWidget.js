@@ -21,7 +21,7 @@ define(['docs/documents/module'], function (module) {
 
 		return {
 			restrict: 'EA',
-			templateUrl: 'app/docs/documents/owned/widgets/documentWidget/docsDocumentWidget.js',
+			templateUrl: 'app/docs/documents/owned/widgets/documentWidget/docsDocumentWidget.html',
 			controllerAs: 'vm',
 
 			controller: function ($scope, $element) {
@@ -49,16 +49,12 @@ define(['docs/documents/module'], function (module) {
 							DocumentAPI
 								.get($stateParams.id, {version: $stateParams.version})
 								.then(function (model) {
-									//noinspection JSCheckFunctionSignatures
-									model.versions.$refresh();
 									vm.document = model;
 								});
 						} else {
 							DocumentAPI
 								.get($stateParams.id)
 								.then(function (model) {
-									//noinspection JSCheckFunctionSignatures
-									model.versions.$refresh();
 									vm.document = model;
 								});
 						}

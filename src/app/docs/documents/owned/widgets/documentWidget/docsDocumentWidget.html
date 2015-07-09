@@ -3,33 +3,25 @@
 		<div class="well">
 			<h3 class="margin-top-0">
 				<i class="fa fa-stack-overflow"></i>
-				{{vm.documentTemplate.name}}
-				<small>{{vm.documentTemplate.description}}</small>
+				{{vm.document.name}}
+				<small>{{vm.document.description}}</small>
 
-				<ui-select ng-model="vm.documentTemplate.version"
-									 class="pull-right"
-									 on-select="vm.changeDocumentVersion($item, $model)"
-									 style="width: 80px">
-					<ui-select-match>v. {{$select.selected.version}}</ui-select-match>
-					<ui-select-choices repeat="version.version as version in vm.documentTemplate.versions">
-						v. {{version.version}}
-					</ui-select-choices>
-				</ui-select>
+				<version-select model="vm.document" class="pull-right"></version-select>
 			</h3>
 
 			<hr/>
 
 			<form id="fieldTemplate" neo-validate>
 				<!-- DOCS_FIELD_EDITOR -->
-				<docs-editor container="vm.documentTemplate"></docs-editor>
+				<docs-editor container="vm.document"></docs-editor>
 				<!-- end:DOCS_FIELD_EDITOR -->
 			</form>
 
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="text-center">
-						<docs-add-field container="vm.documentTemplate"></docs-add-field>
-						<docs-add-composite-field container="vm.documentTemplate"></docs-add-composite-field>
+						<docs-add-field container="vm.document"></docs-add-field>
+						<docs-add-composite-field container="vm.document"></docs-add-composite-field>
 					</div>
 				</div>
 			</div>
@@ -53,7 +45,7 @@
 							<label>Name:</label>
 							<input type="text"
 										 class="form-control input-sm"
-										 ng-model="vm.documentTemplate.name"/>
+										 ng-model="vm.document.name"/>
 						</div>
 					</div>
 				</div>
@@ -63,7 +55,7 @@
 							<label>Description:</label>
 					<textarea class="form-control"
 										rows="3"
-										ng-model="vm.documentTemplate.description"
+										ng-model="vm.document.description"
 										style="resize: none;">
 					</textarea>
 						</div>
