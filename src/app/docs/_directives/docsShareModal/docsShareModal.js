@@ -33,7 +33,7 @@ define(['docs/module'], function (module) {
 				vm.shareToUser = shareToUser;
 
 				function choosePrivilege(privilege) {
-					vm.documentSharing.privileges = privilege;
+					vm.documentSharing.privilege = privilege;
 					vm.privilegeDisableCase = false;
 				}
 

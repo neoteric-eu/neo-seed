@@ -19,7 +19,7 @@ define([
 		return restmod
 			.model('/documents/share')
 			.mix({
-				privileges: {
+				privilege: {
 						encode: 'EnumEncode',
 						decode: 'EnumDecode',
 						param: PermissionTypesEnum
