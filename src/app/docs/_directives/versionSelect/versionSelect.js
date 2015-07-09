@@ -34,10 +34,13 @@ define([
 					// Check if model is already bound to scope
 					if (!_.isUndefined($scope.model)) {
 						$scope.model.versions
-							.$refresh({sorting: {'_id': 'desc'}})
+							.$refresh()
 							.$asPromise()
 							.then(function () {
 								$log.debug('Fetched versions list from the server');
+							})
+							.catch(function () {
+								$log.error('Error fetching versions list from the server');
 							});
 					}
 				});

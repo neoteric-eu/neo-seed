@@ -16,10 +16,16 @@
 			</div>
 		</div>
 
+		<!-- UPLOADED_FILE -->
 		<table class="table no-margin"
 					 ng-show="field.value">
 			<tr>
-				<td style="line-height: 32px">{{field.value.name}}</td>
+				<td>
+					<p style="line-height: 32px; width: 160px"
+						 class="text-ellipsis">
+						{{field.value.name}}
+					</p>
+				</td>
 				<td>
 					<div class="padding-bottom-10 btn-group btn-group-sm pull-right">
 						<a ng-click="vm.downloadAttachment(field.value)"
@@ -36,9 +42,11 @@
 				</td>
 			</tr>
 		</table>
+		<!-- end:UPLOADED_FILE -->
 
 		<span class="label label-info"></span>
 
+		<!-- FILE_UPLOADER -->
 		<div class="display-flex">
 			<input ngf-select
 						 ng-hide="field.value"
@@ -54,6 +62,7 @@
 			<div class="progress-bar bg-color-blue" role="progressbar"
 					 ng-style="{width: field.$progress}"></div>
 		</div>
+		<!-- end:FILE_UPLOADER -->
 
 		<p ng-if="field.note" class="note"><strong>Note:</strong> {{field.note}}</p>
 
