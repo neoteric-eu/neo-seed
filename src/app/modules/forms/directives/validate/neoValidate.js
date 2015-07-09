@@ -8,25 +8,33 @@ define([
 	function neoValidate($log) {
 		return {
 			restrict: 'A',
+			scope: {
+				settings: '='
+			},
 			link: function (scope, form) {
-				form.attr('novalidate');
+
+				var defaults = {
+					framework: 'bootstrap',
+					fields: {},
+					err: {
+						container: 'tooltip'
+					},
+					icon: {
+						valid: 'fa fa-check',
+						invalid: 'fa fa-times',
+						validating: 'fa fa-refresh'
+					}
+				};
+
+				// @todo update in seed
+				var options = _.mergeDefaults(scope.settings || {}, defaults);
 
 				form
 					.on('init.form.fv', function () {
 						// Remove these irritating automatically added hidden submit buttons
 						form.find('.fv-hidden-submit').remove();
 					})
-					.formValidation({
-						framework: 'bootstrap',
-						err: {
-							container: 'tooltip'
-						},
-						icon: {
-							valid: 'fa fa-check',
-							invalid: 'fa fa-times',
-							validating: 'fa fa-refresh'
-						}
-					});
+					.formValidation(options);
 
 				$log.debug('Initiated linking function');
 			}

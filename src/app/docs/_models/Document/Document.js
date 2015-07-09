@@ -11,17 +11,41 @@ define([
 	 *
 	 * @param $log {Object} Console log provider
 	 * @param restmod {Object} Data model layer interface
-	 * @return {*|Model}
+	 * @param VersionAPI {Object} Interface for REST communication with server
+	 * @return {*|Model} Model instance
 	 */
-	function Document($log, restmod) {
+	function Document($log, restmod, VersionAPI) {
 		$log.debug('Initiating model factory');
 
 		return restmod
 			.model('/documents')
 			.mix('DocumentTemplate', {
+
+				// MODEL CONFIGURATION
+				$config: {
+					name: 'Document'
+				},
+
+				// ATTRIBUTE MODIFIERS AND RELATIONS
 				name: {
 					init: 'New document'
+				},
+				type: {
+					init: 'Document'
+				},
+
+				// HOOKS
+				$hooks: {
+					'after-init': function () {
+						this.versions.$add(
+							VersionAPI.build({
+								version: 1
+							})
+						);
+					}
 				}
+
+				// METHODS
 			});
 	}
 

@@ -81,7 +81,8 @@
 		"form.validation": "*",
 		"angular-gridster": "~0.13.4",
 		"javascript-detect-element-resize": "~0.5.3",
-		"ng-file-upload": "~5.0.7"
+		"ng-file-upload": "~5.0.7",
+		"file-saver": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

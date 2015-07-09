@@ -9,15 +9,13 @@ define(['docs/templates/documents/module'], function (module) {
 	 *
 	 * @param $previousState {Object} Router state history service
 	 * @param $stateParams {Object} Current request param provider
-	 * @param $state {Object} UI-Router state service
 	 * @param $log {Object} Logging service
 	 * @param DocumentTemplateAPI {Object} API interface for server communication
 	 * @param FieldTypesEnum {Object} Registry of all available Fields
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function docsDocumentTemplateWidget($previousState, $stateParams, $state, $log,
-		DocumentTemplateAPI,
-		FieldTypesEnum) {
+	function docsDocumentTemplateWidget($previousState, $stateParams, $log,
+		DocumentTemplateAPI, FieldTypesEnum) {
 
 		return {
 			restrict: 'EA',
@@ -32,7 +30,6 @@ define(['docs/templates/documents/module'], function (module) {
 				// functions
 				vm.init = init;
 				vm.save = save;
-				vm.changeDocumentVersion = changeDocumentVersion;
 
 				init();
 
@@ -81,18 +78,6 @@ define(['docs/templates/documents/module'], function (module) {
 						});
 
 					$log.debug('Saved composite field');
-				}
-
-				/**
-				 * Switches between document versions
-				 * @param version {String} version number to be changed to
-				 */
-				function changeDocumentVersion(version) {
-					//noinspection JSUnresolvedVariable
-					$log.debug('Switching to document version: ' + version.version);
-
-					//noinspection JSUnresolvedVariable
-					$state.go($state.current, {id: $stateParams.id, version: version.version});
 				}
 			}
 		};

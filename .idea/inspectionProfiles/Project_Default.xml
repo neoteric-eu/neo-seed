@@ -19,6 +19,7 @@
         <item value="neo-validate" />
       </myValues>
     </inspection_tool>
+    <inspection_tool class="JSCheckFunctionSignatures" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="JSClosureCompilerSyntax" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="JSUnusedAssignment" enabled="true" level="INFO" enabled_by_default="true" />
   </profile>

@@ -9,7 +9,8 @@ module.exports = {
 		command: 'node ./node_modules/protractor/bin/webdriver-manager update'
 	},
 	'git-disable-tracking-templates': {
-		command: 'git update-index --assume-unchanged <%= yeoman.app %>/app/templates/module.js'
+		command: 'git update-index --assume-unchanged <%= yeoman.app %>/app/templates/module.js',
+		failOnError: false
 	},
 	'git-submodule-init': {
 		command: 'git submodule update --init'

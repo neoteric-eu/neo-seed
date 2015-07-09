@@ -19,6 +19,13 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model()
 			.mix('Field', {
+
+				// MODEL CONFIGURATION
+				$config: {
+					name: 'ColorField'
+				},
+
+				// ATTRIBUTE MODIFIERS AND RELATIONS
 				$templateUrl: {
 					init: 'app/docs/_directives/docsField/fields/file.html'
 				},
@@ -28,12 +35,29 @@ define(['docs/module'], function (module) {
 				$inputType: {
 					init: 'file'
 				},
-
+				$progress: {
+					init: 0
+				},
+				value: {
+					hasOne: 'Attachment'
+				},
 				label: {
 					init: function () {
 						return gettextCatalog.getString('Attachment');
 					}
+				},
+
+				// HOOKS
+				$hooks: {
+					// Ensure that composite models are encoded in order to allow recurrence
+					// saving with one request made
+					'before-render': function (raw) {
+						if (!_.isEmpty(this.value)) {
+							raw.value = this.value.$encode(null);
+						}
+					}
 				}
+				// METHODS
 			});
 	}
 

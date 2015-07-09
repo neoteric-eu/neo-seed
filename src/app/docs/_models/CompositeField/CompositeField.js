@@ -16,11 +16,22 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model('/field-templates')
 			.mix('Field', {
+
+				// MODEL CONFIGURATION
+				$config: {
+					name: 'CompositeField'
+				},
+
+				// ATTRIBUTE MODIFIERS AND RELATIONS
 				label: {
 					init: 'New field template'
 				},
-				description: {},
-				version: {}
+				type: {
+					init: 'CompositeField'
+				}
+
+				// HOOKS
+				// METHODS
 			});
 	}
 

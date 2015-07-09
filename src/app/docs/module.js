@@ -18,16 +18,17 @@ define(['angular'], function (ng) {
 	 */
 	module.config(function ($stateProvider, gettext) {
 
-		$stateProvider.state('app.docs', {
-			abstract: true,
-			data: {
-				title: gettext('Docs'),
-				permissions: {
-					only: ['user'],
-					redirectTo: 'auth.login'
+		$stateProvider
+			.state('app.docs', {
+				abstract: true,
+				data: {
+					title: gettext('Docs'),
+					permissions: {
+						only: ['user'],
+						redirectTo: 'auth.login'
+					}
 				}
-			}
-		});
+			});
 	});
 
 	return module;

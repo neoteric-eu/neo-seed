@@ -16,6 +16,13 @@ define(['docs/module'], function (module) {
 		return restmod
 			.model('/document-templates')
 			.mix('Field', {
+
+				// MODEL CONFIGURATION
+				$config: {
+					name: 'DocumentTemplate'
+				},
+
+				// ATTRIBUTE MODIFIERS AND RELATIONS
 				name: {
 					init: 'New document template'
 				},
@@ -23,11 +30,11 @@ define(['docs/module'], function (module) {
 					init: '1'
 				},
 				versions: {
-					init: [{
-						version: '1'
-					}]
-				},
-				description: {}
+					hasMany: 'Version'
+				}
+
+				// HOOKS
+				// METHODS
 			});
 	}
 

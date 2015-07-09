@@ -97,6 +97,7 @@ module.exports = {
 			'select2/select2.js': 'select2/select2.js',
 			'summernote/summernote.js': 'summernote/dist/summernote.js',
 			'to-markdown/to-markdown.js': 'to-markdown/src/to-markdown.js',
+			'file-saver/file-saver.js': 'file-saver/FileSaver.js',
 
 			'form-validation/form-validation.js': 'form.validation/dist/js/formValidation.js',
 			'form-validation/framework/bootstrap.js' : 'form.validation/dist/js/framework/bootstrap.js',
