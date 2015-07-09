@@ -60,8 +60,7 @@ define(['app', 'globalSettings'], function (app, globalSettings) {
 
 				if (rejection.status === 401) {
 					// If user is not authorised redirect to login page
-					$injector.get('$state').go('auth.login');
-					return $q.reject(response);
+					$injector.get('$state').go('auth.logout');
 				} else {
 					// Return the promise rejection.
 					return $q.reject(rejection);
