@@ -10,7 +10,7 @@ define(['app', 'globalSettings'], function (app, globalSettings) {
 	 * @todo import into seed
 	 * @return {{requestError: Function, responseError: Function}}
 	 */
-	function HttpErrorInterceptor($q, $exceptionHandler, $injector) {
+	function HttpErrorInterceptor($q, $exceptionHandler) {
 
 		/**
 		 * Description
@@ -58,13 +58,14 @@ define(['app', 'globalSettings'], function (app, globalSettings) {
 				// show notification
 				notifyError(rejection);
 
-				if (rejection.status === 401) {
-					// If user is not authorised redirect to login page
-					$injector.get('$state').go('auth.logout');
-				} else {
+				//if (rejection.status === 401) {
+				//	// If user is not authorised redirect to login page
+				//	$injector.get('$state').go('auth.logout');
+				//	return $q.reject(rejection);
+				//} else {
 					// Return the promise rejection.
 					return $q.reject(rejection);
-				}
+				//}
 			}
 		};
 	}

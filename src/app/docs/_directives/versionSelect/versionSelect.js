@@ -57,7 +57,7 @@ define([
 				function changeDocumentVersion(newVersion) {
 					// If switching to newest version omit postfix version
 					//noinspection JSUnresolvedVariable
-					if (_.isEqual(_.last($scope.model.versions), newVersion)) {
+					if (_.isEqual(_.first($scope.model.versions), newVersion)) {
 						$log.debug('Switching to document newest version');
 
 						$state.go($state.current, {id: $stateParams.id, version: null});
