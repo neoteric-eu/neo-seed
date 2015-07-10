@@ -21,20 +21,20 @@ define([
 			.model('/documents')
 			.mix('DocumentTemplate', {
 
-				// MODEL CONFIGURATION
+				// model configuration
 				$config: {
 					name: 'Document'
 				},
 
-				// ATTRIBUTE MODIFIERS AND RELATIONS
+				// attribute modifiers and relations
+				templateId: {
+					belongsTo: 'DocumentTemplate'
+				},
 				name: {
 					init: 'New document'
 				},
-				type: {
-					init: 'Document'
-				},
 
-				// HOOKS
+				// hooks
 				$hooks: {
 					'after-init': function () {
 						this.versions.$add(
@@ -45,7 +45,7 @@ define([
 					}
 				}
 
-				// METHODS
+				// methods
 			});
 	}
 

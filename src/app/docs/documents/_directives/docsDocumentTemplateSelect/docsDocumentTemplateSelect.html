@@ -1,0 +1,15 @@
+<div class="form-group">
+	<label>Document template:</label>
+
+	<ui-select ng-model="document.templateId" on-select="vm.selectDocumentTemplate($item)">
+
+		<ui-select-match placeholder="{{'Select template'|translate}}">
+			{{$select.selected.name}}
+		</ui-select-match>
+
+		<ui-select-choices repeat="template.id as template in vm.documentTemplates">
+			{{template.name}}
+		</ui-select-choices>
+
+	</ui-select>
+</div>

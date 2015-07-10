@@ -35,7 +35,7 @@ define(['docs/module'], function (module) {
 
 				// Preload template of field
 				$http
-					.get(scope.field.$templateUrl.toString())
+					.get(scope.field.$templateUrl.toString(), {cache: true})
 					.success(function (data) {
 						element.html(data);
 						$compile(element.contents())(scope);

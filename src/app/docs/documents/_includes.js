@@ -5,7 +5,10 @@ define([
 
 	// Documents shared
 	'./shared/module',
-	'./shared/_includes'
+	'./shared/_includes',
+
+	// Directives
+	'./_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect'
 ], function () {
 	'use strict';
 });

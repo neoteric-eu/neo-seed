@@ -8,7 +8,7 @@ define(['docs/documents/module'], function (module) {
 	 * @memberOf app.docs.templates.documents
 	 *
 	 * @param $q {Object} Angular promise provider
-	 * @param $previousState {Object} Router state history service
+	 * @param $state {Object} UI-Router state service
 	 * @param $stateParams {Object} Current request param provider
 	 * @param $log {Object} Logging service
 	 * @param DocumentAPI {Object} API interface for server communication
@@ -16,8 +16,8 @@ define(['docs/documents/module'], function (module) {
 	 * @param FieldTypesEnum {Object} Registry of all available Fields
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function docsDocumentWidget($q, $previousState, $stateParams, $log,
-		DocumentAPI, AttachmentAPI, FieldTypesEnum) {
+	function docsDocumentWidget($q, $state, $stateParams, $log, DocumentAPI, AttachmentAPI,
+		FieldTypesEnum) {
 
 		return {
 			restrict: 'EA',
@@ -41,8 +41,6 @@ define(['docs/documents/module'], function (module) {
 				 * @method init
 				 */
 				function init() {
-					$previousState.memo('caller', 'app.docs.documents');
-
 					if ($stateParams.id) {
 
 						if ($stateParams.version) {
@@ -74,6 +72,7 @@ define(['docs/documents/module'], function (module) {
 				 */
 				function save() {
 					var formValidation = $element.find('form').data('formValidation');
+
 					// Manually trigger validation on form
 					formValidation.validate();
 
@@ -86,7 +85,7 @@ define(['docs/documents/module'], function (module) {
 								DocumentAPI
 									.save(vm.document)
 									.then(function (model) {
-										$previousState.go('caller');
+										$state.go('app.docs.documents.owned');
 
 										$log.debug('Saved document with ID:' + model.id);
 									});
