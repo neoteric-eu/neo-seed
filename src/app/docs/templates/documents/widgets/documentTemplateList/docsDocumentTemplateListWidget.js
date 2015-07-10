@@ -53,7 +53,7 @@ define(['docs/templates/documents/module'], function (module) {
 								']'
 							}, function (choice) {
 								if (choice === gettextCatalog.getString('Yes')) {
-									return model
+									return documentTemplate
 										.$destroy()
 										.$asPromise()
 										.then(function () {
