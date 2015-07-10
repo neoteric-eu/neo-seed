@@ -1,0 +1,39 @@
+<tr class="ng-table-filters">
+	<th class="hasinput" data-title-text="{{$column.titleAlt(this) || $column.title(this)}}"
+			ng-repeat="$column in $columns" ng-show="$column.show(this)" class="filter">
+		<div ng-repeat="(name, filter) in $column.filter(this)">
+
+			<div ng-if="filter.indexOf('/') !==-1"
+					 ng-include="filter">
+			</div>
+
+			<div ng-if="filter.indexOf('/')===-1"
+					 ng-include="'ng-table/filters/' + filter + '.html'">
+			</div>
+		</div>
+	</th>
+</tr>
+
+<tr>
+	<th title="{{$column.headerTitle(this)}}"
+			ng-repeat="$column in $columns"
+			ng-click="sortBy($column, $event)" ng-show="$column.show(this)"
+			ng-init="template=$column.headerTemplateURL(this)"
+			class="header cursor-pointer no-selection {{$column.class(this)}}"
+			ng-class="{
+				'sorting': $column.sortable(this),
+				'sorting_asc': params.sorting()[$column.sortable(this)]=='asc',
+				'sorting_desc': params.sorting()[$column.sortable(this)]=='desc',
+				'docs-actions-column': $column.title(this) === 'Actions'}"
+		>
+
+		<div ng-if="!template"
+				 ng-show="!template"
+				 class="ng-table-header">
+			{{$column.title(this)}}
+		</div>
+
+		<div ng-if="template" ng-show="template" ng-include="template"></div>
+
+	</th>
+</tr>

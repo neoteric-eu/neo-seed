@@ -80,7 +80,6 @@ define(['docs/module'], function (module) {
 								item.$position = undefined;
 
 								$scope.document.templateId = template;
-								$scope.document.templateId = template;
 
 								// Magical way to solve problem with rendering
 								// QA: DON'T ASK WHY

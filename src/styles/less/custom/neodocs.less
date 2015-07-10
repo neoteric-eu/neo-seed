@@ -1,3 +1,5 @@
+@import "../vendor/libs/elements/elements";
+
 // Fixed collapsing menu in field template editor
 .form-actions.collapse:not(.in) {
 	display: none;
@@ -80,7 +82,6 @@ docs-field .form-group .clearfix {
 	font-weight: bold;
 }
 
-
 .docs-file-upload-table {
 	tr {
 		height: 32px;
@@ -90,3 +91,13 @@ docs-field .form-group .clearfix {
 		}
 	}
 }
+
+.no-selection {
+	.user-select();
+}
+
+.docs-actions-column {
+	width: 70px;
+	text-align: right;
+}
+

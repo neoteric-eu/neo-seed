@@ -28,6 +28,7 @@ define(['docs/templates/documents/module'], function (module) {
 				// functions
 				vm.deleteDocumentTemplate = deleteDocumentTemplate;
 
+
 				/**
 				 * Removes selected document template
 				 * @method deleteDocumentTemplate
