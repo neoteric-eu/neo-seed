@@ -23,10 +23,7 @@
 		</div>
 
 		<table ng-table="vm.documentTableOptions"
-					 show-filter="true"
-					 template-pagination="app/components/tables/directives/neo-footer.html"
-					 template-header="app/components/tables/directives/neo-header.html"
-					 class="table table-bordered neo-table">
+					 class="table table-striped table-bordered no-margin neo-table">
 			<tbody ng-show="$data.length">
 			<tr ng-repeat="document in $data">
 				<td title="'Name'"
@@ -45,7 +42,7 @@
 						class="text-align-right"
 						style="width: 10%"
 						sortable="'createdAt'"
-						filter="{'createdAt': 'text'}">
+						filter="{'createdAt': 'date'}">
 					{{document.createdAt | amDateFormat:'L'}}
 				</td>
 
@@ -53,7 +50,7 @@
 						class="text-align-right"
 						style="width: 10%"
 						sortable="'updatedAt'"
-						filter="{'updatedAt': 'text'}">
+						filter="{'updatedAt': 'date'}">
 					{{document.updatedAt | amDateFormat:'L'}}
 				</td>
 

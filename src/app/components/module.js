@@ -13,7 +13,8 @@ define([
 
 	couchPotato.configureApp(module);
 
-	module.run(function ($couchPotato) {
+	module.run(function ($couchPotato, neoTable) {
+		neoTable.init();
 		module.lazy = $couchPotato;
 	});
 

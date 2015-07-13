@@ -5,8 +5,8 @@ define([
 
 	'./profiles/userProfiles',
 	'./shortcut/shortcut-directive',
-	'./tables/directives/neoTable',
-	'./tables/factories/neoTableParams',
+	'./tables/neoTable',
+	'./tables/neoTableParams',
 
 	'./language/languageSelector',
 
