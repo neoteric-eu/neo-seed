@@ -4,11 +4,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 
-#: src/app/docs/documents/widgets/document-list/docs-document-list.html:41
-msgid "Actions"
+#: src/app/docs/_enums/PermissionTypesEnum.js:29
+msgid "All"
 msgstr ""
 
-#: src/app/docs/_models/Field/FileField.js:34
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docsDocumentTemplateListWidget.js:47
+msgid "Are you sure you want to remove item? There are"
+msgstr ""
+
+#: src/app/docs/_models/Field/FileField.js:46
 msgid "Attachment"
 msgstr ""
 
@@ -17,12 +21,16 @@ msgid "Color"
 msgstr ""
 
 #: src/app/docs/_enums/FieldTypesEnum.js:71
-#: src/app/docs/_models/Field/ColorField.js:36
+#: src/app/docs/_models/Field/ColorField.js:42
 msgid "Color picker"
 msgstr ""
 
 #: src/app/docs/_enums/FieldTypesEnum.js:22
 msgid "Composite"
+msgstr ""
+
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docsDocumentTemplateListWidget.js:46
+msgid "Confirmation"
 msgstr ""
 
 #: src/app/docs/_enums/FieldTypesEnum.js:47
@@ -40,36 +48,37 @@ msgstr ""
 msgid "Date & Time"
 msgstr ""
 
-#: src/app/docs/_models/Field/DateField.js:36
+#: src/app/docs/_models/Field/DateField.js:42
 msgid "Date picker"
 msgstr ""
 
+#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:74
+#: src/app/docs/documents/shared/widgets/sharedDocumentListWidget/docsSharedDocumentListWidget.html:51
 #: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:59
 #: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:62
 msgid "Delete"
 msgstr ""
 
-#: src/app/docs/module.js:24
+#: src/app/docs/module.js:25
 msgid "Docs"
 msgstr ""
 
-#: src/app/docs/documents/module.js:27
-msgid "Documents"
+#: src/app/docs/documents/module.js:25
+msgid "Document"
 msgstr ""
 
+#: src/app/docs/_enums/PermissionTypesEnum.js:20
+#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:68
+#: src/app/docs/documents/shared/widgets/sharedDocumentListWidget/docsSharedDocumentListWidget.html:45
 #: src/app/docs/templates/documents/module.js:57
 #: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:53
 #: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:56
 msgid "Edit"
 msgstr ""
 
-#: src/app/docs/documents/widgets/document-list/docs-document-list.html:75
-msgid "Edit task"
-msgstr ""
-
 #: src/app/docs/_enums/FieldTypesEnum.js:26
 #: src/app/docs/_enums/FieldValidatorsEnum.js:25
-#: src/app/docs/_models/Field/EmailField.js:36
+#: src/app/docs/_models/Field/EmailField.js:42
 msgid "Email"
 msgstr ""
 
@@ -91,10 +100,11 @@ msgstr ""
 msgid "Multi-select"
 msgstr ""
 
-#: src/app/docs/documents/widgets/document-list/docs-document-list.html:38
-msgid "Name"
-msgstr ""
-
+#: src/app/docs/documents/owned/module.js:39
+#: src/app/docs/documents/owned/module.js:54
+#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:20
+#: src/app/docs/documents/shared/module.js:39
+#: src/app/docs/documents/shared/module.js:54
 #: src/app/docs/templates/documents/module.js:42
 #: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:20
 #: src/app/docs/templates/fields/module.js:42
@@ -103,8 +113,9 @@ msgstr ""
 msgid "New"
 msgstr ""
 
-#: src/app/docs/documents/widgets/document-list/docs-document-list.html:93
-msgid "No tasks"
+#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:65
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docsDocumentTemplateListWidget.js:51
+msgid "No"
 msgstr ""
 
 #: src/app/docs/_enums/FieldTypesEnum.js:51
@@ -117,26 +128,22 @@ msgstr ""
 msgid "Numeric"
 msgstr ""
 
+#: src/app/docs/documents/owned/module.js:27
+msgid "Owned"
+msgstr ""
+
 #: src/app/docs/_enums/FieldTypesEnum.js:56
 #: src/app/docs/_enums/FieldValidatorsEnum.js:45
 #: src/app/docs/_models/Field/PhoneField.js:36
 msgid "Phone"
 msgstr ""
 
-#: src/app/docs/documents/widgets/document-list/docs-document-list.html:40
-msgid "Project"
-msgstr ""
-
-#: src/app/docs/documents/widgets/document-list/docs-document-list.html:81
-msgid "Remove task"
+#: src/app/docs/_enums/PermissionTypesEnum.js:23
+msgid "Read"
 msgstr ""
 
 #: src/app/docs/_enums/FieldValidatorsEnum.js:60
 msgid "Required"
-msgstr ""
-
-#: src/app/docs/documents/widgets/document-list/docs-document-list.html:23
-msgid "Search"
 msgstr ""
 
 #: src/app/docs/_enums/FieldTypesEnum.js:76
@@ -144,21 +151,30 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
+#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.html:6
+msgid "Select template"
+msgstr ""
+
 #: src/app/docs/_enums/FieldTypesEnum.js:77
 #: src/app/docs/_enums/FieldTypesEnum.js:82
 msgid "Selection"
 msgstr ""
 
-#: src/app/docs/documents/widgets/document-list/docs-document-list.html:39
-msgid "Status"
+#: src/app/docs/_enums/PermissionTypesEnum.js:26
+#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:80
+msgid "Share"
+msgstr ""
+
+#: src/app/docs/_directives/docsShareModal/docs-share-modal.html:2
+msgid "Share document"
+msgstr ""
+
+#: src/app/docs/documents/shared/module.js:27
+msgid "Shared"
 msgstr ""
 
 #: src/app/docs/_enums/FieldValidatorsEnum.js:40
 msgid "String length"
-msgstr ""
-
-#: src/app/docs/documents/widgets/document-list/docs-document-list.html:37
-msgid "Task"
 msgstr ""
 
 #: src/app/docs/templates/module.js:25
@@ -200,4 +216,23 @@ msgstr ""
 
 #: src/app/docs/_models/Field/UrlField.js:36
 msgid "Url address"
+msgstr ""
+
+#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:62
+msgid "Warning"
+msgstr ""
+
+#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:67
+#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:70
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docsDocumentTemplateListWidget.js:53
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docsDocumentTemplateListWidget.js:56
+msgid "Yes"
+msgstr ""
+
+#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:63
+msgid "You are changing the template that document is based on. All previously created fields will be removed. Do you wish to continue?"
+msgstr ""
+
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docsDocumentTemplateListWidget.js:49
+msgid "documents created based on this template."
 msgstr ""

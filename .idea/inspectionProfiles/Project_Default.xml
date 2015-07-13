@@ -18,6 +18,7 @@
         <item value="gridster" />
         <item value="neo-validate" />
         <item value="ngf-select" />
+        <item value="dropdown" />
       </myValues>
     </inspection_tool>
     <inspection_tool class="JSCheckFunctionSignatures" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
