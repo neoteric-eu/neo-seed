@@ -122,7 +122,7 @@ define(['app'], function (module) {
 			// Display confirmation dialog
 			//noinspection JSUnresolvedFunction
 			$.SmartMessageBox({
-				title: '<i class="fa fa-warning  txt-color-yellow"></i> ' +
+				title: '<i class="fa fa-warning text-warning"></i> ' +
 				gettextCatalog.getString('Confirmation'),
 				content: gettextCatalog.getString('Are you sure you want to remove item?'),
 				buttons: '[' + gettextCatalog.getString('No') + '][' + gettextCatalog.getString('Yes') + ']'

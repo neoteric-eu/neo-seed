@@ -27,6 +27,8 @@
 			<tbody ng-show="$data.length">
 			<tr ng-repeat="document in $data">
 				<td title="'Name'"
+						header-class="'cell-20'"
+						class="no-wrap cell-20"
 						sortable="'name'"
 						filter="{'name': 'text'}">
 					{{document.name}}
@@ -38,23 +40,23 @@
 					{{document.description}}
 				</td>
 
-				<td title="'Created'"
-						class="text-align-right"
-						style="width: 10%"
+				<td title="'Date created'"
+						header-class="'text-align-right cell-20'"
+						class="text-align-right cell-20"
 						sortable="'createdAt'"
 						filter="{'createdAt': 'date'}">
 					{{document.createdAt | amDateFormat:'L'}}
 				</td>
 
-				<td title="'Updated'"
-						class="text-align-right"
-						style="width: 10%"
+				<td title="'Date updated'"
+						header-class="'text-align-right cell-20'"
+						class="text-align-right cell-20"
 						sortable="'updatedAt'"
 						filter="{'updatedAt': 'date'}">
 					{{document.updatedAt | amDateFormat:'L'}}
 				</td>
 
-				<td class="fit-cell">
+				<td class="cell-fit">
 					<div class="btn-group pull-right">
 						<a class="btn dropdown-toggle btn-xs btn-default"
 							 data-toggle="dropdown">

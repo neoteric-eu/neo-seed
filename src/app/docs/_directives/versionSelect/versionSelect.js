@@ -32,7 +32,7 @@ define([
 
 				$scope.$watch('model', function () {
 					// Check if model is already bound to scope
-					if (!_.isUndefined($scope.model)) {
+					if (!_.isUndefined($scope.model) && $scope.model.version > 1) {
 						$scope.model.versions
 							.$refresh()
 							.$asPromise()

@@ -25,7 +25,7 @@ define(['docs/documents/owned/module'], function (module) {
 				vm.documentTableOptions = new neoTableParams(DocumentAPI);
 
 				// functions
-				vm.deleteDocumentTemplate = deleteDocumentTemplate;
+				vm.deleteDocument = deleteDocument;
 				vm.openShareModal = openShareModal;
 
 				/**
@@ -49,7 +49,7 @@ define(['docs/documents/owned/module'], function (module) {
 				 * @method deleteDocumentTemplate
 				 * @param fieldTemplate {app.docs.DocumentTemplate} Model to be removed
 				 */
-				function deleteDocumentTemplate(fieldTemplate) {
+				function deleteDocument(fieldTemplate) {
 					DocumentAPI.remove(fieldTemplate);
 				}
 			}

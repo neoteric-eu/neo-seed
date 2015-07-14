@@ -11,11 +11,9 @@ define([
 	 *
 	 * @param $log {Object} Console log provider
 	 * @param restmod {Object} Data model layer interface
-	 * @param VersionAPI {Object} Interface for REST communication with server
-	 * @param FieldTypesEnum {Object} Available primitive fields enum
 	 * @return {*|Model} Model instance
 	 */
-	function Document($log, restmod, VersionAPI, FieldTypesEnum) {
+	function Document($log, restmod) {
 		$log.debug('Initiating model factory');
 
 		return restmod
@@ -33,20 +31,6 @@ define([
 				},
 				name: {
 					init: 'New document'
-				},
-				fieldType: {
-					init: FieldTypesEnum.getValueByKey('COMPOSITE')
-				},
-
-				// hooks
-				$hooks: {
-					'after-init': function () {
-						this.versions.$add(
-							VersionAPI.build({
-								version: 1
-							})
-						);
-					}
 				}
 
 				// methods

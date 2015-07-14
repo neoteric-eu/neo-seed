@@ -123,8 +123,12 @@ define(['docs/module'], function (module) {
 							RMUtils.assert(_raw && angular.isArray(_raw), 'Collection $decode expected array');
 
 							_.each(_raw, function (rawField) {
-								// Get enum value to check whether model should be expanded
-								var fieldType = FieldTypesEnum.getValueByKey(rawField.fieldType);
+								var fieldType;
+
+								if (_.has(rawField, 'fieldType')) {
+									// Get enum value to check whether model should be expanded
+									fieldType = FieldTypesEnum.getValueByKey(rawField.fieldType);
+								}
 
 								if (_.has(fieldType, 'propertyClass')) {
 

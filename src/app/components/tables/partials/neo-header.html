@@ -1,14 +1,12 @@
 <tr>
-	<th title="{{$column.headerTitle(this)}}"
-			ng-repeat="$column in $columns"
+	<th ng-repeat="$column in $columns"
 			ng-click="sortBy($column, $event)" ng-show="$column.show(this)"
 			ng-init="template=$column.headerTemplateURL(this)"
-			class="header cursor-pointer no-selection {{$column.class(this)}}"
+			class="no-selection {{$column.class(this)}}"
 			ng-class="{
 				'sorting': $column.sortable(this),
 				'sorting-asc': params.sorting()[$column.sortable(this)]=='asc',
-				'sorting-desc': params.sorting()[$column.sortable(this)]=='desc',
-				'docs-actions-column': $column.title(this) === 'Actions'}">
+				'sorting-desc': params.sorting()[$column.sortable(this)]=='desc'}">
 
 		<div ng-if="!template"
 				 ng-show="!template"
@@ -27,11 +25,11 @@
 			class="neo-table-filter hasinput">
 		<div ng-repeat="(name, filter) in $column.filter(this)">
 
-			<div ng-if="filter.indexOf('/') !==-1"
+			<div ng-if="filter.indexOf('/') !== -1"
 					 ng-include="filter">
 			</div>
 
-			<div ng-if="filter.indexOf('/')===-1"
+			<div ng-if="filter.indexOf('/') === -1"
 					 ng-include="'ng-table/filters/' + filter + '.html'">
 			</div>
 		</div>

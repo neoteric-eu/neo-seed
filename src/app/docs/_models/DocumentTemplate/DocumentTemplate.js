@@ -8,10 +8,10 @@ define(['docs/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Data model layer interface
-	 * @param FieldTypesEnum {Object} Available primitive fields enum
+	 * @param VersionAPI {Object} Interface for REST communication with server
 	 * @return {*|Model} Model instance
 	 */
-	function DocumentTemplate($log, restmod, FieldTypesEnum) {
+	function DocumentTemplate($log, restmod, VersionAPI) {
 		$log.debug('Initiating model factory');
 
 		return restmod
@@ -33,8 +33,16 @@ define(['docs/module'], function (module) {
 				versions: {
 					hasMany: 'Version'
 				},
-				fieldType: {
-					init: FieldTypesEnum.getValueByKey('COMPOSITE')
+
+				// hooks
+				$hooks: {
+					'after-init': function () {
+						this.versions.$add(
+							VersionAPI.build({
+								version: 1
+							})
+						);
+					}
 				}
 
 				// HOOKS

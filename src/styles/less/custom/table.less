@@ -21,11 +21,8 @@ table.neo-table {
 		background: url('../../../styles/img/sort_desc.png') no-repeat center right;
 	}
 
-	thead > tr {
-		th {
-			border-left: none !important;
-			border-bottom-width: 1px !important;
-		}
+	thead > tr > th {
+		border-left: none !important;
 	}
 
 	td,
@@ -35,8 +32,54 @@ table.neo-table {
 		box-sizing: content-box;
 	}
 
-	td.fit-cell {
+	td.cell-fit,
+	th.cell-fit {
 		width: 1%;
+	}
+
+	td.cell-10,
+	th.cell-10 {
+		width: 10%;
+	}
+
+	td.cell-20,
+	th.cell-20 {
+		width: 20%;
+	}
+
+	td.cell-30,
+	th.cell-30 {
+		width: 30%;
+	}
+
+	td.cell-40,
+	th.cell-40 {
+		width: 40%;
+	}
+
+	td.cell-50,
+	th.cell-50 {
+		width: 50%;
+	}
+
+	td.cell-60,
+	th.cell-60 {
+		width: 60%;
+	}
+
+	td.cell-70,
+	th.cell-70 {
+		width: 70%;
+	}
+
+	td.cell-80,
+	th.cell-80 {
+		width: 80%;
+	}
+
+	td.cell-90,
+	th.cell-90 {
+		width: 90%;
 	}
 
 	> tbody > tr > td,
@@ -59,7 +102,7 @@ table.neo-table {
 	}
 
 	.neo-table-header {
-		padding-right: 10px;
+		padding-right: 12px;
 	}
 
 	input[type=checkbox].checkbox,
