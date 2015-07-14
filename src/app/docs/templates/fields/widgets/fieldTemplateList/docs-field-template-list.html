@@ -23,25 +23,41 @@
 		</div>
 
 		<table ng-table="vm.fieldTemplatesTableOptions"
-					 template-pagination="app/components/tables/directives/neo-footer.html"
-					 class="table table-striped table-bordered no-margin">
+					 class="table neo-table table-striped table-bordered">
 
 			<tbody ng-show="$data.length">
 			<tr ng-repeat="fieldTemplate in $data">
 				<td data-title="'Name'"
+						header-class="'cell-20'"
+						class="no-wrap cell-20"
 						sortable="'name'"
-						class="col-sm-3">
+						filter="{'name': 'text'}">
 					{{fieldTemplate.label}}
 				</td>
+
 				<td data-title="'Description'"
 						sortable="'description'"
-						class="col-sm-9">
+						filter="{'description': 'text'}">
 					{{fieldTemplate.description}}
 				</td>
-				<td data-title="'Actions'"
-						width="150"
-						class="text-align-right">
 
+				<td title="'Date created'"
+						header-class="'text-align-right cell-10'"
+						class="text-align-right cell-10"
+						sortable="'createdAt'"
+						filter="{'createdAt': 'date'}">
+					{{fieldTemplate.createdAt | amDateFormat:'L'}}
+				</td>
+
+				<td title="'Date updated'"
+						header-class="'text-align-right cell-10'"
+						class="text-align-right cell-10"
+						sortable="'updatedAt'"
+						filter="{'updatedAt': 'date'}">
+					{{fieldTemplate.updatedAt | amDateFormat:'L'}}
+				</td>
+
+				<td class="cell-fit">
 					<div class="btn-group pull-right">
 						<a class="btn dropdown-toggle btn-xs btn-default"
 							 data-toggle="dropdown">
@@ -71,7 +87,7 @@
 
 			<tbody ng-hide="$data.length">
 			<tr>
-				<td colspan="3" class="text-align-center text-muted">
+				<td colspan="5" class="text-align-center text-muted">
 					No data available
 				</td>
 			</tr>
