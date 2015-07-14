@@ -1,22 +1,20 @@
-define([
-	'docs/module',
-	'moment'
-], function (module, moment) {
+define(['app', 'moment'], function (module, moment) {
 	'use strict';
 
 	/**
-	 * Applies moment filtering on date based elements
+	 * Applies moment filtering on datetime based elements
 	 * Can be used along with DateEncode and DateDecode serializers from restmod
-	 * @class momentDate
-	 * @memberOf app.docs
+	 * @class momentDatetime
+	 * @memberOf app.components
 	 *
 	 * @example
 	 * <input type="date" moment-date-input></div>
 	 *
 	 * @param $log {Object} Logging service
-	 * @return {{restrict: string, link: Function}}
+	 * @todo Add to seed
+	 * @return {{restrict: string, require: string, link: Function}}
 	 */
-	function momentDate($log) {
+	function momentDatetime($log) {
 		$log.debug('Initiated directive');
 
 		return {
@@ -25,13 +23,19 @@ define([
 			link: function (scope, element, attrs, ngModel) {
 				ngModel.$formatters.push(function (value) {
 					if (!_.isUndefined(value)) {
-						return value.format('YYYY-MM-DD');
+						return value.format(moment.ISO_8601);
 					}
 				});
 
 				ngModel.$parsers.push(function (value) {
 					if (!_.isUndefined(value)) {
-						return moment(value, 'YYYY-MM-DD');
+						var momentDate = moment(value);
+
+						if (momentDate.isValid()) {
+							return momentDate.toISOString();
+						} else {
+							return undefined;
+						}
 					}
 				});
 
@@ -40,5 +44,5 @@ define([
 		};
 	}
 
-	module.directive('momentDate', momentDate);
+	module.directive('momentDatetime', momentDatetime);
 });

@@ -10,6 +10,9 @@ define([
 
 	'./language/languageSelector',
 
+	'./moment/momentDate',
+	'./moment/momentDatetime',
+
 	'./_locale/translation'
 ], function () {
 	'use strict';

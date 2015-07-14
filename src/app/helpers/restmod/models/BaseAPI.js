@@ -120,6 +120,7 @@ define(['app'], function (module) {
 			}
 
 			// Display confirmation dialog
+			//noinspection JSUnresolvedFunction
 			$.SmartMessageBox({
 				title: '<i class="fa fa-warning  txt-color-yellow"></i> ' +
 				gettextCatalog.getString('Confirmation'),
@@ -182,6 +183,7 @@ define(['app'], function (module) {
 				.catch(handleError);
 		};
 
+		//noinspection JSUnusedGlobalSymbols
 		/**
 		 * Persists model nested as property collection
 		 * @abstract
@@ -214,23 +216,25 @@ define(['app'], function (module) {
 				.catch(handleError);
 		};
 
+		//noinspection JSValidateJSDoc
 		/**
 		 * Shows in browser error messages when error occurs
 		 * @method handleError
 		 * @memberOf app.BaseAPI
 		 * @param response CallExpression
-		 * @return {*|Array|Promise}
+		 * @return {*|Promise|Array}
 		 */
 		function handleError(response) {
+			var responseObj = response.$response.data || response.$response;
 			appMessages.error({
-				message: response.$response.data.message,
+				message: responseObj.message,
 				boxType: appMessages.boxEnums.BIG,
 				timeout: 10000
 			});
 
-			$log.error('Server error: ' + JSON.stringify(response.$response.data));
+			$log.error('Server error: ' + JSON.stringify(responseObj));
 
-			return $q.reject(response);
+			return $q.reject(responseObj);
 		}
 
 		return API;
