@@ -48,15 +48,33 @@ msgstr ""
 msgid "Date & Time"
 msgstr ""
 
+#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:43
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:44
+#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:45
+msgid "Date created"
+msgstr ""
+
 #: src/app/docs/_models/Field/DateField.js:42
 msgid "Date picker"
 msgstr ""
 
-#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:74
+#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:51
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:52
+#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:53
+msgid "Date updated"
+msgstr ""
+
+#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:77
 #: src/app/docs/documents/shared/widgets/sharedDocumentListWidget/docsSharedDocumentListWidget.html:51
-#: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:59
-#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:62
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:78
+#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:79
 msgid "Delete"
+msgstr ""
+
+#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:37
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:38
+#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:39
+msgid "Description"
 msgstr ""
 
 #: src/app/docs/module.js:25
@@ -68,11 +86,11 @@ msgid "Document"
 msgstr ""
 
 #: src/app/docs/_enums/PermissionTypesEnum.js:20
-#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:68
+#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:71
 #: src/app/docs/documents/shared/widgets/sharedDocumentListWidget/docsSharedDocumentListWidget.html:45
 #: src/app/docs/templates/documents/module.js:57
-#: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:53
-#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:56
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:72
+#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:73
 msgid "Edit"
 msgstr ""
 
@@ -100,6 +118,12 @@ msgstr ""
 msgid "Multi-select"
 msgstr ""
 
+#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:29
+#: src/app/docs/templates/documents/widgets/documentTemplateList/docs-document-template-list.html:30
+#: src/app/docs/templates/fields/widgets/fieldTemplateList/docs-field-template-list.html:31
+msgid "Name"
+msgstr ""
+
 #: src/app/docs/documents/owned/module.js:39
 #: src/app/docs/documents/owned/module.js:54
 #: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:20
@@ -113,7 +137,7 @@ msgstr ""
 msgid "New"
 msgstr ""
 
-#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:65
+#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:64
 #: src/app/docs/templates/documents/widgets/documentTemplateList/docsDocumentTemplateListWidget.js:51
 msgid "No"
 msgstr ""
@@ -161,7 +185,7 @@ msgid "Selection"
 msgstr ""
 
 #: src/app/docs/_enums/PermissionTypesEnum.js:26
-#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:80
+#: src/app/docs/documents/owned/widgets/documentListWidget/docsDocumentListWidget.html:83
 msgid "Share"
 msgstr ""
 
@@ -218,18 +242,18 @@ msgstr ""
 msgid "Url address"
 msgstr ""
 
-#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:62
+#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:61
 msgid "Warning"
 msgstr ""
 
-#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:67
-#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:70
+#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:66
+#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:69
 #: src/app/docs/templates/documents/widgets/documentTemplateList/docsDocumentTemplateListWidget.js:53
 #: src/app/docs/templates/documents/widgets/documentTemplateList/docsDocumentTemplateListWidget.js:56
 msgid "Yes"
 msgstr ""
 
-#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:63
+#: src/app/docs/documents/_directives/docsDocumentTemplateSelect/docsDocumentTemplateSelect.js:62
 msgid "You are changing the template that document is based on. All previously created fields will be removed. Do you wish to continue?"
 msgstr ""
 

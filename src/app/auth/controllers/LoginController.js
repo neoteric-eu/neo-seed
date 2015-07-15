@@ -16,11 +16,12 @@ define([
 	 * @param localStorageService
 	 * @param neoSession
 	 * @param UserAPI
+	 * @todo Add to seed
 	 */
 	function LoginController($q, $scope, $modal, $state, $log, localStorageService, neoSession,
 		UserAPI, ipCookie) {
 		$scope.formError = false;
-		var User = UserAPI.build();
+		$scope.user = UserAPI.build();
 		$scope.loginData = globalSettings.get('LOGIN_DATA');
 
 		/**
@@ -29,7 +30,7 @@ define([
 		 * @param {Object} loginData
 		 */
 		$scope.loginAs = function (loginData) {
-			User = loginData;
+			$scope.user = loginData;
 			$scope.login();
 		};
 
@@ -45,7 +46,7 @@ define([
 			$log.debug('Login start');
 
 			UserAPI
-				.login(User)
+				.login($scope.user)
 				.then(function (user) {
 					$log.debug('login on_Success', 'start select customer');
 

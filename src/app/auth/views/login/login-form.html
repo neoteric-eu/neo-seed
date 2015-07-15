@@ -35,7 +35,8 @@
 	</fieldset>
 	<footer>
 		<button type="submit" class="btn btn-primary" ng-disabled="!loginForm.$valid || spinner">
-			{{'Log in'|translate}} <i class="fa fa-spinner fa-spin" ng-show="spinner"></i>
+			{{'Log in'|translate}}
+			<i class="fa fa-spinner fa-spin" ng-show="spinner"></i>
 		</button>
 
 		<div class="btn-group" ng-show="loginData.length">
