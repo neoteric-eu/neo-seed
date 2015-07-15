@@ -78,7 +78,7 @@ define(['docs/module'], function (module) {
 								// Remove $position to be able to add item from another to collection
 								item.$position = undefined;
 
-								$scope.document.templateId = template;
+								$scope.document.template = template;
 
 								// Magical way to solve problem with rendering
 								// QA: DON'T ASK WHY

@@ -26,7 +26,7 @@ define([
 				},
 
 				// attribute modifiers and relations
-				templateId: {
+				template: {
 					belongsTo: 'DocumentTemplate'
 				},
 				name: {

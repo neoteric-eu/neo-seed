@@ -23,6 +23,7 @@
 		</div>
 
 		<table ng-table="vm.documentTableOptions"
+					 show-filter="true"
 					 class="table table-striped table-bordered no-margin neo-table">
 			<tbody ng-show="$data.length">
 			<tr ng-repeat="document in $data">
