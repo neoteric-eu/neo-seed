@@ -53,7 +53,6 @@ define(['docs/module'], function (module) {
 				 * @param template {Object} property
 				 */
 				function selectDocumentTemplate(template) {
-					console.log();
 					$log.debug('Opened template selection confirmation modal');
 
 					// Display confirmation dialog
