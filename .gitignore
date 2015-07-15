@@ -10,11 +10,11 @@
 /src/styles/fonts
 
 ### Extensions ###
-.todo
-.ask
-.tmp
-.mo
-.pot
+*.todo
+*.ask
+*.tmp
+*.mo
+*.pot
 
 ### Files ###
 src/app/modules/global_settings.js
