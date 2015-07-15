@@ -23,11 +23,12 @@
 		</div>
 
 		<table ng-table="vm.fieldTemplatesTableOptions"
+					 show-filter="true"
 					 class="table neo-table table-striped table-bordered">
 
 			<tbody ng-show="$data.length">
 			<tr ng-repeat="fieldTemplate in $data">
-				<td data-title="'Name'"
+				<td title="'Name' | translate"
 						header-class="'cell-20'"
 						class="no-wrap cell-20"
 						sortable="'name'"
@@ -35,13 +36,13 @@
 					{{fieldTemplate.label}}
 				</td>
 
-				<td data-title="'Description'"
+				<td data-title="'Description' | translate"
 						sortable="'description'"
 						filter="{'description': 'text'}">
 					{{fieldTemplate.description}}
 				</td>
 
-				<td title="'Date created'"
+				<td title="'Date created' | translate"
 						header-class="'text-align-right cell-10'"
 						class="text-align-right cell-10"
 						sortable="'createdAt'"
@@ -49,7 +50,7 @@
 					{{fieldTemplate.createdAt | amDateFormat:'L'}}
 				</td>
 
-				<td title="'Date updated'"
+				<td title="'Date updated' | translate"
 						header-class="'text-align-right cell-10'"
 						class="text-align-right cell-10"
 						sortable="'updatedAt'"

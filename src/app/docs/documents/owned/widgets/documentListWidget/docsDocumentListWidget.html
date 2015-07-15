@@ -26,7 +26,7 @@
 					 class="table table-striped table-bordered no-margin neo-table">
 			<tbody ng-show="$data.length">
 			<tr ng-repeat="document in $data">
-				<td title="'Name'"
+				<td title="'Name' | translate"
 						header-class="'cell-20'"
 						class="no-wrap cell-20"
 						sortable="'name'"
@@ -34,13 +34,13 @@
 					{{document.name}}
 				</td>
 
-				<td title="'Description'"
+				<td title="'Description' | translate"
 						sortable="'description'"
 						filter="{'description': 'text'}">
 					{{document.description}}
 				</td>
 
-				<td title="'Date created'"
+				<td title="'Date created' | translate"
 						header-class="'text-align-right cell-10'"
 						class="text-align-right cell-10"
 						sortable="'createdAt'"
@@ -48,7 +48,7 @@
 					{{document.createdAt | amDateFormat:'L'}}
 				</td>
 
-				<td title="'Date updated'"
+				<td title="'Date updated' | translate"
 						header-class="'text-align-right cell-10'"
 						class="text-align-right cell-10"
 						sortable="'updatedAt'"

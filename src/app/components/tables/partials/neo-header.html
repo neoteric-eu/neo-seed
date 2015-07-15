@@ -1,6 +1,8 @@
 <tr>
-	<th ng-repeat="$column in $columns"
-			ng-click="sortBy($column, $event)" ng-show="$column.show(this)"
+	<th title="{{$column.headerTitle(this)}}"
+			ng-repeat="$column in $columns"
+			ng-click="sortBy($column, $event)"
+			ng-show="$column.show(this)"
 			ng-init="template=$column.headerTemplateURL(this)"
 			class="no-selection {{$column.class(this)}}"
 			ng-class="{
@@ -10,8 +12,8 @@
 
 		<div ng-if="!template"
 				 ng-show="!template"
+				 ng-bind="$column.title(this)"
 				 class="neo-table-header">
-			{{$column.title(this)|translate}}
 		</div>
 
 		<div ng-if="template" ng-show="template" ng-include="template"></div>
@@ -19,9 +21,10 @@
 </tr>
 
 
-<tr>
+<tr ng-show="show_filter">
 	<th ng-repeat="$column in $columns"
 			ng-show="$column.show(this)"
+			data-title-text="{{$column.titleAlt(this) || $column.title(this)}}"
 			class="neo-table-filter hasinput {{$column.class(this)}}">
 		<div ng-repeat="(name, filter) in $column.filter(this)">
 
@@ -35,3 +38,4 @@
 		</div>
 	</th>
 </tr>
+

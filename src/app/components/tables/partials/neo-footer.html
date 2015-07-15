@@ -2,10 +2,24 @@
 	<div class="col-sm-8 hidden-xs neo-table-info"
 			 style="position: absolute; overflow: visible">
 		{{'Showing'|translate}}
-		{{params.total() ? (params.page() - 1) * params.count() + 1 : 0}} {{'to'|translate}}
-		{{(params.page() * params.count()) &lt; params.total() ? params.page() * params.count() :
-		params.total()}} {{'of'|translate}}
-		{{params.total()}} {{'entries paginated by'|translate}}
+
+		<span class="txt-color-darken">
+			{{params.total() ? (params.page() - 1) * params.count() + 1 : 0}}
+		</span>
+
+		{{'to'|translate}}
+
+		<span class="txt-color-darken">
+			{{(params.page() * params.count()) &lt; params.total() ? params.page() * params.count() :
+		params.total()}}
+		</span>
+
+		{{'of'|translate}}
+		<span class="text-primary">
+			{{params.total()}}
+		</span>
+
+		{{'entries paginated by'|translate}}
 
 		<div class="btn-group btn-group-sm" dropdown>
 			<button type="button"
