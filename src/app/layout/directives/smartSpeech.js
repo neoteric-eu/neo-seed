@@ -184,28 +184,29 @@ define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig)
 		 * @method commandToRegExp
 		 * @param {} command NewExpression
 		 */
-		var commandsList              = [], recognition, callbacks = {
-			start: [],
-			error: [],
-			end: [],
-			result: [],
-			resultMatch: [],
-			resultNoMatch: [],
-			errorNetwork: [],
-			errorPermissionBlocked: [],
-			errorPermissionDenied: []
-		}, autoRestart, lastStartedAt = 0,
-		    //debugState = false, // decleared in app.appConfig.js
-		    //appConfig.debugStyle = 'font-weight: bold; color: #00f;', // decleared in app.appConfig.js
+		var commandsList = [], recognition, callbacks = {
+				start: [],
+				error: [],
+				end: [],
+				result: [],
+				resultMatch: [],
+				resultNoMatch: [],
+				errorNetwork: [],
+				errorPermissionBlocked: [],
+				errorPermissionDenied: []
+			}, autoRestart, lastStartedAt = 0,
+		//debugState = false, // decleared in app.appConfig.js
+		//appConfig.debugStyle = 'font-weight: bold; color: #00f;', // decleared in app.appConfig.js
 
-		    // The command matching code is a modified version of Backbone.Router by Jeremy Ashkenas,
-		    // under the MIT license.
-		    optionalParam             = /\s*\((.*?)\)\s*/g, optionalRegex = /(\(\?:[^)]+\))\?/g, namedParam = /(\(\?)?:\w+/g, splatParam = /\*\w+/g, escapeRegExp = /[\-{}\[\]+?.,\\\^$|#]/g, commandToRegExp = function (command) {
-			command = command.replace(escapeRegExp, '\\$&').replace(optionalParam, '(?:$1)?').replace(namedParam, function (match, optional) {
-				return optional ? match : '([^\\s]+)';
-			}).replace(splatParam, '(.*?)').replace(optionalRegex, '\\s*$1?\\s*');
-			return new RegExp('^' + command + '$', 'i');
-		};
+		// The command matching code is a modified version of Backbone.Router by Jeremy Ashkenas,
+		// under the MIT license.
+			optionalParam = /\s*\((.*?)\)\s*/g, optionalRegex = /(\(\?:[^)]+\))\?/g, namedParam = /(\(\?)?:\w+/g, splatParam = /\*\w+/g, escapeRegExp = /[\-{}\[\]+?.,\\\^$|#]/g, commandToRegExp = function (command) {
+				command = command.replace(escapeRegExp, '\\$&').replace(optionalParam, '(?:$1)?').replace(namedParam, function (match,
+					optional) {
+					return optional ? match : '([^\\s]+)';
+				}).replace(splatParam, '(.*?)').replace(optionalRegex, '\\s*$1?\\s*');
+				return new RegExp('^' + command + '$', 'i');
+			};
 
 		// This method receives an array of callbacks to iterate over, and invokes each of them
 		/**
@@ -282,7 +283,7 @@ define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig)
 					if (appConfig.debugState) {
 						root.console.log('%c ✔ SUCCESS: User allowed access the microphone service to start ', appConfig.debugStyle_success);
 						root.console.log('Language setting is set to: ' +
-						recognition.lang, appConfig.debugStyle);
+							recognition.lang, appConfig.debugStyle);
 					}
 					$.root_.removeClass('service-not-allowed');
 					$.root_.addClass('service-allowed');
@@ -366,7 +367,7 @@ define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig)
 								var parameters = result.slice(1);
 								if (appConfig.debugState) {
 									root.console.log('command matched: %c' +
-									commandsList[j].originalPhrase, appConfig.debugStyle);
+										commandsList[j].originalPhrase, appConfig.debugStyle);
 									if (parameters.length) {
 										root.console.log('with parameters', parameters);
 									}
@@ -514,7 +515,7 @@ define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig)
 				}
 				if (appConfig.debugState) {
 					root.console.log('Commands successfully loaded: %c' +
-					commandsList.length, appConfig.debugStyle);
+						commandsList.length, appConfig.debugStyle);
 				}
 			},
 

@@ -40,8 +40,7 @@ define(['layout/module'], function (module) {
 					if (state &&
 						state.data &&
 						state.data.title &&
-						breadcrunbs.indexOf(state.data.title) ===
-						-1) {
+						breadcrunbs.indexOf(state.data.title) === -1) {
 						breadcrunbs.unshift(state.data.title);
 					}
 

@@ -62,8 +62,8 @@ define(['app', 'globalSettings'], function (app, globalSettings) {
 				//	$injector.get('$state').go('auth.logout');
 				//	return $q.reject(rejection);
 				//} else {
-					// Return the promise rejection.
-					return $q.reject(rejection);
+				// Return the promise rejection.
+				return $q.reject(rejection);
 				//}
 			}
 		};

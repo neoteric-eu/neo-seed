@@ -35,17 +35,17 @@ var MyTemplate = {
 				 * @param {} data
 				 */
 				buildComment: function (data) {
-					var instance          = template_instance,                  //BaseTemplate instance
-					    config            = instance.config,                      //User current config
-					    available_options = config.tags.function,      //Custom functions tags options
-					    comment           = {
-						    pos: data.pos,
-						    tags: []
-					    },
-					    method_name       = data.name,
-					    node              = data.node,
-					    params            = [],
-					    default_value     = 'My function Description';
+					var instance = template_instance,                  //BaseTemplate instance
+						config = instance.config,                      //User current config
+						available_options = config.tags.function,      //Custom functions tags options
+						comment = {
+							pos: data.pos,
+							tags: []
+						},
+						method_name = data.name,
+						node = data.node,
+						params = [],
+						default_value = 'My function Description';
 
 					if (typeof(config.private) === 'undefined' || config.private || !/^_/.test(method_name)) {
 
@@ -131,9 +131,9 @@ var MyTemplate = {
 				 *   index
 				 */
 				enterFunctionExpression: function (params) {
-					var instance     = this,
-					    comment_data = {},
-					    parent       = params.parent;
+					var instance = this,
+						comment_data = {},
+						parent = params.parent;
 
 					if (parent.type === 'Property') {
 
@@ -167,13 +167,13 @@ var MyTemplate = {
 				 *   index
 				 */
 				enterFunctionDeclaration: function (params) {
-					var instance     = this,
-					    node         = params.node,
-					    comment_data = {
-						    pos: node.range[0],
-						    name: node.id.name,
-						    node: node
-					    };
+					var instance = this,
+						node = params.node,
+						comment_data = {
+							pos: node.range[0],
+							name: node.id.name,
+							node: node
+						};
 					instance.buildComment(comment_data);
 				},
 
@@ -184,13 +184,13 @@ var MyTemplate = {
 				 *   index
 				 */
 				enterVariableDeclaration: function (params) {
-					var instance     = this,
-					    node         = params.node,
-					    declarations = node.declarations,
-					    size         = declarations.length,
-					    i            = 0,
-					    item,
-					    comment_data = {};
+					var instance = this,
+						node = params.node,
+						declarations = node.declarations,
+						size = declarations.length,
+						i = 0,
+						item,
+						comment_data = {};
 
 					for (i; i < size; i++) {
 						item = declarations[i];

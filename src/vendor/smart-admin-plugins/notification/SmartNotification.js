@@ -35,9 +35,9 @@ function SmartUnLoading() {
 }
 
 // Messagebox
-var ExistMsg         = 0,
-    SmartMSGboxCount = 0,
-    PrevTop          = 0;
+var ExistMsg = 0,
+	SmartMSGboxCount = 0,
+	PrevTop = 0;
 
 $.SmartMessageBox = function (settings, callback) {
 	var SmartMSG, Content;
@@ -428,9 +428,9 @@ $.bigBox = function (settings, callback) {
 // .BigBox
 
 // Small Notification
-var SmallBoxes       = 0,
-    SmallCount       = 0,
-    SmallBoxesAnchos = 0;
+var SmallBoxes = 0,
+	SmallCount = 0,
+	SmallBoxesAnchos = 0;
 
 
 $.smallBox = function (settings, callback) {
@@ -473,8 +473,8 @@ $.smallBox = function (settings, callback) {
 
 	BoxSmall = ""
 
-	var IconSection       = "",
-	    CurrentIDSmallbox = "smallbox" + SmallBoxes;
+	var IconSection = "",
+		CurrentIDSmallbox = "smallbox" + SmallBoxes;
 
 	if (settings.iconSmall == undefined) {
 		IconSection = "<div class='miniIcono'></div>";

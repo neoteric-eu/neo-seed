@@ -32,8 +32,7 @@ define(['app'], function (app) {
 			});
 
 			$(document).mouseup(function (e) {
-				if (ajax_dropdown &&
-					!ajax_dropdown.is(e.target) &&
+				if (ajax_dropdown && !ajax_dropdown.is(e.target) &&
 					ajax_dropdown.has(e.target).length ===
 					0) {
 					ajax_dropdown.fadeOut(150);

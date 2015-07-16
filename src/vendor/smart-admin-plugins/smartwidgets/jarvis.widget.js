@@ -445,16 +445,16 @@
 			 **/
 			self.widget.each(function () {
 
-				var tWidget    = $(this),
-				    thisHeader = $(this).children('header'),
-				    customBtn,
-				    deleteBtn,
-				    editBtn,
-				    fullscreenBtn,
-				    widgetcolorBtn,
-				    toggleBtn,
-				    toggleSettings,
-				    refreshBtn;
+				var tWidget = $(this),
+					thisHeader = $(this).children('header'),
+					customBtn,
+					deleteBtn,
+					editBtn,
+					fullscreenBtn,
+					widgetcolorBtn,
+					toggleBtn,
+					toggleSettings,
+					refreshBtn;
 
 				/**
 				 * Dont double wrap(check).
@@ -665,11 +665,11 @@
 					/**
 					 * Variables.
 					 **/
-					var thisItem       = $(this),
-					    thisItemHeader = thisItem.children(),
-					    pathToFile     = thisItem.data('widget-load'),
-					    reloadTime     = thisItem.data('widget-refresh') * 1000,
-					    ajaxLoader     = thisItem.children();
+					var thisItem = $(this),
+						thisItemHeader = thisItem.children(),
+						pathToFile = thisItem.data('widget-load'),
+						reloadTime = thisItem.data('widget-refresh') * 1000,
+						ajaxLoader = thisItem.children();
 
 					if (!thisItem.find('.jarviswidget-ajax-placeholder')
 							.length) {
@@ -1307,11 +1307,11 @@
 				/**
 				 * Variables.
 				 **/
-				var rItem      = $(this)
-					.parents(self.o.widgets),
-				    pathToFile = rItem.data('widget-load'),
-				    ajaxLoader = rItem.children(),
-				    btn        = $(this);
+				var rItem = $(this)
+						.parents(self.o.widgets),
+					pathToFile = rItem.data('widget-load'),
+					ajaxLoader = rItem.children(),
+					btn = $(this);
 
 				/**
 				 * Run the ajax function.
@@ -1337,10 +1337,10 @@
 		 * @param:
 		 **/
 		destroy: function () {
-			var self      = this,
-			    namespace = '.' + pluginName,
-			    sortItem  = self.obj.find(self.o.grid +
-			    '.sortable-grid').not('[data-widget-excludegrid]');
+			var self = this,
+				namespace = '.' + pluginName,
+				sortItem = self.obj.find(self.o.grid +
+					'.sortable-grid').not('[data-widget-excludegrid]');
 
 			sortItem.sortable('destroy');
 			self.widget.children('header').off(namespace);

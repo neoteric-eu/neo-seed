@@ -37,17 +37,6 @@ define(['app'], function (app) {
 						return _name;
 					}
 				}
-			},
-
-			$hooks: {
-				'before-request': function (_req) {
-					if (_.has(ipCookie('activeCustomer'), 'customerId')) {
-						_req.headers = _.extend(_req.headers, {
-							'X-Customer-Id': localStorageService.cookie.get('activeCustomer').customerId,
-							'Authorization': 'token ' + $rootScope.token
-						});
-					}
-				}
 			}
 		});
 	}

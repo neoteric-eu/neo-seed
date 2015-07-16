@@ -100,7 +100,7 @@ module.exports = {
 			'file-saver/file-saver.js': 'file-saver/FileSaver.js',
 
 			'form-validation/form-validation.js': 'form.validation/dist/js/formValidation.js',
-			'form-validation/framework/bootstrap.js' : 'form.validation/dist/js/framework/bootstrap.js',
+			'form-validation/framework/bootstrap.js': 'form.validation/dist/js/framework/bootstrap.js',
 			'form-validation/language/': 'form.validation/dist/js/language/'
 		}
 	},
@@ -117,7 +117,7 @@ module.exports = {
 			destPrefix: 'src/styles/css/vendor'
 		},
 		files: {
-			'form-validation/formValidation.css' : 'form.validation/dist/css/formValidation.css',
+			'form-validation/formValidation.css': 'form.validation/dist/css/formValidation.css',
 			'select2/select2.css': 'select2/select2.css',
 			'select2/select2-bootstrap.css': 'select2/select2-bootstrap.css',
 			'ui-select/select.css': 'angular-ui-select/dist/select.css'

@@ -59,9 +59,9 @@ define(['modules/forms/module', 'jcrop'], function (module) {
 					listeners.onChangeHandlers.push(coordsUpdate);
 				}
 
-				var $previewPane      = $(attributes.smartJcropPreview),
-				    $previewContainer = $previewPane.find('.preview-container'),
-				    $previewImg       = $previewPane.find('img');
+				var $previewPane = $(attributes.smartJcropPreview),
+					$previewContainer = $previewPane.find('.preview-container'),
+					$previewImg = $previewPane.find('img');
 
 				if ($previewPane.length && $previewImg.length) {
 					/**

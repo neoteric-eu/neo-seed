@@ -63,12 +63,12 @@ define([
 	couchPotato.configureApp(app);
 
 	app.config(function ($provide,
-	                     $httpProvider,
-	                     $locationProvider,
-	                     localStorageServiceProvider,
-	                     $logProvider,
-	                     restmodProvider,
-	                     uiSelectConfig) {
+		$httpProvider,
+		$locationProvider,
+		localStorageServiceProvider,
+		$logProvider,
+		restmodProvider,
+		uiSelectConfig) {
 
 		restmodProvider.rebase('NeoStyleAPI');
 
@@ -84,12 +84,12 @@ define([
 	});
 
 	app.run(function ($couchPotato,
-	                  $rootScope,
-	                  $state,
-	                  gettextCatalog,
-	                  LanguageAPI,
-	                  $urlRouter,
-	                  $log) {
+		$rootScope,
+		$state,
+		gettextCatalog,
+		LanguageAPI,
+		$urlRouter,
+		$log) {
 
 		$log.debug('Setting up application configuration');
 

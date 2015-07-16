@@ -30,8 +30,7 @@ define(['app'], function (app) {
 
 			// SHORTCUT buttons goes away if mouse is clicked outside of the area
 			$(document).mouseup(function (e) {
-				if (shortcut_dropdown &&
-					!shortcut_dropdown.is(e.target) &&
+				if (shortcut_dropdown && !shortcut_dropdown.is(e.target) &&
 					shortcut_dropdown.has(e.target).length ===
 					0) {
 					shortcut_buttons_hide();

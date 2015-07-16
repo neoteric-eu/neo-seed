@@ -14,7 +14,10 @@ define([
 				.success(function (template) {
 					$templateCache.put(cacheKey, template);
 
-					$log.debug('Loaded neoTable ' + templateName + ' template into cache under key: ' + cacheKey);
+					$log.debug('Loaded neoTable ' +
+						templateName +
+						' template into cache under key: ' +
+						cacheKey);
 				})
 				.error(function () {
 					$log.error('Could not load neoTable ' + templateName + ' template');
