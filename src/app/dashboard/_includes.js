@@ -1,5 +1,3 @@
-define([
-	'./controllers/DashboardCtrl'
-], function() {
+define([], function () {
 	'use strict';
 });

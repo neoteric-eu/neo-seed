@@ -1,33 +1,11 @@
 define([
-	// Core app generics
-	'helpers/_includes',
+	// Seed
+	'seed/_includes',
+	'seed/module',
 
-	// Core apps components
-	'components/module',
-	'components/_includes',
-
-	// Layout
-	'layout/module',
-	'layout/_includes',
-
-	// Authentication
-	'auth/module',
-	'auth/_includes',
-
-	// Forms
-	'modules/forms/module',
-
-	// Graphs
-	'modules/graphs/module',
-	'modules/graphs/includes',
-
-	// Widgets
-	'modules/widgets/module',
-	'modules/widgets/includes',
-
-	// Dash
-	'dashboard/module',
-	'dashboard/_includes'
+	// Dashboard
+	'./dashboard/_includes',
+	'./dashboard/module'
 ], function () {
 	'use strict';
 });

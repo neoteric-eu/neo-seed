@@ -1,40 +1,23 @@
 define([
-	'angular',
-	'angular-couch-potato',
-	'angular-templates'
-], function (ng, couchPotato) {
+	'angular'
+], function (ng) {
 	'use strict';
 
-	var module = ng.module('app.dashboard', [
-		'ui.router',
-		'gettext'
-	]);
+	var module = ng.module('app.dashboard', []);
 
-	module.config(function ($stateProvider, $couchPotatoProvider) {
+	module.config(function ($stateProvider) {
 		$stateProvider
 			.state('app.dashboard', {
 				url: '/dashboard',
 				views: {
 					'content@app': {
-						controller: 'DashboardCtrl as dashboard',
-						templateUrl: 'app/dashboard/views/dashboard.html',
-						resolve: {
-							deps: $couchPotatoProvider.resolveDependencies([
-								'dashboard/controllers/DashboardCtrl'
-							])
-						}
+						templateUrl: 'app/dashboard/views/dashboard.html'
 					}
 				},
 				data: {
 					title: 'Dashboard'
 				}
 			});
-	});
-
-	couchPotato.configureApp(module);
-
-	module.run(function ($couchPotato) {
-		module.lazy = $couchPotato;
 	});
 
 	return module;

@@ -1,7 +1,7 @@
 // Defer AngularJS bootstrap
 window.name = 'NG_DEFER_BOOTSTRAP!';
 
-requirejs(['require.conf'], function () {
+requirejs(['../seed/require.conf', 'require.conf'], function () {
 	'use strict';
 
 	requirejs([
@@ -12,8 +12,8 @@ requirejs(['require.conf'], function () {
 		'lodash-extensions',
 		'appConfig',
 		'bootstrap',
-		'_includes',
-		'app'
+		'app/_includes',
+		'app/app'
 	], function (require, ng, domReady) {
 		domReady(function () {
 			setTimeout(function () {
