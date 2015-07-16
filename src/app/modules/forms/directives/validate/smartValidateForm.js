@@ -1,4 +1,4 @@
-define(['modules/forms/module', 'modules/forms/common', 'jquery-validation'], function (module) {
+define(['modules/forms/module', 'jquery-validation'], function (module) {
 	'use strict';
 
 	return module.registerDirective('smartValidateForm', function () {

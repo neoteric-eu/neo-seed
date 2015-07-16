@@ -9,12 +9,12 @@ define(['layout/module'], function (module) {
 		});
 
 		var $window = $(window),
-			$html = $('html'),
-			$body = $('body'),
-			$navigation,
-			$menu,
-			$ribbon,
-			$footer;
+		    $html   = $('html'),
+		    $body   = $('body'),
+		    $navigation,
+		    $menu,
+		    $ribbon,
+		    $footer;
 
 
 		(function cacheElements() {
@@ -47,11 +47,11 @@ define(['layout/module'], function (module) {
 				tElement.removeAttr('smart-layout data-smart-layout');
 
 				var appViewHeight = 0,
-					appViewWidth = 0,
-					calcWidth,
-					calcHeight,
-					deltaX,
-					deltaY;
+				    appViewWidth  = 0,
+				    calcWidth,
+				    calcHeight,
+				    deltaX,
+				    deltaY;
 
 				var forceResizeTrigger = false;
 

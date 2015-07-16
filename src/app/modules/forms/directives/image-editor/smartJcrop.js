@@ -59,9 +59,9 @@ define(['modules/forms/module', 'jcrop'], function (module) {
 					listeners.onChangeHandlers.push(coordsUpdate);
 				}
 
-				var $previewPane = $(attributes.smartJcropPreview),
-					$previewContainer = $previewPane.find('.preview-container'),
-					$previewImg = $previewPane.find('img');
+				var $previewPane      = $(attributes.smartJcropPreview),
+				    $previewContainer = $previewPane.find('.preview-container'),
+				    $previewImg       = $previewPane.find('img');
 
 				if ($previewPane.length && $previewImg.length) {
 					/**
@@ -99,7 +99,8 @@ define(['modules/forms/module', 'jcrop'], function (module) {
 				if (attributes.selection) {
 					scope.$watch('selection', function (newVal, oldVal) {
 						if (newVal !== oldVal) {
-							var rectangle = newVal === 'release' ? [imageWidth / 2, imageHeight / 2, imageWidth / 2, imageHeight / 2] : newVal;
+							var rectangle = newVal === 'release' ? [imageWidth / 2, imageHeight / 2, imageWidth /
+							2, imageHeight / 2] : newVal;
 
 							var callback = newVal === 'release' ? function () {
 								jcropApi.release();

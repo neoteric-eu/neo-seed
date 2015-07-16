@@ -30,6 +30,8 @@ module.exports = {
 			'angular-restmod/angular-restmod.js': 'angular-restmod/dist/angular-restmod-bundle.js',
 			'angular-restmod/styles/ams.js': 'angular-restmod/dist/styles/ams.js',
 			'angular-restmod/plugins': 'angular-restmod/dist/plugins/*.min.js',
+			'angular-gridster/angular-gridster.js': 'angular-gridster/src/angular-gridster.js',
+			'angular-file-upload/angular-file-upload.js': 'ng-file-upload/ng-file-upload.js',
 
 			'bootstrap/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
 			'bootstrap-timepicker/bootstrap-timepicker.js': 'bootstrap3-fontawesome-timepicker/js/bootstrap-timepicker.js',
@@ -46,7 +48,7 @@ module.exports = {
 			'datatables/datatables.js': 'datatables/media/js/jquery.dataTables.js',
 			'datatables-colvis/datatables-colvis.js': 'datatables-colvis/js/dataTables.colVis.js',
 			'datatables-bootstrap/datatables-bootstrap.js': 'datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.js',
-			'datatables-responsive/datatables-responsive.js': 'datatables-responsive/files/1.10/js/datatables.responsive.js',
+			'datatables-responsive/datatables-responsive.js': 'datatables-responsive/js/dataTables.responsive.js',
 			'datatables-tools/datatables-tools.js': 'datatables-tabletools/js/dataTables.tableTools.js',
 
 			'jquery/jquery.js': 'jquery/dist/jquery.js',
@@ -60,6 +62,7 @@ module.exports = {
 			'jquery-jvectormap/jquery-jvectormap.js': 'jvectormap/jquery-jvectormap.js',
 			'jquery-knob/jquery-knob.js': 'jquery-knob/js/jquery.knob.js',
 			'jquery-maskedinput/jquery-maskedinput.js': 'jquery-maskedinput/dist/jquery.maskedinput.js',
+			'jquery-nestable/jquery-nestable.js': 'jquery-nestable/jquery.nestable.js',
 			'jquery-ui/jquery-ui.js': 'jquery-ui/jquery-ui.js',
 			'jquery-ui/i18n': 'jquery-ui/ui/i18n',
 			'jquery-ui/': 'jquery-ui/ui/*.js',
@@ -67,6 +70,7 @@ module.exports = {
 			'jquery-sparkline/jquery-sparkline.js': 'relayfoods-jquery.sparkline/dist/jquery.sparkline.js',
 			'jquery-validation/jquery-validate.js': 'jquery-validation/dist/jquery.validate.js',
 			'jquery-magnificpopup/jquery-magnificpopup.js': 'magnific-popup/dist/jquery.magnific-popup.js',
+			'jquery-resize/jquery-resize.js': 'javascript-detect-element-resize/jquery.resize.js',
 
 			'requirejs-domready/requirejs-domready.js': 'requirejs-domready/domReady.js',
 
@@ -92,7 +96,12 @@ module.exports = {
 			'raven/raven.js': 'raven-js/dist/raven.js',
 			'select2/select2.js': 'select2/select2.js',
 			'summernote/summernote.js': 'summernote/dist/summernote.js',
-			'to-markdown/to-markdown.js': 'to-markdown/src/to-markdown.js'
+			'to-markdown/to-markdown.js': 'to-markdown/src/to-markdown.js',
+			'file-saver/file-saver.js': 'file-saver/FileSaver.js',
+
+			'form-validation/form-validation.js': 'form.validation/dist/js/formValidation.js',
+			'form-validation/framework/bootstrap.js' : 'form.validation/dist/js/framework/bootstrap.js',
+			'form-validation/language/': 'form.validation/dist/js/language/'
 		}
 	},
 	require: {
@@ -108,6 +117,7 @@ module.exports = {
 			destPrefix: 'src/styles/css/vendor'
 		},
 		files: {
+			'form-validation/formValidation.css' : 'form.validation/dist/css/formValidation.css',
 			'select2/select2.css': 'select2/select2.css',
 			'select2/select2-bootstrap.css': 'select2/select2-bootstrap.css',
 			'ui-select/select.css': 'angular-ui-select/dist/select.css'
@@ -122,7 +132,8 @@ module.exports = {
 			'elements/elements.less': 'less-elements/elements.less',
 			'animate/animate.less': 'animate.less/animate.less',
 			'animate/source': 'animate.less/source',
-			'font-awesome/': 'fontawesome/less'
+			'font-awesome/': 'fontawesome/less',
+			'angular-gridster/angular-gridster.less': 'angular-gridster/src/angular-gridster.less'
 		}
 	},
 	fonts: {

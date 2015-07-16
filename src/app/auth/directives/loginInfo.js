@@ -14,7 +14,7 @@ define(['auth/module'], function (module) {
 			 */
 			link: function (scope) {
 				var unbindWatch = scope.$watch(scope.$root.user, function (newValue, oldValue) {
-					if(newValue !== oldValue) {
+					if (newValue !== oldValue) {
 						scope.user = newValue.user;
 						unbindWatch();
 					}

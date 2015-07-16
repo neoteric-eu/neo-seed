@@ -19,9 +19,6 @@ module.exports = {
 		]
 	},
 	test: {
-		options: {
-			jshintrc: 'test/.jshintrc'
-		},
 		src: [
 			'test/**/*.spec.js',
 			'<%= yeoman.app %>/app/**/*.spec.js'

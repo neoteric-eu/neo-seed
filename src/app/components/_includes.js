@@ -5,11 +5,14 @@ define([
 
 	'./profiles/userProfiles',
 	'./shortcut/shortcut-directive',
-	'./tables/directives/neoTable',
-	'./tables/factories/neoTableParams',
+	'./tables/neoTable',
+	'./tables/neoTableParams',
 
 	'./language/controllers/LanguageController',
-	'./language/directives/languageSelector',
+	'./language/languageSelector',
+
+	'./moment/momentDate',
+	'./moment/momentDatetime',
 
 	'./_locale/translation'
 ], function () {

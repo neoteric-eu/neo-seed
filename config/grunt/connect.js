@@ -2,30 +2,30 @@ module.exports = function () {
 	'use strict';
 
 	var modRewrite = require('connect-modrewrite'),
-		middleware = function (connect, options) {
+	    middleware = function (connect, options) {
 
-			var middlewares = [];
+		    var middlewares = [];
 
-			middlewares.push(modRewrite([
-				'^[^\\.]*$ /index.html [L]'
-			]));
+		    middlewares.push(modRewrite([
+			    '^[^\\.]*$ /index.html [L]'
+		    ]));
 
-			if (!Array.isArray(options.base)) {
-				options.base = [options.base];
-			}
+		    if (!Array.isArray(options.base)) {
+			    options.base = [options.base];
+		    }
 
-			var directory = options.directory || options.base[options.base.length - 1];
+		    var directory = options.directory || options.base[options.base.length - 1];
 
-			options.base.forEach(function (base) {
-				// Serve static files.
-				middlewares.push(connect.static(base));
-			});
+		    options.base.forEach(function (base) {
+			    // Serve static files.
+			    middlewares.push(connect.static(base));
+		    });
 
-			// Make directory browse-able.
-			middlewares.push(connect.directory(directory));
+		    // Make directory browse-able.
+		    middlewares.push(connect.directory(directory));
 
-			return middlewares;
-		};
+		    return middlewares;
+	    };
 
 	return {
 		server: {

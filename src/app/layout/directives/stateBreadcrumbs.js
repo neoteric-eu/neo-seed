@@ -5,7 +5,7 @@ define(['layout/module'], function (module) {
 		return {
 			restrict: 'E',
 			replace: true,
-			template: '<ol class="breadcrumb"><li>Home</li></ol>',
+			template: '<ol class="breadcrumb"></ol>',
 			/**
 			 * Description
 			 * @method link
@@ -20,7 +20,7 @@ define(['layout/module'], function (module) {
 				 * @param {} breadcrumbs
 				 */
 				function setBreadcrumbs(breadcrumbs) {
-					var html = '<li>Home</li>';
+					var html = '';
 					angular.forEach(breadcrumbs, function (crumb) {
 						html += '<li>' + crumb + '</li>';
 					});
@@ -37,7 +37,11 @@ define(['layout/module'], function (module) {
 
 					var state = $state.get(stateName);
 
-					if (state && state.data && state.data.title && breadcrunbs.indexOf(state.data.title) === -1) {
+					if (state &&
+						state.data &&
+						state.data.title &&
+						breadcrunbs.indexOf(state.data.title) ===
+						-1) {
 						breadcrunbs.unshift(state.data.title);
 					}
 

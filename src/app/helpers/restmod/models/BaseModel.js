@@ -9,11 +9,9 @@ define(['app'], function (app) {
 	 * @memberOf app
 	 *
 	 * @param restmod
-	 * @returns {*|{$isAbstract, $$chain}}
-	 * @param $rootScope
-	 * @param ipCookie
+	 * @return {Object}
 	 */
-	function BaseModel($rootScope, restmod, ipCookie) {
+	function BaseModel(restmod) {
 		return restmod.mixin({
 			createdAt: {
 				encode: 'DatetimeEncode',

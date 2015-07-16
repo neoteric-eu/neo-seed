@@ -28,11 +28,13 @@
 											'state-error' : !form.firstName.$pristine && form.firstName.$invalid,
 											'state-success': !form.firstName.$pristine && form.firstName.$valid
 										}"> <i class="icon-append fa fa-user"></i>
-									<input type="text" name="firstName" placeholder="{{'First name'|translate}}" ng-model="user.firstName"
+									<input type="text" name="firstName" placeholder="{{'First name'|translate}}"
+												 ng-model="user.firstName"
 												 required>
 									<b class="tooltip tooltip-bottom-right">{{'Enter your first name'|translate}}</b>
 								</label>
-								<em ng-show="!form.firstName.$pristine && form.firstName.$error.required" for="firstName"
+								<em ng-show="!form.firstName.$pristine && form.firstName.$error.required"
+										for="firstName"
 										class="invalid">
 									{{'Please enter your first name'|translate}}</em>
 							</section>
@@ -41,11 +43,13 @@
 											'state-error' : !form.lastName.$pristine && form.lastName.$invalid,
 											'state-success': !form.lastName.$pristine && form.lastName.$valid
 										}"> <i class="icon-append fa fa-user"></i>
-									<input type="text" name="lastName" placeholder="{{'Last name'|translate}}" ng-model="user.lastName"
+									<input type="text" name="lastName" placeholder="{{'Last name'|translate}}"
+												 ng-model="user.lastName"
 												 required>
 									<b class="tooltip tooltip-bottom-right">{{'Enter your last name'|translate}}</b>
 								</label>
-								<em ng-show="!form.lastName.$pristine && form.lastName.$error.required" for="lastName" class="invalid">
+								<em ng-show="!form.lastName.$pristine && form.lastName.$error.required"
+										for="lastName" class="invalid">
 									{{'Please enter your last name'|translate}}</em>
 							</section>
 							<section>
@@ -53,11 +57,14 @@
 											'state-error' : !form.terms.$pristine && form.terms.$invalid,
 											'state-success': !form.terms.$pristine && form.terms.$valid
 										}">
-									<input type="checkbox" name="terms" id="terms" ng-model="user.acceptTermsOfService" required>
-									<i></i>{{'I agree with the'|translate}}&nbsp;<a ng-click="openTerms(); prevent">{{'Terms and
+									<input type="checkbox" name="terms" id="terms"
+												 ng-model="user.acceptTermsOfService" required>
+									<i></i>{{'I agree with the'|translate}}&nbsp;<a ng-click="openTerms(); prevent">{{'Terms
+									and
 									Conditions'|translate}}</a>
 								</label>
-								<em ng-show="!form.terms.$pristine && form.terms.$error.required" for="terms" class="invalid">{{'You
+								<em ng-show="!form.terms.$pristine && form.terms.$error.required" for="terms"
+										class="invalid">{{'You
 									must agree with Terms and Conditions.'|translate}}</em>
 							</section>
 						</fieldset>

@@ -11,11 +11,11 @@ define(['auth/module'], function (module) {
 	 * @param {} gettextCatalog
 	 */
 	var RegisterController = function ($rootScope,
-																		 $scope,
-																		 $cookies,
-																		 neoSession,
-																		 smRegistrationService,
-																		 gettextCatalog) {
+		$scope,
+		$cookies,
+		neoSession,
+		smRegistrationService,
+		gettextCatalog) {
 		$scope.user = {
 			reflink: $cookies.referralId,
 			language: angular.uppercase(neoSession.getLanguage())
@@ -38,7 +38,8 @@ define(['auth/module'], function (module) {
 		 * @method checkPassword
 		 */
 		$scope.checkPassword = function () {
-			this.form.passwordConfirm.$setValidity('dontMatch', $scope.user.password === $scope.user.passwordConfirm);
+			this.form.passwordConfirm.$setValidity('dontMatch', $scope.user.password ===
+				$scope.user.passwordConfirm);
 		};
 
 		/**

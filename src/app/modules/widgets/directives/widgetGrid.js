@@ -186,8 +186,8 @@ define(['modules/widgets/module'], function (module) {
 		};
 
 		var jarvisWidgetAddedOff,
-			$viewContentLoadedOff,
-			$stateChangeStartOff;
+		    $viewContentLoadedOff,
+		    $stateChangeStartOff;
 
 		return {
 			restrict: 'A',

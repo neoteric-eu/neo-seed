@@ -8,10 +8,7 @@ define(['app', 'globalSettings'], function (app) {
 	 * @param {} $state
 	 * @param {} LanguageAPI
 	 */
-	var LanguagesController = function ($scope,
-	                                    $rootScope,
-	                                    $state,
-	                                    LanguageAPI) {
+	var LanguagesController = function ($scope, $rootScope, $state, LanguageAPI) {
 
 		$scope.languages = LanguageAPI.languageCollection || [];
 		$scope.currentLanguage = LanguageAPI.getLanguage();

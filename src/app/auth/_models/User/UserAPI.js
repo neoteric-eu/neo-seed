@@ -59,6 +59,7 @@ define(['auth/module'], function (module) {
 					$log.error('Could not logout the user', response);
 				});
 		};
+
 		return api;
 	}
 

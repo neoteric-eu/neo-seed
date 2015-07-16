@@ -8,7 +8,8 @@ define(['modules/graphs/module', 'morris'], function (module) {
 	 * @link https://github.com/morrisjs/morris.js
 	 * @example
 	 * <morris-donut-graph graph-config="configObject"></morris-donut-graph>
-	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string}, link: Function}}
+	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string},
+	 *   link: Function}}
 	 */
 	function morrisDonutGraph() {
 		return {

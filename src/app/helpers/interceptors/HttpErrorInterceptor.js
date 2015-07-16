@@ -2,11 +2,12 @@ define(['app', 'globalSettings'], function (app, globalSettings) {
 	'use strict';
 
 	/**
-	 * Description
+	 * Handles globally server error exceptions
 	 * @method HttpErrorInterceptor
-	 * @param {} $exceptionHandler
-	 * @param {} $exceptionHandler
-	 * @return ObjectExpression
+	 * @param $q {Object} Angular promise provider
+	 * @param $exceptionHandler {Function} Exception handler
+	 * @param $injector {Object} Dependency Injection service
+	 * @return {{requestError: Function, responseError: Function}}
 	 */
 	function HttpErrorInterceptor($q, $exceptionHandler) {
 
@@ -52,10 +53,18 @@ define(['app', 'globalSettings'], function (app, globalSettings) {
 			 * @param {} rejection CallExpression
 			 */
 			responseError: function (rejection) {
+
 				// show notification
 				notifyError(rejection);
-				// Return the promise rejection.
-				return $q.reject(rejection);
+
+				//if (rejection.status === 401) {
+				//	// If user is not authorised redirect to login page
+				//	$injector.get('$state').go('auth.logout');
+				//	return $q.reject(rejection);
+				//} else {
+					// Return the promise rejection.
+					return $q.reject(rejection);
+				//}
 			}
 		};
 	}

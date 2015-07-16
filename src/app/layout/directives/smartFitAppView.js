@@ -18,7 +18,9 @@ define(['layout/module'], function (module) {
 				var selector = attributes.smartFitAppView;
 
 				if (SmartCss.appViewSize && SmartCss.appViewSize.height) {
-					var height = SmartCss.appViewSize.height - leadingY < 252 ? 252 : SmartCss.appViewSize.height - leadingY;
+					var height = SmartCss.appViewSize.height -
+					leadingY <
+					252 ? 252 : SmartCss.appViewSize.height - leadingY;
 					SmartCss.add(selector, 'height', height + 'px');
 				}
 

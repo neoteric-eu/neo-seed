@@ -20,7 +20,8 @@ var MyTemplate = {
 	/**
 	 * Allow to write custom tags
 	 * @method tags
-	 * @param {} template_instance object through which we can access the attributes like config, comment_list, etc
+	 * @param {} template_instance object through which we can access the attributes like config,
+	 *   comment_list, etc
 	 * @return tags Object that contains the custom tags implementations
 	 */
 	tags: function (template_instance) {
@@ -34,17 +35,17 @@ var MyTemplate = {
 				 * @param {} data
 				 */
 				buildComment: function (data) {
-					var instance = template_instance,                  //BaseTemplate instance
-						config = instance.config,                      //User current config
-						available_options = config.tags.function,      //Custom functions tags options
-						comment = {
-							pos: data.pos,
-							tags: []
-						},
-						method_name = data.name,
-						node = data.node,
-						params = [],
-						default_value = 'My function Description';
+					var instance          = template_instance,                  //BaseTemplate instance
+					    config            = instance.config,                      //User current config
+					    available_options = config.tags.function,      //Custom functions tags options
+					    comment           = {
+						    pos: data.pos,
+						    tags: []
+					    },
+					    method_name       = data.name,
+					    node              = data.node,
+					    params            = [],
+					    default_value     = 'My function Description';
 
 					if (typeof(config.private) === 'undefined' || config.private || !/^_/.test(method_name)) {
 
@@ -126,12 +127,13 @@ var MyTemplate = {
 				/**
 				 * Concrete visitor function implementation for functions tags in default Template
 				 * @method enterFunctionExpression
-				 * @param {} params Object that contains properties like node, parent, fieldName, siblings, index
+				 * @param {} params Object that contains properties like node, parent, fieldName, siblings,
+				 *   index
 				 */
 				enterFunctionExpression: function (params) {
-					var instance = this,
-						comment_data = {},
-						parent = params.parent;
+					var instance     = this,
+					    comment_data = {},
+					    parent       = params.parent;
 
 					if (parent.type === 'Property') {
 
@@ -161,32 +163,34 @@ var MyTemplate = {
 				/**
 				 * Concrete visitor function implementation for functions tags in default Template
 				 * @method enterFunctionDeclaration
-				 * @param {} params Object that contains properties like node, parent, fieldName, siblings, index
+				 * @param {} params Object that contains properties like node, parent, fieldName, siblings,
+				 *   index
 				 */
 				enterFunctionDeclaration: function (params) {
-					var instance = this,
-						node = params.node,
-						comment_data = {
-							pos: node.range[0],
-							name: node.id.name,
-							node: node
-						};
+					var instance     = this,
+					    node         = params.node,
+					    comment_data = {
+						    pos: node.range[0],
+						    name: node.id.name,
+						    node: node
+					    };
 					instance.buildComment(comment_data);
 				},
 
 				/**
 				 * Concrete visitor function implementation for functions tags in default Template
 				 * @method enterVariableDeclaration
-				 * @param {} params Object that contains properties like node, parent, fieldName, siblings, index
+				 * @param {} params Object that contains properties like node, parent, fieldName, siblings,
+				 *   index
 				 */
 				enterVariableDeclaration: function (params) {
-					var instance = this,
-						node = params.node,
-						declarations = node.declarations,
-						size = declarations.length,
-						i = 0,
-						item,
-						comment_data = {};
+					var instance     = this,
+					    node         = params.node,
+					    declarations = node.declarations,
+					    size         = declarations.length,
+					    i            = 0,
+					    item,
+					    comment_data = {};
 
 					for (i; i < size; i++) {
 						item = declarations[i];

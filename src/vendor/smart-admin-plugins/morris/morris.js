@@ -1,31 +1,31 @@
 (function () {
 	var $, Morris, minutesSpecHelper, secondsSpecHelper,
-		__slice = [].slice,
-		__hasProp = {}.hasOwnProperty,
-		__extends = function (child, parent) {
-			for (var key in parent) {
-				if (__hasProp.call(parent, key)) child[key] = parent[key];
-			}
-			function ctor() {
-				this.constructor = child;
-			}
+	    __slice   = [].slice,
+	    __hasProp = {}.hasOwnProperty,
+	    __extends = function (child, parent) {
+		    for (var key in parent) {
+			    if (__hasProp.call(parent, key)) child[key] = parent[key];
+		    }
+		    function ctor() {
+			    this.constructor = child;
+		    }
 
-			ctor.prototype = parent.prototype;
-			child.prototype = new ctor();
-			child.__super__ = parent.prototype;
-			return child;
-		},
-		__bind = function (fn, me) {
-			return function () {
-				return fn.apply(me, arguments);
-			};
-		},
-		__indexOf = [].indexOf || function (item) {
-				for (var i = 0, l = this.length; i < l; i++) {
-					if (i in this && this[i] === item) return i;
-				}
-				return -1;
-			};
+		    ctor.prototype = parent.prototype;
+		    child.prototype = new ctor();
+		    child.__super__ = parent.prototype;
+		    return child;
+	    },
+	    __bind    = function (fn, me) {
+		    return function () {
+			    return fn.apply(me, arguments);
+		    };
+	    },
+	    __indexOf = [].indexOf || function (item) {
+			    for (var i = 0, l = this.length; i < l; i++) {
+				    if (i in this && this[i] === item) return i;
+			    }
+			    return -1;
+		    };
 
 	Morris = window.Morris = {};
 
@@ -803,7 +803,7 @@
 
 		Line.prototype.drawXAxis = function () {
 			var drawLabel, l, labels, prevLabelMargin, row, ypos, _i, _len, _results,
-				_this = this;
+			    _this = this;
 			ypos = this.bottom + this.options.gridTextSize * 1.25;
 			prevLabelMargin = null;
 			drawLabel = function (labelText, xpos) {

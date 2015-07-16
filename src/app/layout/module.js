@@ -1,8 +1,6 @@
 define([
 	'angular',
-	'angular-couch-potato',
-	'angular-ui-router',
-	'angular-templates'
+	'angular-couch-potato'
 ], function (ng, couchPotato) {
 
 	'use strict';

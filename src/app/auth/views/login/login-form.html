@@ -9,7 +9,8 @@
 
 		<section>
 			<label class="input"> <i class="icon-append fa fa-user"></i>
-				<input type="email" name="email" placeholder="{{'Email'|translate}}" ng-model="user.login" required>
+				<input type="email" name="email" placeholder="{{'Email'|translate}}" ng-model="user.login"
+							 required>
 				<b class="tooltip tooltip-top-right">
 					<i class="fa fa-user txt-color-teal"></i>
 					{{'Enter your email address.'|translate}}
@@ -19,7 +20,8 @@
 
 		<section>
 			<label class="input"> <i class="icon-append fa fa-lock"></i>
-				<input type="password" name="password" placeholder="{{'Password'|translate}}" ng-model="user.password" required>
+				<input type="password" name="password" placeholder="{{'Password'|translate}}"
+							 ng-model="user.password" required>
 				<b class="tooltip tooltip-top-right">
 					<i class="fa fa-lock txt-color-teal"></i>
 					{{'Enter your password.'|translate}}
@@ -33,7 +35,8 @@
 	</fieldset>
 	<footer>
 		<button type="submit" class="btn btn-primary" ng-disabled="!loginForm.$valid || spinner">
-			{{'Log in'|translate}} <i class="fa fa-spinner fa-spin" ng-show="spinner"></i>
+			{{'Log in'|translate}}
+			<i class="fa fa-spinner fa-spin" ng-show="spinner"></i>
 		</button>
 
 		<div class="btn-group" ng-show="loginData.length">

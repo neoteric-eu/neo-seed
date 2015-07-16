@@ -1,15 +1,20 @@
 define([
 	'angular',
 	'angular-couch-potato',
-	'angular-templates'
+	'angular-table'
 ], function (ng, couchPotato) {
 	'use strict';
 
-	var module = ng.module('app.components', []);
+	var module = ng.module('app.components', ['ngTable']);
+
+	module.constant('componentsConf', {
+		MODULE_PATH: 'app/components'
+	});
 
 	couchPotato.configureApp(module);
 
-	module.run(function ($couchPotato) {
+	module.run(function ($couchPotato, neoTable) {
+		neoTable.init();
 		module.lazy = $couchPotato;
 	});
 

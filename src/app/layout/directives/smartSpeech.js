@@ -14,7 +14,11 @@ define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig)
 	 * http://www.myorange.ca
 	 */
 
-	var SpeechRecognition = root.SpeechRecognition || root.webkitSpeechRecognition || root.mozSpeechRecognition || root.msSpeechRecognition || root.oSpeechRecognition;
+	var SpeechRecognition = root.SpeechRecognition ||
+		root.webkitSpeechRecognition ||
+		root.mozSpeechRecognition ||
+		root.msSpeechRecognition ||
+		root.oSpeechRecognition;
 
 	// ref:
 	// http://updates.html5rocks.com/2013/01/Voice-Driven-Web-Apps-Introduction-to-the-Web-Speech-API
@@ -180,28 +184,28 @@ define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig)
 		 * @method commandToRegExp
 		 * @param {} command NewExpression
 		 */
-		var commandsList = [], recognition, callbacks = {
-				start: [],
-				error: [],
-				end: [],
-				result: [],
-				resultMatch: [],
-				resultNoMatch: [],
-				errorNetwork: [],
-				errorPermissionBlocked: [],
-				errorPermissionDenied: []
-			}, autoRestart, lastStartedAt = 0,
-		//debugState = false, // decleared in app.appConfig.js
-		//appConfig.debugStyle = 'font-weight: bold; color: #00f;', // decleared in app.appConfig.js
+		var commandsList              = [], recognition, callbacks = {
+			start: [],
+			error: [],
+			end: [],
+			result: [],
+			resultMatch: [],
+			resultNoMatch: [],
+			errorNetwork: [],
+			errorPermissionBlocked: [],
+			errorPermissionDenied: []
+		}, autoRestart, lastStartedAt = 0,
+		    //debugState = false, // decleared in app.appConfig.js
+		    //appConfig.debugStyle = 'font-weight: bold; color: #00f;', // decleared in app.appConfig.js
 
-		// The command matching code is a modified version of Backbone.Router by Jeremy Ashkenas, under
-		// the MIT license.
-			optionalParam = /\s*\((.*?)\)\s*/g, optionalRegex = /(\(\?:[^)]+\))\?/g, namedParam = /(\(\?)?:\w+/g, splatParam = /\*\w+/g, escapeRegExp = /[\-{}\[\]+?.,\\\^$|#]/g, commandToRegExp = function (command) {
-				command = command.replace(escapeRegExp, '\\$&').replace(optionalParam, '(?:$1)?').replace(namedParam, function (match, optional) {
-					return optional ? match : '([^\\s]+)';
-				}).replace(splatParam, '(.*?)').replace(optionalRegex, '\\s*$1?\\s*');
-				return new RegExp('^' + command + '$', 'i');
-			};
+		    // The command matching code is a modified version of Backbone.Router by Jeremy Ashkenas,
+		    // under the MIT license.
+		    optionalParam             = /\s*\((.*?)\)\s*/g, optionalRegex = /(\(\?:[^)]+\))\?/g, namedParam = /(\(\?)?:\w+/g, splatParam = /\*\w+/g, escapeRegExp = /[\-{}\[\]+?.,\\\^$|#]/g, commandToRegExp = function (command) {
+			command = command.replace(escapeRegExp, '\\$&').replace(optionalParam, '(?:$1)?').replace(namedParam, function (match, optional) {
+				return optional ? match : '([^\\s]+)';
+			}).replace(splatParam, '(.*?)').replace(optionalRegex, '\\s*$1?\\s*');
+			return new RegExp('^' + command + '$', 'i');
+		};
 
 		// This method receives an array of callbacks to iterate over, and invokes each of them
 		/**
@@ -277,7 +281,8 @@ define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig)
 					//debugState
 					if (appConfig.debugState) {
 						root.console.log('%c ✔ SUCCESS: User allowed access the microphone service to start ', appConfig.debugStyle_success);
-						root.console.log('Language setting is set to: ' + recognition.lang, appConfig.debugStyle);
+						root.console.log('Language setting is set to: ' +
+						recognition.lang, appConfig.debugStyle);
 					}
 					$.root_.removeClass('service-not-allowed');
 					$.root_.addClass('service-allowed');
@@ -360,7 +365,8 @@ define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig)
 							if (result) {
 								var parameters = result.slice(1);
 								if (appConfig.debugState) {
-									root.console.log('command matched: %c' + commandsList[j].originalPhrase, appConfig.debugStyle);
+									root.console.log('command matched: %c' +
+									commandsList[j].originalPhrase, appConfig.debugStyle);
 									if (parameters.length) {
 										root.console.log('with parameters', parameters);
 									}
@@ -507,7 +513,8 @@ define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig)
 					}
 				}
 				if (appConfig.debugState) {
-					root.console.log('Commands successfully loaded: %c' + commandsList.length, appConfig.debugStyle);
+					root.console.log('Commands successfully loaded: %c' +
+					commandsList.length, appConfig.debugStyle);
 				}
 			},
 
@@ -585,7 +592,10 @@ define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig)
 		}
 	};
 	// if already running with localstorage
-	if (SpeechRecognition && appConfig.voice_command && localStorage.getItem('sm-setautovoice') === 'true') {
+	if (SpeechRecognition &&
+		appConfig.voice_command &&
+		localStorage.getItem('sm-setautovoice') ===
+		'true') {
 		autoStart();
 	}
 
@@ -632,7 +642,9 @@ define(['layout/module', 'jquery', 'appConfig'], function (module, $, appConfig)
 
 				//remove popover
 				$(document).mouseup(function (e) {
-					if (!$('#speech-btn .popover').is(e.target) && $('#speech-btn .popover').has(e.target).length === 0) {
+					if (!$('#speech-btn .popover').is(e.target) &&
+						$('#speech-btn .popover').has(e.target).length ===
+						0) {
 						$('#speech-btn .popover').fadeOut(250);
 					}
 				});

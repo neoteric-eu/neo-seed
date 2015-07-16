@@ -15,14 +15,14 @@ define(['auth/module'], function (module) {
 	 * @return {*|string}
 	 */
 	var ActivationController = function ($scope,
-																			 $location,
-																			 $modal,
-																			 $rootScope,
-																			 neoSession,
-																			 smRegistrationService,
-																			 appMessages,
-																			 SM_REGISTRATION_PATH,
-																			 gettextCatalog) {
+		$location,
+		$modal,
+		$rootScope,
+		neoSession,
+		smRegistrationService,
+		appMessages,
+		SM_REGISTRATION_PATH,
+		gettextCatalog) {
 		$scope.spinner = false;
 		$scope.formError = false;
 

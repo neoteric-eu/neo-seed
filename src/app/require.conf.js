@@ -7,6 +7,7 @@ requirejs.config({
 		'jquery': '../vendor/libs/jquery/jquery',
 		'jquery-ui': '../vendor/libs/jquery-ui',
 		'jquery-color': '../vendor/libs/jquery-color/jquery-color',
+		'jquery-resize': '../vendor/libs/jquery-resize/jquery-resize',
 		'jqgrid': '../vendor/libs/jquery-jqgrid/jquery-jqgrid',
 		'jqgrid-locale-en': '../vendor/libs/jquery-jqgrid/i18n/grid.locale-en',
 		'jquery-maskedinput': '../vendor/libs/jquery-maskedinput/jquery-maskedinput',
@@ -17,6 +18,7 @@ requirejs.config({
 		'nouislider': '../vendor/libs/jquery-nouislider/jquery-nouislider',
 		'ionslider': '../vendor/libs/ionslider/ionslider',
 		'jquery-knob': '../vendor/libs/jquery-knob/jquery-knob',
+		'jquery-nestable': '../vendor/libs/jquery-nestable/jquery-nestable',
 		'jcrop': '../vendor/libs/jquery-jcrop/jquery-jcrop',
 		'magnific-popup': '../vendor/libs/jquery-magnificpopup/jquery-magnificpopup',
 
@@ -29,8 +31,10 @@ requirejs.config({
 		'angular-ui-router-extras-transition': '../vendor/libs/angular-ui-router-extras/ct-ui-router-extras.transition',
 		'angular-ui-router-extras-previous': '../vendor/libs-custom/angular-ui-router-extras/ct-ui-router-extras.previous',
 		'angular-ui-router-extras-sticky': '../vendor/libs/angular-ui-router-extras/ct-ui-router-extras.sticky',
+		'angular-file-upload': '../vendor/libs/angular-file-upload/angular-file-upload',
 		'angular-google-maps': '../vendor/libs/angular-google-maps/angular-google-maps',
-		'angular-bootstrap': '../vendor/libs/angular-bootstrap/ui-bootstrap-tpls',
+		'angular-bootstrap': '../vendor/libs/angular-bootstrap/ui-bootstrap',
+		'angular-bootstrap-tpls': '../vendor/libs/angular-bootstrap/ui-bootstrap-tpls',
 		'angular-couch-potato': '../vendor/libs/angular-couch-potato/angular-couch-potato',
 		'angular-debounce': '../vendor/libs/angular-debounce/angular-debounce',
 		'angular-easyfb': '../vendor/libs/angular-easyfb/angular-easyfb',
@@ -47,6 +51,7 @@ requirejs.config({
 		'angular-ui-date': '../vendor/libs/angular-ui-date/angular-ui-date',
 		'angular-table': '../vendor/libs/angular-table/angular-table',
 		'angular-cookie': '../vendor/libs/angular-cookie/angular-cookie',
+		'angular-gridster': '../vendor/libs/angular-gridster/angular-gridster',
 
 		// Bootstrap dependencies
 		'bootstrap': '../vendor/libs/bootstrap/bootstrap',
@@ -105,7 +110,10 @@ requirejs.config({
 		'lodash-extensions': '../vendor/libs-custom/lodash-extensions/lodash-extensions',
 		'raphael': '../vendor/libs/raphael/raphael',
 		'morris': '../vendor/libs/morris/morris',
+		'file-saver': '../vendor/libs/file-saver/file-saver',
 
+		'form-validation': '../vendor/libs/form-validation/form-validation',
+		'form-validation-bootstrap': '../vendor/libs/form-validation/framework/bootstrap',
 
 		// App paths
 		'appConfig': 'app.conf',
@@ -123,7 +131,9 @@ requirejs.config({
 		'jquery-form': ['jquery'],
 		'jquery-knob': ['jquery'],
 		'jquery-maskedinput': ['jquery'],
+		'jquery-nestable': ['jquery'],
 		'jquery-validation': ['jquery'],
+		'jquery-resize': ['jquery'],
 		'jqgrid': ['jquery'],
 		'jqgrid-locale-en': ['jquery', 'jqgrid'],
 		'magnific-popup': ['jquery'],
@@ -136,6 +146,7 @@ requirejs.config({
 		},
 
 		'angular-animate': ['angular'],
+		'angular-bootstrap-tpls': ['angular-bootstrap'],
 		'angular-bootstrap': ['angular'],
 		'angular-cookie': ['angular'],
 		'angular-couch-potato': ['angular'],
@@ -150,6 +161,7 @@ requirejs.config({
 		'angular-restmod-preload': ['angular-restmod'],
 		'angular-restmod-find-many': ['angular-restmod'],
 		'angular-sanitize': ['angular'],
+		'angular-file-upload': {deps: ['angular']},
 		'angular-ui-router': ['angular'],
 		'angular-ui-router-extras-core': ['angular', 'angular-ui-router'],
 		'angular-ui-router-extras-dsr': ['angular', 'angular-ui-router', 'angular-ui-router-extras-core'],
@@ -160,6 +172,7 @@ requirejs.config({
 		'angular-ui-date': ['angular'],
 		'angular-permission': ['angular'],
 		'angular-table': ['angular'],
+		'angular-gridster': ['angular', 'jquery-resize'],
 
 		// Bootstrap dependencies
 		'bootstrap': ['jquery'],
@@ -208,6 +221,8 @@ requirejs.config({
 		'to-markdown': ['he'],
 		'lodash-deep': ['lodash'],
 		'lodash-extensions': ['lodash'],
+		'form-validation': ['jquery'],
+		'form-validation-bootstrap': ['bootstrap', 'form-validation'],
 
 
 		// App paths

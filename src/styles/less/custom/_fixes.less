@@ -48,12 +48,14 @@
 .router-animation-container {
 	position: relative;
 }
+
 .router-animation-container .router-animation-loader {
 	position: absolute;
 	display: none;
 	top: 10px;
 	left: 10px;
 }
+
 .router-animation-container.active .router-animation-loader {
 	display: block;
 }
@@ -621,6 +623,7 @@
 		height: auto;
 	}
 }
+
 /*
 			 * Glyphicons
 			 *
@@ -666,6 +669,7 @@
 		width: 12.5%;
 	}
 }
+
 .placeholder-header {
 	display: block;
 	height: 49px;
@@ -753,6 +757,7 @@ a[ng-click]:hover {
 	transition: all 0.3s linear;
 	opacity: 1;
 }
+
 .smart-treeview-group.ng-hide {
 	opacity: 0;
 }
@@ -767,3 +772,15 @@ a[ng-click]:hover {
 	display: none;
 }
 
+.widget-body.no-padding {
+	margin: 0;
+	.table {
+		border-width: 0 0 1px 0;
+		thead th {
+			border-bottom-width: 2px;
+		}
+	}
+	.widget-body-toolbar {
+		margin: 0;
+	}
+}
