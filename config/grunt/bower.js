@@ -2,7 +2,7 @@
 module.exports = {
 	js: {
 		options: {
-			destPrefix: 'src/vendor/libs'
+			destPrefix: 'src/assets/js/vendor/libs'
 		},
 		files: {
 			'angular/angular.js': 'angular/angular.js',
@@ -106,7 +106,7 @@ module.exports = {
 	},
 	require: {
 		options: {
-			destPrefix: 'src/app'
+			destPrefix: 'src'
 		},
 		files: {
 			'require.js': 'requirejs/require.js'
@@ -114,7 +114,7 @@ module.exports = {
 	},
 	css: {
 		options: {
-			destPrefix: 'src/styles/css/vendor'
+			destPrefix: 'src/assets/css/vendor'
 		},
 		files: {
 			'form-validation/formValidation.css': 'form.validation/dist/css/formValidation.css',
@@ -125,7 +125,7 @@ module.exports = {
 	},
 	less: {
 		options: {
-			destPrefix: 'src/styles/less/vendor/libs'
+			destPrefix: 'src/assets/less/vendor/libs'
 		},
 		files: {
 			'bootstrap': 'bootstrap/less',
@@ -138,7 +138,7 @@ module.exports = {
 	},
 	fonts: {
 		options: {
-			destPrefix: 'src/styles/fonts'
+			destPrefix: 'src/assets/fonts'
 		},
 		files: {
 			'font-awesome': 'fontawesome/fonts/',

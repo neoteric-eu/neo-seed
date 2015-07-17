@@ -1,4 +1,4 @@
-define(['seed/module', 'globalSettings'], function (app, globalSettings) {
+define(['seed/module'], function (app) {
 	'use strict';
 
 	/**
@@ -6,10 +6,10 @@ define(['seed/module', 'globalSettings'], function (app, globalSettings) {
 	 * @method HttpErrorInterceptor
 	 * @param $q {Object} Angular promise provider
 	 * @param $exceptionHandler {Function} Exception handler
-	 * @param $injector {Object} Dependency Injection service
+	 * @param appConf {Object} Application configuration settings
 	 * @return {{requestError: Function, responseError: Function}}
 	 */
-	function HttpErrorInterceptor($q, $exceptionHandler) {
+	function HttpErrorInterceptor($q, $exceptionHandler, appConf) {
 
 		/**
 		 * Description
@@ -17,7 +17,7 @@ define(['seed/module', 'globalSettings'], function (app, globalSettings) {
 		 * @param {} rejection
 		 */
 		function notifyError(rejection) {
-			if (globalSettings.get('SENTRY_API_KEY')) {
+			if (appConf.sentrySettings.apiKey) {
 				var exception = {
 					message: rejection.data,
 					method: rejection.config.method,

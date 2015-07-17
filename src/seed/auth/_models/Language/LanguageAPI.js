@@ -1,15 +1,20 @@
-define(['seed/auth/module', 'globalSettings', 'moment'], function (module, globalSettings, moment) {
+define([
+	'seed/auth/module',
+	'moment'
+], function (module, moment) {
 	'use strict';
 
 	/**
-	 * @method LanguageAPI
+	 * @class LanguageAPI
 	 * @param Language
 	 * @param $rootScope
-	 * @param localStorageService
 	 * @param gettextCatalog
 	 * @param amMoment
+	 * @param ipCookie
+	 * @param appConf
 	 */
-	var LanguageAPI = function (Language, $rootScope, ipCookie, gettextCatalog, amMoment) {
+	var LanguageAPI = function (Language, $rootScope, ipCookie,
+		gettextCatalog, amMoment, appConf) {
 
 		this.languageCollection = [];
 
@@ -22,12 +27,12 @@ define(['seed/auth/module', 'globalSettings', 'moment'], function (module, globa
 			var self = this;
 			Language
 				.$collection()
-				.$build(globalSettings.get('LANGUAGES'))
+				.$build(appConf.languageSettings.languages)
 				.$reveal()
 				.$asPromise()
 				.then(function (data) {
 					self.languageCollection = data;
-					self.setLanguage(ipCookie('lang') || globalSettings.get('DEFAULT_LANG'));
+					self.setLanguage(ipCookie('lang') || appConf.languageSettings.defaultLanguage);
 				});
 		};
 

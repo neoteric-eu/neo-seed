@@ -20,7 +20,7 @@ define([
 			},
 			views: {
 				root: {
-					templateUrl: 'app/layout/layout.html'
+					templateUrl: 'apps/layout/layout.html'
 				}
 			}
 		});

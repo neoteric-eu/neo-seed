@@ -48,7 +48,6 @@ define(['seed/components/module'], function (module) {
 				throw new Error('option "CollectionAPI" must be defined');
 			}
 
-			// @todo update in seed
 			// Make sure that parameters are defined object
 			parameters = parameters || {};
 
@@ -65,9 +64,7 @@ define(['seed/components/module'], function (module) {
 				onAfterResolve: undefined
 			};
 
-			// @todo update in seed
 			var options = _.mergeDefaults(parameters, defaults);
-
 
 			return new ngTableParams(options.params, {
 				total: 0,

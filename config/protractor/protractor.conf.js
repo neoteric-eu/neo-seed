@@ -33,7 +33,7 @@ exports.config = {
 	// Spec patterns are relative to the location of this config.
 	specs: [
 		'../../test/e2e/**/*.spec.js',
-		'../../src/app/**/test/e2e/**/*.spec.js'
+		'../../src/apps/**/test/e2e/**/*.spec.js'
 	],
 
 	// ----- Capabilities to be passed to the webdriver instance ----

@@ -1,9 +1,9 @@
 module.exports = {
 	default: {
 		files: [{
-			src: 'app/**/*.html',
+			src: 'apps/**/*.html',
 			cwd: '<%= yeoman.app %>/',
-			dest: '<%= yeoman.app %>/app/templates/module.js'
+			dest: '<%= yeoman.app %>/apps/templates/module.js'
 		}],
 		options: {
 			source: function (code) {

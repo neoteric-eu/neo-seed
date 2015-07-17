@@ -1,7 +1,4 @@
-define([
-	'seed/auth/module',
-	'globalSettings'
-], function (module, globalSettings) {
+define(['seed/auth/module'], function (module) {
 	'use strict';
 
 	/**
@@ -15,12 +12,14 @@ define([
 	 * @param $log
 	 * @param neoSession
 	 * @param UserAPI
+	 * @param ipCookie
+	 * @param appConf
 	 */
 	function LoginController($q, $scope, $modal, $state, $log, neoSession,
-		UserAPI, ipCookie) {
+		UserAPI, ipCookie, appConf) {
 		$scope.formError = false;
 		$scope.user = UserAPI.build();
-		$scope.loginData = globalSettings.get('LOGIN_DATA');
+		$scope.loginData = appConf.generalSettings.predefinedLogins;
 
 		/**
 		 * Description
@@ -106,15 +105,15 @@ define([
 		 */
 		$scope.selectCustomerList = function (customers) {
 			var dfd = $q.defer(),
-				customerId = ipCookie.get('customerId');
+				customerId = ipCookie('activeCustomer');
 
-			if (!_.isNull(customerId)) {
+			if (!_.isUndefined(customerId)) {
 				var customer = _.where(customers, {id: customerId});
 				dfd.resolve(customer);
 
 			} else if (customers.length > 1) {
 				var modalInstance = $modal.open({
-					templateUrl: '/app/auth/views/modals/chooseCustomerModal.html',
+					templateUrl: 'seed/auth/views/modals/chooseCustomerModal.html',
 					controller: ChooseCustomerModalController,
 					resolve: {
 						customers: function () {

@@ -3,7 +3,7 @@ module.exports = function (grunt) {
 	var files = {};
 
 	grunt.file
-		.expand({filter: 'isDirectory'}, ['src/app/*'])
+		.expand({filter: 'isDirectory'}, ['src/apps/*'])
 		.forEach(function (path) {
 			files[path + '/_locale/translation.js'] = path + '/_locale/*.po';
 		});

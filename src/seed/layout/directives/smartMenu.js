@@ -7,11 +7,6 @@ define([
 	'use strict';
 
 	(function ($) {
-
-		/**
-		 * Description
-		 * @method smartCollapseToggle CallExpression
-		 */
 		$.fn.smartCollapseToggle = function () {
 
 			return this.each(function () {
@@ -33,7 +28,7 @@ define([
 								.toggleClass('fa-minus-square-o fa-plus-square-o');
 
 							$this.find('ul:first')
-								.slideToggle(appConfig.menu_speed || 200);
+								.slideToggle(appConfig.generalSettings.menu_speed || 200);
 						}
 					} else {
 						// toggle expand item
@@ -41,7 +36,7 @@ define([
 							.toggleClass('fa-minus-square-o fa-plus-square-o');
 
 						$this.find('ul:first')
-							.slideToggle(appConfig.menu_speed || 200);
+							.slideToggle(appConfig.generalSettings.menu_speed || 200);
 					}
 				}
 			});
@@ -51,12 +46,6 @@ define([
 	module.registerDirective('smartMenu', function ($state, $rootScope) {
 		return {
 			restrict: 'A',
-			/**
-			 * Description
-			 * @method link
-			 * @param {} scope
-			 * @param {} element
-			 */
 			link: function (scope, element) {
 				var $body = $('body');
 

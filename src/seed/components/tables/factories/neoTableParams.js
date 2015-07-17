@@ -48,7 +48,6 @@ define(['seed/components/module'], function (module) {
 				throw new Error('option "CollectionAPI" must be defined');
 			}
 
-			// @todo update in seed
 			// Make sure that parameters are defined object
 			parameters = parameters || {};
 

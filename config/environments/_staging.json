@@ -1,0 +1,7 @@
+{
+	"debugEnabled": false,
+	"modRewriteEnabled": true,
+	"predefinedLogins": [],
+	"apiUrl": "http://ntrc-delta.neoteric.eu:9035/api/v1/"
+}
+

@@ -22,7 +22,6 @@ define([
 
 	'./directives/neoKeep/neoKeep',
 	'./directives/neoOmit/neoOmit',
-	'../forms/directives/validate/smartValidateForm',
 
 	'./_locale/translation'
 ], function () {

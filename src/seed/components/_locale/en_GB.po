@@ -11,35 +11,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: src/app/components/tables/directives/neo-footer.html:66
+#: src/apps/components/tables/directives/neo-footer.html:66
 msgid "Next"
 msgstr "Next"
 
-#: src/app/components/tables/directives/neo-footer.html:36
+#: src/apps/components/tables/directives/neo-footer.html:36
 msgid "Previous"
 msgstr "Previous"
 
-#: src/app/components/profiles/user-profiles.html:3
+#: src/apps/components/profiles/user-profiles.html:3
 msgid "Profiles"
 msgstr "Profiles"
 
-#: src/app/components/tables/directives/neo-footer.html:4
+#: src/apps/components/tables/directives/neo-footer.html:4
 msgid "Showing"
 msgstr "Showing"
 
-#: src/app/components/tables/directives/neo-footer.html:8
+#: src/apps/components/tables/directives/neo-footer.html:8
 msgid "entries paginated by"
 msgstr "entries paginated by"
 
-#: src/app/components/tables/directives/neo-footer.html:23
+#: src/apps/components/tables/directives/neo-footer.html:23
 msgid "items per page"
 msgstr "items per page"
 
-#: src/app/components/tables/directives/neo-footer.html:7
+#: src/apps/components/tables/directives/neo-footer.html:7
 msgid "of"
 msgstr "of"
 
-#: src/app/components/tables/directives/neo-footer.html:5
+#: src/apps/components/tables/directives/neo-footer.html:5
 msgid "to"
 msgstr "to"
 

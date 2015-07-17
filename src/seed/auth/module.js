@@ -5,11 +5,7 @@ define([
 ], function (ng, couchPotato) {
 	'use strict';
 
-	/**
-	 * @class
-	 * @memberOf seed.auth
-	 */
-	var module = ng.module('seed.auth', ['ui.router', 'ipCookie']);
+	var module = ng.module('seed.auth', ['ipCookie', 'seed.forms', 'neo.dashboard']);
 
 	couchPotato.configureApp(module);
 
@@ -36,19 +32,18 @@ define([
 				views: {
 					auth: {
 						controller: 'LoginController',
-						templateUrl: 'app/auth/views/login/login.html'
+						templateUrl: 'apps/auth/views/login/login.html'
 					}
 				},
 				data: {
-					title: gettext('Login'),
-					htmlId: 'extr-page'
+					title: gettext('Login')
 				},
 				resolve: {
 					deps: $couchPotatoProvider.resolveDependencies([
 						// Controllers
 						'seed/auth/controllers/LoginController',
 						// Directives
-						'seed/forms/directives/validate/smartValidateForm'
+						'seed/forms/validate/smartValidateForm'
 					])
 				}
 			})
@@ -80,12 +75,11 @@ define([
 				views: {
 					auth: {
 						controller: 'RegisterController',
-						templateUrl: 'app/auth/views/register/register.html'
+						templateUrl: 'apps/auth/views/register/register.html'
 					}
 				},
 				data: {
-					title: gettext('Register'),
-					htmlId: 'extr-page'
+					title: gettext('Register')
 				},
 				resolve: {
 					deps: $couchPotatoProvider.resolveDependencies([
@@ -99,7 +93,7 @@ define([
 				url: '/forgot-password',
 				views: {
 					auth: {
-						templateUrl: 'app/auth/views/forgot-password.html'
+						templateUrl: 'apps/auth/views/forgot-password.html'
 					}
 				},
 				data: {
@@ -117,12 +111,11 @@ define([
 				url: '/lock',
 				views: {
 					root: {
-						templateUrl: 'app/auth/views/lock.html'
+						templateUrl: 'apps/auth/views/lock.html'
 					}
 				},
 				data: {
-					title: 'Locked Screen',
-					htmlId: 'lock-page'
+					title: 'Locked Screen'
 				}
 			});
 	});

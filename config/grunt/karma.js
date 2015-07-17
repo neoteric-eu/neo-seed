@@ -23,9 +23,9 @@ module.exports = {
 		],
 
 		preprocessors: {
-			'src/app/components/**/*.js': 'coverage',
-			'src/app/auth/**/*.js': 'coverage',
-			'src/app/helpers/**/*.js': 'coverage'
+			'src/apps/components/**/*.js': 'coverage',
+			'src/apps/auth/**/*.js': 'coverage',
+			'src/apps/helpers/**/*.js': 'coverage'
 		},
 
 		reporters: ['coverage'],

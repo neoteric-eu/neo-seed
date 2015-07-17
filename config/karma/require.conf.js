@@ -1,4 +1,4 @@
-requirejs(['/base/src/app/require.conf.js'], function () {
+requirejs(['/base/src/apps/require.conf.js'], function () {
 	'use strict';
 
 	var tests = [];

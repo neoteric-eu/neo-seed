@@ -4,7 +4,7 @@ define(['seed/module'], function (module) {
 	function neoTable() {
 		return {
 			restrict: 'E',
-			templateUrl: 'app/modules/components/tables/directive/neo-table.html',
+			templateUrl: 'apps/modules/components/tables/directive/neo-table.html',
 			link: function (scope, element, attr) {
 				scope.table.view = attr.view;
 			}

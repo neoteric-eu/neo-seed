@@ -1,8 +1,10 @@
 module.exports = function () {
+	'use strict';
+
 	return {
-		default: {
-			src: ['<%= yeoman.app %>/styles/css/*.css'],
-			dest: '<%= yeoman.tmp %>/styles/css/style.css'
+		options: {
+			src: ['<%= yeoman.app %>/assets/css/*.css'],
+			dest: '<%= yeoman.tmp %>/assets/css/style.css'
 		}
-	}
+	};
 };

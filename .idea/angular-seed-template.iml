@@ -10,8 +10,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/app/tasks/task/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/app/modules/smRegistration/test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/app/tasks/planner/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/app/auth/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/app/components/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/seed/auth/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/seed/components/test" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/.sass-cache" />
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/app/api" />

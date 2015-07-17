@@ -11,18 +11,18 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "Language: pl_PL\n"
 
-#: src/app/core/services/BaseAPI.js:88
+#: src/apps/core/services/BaseAPI.js:88
 msgid "Are you sure you want to remove item?"
 msgstr "Czy na pewno chcesz usunąć wybrany element?"
 
-#: src/app/core/services/BaseAPI.js:87
+#: src/apps/core/services/BaseAPI.js:87
 msgid "Confirmation"
 msgstr "Potwerdzenie"
 
-#: src/app/core/services/BaseAPI.js:89
+#: src/apps/core/services/BaseAPI.js:89
 msgid "No"
 msgstr "Nie"
 
-#: src/app/core/services/BaseAPI.js:89 src/app/core/services/BaseAPI.js:91
+#: src/apps/core/services/BaseAPI.js:89 src/apps/core/services/BaseAPI.js:91
 msgid "Yes"
 msgstr "Tak"

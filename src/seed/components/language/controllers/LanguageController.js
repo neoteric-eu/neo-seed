@@ -1,4 +1,4 @@
-define(['seed/module', 'globalSettings'], function (app) {
+define(['seed/module'], function (app) {
 	'use strict';
 
 	/**

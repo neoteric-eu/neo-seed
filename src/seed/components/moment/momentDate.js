@@ -11,7 +11,6 @@ define(['seed/module', 'moment'], function (module, moment) {
 	 * <input type="date" moment-date-input></div>
 	 *
 	 * @param $log {Object} Logging service
-	 * @todo Add to seed
 	 * @return {{restrict: string, require: string, link: Function}}
 	 */
 	function momentDate($log) {

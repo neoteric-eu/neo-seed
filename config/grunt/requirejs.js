@@ -1,27 +1,27 @@
 module.exports = function () {
+	'use strict';
+
 	return {
 		default: {
 			options: {
-				baseUrl: 'src/app',
-				optimize: 'uglify2',
+				baseUrl: 'src/',
+				optimize: 'none',
 				generateSourceMaps: true,
 				preserveLicenseComments: false,
 				useStrict: true,
-				out: '<%= yeoman.dist %>/app/main.js',
-				mainConfigFile: '<%= yeoman.app %>/app/require.conf.js',
+				out: '<%= yeoman.dist %>/apps/container.js',
+				mainConfigFile: '<%= yeoman.app %>/seed/require.conf.js',
 				findNestedDependencies: true,
 				removeCombined: true,
 				optimizeAllPluginResources: true,
 				replaceRequireScript: [{
 					files: ['<%= yeoman.dist %>/index.html'],
-					module: 'main'
+					module: 'container'
 				}],
-				name: '../vendor/libs/almond/almond',
 				uglify2: {
 					mangle: false
 				},
-				include: ['main'],
-				wrap: true
+				include: ['container']
 			}
 		}
 	};

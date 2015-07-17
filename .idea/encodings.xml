@@ -3,24 +3,23 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$/bower.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/config/grunt/bower.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/app.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/auth/_includes.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/auth/_models/Language/LanguageAPI.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/auth/_models/Profile/ProfileAPI.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/auth/_models/User/User.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/auth/_models/User/UserAPI.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/auth/controllers/ActivationController.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/auth/controllers/LoginController.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/auth/controllers/RegisterController.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/auth/directives/loginInfo.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/auth/module.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/auth/services/neoRequestHeaders.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/components/profiles/user-profiles.html" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/components/profiles/userProfiles.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/helpers/restmod/models/BaseModel.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/layout/_includes.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/layout/module.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/main.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/app/require.conf.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/apps/module.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/container.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/auth/_includes.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/auth/_models/Language/LanguageAPI.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/auth/_models/Profile/ProfileAPI.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/auth/_models/User/User.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/auth/_models/User/UserAPI.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/auth/controllers/ActivationController.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/auth/controllers/LoginController.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/auth/controllers/RegisterController.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/auth/directives/loginInfo.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/auth/module.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/auth/services/neoRequestHeaders.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/components/profiles/user-profiles.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/components/profiles/userProfiles.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/helpers/restmod/models/BaseModel.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/layout/_includes.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/seed/layout/module.js" charset="UTF-8" />
   </component>
 </project>

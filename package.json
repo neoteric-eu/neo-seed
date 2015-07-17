@@ -30,6 +30,7 @@
 		"grunt-newer": "~0.5.4",
 		"grunt-nexus-artifact": "^0.3.7",
 		"grunt-nexus-deployer": "0.0.5",
+		"grunt-ng-constant": "^1.1.0",
 		"grunt-open": "^0.2.3",
 		"grunt-protractor-runner": "^1.2.1",
 		"grunt-replace": "^0.7.8",

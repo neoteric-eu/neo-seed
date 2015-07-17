@@ -1,4 +1,4 @@
-define(['seed/module', 'globalSettings'], function (app, globalSettings) {
+define(['seed/module'], function (app) {
 	'use strict';
 
 	/**
@@ -6,16 +6,17 @@ define(['seed/module', 'globalSettings'], function (app, globalSettings) {
 	 * @interface
 	 * @memberOf app
 	 * @param restmod
+	 * @param appConf
 	 * @return {*|{$isAbstract, $$chain}}
 	 */
-	function NeoStyleAPI(restmod) {
+	function NeoStyleAPI(restmod, appConf) {
 		return restmod.mixin(
 			'DefaultPacker',
 			'restmod.Preload',
 			'BaseModel', {
 				$config: {
 					style: 'NeoStyleAPI',
-					urlPrefix: globalSettings.get('API_URL'),
+					urlPrefix: appConf.generalSettings.apiUrl,
 					primaryKey: 'id',
 					jsonRoot: 'data',
 					jsonMeta: 'meta'

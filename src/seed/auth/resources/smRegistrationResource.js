@@ -1,8 +1,8 @@
-define(['globalSettings'], function (globalSettings) {
+define([], function () {
 	'use strict';
 
-	var smRegistrationResource = function ($resource) {
-		return $resource(globalSettings.get('baseUrl') + ':service/:action/:id',
+	var smRegistrationResource = function ($resource, appConf) {
+		return $resource(appConf.generalSettings.apiUrl + ':service/:action/:id',
 			{
 				service: 'registration',
 				id: '@registrationId'

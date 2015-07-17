@@ -5,7 +5,7 @@ define(['seed/module'], function (module) {
 		return {
 			restrict: 'EA',
 			replace: true,
-			templateUrl: 'app/components/language/directives/language-selector.html',
+			templateUrl: 'apps/components/language/directives/language-selector.html',
 			scope: true
 		};
 	});

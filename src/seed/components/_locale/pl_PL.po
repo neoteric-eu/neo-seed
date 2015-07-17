@@ -11,30 +11,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: src/app/components/tables/smart-footer.html:48
+#: src/apps/components/tables/smart-footer.html:48
 msgid "Next"
 msgstr "Następna"
 
-#: src/app/components/tables/smart-footer.html:18
+#: src/apps/components/tables/smart-footer.html:18
 msgid "Previous"
 msgstr "Poprzednia"
 
-#: src/app/components/profiles/user-profiles.html:3
+#: src/apps/components/profiles/user-profiles.html:3
 msgid "Profiles"
 msgstr "Profile"
 
-#: src/app/components/tables/smart-footer.html:3
+#: src/apps/components/tables/smart-footer.html:3
 msgid "Showing"
 msgstr "Wyświetlono"
 
-#: src/app/components/tables/smart-footer.html:8
+#: src/apps/components/tables/smart-footer.html:8
 msgid "entries"
 msgstr "elementów"
 
-#: src/app/components/tables/smart-footer.html:6
+#: src/apps/components/tables/smart-footer.html:6
 msgid "of"
 msgstr "z"
 
-#: src/app/components/tables/smart-footer.html:4
+#: src/apps/components/tables/smart-footer.html:4
 msgid "to"
 msgstr "do"

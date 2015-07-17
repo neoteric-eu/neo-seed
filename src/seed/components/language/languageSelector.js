@@ -6,7 +6,6 @@ define(['seed/module'], function (module) {
 	 * @class languageSelector
 	 * @memberOf app.components
 	 *
-	 * @todo Include into seed
 	 * @param $log Browser console provider
 	 * @param LanguageAPI Interface for collection management
 	 * @return {{restrict: string, templateUrl: string, scope: boolean, controllerAs: string,

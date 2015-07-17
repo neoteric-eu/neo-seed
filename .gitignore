@@ -4,10 +4,10 @@
 /node_modules
 /bower_components
 /test/results
-/src/vendor/libs
-/src/styles/less/vendor/libs
-/src/styles/css
-/src/styles/fonts
+/src/assets/js/vendor
+/src/assets/less/vendor/libs
+/src/assets/css
+/src/assets/fonts
 
 ### Extensions ###
 *.todo
@@ -17,10 +17,10 @@
 *.pot
 
 ### Files ###
-src/app/modules/global_settings.js
+src/apps/global_settings.js
 npm-debug.log
-src/app/templates/module.js
-src/app/require.js
+src/apps/templates/module.js
+src/require.js
 
 ### SublimeText ###
 # cache files for sublime text

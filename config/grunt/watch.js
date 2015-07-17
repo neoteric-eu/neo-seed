@@ -5,20 +5,19 @@ module.exports = {
 	},
 	js: {
 		files: [
-			'<%= yeoman.app %>/app/**/*.js',
-			'!<%= yeoman.app %>/app/templates/module.js'
+			'<%= yeoman.app %>/apps/**/*.js'
 		],
 		tasks: 'newer:jshint:app'
 	},
 	json: {
-		files: '<%= yeoman.app %>/app/**/**/*.json'
+		files: '<%= yeoman.app %>/apps/**/**/*.json'
 	},
 	html: {
-		files: '<%= yeoman.app %>/app/**/**/*.html',
+		files: '<%= yeoman.app %>/apps/**/**/*.html',
 		tasks: 'templates'
 	},
 	styles_less: {
-		files: '<%= yeoman.app %>/styles/less/**/**/*.less',
+		files: '<%= yeoman.app %>/assets/less/**/**/*.less',
 		tasks: 'less'
 	},
 	gruntfile: {

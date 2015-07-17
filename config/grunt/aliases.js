@@ -86,14 +86,14 @@ module.exports = {
 	'config:development': {
 		description: 'Sets app configuration to development settings',
 		tasks: [
-			'replace:development'
+			'ngconstant:development'
 		]
 	},
 
 	'config:staging': {
 		description: 'Sets app configuration to staging settings',
 		tasks: [
-			'replace:staging'
+			'ngconstant:staging'
 			// Add further deploy related tasks here
 		]
 	},
@@ -101,7 +101,7 @@ module.exports = {
 	'config:production': {
 		description: 'Sets app configuration to production settings',
 		tasks: [
-			'replace:production'
+			'ngconstant:production'
 			// Add further deploy related tasks here
 		]
 	},
