@@ -53,8 +53,8 @@ define([
 
 		uiSelectConfig.theme = 'bootstrap';
 
-		$locationProvider.html5Mode(appConf.generalSettings.modRewriteEnabled);
-		$logProvider.debugEnabled(appConf.generalSettings.debugEnabled);
+		$locationProvider.html5Mode(appConf.environmentSettings.modRewriteEnabled);
+		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
 
 		// Add the interceptors to the $httpProvider.
 		$httpProvider.interceptors.push('HttpErrorInterceptor');
@@ -67,7 +67,7 @@ define([
 		$log.debug('Setting up seed configuration');
 
 		LanguageAPI.initiate();
-		gettextCatalog.debug = appConf.generalSettings.debugEnabled;
+		gettextCatalog.debug = appConf.environmentSettings.debugEnabled;
 	});
 
 	return seed;

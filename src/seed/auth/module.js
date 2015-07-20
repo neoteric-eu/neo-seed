@@ -41,7 +41,7 @@ define([
 				resolve: {
 					deps: $couchPotatoProvider.resolveDependencies([
 						// Controllers
-						'seed/auth/controllers/LoginController',
+						'seed/auth/controllers/LoginController'
 					])
 				}
 			})
