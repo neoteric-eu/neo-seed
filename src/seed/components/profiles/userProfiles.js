@@ -6,7 +6,7 @@ define(['seed/module'], function (app) {
 
 		return {
 			restrict: 'EA',
-			templateUrl: 'apps/components/profiles/user-profiles.html',
+			templateUrl: 'seed/components/profiles/user-profiles.html',
 			controllerAs: 'vm',
 			controller: function () {
 				var vm = this;

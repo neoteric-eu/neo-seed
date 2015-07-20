@@ -5,9 +5,15 @@ define(['angular'], function () {
 
 		.constant('appConf', {
 			environmentSettings: {
-				debugEnabled: false,
+				debugEnabled: true,
 				modRewriteEnabled: true,
-				predefinedLogins: [],
+				predefinedLogins: [{
+					login: 'admin@neoteric.eu',
+					password: 'abc123'
+				}, {login: 'admin@preiscoin.com', password: '123qweasd321'}, {
+					login: 'jmach@neoteric.eu',
+					password: 'abc123'
+				}],
 				apiUrl: 'http://ntrc-delta.neoteric.eu:9035/api/v1/'
 			},
 			generalSettings: {
@@ -67,7 +73,7 @@ define(['angular'], function () {
 				}]
 			},
 			soundSettings: {path: 'assets/sounds/', enabled: true},
-			sentrySettings: {apiKey: '', options: {}}
+			sentrySettings: {}
 		})
 
 		;

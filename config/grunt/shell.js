@@ -9,7 +9,7 @@ module.exports = {
 		command: 'node ./node_modules/protractor/bin/webdriver-manager update'
 	},
 	'git-disable-tracking-templates': {
-		command: 'git update-index --assume-unchanged <%= yeoman.app %>/apps/templates/module.js',
+		command: 'git update-index --assume-unchanged <%= yeoman.app %>/seed/templates/module.js',
 		failOnError: false
 	},
 	'git-submodule-init': {
@@ -17,8 +17,5 @@ module.exports = {
 	},
 	'git-submodule-update': {
 		command: 'git submodule update --remote'
-	},
-	'smart-comments': {
-		command: 'node ./node_modules/smartcomments/bin/smartcomments -g -t <%= yeoman.app %>/app --config config/comments/comments.conf.json'
 	}
 };

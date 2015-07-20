@@ -32,7 +32,7 @@ define([
 				views: {
 					auth: {
 						controller: 'LoginController',
-						templateUrl: 'apps/auth/views/login/login.html'
+						templateUrl: 'seed/auth/views/login/login.html'
 					}
 				},
 				data: {
@@ -42,8 +42,6 @@ define([
 					deps: $couchPotatoProvider.resolveDependencies([
 						// Controllers
 						'seed/auth/controllers/LoginController',
-						// Directives
-						'seed/forms/validate/smartValidateForm'
 					])
 				}
 			})
@@ -75,7 +73,7 @@ define([
 				views: {
 					auth: {
 						controller: 'RegisterController',
-						templateUrl: 'apps/auth/views/register/register.html'
+						templateUrl: 'seed/auth/views/register/register.html'
 					}
 				},
 				data: {
@@ -83,8 +81,7 @@ define([
 				},
 				resolve: {
 					deps: $couchPotatoProvider.resolveDependencies([
-						'seed/auth/controllers/RegisterController',
-						'seed/forms/directives/validate/smartValidateForm'
+						'seed/auth/controllers/RegisterController'
 					])
 				}
 			})
@@ -93,17 +90,12 @@ define([
 				url: '/forgot-password',
 				views: {
 					auth: {
-						templateUrl: 'apps/auth/views/forgot-password.html'
+						templateUrl: 'seed/auth/views/forgot-password.html'
 					}
 				},
 				data: {
 					title: gettext('Forgot Password'),
 					htmlId: 'extr-page'
-				},
-				resolve: {
-					deps: $couchPotatoProvider.resolveDependencies([
-						'seed/forms/directives/validate/smartValidateForm'
-					])
 				}
 			})
 
@@ -111,7 +103,7 @@ define([
 				url: '/lock',
 				views: {
 					root: {
-						templateUrl: 'apps/auth/views/lock.html'
+						templateUrl: 'seed/auth/views/lock.html'
 					}
 				},
 				data: {

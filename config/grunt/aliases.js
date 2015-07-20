@@ -2,6 +2,7 @@ module.exports = {
 	'serve': {
 		description: 'Runs locally server with application',
 		tasks: [
+			'config:development',
 			'clean:server',
 			'templates',
 			'connect:server',
@@ -68,41 +69,11 @@ module.exports = {
 		]
 	},
 
-	'code:auto-comment': {
-		description: 'Automatically comments the code',
-		tasks: [
-			'shell:smart-comments'
-		]
-	},
-
 	'docs': {
 		description: 'Generates JSDoc documentation',
 		tasks: [
 			'clean:doc',
 			'jsdoc'
-		]
-	},
-
-	'config:development': {
-		description: 'Sets app configuration to development settings',
-		tasks: [
-			'ngconstant:development'
-		]
-	},
-
-	'config:staging': {
-		description: 'Sets app configuration to staging settings',
-		tasks: [
-			'ngconstant:staging'
-			// Add further deploy related tasks here
-		]
-	},
-
-	'config:production': {
-		description: 'Sets app configuration to production settings',
-		tasks: [
-			'ngconstant:production'
-			// Add further deploy related tasks here
 		]
 	},
 

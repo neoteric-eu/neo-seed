@@ -19,7 +19,7 @@ define(['seed/auth/module'], function (module) {
 		UserAPI, ipCookie, appConf) {
 		$scope.formError = false;
 		$scope.user = UserAPI.build();
-		$scope.loginData = appConf.generalSettings.predefinedLogins;
+		$scope.loginData = appConf.environmentSettings.predefinedLogins;
 
 		/**
 		 * Description

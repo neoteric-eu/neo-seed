@@ -4,7 +4,11 @@ define([
 	'./activities/activities-service',
 
 	'./profiles/userProfiles',
+
+	'./messages/appMessages',
+
 	'./shortcut/shortcut-directive',
+
 	'./tables/neoTable',
 	'./tables/neoTableParams',
 

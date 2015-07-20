@@ -3,7 +3,6 @@ define([
 	'./controllers/LoginController',
 	'./controllers/RegisterController',
 
-	'./services/appMessages',
 	'./services/neoSession',
 	'./services/neoRequestHeaders',
 

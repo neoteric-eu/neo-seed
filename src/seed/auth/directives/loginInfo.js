@@ -5,7 +5,7 @@ define(['seed/auth/module'], function (module) {
 
 		return {
 			restrict: 'A',
-			templateUrl: 'apps/auth/directives/login-info.html',
+			templateUrl: 'seed/auth/directives/login-info.html',
 			scope: {},
 			/**
 			 * Description

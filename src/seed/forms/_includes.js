@@ -1,7 +1,9 @@
 define([
 	// Validate
 	'./validate/neoValidate',
-	'./validate/smartValidateForm'
+
+	// Input
+	'./input/neoDatepicker'
 ], function () {
 	'use strict';
 });

@@ -1,3 +1,3 @@
 /**
- * @namespace app
+ * @namespace apps
  */

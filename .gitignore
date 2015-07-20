@@ -4,7 +4,7 @@
 /node_modules
 /bower_components
 /test/results
-/src/assets/js/vendor
+/src/assets/js/vendor/libs
 /src/assets/less/vendor/libs
 /src/assets/css
 /src/assets/fonts
@@ -17,9 +17,8 @@
 *.pot
 
 ### Files ###
-src/apps/global_settings.js
+src/apps/module.conf.js
 npm-debug.log
-src/apps/templates/module.js
 src/require.js
 
 ### SublimeText ###
