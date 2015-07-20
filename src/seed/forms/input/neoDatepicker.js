@@ -7,6 +7,18 @@ define([
 ], function (module, moment) {
 	'use strict';
 
+	/**
+	 * Converts input[type=text] into datepicker with moment.js wrapped date parameter
+	 * @class neoDatepicker
+	 * @memberOf seed.forms
+	 *
+	 * @example
+	 *  <input data-smart-datepicker"vm.task.dueDate"
+	 *         type="text"
+	 *         class="form-control">
+	 *
+	 * @return {{restrict: string, scope: {neoDatepicker: string}, link: Function}}
+	 */
 	function neoDatepicker() {
 		return {
 			restrict: 'A',

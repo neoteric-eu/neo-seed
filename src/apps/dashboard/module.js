@@ -11,9 +11,6 @@ define(['angular'], function (ng) {
 					'content@app': {
 						templateUrl: 'apps/dashboard/views/dashboard.html'
 					}
-				},
-				data: {
-					title: 'Dashboard'
 				}
 			});
 	});
