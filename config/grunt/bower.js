@@ -62,7 +62,6 @@ module.exports = {
 			'jquery-jvectormap/jquery-jvectormap.js': 'jvectormap/jquery-jvectormap.js',
 			'jquery-knob/jquery-knob.js': 'jquery-knob/js/jquery.knob.js',
 			'jquery-maskedinput/jquery-maskedinput.js': 'jquery-maskedinput/dist/jquery.maskedinput.js',
-			'jquery-nestable/jquery-nestable.js': 'jquery-nestable/jquery.nestable.js',
 			'jquery-ui/jquery-ui.js': 'jquery-ui/jquery-ui.js',
 			'jquery-ui/i18n': 'jquery-ui/ui/i18n',
 			'jquery-ui/': 'jquery-ui/ui/*.js',
