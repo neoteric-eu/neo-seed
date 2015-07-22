@@ -4,8 +4,7 @@ define(['seed/module'], function (module) {
 	/**
 	 * Base interface for REST communication with server
 	 * @interface
-	 * @memberOf app
-	 * @todo add to seed
+	 * @memberOf seed
 	 *
 	 * @param $q {Object} AngularJS promise object
 	 * @param $log {Object} Logging provider
@@ -14,6 +13,7 @@ define(['seed/module'], function (module) {
 	 * @return {Object} REST interface for Restmod models
 	 */
 	function BaseAPI($q, $log, gettextCatalog, appMessages) {
+		$log = $log.getInstance('seed.BaseAPI');
 
 		/**
 		 * API constructor takes model as a parameter

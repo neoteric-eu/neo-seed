@@ -1,7 +1,7 @@
 define(['angular'], function (ng) {
 	'use strict';
 
-	var module = ng.module('neo.dashboard', []);
+	var module = ng.module('app.dashboard', []);
 
 	module.config(function ($stateProvider) {
 		$stateProvider

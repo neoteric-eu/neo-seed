@@ -9,16 +9,16 @@ define([
 	couchPotato.configureApp(container);
 
 	container.run(function ($couchPotato, $log, $rootScope, $state, appConf) {
-
-		$log.debug('Setting up application configuration');
+		$log = $log.getInstance('app.module');
 
 		container.lazy = $couchPotato;
-		container.name = appConf.appName;
 
+		container.name = appConf.appName;
 		$rootScope.appReady = true;
+
 		$rootScope.$state = $state;
 
-		$log.debug('Starting application');
+		$log.debug('Set up container configuration');
 	});
 
 	return container;

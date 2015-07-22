@@ -20,7 +20,6 @@ define([
 	'./directives/smartPageTitle',
 	'./directives/hrefVoid',
 	'./service/SmartCss',
-	'../auth/services/neoRequestHeaders',
 
 	'./_locale/translation'
 ], function() {

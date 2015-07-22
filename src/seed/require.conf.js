@@ -14,6 +14,7 @@ requirejs.config({
 		'angular-cookie': 'assets/js/vendor/libs/angular-cookie/angular-cookie',
 		'angular-couch-potato': 'assets/js/vendor/libs/angular-couch-potato/angular-couch-potato',
 		'angular-gettext': 'assets/js/vendor/libs/angular-gettext/angular-gettext',
+		'angular-hotkeys': 'assets/js/vendor/libs/angular-hotkeys/angular-hotkeys',
 		'angular-moment': 'assets/js/vendor/libs/angular-moment/angular-moment',
 		'angular-permission': 'assets/js/custom/angular-permission/angular-permission',
 		'angular-restmod': 'assets/js/vendor/libs/angular-restmod/angular-restmod',

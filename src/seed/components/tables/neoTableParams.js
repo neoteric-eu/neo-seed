@@ -30,9 +30,11 @@ define(['seed/components/module'], function (module) {
 	 *		}
 	 *	});
 	 * @param ngTableParams {Function} ngTable params interface
+	 * @param $log {Object} Logging service
 	 * @returns {Function} ngTable configuration factory
 	 */
-	function neoTableParams(ngTableParams) {
+	function neoTableParams(ngTableParams, $log) {
+		$log = $log.getInstance('seed.components.neoTableParams');
 
 		/**
 		 * ngTable configuration factory
@@ -59,6 +61,7 @@ define(['seed/components/module'], function (module) {
 						'_id': 'desc'
 					}
 				},
+				getData: undefined,
 				groupBy: undefined,
 				onBeforeResolve: undefined,
 				onAfterResolve: undefined
@@ -70,37 +73,44 @@ define(['seed/components/module'], function (module) {
 				total: 0,
 				groupBy: options.groupBy,
 				getData: function ($defer, params) {
-					var queryParams = {
-						first: (params.url().page - 1) * params.url().count,
-						pageSize: params.url().count,
-						sort: params.sorting(),
-						filter: params.filter()
-					};
+					if (_.isFunction(options.getData)) {
+						options.getData($defer, params);
 
-					CollectionAPI
-						.filter(queryParams)
-						.then(function (models) {
-							if (_.isFunction(options.onBeforeResolve)) {
-								options.onBeforeResolve(models);
-							}
-							return models;
-						})
-						.then(function (models) {
-							params.total(models.$metadata.total);
-							$defer.resolve(models);
-							return models;
-						})
-						.then(function (models) {
-							if (_.isFunction(options.onAfterResolve)) {
-								options.onAfterResolve(models);
-							}
-						});
+					} else {
+						var queryParams = {
+							first: (params.url().page - 1) * params.url().count,
+							pageSize: params.url().count,
+							sort: params.sorting(),
+							filter: params.filter()
+						};
+
+						CollectionAPI
+							.filter(queryParams)
+							.then(function (models) {
+								if (_.isFunction(options.onBeforeResolve)) {
+									options.onBeforeResolve(models);
+								}
+								return models;
+							})
+							.then(function (models) {
+								params.total(models.$metadata.total);
+								$defer.resolve(models);
+								return models;
+							})
+							.then(function (models) {
+								if (_.isFunction(options.onAfterResolve)) {
+									options.onAfterResolve(models);
+								}
+							});
+					}
 				}
 			});
 		};
 
+		$log.debug('Constructed new instance of ngTableFactory');
+
 		return ngTableFactory;
 	}
 
-	module.registerFactory('neoTableParams', neoTableParams);
+	module.factory('neoTableParams', neoTableParams);
 });

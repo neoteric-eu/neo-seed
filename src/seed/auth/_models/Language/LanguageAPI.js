@@ -5,13 +5,14 @@ define([
 	'use strict';
 
 	/**
-	 * @class LanguageAPI
+	 *
 	 * @param Language
 	 * @param $rootScope
+	 * @param ipCookie
 	 * @param gettextCatalog
 	 * @param amMoment
-	 * @param ipCookie
 	 * @param appConf
+	 * @constructor
 	 */
 	var LanguageAPI = function (Language, $rootScope, ipCookie,
 		gettextCatalog, amMoment, appConf) {
@@ -73,7 +74,7 @@ define([
 		};
 	};
 
-	module.registerService('LanguageAPI', LanguageAPI);
+	module.service('LanguageAPI', LanguageAPI);
 });
 
 

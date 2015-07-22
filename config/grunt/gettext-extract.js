@@ -1,16 +1,26 @@
 module.exports = function (grunt) {
 	'use strict';
-	var files = {};
+
+	var appsFiles = {}, seedFiles = {};
 
 	grunt.file
 		.expand({filter: 'isDirectory'}, ['src/apps/*'])
 		.forEach(function (path) {
-			files[path + '/_locale/template.pot'] = path + '/**/*@(.html|.js)';
+			appsFiles[path + '/_locale/template.pot'] = path + '/**/*@(.html|.js)';
+		});
+
+	grunt.file
+		.expand({filter: 'isDirectory'}, ['src/seed/*'])
+		.forEach(function (path) {
+			appsFiles[path + '/_locale/template.pot'] = path + '/**/*@(.html|.js)';
 		});
 
 	return {
-		pot: {
-			files: files
+		apps: {
+			files: appsFiles
+		},
+		seed: {
+			files: seedFiles
 		}
 	};
 };

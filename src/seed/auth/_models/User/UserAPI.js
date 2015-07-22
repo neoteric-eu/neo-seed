@@ -2,68 +2,77 @@ define(['seed/auth/module'], function (module) {
 	'use strict';
 
 	/**
-	 * Description
-	 * @constructor UserAPI
-	 * @method UserAPI
-	 * @param User
-	 * @param $rootScope
-	 * @param $log
+	 *
 	 * @param BaseAPI
+	 * @param User
+	 * @param $log
+	 * @param $rootScope
 	 * @param ipCookie
-	 * @return {*} api
+	 * @return {*}
+	 * @constructor
 	 */
-	function UserAPI(BaseAPI, User, $log, $rootScope, ipCookie) {
+	var UserAPI = function ($log, $rootScope, BaseAPI, User, ipCookie) {
+		$log = $log.getInstance('seed.auth.models.UserAPI');
 
 		var api = new BaseAPI(User);
 
 		api.login = function (loginData) {
+			$log.debug('Called "login" UserAPI method');
+
+			// @TODO Find way to remove building model before calling
 			return User
-				// @TODO Find way to remove building model before calling
 				.$build(loginData)
 				.$login()
 				.$asPromise()
 				.then(function (user) {
 					// Make user, customers accessible globally
+					$log.debug('Set user object available globally');
 					$rootScope.user = user;
 
 					ipCookie('token', user.$metadata.token);
 					return user;
 				})
-				.catch(function (response) {
-					$log.error('Could not login the user', response);
+				.catch(function () {
+					$log.error('Could not login the user');
 				});
 		};
 
 		api.authInfo = function authInfo() {
+			$log.debug('Called "authInfo" UserAPI method');
+
+			// @TODO Find way to remove building model before calling
 			return User
-				// @TODO Find way to remove building model before calling
 				.$build()
 				.$authInfo()
 				.$asPromise()
 				.then(function (user) {
-					// Make user, customers accessible globally
+					$log.debug('Set user object available globally');
 					$rootScope.user = user;
 
 					return user;
 				})
-				.catch(function (response) {
-					$log.error('Could not login the user', response);
+				.catch(function () {
+					$log.error('Use session experienced');
 				});
 		};
 
 		api.logout = function (user) {
+
 			return user
 				.$logout()
 				.$asPromise()
+				.then(function () {
+					$log.debug('Logged out user');
+				})
 				.catch(function (response) {
 					$log.error('Could not logout the user', response);
 				});
 		};
 
 		return api;
-	}
+	};
 
-	module.registerService('UserAPI', UserAPI);
+	module.service('UserAPI', UserAPI);
 });
 
 

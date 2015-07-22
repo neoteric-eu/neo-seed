@@ -1,51 +1,29 @@
 define(['seed/auth/module'], function (module) {
 	'use strict';
 
-	function User(restmod, ipCookie) {
-		/**
-		 * Data model
-		 * @example
-		 *  {
-		 *    "id": "5357699c9d33da5ee72b45ce",
-		 *    "email": "admin@preiscoin.com",
-		 *    "passwordHash": "51b112a6cc1c05e56e923d0f22ac84303d7d7c4e9459aa46b356ccfb86c99882",
-		 *    "phoneNumber": "",
-		 *    "userStatus": "ACTIVE",
-		 *    "firstName": "System-admin",
-		 *    "lastName": "System-admin",
-		 *    "createdOn": "2014-06-16T16:17:00.796+02:00",
-		 *    "lastPassChange": null,
-		 *    "language": "EN",
-		 *    "newsletter": false,
-		 *    "termsOfService": null,
-		 *    "customers": [
-		 *      "customerId": "5351090b8fe7f4e7b99d6e67",
-		 *      "customerName": "Administratorzy systemu",
-		 *      "roles": [{
-		 *    	  "roleId": "53576b379d33da5ee72b45cf",
-		 *    	  "roleName": "system-admin"
-		 *      }],
-		 *      "featureKeys": [
-		 *        "CERT_MGMT"
-		 *      ],
-		 *      "constraints": [],
-		 *      "status": "ACTIVE",
-		 *      "hashCode": -1959223591
-		 *    ]
-		 *  }
-		 */
+	/**
+	 *
+	 * @param restmod
+	 * @param ipCookie
+	 * @return {*|Model}
+	 * @constructor
+	 */
+	var User = function (restmod, ipCookie) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
 			.mix('UserPacker', {
 				customers: {
-					hasMany: 'Profile'
+					hasMany: 'Customer'
 				},
 				language: {
 					hasOne: 'Language'
 				},
 				password: {
 					volatile: true
+				},
+				avatar: {
+					init: 'assets/img/avatars/sunny-big.png'
 				},
 
 				$config: {
@@ -108,7 +86,7 @@ define(['seed/auth/module'], function (module) {
 					}
 				}
 			});
-	}
+	};
 
-	module.registerFactory('User', User);
+	module.factory('User', User);
 });

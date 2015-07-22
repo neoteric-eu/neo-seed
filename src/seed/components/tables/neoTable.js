@@ -1,10 +1,11 @@
 define([
-	'seed/module',
+	'seed/components/module',
 	'angular-table'
 ], function (module) {
 	'use strict';
 
 	function neoTable($templateCache, $http, $log) {
+		$log = $log.getInstance('seed.components.neoTable');
 
 		var neoTableBuilder = {};
 

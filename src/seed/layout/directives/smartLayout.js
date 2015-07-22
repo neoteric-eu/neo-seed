@@ -3,6 +3,8 @@ define(['seed/layout/module'], function (module) {
 
 	module.registerDirective('smartLayout', function ($rootScope, $timeout, $interval, $q, $log) {
 
+		$log = $log.getInstance('seed.layout.smartLayout');
+
 		var initialized = false, initializedResolver = $q.defer();
 		initializedResolver.promise.then(function () {
 			initialized = true;
@@ -38,11 +40,6 @@ define(['seed/layout/module'], function (module) {
 		return {
 			priority: 2014,
 			restrict: 'A',
-			/**
-			 * Description
-			 * @method compile
-			 * @param {} tElement
-			 */
 			compile: function (tElement) {
 				tElement.removeAttr('smart-layout data-smart-layout');
 
@@ -55,10 +52,6 @@ define(['seed/layout/module'], function (module) {
 
 				var forceResizeTrigger = false;
 
-				/**
-				 * Description
-				 * @method resizeListener
-				 */
 				function resizeListener() {
 
 					var menuHeight = $body.hasClass('menu-on-top') &&
@@ -73,11 +66,11 @@ define(['seed/layout/module'], function (module) {
 
 					calcWidth = $window.width() - menuWidth - contentXPad;
 					calcHeight = $window.height() -
-					menuHeight -
-					contentYPad -
-					$navigation.height() -
-					$ribbon.height() -
-					$footer.height();
+						menuHeight -
+						contentYPad -
+						$navigation.height() -
+						$ribbon.height() -
+						$footer.height();
 
 					deltaX = appViewWidth - calcWidth;
 					deltaY = appViewHeight - calcHeight;
@@ -107,11 +100,6 @@ define(['seed/layout/module'], function (module) {
 					run(300);
 				}, 300);
 
-				/**
-				 * Description
-				 * @method run
-				 * @param {} delay
-				 */
 				function run(delay) {
 					initializedResolver.promise.then(function () {
 						attachOnResize(delay);
@@ -120,29 +108,16 @@ define(['seed/layout/module'], function (module) {
 
 				run(10);
 
-				/**
-				 * Description
-				 * @method detachOnResize
-				 */
 				function detachOnResize() {
 					looping = false;
 				}
 
-				/**
-				 * Description
-				 * @method attachOnResize
-				 * @param {} delay
-				 */
 				function attachOnResize(delay) {
 					$timeout(function () {
 						looping = true;
 					}, delay);
 				}
 
-				/**
-				 * Description
-				 * @method loop
-				 */
 				function loop() {
 					$body.toggleClass('mobile-view-activated', $window.width() < 979);
 
@@ -153,11 +128,6 @@ define(['seed/layout/module'], function (module) {
 					resizeListener();
 				}
 
-				/**
-				 * Description
-				 * @method handleHtmlId
-				 * @param {} toState
-				 */
 				function handleHtmlId(toState) {
 					if (toState.data && toState.data.htmlId) {
 						$html.attr('id', toState.data.htmlId);
@@ -175,19 +145,19 @@ define(['seed/layout/module'], function (module) {
 				// initialized with 1 cause we came here with one $viewContentLoading request
 				var viewContentLoading = 1;
 				$rootScope.$on('$viewContentLoading', function () {
-					$log.debug('$viewContentLoading');
 					viewContentLoading++;
+					$log.debug('Called "$viewContentLoading" smartLayout method');
 				});
 
 				$rootScope.$on('$stateChangeSuccess', function () {
-					$log.debug('$stateChangeSuccess');
 					forceResizeTrigger = true;
+					$log.debug('Called "$stateChangeSuccess" smartLayout method');
 				});
 
 				$rootScope.$on('$viewContentLoaded', function () {
-					$log.debug('$viewContentLoaded');
-					viewContentLoading--;
+					$log.debug('Called "$viewContentLoaded" smartLayout method');
 
+					viewContentLoading--;
 					if (viewContentLoading === 0 && initialized) {
 						debouncedRun();
 					}

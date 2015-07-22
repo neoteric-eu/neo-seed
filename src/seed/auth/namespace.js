@@ -1,4 +1,4 @@
 /**
- * @namespace app.auth
- * @memberof app
+ * @namespace seed.auth
+ * @memberof seed
  */

@@ -47,7 +47,7 @@ define([
 	couchPotato.configureApp(seed);
 
 	seed.config(function ($provide, $httpProvider, $locationProvider,
-		$logProvider, restmodProvider, uiSelectConfig, appConf) {
+		$logProvider, restmodProvider, uiSelectConfig, appConf, moment) {
 
 		restmodProvider.rebase('NeoStyleAPI');
 
@@ -56,18 +56,66 @@ define([
 		$locationProvider.html5Mode(appConf.environmentSettings.modRewriteEnabled);
 		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
 
+		$provide.decorator('$log', function ($delegate) {
+			$delegate.getInstance = getInstance;
+
+			function getInstance(name) {
+				var className = _.isUndefined(name) ? '' : name + ' :: ';
+				var logInstance = ng.copy($delegate);
+
+				_.assign(logInstance, {
+					log: function () {
+						var args = [].slice.call(arguments),
+							now = moment().format('YYYY-MM-DD HH:mm:ss');
+
+						args[0] = [null, now + ' - ' + className, args[0]].join('');
+
+						return $delegate.log.apply(null, args);
+					},
+					info: function () {
+						var args = [].slice.call(arguments),
+							now = moment().format('YYYY-MM-DD HH:mm:ss');
+
+						args[0] = [null, now + ' - ' + className, args[0]].join('');
+
+						return $delegate.info.apply(null, args);
+					},
+					debug: function () {
+						var args = [].slice.call(arguments),
+							now = moment().format('YYYY-MM-DD HH:mm:ss');
+
+						args[0] = [null, now + ' - ' + className, args[0]].join('');
+
+						return $delegate.debug.apply(null, args);
+					},
+					error: function () {
+						var args = [].slice.call(arguments),
+							now = moment().format('YYYY-MM-DD HH:mm:ss');
+
+						args[0] = [null, now + ' - ' + className, args[0]].join('');
+
+						return $delegate.error.apply(null, args);
+					}
+				});
+
+				return logInstance;
+			}
+
+			return $delegate;
+		});
+
 		// Add the interceptors to the $httpProvider.
 		$httpProvider.interceptors.push('HttpErrorInterceptor');
 		$httpProvider.interceptors.push('HttpRequestInterceptor');
 	});
 
-	seed.run(function ($couchPotato, $rootScope, $state,
-		gettextCatalog, LanguageAPI, $urlRouter, $log, appConf) {
-
-		$log.debug('Setting up seed configuration');
+	seed.run(function (gettextCatalog, LanguageAPI, $log, appConf) {
+		$log = $log.getInstance('seed.module');
 
 		LanguageAPI.initiate();
 		gettextCatalog.debug = appConf.environmentSettings.debugEnabled;
+
+		$log.debug('Set up seed configuration');
 	});
 
 	return seed;

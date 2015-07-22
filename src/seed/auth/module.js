@@ -1,15 +1,18 @@
 define([
 	'angular',
-	'angular-couch-potato',
-	'angular-cookie'
-], function (ng, couchPotato) {
+	'angular-cookie',
+	'angular-hotkeys'
+], function (ng) {
 	'use strict';
 
-	var module = ng.module('seed.auth', ['ipCookie', 'seed.forms', 'neo.dashboard']);
+	var module = ng.module('seed.auth', [
+		'ipCookie',
+		'cfp.hotkeys',
+		'app.dashboard',
+		'seed.auth.login'
+	]);
 
-	couchPotato.configureApp(module);
-
-	module.config(function ($stateProvider, $couchPotatoProvider, gettext) {
+	module.config(function ($stateProvider) {
 
 		$stateProvider
 			.state('auth', {
@@ -22,27 +25,8 @@ define([
 				},
 				views: {
 					root: {
-						template: '<div data-ui-view="auth"></div>'
+						templateUrl: 'seed/auth/views/view.html'
 					}
-				}
-			})
-
-			.state('auth.login', {
-				url: '/login',
-				views: {
-					auth: {
-						controller: 'LoginController',
-						templateUrl: 'seed/auth/views/login/login.html'
-					}
-				},
-				data: {
-					title: gettext('Login')
-				},
-				resolve: {
-					deps: $couchPotatoProvider.resolveDependencies([
-						// Controllers
-						'seed/auth/controllers/LoginController'
-					])
 				}
 			})
 
@@ -66,59 +50,34 @@ define([
 						}
 					}
 				}
-			})
-
-			.state('auth.register', {
-				url: '/register',
-				views: {
-					auth: {
-						controller: 'RegisterController',
-						templateUrl: 'seed/auth/views/register/register.html'
-					}
-				},
-				data: {
-					title: gettext('Register')
-				},
-				resolve: {
-					deps: $couchPotatoProvider.resolveDependencies([
-						'seed/auth/controllers/RegisterController'
-					])
-				}
-			})
-
-			.state('auth.forgotPassword', {
-				url: '/forgot-password',
-				views: {
-					auth: {
-						templateUrl: 'seed/auth/views/forgot-password.html'
-					}
-				},
-				data: {
-					title: gettext('Forgot Password'),
-					htmlId: 'extr-page'
-				}
-			})
-
-			.state('lock', {
-				url: '/lock',
-				views: {
-					root: {
-						templateUrl: 'seed/auth/views/lock.html'
-					}
-				},
-				data: {
-					title: 'Locked Screen'
-				}
 			});
 	});
 
-	module.run(function ($couchPotato, $rootScope, Permission, neoSession) {
+	module.run(function ($log, $rootScope, $state,
+		hotkeys, Permission, UserAPI, neoSession) {
 
-		module.lazy = $couchPotato;
+		$log = $log.getInstance('seed.auth.module');
+
+		// Bound globally shortcut to lock screen
+		hotkeys.add({
+			combo: 'alt+l',
+			description: 'Lock screen',
+			callback: function () {
+				UserAPI
+					.logout($rootScope.user)
+					.then(function () {
+						neoSession.clearSession();
+						$state.go('auth.lock');
+					});
+			}
+		});
 
 		Permission.defineRole('user', function () {
 			return neoSession.checkSession();
 		});
+
+		$log.debug('Initiated module');
 	});
+
 	return module;
 });

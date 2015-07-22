@@ -9,13 +9,8 @@ define(['seed/module'], function (app) {
 	 * @param appConf {Object} Application configuration settings
 	 * @return {{requestError: Function, responseError: Function}}
 	 */
-	function HttpErrorInterceptor($q, $exceptionHandler, appConf) {
+	function HttpErrorInterceptor($q, $injector, $exceptionHandler, appConf) {
 
-		/**
-		 * Description
-		 * @method notifyError
-		 * @param {} rejection
-		 */
 		function notifyError(rejection) {
 			if (appConf.sentrySettings.apiKey) {
 				var exception = {
@@ -33,11 +28,6 @@ define(['seed/module'], function (app) {
 
 		return {
 			// On request failure
-			/**
-			 * Description
-			 * @method requestError
-			 * @param {} rejection CallExpression
-			 */
 			requestError: function (rejection) {
 				// show notification
 				notifyError(rejection);
@@ -47,24 +37,20 @@ define(['seed/module'], function (app) {
 			},
 
 			// On response failure
-			/**
-			 * Description
-			 * @method responseError
-			 * @param {} rejection CallExpression
-			 */
 			responseError: function (rejection) {
 
 				// show notification
 				notifyError(rejection);
 
-				//if (rejection.status === 401) {
-				//	// If user is not authorised redirect to login page
-				//	$injector.get('$state').go('auth.logout');
-				//	return $q.reject(rejection);
-				//} else {
-				// Return the promise rejection.
-				return $q.reject(rejection);
-				//}
+				if (rejection.status === 401) {
+					// If user is not authorised redirect to login page
+					$injector.get('$state').go('auth.logout');
+					return $q.reject(rejection);
+				} else {
+					// Return the promise rejection.
+					return $q.reject(rejection);
+					//}
+				}
 			}
 		};
 	}

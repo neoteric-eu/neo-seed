@@ -32,6 +32,7 @@ module.exports = {
 			'angular-restmod/plugins': 'angular-restmod/dist/plugins/*.min.js',
 			'angular-gridster/angular-gridster.js': 'angular-gridster/src/angular-gridster.js',
 			'angular-file-upload/angular-file-upload.js': 'ng-file-upload/ng-file-upload.js',
+			'angular-hotkeys/angular-hotkeys.js': 'angular-hotkeys/build/hotkeys.js',
 
 			'bootstrap/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
 			'bootstrap-timepicker/bootstrap-timepicker.js': 'bootstrap3-fontawesome-timepicker/js/bootstrap-timepicker.js',
@@ -119,7 +120,8 @@ module.exports = {
 			'form-validation/formValidation.css': 'form.validation/dist/css/formValidation.css',
 			'select2/select2.css': 'select2/select2.css',
 			'select2/select2-bootstrap.css': 'select2/select2-bootstrap.css',
-			'ui-select/select.css': 'angular-ui-select/dist/select.css'
+			'ui-select/select.css': 'angular-ui-select/dist/select.css',
+			'hotkeys/hotkeys.css': 'angular-hotkeys/build/hotkeys.css'
 		}
 	},
 	less: {

@@ -5,7 +5,7 @@ define([
 
 	'use strict';
 
-	var module = ng.module('seed.layout', ['ui.router']);
+	var module = ng.module('seed.layout', ['seed.auth']);
 	couchPotato.configureApp(module);
 
 	module.config(function ($stateProvider, $urlRouterProvider) {
@@ -15,7 +15,7 @@ define([
 			data: {
 				permissions: {
 					only: ['user'],
-					redirectTo: 'auth.login'
+					redirectTo: 'auth.login.loginForm'
 				}
 			},
 			views: {
@@ -31,11 +31,8 @@ define([
 		});
 	});
 
-	module.run(function ($rootScope, $couchPotato) {
+	module.run(function ($couchPotato) {
 		module.lazy = $couchPotato;
-
-		//$http.defaults.headers.common['X-Customer-Id'] = ipCookie('activeCustomer').customerId;
-		//$http.defaults.headers.common['Authorization'] = 'token ' + ipCookie('token');
 	});
 
 	return module;

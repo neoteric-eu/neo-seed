@@ -1,26 +1,24 @@
 define([
-	'./controllers/ActivationController',
-	'./controllers/LoginController',
-	'./controllers/RegisterController',
+	'./_directives/neoKeep/neoKeep',
+	'./_directives/neoOmit/neoOmit',
 
-	'./services/neoSession',
-	'./services/neoRequestHeaders',
+	'./_services/neoSession',
+	'./_services/neoRequestHeaders',
 
 	'./_models/User/User',
 	'./_models/User/UserAPI',
-	'./_models/Profile/Profile',
-	'./_models/Profile/ProfileAPI',
+	'./_models/User/UserPacker',
+
+	'./_models/Customer/Customer',
+	'./_models/Customer/CustomerAPI',
+
 	'./_models/Language/LanguageAPI',
 	'./_models/Language/Language',
 
 	'../helpers/restmod/models/BaseAPI',
 
-	'./packers/UserPacker',
-
-	'./resources/smRegistrationResource',
-
-	'./directives/neoKeep/neoKeep',
-	'./directives/neoOmit/neoOmit',
+	'./login/module',
+	'./login/_includes',
 
 	'./_locale/translation'
 ], function () {
