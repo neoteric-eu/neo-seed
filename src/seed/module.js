@@ -56,6 +56,7 @@ define([
 		$locationProvider.html5Mode(appConf.environmentSettings.modRewriteEnabled);
 		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
 
+		// Decorate angular logger
 		$provide.decorator('$log', function ($delegate) {
 			$delegate.getInstance = getInstance;
 
@@ -63,39 +64,22 @@ define([
 				var className = _.isUndefined(name) ? '' : name + ' :: ';
 				var logInstance = ng.copy($delegate);
 
+				function decorate(logFn, className) {
+					return function () {
+						var args = [].slice.call(arguments),
+							now = moment().format('YYYY-MM-DD HH:mm:ss');
+
+						args[0] = [null, now + ' - ' + className, args[0]].join('');
+
+						return logFn.apply(null, args);
+					};
+				}
+
 				_.assign(logInstance, {
-					log: function () {
-						var args = [].slice.call(arguments),
-							now = moment().format('YYYY-MM-DD HH:mm:ss');
-
-						args[0] = [null, now + ' - ' + className, args[0]].join('');
-
-						return $delegate.log.apply(null, args);
-					},
-					info: function () {
-						var args = [].slice.call(arguments),
-							now = moment().format('YYYY-MM-DD HH:mm:ss');
-
-						args[0] = [null, now + ' - ' + className, args[0]].join('');
-
-						return $delegate.info.apply(null, args);
-					},
-					debug: function () {
-						var args = [].slice.call(arguments),
-							now = moment().format('YYYY-MM-DD HH:mm:ss');
-
-						args[0] = [null, now + ' - ' + className, args[0]].join('');
-
-						return $delegate.debug.apply(null, args);
-					},
-					error: function () {
-						var args = [].slice.call(arguments),
-							now = moment().format('YYYY-MM-DD HH:mm:ss');
-
-						args[0] = [null, now + ' - ' + className, args[0]].join('');
-
-						return $delegate.error.apply(null, args);
-					}
+					log: decorate($delegate.log, className),
+					info: decorate($delegate.info, className),
+					debug: decorate($delegate.debug, className),
+					error: decorate($delegate.error, className)
 				});
 
 				return logInstance;

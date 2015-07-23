@@ -1,3 +1,5 @@
-define([], function () {
+define([
+	'./forms/authLockForm'
+], function () {
 	'use strict';
 });

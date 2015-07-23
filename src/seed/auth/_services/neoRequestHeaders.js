@@ -4,28 +4,31 @@ define(['seed/auth/module'], function (module) {
 	/**
 	 * Expands every HTTP request by additional headers
 	 * @class neoRequestHeaders
-	 * @memberOf app.auth
+	 * @memberOf seed.auth
 	 *
 	 * @param $http {Object} Facilitates communication with the remote HTTP servers
+	 * @param $log
 	 */
 	var neoRequestHeaders = function ($log, $http) {
 		$log = $log.getInstance('app.auth.neoRequestHeaders');
 
 		this.setAuthToken = function (token) {
 			$http.defaults.headers.common['Authorization'] = 'token ' + token;
-			$log.debug('Set auth token header');
+
+			$log.debug('Set Authorization header');
 		};
 
 		this.setCustomerId = function (customerId) {
 			$http.defaults.headers.common['X-Customer-Id'] = customerId;
-			$log.debug('Set customer token header');
+
+			$log.debug('Set X-Customer-Id header');
 		};
 
 		this.clearHeaders = function () {
 			delete $http.defaults.headers.common['Authorization'];
 			delete $http.defaults.headers.common['X-Customer-Id'];
 
-			$log.debug('Cleared header');
+			$log.debug('Cleared headers');
 		};
 	};
 

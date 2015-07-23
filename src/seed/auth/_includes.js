@@ -17,8 +17,11 @@ define([
 
 	'../helpers/restmod/models/BaseAPI',
 
-	'./login/module',
 	'./login/_includes',
+	'./login/module',
+
+	'./lock/_includes',
+	'./lock/module',
 
 	'./_locale/translation'
 ], function () {

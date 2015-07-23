@@ -5,13 +5,19 @@ define([
 	'use strict';
 
 	/**
-	 *
-	 * @param restmod
-	 * @param RMPackerCache
-	 * @return {*|{$isAbstract, $$chain}}
+	 * Custom serializer for user request for SassManager compatibility
 	 * @constructor
+	 * @memberOf seed.auth
+	 *
+	 * @param restmod {Object} Data model layer interface
+	 * @param RMPackerCache {Object} Restmod cache service
+	 * @return {*|{$isAbstract, $$chain}}
 	 */
-	var UserPacker = function (restmod, RMPackerCache) {
+	var UserPacker = function ($log, restmod, RMPackerCache) {
+
+		$log = $log.getInstance('seed.auth.UserPacker');
+		$log.debug('Initiated factory');
+
 		return restmod.mixin(function () {
 			this.define('Model.unpack', function (_resource, _raw) {
 				var name,

@@ -28,5 +28,5 @@ define(['seed/module'], function (app) {
 		};
 	};
 
-	app.registerDirective('userProfiles', userProfiles);
+	app.directive('userProfiles', userProfiles);
 });

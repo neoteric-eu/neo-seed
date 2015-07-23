@@ -11,13 +11,13 @@
 
 	<!-- notification content -->
 	<div class="ajax-notifications custom-scroll" ng-switch="activeTab">
-		<div smart-include="app-demo/components/activities/tabs/tab-msgs.html"
+		<div ng-include="'app-demo/components/activities/tabs/tab-msgs.html'"
 				 ng-switch-when="msgs"></div>
-		<div smart-include="app-demo/components/activities/tabs/tab-notify.html"
+		<div ng-include="'app-demo/components/activities/tabs/tab-notify.html'"
 				 ng-switch-when="notify"></div>
-		<div smart-include="app-demo/components/activities/tabs/tab-tasks.html"
+		<div ng-include="'app-demo/components/activities/tabs/tab-tasks.html'"
 				 ng-switch-when="tasks"></div>
-		<div smart-include="app-demo/components/activities/tabs/tab-default.html"
+		<div ng-include="'app-demo/components/activities/tabs/tab-default.html'"
 				 ng-switch-when="default"></div>
 	</div>
 	<!-- end notification content -->

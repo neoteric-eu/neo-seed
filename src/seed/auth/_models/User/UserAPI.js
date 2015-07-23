@@ -2,34 +2,38 @@ define(['seed/auth/module'], function (module) {
 	'use strict';
 
 	/**
-	 *
-	 * @param BaseAPI
-	 * @param User
-	 * @param $log
-	 * @param $rootScope
-	 * @param ipCookie
-	 * @return {*}
+	 * Interface for REST communication with server
 	 * @constructor
+	 * @implements {seed.BaseAPI}
+	 * @memberOf seed.auth
+	 *
+	 * @param $log {Object} Logging service
+	 * @param $rootScope {Object} Global scope provider
+	 * @param ipCookie {Function} Cookie management service
+	 * @param BaseAPI {Function} Base interface for REST communication with server
+	 * @param User {Object} Model factory
+	 * @return {Function} Instantiated service
 	 */
 	var UserAPI = function ($log, $rootScope, BaseAPI, User, ipCookie) {
-		$log = $log.getInstance('seed.auth.models.UserAPI');
+
+		$log = $log.getInstance('seed.auth.UserAPI');
+		$log.debug('Initiated service');
 
 		var api = new BaseAPI(User);
 
 		api.login = function (loginData) {
-			$log.debug('Called "login" UserAPI method');
-
-			// @TODO Find way to remove building model before calling
 			return User
 				.$build(loginData)
 				.$login()
 				.$asPromise()
 				.then(function (user) {
-					// Make user, customers accessible globally
+
 					$log.debug('Set user object available globally');
 					$rootScope.user = user;
-
 					ipCookie('token', user.$metadata.token);
+
+					$log.debug('Successfully logged user in');
+
 					return user;
 				})
 				.catch(function () {
@@ -38,9 +42,6 @@ define(['seed/auth/module'], function (module) {
 		};
 
 		api.authInfo = function authInfo() {
-			$log.debug('Called "authInfo" UserAPI method');
-
-			// @TODO Find way to remove building model before calling
 			return User
 				.$build()
 				.$authInfo()
@@ -48,6 +49,8 @@ define(['seed/auth/module'], function (module) {
 				.then(function (user) {
 					$log.debug('Set user object available globally');
 					$rootScope.user = user;
+
+					$log.debug('Successfully verified user session');
 
 					return user;
 				})
@@ -57,7 +60,6 @@ define(['seed/auth/module'], function (module) {
 		};
 
 		api.logout = function (user) {
-
 			return user
 				.$logout()
 				.$asPromise()

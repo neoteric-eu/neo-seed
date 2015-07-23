@@ -9,7 +9,8 @@ define([
 		'ipCookie',
 		'cfp.hotkeys',
 		'app.dashboard',
-		'seed.auth.login'
+		'seed.auth.login',
+		'seed.auth.lock'
 	]);
 
 	module.config(function ($stateProvider) {

@@ -5,26 +5,36 @@ define([
 	'use strict';
 
 	/**
-	 *
-	 * @param Language
-	 * @param $rootScope
-	 * @param ipCookie
-	 * @param gettextCatalog
-	 * @param amMoment
-	 * @param appConf
+	 * Interface for REST communication with server
 	 * @constructor
+	 * @implements {seed.BaseAPI}
+	 * @memberOf seed.auth
+	 *
+	 * @param $log {Object} Logging service
+	 * @param Language  {Object} Model factory
+	 * @param BaseAPI {Function} Base interface for REST communication with server
+	 * @param $rootScope {Object} Global scope provider
+	 * @param appConf {Object} Application configuration
+	 * @param ipCookie {Function} Cookie management service
+	 * @param gettextCatalog {Object} translation catalog provider
+	 * @param amMoment {Object} Moment configuration provider
+	 * @return {Function} Instantiated service
 	 */
-	var LanguageAPI = function (Language, $rootScope, ipCookie,
+	var LanguageAPI = function ($log, $rootScope, ipCookie, Language, BaseAPI,
 		gettextCatalog, amMoment, appConf) {
 
-		this.languageCollection = [];
+		$log = $log.getInstance('seed.auth.LanguageAPI');
+		$log.debug('Initiated service');
+
+		var api = new BaseAPI(Language);
+
+		api.languageCollection = [];
 
 		/**
 		 * Initiate the collection of the languages
 		 * and assign them to $rootScope.
-		 * @method initiate
 		 */
-		this.initiate = function () {
+		api.initiate = function () {
 			var self = this;
 			Language
 				.$collection()
@@ -35,20 +45,21 @@ define([
 					self.languageCollection = data;
 					self.setLanguage(ipCookie('lang') || appConf.languageSettings.defaultLanguage);
 				});
+
+			$log.debug('Set up application language collection');
 		};
 
 		/**
-		 * Description
-		 * @method setLanguage
-		 * @param language
+		 * Set application interface language
+		 * @param language {seed.auth.Language} Language instance
 		 */
-		this.setLanguage = function (language) {
+		api.setLanguage = function (language) {
 
 			if (_.isString(language)) {
 				language = this.languageCollection.$findByCode(language);
 			}
 
-			this.languageCollection.$setSelected(language);
+			api.languageCollection.$setSelected(language);
 
 			// Write locale to cookie
 			ipCookie('lang', language.code);
@@ -57,13 +68,15 @@ define([
 			gettextCatalog.setCurrentLanguage(language.locale);
 			amMoment.changeLocale(language.locale);
 			moment.locale(language.locale);
+
+			$log.debug('Changed application language to: ' + language.locale);
 		};
 
 		/**
-		 * Description
-		 * @method getLanguage language
+		 * Get application interface language
+		 * @return {seed.auth.Language} Language instance
 		 */
-		this.getLanguage = function () {
+		api.getLanguage = function () {
 			var language = this.languageCollection.$selected || ipCookie.get('lang');
 
 			if (!_.isObject(language)) {
@@ -72,6 +85,8 @@ define([
 
 			return language;
 		};
+
+		return api;
 	};
 
 	module.service('LanguageAPI', LanguageAPI);

@@ -1,13 +1,9 @@
 define([
-	'angular',
-	'angular-couch-potato',
-	'angular-cookie'
-], function (ng, couchPotato) {
+	'angular'
+], function (ng) {
 	'use strict';
 
-	var module = ng.module('seed.auth.login', []);
-
-	couchPotato.configureApp(module);
+	var module = ng.module('seed.auth.lock', []);
 
 	module.config(function ($stateProvider) {
 
@@ -16,7 +12,7 @@ define([
 				url: '/lock',
 				views: {
 					auth: {
-						templateUrl: 'seed/auth/views/lock/lock.html'
+						template: '<auth-lock-form></auth-lock-form>'
 					}
 				},
 				data: {
@@ -26,7 +22,7 @@ define([
 	});
 
 	module.run(function ($log) {
-
+		$log = $log.getInstance('seed.auth.lock.module');
 		$log.debug('Initiated module');
 	});
 

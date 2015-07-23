@@ -2,11 +2,13 @@ define(['seed/auth/module'], function (module) {
 	'use strict';
 
 	/**
-	 *
-	 * @param restmod
-	 * @param ipCookie
-	 * @return {*|Model}
 	 * @constructor
+	 * @implements {seed.BaseModel}
+	 * @memberOf seed.auth
+	 *
+	 * @param restmod {Object} Data model layer interface
+	 * @param ipCookie {Function} Cookie management service
+	 * @return {*|Model} Model instance
 	 */
 	var User = function (restmod, ipCookie) {
 		//noinspection JSUnusedGlobalSymbols

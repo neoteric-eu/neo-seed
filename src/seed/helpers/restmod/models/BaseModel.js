@@ -5,8 +5,8 @@ define(['seed/module'], function (app) {
 	 * Restmod base model for all instances
 	 * @class BaseModel
 	 * @interface
-	 * @implements {app.BaseAPI}
-	 * @memberOf app
+	 * @implements {seed.BaseAPI}
+	 * @memberOf seed
 	 *
 	 * @param restmod
 	 * @return {Object}

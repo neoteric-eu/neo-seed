@@ -2,10 +2,12 @@ define(['seed/auth/module'], function (module) {
 	'use strict';
 
 	/**
-	 *
-	 * @param restmod
-	 * @return {*|Model}
 	 * @constructor
+	 * @implements {seed.BaseModel}
+	 * @memberOf seed.auth
+	 *
+	 * @param restmod {Object} Data model layer interface
+	 * @return {*|Model} Model instance
 	 */
 	var Customer = function (restmod) {
 		return restmod
