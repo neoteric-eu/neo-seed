@@ -17,10 +17,6 @@ define(['seed/widgets/module'], function (module) {
 			toggleButton: true,
 			toggleClass: 'fa fa-minus | fa fa-plus',
 			toggleSpeed: 200,
-			/**
-			 * Description
-			 * @method onToggle
-			 */
 			onToggle: function () {
 			},
 
@@ -29,10 +25,6 @@ define(['seed/widgets/module'], function (module) {
 			deleteMsg: 'Warning: This action cannot be undone!',
 			deleteClass: 'fa fa-times',
 			deleteSpeed: 200,
-			/**
-			 * Description
-			 * @method onDelete
-			 */
 			onDelete: function () {
 			},
 
@@ -41,10 +33,6 @@ define(['seed/widgets/module'], function (module) {
 			editPlaceholder: '.jarviswidget-editbox',
 			editClass: 'fa fa-cog | fa fa-save',
 			editSpeed: 200,
-			/**
-			 * Description
-			 * @method onEdit
-			 */
 			onEdit: function () {
 			},
 
@@ -54,27 +42,15 @@ define(['seed/widgets/module'], function (module) {
 			fullscreenButton: true,
 			fullscreenClass: 'fa fa-expand | fa fa-compress',
 			fullscreenDiff: 3,
-			/**
-			 * Description
-			 * @method onFullscreen
-			 */
 			onFullscreen: function () {
 			},
 
 			// custom btn
 			customButton: false,
 			customClass: 'folder-10 | next-10',
-			/**
-			 * Description
-			 * @method customStart
-			 */
 			customStart: function () {
 				alert('Hello you, this is a custom button...');
 			},
-			/**
-			 * Description
-			 * @method customEnd
-			 */
 			customEnd: function () {
 				alert('bye, till next time...');
 			},
@@ -95,24 +71,11 @@ define(['seed/widgets/module'], function (module) {
 			labelUpdated: 'Last Update:',
 			labelRefresh: 'Refresh',
 			labelDelete: 'Delete widget:',
-			/**
-			 * Description
-			 * @method afterLoad
-			 */
 			afterLoad: function () {
 			},
-			rtl: false, // best not to toggle this!
-			/**
-			 * Description
-			 * @method onChange
-			 */
 			onChange: function () {
 
 			},
-			/**
-			 * Description
-			 * @method onSave
-			 */
 			onSave: function () {
 
 			},
@@ -123,12 +86,6 @@ define(['seed/widgets/module'], function (module) {
 		var dispatchedWidgetIds = [];
 		var setupWaiting = false;
 
-		/**
-		 * Description
-		 * @method setupWidgets
-		 * @param {} element
-		 * @param {} widgetIds
-		 */
 		var setupWidgets = function (element, widgetIds) {
 
 			if (!setupWaiting) {
@@ -151,25 +108,13 @@ define(['seed/widgets/module'], function (module) {
 					}, 200);
 				}
 			}
-
 		};
 
-		/**
-		 * Description
-		 * @method destroyWidgets
-		 * @param {} element
-		 * @param {} widgetIds
-		 */
 		var destroyWidgets = function (element, widgetIds) {
 			//element.data('jarvisWidgets') && element.data('jarvisWidgets').destroy();
 			dispatchedWidgetIds = _.xor(dispatchedWidgetIds, widgetIds);
 		};
 
-		/**
-		 * Description
-		 * @method initDropdowns
-		 * @param {} widgetIds
-		 */
 		var initDropdowns = function (widgetIds) {
 			angular.forEach(widgetIds, function (wid) {
 				$('#' + wid + ' [data-toggle="dropdown"]').each(function () {
@@ -191,11 +136,6 @@ define(['seed/widgets/module'], function (module) {
 
 		return {
 			restrict: 'A',
-			/**
-			 * Description
-			 * @method compile
-			 * @param {} element
-			 */
 			compile: function (element) {
 
 				element.removeAttr('widget-grid data-widget-grid');

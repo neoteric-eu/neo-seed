@@ -96,7 +96,7 @@ define([
 	seed.run(function (gettextCatalog, LanguageAPI, $log, appConf) {
 		$log = $log.getInstance('seed.module');
 
-		LanguageAPI.initiate();
+		LanguageAPI.init();
 		gettextCatalog.debug = appConf.environmentSettings.debugEnabled;
 
 		$log.debug('Set up seed configuration');

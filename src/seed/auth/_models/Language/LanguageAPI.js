@@ -28,21 +28,21 @@ define([
 
 		var api = new BaseAPI(Language);
 
-		api.languageCollection = [];
+		this.languageCollection = [];
 
 		/**
 		 * Initiate the collection of the languages
 		 * and assign them to $rootScope.
 		 */
-		api.initiate = function () {
+		api.init = function () {
 			var self = this;
 			Language
 				.$collection()
-				.$build(appConf.languageSettings.languages)
+				.$build(appConf.languageSettings.languageCollection)
 				.$reveal()
 				.$asPromise()
-				.then(function (data) {
-					self.languageCollection = data;
+				.then(function (collection) {
+					self.languageCollection = collection;
 					self.setLanguage(ipCookie('lang') || appConf.languageSettings.defaultLanguage);
 				});
 
@@ -69,7 +69,7 @@ define([
 			amMoment.changeLocale(language.locale);
 			moment.locale(language.locale);
 
-			$log.debug('Changed application language to: ' + language.locale);
+			$log.debug('Set application language to: ' + language.locale);
 		};
 
 		/**
@@ -77,7 +77,7 @@ define([
 		 * @return {seed.auth.Language} Language instance
 		 */
 		api.getLanguage = function () {
-			var language = this.languageCollection.$selected || ipCookie.get('lang');
+			var language = this.languageCollection.$selected || ipCookie('lang');
 
 			if (!_.isObject(language)) {
 				language = this.languageCollection.$findByCode(language);

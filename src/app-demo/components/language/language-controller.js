@@ -6,10 +6,10 @@ define(['app'], function(app){
 			function LanguagesCtrl($scope, $rootScope, $log, Language){
 
 				$rootScope.lang = {};
-				
+
 				Language.getLanguages(function(data){
 
-                    $rootScope.currentLanguage = data[0];
+                    $rootScope.activeLanguage = data[0];
 
                     $rootScope.languages = data;
 
@@ -21,12 +21,12 @@ define(['app'], function(app){
                 });
 
 				$scope.selectLanguage = function(language){
-                    $rootScope.currentLanguage = language;
-                    
+                    $rootScope.activeLanguage = language;
+
                     Language.getLang(language.key,function(data){
 
                     	$rootScope.lang = data;
-                        
+
                     });
                 }
 
@@ -34,7 +34,7 @@ define(['app'], function(app){
                 $rootScope.getWord = function(key){
                 	if(angular.isDefined($rootScope.lang[key])){
                 		return $rootScope.lang[key];
-                	} 
+                	}
                 	else {
                 		return key;
                 	}

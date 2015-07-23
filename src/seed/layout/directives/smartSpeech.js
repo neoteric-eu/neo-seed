@@ -1,4 +1,4 @@
-define(['seed/layout/module', 'jquery', 'appConfig'], function (module, $, appConfig) {
+define(['seed/layout/module', 'appConfig'], function (module, appConfig) {
 	'use strict';
 
 	$.root_ = $('body');

@@ -3,17 +3,15 @@ define([
 	'./activities/activities-dropdown-toggle-directive',
 	'./activities/activities-service',
 
-	'./profiles/userProfiles',
+	'./customer/neoCustomerSwitcher',
+
+	'./language/neoLanguageSwitcher',
 
 	'./messages/appMessages',
 
-	'./shortcut/shortcut-directive',
-
 	'./tables/neoTable',
-	'./tables/neoTableParams',
 
-	'./language/controllers/LanguageController',
-	'./language/languageSelector',
+	'./tables/neoTableParams',
 
 	'./moment/momentDate',
 	'./moment/momentDatetime',

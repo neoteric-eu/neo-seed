@@ -5,7 +5,7 @@ define(['seed/module', 'moment'], function (module, moment) {
 	 * Applies moment filtering on date based elements
 	 * Can be used along with DateEncode and DateDecode serializers from restmod
 	 * @class momentDate
-	 * @memberOf app.components
+	 * @memberOf seed.components
 	 *
 	 * @example
 	 * <input type="date" moment-date-input></div>

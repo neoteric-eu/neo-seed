@@ -1,8 +1,7 @@
 define([
 	'seed/layout/module',
-	'jquery',
 	'appConfig'
-], function (module, $, appConfig) {
+], function (module, appConfig) {
 
 	'use strict';
 

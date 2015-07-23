@@ -26,7 +26,7 @@ define(['angular'], function () {
 			},
 			languageSettings: {
 				defaultLanguage: {name: 'English', code: 'gb', locale: 'en_GB'},
-				languages: [{name: 'Polski', code: 'pl', locale: 'pl_PL'}, {
+				languageCollection: [{name: 'Polski', code: 'pl', locale: 'pl_PL'}, {
 					name: 'English',
 					code: 'gb',
 					locale: 'en_GB'

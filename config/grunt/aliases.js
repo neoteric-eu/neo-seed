@@ -5,6 +5,15 @@ module.exports = {
 			'config:development',
 			'clean:server',
 			'templates',
+			'connect:server'
+		]
+	},
+	'serve_with_watch': {
+		description: 'Runs locally server with application',
+		tasks: [
+			'config:development',
+			'clean:server',
+			'templates',
 			'connect:server',
 			'watch'
 		]

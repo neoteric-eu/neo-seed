@@ -4,7 +4,7 @@
 		"code": "gb",
 		"locale": "en_GB"
 	},
-	"languages": [
+	"languageCollection": [
 		{
 			"name": "Polski",
 			"code": "pl",
