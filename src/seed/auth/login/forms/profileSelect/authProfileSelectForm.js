@@ -7,13 +7,13 @@ define(['seed/auth/module'], function (module) {
 	 * @memberOf seed.auth.login
 	 *
 	 * @param $log {Object} Logging service
-	 * @param $state {Object}
-	 * @param neoSession {Object}
-	 * @param ipCookie {Object}
+	 * @param $cookies {Function} Cookie service
+	 * @param $state {Object} State helper service
+	 * @param neoSession {Object} Session service
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope:
 	 *   {redirectToState: string}, controller: Function}}
 	 */
-	function authProfileSelectForm($log, $state, neoSession, ipCookie) {
+	function authProfileSelectForm($log, $cookies, $state, neoSession) {
 		$log = $log.getInstance('seed.auth.login.authProfileSelectForm');
 
 		$log.debug('Initiated directive');
@@ -62,7 +62,7 @@ define(['seed/auth/module'], function (module) {
 				}
 
 				function login() {
-					neoSession.setSession(vm.activeCustomer, ipCookie('token'));
+					neoSession.setSession(vm.activeCustomer, $cookies.get('token'));
 					$state.go('app.dashboard');
 
 					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);

@@ -4,14 +4,14 @@ define(['seed/auth/module'], function (module) {
 	/**
 	 *
 	 * @param $log {Object} Logging service
-	 * @param Permission
-	 * @param ipCookie
-	 * @param $q
-	 * @param neoRequestHeaders
-	 * @param UserAPI
-	 * @param $rootScope
+	 * @param $cookies {Function} Cookie service
+	 * @param Permission {Object} ACL service
+	 * @param $q {Object} Angular promise provider
+	 * @param neoRequestHeaders {Object} Request decorator
+	 * @param UserAPI {Object} Interface for REST communication with server
+	 * @param $rootScope {Object} Angular global scope helper
 	 */
-	var neoSession = function ($log, Permission, ipCookie, $q, $rootScope,
+	var neoSession = function ($log, $cookies, Permission, $q, $rootScope,
 														 neoRequestHeaders, UserAPI) {
 
 		$log = $log.getInstance('seed.auth.neoSession');
@@ -24,11 +24,11 @@ define(['seed/auth/module'], function (module) {
 						return _.where(customer, roleName);
 					});
 
-				ipCookie('activeCustomer', customer.customerId);
+				$cookies.putObject('activeCustomer', customer.customerId);
 				neoRequestHeaders.setCustomerId(customer.customerId);
 			}
 
-			ipCookie('token', token);
+			$cookies.putObject('token', token);
 			neoRequestHeaders.setAuthToken(token);
 
 			$log.debug('Set new user session');
@@ -38,8 +38,8 @@ define(['seed/auth/module'], function (module) {
 			neoRequestHeaders.clearHeaders();
 			$rootScope.user = undefined;
 
-			ipCookie.remove('token');
-			ipCookie.remove('activeCustomer');
+			$cookies.remove('token');
+			$cookies.remove('activeCustomer');
 
 			$log.debug('Cleared user session');
 		};
@@ -47,8 +47,8 @@ define(['seed/auth/module'], function (module) {
 		this.checkSession = function () {
 			var dfd = $q.defer(),
 				self = this,
-				token = ipCookie('token'),
-				activeCustomer = ipCookie('activeCustomer');
+				token = $cookies.get('token'),
+				activeCustomer = $cookies.get('activeCustomer');
 
 			if (token && activeCustomer) {
 				neoRequestHeaders.setAuthToken(token);

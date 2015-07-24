@@ -1,12 +1,12 @@
 define([
 	'angular',
-	'angular-cookie',
+	'angular-cookies',
 	'angular-hotkeys'
 ], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.auth', [
-		'ipCookie',
+		'ngCookies',
 		'cfp.hotkeys',
 		'app.dashboard',
 		'seed.auth.login',

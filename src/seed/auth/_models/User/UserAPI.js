@@ -8,13 +8,13 @@ define(['seed/auth/module'], function (module) {
 	 * @memberOf seed.auth
 	 *
 	 * @param $log {Object} Logging service
+	 * @param $cookies {Function} Cookie service
 	 * @param $rootScope {Object} Global scope provider
-	 * @param ipCookie {Function} Cookie management service
 	 * @param BaseAPI {Function} Base interface for REST communication with server
 	 * @param User {Object} Model factory
 	 * @return {Function} Instantiated service
 	 */
-	var UserAPI = function ($log, $rootScope, BaseAPI, User, ipCookie) {
+	var UserAPI = function ($log, $cookies, $rootScope, BaseAPI, User) {
 
 		$log = $log.getInstance('seed.auth.UserAPI');
 		$log.debug('Initiated service');
@@ -30,7 +30,7 @@ define(['seed/auth/module'], function (module) {
 
 					$log.debug('Set user object available globally');
 					$rootScope.user = user;
-					ipCookie('token', user.$metadata.token);
+					$cookies.put('token', user.$metadata.token);
 
 					$log.debug('Successfully logged user in');
 

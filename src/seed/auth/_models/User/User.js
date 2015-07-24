@@ -7,10 +7,10 @@ define(['seed/auth/module'], function (module) {
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
-	 * @param ipCookie {Function} Cookie management service
+	 * @param $cookies {Function} Cookie service
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, ipCookie) {
+	var User = function (restmod, $cookies) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
@@ -66,7 +66,7 @@ define(['seed/auth/module'], function (module) {
 								url: this.$scope.$url() + '/authInfo',
 								cache: true,
 								data: {
-									token: ipCookie('token')
+									token: $cookies.get('token')
 								}
 							}, function (_data) {
 								this.$unwrap(_data.data);

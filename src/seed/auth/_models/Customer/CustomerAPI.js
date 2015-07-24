@@ -8,14 +8,13 @@ define(['seed/auth/module'], function (module) {
 	 * @memberOf seed.auth
 	 *
 	 * @param $log {Object} Logging service
+	 * @param $cookies {Function} Cookie service
 	 * @param Customer {Object} Model factory
 	 * @param BaseAPI {Function} Base interface for REST communication with server
 	 * @param neoSession {Object} Session management service
-	 * @param Permission {Object} ACL service
-	 * @param ipCookie {Function} Cookie management service
 	 * @return {Function} Instantiated service
 	 */
-	var CustomerAPI = function ($log, Customer, BaseAPI, neoSession, Permission, ipCookie) {
+	var CustomerAPI = function ($log, $cookies, Customer, BaseAPI, neoSession) {
 
 		$log = $log.getInstance('seed.auth.CustomerAPI');
 
@@ -30,7 +29,7 @@ define(['seed/auth/module'], function (module) {
 		api.setSelected = function (customer) {
 			Customer.$setSelected(customer);
 
-			neoSession.setSession(customer, ipCookie('token'));
+			neoSession.setSession(customer, $cookies.get('token'));
 
 			$log.debug('Selected active customer: ' + customer.customerId);
 		};

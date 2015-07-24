@@ -7,13 +7,12 @@ define(['seed/auth/lock/module'], function (module) {
 	 * @memberOf seed.auth.login
 	 *
 	 * @param $log {Object} Logging service
-	 * @param $state {Object}
-	 * @param neoSession {Object}
-	 * @param ipCookie {Object}
-	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope:
-	 *   {redirectToState: string}, controller: Function}}
+	 * @param $cookies {Function} Cookie service
+	 * @param $state {Object} UI-Router state helper
+	 * @param neoSession {Object} Session service
+	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function authLockForm($log, $state, neoSession, ipCookie) {
+	function authLockForm($log, $cookies, $state, neoSession) {
 		$log = $log.getInstance('seed.auth.login.authLockForm');
 
 		$log.debug('Initiated directive');
@@ -46,7 +45,7 @@ define(['seed/auth/lock/module'], function (module) {
 
 				function login() {
 
-					neoSession.setSession(vm.activeCustomer, ipCookie('token'));
+					neoSession.setSession(vm.activeCustomer, $cookies.get('token'));
 					$state.go('app.dashboard');
 
 					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);
