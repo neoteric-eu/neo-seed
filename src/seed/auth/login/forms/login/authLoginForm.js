@@ -60,7 +60,7 @@ define(['seed/auth/module'], function (module) {
 							if (vm.user.customers.length > 1) {
 								$state.transitionTo('auth.profileSelect', {}, {notify: true, reload: false});
 							} else {
-								neoSession.setSession(_.first(vm.user.customers), $cookies.get('token'));
+								neoSession.setSession(_.first(vm.user.customers), $cookies.getObject('token'));
 								$state.go('app.dashboard');
 							}
 						})

@@ -30,7 +30,7 @@ define(['seed/auth/module'], function (module) {
 
 					$log.debug('Set user object available globally');
 					$rootScope.user = user;
-					$cookies.put('token', user.$metadata.token);
+					$cookies.putObject('token', user.$metadata.token);
 
 					$log.debug('Successfully logged user in');
 

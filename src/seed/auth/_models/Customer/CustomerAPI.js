@@ -29,7 +29,7 @@ define(['seed/auth/module'], function (module) {
 		api.setSelected = function (customer) {
 			Customer.$setSelected(customer);
 
-			neoSession.setSession(customer, $cookies.get('token'));
+			neoSession.setSession(customer, $cookies.getObject('token'));
 
 			$log.debug('Selected active customer: ' + customer.customerId);
 		};

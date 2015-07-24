@@ -24,7 +24,7 @@ define(['seed/auth/module'], function (module) {
 						return _.where(customer, roleName);
 					});
 
-				$cookies.put('activeCustomer', customer.customerId);
+				$cookies.putObject('activeCustomer', customer.customerId);
 				neoRequestHeaders.setCustomerId(customer.customerId);
 			}
 
@@ -47,8 +47,8 @@ define(['seed/auth/module'], function (module) {
 		this.checkSession = function () {
 			var dfd = $q.defer(),
 				self = this,
-				token = $cookies.get('token'),
-				activeCustomer = $cookies.get('activeCustomer');
+				token = $cookies.getObject('token'),
+				activeCustomer = $cookies.getObject('activeCustomer');
 
 			if (token && activeCustomer) {
 				neoRequestHeaders.setAuthToken(token);

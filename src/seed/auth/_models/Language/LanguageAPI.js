@@ -43,7 +43,7 @@ define([
 				.$asPromise()
 				.then(function (collection) {
 					self.languageCollection = collection;
-					self.setLanguage($cookies.get('lang') || appConf.languageSettings.defaultLanguage);
+					self.setLanguage($cookies.getObject('lang') || appConf.languageSettings.defaultLanguage);
 				});
 
 			$log.debug('Set up application language collection');
@@ -62,7 +62,7 @@ define([
 			api.languageCollection.$setSelected(language);
 
 			// Write locale to cookie
-			$cookies.put('lang', language.code);
+			$cookies.putObject('lang', language.code);
 
 			// Update libraries locale settings
 			gettextCatalog.setCurrentLanguage(language.locale);
@@ -77,7 +77,7 @@ define([
 		 * @return {seed.auth.Language} Language instance
 		 */
 		api.getLanguage = function () {
-			var language = this.languageCollection.$selected || $cookies.get('lang');
+			var language = this.languageCollection.$selected || $cookies.getObject('lang');
 
 			if (!_.isObject(language)) {
 				language = this.languageCollection.$findByCode(language);

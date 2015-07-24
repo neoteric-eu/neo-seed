@@ -60,16 +60,13 @@ define(['seed/auth/module'], function (module) {
 						},
 
 						$authInfo: function () {
-
-							console.log($cookies.get('token'));
-
 							//noinspection JSUnresolvedFunction
 							return this.$send({
 								method: 'GET',
 								url: this.$scope.$url() + '/authInfo',
 								cache: true,
 								data: {
-									token: $cookies.get('token')
+									token: $cookies.getObject('token')
 								}
 							}, function (_data) {
 								this.$unwrap(_data.data);

@@ -30,7 +30,7 @@ define(['seed/components/module'], function (app) {
 				// Variables
 				vm.customerCollection = $scope.$root.user.customers;
 				vm.activeCustomer = _.findWhere($scope.$root.user.customers, {
-					'customerId': $cookies.get('activeCustomer')
+					'customerId': $cookies.getObject('activeCustomer')
 				});
 
 				// Functions
@@ -38,7 +38,7 @@ define(['seed/components/module'], function (app) {
 
 				function setActiveCustomer(customer) {
 					vm.activeCustomer = customer;
-					$cookies.put('activeCustomer', customer.customerId);
+					$cookies.putObject('activeCustomer', customer.customerId);
 
 					$state.reload();
 					$log.debug('Changed user customer to: ' + customer.customerName);

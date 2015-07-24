@@ -45,7 +45,7 @@ define(['seed/auth/lock/module'], function (module) {
 
 				function login() {
 
-					neoSession.setSession(vm.activeCustomer, $cookies.get('token'));
+					neoSession.setSession(vm.activeCustomer, $cookies.getObject('token'));
 					$state.go('app.dashboard');
 
 					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);
