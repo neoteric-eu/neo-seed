@@ -137,7 +137,7 @@ module.exports = {
 			destPrefix: 'src/assets/fonts'
 		},
 		files: {
-			'glyphicons': 'bootstrap/fonts/'
+			'font-awesome': 'fontawesome/fonts/'
 		}
 	}
 };
