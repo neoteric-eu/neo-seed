@@ -1,12 +1,7 @@
-define([
-	'angular',
-	'angular-couch-potato'
-], function (ng, couchPotato) {
-
+define(['angular'], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.layout', ['seed.auth']);
-	couchPotato.configureApp(module);
 
 	module.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -29,10 +24,6 @@ define([
 			var $state = $injector.get('$state');
 			$state.go('auth.login');
 		});
-	});
-
-	module.run(function ($couchPotato) {
-		module.lazy = $couchPotato;
 	});
 
 	return module;

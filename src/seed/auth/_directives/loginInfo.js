@@ -1,8 +1,7 @@
 define(['seed/auth/module'], function (module) {
 	'use strict';
 
-	return module.registerDirective('loginInfo', function () {
-
+	function loginInfo() {
 		return {
 			restrict: 'A',
 			templateUrl: 'seed/auth/_directives/login-info.html',
@@ -17,5 +16,7 @@ define(['seed/auth/module'], function (module) {
 				});
 			}
 		};
-	});
+	}
+
+	return module.directive('loginInfo', loginInfo);
 });

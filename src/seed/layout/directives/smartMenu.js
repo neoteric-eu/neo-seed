@@ -42,7 +42,7 @@ define([
 		};
 	})(jQuery);
 
-	module.registerDirective('smartMenu', function ($state, $rootScope) {
+	module.directive('smartMenu', function ($state, $rootScope) {
 		return {
 			restrict: 'A',
 			link: function (scope, element) {

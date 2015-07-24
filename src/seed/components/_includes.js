@@ -4,17 +4,15 @@ define([
 	'./activities/activities-service',
 
 	'./customer/neoCustomerSwitcher',
-
 	'./language/neoLanguageSwitcher',
-
 	'./messages/appMessages',
+	'./preload/neoPreload',
 
 	'./tables/neoTable',
-
 	'./tables/neoTableParams',
 
-	'./moment/momentDate',
-	'./moment/momentDatetime',
+	'./moment/neoMomentDate',
+	'./moment/neoMomentDatetime',
 
 	'./_locale/translation'
 ], function () {

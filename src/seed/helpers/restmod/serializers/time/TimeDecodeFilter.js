@@ -18,5 +18,5 @@ define(['seed/module', 'moment'], function (app, moment) {
 		};
 	}
 
-	app.registerFactory('TimeDecodeFilter', TimeDecodeFilter);
+	app.factory('TimeDecodeFilter', TimeDecodeFilter);
 });

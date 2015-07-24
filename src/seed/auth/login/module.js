@@ -1,13 +1,7 @@
-define([
-	'angular',
-	'angular-couch-potato',
-	'angular-cookie'
-], function (ng, couchPotato) {
+define(['angular'], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.auth.login', []);
-
-	couchPotato.configureApp(module);
 
 	module.config(function ($stateProvider) {
 

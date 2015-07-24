@@ -13,14 +13,9 @@
 define(['seed/widgets/module'], function (module) {
 	'use strict';
 
-	module.registerDirective('jarvisWidget', function ($rootScope) {
+	module.directive('jarvisWidget', function ($rootScope) {
 		return {
 			restrict: 'A',
-			/**
-			 * Description
-			 * @method compile
-			 * @param {} element
-			 */
 			compile: function (element) {
 				if (element.data('widget-color')) {
 					element.addClass('jarviswidget-color-' + element.data('widget-color'));

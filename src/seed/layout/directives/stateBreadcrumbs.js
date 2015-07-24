@@ -1,24 +1,13 @@
 define(['seed/layout/module'], function (module) {
 	'use strict';
 
-	module.registerDirective('stateBreadcrumbs', function ($rootScope, $state) {
+	module.directive('stateBreadcrumbs', function ($rootScope, $state) {
 		return {
 			restrict: 'E',
 			replace: true,
 			template: '<ol class="breadcrumb"></ol>',
-			/**
-			 * Description
-			 * @method link
-			 * @param {} scope
-			 * @param {} element
-			 */
 			link: function (scope, element) {
 
-				/**
-				 * Description
-				 * @method setBreadcrumbs
-				 * @param {} breadcrumbs
-				 */
 				function setBreadcrumbs(breadcrumbs) {
 					var html = '';
 					angular.forEach(breadcrumbs, function (crumb) {
@@ -27,12 +16,6 @@ define(['seed/layout/module'], function (module) {
 					element.html(html);
 				}
 
-				/**
-				 * Description
-				 * @method fetchBreadcrumbs
-				 * @param {} stateName
-				 * @param {} breadcrunbs
-				 */
 				function fetchBreadcrumbs(stateName, breadcrunbs) {
 
 					var state = $state.get(stateName);
@@ -52,11 +35,6 @@ define(['seed/layout/module'], function (module) {
 					}
 				}
 
-				/**
-				 * Description
-				 * @method processState
-				 * @param {} state
-				 */
 				function processState(state) {
 					var breadcrumbs;
 					if (state.data && state.data.breadcrumbs) {

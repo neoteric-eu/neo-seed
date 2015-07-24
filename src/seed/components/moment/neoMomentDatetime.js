@@ -1,19 +1,22 @@
-define(['seed/module', 'moment'], function (module, moment) {
+define(['seed/module'], function (module) {
 	'use strict';
 
 	/**
 	 * Applies moment filtering on datetime based elements
 	 * Can be used along with DateEncode and DateDecode serializers from restmod
-	 * @class momentDatetime
+	 * @class neoMomentDatetime
 	 * @memberOf seed.components
 	 *
 	 * @example
-	 * <input type="date" moment-date-input></div>
+	 * <input type="date" moment-datetime></input>
 	 *
 	 * @param $log {Object} Logging service
 	 * @return {{restrict: string, require: string, link: Function}}
 	 */
-	function momentDatetime($log) {
+	function neoMomentDatetime($log) {
+
+		$log = $log.getInstance('seed.components.neoMomentDatetime');
+
 		$log.debug('Initiated directive');
 
 		return {
@@ -43,5 +46,5 @@ define(['seed/module', 'moment'], function (module, moment) {
 		};
 	}
 
-	module.directive('momentDatetime', momentDatetime);
+	module.directive('neoMomentDatetime', neoMomentDatetime);
 });

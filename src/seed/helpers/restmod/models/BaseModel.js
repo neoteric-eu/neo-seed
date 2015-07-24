@@ -41,5 +41,5 @@ define(['seed/module'], function (app) {
 		});
 	}
 
-	app.registerFactory('BaseModel', BaseModel);
+	app.factory('BaseModel', BaseModel);
 });

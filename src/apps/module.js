@@ -1,17 +1,13 @@
 define([
 	'angular',
-	'angular-couch-potato'
-], function (ng, couchPotato) {
+	'angular-loading-bar'
+], function (ng) {
 	'use strict';
 
 	var container = ng.module('app', ['seed', 'app.conf']);
 
-	couchPotato.configureApp(container);
-
-	container.run(function ($couchPotato, $log, $rootScope, $state, appConf) {
+	container.run(function ($log, $rootScope, $state, appConf) {
 		$log = $log.getInstance('app.module');
-
-		container.lazy = $couchPotato;
 
 		container.name = appConf.appName;
 		$rootScope.appReady = true;

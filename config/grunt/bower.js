@@ -33,6 +33,7 @@ module.exports = {
 			'angular-gridster/angular-gridster.js': 'angular-gridster/src/angular-gridster.js',
 			'angular-file-upload/angular-file-upload.js': 'ng-file-upload/ng-file-upload.js',
 			'angular-hotkeys/angular-hotkeys.js': 'angular-hotkeys/build/hotkeys.js',
+			'angular-loading-bar/angular-loading-bar.js': 'angular-loading-bar/build/loading-bar.js',
 
 			'bootstrap/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
 			'bootstrap-timepicker/bootstrap-timepicker.js': 'bootstrap3-fontawesome-timepicker/js/bootstrap-timepicker.js',

@@ -24,5 +24,5 @@ define(['seed/module'], function (app) {
 			});
 	}
 
-	app.registerFactory('NeoStyleAPI', NeoStyleAPI);
+	app.factory('NeoStyleAPI', NeoStyleAPI);
 });

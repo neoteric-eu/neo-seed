@@ -45,5 +45,5 @@ define(['seed/graphs/module', 'morris'], function (module) {
 		};
 	}
 
-	return module.registerDirective('morrisDonutGraph', morrisDonutGraph);
+	return module.directive('morrisDonutGraph', morrisDonutGraph);
 });

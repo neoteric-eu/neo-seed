@@ -240,5 +240,5 @@ define(['seed/module'], function (module) {
 		return API;
 	}
 
-	module.registerFactory('BaseAPI', BaseAPI);
+	module.factory('BaseAPI', BaseAPI);
 });

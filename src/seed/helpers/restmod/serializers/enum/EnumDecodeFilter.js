@@ -19,5 +19,5 @@ define(['seed/module'], function (app) {
 		};
 	}
 
-	app.registerFactory('EnumDecodeFilter', EnumDecodeFilter);
+	app.factory('EnumDecodeFilter', EnumDecodeFilter);
 });

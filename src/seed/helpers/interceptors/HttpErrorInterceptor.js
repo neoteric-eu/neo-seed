@@ -55,5 +55,5 @@ define(['seed/module'], function (app) {
 		};
 	}
 
-	app.registerFactory('HttpErrorInterceptor', HttpErrorInterceptor);
+	app.factory('HttpErrorInterceptor', HttpErrorInterceptor);
 });

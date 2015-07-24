@@ -1,7 +1,7 @@
 define(['seed/layout/module'], function (module) {
 	'use strict';
 
-	module.registerDirective('toggleMenu', function () {
+	module.directive('toggleMenu', function () {
 		return {
 			restrict: 'A',
 			/**

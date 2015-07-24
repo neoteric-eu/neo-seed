@@ -4,7 +4,6 @@ define([
 	'angular',
 	'angular-table',
 	'angular-mocks',
-	'angular-couch-potato',
 	'seed/components/module',
 	'seed/components/_includes'
 ], function () {
@@ -18,7 +17,7 @@ define([
 
 				beforeEach(function () {
 					// Instantiate the fake module
-					module('app.components', 'scs.couch-potato', 'ngTable');
+					module('app.components', 'ngTable');
 
 					// Inject service into module
 					inject(function (_neoTableParams_, $q, _$rootScope_) {

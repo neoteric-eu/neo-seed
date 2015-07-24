@@ -1,7 +1,7 @@
 define(['seed/layout/module'], function (module) {
 	'use strict';
 
-	module.registerDirective('hrefVoid', function () {
+	function hrefVoid() {
 		return {
 			restrict: 'A',
 			link: function (scope, element) {
@@ -12,5 +12,7 @@ define(['seed/layout/module'], function (module) {
 				});
 			}
 		};
-	});
+	}
+
+	module.directive('hrefVoid', hrefVoid);
 });

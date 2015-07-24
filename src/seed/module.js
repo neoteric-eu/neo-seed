@@ -1,32 +1,32 @@
 define([
 	'angular',
-	'angular-couch-potato',
 	'angular-animate',
-	'angular-ui-router',
 	'angular-sanitize',
+	'angular-ui-router',
 	'angular-bootstrap',
 	'angular-bootstrap-tpls',
 	'angular-ui-select',
 	'angular-gettext',
 	'angular-permission',
+	'angular-loading-bar',
 	'angular-moment',
 	'angular-restmod',
 	'angular-restmod-preload',
 	'angular-restmod-find-many',
 	'smartwidgets',
 	'notification'
-], function (ng, couchPotato) {
+], function (ng) {
 	'use strict';
 
 	var seed = ng.module('seed', [
-		'ngSanitize',
 		'ngAnimate',
+		'ngSanitize',
 
 		'gettext',
 		'permission',
 		'angularMoment',
 		'restmod',
-		'scs.couch-potato',
+		'angular-loading-bar',
 
 		'ui.bootstrap',
 		'ui.select',
@@ -44,14 +44,15 @@ define([
 		'seed.widgets'
 	]);
 
-	couchPotato.configureApp(seed);
-
-	seed.config(function ($provide, $httpProvider, $locationProvider,
+	seed.config(function ($provide, $httpProvider, $locationProvider, cfpLoadingBarProvider,
 		$logProvider, restmodProvider, uiSelectConfig, appConf, moment) {
 
 		restmodProvider.rebase('NeoStyleAPI');
 
 		uiSelectConfig.theme = 'bootstrap';
+
+		cfpLoadingBarProvider.includeSpinner = false;
+		cfpLoadingBarProvider.latencyThreshold = 500;
 
 		$locationProvider.html5Mode(appConf.environmentSettings.modRewriteEnabled);
 		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);

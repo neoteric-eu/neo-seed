@@ -12,9 +12,9 @@ requirejs.config({
 		'angular-bootstrap': 'assets/js/vendor/libs/angular-bootstrap/ui-bootstrap',
 		'angular-bootstrap-tpls': 'assets/js/vendor/libs/angular-bootstrap/ui-bootstrap-tpls',
 		'angular-cookie': 'assets/js/vendor/libs/angular-cookie/angular-cookie',
-		'angular-couch-potato': 'assets/js/vendor/libs/angular-couch-potato/angular-couch-potato',
 		'angular-gettext': 'assets/js/vendor/libs/angular-gettext/angular-gettext',
 		'angular-hotkeys': 'assets/js/vendor/libs/angular-hotkeys/angular-hotkeys',
+		'angular-loading-bar': 'assets/js/vendor/libs/angular-loading-bar/angular-loading-bar',
 		'angular-moment': 'assets/js/vendor/libs/angular-moment/angular-moment',
 		'angular-permission': 'assets/js/custom/angular-permission/angular-permission',
 		'angular-restmod': 'assets/js/vendor/libs/angular-restmod/angular-restmod',
@@ -34,7 +34,6 @@ requirejs.config({
 		'notification': 'assets/js/vendor/smartadmin/notification/SmartNotification',
 
 		// Other vendor
-		'fastclick': 'assets/js/vendor/libs/fastclick/fastclick',
 		'moment': 'assets/js/vendor/libs/moment/moment',
 		'domReady': 'assets/js/vendor/libs/requirejs-domready/requirejs-domready',
 		'lodash': 'assets/js/vendor/libs/lodash/lodash',
@@ -57,12 +56,13 @@ requirejs.config({
 		},
 
 		'angular-animate': ['angular'],
-		'angular-bootstrap-tpls': ['angular-bootstrap'],
 		'angular-bootstrap': ['angular'],
+		'angular-bootstrap-tpls': ['angular-bootstrap'],
 		'angular-cookie': ['angular'],
-		'angular-couch-potato': ['angular'],
 		'angular-gettext': ['angular'],
+		'angular-hotkeys': ['angular'],
 		'angular-mocks': ['angular'],
+		'angular-loading-bar': ['angular'],
 		'angular-moment': ['angular', 'moment'],
 		'angular-restmod': ['angular'],
 		'angular-restmod-preload': ['angular-restmod'],
@@ -97,11 +97,5 @@ requirejs.config({
 		'jquery',
 		'bootstrap',
 		'angular'
-	],
-
-	config: {
-		moment: {
-			noGlobal: true
-		}
-	}
+	]
 });

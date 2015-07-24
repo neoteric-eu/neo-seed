@@ -1,8 +1,7 @@
 define(['seed/layout/module'], function (module) {
-
 	'use strict';
 
-	module.registerDirective('resetWidgets', function () {
+	module.directive('resetWidgets', function () {
 
 		return {
 			restrict: 'A',

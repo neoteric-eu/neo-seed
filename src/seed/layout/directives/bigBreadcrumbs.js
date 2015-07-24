@@ -1,7 +1,7 @@
 define(['seed/layout/module'], function (module) {
 	'use strict';
 
-	module.registerDirective('bigBreadcrumbs', function () {
+	function bigBreadcrumbs() {
 		return {
 			restrict: 'E',
 			replace: true,
@@ -10,12 +10,7 @@ define(['seed/layout/module'], function (module) {
 				items: '=',
 				icon: '@'
 			},
-			/**
-			 * Description
-			 * @method link
-			 * @param {} scope
-			 * @param {} element
-			 */
+
 			link: function (scope, element) {
 				var first = _.first(scope.items);
 
@@ -33,5 +28,7 @@ define(['seed/layout/module'], function (module) {
 					});
 			}
 		};
-	});
+	}
+
+	module.directive('bigBreadcrumbs', bigBreadcrumbs);
 });

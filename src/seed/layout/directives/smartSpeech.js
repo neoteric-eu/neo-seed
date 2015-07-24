@@ -606,7 +606,7 @@ define(['seed/layout/module', 'appConfig'], function (module, appConfig) {
 	}
 
 
-	module.registerDirective('speechRecognition', function () {
+	module.directive('speechRecognition', function () {
 
 		/**
 		 * Description

@@ -6,7 +6,9 @@ module.exports = {
 	js: {
 		files: [
 			'<%= yeoman.app %>/apps/**/*.js',
-			'<%= yeoman.app %>/seed/**/*.js'
+			'!<%= yeoman.app %>/apps/templates/module.js',
+			'<%= yeoman.app %>/seed/**/*.js',
+			'!<%= yeoman.app %>/seed/templates/module.js'
 		],
 		tasks: 'newer:jshint:app'
 	},

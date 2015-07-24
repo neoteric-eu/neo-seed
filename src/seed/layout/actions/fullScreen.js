@@ -1,7 +1,7 @@
 define(['seed/layout/module'], function (module) {
 	'use strict';
 
-	module.registerDirective('fullScreen', function () {
+	module.directive('fullScreen', function () {
 		return {
 			restrict: 'A',
 			/**

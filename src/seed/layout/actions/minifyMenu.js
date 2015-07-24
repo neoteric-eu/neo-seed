@@ -1,7 +1,7 @@
 define(['seed/layout/module'], function (module) {
 	'use strict';
 
-	module.registerDirective('minifyMenu', function () {
+	module.directive('minifyMenu', function () {
 		return {
 			restrict: 'A',
 			/**

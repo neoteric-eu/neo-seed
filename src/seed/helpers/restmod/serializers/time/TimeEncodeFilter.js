@@ -18,5 +18,5 @@ define(['seed/module', 'moment'], function (app) {
 		};
 	}
 
-	app.registerFactory('TimeEncodeFilter', TimeEncodeFilter);
+	app.factory('TimeEncodeFilter', TimeEncodeFilter);
 });

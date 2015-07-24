@@ -84,5 +84,5 @@ define(['seed/module'], function (module) {
 		return Enum;
 	}
 
-	module.registerFactory('BaseEnum', BaseEnum);
+	module.factory('BaseEnum', BaseEnum);
 });

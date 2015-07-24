@@ -18,5 +18,5 @@ define(['seed/module', 'moment'], function (app, moment) {
 		};
 	}
 
-	app.registerFactory('DateDecodeFilter', DateDecodeFilter);
+	app.factory('DateDecodeFilter', DateDecodeFilter);
 });
