@@ -18,6 +18,7 @@ define(['seed/auth/module'], function (module) {
 	var CustomerAPI = function ($log, Customer, BaseAPI, neoSession, Permission, ipCookie) {
 
 		$log = $log.getInstance('seed.auth.CustomerAPI');
+
 		$log.debug('Initiated service');
 
 		var api = new BaseAPI(Customer);
@@ -30,7 +31,6 @@ define(['seed/auth/module'], function (module) {
 			Customer.$setSelected(customer);
 
 			neoSession.setSession(customer, ipCookie('token'));
-			Permission.setFeatures(customer.featureKeys);
 
 			$log.debug('Selected active customer: ' + customer.customerId);
 		};

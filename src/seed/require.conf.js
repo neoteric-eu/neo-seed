@@ -16,7 +16,7 @@ requirejs.config({
 		'angular-hotkeys': 'assets/js/vendor/libs/angular-hotkeys/angular-hotkeys',
 		'angular-loading-bar': 'assets/js/vendor/libs/angular-loading-bar/angular-loading-bar',
 		'angular-moment': 'assets/js/vendor/libs/angular-moment/angular-moment',
-		'angular-permission': 'assets/js/custom/angular-permission/angular-permission',
+		'angular-permission': 'assets/js/vendor/libs/angular-permission/angular-permission',
 		'angular-restmod': 'assets/js/vendor/libs/angular-restmod/angular-restmod',
 		'angular-restmod-preload': 'assets/js/vendor/libs/angular-restmod/plugins/preload.min',
 		'angular-restmod-find-many': 'assets/js/vendor/libs/angular-restmod/plugins/find-many.min',

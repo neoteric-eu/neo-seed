@@ -16,24 +16,21 @@ module.exports = {
 			'angular-gettext/angular-gettext.js': 'angular-gettext/dist/angular-gettext.js',
 			'angular-google-maps/angular-google-maps.js': 'angular-google-maps/dist/angular-google-maps.js',
 			'angular-google-plus/angular-google-plus.js': 'angular-google-plus/dist/angular-google-plus.js',
-			'angular-local-storage/angular-local-storage.js': 'angular-local-storage/dist/angular-local-storage.js',
+			'angular-hotkeys/angular-hotkeys.js': 'angular-hotkeys/build/hotkeys.js',
+			'angular-loading-bar/angular-loading-bar.js': 'angular-loading-bar/build/loading-bar.js',
 			'angular-mocks/angular-mocks.js': 'angular-mocks/angular-mocks.js',
 			'angular-moment/angular-moment.js': 'angular-moment/angular-moment.js',
 			'angular-resource/angular-resource.js': 'angular-resource/angular-resource.js',
 			'angular-sanitize/angular-sanitize.js': 'angular-sanitize/angular-sanitize.js',
 			'angular-ui-date/angular-ui-date.js': 'angular-ui-date/src/date.js',
 			'angular-ui-router/angular-ui-router.js': 'angular-ui-router/release/angular-ui-router.js',
-			'angular-ui-router-extras': 'ui-router-extras/release/modular',
 			'angular-ui-select/angular-ui-select.js': 'angular-ui-select/dist/select.js',
 			'angular-xeditable/dist/js/xeditable.js': 'angular-xeditable/dist/js/xeditable.js',
 			'angular-table/angular-table.js': 'ng-table/dist/ng-table.js',
+			'angular-permission/angular-permission.js': 'angular-permission/dist/angular-permission.js',
 			'angular-restmod/angular-restmod.js': 'angular-restmod/dist/angular-restmod-bundle.js',
 			'angular-restmod/styles/ams.js': 'angular-restmod/dist/styles/ams.js',
 			'angular-restmod/plugins': 'angular-restmod/dist/plugins/*.min.js',
-			'angular-gridster/angular-gridster.js': 'angular-gridster/src/angular-gridster.js',
-			'angular-file-upload/angular-file-upload.js': 'ng-file-upload/ng-file-upload.js',
-			'angular-hotkeys/angular-hotkeys.js': 'angular-hotkeys/build/hotkeys.js',
-			'angular-loading-bar/angular-loading-bar.js': 'angular-loading-bar/build/loading-bar.js',
 
 			'bootstrap/bootstrap.js': 'bootstrap/dist/js/bootstrap.js',
 			'bootstrap-timepicker/bootstrap-timepicker.js': 'bootstrap3-fontawesome-timepicker/js/bootstrap-timepicker.js',
@@ -71,7 +68,6 @@ module.exports = {
 			'jquery-sparkline/jquery-sparkline.js': 'relayfoods-jquery.sparkline/dist/jquery.sparkline.js',
 			'jquery-validation/jquery-validate.js': 'jquery-validation/dist/jquery.validate.js',
 			'jquery-magnificpopup/jquery-magnificpopup.js': 'magnific-popup/dist/jquery.magnific-popup.js',
-			'jquery-resize/jquery-resize.js': 'javascript-detect-element-resize/jquery.resize.js',
 
 			'requirejs-domready/requirejs-domready.js': 'requirejs-domready/domReady.js',
 
@@ -98,7 +94,6 @@ module.exports = {
 			'select2/select2.js': 'select2/select2.js',
 			'summernote/summernote.js': 'summernote/dist/summernote.js',
 			'to-markdown/to-markdown.js': 'to-markdown/src/to-markdown.js',
-			'file-saver/file-saver.js': 'file-saver/FileSaver.js',
 
 			'form-validation/form-validation.js': 'form.validation/dist/js/formValidation.js',
 			'form-validation/framework/bootstrap.js': 'form.validation/dist/js/framework/bootstrap.js',
@@ -134,8 +129,7 @@ module.exports = {
 			'elements/elements.less': 'less-elements/elements.less',
 			'animate/animate.less': 'animate.less/animate.less',
 			'animate/source': 'animate.less/source',
-			'font-awesome/': 'fontawesome/less',
-			'angular-gridster/angular-gridster.less': 'angular-gridster/src/angular-gridster.less'
+			'font-awesome/': 'fontawesome/less'
 		}
 	},
 	fonts: {

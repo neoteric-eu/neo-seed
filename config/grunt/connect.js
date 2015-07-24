@@ -34,8 +34,7 @@ module.exports = function () {
 				port: 9000,
 				base: '<%= yeoman.app %>',
 				open: true,
-				livereload: true,
-				useAvailablePort: true,
+				keepalive: true,
 				middleware: middleware
 			}
 		},

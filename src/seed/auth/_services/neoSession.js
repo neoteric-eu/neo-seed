@@ -11,13 +11,18 @@ define(['seed/auth/module'], function (module) {
 	 * @param UserAPI
 	 * @param $rootScope
 	 */
-	var neoSession = function ($log, Permission, ipCookie,
-		$q, $rootScope, neoRequestHeaders, UserAPI) {
+	var neoSession = function ($log, Permission, ipCookie, $q, $rootScope,
+														 neoRequestHeaders, UserAPI) {
+
 		$log = $log.getInstance('seed.auth.neoSession');
 
 		this.setSession = function (customer, token) {
 			if (customer) {
-				Permission.setFeatures(customer.featureKeys);
+				Permission.defineManyRoles(
+					customer.featureKeys,
+					function (stateParams, roleName) {
+						return _.where(customer, roleName);
+					});
 
 				ipCookie('activeCustomer', customer.customerId);
 				neoRequestHeaders.setCustomerId(customer.customerId);
@@ -31,7 +36,6 @@ define(['seed/auth/module'], function (module) {
 
 		this.clearSession = function () {
 			neoRequestHeaders.clearHeaders();
-			Permission.clearFeautres();
 			$rootScope.user = undefined;
 
 			ipCookie.remove('token');
