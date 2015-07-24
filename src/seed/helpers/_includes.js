@@ -2,6 +2,8 @@ define([
 	'./interceptors/HttpRequestInterceptor',
 	'./interceptors/HttpErrorInterceptor',
 
+	'./decorators/logDecorator',
+
 	'./enums/BaseEnum',
 
 	'./restmod/serializers/datetime/DatetimeDecodeFilter',

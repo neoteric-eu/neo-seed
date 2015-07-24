@@ -97,5 +97,11 @@ requirejs.config({
 		'jquery',
 		'bootstrap',
 		'angular'
-	]
+	],
+
+	config: {
+		moment: {
+			noGlobal: true
+		}
+	}
 });

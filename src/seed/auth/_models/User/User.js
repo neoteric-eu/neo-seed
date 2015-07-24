@@ -60,6 +60,9 @@ define(['seed/auth/module'], function (module) {
 						},
 
 						$authInfo: function () {
+
+							console.log($cookies.get('token'));
+
 							//noinspection JSUnresolvedFunction
 							return this.$send({
 								method: 'GET',

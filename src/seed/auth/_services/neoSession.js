@@ -24,7 +24,7 @@ define(['seed/auth/module'], function (module) {
 						return _.where(customer, roleName);
 					});
 
-				$cookies.putObject('activeCustomer', customer.customerId);
+				$cookies.put('activeCustomer', customer.customerId);
 				neoRequestHeaders.setCustomerId(customer.customerId);
 			}
 
