@@ -9,8 +9,8 @@ requirejs.config({
 		// Angular dependencies
 		'angular': 'assets/js/vendor/libs/angular/angular',
 		'angular-animate': 'assets/js/vendor/libs/angular-animate/angular-animate',
-		'angular-bootstrap': 'assets/js/vendor/libs/angular-bootstrap/ui-bootstrap',
-		'angular-bootstrap-tpls': 'assets/js/vendor/libs/angular-bootstrap/ui-bootstrap-tpls',
+		'angular-ui-bootstrap': 'assets/js/vendor/libs/angular-ui-bootstrap/angular-ui-bootstrap',
+		'angular-ui-bootstrap-tpls': 'assets/js/vendor/libs/angular-ui-bootstrap/angular-ui-bootstrap-tpls',
 		'angular-cookies': 'assets/js/vendor/libs/angular-cookies/angular-cookies',
 		'angular-gettext': 'assets/js/vendor/libs/angular-gettext/angular-gettext',
 		'angular-hotkeys': 'assets/js/vendor/libs/angular-hotkeys/angular-hotkeys',
@@ -56,8 +56,8 @@ requirejs.config({
 		},
 
 		'angular-animate': ['angular'],
-		'angular-bootstrap': ['angular'],
-		'angular-bootstrap-tpls': ['angular-bootstrap'],
+		'angular-ui-bootstrap': ['angular'],
+		'angular-ui-bootstrap-tpls': ['angular-ui-bootstrap'],
 		'angular-cookies': ['angular'],
 		'angular-gettext': ['angular'],
 		'angular-hotkeys': ['angular'],
