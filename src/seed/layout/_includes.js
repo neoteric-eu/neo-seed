@@ -10,6 +10,7 @@ define([
 	'./directives/bigBreadcrumbs',
 	'./directives/stateBreadcrumbs',
 	'./directives/hrefVoid',
+	'./directives/neoNavigation',
 
 	'./_locale/translation'
 ], function() {

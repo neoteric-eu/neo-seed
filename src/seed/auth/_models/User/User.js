@@ -25,7 +25,7 @@ define(['seed/auth/module'], function (module) {
 					volatile: true
 				},
 				avatar: {
-					init: 'assets/img/avatars/sunny-big.png'
+					init: 'assets/img/seed/avatar-default.png'
 				},
 
 				$config: {

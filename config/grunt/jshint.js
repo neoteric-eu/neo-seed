@@ -8,6 +8,7 @@ module.exports = {
 			jshintrc: '.jshintrc',
 			ignores: [
 				'<%= yeoman.app %>/require.js',
+				'<%= yeoman.app %>/apps/demo/**/*.js',
 				'<%= yeoman.app %>/apps/**/_locale/*.js',
 				'<%= yeoman.app %>/apps/**/*.spec.js',
 				'<%= yeoman.app %>/seed/**/_locale/*.js',

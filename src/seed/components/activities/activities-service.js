@@ -9,7 +9,7 @@ define(['seed/module'], function (app) {
 		 * @param {} callback
 		 */
 		function getActivities(callback) {
-			$http.get('app-demo/api/activities/activity.json').success(function (data) {
+			$http.get('apps/demo/api/activities/activity.json').success(function (data) {
 				callback(data);
 			}).error(function () {
 				$log.log('Error');
@@ -24,7 +24,7 @@ define(['seed/module'], function (app) {
 		 * @param {} callback
 		 */
 		function getActivitiesByType(type, callback) {
-			$http.get('app-demo/api/activities/activity-' + type + '.json').success(function (data) {
+			$http.get('apps/demo/api/activities/activity-' + type + '.json').success(function (data) {
 				callback(data);
 			}).error(function () {
 				$log.log('Error');

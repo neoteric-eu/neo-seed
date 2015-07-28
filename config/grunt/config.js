@@ -10,11 +10,12 @@ module.exports = function (grunt) {
 		development: {
 			constants: {
 				appConf: {
-					environmentSettings: grunt.file.readJSON('./config/environments/_development.json'),
-					generalSettings: grunt.file.readJSON('./config/settings/general.json'),
-					languageSettings: grunt.file.readJSON('./config/settings/language.json'),
-					skinSettings: grunt.file.readJSON('./config/settings/skin.json'),
-					soundSettings: grunt.file.readJSON('./config/settings/sound.json'),
+					appsSettings: grunt.file.readJSON('src/config/settings/apps.json'),
+					environmentSettings: grunt.file.readJSON('src/config/environments/_development.json'),
+					generalSettings: grunt.file.readJSON('src/config/settings/general.json'),
+					languageSettings: grunt.file.readJSON('src/config/settings/language.json'),
+					skinSettings: grunt.file.readJSON('src/config/settings/skin.json'),
+					soundSettings: grunt.file.readJSON('src/config/settings/sound.json'),
 					sentrySettings: {}
 				}
 			}
@@ -22,11 +23,12 @@ module.exports = function (grunt) {
 		staging: {
 			constants: {
 				appConf: {
-					environmentSettings: grunt.file.readJSON('./config/environments/_staging.json'),
-					generalSettings: grunt.file.readJSON('./config/settings/general.json'),
-					languageSettings: grunt.file.readJSON('./config/settings/language.json'),
-					skinSettings: grunt.file.readJSON('./config/settings/skin.json'),
-					soundSettings: grunt.file.readJSON('./config/settings/sound.json'),
+					appsSettings: grunt.file.readJSON('src/config/settings/apps.json'),
+					environmentSettings: grunt.file.readJSON('src/config/environments/_staging.json'),
+					generalSettings: grunt.file.readJSON('src/config/settings/general.json'),
+					languageSettings: grunt.file.readJSON('src/config/settings/language.json'),
+					skinSettings: grunt.file.readJSON('src/config/settings/skin.json'),
+					soundSettings: grunt.file.readJSON('src/config/settings/sound.json'),
 					sentrySettings: {}
 				}
 			}
@@ -34,12 +36,13 @@ module.exports = function (grunt) {
 		production: {
 			constants: {
 				appConf: {
-					environmentSettings: grunt.file.readJSON('./config/environments/_production.json'),
-					generalSettings: grunt.file.readJSON('./config/settings/general.json'),
-					languageSettings: grunt.file.readJSON('./config/settings/language.json'),
-					skinSettings: grunt.file.readJSON('./config/settings/skin.json'),
-					soundSettings: grunt.file.readJSON('./config/settings/sound.json'),
-					sentrySettings: grunt.file.readJSON('./config/settings/sentry.json')
+					appsSettings: grunt.file.readJSON('src/config/settings/apps.json'),
+					environmentSettings: grunt.file.readJSON('src/config/environments/_production.json'),
+					generalSettings: grunt.file.readJSON('src/config/settings/general.json'),
+					languageSettings: grunt.file.readJSON('src/config/settings/language.json'),
+					skinSettings: grunt.file.readJSON('src/config/settings/skin.json'),
+					soundSettings: grunt.file.readJSON('src/config/settings/sound.json'),
+					sentrySettings: grunt.file.readJSON('src/config/settings/sentry.json')
 				}
 			}
 		}

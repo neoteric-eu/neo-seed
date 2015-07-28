@@ -4,19 +4,24 @@ define(['angular'], function () {
 	return angular.module('app.conf', [])
 
 		.constant('appConf', {
+			appsSettings: [{
+				name: 'Demo',
+				path: 'apps/demo',
+				order: 0
+			}, {name: 'Dashboard', path: 'apps/dashboard', order: 1}],
 			environmentSettings: {
 				debugEnabled: true,
 				modRewriteEnabled: true,
-				predefinedLogins: [{login: 'admin@neoteric.eu', password: 'abc123'}, {
-					login: 'admin@preiscoin.com',
-					password: '123qweasd321'
-				}, {login: 'jmach@neoteric.eu', password: 'abc123'}],
+				predefinedLogins: [{
+					login: 'admin@neoteric.eu',
+					password: 'abc123'
+				}, {login: 'admin@preiscoin.com', password: '123qweasd321'}, {
+					login: 'jmach@neoteric.eu',
+					password: 'abc123'
+				}],
 				apiUrl: 'http://ntrc-delta.neoteric.eu:9035/api/v1/'
 			},
-			generalSettings: {
-				appName: 'Neoteric Application',
-				emails: {contact: 'contact@neoteric.eu', info: 'info@neoteric.eu', support: 'support@neoteric.eu'}
-			},
+			generalSettings: {name: 'Neoteric', defaultStateToRedirectAfterLogin: 'app.demo.dashboard'},
 			languageSettings: {
 				defaultLanguage: {name: 'English', code: 'gb', locale: 'en_GB'},
 				languageCollection: [{name: 'Polski', code: 'pl', locale: 'pl_PL'}, {

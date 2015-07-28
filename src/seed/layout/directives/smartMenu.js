@@ -1,8 +1,4 @@
-define([
-	'seed/layout/module',
-	'appConfig'
-], function (module, appConfig) {
-
+define(['seed/layout/module'], function (module) {
 	'use strict';
 
 	(function ($) {
@@ -27,7 +23,7 @@ define([
 								.toggleClass('fa-minus-square-o fa-plus-square-o');
 
 							$this.find('ul:first')
-								.slideToggle(appConfig.generalSettings.menu_speed || 200);
+								.slideToggle(200);
 						}
 					} else {
 						// toggle expand item
@@ -35,20 +31,26 @@ define([
 							.toggleClass('fa-minus-square-o fa-plus-square-o');
 
 						$this.find('ul:first')
-							.slideToggle(appConfig.generalSettings.menu_speed || 200);
+							.slideToggle(200);
 					}
 				}
 			});
 		};
 	})(jQuery);
 
-	module.directive('smartMenu', function ($state, $rootScope) {
+	module.directive('smartMenu', function ($log, $state, $rootScope) {
+
+		$log = $log.getInstance('seed.layout.smartMenu');
+
+		$log.debug('Initiated directive');
+
 		return {
 			restrict: 'A',
 			link: function (scope, element) {
 				var $body = $('body');
 
 				var $collapsible = element.find('li[data-menu-collapse]');
+
 				$collapsible.each(function (idx, li) {
 					var $li = $(li);
 					$li
@@ -97,6 +99,9 @@ define([
 						$collapsible.filter('.open').smartCollapseToggle();
 					}
 				});
+
+
+				$log.debug('Called linking function');
 
 			}
 		};

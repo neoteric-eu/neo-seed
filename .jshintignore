@@ -1,6 +1,5 @@
-src/app-demo
-src/assets/js
-src/test/results
+src/apps/demo
+src/assets/js/vendor
 src/seed/templates/module.js
 dist
 node_modules

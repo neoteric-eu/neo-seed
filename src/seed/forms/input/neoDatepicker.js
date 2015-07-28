@@ -1,5 +1,5 @@
 define([
-	'modules/forms/module',
+	'apps/demo/modules/forms/module',
 	'moment',
 	'jquery-ui/datepicker',
 	'jquery-ui/i18n/datepicker-pl',

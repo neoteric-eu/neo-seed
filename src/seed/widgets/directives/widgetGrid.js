@@ -1,7 +1,7 @@
 define(['seed/widgets/module'], function (module) {
 	'use strict';
 
-	module.directive('widgetGrid', function ($rootScope, $compile, $q, $state, $timeout, $log) {
+	module.directive('widgetGrid', function ($rootScope, $compile, $q, $state, $timeout) {
 
 		var jarvisWidgetsDefaults = {
 			grid: 'article',
@@ -166,7 +166,6 @@ define(['seed/widgets/module'], function (module) {
 								setupWidgets(element, widgetIds);
 							}, 100);
 						}
-						$log.debug('jarvisWidgetAdded');
 					});
 
 			}

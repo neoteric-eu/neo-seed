@@ -1,9 +1,0 @@
-{
-	"name": "neoteric",
-	"version": "0.0.0",
-	"private": true,
-	"dependencies": {
-		"neo-seed": "./src/seed",
-		"neo-container": "./src/apps"
-	}
-}

@@ -1,7 +1,7 @@
 define(['angular'], function (ng) {
 	'use strict';
 
-	var module = ng.module('seed.layout', ['seed.auth']);
+	var module = ng.module('seed.layout', ['seed.auth', 'app']);
 
 	module.config(function ($stateProvider, $urlRouterProvider) {
 

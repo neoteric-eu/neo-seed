@@ -1,7 +1,7 @@
 <ul class="header-dropdown-list hidden-xs">
 	<li class="dropdown" dropdown>
 		<a class="dropdown-toggle" dropdown-toggle href-void>
-			<img src="assets/img/blank.gif" class="flag flag-{{vm.activeLanguage.code}}">
+			<img class="flag flag-{{vm.activeLanguage.code}}">
 			<span> {{vm.activeLanguage.name}} </span>
 			<i class="fa fa-angle-down"></i>
 		</a>
@@ -10,7 +10,7 @@
 			<li ng-class="{active: language === vm.activeLanguage}"
 					ng-repeat="language in vm.languageCollection">
 				<a ng-click="vm.setLanguageActive(language)">
-					<img src="assets/img/blank.gif" class="flag flag-{{language.code}}">
+					<img class="flag flag-{{language.code}}">
 					{{language.name}}
 				</a>
 			</li>

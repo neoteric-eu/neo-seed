@@ -5,7 +5,7 @@ module.exports = function (grunt) {
 	var bowerFiles = [];
 
 	grunt.file
-		.expand({filter: 'isDirectory'}, ['src/*'])
+		.expand({filter: 'isDirectory'}, ['src/**'])
 		.forEach(function (path) {
 			try {
 				bowerFiles.push(grunt.file.readJSON(path + '/bower.json'));
@@ -15,6 +15,9 @@ module.exports = function (grunt) {
 		});
 
 	var defaultConf = {
+		options: {
+			runBower: false
+		},
 		js: {
 			options: {
 				destPrefix: 'src/assets/js/vendor/libs'
@@ -37,9 +40,7 @@ module.exports = function (grunt) {
 			options: {
 				destPrefix: 'src/assets/fonts'
 			},
-			files: {
-				'font-awesome': 'font-awesome/fonts/'
-			}
+			files: {}
 		},
 		require: {
 			options: {
@@ -57,7 +58,7 @@ module.exports = function (grunt) {
 			_.assign(defaultConf.js.files, bowerExtension.copy.js);
 			_.assign(defaultConf.css.files, bowerExtension.copy.css);
 			_.assign(defaultConf.less.files, bowerExtension.copy.less);
-			_.assign(defaultConf.fonts.files, bowerExtension.copy.files);
+			_.assign(defaultConf.fonts.files, bowerExtension.copy.fonts);
 		}
 	});
 

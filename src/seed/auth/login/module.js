@@ -19,7 +19,7 @@ define(['angular'], function (ng) {
 				url: '/login/profile',
 				views: {
 					auth: {
-						template: '<auth-profile-select-form redirect-to-state="app.dashboard"></auth-profile-select-form>'
+						template: '<auth-profile-select-form></auth-profile-select-form>'
 					}
 				}
 			});

@@ -4,7 +4,11 @@ define([
 ], function (ng) {
 	'use strict';
 
-	var container = ng.module('app', ['seed', 'app.conf']);
+	var container = ng.module('app', [
+		'seed',
+		'app.conf',
+		'app.demo'
+	]);
 
 	container.run(function ($log, $rootScope, $state, appConf) {
 		$log = $log.getInstance('app.module');

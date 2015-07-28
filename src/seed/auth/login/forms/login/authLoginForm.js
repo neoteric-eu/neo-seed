@@ -61,7 +61,7 @@ define(['seed/auth/module'], function (module) {
 								$state.transitionTo('auth.profileSelect', {}, {notify: true, reload: false});
 							} else {
 								neoSession.setSession(_.first(vm.user.customers), $cookies.getObject('token'));
-								$state.go('app.dashboard');
+								$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
 							}
 						})
 						.catch(function () {
