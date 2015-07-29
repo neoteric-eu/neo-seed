@@ -4,7 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"neo-seed": "./seed/",
-		"neo-demo": "./apps/demo/"
+		"neo-demo": "1.0.0"
 	},
 	"resolutions": {
 		"angular": "1.4.3",

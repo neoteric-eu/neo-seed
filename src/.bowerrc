@@ -1,3 +1,5 @@
 {
-	"directory": "../bower_components"
+	"directory": "../bower_components",
+	"registry": "http://mordor.neoteric.eu:3500",
+	"timeout": 300000
 }
