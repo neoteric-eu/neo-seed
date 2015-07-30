@@ -4,14 +4,19 @@
 	"private": true,
 	"dependencies": {
 		"neo-seed": "./seed/",
-		"neo-demo": "1.0.0"
+		"neo-demo": "2.0.0"
 	},
 	"resolutions": {
 		"angular": "1.4.3",
-		"bootstrap": "3.3.4",
-		"jquery": "2.1.3",
+		"bootstrap": "~3.3.4",
+		"jquery": "~2.1.3",
 		"lodash": "3.10.0",
 		"font-awesome": "4.3.0",
 		"moment": "2.9.0"
+	},
+	"copy": {
+		"apps": {
+			"demo": "neo-demo"
+		}
 	}
 }

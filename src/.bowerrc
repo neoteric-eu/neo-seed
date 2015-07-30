@@ -1,5 +1,7 @@
 {
-	"directory": "../bower_components",
-	"registry": "http://mordor.neoteric.eu:3500",
-	"timeout": 300000
+	"cwd": "../",
+	"registry": [
+		"http://mordor.neoteric.eu:3500",
+		"https://bower.herokuapp.com"
+	]
 }

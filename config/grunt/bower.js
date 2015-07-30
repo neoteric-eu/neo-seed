@@ -18,6 +18,12 @@ module.exports = function (grunt) {
 		options: {
 			runBower: false
 		},
+		apps: {
+			options: {
+				destPrefix: 'src/apps'
+			},
+			files: {}
+		},
 		js: {
 			options: {
 				destPrefix: 'src/assets/js/vendor/libs'
@@ -55,6 +61,7 @@ module.exports = function (grunt) {
 	bowerFiles.forEach(function (bowerExtension) {
 		if (_.has(bowerExtension, 'copy')) {
 			// Extend js files
+			_.assign(defaultConf.apps.files, bowerExtension.copy.apps);
 			_.assign(defaultConf.js.files, bowerExtension.copy.js);
 			_.assign(defaultConf.css.files, bowerExtension.copy.css);
 			_.assign(defaultConf.less.files, bowerExtension.copy.less);
