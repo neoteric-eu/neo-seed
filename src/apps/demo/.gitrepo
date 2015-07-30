@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@gitlab.neoteric.eu:bkrysiak/neo-demo.git
+	branch = master
+	commit = 644c50789869e595d96339a6a7a6cf9b1aa9a31d
+	parent = 1fc6d650c88939467e2028642c73f60e44eceb2d
+	cmdver = 0.2.2
