@@ -1,0 +1,282 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: src/apps/auth/controllers/ActivationController.js:94
+msgid "Account already activated."
+msgstr ""
+
+#: src/apps/auth/views/register/activation.html:73
+msgid "Activate"
+msgstr ""
+
+#: src/apps/auth/views/register/activation.html:15
+msgid "Activation"
+msgstr ""
+
+#: src/apps/auth/controllers/ActivationController.js:91
+msgid "Activation token or account unknown."
+msgstr ""
+
+#: src/apps/auth/views/modals/chooseCustomerModal.html:14
+#: src/apps/auth/views/register/terms.html:34
+msgid "Cancel"
+msgstr ""
+
+#: src/apps/auth/views/password/new-password.html:54
+msgid "Change"
+msgstr ""
+
+#: src/apps/auth/views/password/new-password.html:45
+#: src/apps/auth/views/register/register-sm.html:70
+#: src/apps/auth/views/register/register-sm.html:72
+msgid "Confirm password"
+msgstr ""
+
+#: src/apps/auth/views/password/new-password.html:47
+msgid "Confirm your new password"
+msgstr ""
+
+#: src/apps/auth/views/register/register-sm.html:60
+msgid "Do not tell anyone your password!"
+msgstr ""
+
+#: src/apps/auth/views/login/login-form.html:12
+msgid "Email"
+msgstr ""
+
+#: src/apps/auth/views/password/reset-password.html:32
+#: src/apps/auth/views/register/register-sm.html:43
+msgid "Email address"
+msgstr ""
+
+#: src/apps/auth/views/register/register-sm.html:80
+msgid "English"
+msgstr ""
+
+#: src/apps/auth/views/login/login-form.html:15
+msgid "Enter your email address."
+msgstr ""
+
+#: src/apps/auth/views/register/activation.html:33
+msgid "Enter your first name"
+msgstr ""
+
+#: src/apps/auth/views/register/activation.html:46
+msgid "Enter your last name"
+msgstr ""
+
+#: src/apps/auth/views/login/login-form.html:25
+msgid "Enter your password."
+msgstr ""
+
+#: src/apps/auth/services/appMessages.js:20
+msgid "Error"
+msgstr "Błąd"
+
+#: src/apps/auth/views/register/register-sm.html:20
+msgid "Error!"
+msgstr "Błąd!"
+
+#: src/apps/auth/views/register/activation.html:31
+msgid "First name"
+msgstr ""
+
+#: src/apps/auth/module.js:90
+msgid "Forgot Password"
+msgstr ""
+
+#: src/apps/auth/views/login/login-form.html:30
+msgid "Forgot password?"
+msgstr ""
+
+#: src/apps/auth/views/register/terms.html:37
+msgid "I Agree"
+msgstr ""
+
+#: src/apps/auth/views/register/activation.html:57
+msgid "I agree with the"
+msgstr ""
+
+#: src/apps/auth/services/appMessages.js:25
+msgid "Info"
+msgstr ""
+
+#: src/apps/auth/services/appMessages.js:126
+msgid "Internal server error"
+msgstr "Błąd wewnętrzny serwera"
+
+#: src/apps/auth/views/register/register-sm.html:79
+msgid "Language"
+msgstr ""
+
+#: src/apps/auth/views/register/activation.html:44
+msgid "Last name"
+msgstr ""
+
+#: src/apps/auth/views/login/login-form.html:36
+msgid "Log in"
+msgstr ""
+
+#: src/apps/auth/module.js:45
+msgid "Login"
+msgstr ""
+
+#: src/apps/auth/views/login/login-form.html:41
+msgid "Login as"
+msgstr ""
+
+#: src/apps/auth/views/register/register-sm.html:45
+msgid "Needed to verify your account"
+msgstr ""
+
+#: src/apps/auth/views/password/new-password.html:16
+#: src/apps/auth/views/password/new-password.html:32
+msgid "New password"
+msgstr ""
+
+#: src/apps/auth/views/login/login.html:43
+msgid "Not just your average template!"
+msgstr ""
+
+#: src/apps/auth/views/login/login-form.html:22
+#: src/apps/auth/views/register/register-sm.html:57
+msgid "Password"
+msgstr ""
+
+#: src/apps/auth/views/password/new-password.html:37
+msgid "Password must have at least 6 characters"
+msgstr ""
+
+#: src/apps/auth/views/register/register-sm.html:62
+msgid "Password must have at least 6 characters."
+msgstr ""
+
+#: src/apps/auth/views/password/reset-password.html:52
+msgid "Password reset!"
+msgstr ""
+
+#: src/apps/auth/views/password/new-password.html:49
+msgid "Passwords do not match"
+msgstr ""
+
+#: src/apps/auth/views/register/register-sm.html:74
+msgid "Passwords do not match."
+msgstr ""
+
+#: src/apps/auth/views/register/register-sm.html:99
+msgid ""
+"Please check your email account for further details on how to activate your "
+"account."
+msgstr ""
+
+#: src/apps/auth/views/password/reset-password.html:55
+msgid ""
+"Please check your email account for further details on how to change your "
+"password."
+msgstr ""
+
+#: src/apps/auth/views/password/reset-password.html:38
+#: src/apps/auth/views/register/register-sm.html:49
+msgid "Please enter a VALID email address"
+msgstr ""
+
+#: src/apps/auth/views/password/reset-password.html:36
+#: src/apps/auth/views/register/register-sm.html:47
+msgid "Please enter your email address"
+msgstr ""
+
+#: src/apps/auth/views/register/activation.html:37
+msgid "Please enter your first name"
+msgstr ""
+
+#: src/apps/auth/views/register/activation.html:49
+msgid "Please enter your last name"
+msgstr ""
+
+#: src/apps/auth/views/register/register-sm.html:81
+msgid "Polish"
+msgstr ""
+
+#: src/apps/auth/views/register/register-sm.html:109
+msgid "Preiscoin%20question"
+msgstr ""
+
+#: src/apps/auth/views/register/register-sm.html:35
+msgid "Referral"
+msgstr ""
+
+#: src/apps/auth/module.js:71 src/apps/auth/views/register/register-sm.html:16
+#: src/apps/auth/views/register/register-sm.html:87
+msgid "Register"
+msgstr ""
+
+#: src/apps/auth/views/password/reset-password.html:34
+msgid "Required to verify your account"
+msgstr ""
+
+#: src/apps/auth/views/password/reset-password.html:43
+msgid "Reset"
+msgstr ""
+
+#: src/apps/auth/views/password/reset-password.html:16
+msgid "Reset password"
+msgstr ""
+
+#: src/apps/auth/views/modals/chooseCustomerModal.html:15
+msgid "Select"
+msgstr ""
+
+#: src/apps/auth/views/modals/chooseCustomerModal.html:4
+msgid "Select customer to login"
+msgstr ""
+
+#: src/apps/auth/controllers/ActivationController.js:97
+#: src/apps/auth/controllers/RegisterController.js:75
+msgid "Server error. Please try again."
+msgstr ""
+
+#: src/apps/auth/services/appMessages.js:10
+msgid "Success"
+msgstr ""
+
+#: src/apps/auth/views/register/terms.html:5
+msgid "Terms & Conditions"
+msgstr ""
+
+#: src/apps/auth/views/register/activation.html:68
+msgid "Thank you for your registration!"
+msgstr ""
+
+#: src/apps/auth/views/register/register-sm.html:96
+msgid "Thank you!"
+msgstr ""
+
+#: src/apps/auth/views/register/register-sm.html:21
+msgid "The reflink is invalid."
+msgstr ""
+
+#: src/apps/auth/services/appMessages.js:15
+msgid "Warning"
+msgstr ""
+
+#: src/apps/auth/views/login/login-form.html:6
+msgid "Wrong e-mail or password."
+msgstr ""
+
+#: src/apps/auth/controllers/ActivationController.js:82
+msgid "Your account has been successfully activated."
+msgstr ""
+
+#: src/apps/auth/views/password/new-password.html:35
+msgid "Your new password"
+msgstr ""

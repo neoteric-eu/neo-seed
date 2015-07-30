@@ -1,0 +1,27 @@
+{
+	"tags": {
+		"allowUnknownTags": true
+	},
+	"plugins": ["plugins/markdown"],
+	"templates": {
+		"cleverLinks": false,
+		"monospaceLinks": false,
+		"dateFormat": "ddd MMM Do YYYY",
+		"outputSourceFiles": true,
+		"outputSourcePath": true,
+		"systemName": "NeoB2B",
+		"footer": "",
+		"copyright": "",
+		"navType": "vertical",
+		"theme": "united",
+		"linenums": true,
+		"collapseSymbols": false,
+		"inverseNav": true,
+		"highlightTutorialCode": true,
+		"protocol": "html://"
+	},
+	"markdown": {
+		"parser": "gfm",
+		"hardwrap": true
+	}
+}
