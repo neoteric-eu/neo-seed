@@ -56,7 +56,6 @@ define([], function () {
 		}
 	];
 
-
 	appConfig.sound_path = 'styles/sounds/';
 	appConfig.sound_on = true;
 
