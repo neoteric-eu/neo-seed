@@ -71,6 +71,7 @@ define([], function () {
 	appConfig.debugStyle_warning = 'background-color:yellow';
 	appConfig.debugStyle_success = 'background-color:green; font-weight:bold; color:#fff;';
 	appConfig.debugStyle_error = 'background-color:#ed1c24; font-weight:bold; color:#fff;';
+
 	appConfig.voice_command = true;
 	appConfig.voice_command_auto = false;
 	appConfig.voice_command_lang = 'en-US';
