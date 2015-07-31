@@ -3,6 +3,8 @@ define([
 	'./auth/module',
 	'./auth/models/User',
 
+
+
 	// layout
 	'./modules/widgets/directives/widgetGrid',
 	'./modules/widgets/directives/jarvisWidget',
