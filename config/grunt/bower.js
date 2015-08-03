@@ -15,12 +15,15 @@ module.exports = function (grunt) {
 		});
 
 	var defaultConf = {
-		options: {
-			runBower: false
-		},
 		apps: {
 			options: {
 				destPrefix: 'src/apps'
+			},
+			files: {}
+		},
+		img: {
+			options: {
+				destPrefix: 'src/assets/img'
 			},
 			files: {}
 		},
@@ -62,6 +65,7 @@ module.exports = function (grunt) {
 		if (_.has(bowerExtension, 'copy')) {
 			// Extend js files
 			_.assign(defaultConf.apps.files, bowerExtension.copy.apps);
+			_.assign(defaultConf.img.files, bowerExtension.copy.img);
 			_.assign(defaultConf.js.files, bowerExtension.copy.js);
 			_.assign(defaultConf.css.files, bowerExtension.copy.css);
 			_.assign(defaultConf.less.files, bowerExtension.copy.less);

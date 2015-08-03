@@ -1,7 +1,0 @@
-{
-	"cwd": "../",
-	"registry": [
-		"http://mordor.neoteric.eu:3500",
-		"https://bower.herokuapp.com"
-	]
-}
