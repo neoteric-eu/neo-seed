@@ -1,0 +1,22 @@
+<div class="project-context hidden-xs dropdown">
+	<span class="label">
+		{{'Profiles'|translate}}:
+	</span>
+
+	<div class="dropdown" dropdown>
+		<div class="project-selector dropdown-toggle" dropdown-toggle>
+			<span ng-bind-html="vm.activeCustomer.customerName"></span>
+			<i class="fa fa-angle-down"></i>
+		</div>
+
+		<ul class="dropdown-menu">
+			<li ng-repeat="customer in vm.customerCollection">
+				<a ng-click="vm.setActiveCustomer(customer)">
+					<i ng-show="customer.customerId === vm.activeCustomer.customerId"
+						 class="fa fa-hand-o-right"></i>
+					{{customer.customerName}}
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

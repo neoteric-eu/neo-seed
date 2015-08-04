@@ -1,0 +1,222 @@
+table.neo-table {
+	clear: both;
+	max-width: none !important;
+
+	// Sorting styling
+	thead .sorting,
+	thead .sorting-asc,
+	thead .sorting-desc {
+		cursor: pointer;
+	}
+
+	thead .sorting {
+		background: url('../../../img/sort_both.png') no-repeat center right;
+	}
+
+	thead .sorting-asc {
+		background: url('../../../img/sort_asc.png') no-repeat center right;
+	}
+
+	thead .sorting-desc {
+		background: url('../../../img/sort_desc.png') no-repeat center right;
+	}
+
+	thead > tr > th {
+		border-left: none !important;
+	}
+
+	td,
+	th {
+		-webkit-box-sizing: content-box;
+		-moz-box-sizing: content-box;
+		box-sizing: content-box;
+	}
+
+	td.cell-fit,
+	th.cell-fit {
+		width: 1%;
+	}
+
+	td.cell-10,
+	th.cell-10 {
+		width: 10%;
+	}
+
+	td.cell-20,
+	th.cell-20 {
+		width: 20%;
+	}
+
+	td.cell-30,
+	th.cell-30 {
+		width: 30%;
+	}
+
+	td.cell-40,
+	th.cell-40 {
+		width: 40%;
+	}
+
+	td.cell-50,
+	th.cell-50 {
+		width: 50%;
+	}
+
+	td.cell-60,
+	th.cell-60 {
+		width: 60%;
+	}
+
+	td.cell-70,
+	th.cell-70 {
+		width: 70%;
+	}
+
+	td.cell-80,
+	th.cell-80 {
+		width: 80%;
+	}
+
+	td.cell-90,
+	th.cell-90 {
+		width: 90%;
+	}
+
+	> tbody > tr > td,
+	> tbody > tr > th,
+	> tfoot > tr > td,
+	> tfoot > tr > th,
+	> thead > tr > td,
+	> thead > tr > th {
+		padding: 8px 10px;
+	}
+
+	thead > tr > th input,
+	tfoot > tr > th input {
+		width: 100% !important;
+		font-weight: normal;
+	}
+
+	thead > tr > th.hasinput {
+		padding: 6px !important;
+	}
+
+	.neo-table-header {
+		padding-right: 12px;
+	}
+
+	input[type=checkbox].checkbox,
+	input[type=radio].radiobox {
+		left: -999px;
+	}
+
+	// Filtering styling
+	div.neo-table-filter {
+		label {
+			font-weight: normal;
+			float: right;
+		}
+
+		input {
+			width: 16em;
+		}
+
+		.input-group-addon {
+			width: 32px;
+			margin-top: 0;
+			float: left;
+			height: 32px;
+			padding-top: 8px;
+		}
+
+		.input-group-addon + .form-control {
+			float: left;
+		}
+	}
+}
+
+div.neo-table-paginate {
+	float: right;
+	margin: 0;
+}
+
+div.neo-table-paginate ul.pagination {
+	margin: 2px 0;
+	white-space: nowrap;
+}
+
+/*
+ * FixedHeader styles
+ */
+.dt-toolbar {
+	display: block;
+	position: relative;
+	padding: 6px 7px 1px;
+	width: 100%;
+	float: left;
+	border-bottom: 1px solid #ccc;
+	background: #fafafa;
+}
+
+.dt-toolbar-footer {
+	background: #fafafa;
+	font-size: 11px;
+	overflow: hidden;
+	padding: 5px 10px;
+	border-top: 1px solid #ccc;
+	-webkit-box-shadow: inset 0 1px #fff;
+	-moz-box-shadow: inset 0 1px #fff;
+	-ms-box-shadow: inset 0 1px #fff;
+	box-shadow: inset 0 1px #fff;
+	height: 44px;
+}
+
+.dt-toolbar > :first-child,
+.dt-toolbar-footer > :first-child {
+	padding-left: 0 !important;
+}
+
+.dt-toolbar > :last-child,
+.dt-toolbar-footer > :last-child {
+	padding-right: 0 !important;
+}
+
+div.neo-table-info {
+	padding: 2px 0;
+	font-size: 13px;
+	font-weight: bold;
+	font-style: italic;
+	color: #969696;
+
+	.btn-group.btn-group-sm {
+		font-style: normal;
+		padding: 0 5px;
+	}
+
+	.dropdown-menu {
+		min-width: 20px;
+		left: 10px;
+
+		> li > a {
+			padding: 3px 12px;
+		}
+	}
+}
+
+/*
+ * Double lines in thead tfoot
+ */
+
+/* checkbox */
+
+.dt-toolbar-footer > :first-child .neo-tables_filter > :only-child,
+.dt-toolbar-footer > :first-child .pagination,
+.dt-toolbar-footer > :first-child .neo-tables_length {
+	float: left;
+}
+
+.dt-toolbar-footer > :last-child .neo-table-filter > :only-child,
+.dt-toolbar-footer > :last-child .pagination,
+.dt-toolbar-footer > :last-child .neo-table-length {
+	float: right;
+}

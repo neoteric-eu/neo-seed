@@ -1,0 +1,50 @@
+<form class="neo-form" ng-submit="vm.login()" novalidate>
+
+	<img ng-src="{{vm.user.avatar}}">
+
+	<fieldset>
+		<h1 class="text-center">
+			{{'Select profile'|translate}}
+			<small> {{'to continue'|translate}}</small>
+		</h1>
+	</fieldset>
+
+	<fieldset>
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<!-- List group -->
+			<div class="list-group">
+				<button type="button"
+								ng-repeat="customer in vm.user.customers"
+								ng-class="{'list-group-item-info' : vm.isCustomerActive(customer)}"
+								ng-click="vm.setCustomerActive(customer)"
+								class="list-group-item">
+					{{customer.customerName}}
+
+					<i class="pull-right fa"
+						 ng-class="{
+							 'fa-check-square': vm.isCustomerActive(customer),
+							 'fa-square-o': !vm.isCustomerActive(customer)
+						 }">
+					</i>
+				</button>
+			</div>
+		</div>
+	</fieldset>
+
+	<footer>
+		<button type="submit"
+						class="btn btn-primary">
+			{{'Select'|translate}}
+		</button>
+
+
+		<div class="btn-group">
+			<a class="btn btn-default"
+				 ui-sref="auth.login">
+				{{'Back'|translate}}
+			</a>
+		</div>
+	</footer>
+</form>
+

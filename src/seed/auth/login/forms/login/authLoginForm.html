@@ -1,0 +1,69 @@
+<form class="neo-form"
+			ng-submit="vm.login()"
+			novalidate>
+
+	<img ng-src="{{vm.user.avatar}}">
+
+	<fieldset>
+		<h1 class="text-center">{{'Welcome!'|translate}}
+			<small> {{'Please log in'|translate}}</small>
+		</h1>
+	</fieldset>
+
+	<fieldset>
+		<section class="form-group" ng-show="vm.formError">
+			<p class="alert alert-danger" ng-model="formError">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				{{'Wrong e-mail or password.'|translate}}
+			</p>
+		</section>
+
+		<section class="form-group">
+			<div class="input-icon-right">
+				<i class="icon-append fa fa-user"></i>
+				<input type="email"
+							 class="form-control"
+							 placeholder="{{'Email'|translate}}"
+							 ng-model="vm.user.login">
+			</div>
+		</section>
+
+		<section class="form-group">
+			<div class="input-icon-right">
+				<i class="icon-append fa fa-lock"></i>
+				<input type="password"
+							 class="form-control"
+							 placeholder="{{'Password'|translate}}"
+							 ng-model="vm.user.password">
+			</div>
+
+			<div class="note">
+				<a ui-sref="auth.forgotPassword">{{'Forgot password?'|translate}}</a>
+			</div>
+		</section>
+	</fieldset>
+
+	<footer>
+		<button type="submit"
+						class="btn btn-primary">
+			{{'Log in'|translate}}
+		</button>
+
+		<div class="btn-group"
+				 ng-show="vm.predefinedLogins.length">
+
+			<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				{{'Login as'|translate}}
+				<span class="caret"></span>
+			</button>
+
+			<ul class="dropdown-menu">
+				<li ng-repeat="user in vm.predefinedLogins">
+					<a href ng-click="vm.loginAs(user)">{{ user.login }}</a>
+				</li>
+			</ul>
+
+		</div>
+	</footer>
+</form>
+
