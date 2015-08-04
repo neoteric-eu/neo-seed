@@ -3,8 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"dependencies": {
-		"neo-seed": "./seed",
-		"neo-demo": "./apps/demo"
+		"neo-seed": "./seed"
 	},
 	"resolutions": {
 		"angular": "1.4.3",
