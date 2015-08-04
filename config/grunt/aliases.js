@@ -91,6 +91,7 @@ module.exports = {
 			'logo',
 			'clean:bower',
 			'force:bower',
+			'symlink',
 			'shell:webdriver-update',
 			'githooks',
 			'config:development',
