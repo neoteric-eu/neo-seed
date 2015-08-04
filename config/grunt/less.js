@@ -1,12 +1,27 @@
-module.exports = {
-	default: {
-		files: {
-			'<%= yeoman.app %>/assets/css/vendor/bootstrap/bootstrap.css': '<%= yeoman.app %>/assets/less/custom/bootstrap/bootstrap.less',
-			'<%= yeoman.app %>/assets/css/vendor/font-awesome/font-awesome.css': '<%= yeoman.app %>/assets/less/custom/font-awesome/font-awesome.less',
+module.exports = function (grunt) {
+	'use strict';
 
-			'<%= yeoman.app %>/assets/css/seed.css': '<%= yeoman.app %>/assets/less/custom/seed.less',
-			'<%= yeoman.app %>/assets/css/seed-plugins.css': '<%= yeoman.app %>/assets/less/custom/seed-plugins.less',
-			'<%= yeoman.app %>/assets/css/seed-skins.css': '<%= yeoman.app %>/assets/less/custom/seed-skins.less'
+	var files = [];
+
+	grunt.file
+		.expand({filter: 'isDirectory'}, ['src/assets/*'])
+		.forEach(function (path) {
+			try {
+				files.push({
+					expand: true,
+					cwd: path + '/less',
+					src: ['**/*.less', '!**/_*.less'],
+					dest: path + '/css',
+					ext: '.css'
+				})
+			} catch (e) {
+				// Handle exception
+			}
+		});
+
+	return {
+		default: {
+			files: files
 		}
-	}
+	};
 };

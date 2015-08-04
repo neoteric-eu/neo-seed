@@ -1,0 +1,168 @@
+@import "../bootstrap/_variables";
+@import "/src/assets/vendor/less/bootstrap/mixins/vendor-prefixes";
+@import "/src/assets/vendor/less/animate/source/animated";
+@import "/src/assets/vendor/less/animate/source/fadeIn";
+@import "/src/assets/vendor/less/animate/source/fadeOut";
+
+#app-loader {
+	.animated;
+	.fadeIn;
+
+	&.ng-hide-add {
+		.fadeOut;
+	}
+
+	> img {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-left: -87px;
+		margin-top: -115px;
+	}
+}
+
+@loader-width: 40px;
+@loader-color: @gray-light;
+@slide-color: @blueLight;
+@separator-color: @gray-lighter;
+
+.loader {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -@loader-width/2;
+	margin-top: -4px;
+	width: @loader-width;
+	border: 2px solid @loader-color;
+	border-radius: 3px;
+	padding: 1px;
+	.animation-name(loader-border);
+	.animation-duration(2s);
+	.animation-iteration-count(infinite);
+	.animation-timing-function(ease-in);
+
+	// Indicator
+	> span {
+		display: block;
+		width: 0;
+		height: 4px;
+		background: @slide-color;
+		position: relative;
+		.animation-name(loader-slide);
+		.animation-duration(2s);
+		.animation-iteration-count(infinite);
+		.animation-timing-function(ease-in);
+	}
+
+	&:before,
+	&:after {
+		content: '';
+		display: block;
+		background: @separator-color;
+		height: 4px;
+		width: 1px;
+		position: absolute;
+		z-index: 10;
+	}
+
+	&:before {
+		left: 33%;
+	}
+
+	&:after {
+		top: 1px;
+		left: 66%;
+	}
+}
+
+// Animation mixin
+.loader-slide() {
+	0% {
+		width: 0;
+		margin-left: 0;
+		opacity: 0;
+	}
+	0% {
+		width: 0;
+		margin-left: 0;
+		opacity: 1;
+	}
+	50% {
+		width: 0;
+		margin-left: 0;
+	}
+	75% {
+		width: 100%;
+		margin-left: 0;
+	}
+	90% {
+		width: 0;
+		margin-left: 100%;
+		opacity: 1;
+	}
+	100% {
+		width: 0;
+		margin-left: 100%;
+		opacity: 0;
+	}
+}
+
+// Generate animation for span
+@-webkit-keyframes loader-slide {
+	.loader-slide;
+}
+
+@-moz-keyframes loader-slide {
+	.loader-slide;
+}
+
+@-ms-keyframes loader-slide {
+	.loader-slide;
+}
+
+@-o-keyframes loader-slide {
+	.loader-slide;
+}
+
+@keyframes loader-slide {
+	.loader-slide;
+}
+
+.loader-border {
+	0% {
+		border-color: transparent;
+		width: @loader-width;
+		margin-left: -@loader-width/2;
+	}
+	50% {
+		border-color: @loader-color;
+		width: @loader-width;
+		margin-left: -20px;
+	}
+	100% {
+		border-color: transparent;
+		width: @loader-width;
+		margin-left: -@loader-width/2;
+	}
+}
+
+// Generate animation for border
+@-webkit-keyframes loader-border {
+	.loader-border;
+}
+
+@-moz-keyframes loader-border {
+	.loader-border;
+}
+
+@-ms-keyframes loader-border {
+	.loader-border;
+}
+
+@-o-keyframes loader-border {
+	.loader-border;
+}
+
+@keyframes loader-border {
+	.loader-border;
+}

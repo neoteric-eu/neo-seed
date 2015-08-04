@@ -15,39 +15,30 @@ module.exports = function (grunt) {
 		});
 
 	var defaultConf = {
-		apps: {
-			options: {
-				destPrefix: 'src/apps'
-			},
-			files: {}
-		},
-		img: {
-			options: {
-				destPrefix: 'src/assets/img'
-			},
-			files: {}
+		options: {
+			runBower: true
 		},
 		js: {
 			options: {
-				destPrefix: 'src/assets/js/vendor/libs'
+				destPrefix: 'src/assets/vendor/js'
 			},
 			files: {}
 		},
 		css: {
 			options: {
-				destPrefix: 'src/assets/css/vendor'
+				destPrefix: 'src/assets/vendor/css'
 			},
 			files: {}
 		},
 		less: {
 			options: {
-				destPrefix: 'src/assets/less/vendor/libs'
+				destPrefix: 'src/assets/vendor/less'
 			},
 			files: {}
 		},
 		fonts: {
 			options: {
-				destPrefix: 'src/assets/fonts'
+				destPrefix: 'src/assets/vendor/fonts'
 			},
 			files: {}
 		},
@@ -64,8 +55,6 @@ module.exports = function (grunt) {
 	bowerFiles.forEach(function (bowerExtension) {
 		if (_.has(bowerExtension, 'copy')) {
 			// Extend js files
-			_.assign(defaultConf.apps.files, bowerExtension.copy.apps);
-			_.assign(defaultConf.img.files, bowerExtension.copy.img);
 			_.assign(defaultConf.js.files, bowerExtension.copy.js);
 			_.assign(defaultConf.css.files, bowerExtension.copy.css);
 			_.assign(defaultConf.less.files, bowerExtension.copy.less);

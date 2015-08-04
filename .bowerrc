@@ -1,11 +1,10 @@
 {
-	"cwd": "./src/",
+	"cwd": "src",
 	"directory": "../bower_components",
 	"registry": {
 		"search": [
-			"http://mordor.neoteric.eu:3500",
-			"http://mordor.neoteric.eu:3501",
-			"https://bower.herokuapp.com"
+			"https://bower.herokuapp.com",
+			"http://mordor.neoteric.eu:3500"
 		],
 		"registry": {
 			"register": "http://mordor.neoteric.eu:3500",

@@ -4,10 +4,9 @@
 /node_modules
 /bower_components
 /test/results
-/src/assets/js/vendor/libs
-/src/assets/less/vendor/libs
-/src/assets/css
-/src/assets/fonts
+/src/assets/
+/src/seed/_assets/
+/src/apps/*/_assets/
 
 ### Extensions ###
 *.todo

@@ -3,7 +3,6 @@ define(['seed/module'], function (module) {
 
 	/**
 	 * Base interface for augmenting enum functionality in app
-	 * @todo Move functionality to seed
 	 * @class BaseEnum
 	 * @interface
 	 * @memberOf app

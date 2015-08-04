@@ -24,7 +24,7 @@ define(['seed/layout/module'], function (module) {
 					promises.push(dfd.promise);
 
 					$http
-						.get(appPath + '/_assets/navigation/navigation.html', {cache: true})
+						.get(appPath + '/_config/navigation.html', {cache: true})
 
 						.success(function (data) {
 							$element.children().first().append(data);

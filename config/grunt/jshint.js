@@ -12,7 +12,9 @@ module.exports = {
 				'<%= yeoman.app %>/apps/**/_locale/*.js',
 				'<%= yeoman.app %>/apps/**/*.spec.js',
 				'<%= yeoman.app %>/seed/**/_locale/*.js',
-				'<%= yeoman.app %>/seed/**/*.spec.js'
+				'<%= yeoman.app %>/seed/**/*.spec.js',
+				'<%= yeoman.app %>/seed/_assets/**',
+				'<%= yeoman.app %>/apps/*/_assets/**'
 			]
 		},
 		src: [

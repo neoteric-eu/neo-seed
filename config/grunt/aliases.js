@@ -90,7 +90,7 @@ module.exports = {
 		tasks: [
 			'logo',
 			'clean:bower',
-			'bower',
+			'force:bower',
 			'shell:webdriver-update',
 			'githooks',
 			'config:development',
