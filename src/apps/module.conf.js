@@ -4,11 +4,7 @@ define(['angular'], function () {
 	return angular.module('app.conf', [])
 
 		.constant('appConf', {
-			appsSettings: [{
-				name: 'Demo',
-				path: 'apps/demo',
-				order: 0
-			}, {name: 'Dashboard', path: 'apps/dashboard', order: 1}],
+			appsSettings: [{name: 'Dashboard', path: 'apps/dashboard', order: 0}],
 			environmentSettings: {
 				debugEnabled: true,
 				modRewriteEnabled: true,
