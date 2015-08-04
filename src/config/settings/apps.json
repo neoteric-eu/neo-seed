@@ -1,12 +1,7 @@
 [
 	{
-		"name": "Demo",
-		"path": "apps/demo",
-		"order": 0
-	},
-	{
 		"name": "Dashboard",
 		"path": "apps/dashboard",
-		"order": 1
+		"order": 0
 	}
 ]

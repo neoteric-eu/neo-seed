@@ -5,11 +5,7 @@ define([
 
 	// Dashboard
 	'apps/dashboard/_includes',
-	'apps/dashboard/module',
-
-	// Demo
-	'apps/demo/_includes',
-	'apps/demo/module'
+	'apps/dashboard/module'
 ], function () {
 	'use strict';
 });
