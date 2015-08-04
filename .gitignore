@@ -1,0 +1,55 @@
+### Directories ###
+/dist
+/docs
+/node_modules
+/bower_components
+/test/results
+/src/assets/
+
+### Extensions ###
+*.todo
+*.ask
+*.tmp
+*.mo
+*.pot
+
+### Files ###
+src/apps/module.conf.js
+npm-debug.log
+src/require.js
+
+### SublimeText ###
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# workspace files are user-specific
+*.sublime-workspace
+
+# project files should be checked into the repository, unless a significant
+# proportion of contributors will probably not be using SublimeText
+*.sublime-project
+
+# sftp configuration file
+sftp-config.json
+
+
+### WebStorm ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
+.idea/
+
+# File-based project format:
+*.iml
+*.ipr
+*.iws
+
+# Plugin-specific files:
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+

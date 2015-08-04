@@ -1,0 +1,19 @@
+{
+	"debugEnabled": true,
+	"modRewriteEnabled": true,
+	"predefinedLogins": [
+		{
+			"login": "admin@neoteric.eu",
+			"password": "abc123"
+		},
+		{
+			"login": "admin@preiscoin.com",
+			"password": "123qweasd321"
+		},
+		{
+			"login": "jmach@neoteric.eu",
+			"password": "abc123"
+		}
+	],
+	"apiUrl": "http://ntrc-delta.neoteric.eu:9035/api/v1/"
+}
