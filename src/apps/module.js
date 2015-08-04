@@ -6,8 +6,7 @@ define([
 
 	var container = ng.module('app', [
 		'seed',
-		'app.conf',
-		'app.demo'
+		'app.conf'
 	]);
 
 	container.run(function ($log, $rootScope, $state, appConf) {
