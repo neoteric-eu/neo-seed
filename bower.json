@@ -104,6 +104,8 @@
 			"summernote/summernote.js": "summernote/dist/summernote.js",
 			"to-markdown/to-markdown.js": "to-markdown/src/to-markdown.js"
 		},
+		"less": {
+		},
 		"css": {
 			"select2/select2.css": "select2/select2.css",
 			"select2/select2-bootstrap.css": "select2/select2-bootstrap.css"
