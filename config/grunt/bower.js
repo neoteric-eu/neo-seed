@@ -24,12 +24,6 @@ module.exports = function (grunt) {
 			},
 			files: {}
 		},
-		css: {
-			options: {
-				destPrefix: 'src/assets/vendor/css'
-			},
-			files: {}
-		},
 		less: {
 			options: {
 				destPrefix: 'src/assets/vendor/less'
@@ -56,7 +50,6 @@ module.exports = function (grunt) {
 		if (_.has(bowerExtension, 'copy')) {
 			// Extend js files
 			_.assign(defaultConf.js.files, bowerExtension.copy.js);
-			_.assign(defaultConf.css.files, bowerExtension.copy.css);
 			_.assign(defaultConf.less.files, bowerExtension.copy.less);
 			_.assign(defaultConf.fonts.files, bowerExtension.copy.fonts);
 		}

@@ -3,48 +3,48 @@ requirejs.config({
 	paths: {
 		'appConfig': 'apps/module.conf',
 		// jQuery dependencies
-		'jquery': 'assets/js/vendor/libs/jquery/jquery',
-		'jquery-ui': 'assets/js/vendor/libs/jquery-ui',
+		'jquery': 'assets/vendor/js/jquery/jquery',
+		'jquery-ui': 'assets/vendor/js/jquery-ui',
 
 		// Angular dependencies
-		'angular': 'assets/js/vendor/libs/angular/angular',
-		'angular-animate': 'assets/js/vendor/libs/angular-animate/angular-animate',
-		'angular-ui-bootstrap': 'assets/js/vendor/libs/angular-ui-bootstrap/angular-ui-bootstrap',
-		'angular-ui-bootstrap-tpls': 'assets/js/vendor/libs/angular-ui-bootstrap/angular-ui-bootstrap-tpls',
-		'angular-cookies': 'assets/js/vendor/libs/angular-cookies/angular-cookies',
-		'angular-gettext': 'assets/js/vendor/libs/angular-gettext/angular-gettext',
-		'angular-hotkeys': 'assets/js/vendor/libs/angular-hotkeys/angular-hotkeys',
-		'angular-loading-bar': 'assets/js/vendor/libs/angular-loading-bar/angular-loading-bar',
-		'angular-moment': 'assets/js/vendor/libs/angular-moment/angular-moment',
-		'angular-permission': 'assets/js/vendor/libs/angular-permission/angular-permission',
-		'angular-restmod': 'assets/js/vendor/libs/angular-restmod/angular-restmod',
-		'angular-restmod-preload': 'assets/js/vendor/libs/angular-restmod/plugins/preload.min',
-		'angular-restmod-find-many': 'assets/js/vendor/libs/angular-restmod/plugins/find-many.min',
-		'angular-sanitize': 'assets/js/vendor/libs/angular-sanitize/angular-sanitize',
-		'angular-ui-date': 'assets/js/vendor/libs/angular-ui-date/angular-ui-date',
-		'angular-ui-select': 'assets/js/vendor/libs/angular-ui-select/angular-ui-select',
-		'angular-ui-router': 'assets/js/vendor/libs/angular-ui-router/angular-ui-router',
-		'angular-table': 'assets/js/vendor/libs/angular-table/angular-table',
+		'angular': 'assets/vendor/js/angular/angular',
+		'angular-animate': 'assets/vendor/js/angular-animate/angular-animate',
+		'angular-ui-bootstrap': 'assets/vendor/js/angular-ui-bootstrap/angular-ui-bootstrap',
+		'angular-ui-bootstrap-tpls': 'assets/vendor/js/angular-ui-bootstrap/angular-ui-bootstrap-tpls',
+		'angular-cookies': 'assets/vendor/js/angular-cookies/angular-cookies',
+		'angular-gettext': 'assets/vendor/js/angular-gettext/angular-gettext',
+		'angular-hotkeys': 'assets/vendor/js/angular-hotkeys/angular-hotkeys',
+		'angular-loading-bar': 'assets/vendor/js/angular-loading-bar/angular-loading-bar',
+		'angular-moment': 'assets/vendor/js/angular-moment/angular-moment',
+		'angular-permission': 'assets/vendor/js/angular-permission/angular-permission',
+		'angular-restmod': 'assets/vendor/js/angular-restmod/angular-restmod',
+		'angular-restmod-preload': 'assets/vendor/js/angular-restmod/plugins/preload.min',
+		'angular-restmod-find-many': 'assets/vendor/js/angular-restmod/plugins/find-many.min',
+		'angular-sanitize': 'assets/vendor/js/angular-sanitize/angular-sanitize',
+		'angular-ui-date': 'assets/vendor/js/angular-ui-date/angular-ui-date',
+		'angular-ui-select': 'assets/vendor/js/angular-ui-select/angular-ui-select',
+		'angular-ui-router': 'assets/vendor/js/angular-ui-router/angular-ui-router',
+		'angular-table': 'assets/vendor/js/angular-table/angular-table',
 
 		// Bootstrap dependencies
-		'bootstrap': 'assets/js/vendor/libs/bootstrap/bootstrap',
+		'bootstrap': 'assets/vendor/js/bootstrap/bootstrap',
 
 		// Smart Admin plugins
-		'smartwidgets': 'assets/js/vendor/smartadmin/smartwidgets/jarvis.widget',
-		'notification': 'assets/js/vendor/smartadmin/notification/SmartNotification',
+		'smartwidgets': 'assets/seed/js/smartadmin/smartwidgets/jarvis.widget',
+		'notification': 'assets/seed/js/smartadmin/notification/SmartNotification',
 
 		// Other vendor
-		'moment': 'assets/js/vendor/libs/moment/moment',
-		'domReady': 'assets/js/vendor/libs/requirejs-domready/requirejs-domready',
-		'lodash': 'assets/js/vendor/libs/lodash/lodash',
-		'lodash-deep': 'assets/js/vendor/libs/lodash-deep/lodash-deep',
-		'lodash-extensions': 'assets/js/custom/lodash-extensions/lodash-extensions',
+		'moment': 'assets/vendor/js/moment/moment',
+		'domReady': 'assets/vendor/js/requirejs-domready/requirejs-domready',
+		'lodash': 'assets/vendor/js/lodash/lodash',
+		'lodash-deep': 'assets/vendor/js/lodash-deep/lodash-deep',
+		'lodash-extensions': 'assets/seed/js/custom/lodash-extensions/lodash-extensions',
 
-		'raphael': 'assets/js/vendor/libs/raphael/raphael',
-		'morris': 'assets/js/vendor/libs/morris/morris',
+		'raphael': 'assets/vendor/js/raphael/raphael',
+		'morris': 'assets/vendor/js/morris/morris',
 
-		'form-validation': 'assets/js/vendor/libs/form-validation/form-validation',
-		'form-validation-bootstrap': 'assets/js/vendor/libs/form-validation/framework/bootstrap'
+		'form-validation': 'assets/vendor/js/form-validation/form-validation',
+		'form-validation-bootstrap': 'assets/vendor/js/form-validation/framework/bootstrap'
 	},
 
 	shim: {

@@ -5,8 +5,6 @@
 /bower_components
 /test/results
 /src/assets/
-/src/seed/_assets/
-/src/apps/*/_assets/
 
 ### Extensions ###
 *.todo

@@ -1,10 +1,24 @@
 module.exports = function (grunt) {
 	'use strict';
 
-	var files = [];
+	var files = [{
+		expand: true,
+		cwd: 'src/assets/vendor/less',
+		src: [
+			'**/*.less',
+			//Exclusions from vendor
+			'!**/_*.less',
+			'!bootstrap/**',
+			'!elements/**',
+			'!animate/**',
+			'!font-awesome/**'
+		],
+		dest: 'src/assets/vendor/css',
+		ext: '.css'
+	}];
 
 	grunt.file
-		.expand({filter: 'isDirectory'}, ['src/assets/*'])
+		.expand({filter: 'isDirectory'}, ['src/assets/*', '!src/assets/vendor'])
 		.forEach(function (path) {
 			try {
 				files.push({

@@ -1,9 +1,9 @@
-src/apps/demo
-src/assets/js/vendor
+src/apps/demo/
+src/assets/
 src/seed/templates/module.js
-dist
-node_modules
-bower_components
-_locale
+dist/
+node_modules/
+bower_components/
+_locale/*
 
 
