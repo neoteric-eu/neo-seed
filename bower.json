@@ -59,7 +59,7 @@
       "jquery-ui/i18n": "jquery-ui/ui/i18n",
       "jquery-ui/": "jquery-ui/ui/*.js",
       "requirejs-domready/requirejs-domready.js": "requirejs-domready/domReady.js",
-      "lodash/lodash.js": "lodash/dist/lodash.js",
+      "lodash/lodash.js": "lodash/lodash.js",
       "lodash-deep/lodash-deep.js": "lodash-deep/lodash-deep.js",
       "moment/moment.js": "moment/min/moment-with-locales.js",
       "morris/morris.js": "morris.js/morris.js",
