@@ -34,7 +34,7 @@ define(['seed/components/module'], function (module) {
 	 * @returns {Function} ngTable configuration factory
 	 */
 	function neoTableParams(ngTableParams, $log) {
-		$log = $log.getInstance('seed.components.neoTableParams');
+		//$log = $log.getInstance('seed.components.neoTableParams');
 
 		/**
 		 * ngTable configuration factory

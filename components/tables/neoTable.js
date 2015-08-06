@@ -5,7 +5,6 @@ define([
 	'use strict';
 
 	function neoTable($templateCache, $http, $log) {
-		$log = $log.getInstance('seed.components.neoTable');
 
 		var neoTableBuilder = {};
 
@@ -15,10 +14,7 @@ define([
 				.success(function (template) {
 					$templateCache.put(cacheKey, template);
 
-					$log.debug('Loaded neoTable ' +
-						templateName +
-						' template into cache under key: ' +
-						cacheKey);
+					$log.debug('Loaded neoTable ' + templateName + ' template into cache under key: ' + cacheKey);
 				})
 				.error(function () {
 					$log.error('Could not load neoTable ' + templateName + ' template');
@@ -30,6 +26,7 @@ define([
 			loadTemplate('partials/neo-footer.html', 'ng-table/pager.html');
 			loadTemplate('filters/text-filter.html', 'ng-table/filters/text.html');
 			loadTemplate('filters/date-filter.html', 'ng-table/filters/date.html');
+			loadTemplate('filters/timestamp-filter.html', 'ng-table/filters/timestamp.html');
 
 			$log.debug('Initiated service');
 		};
