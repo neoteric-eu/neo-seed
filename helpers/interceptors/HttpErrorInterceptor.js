@@ -45,9 +45,12 @@ define(['seed/module'], function (app) {
 				if (rejection.status === 401) {
 					// If user is not authorised redirect to login page
 					$injector.get('$state').go('auth.logout');
+					return $q.reject(rejection);
+				} else {
+					// Return the promise rejection.
+					return $q.reject(rejection);
+					//}
 				}
-
-				return $q.reject(rejection);
 			}
 		};
 	}
