@@ -1,4 +1,4 @@
-define(['app', 'moment'], function (module, moment) {
+define(['seed/components/module', 'moment'], function (module, moment) {
 	'use strict';
 
 	/**
