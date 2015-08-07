@@ -25,6 +25,9 @@ define([
 		neoTableBuilder.init = function () {
 			loadTemplate('partials/neo-header.html', 'ng-table/header.html');
 			loadTemplate('partials/neo-footer.html', 'ng-table/pager.html');
+			loadTemplate('partials/neo-sorting.html', 'ng-table/sorterRow.html');
+			loadTemplate('partials/neo-filters.html', 'ng-table/filterRow.html');
+
 			loadTemplate('filters/text-filter.html', 'ng-table/filters/text.html');
 			loadTemplate('filters/date-filter.html', 'ng-table/filters/date.html');
 			loadTemplate('filters/timestamp-filter.html', 'ng-table/filters/timestamp.html');
