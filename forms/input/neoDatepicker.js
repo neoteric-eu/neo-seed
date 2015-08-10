@@ -1,5 +1,5 @@
 define([
-	'apps/demo/modules/forms/module',
+	'seed/components/module',
 	'moment',
 	'jquery-ui/datepicker',
 	'jquery-ui/i18n/datepicker-pl',
@@ -13,18 +13,20 @@ define([
 	 * @memberOf seed.forms
 	 *
 	 * @example
-	 *  <input data-smart-datepicker"vm.task.dueDate"
+	 *  <input neo-datepicker
+	 *         ng-model="vm.dueDate"
+	 *         neo-moment-date
 	 *         type="text"
 	 *         class="form-control">
 	 *
-	 * @return {{restrict: string, scope: {neoDatepicker: string}, link: Function}}
+	 * @return {{restrict: string, link: Function}}
 	 */
-	function neoDatepicker() {
+	function neoDatepicker($log) {
+		$log = $log.getInstance('seed.components.neoDatepicker');
+		$log.debug('Initiated directive');
+
 		return {
 			restrict: 'A',
-			scope: {
-				neoDatepicker: '='
-			},
 
 			link: function (scope, element, attributes) {
 
@@ -47,19 +49,7 @@ define([
 				var options = {
 					regional: $.datepicker.regional[moment.locale()],
 					prevText: '<i class="fa fa-chevron-left"></i>',
-					nextText: '<i class="fa fa-chevron-right"></i>',
-					/**
-					 * Select date when clicked
-					 * @method onSelect
-					 * @param {Object} selectedDate
-					 */
-					onSelect: function (selectedDate) {
-						angular.forEach(onSelectCallbacks, function (callback) {
-							callback.call(this, selectedDate);
-						});
-
-						scope.neoDatepicker = moment(selectedDate, 'L');
-					}
+					nextText: '<i class="fa fa-chevron-right"></i>'
 				};
 
 				if (attributes.numberOfMonths) {
@@ -70,36 +60,9 @@ define([
 					options.changeMonth = attributes.changeMonth === 'true';
 				}
 
-				/**
-				 * Custom jquery.ui -> moment.js parser
-				 * @param format Ignored parameter
-				 * @param value String to be formatted
-				 * @returns {*}
-				 */
-				$.datepicker.parseDate = function (format, value) {
-					return moment(value, 'L').toDate();
-				};
-
-				/**
-				 * Custom jquery.ui -> moment.js date formatter
-				 * @param {String} format Ignored parameter
-				 * @param {String} value String to be formatted
-				 * @returns {*}
-				 */
-				$.datepicker.formatDate = function (format, value) {
-					return moment(value).format('L');
-				};
-
-				/**
-				 * Listen to any upcoming date changes and reflect them
-				 * in input calendar values
-				 * @type {Function|function()|*}
-				 */
-				scope.$watch('neoDatepicker', function (newValue) {
-					element.datepicker('setDate', newValue.format('L'));
-				}, true);
-
 				element.datepicker(options);
+
+				$log.debug('Initiated linking function');
 			}
 		};
 	}

@@ -15,6 +15,7 @@ define([
 	'./auth/_includes',
 
 	// Forms
+	'./forms/_includes',
 	'./forms/module',
 
 	// Graphs
