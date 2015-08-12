@@ -4,7 +4,7 @@ requirejs.config({
 		'appConfig': 'apps/module.conf',
 		// jQuery dependencies
 		'jquery': 'assets/vendor/js/jquery/jquery',
-		'jquery-ui': 'assets/vendor/js/jquery-ui/',
+		'jquery-ui': 'assets/vendor/js/jquery-ui',
 
 		// Angular dependencies
 		'angular': 'assets/vendor/js/angular/angular',

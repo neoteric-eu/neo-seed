@@ -1,4 +1,4 @@
-define(['angular', 'moment', 'seed/module'], function (ng, moment, module) {
+define(['angular', 'moment', 'seed/helpers/module'], function (ng, moment, module) {
 	'use strict';
 
 	/**

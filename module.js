@@ -1,3 +1,7 @@
+/**
+ * @namespace seed
+ */
+
 define([
 	'angular',
 	'angular-animate',
@@ -37,6 +41,7 @@ define([
 		// Seed modules
 		'seed.templates',
 		'seed.components',
+		'seed.helpers',
 		'seed.auth',
 		'seed.layout',
 		'seed.forms',
