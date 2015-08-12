@@ -1,4 +1,7 @@
 define([
+	// Templates
+	'./templates/module',
+
 	// Core app generics
 	'./helpers/_includes',
 
@@ -24,10 +27,7 @@ define([
 
 	// Widgets
 	'./widgets/module',
-	'./widgets/includes',
-
-	// Templates
-	'./templates/module'
+	'./widgets/includes'
 ], function () {
 	'use strict';
 });

@@ -10,16 +10,31 @@ define([
 		var neoTableBuilder = {};
 
 		function loadTemplate(templateName, cacheKey) {
-			$http
-				.get('seed/components/tables/' + templateName)
-				.success(function (template) {
-					$templateCache.put(cacheKey, template);
+			var template = $templateCache.get('seed/components/tables/' + templateName);
 
-					$log.debug('Loaded neoTable ' + templateName + ' template into cache under key: ' + cacheKey);
-				})
-				.error(function () {
-					$log.error('Could not load neoTable ' + templateName + ' template');
-				});
+			if (template) {
+				$templateCache.put(cacheKey, template);
+
+				$log.debug('Loaded neoTable ' +
+					templateName +
+					' template into cache under key: ' +
+					cacheKey);
+
+			} else {
+				$http
+					.get('seed/components/tables/' + templateName)
+					.success(function (template) {
+						$templateCache.put(cacheKey, template);
+
+						$log.debug('Loaded neoTable ' +
+							templateName +
+							' template into cache under key: ' +
+							cacheKey);
+					})
+					.error(function () {
+						$log.error('Could not load neoTable ' + templateName + ' template');
+					});
+			}
 		}
 
 		neoTableBuilder.init = function () {
@@ -37,7 +52,6 @@ define([
 
 		return neoTableBuilder;
 	}
-
 
 	module.service('neoTable', neoTable);
 });
