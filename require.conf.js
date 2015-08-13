@@ -67,7 +67,6 @@ requirejs.config({
 		'angular-restmod-preload': ['angular-restmod'],
 		'angular-restmod-find-many': ['angular-restmod'],
 		'angular-sanitize': ['angular'],
-		'angular-ui-date': ['angular'],
 		'angular-ui-select': ['angular'],
 		'angular-ui-router': ['angular'],
 		'angular-permission': ['angular'],
