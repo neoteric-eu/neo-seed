@@ -21,7 +21,6 @@ requirejs.config({
 		'angular-restmod-preload': 'assets/vendor/js/angular-restmod/plugins/preload.min',
 		'angular-restmod-find-many': 'assets/vendor/js/angular-restmod/plugins/find-many.min',
 		'angular-sanitize': 'assets/vendor/js/angular-sanitize/angular-sanitize',
-		'angular-ui-date': 'assets/vendor/js/angular-ui-date/angular-ui-date',
 		'angular-ui-select': 'assets/vendor/js/angular-ui-select/angular-ui-select',
 		'angular-ui-router': 'assets/vendor/js/angular-ui-router/angular-ui-router',
 		'angular-table': 'assets/vendor/js/angular-table/angular-table',
