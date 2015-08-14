@@ -61,7 +61,7 @@ define(['seed/auth/module'], function (module) {
 				UserAPI
 					.authInfo()
 					.then(function () {
-						var activeCustomer = _.findWhere($rootScope.user.customers, {customerId: activeCustomer})
+						var activeCustomer = _.findWhere($rootScope.user.customers, {customerId: activeCustomer});
 
 						self.setSession(activeCustomer, token);
 						dfd.resolve();
