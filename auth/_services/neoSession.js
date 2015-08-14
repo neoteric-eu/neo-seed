@@ -17,24 +17,24 @@ define(['seed/auth/module'], function (module) {
 		$log = $log.getInstance('seed.auth.neoSession');
 		$log.debug('Initiated service');
 
-		this.setSession = function (customer, token) {
-			if (customer) {
-				Permission.defineManyRoles(
-					customer.featureKeys,
-					function (stateParams, roleName) {
-						return _.where(customer, roleName);
-					});
+		this.setSession = function (user, customer) {
+			Permission.defineManyRoles(
+				customer.featureKeys,
+				function (stateParams, roleName) {
+					return _.where(customer, roleName);
+				});
 
-				$cookies.putObject('activeCustomer', customer.customerId);
+			$cookies.putObject('activeCustomer', customer.customerId);
 
-				neoRequestHeaders.setCustomerId(customer.customerId);
-			}
+			neoRequestHeaders.setCustomerId(customer.customerId);
 
 			$log.debug('Set user object available globally');
 			$rootScope.user = user;
+			$log.debug('Set customer object available globally');
+			$rootScope.customer = customer;
 
-			$cookies.putObject('token', token);
-			neoRequestHeaders.setAuthToken(token);
+			$cookies.putObject('token', user.$metadata.token);
+			neoRequestHeaders.setAuthToken(user.$metadata.token);
 
 			$log.debug('Set new user session');
 		};
@@ -61,14 +61,16 @@ define(['seed/auth/module'], function (module) {
 				UserAPI
 					.authInfo()
 					.then(function () {
-						var activeCustomer = _.findWhere($rootScope.user.customers, {customerId: activeCustomer});
-
-						self.setSession(activeCustomer, token);
+						if (!($rootScope.user && $rootScope.customer)) {
+							self.setSession($rootScope.user, $rootScope.customer);
+						}
 						dfd.resolve();
+
+						$log.debug('Successfully checked if user user session is still valid');
+
 					})
 					.catch(function (reason) {
 						self.clearSession();
-
 						dfd.reject(reason);
 
 						$log.error('Error while checking user session');
@@ -78,8 +80,6 @@ define(['seed/auth/module'], function (module) {
 
 				dfd.reject();
 			}
-
-			$log.debug('Checked if user user session is still valid');
 
 			return dfd.promise;
 		};
