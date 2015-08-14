@@ -24,7 +24,7 @@ define(['seed/auth/module'], function (module) {
 			templateUrl: 'seed/auth/login/forms/login/authLoginForm.html',
 			controllerAs: 'vm',
 
-			controller: function () {
+			controller: function ($scope) {
 				var vm = this;
 
 				// variables
@@ -54,13 +54,15 @@ define(['seed/auth/module'], function (module) {
 						.login(vm.user)
 						.then(function (user) {
 							vm.user = user;
+							$log.debug('Set user object available globally');
+							$scope.$root.user = user;
 
 							$log.debug('Logged in user with ID: ' + user.id);
 
 							if (vm.user.customers.length > 1) {
 								$state.transitionTo('auth.profileSelect', {}, {notify: true, reload: false});
 							} else {
-								neoSession.setSession(_.first(vm.user.customers), $cookies.getObject('token'));
+								neoSession.setSession(vm.user, _.first(vm.user.customers));
 								$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
 							}
 						})

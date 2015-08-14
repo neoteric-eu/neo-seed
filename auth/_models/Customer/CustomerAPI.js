@@ -11,10 +11,9 @@ define(['seed/auth/module'], function (module) {
 	 * @param $cookies {Function} Cookie service
 	 * @param Customer {Object} Model factory
 	 * @param BaseAPI {Function} Base interface for REST communication with server
-	 * @param neoSession {Object} Session management service
 	 * @return {Function} Instantiated service
 	 */
-	var CustomerAPI = function ($log, $cookies, Customer, BaseAPI, neoSession) {
+	var CustomerAPI = function ($log, $cookies, Customer, BaseAPI) {
 
 		$log = $log.getInstance('seed.auth.CustomerAPI');
 
@@ -28,8 +27,6 @@ define(['seed/auth/module'], function (module) {
 		 */
 		api.setSelected = function (customer) {
 			Customer.$setSelected(customer);
-
-			neoSession.setSession(customer, $cookies.getObject('token'));
 
 			$log.debug('Selected active customer: ' + customer.customerId);
 		};
