@@ -6,6 +6,10 @@ define([
 	'use strict';
 
 	function neoValidate($log) {
+
+		$log = $log.getInstance('seed.forms.neoValidate');
+		$log.debug('Initiated directive');
+
 		return {
 			restrict: 'A',
 			scope: {
@@ -35,7 +39,7 @@ define([
 					})
 					.formValidation(options);
 
-				$log.debug('Initiated linking function');
+				$log.debug('Called linking function');
 			}
 		};
 	}

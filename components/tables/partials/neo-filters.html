@@ -1,0 +1,17 @@
+<tr ng-show="show_filter">
+	<th ng-repeat="$column in $columns"
+			ng-show="$column.show(this)"
+			data-title-text="{{$column.titleAlt(this) || $column.title(this)}}"
+			class="neo-table-filter hasinput {{$column.class(this)}}">
+		<div ng-repeat="(name, filter) in $column.filter(this)">
+
+			<div ng-if="filter.indexOf('/') !== -1"
+					 ng-include="filter">
+			</div>
+
+			<div ng-if="filter.indexOf('/') === -1"
+					 ng-include="'ng-table/filters/' + filter + '.html'">
+			</div>
+		</div>
+	</th>
+</tr>

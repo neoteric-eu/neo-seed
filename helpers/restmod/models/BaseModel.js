@@ -1,4 +1,4 @@
-define(['seed/module'], function (app) {
+define(['seed/helpers/module'], function (app) {
 	'use strict';
 
 	/**

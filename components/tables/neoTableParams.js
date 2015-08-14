@@ -5,7 +5,7 @@ define(['seed/components/module'], function (module) {
 	 * Configuration interface that utilize the amount of code
 	 * required to configure data-binding with ngTable library
 	 * @class
-	 * @memberOf app.components
+	 * @memberOf seed.components
 	 *
 	 * @link https://github.com/esvit/ng-table/wiki/Configuring-your-table-with-ngTableParams
 	 * @example
@@ -39,7 +39,7 @@ define(['seed/components/module'], function (module) {
 		/**
 		 * ngTable configuration factory
 		 *
-		 * @memberOf app.components.neoTableParams
+		 * @memberOf seed.components.neoTableParams
 		 * @param CollectionAPI {Object} Table reference CollectionAPI
 		 * @param parameters {Object} Factory options
 		 * @return {Object} ngTable library configuration instance

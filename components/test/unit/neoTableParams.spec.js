@@ -1,11 +1,12 @@
 define([
-	'lodash',
 	'lodash-extensions',
 	'angular',
 	'angular-table',
 	'angular-mocks',
 	'seed/components/module',
-	'seed/components/_includes'
+	'seed/components/_includes',
+	'seed/helpers/_includes',
+	'seed/helpers/decorators/logDecorator'
 ], function () {
 	'use strict';
 
@@ -17,7 +18,7 @@ define([
 
 				beforeEach(function () {
 					// Instantiate the fake module
-					module('app.components', 'ngTable');
+					module('seed.components', 'seed.helpers', 'ngTable');
 
 					// Inject service into module
 					inject(function (_neoTableParams_, $q, _$rootScope_) {
@@ -67,7 +68,7 @@ define([
 						groupBy: null
 					};
 
-					expect(result.$params).toEqual(expectedResult);
+					expect(result.parameters()).toEqual(expectedResult);
 				});
 
 				it('onCalledShouldSetQueryParams', function () {
@@ -89,7 +90,7 @@ define([
 					});
 
 					// WHEN
-					tableParams.getData(mockedDeferred);
+					tableParams.reload();
 
 					// THEN
 					mockedDeferred.promise
@@ -108,7 +109,7 @@ define([
 					});
 
 					// WHEN
-					tableParams.getData(mockedDeferred);
+					tableParams.reload();
 
 					// THEN
 					mockedDeferred.promise

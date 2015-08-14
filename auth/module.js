@@ -8,7 +8,6 @@ define([
 	var module = ng.module('seed.auth', [
 		'ngCookies',
 		'cfp.hotkeys',
-		'app.dashboard',
 		'seed.auth.login',
 		'seed.auth.lock'
 	]);

@@ -1,3 +1,9 @@
+/**
+ * @namespace seed.components
+ * @memberof seed
+ */
+
+
 define([
 	'angular',
 	'angular-table'

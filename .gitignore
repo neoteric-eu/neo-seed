@@ -1,0 +1,7 @@
+### Directories ###
+templates/
+
+### Files ###
+**/*.mo
+**/*.pot
+**/translation.js

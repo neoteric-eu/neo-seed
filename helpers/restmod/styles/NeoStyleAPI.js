@@ -16,7 +16,7 @@ define(['seed/module'], function (app) {
 			'BaseModel', {
 				$config: {
 					style: 'NeoStyleAPI',
-					urlPrefix: appConf.generalSettings.apiUrl,
+					urlPrefix: appConf.environmentSettings.apiUrl,
 					primaryKey: 'id',
 					jsonRoot: 'data',
 					jsonMeta: 'meta'
