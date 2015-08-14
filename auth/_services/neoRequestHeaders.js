@@ -11,7 +11,7 @@ define(['seed/auth/module'], function (module) {
 	 */
 	var neoRequestHeaders = function ($log, $http) {
 		$log = $log.getInstance('app.auth.neoRequestHeaders');
-		$log.log('Initiated service');
+		$log.debug('Initiated service');
 
 		this.setAuthToken = function (token) {
 			$http.defaults.headers.common['Authorization'] = 'token ' + token;

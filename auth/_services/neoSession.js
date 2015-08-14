@@ -15,7 +15,7 @@ define(['seed/auth/module'], function (module) {
 		neoRequestHeaders, UserAPI) {
 
 		$log = $log.getInstance('seed.auth.neoSession');
-		$log.log('Initiated service');
+		$log.debug('Initiated service');
 
 		this.setSession = function (customer, token) {
 			if (customer) {
