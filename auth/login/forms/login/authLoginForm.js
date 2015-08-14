@@ -15,8 +15,8 @@ define(['seed/auth/module'], function (module) {
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
 	function authLoginForm($log, $cookies, $state, appConf, UserAPI, neoSession) {
-		$log = $log.getInstance('seed.auth.login.authLoginForm');
 
+		$log = $log.getInstance('seed.auth.login.authLoginForm');
 		$log.debug('Initiated directive');
 
 		return {

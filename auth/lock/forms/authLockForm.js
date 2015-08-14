@@ -14,8 +14,8 @@ define(['seed/auth/lock/module'], function (module) {
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
 	function authLockForm($log, $cookies, $state, neoSession, appConf) {
-		$log = $log.getInstance('seed.auth.login.authLockForm');
 
+		$log = $log.getInstance('seed.auth.login.authLockForm');
 		$log.debug('Initiated directive');
 
 		return {
@@ -35,11 +35,7 @@ define(['seed/auth/lock/module'], function (module) {
 				init();
 
 				function init() {
-					//if (_.isUndefined(vm.user) || _.isEmpty(vm.user.customers)) {
-					//	$state.go('auth.login');
-					//} else {
 					vm.activeCustomer = _.first(vm.user.customers);
-					//}
 
 					$log.debug('Initiated controller');
 				}

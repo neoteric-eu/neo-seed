@@ -27,13 +27,7 @@ define(['seed/auth/module'], function (module) {
 				.$login()
 				.$asPromise()
 				.then(function (user) {
-
-					$log.debug('Set user object available globally');
-					$rootScope.user = user;
-					$cookies.putObject('token', user.$metadata.token);
-
 					$log.debug('Successfully logged user in');
-
 					return user;
 				})
 				.catch(function () {

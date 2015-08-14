@@ -27,7 +27,6 @@ define(['angular'], function (ng) {
 
 	module.run(function ($log) {
 		$log = $log.getInstance('seed.auth.login.module');
-
 		$log.debug('Initiated module');
 	});
 

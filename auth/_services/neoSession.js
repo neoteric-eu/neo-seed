@@ -12,9 +12,10 @@ define(['seed/auth/module'], function (module) {
 	 * @param $rootScope {Object} Angular global scope helper
 	 */
 	var neoSession = function ($log, $cookies, Permission, $q, $rootScope,
-														 neoRequestHeaders, UserAPI) {
+		neoRequestHeaders, UserAPI) {
 
 		$log = $log.getInstance('seed.auth.neoSession');
+		$log.log('Initiated service');
 
 		this.setSession = function (customer, token) {
 			if (customer) {
@@ -25,8 +26,12 @@ define(['seed/auth/module'], function (module) {
 					});
 
 				$cookies.putObject('activeCustomer', customer.customerId);
+
 				neoRequestHeaders.setCustomerId(customer.customerId);
 			}
+
+			$log.debug('Set user object available globally');
+			$rootScope.user = user;
 
 			$cookies.putObject('token', token);
 			neoRequestHeaders.setAuthToken(token);
@@ -56,12 +61,15 @@ define(['seed/auth/module'], function (module) {
 				UserAPI
 					.authInfo()
 					.then(function () {
-						self.setSession(_.findWhere($rootScope.user.customers, {customerId: activeCustomer}), token);
+						var activeCustomer = _.findWhere($rootScope.user.customers, {customerId: activeCustomer})
+
+						self.setSession(activeCustomer, token);
 						dfd.resolve();
 					})
 					.catch(function (reason) {
-						dfd.reject(reason);
 						self.clearSession();
+
+						dfd.reject(reason);
 
 						$log.error('Error while checking user session');
 					});

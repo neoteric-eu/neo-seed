@@ -64,7 +64,8 @@ define(['seed/auth/module'], function (module) {
 
 				function login() {
 					neoSession.setSession(vm.activeCustomer, $cookies.getObject('token'));
-					$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
+					$state.go($scope.redirectToState ||
+						appConf.generalSettings.defaultStateToRedirectAfterLogin);
 
 					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);
 				}
