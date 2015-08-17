@@ -50,6 +50,7 @@ define(['seed/auth/module'], function (module) {
 		};
 
 		this.checkSession = function () {
+
 			var dfd = $q.defer(),
 				self = this,
 				token = $cookies.getObject('token'),
@@ -61,7 +62,8 @@ define(['seed/auth/module'], function (module) {
 				UserAPI
 					.authInfo()
 					.then(function () {
-						if (!($rootScope.user && $rootScope.customer)) {
+						//todo: $rootScope.customer is undefined
+						if (!($rootScope.user && $rootScope.customer)) {  //
 							self.setSession($rootScope.user, $rootScope.customer);
 						}
 						dfd.resolve();
