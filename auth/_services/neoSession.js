@@ -23,29 +23,32 @@ define(['seed/auth/module'], function (module) {
 				function (stateParams, roleName) {
 					return _.where(customer, roleName);
 				});
+			$log.debug('Set access rights');
 
 			$cookies.putObject('activeCustomer', customer.customerId);
+			$cookies.putObject('token', user.$metadata.token);
+			$log.debug('Set cookie objects');
+
+			$rootScope.user = user;
+			$rootScope.customer = customer;
+			$log.debug('Set customer and user objects available globally');
 
 			neoRequestHeaders.setCustomerId(customer.customerId);
-
-			$log.debug('Set user object available globally');
-			$rootScope.user = user;
-			$log.debug('Set customer object available globally');
-			$rootScope.customer = customer;
-
-			$cookies.putObject('token', user.$metadata.token);
 			neoRequestHeaders.setAuthToken(user.$metadata.token);
 
 			$log.debug('Set new user session');
 		};
 
 		this.clearSession = function () {
-			neoRequestHeaders.clearHeaders();
-			$rootScope.user = undefined;
-			$rootScope.customer = undefined;
-
 			$cookies.remove('token');
 			$cookies.remove('activeCustomer');
+			$log.debug('Removed cookie objects');
+
+			$rootScope.user = undefined;
+			$rootScope.customer = undefined;
+			$log.debug('Removed global objects');
+
+			neoRequestHeaders.clearHeaders();
 
 			$log.debug('Cleared user session');
 		};

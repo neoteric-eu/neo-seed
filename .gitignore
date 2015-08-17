@@ -1,7 +1,7 @@
-### Directories ###
-templates/
-
-### Files ###
+### Extensions ###
 **/*.mo
 **/*.pot
-**/translation.js
+
+### Files ###
+__misc/_templates/module.js
+__misc/_locale/translation.js
