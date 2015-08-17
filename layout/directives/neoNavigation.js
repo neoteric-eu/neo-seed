@@ -38,7 +38,7 @@ define(['seed/layout/module'], function (module) {
 					promises.push(dfd.promise);
 
 					// try to get templates from the cache
-					var template = $templateCache.get(appPath + '/_config/navigation.html');
+					var template = $templateCache.get(appPath + '/__misc/_navigation/navigation.html');
 
 					if (template) {
 						$element.children().first().append(template);
@@ -48,7 +48,7 @@ define(['seed/layout/module'], function (module) {
 					} else {
 						// If it fails try server request
 						$http
-							.get(appPath + '/_config/navigation.html')
+							.get(appPath + '/__misc/_navigation/navigation.html')
 							.success(function (template) {
 								$element.children().first().append(template);
 								dfd.resolve();
