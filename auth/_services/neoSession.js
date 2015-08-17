@@ -42,6 +42,7 @@ define(['seed/auth/module'], function (module) {
 		this.clearSession = function () {
 			neoRequestHeaders.clearHeaders();
 			$rootScope.user = undefined;
+			$rootScope.customer = undefined;
 
 			$cookies.remove('token');
 			$cookies.remove('activeCustomer');
@@ -50,7 +51,6 @@ define(['seed/auth/module'], function (module) {
 		};
 
 		this.checkSession = function () {
-
 			var dfd = $q.defer(),
 				self = this,
 				token = $cookies.getObject('token'),
@@ -61,10 +61,10 @@ define(['seed/auth/module'], function (module) {
 
 				UserAPI
 					.authInfo()
-					.then(function () {
-						//todo: $rootScope.customer is undefined
-						if (!($rootScope.user && $rootScope.customer)) {  //
-							self.setSession($rootScope.user, $rootScope.customer);
+					.then(function (user) {
+						if (!($rootScope.user && $rootScope.customer)) {
+							var customer = _.findWhere(user.customers, {customerId: activeCustomer});
+							self.setSession(user, customer);
 						}
 						dfd.resolve();
 
