@@ -41,11 +41,7 @@ define(['seed/auth/module'], function (module) {
 				.$authInfo()
 				.$asPromise()
 				.then(function (user) {
-					$log.debug('Set user object available globally');
-					$rootScope.user = user;
-
 					$log.debug('Successfully verified user session');
-
 					return user;
 				})
 				.catch(function () {
