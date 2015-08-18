@@ -13,9 +13,7 @@ define([
 
 	'./moment/neoMomentDate',
 	'./moment/neoMomentDatetime',
-	'./moment/momentDatetimeDayrange',
-
-	'./_locale/translation'
+	'./moment/momentDatetimeDayrange'
 ], function () {
 	'use strict';
 });

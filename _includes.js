@@ -1,6 +1,8 @@
 define([
 	// Templates
 	'./__misc/_templates/module',
+	// Translation
+	'./__misc/_locale/translation',
 
 	// Core app generics
 	'./helpers/_includes',

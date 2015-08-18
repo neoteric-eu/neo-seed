@@ -21,9 +21,7 @@ define([
 	'./login/module',
 
 	'./lock/_includes',
-	'./lock/module',
-
-	'./_locale/translation'
+	'./lock/module'
 ], function () {
 	'use strict';
 });

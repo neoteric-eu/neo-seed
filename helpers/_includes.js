@@ -18,9 +18,7 @@ define([
 	'./restmod/models/BaseAPI',
 	'./restmod/models/BaseModel',
 	'./restmod/styles/NeoStyleAPI',
-	'./restmod/packers/PackerUtils',
-
-	'./_locale/translation'
+	'./restmod/packers/PackerUtils'
 ], function () {
 	'use strict';
 });
