@@ -1,5 +1,6 @@
 // jshint unused: false
 requirejs.config({
+	baseUrl: '/',
 	paths: {
 		'appConfig': 'apps/module.conf',
 		// jQuery dependencies
