@@ -50,6 +50,10 @@ define(['seed/auth/module'], function (module) {
 				 * @method login
 				 */
 				function login() {
+					if (_.isEmpty(vm.user.login) || _.isEmpty(vm.user.password)) {
+						return ;
+					}
+
 					UserAPI
 						.login(vm.user)
 						.then(function (user) {

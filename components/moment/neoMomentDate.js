@@ -1,4 +1,7 @@
-define(['seed/components/module'], function (module) {
+define([
+	'seed/components/module',
+	'moment'
+], function (module, moment) {
 	'use strict';
 
 	/**
@@ -25,16 +28,15 @@ define(['seed/components/module'], function (module) {
 			link: function (scope, element, attrs, ngModel) {
 				ngModel.$formatters.push(function (value) {
 					if (!_.isUndefined(value)) {
-						return value.format('YYYY-MM-DD');
+						return value.format('L');//'YYYY-MM-DD');
 					}
 				});
 
 				ngModel.$parsers.push(function (value) {
 					if (!_.isUndefined(value)) {
-						var momentDate = moment(value, 'YYYY-MM-DD');
-
+						var momentDate = moment(value, 'L');// 'YYYY-MM-DD');
 						if (momentDate.isValid()) {
-							return momentDate.toISOString();
+							return momentDate;
 						} else {
 							return undefined;
 						}
