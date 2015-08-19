@@ -72,7 +72,7 @@ define(['seed/components/module'], function (module) {
 						.filter(query)
 						.then(function (collection) {
 							vm.filteredCollection = collection;
-						})
+						});
 				}
 
 				/**

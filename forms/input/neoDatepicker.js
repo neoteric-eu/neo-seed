@@ -61,7 +61,7 @@ define([
 				}
 
 				scope.$on('$destroy', function () {
-					element.datepicker("destroy");
+					element.datepicker('destroy');
 					$('#ui-datepicker-div').remove();
 				});
 

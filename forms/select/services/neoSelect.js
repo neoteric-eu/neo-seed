@@ -7,7 +7,7 @@ define([
 	function neoSelect($templateCache, $http, $log) {
 		$log = $log.getInstance('seed.components.neoSelect');
 
-		var neoSelect = {};
+		var neoSelectService = {};
 
 		function loadTemplate(templateName, cacheKey) {
 			var template = $templateCache.get('seed/forms/select/' + templateName);
@@ -37,13 +37,13 @@ define([
 			}
 		}
 
-		neoSelect.init = function () {
+		neoSelectService.init = function () {
 			loadTemplate('partials/match.html', 'bootstrap/match.tpl.html');
 
 			$log.debug('Initiated service');
 		};
 
-		return neoSelect;
+		return neoSelectService;
 	}
 
 	module.service('neoSelect', neoSelect);
