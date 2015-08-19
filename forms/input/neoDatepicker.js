@@ -30,6 +30,7 @@ define([
 
 			link: function (scope, element, attributes) {
 
+
 				var onSelectCallbacks = [];
 
 				if (attributes.minRestrict) {
@@ -45,7 +46,6 @@ define([
 							.datepicker('option', 'maxDate', selectedDate);
 					});
 				}
-
 				var options = {
 					regional: $.datepicker.regional[moment.locale()],
 					prevText: '<i class="fa fa-chevron-left"></i>',
