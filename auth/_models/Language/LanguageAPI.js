@@ -67,7 +67,8 @@ define([
 			// Update libraries locale settings
 			gettextCatalog.setCurrentLanguage(language.locale);
 			amMoment.changeLocale(language.locale);
-			moment.locale(language.locale);
+
+			$rootScope.$emit('seed.languageAPI.setLanguage', language);
 
 			$log.debug('Set application language to: ' + language.locale);
 		};

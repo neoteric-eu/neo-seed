@@ -60,12 +60,40 @@ define([
 					options.changeMonth = attributes.changeMonth === 'true';
 				}
 
+				element.datepicker(options);
+
+				/**
+				 * Match locale-string to fit jquery needs
+				 * @return {string} Normalized locale
+				 */
+				function normalizeLocale() {
+					var locale = moment.locale().split('-');
+
+					if (locale.length == 2) {
+						locale[1] = locale[1].toUpperCase();
+					}
+					return locale.join('-');
+				}
+
+				/**
+				 * When user change language re-initalize datepicker control
+				 */
+				scope.$root.$on('seed.languageAPI.setLanguage', function () {
+					var locale = normalizeLocale();
+					var options = element.datepicker('option', 'all');
+
+					element.datepicker('destroy')
+						.datepicker(options)
+						.datepicker('option', $.datepicker.regional[locale]);
+				});
+
+				/**
+				 * When datepicker is destroyed remove it from JS and DOM
+				 */
 				scope.$on('$destroy', function () {
 					element.datepicker('destroy');
 					$('#ui-datepicker-div').remove();
 				});
-
-				element.datepicker(options);
 
 				$log.debug('Initiated linking function');
 			}
