@@ -8,8 +8,10 @@ define([
 	'./messages/appMessages',
 	'./preload/neoPreload',
 
-	'./tables/neoTable',
-	'./tables/neoTableParams',
+	'./tables/services/neoTable',
+	'./tables/factories/neoTableParams',
+	'./tables/directives/neoTableEnumFilter/neoTableEnumFilter',
+	'./tables/directives/neoTableRelatedFilter/neoTableRelatedFilter',
 
 	'./moment/neoMomentDate',
 	'./moment/neoMomentDatetime',

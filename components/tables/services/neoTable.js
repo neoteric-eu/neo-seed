@@ -1,5 +1,5 @@
 define([
-	'seed/components/module',
+	'../../module',
 	'angular-table'
 ], function (module) {
 	'use strict';
@@ -46,6 +46,8 @@ define([
 			loadTemplate('filters/text-filter.html', 'ng-table/filters/text.html');
 			loadTemplate('filters/date-filter.html', 'ng-table/filters/date.html');
 			loadTemplate('filters/timestamp-filter.html', 'ng-table/filters/timestamp.html');
+			loadTemplate('filters/enum-filter.html', 'ng-table/filters/enum.html');
+			loadTemplate('filters/related-filter.html', 'ng-table/filters/related.html');
 
 			$log.debug('Initiated service');
 		};

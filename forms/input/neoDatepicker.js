@@ -60,6 +60,11 @@ define([
 					options.changeMonth = attributes.changeMonth === 'true';
 				}
 
+				scope.$on('$destroy', function () {
+					element.datepicker("destroy");
+					$('#ui-datepicker-div').remove();
+				});
+
 				element.datepicker(options);
 
 				$log.debug('Initiated linking function');
