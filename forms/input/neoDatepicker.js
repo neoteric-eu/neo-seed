@@ -47,7 +47,6 @@ define([
 					});
 				}
 				var options = {
-					regional: $.datepicker.regional[moment.locale()],
 					prevText: '<i class="fa fa-chevron-left"></i>',
 					nextText: '<i class="fa fa-chevron-right"></i>'
 				};
