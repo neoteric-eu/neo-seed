@@ -1,23 +1,16 @@
 <div class="dt-toolbar-footer">
 	<div class="col-sm-8 hidden-xs neo-table-info"
 			 style="position: absolute; overflow: visible">
-		{{'Showing'|translate}}
 
-		<span class="txt-color-darken">
-			{{params.total() ? (params.page() - 1) * params.count() + 1 : 0}}
-		</span>
+		{{'Showing'|translate}}
+		{{params.total() ? (params.page() - 1) * params.count() + 1 : 0}}
 
 		{{'to'|translate}}
-
-		<span class="txt-color-darken">
-			{{(params.page() * params.count()) &lt; params.total() ? params.page() * params.count() :
+		{{(params.page() * params.count()) &lt; params.total() ? params.page() * params.count() :
 		params.total()}}
-		</span>
 
 		{{'of'|translate}}
-		<span class="text-primary">
-			{{params.total()}}
-		</span>
+		{{params.total()}}
 
 		{{'entries paginated by'|translate}}
 
