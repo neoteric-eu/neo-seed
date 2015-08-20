@@ -42,11 +42,27 @@ define(['seed/helpers/module'], function (module) {
 				return;
 			}
 
-			$log.debug('Model "' + this.model.name + '" called BaseAPI "build" method with params: ' +
-				JSON.stringify(initValues));
+			$log.debug('Model "' + this.model.name + '" called BaseAPI "build" method' + stringify(initValues));
 
 			return this.model.$build(initValues);
 		};
+
+		//todo: https://github.com/isaacs/json-stringify-safe
+		function stringify(json) {
+			var visited = [];
+
+			function replacer(key, value) {
+				if (value != null && typeof value == "object") {
+					if (visited.indexOf(value) >= 0) {
+						return undefined;
+					}
+					visited.push(value);
+				}
+				return value;
+			}
+			return JSON.stringify(json, replacer)
+		}
+
 
 		/**
 		 * Fetches single model from server
