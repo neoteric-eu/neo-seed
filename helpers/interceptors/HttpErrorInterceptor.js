@@ -4,12 +4,17 @@ define(['seed/helpers/module'], function (app) {
 	/**
 	 * Handles globally server error exceptions
 	 * @method HttpErrorInterceptor
+	 * @param $log {Object} Logging service
 	 * @param $q {Object} Angular promise provider
+	 * @param $injector {Object} Angular Dependency Injection provider
 	 * @param $exceptionHandler {Function} Exception handler
 	 * @param appConf {Object} Application configuration settings
 	 * @return {{requestError: Function, responseError: Function}}
 	 */
-	function HttpErrorInterceptor($q, $injector, $exceptionHandler, appConf) {
+	function HttpErrorInterceptor($log, $q, $injector, $exceptionHandler, appConf) {
+
+		$log = $log.getInstance('seed.helpers.HttpErrorInterceptor');
+		$log.debug('Initiated factory');
 
 		function notifyError(rejection) {
 			if (appConf.sentrySettings.apiKey) {

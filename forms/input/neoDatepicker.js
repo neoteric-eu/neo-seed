@@ -47,6 +47,7 @@ define([
 					});
 				}
 				var options = {
+					regional: $.datepicker.regional[moment.locale()],
 					prevText: '<i class="fa fa-chevron-left"></i>',
 					nextText: '<i class="fa fa-chevron-right"></i>'
 				};
@@ -59,7 +60,9 @@ define([
 					options.changeMonth = attributes.changeMonth === 'true';
 				}
 
-				element.datepicker(options);
+				element
+					.datepicker(options)
+					.datepicker('option', $.datepicker.regional[normalizeLocale()]);
 
 				/**
 				 * Match locale-string to fit jquery needs
@@ -81,7 +84,8 @@ define([
 					var locale = normalizeLocale();
 					var options = element.datepicker('option', 'all');
 
-					element.datepicker('destroy')
+					element
+						.datepicker('destroy')
 						.datepicker(options)
 						.datepicker('option', $.datepicker.regional[locale]);
 				});

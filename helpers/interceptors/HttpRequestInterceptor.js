@@ -9,6 +9,10 @@ define(['seed/helpers/module'], function (app) {
 	 * @return {{request: Function}}
 	 */
 	function HttpRequestInterceptor($log) {
+
+		$log = $log.getInstance('seed.helpers.HttpRequestInterceptor');
+		$log.debug('Initiated factory');
+
 		return {
 			request: function (config) {
 				var uri = config.url;

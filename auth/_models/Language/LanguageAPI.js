@@ -68,7 +68,7 @@ define([
 			gettextCatalog.setCurrentLanguage(language.locale);
 			amMoment.changeLocale(language.locale);
 
-			$rootScope.$emit('seed.languageAPI.setLanguage', language);
+			$rootScope.$broadcast('seed.languageAPI.setLanguage', language);
 
 			$log.debug('Set application language to: ' + language.locale);
 		};

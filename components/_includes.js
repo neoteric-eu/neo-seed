@@ -12,6 +12,7 @@ define([
 	'./tables/factories/neoTableParams',
 	'./tables/directives/neoTableEnumFilter/neoTableEnumFilter',
 	'./tables/directives/neoTableRelatedFilter/neoTableRelatedFilter',
+	'./tables/directives/neoTableDateFilter/neoTableDateFilter',
 
 	'./moment/neoMomentDate',
 	'./moment/neoMomentDatetime',

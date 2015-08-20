@@ -28,13 +28,13 @@ define([
 			link: function (scope, element, attrs, ngModel) {
 				ngModel.$formatters.push(function (value) {
 					if (!_.isUndefined(value)) {
-						return value.format('L');//'YYYY-MM-DD');
+						return value.format('L');
 					}
 				});
 
 				ngModel.$parsers.push(function (value) {
 					if (!_.isUndefined(value)) {
-						var momentDate = moment(value, 'L');// 'YYYY-MM-DD');
+						var momentDate = moment(value, 'L');
 						if (momentDate.isValid()) {
 							return momentDate;
 						} else {
