@@ -44,7 +44,8 @@ requirejs.config({
 		'morris': 'assets/vendor/js/morris/morris',
 
 		'form-validation': 'assets/vendor/js/form-validation/form-validation',
-		'form-validation-bootstrap': 'assets/vendor/js/form-validation/framework/bootstrap'
+		'form-validation-bootstrap': 'assets/vendor/js/form-validation/framework/bootstrap',
+		'json-stringify-safe': 'assets/seed/js/custom/lodash-extensions/json-stringify-safe'
 	},
 
 	shim: {
