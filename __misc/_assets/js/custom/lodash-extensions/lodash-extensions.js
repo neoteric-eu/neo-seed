@@ -4,9 +4,12 @@
  * @example
  *  var options = _.mergeDefaults(defaults, parameters);
  */
-define(['lodash', 'lodash-deep'], function (_, lodashDeep) {
+define(['lodash', 'lodash-deep', 'json-stringify-safe'], function (_, lodashDeep, jsonStringify) {
 	// Extend lodash for deep functions
 	_.mixin(lodashDeep);
+
+	// Extend lodash with stringify function
+	_.mixin(jsonStringify);
 
 	// Add merging default options with params
 	_.mergeDefaults = _.partialRight(_.merge, function deep(a, b) {
@@ -20,4 +23,5 @@ define(['lodash', 'lodash-deep'], function (_, lodashDeep) {
 			return _.contains(values, _.get(item, property));
 		});
 	};
+
 });

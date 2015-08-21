@@ -24,7 +24,7 @@ define(['seed/helpers/module'], function (app) {
 					try {
 						serializedParams = $.param(config.params, false);
 					} catch (e) {
-						$log.error('Error serializing request params: ' + JSON.stringify(config.params));
+						$log.error('Error serializing request params: ' + _.stringify(config.params));
 					}
 					// Append it to request url
 					if (serializedParams) {

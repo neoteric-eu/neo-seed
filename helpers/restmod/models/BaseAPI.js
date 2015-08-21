@@ -42,26 +42,10 @@ define(['seed/helpers/module'], function (module) {
 				return;
 			}
 
-			$log.debug('Model "' + this.model.name + '" called BaseAPI "build" method' + stringify(initValues));
+			$log.debug('Model "' + this.model.name + '" called BaseAPI "build" method' + _.stringify(initValues));
 
 			return this.model.$build(initValues);
 		};
-
-		//todo: https://github.com/isaacs/json-stringify-safe
-		function stringify(json) {
-			var visited = [];
-
-			function replacer(key, value) {
-				if (value != null && typeof value == "object") {
-					if (visited.indexOf(value) >= 0) {
-						return undefined;
-					}
-					visited.push(value);
-				}
-				return value;
-			}
-			return JSON.stringify(json, replacer)
-		}
 
 
 		/**
@@ -78,8 +62,8 @@ define(['seed/helpers/module'], function (module) {
 			}
 
 			$log.debug('Model "' + this.model.name + '" called BaseAPI "get" method with ID: ' +
-				JSON.stringify(ids) + ' and params: ' +
-				JSON.stringify(params));
+				_.stringify(ids) + ' and params: ' +
+				_.stringify(params));
 
 			return this.model
 				.$find(ids, params)
@@ -112,7 +96,7 @@ define(['seed/helpers/module'], function (module) {
 		API.prototype.filter = function (query) {
 
 			$log.debug('Model "' + this.model.name + '" called BaseAPI "filter" method with params: ' +
-				JSON.stringify(query));
+				_.stringify(query));
 
 			return this.model
 				.$collection()
@@ -220,8 +204,8 @@ define(['seed/helpers/module'], function (module) {
 
 
 			$log.debug('Model "' + this.model.name + '" called BaseAPI "save" method to create model: ' +
-				JSON.stringify(model) + ' for parent property: ' +
-				JSON.stringify(parentProperty));
+				_.stringify(model) + ' for parent property: ' +
+				_.stringify(parentProperty));
 
 			return parentProperty
 				.$create(model)
@@ -248,7 +232,7 @@ define(['seed/helpers/module'], function (module) {
 				timeout: 10000
 			});
 
-			$log.error('Server error: ' + JSON.stringify(responseObj));
+			$log.error('Server error: ' + _.stringify(responseObj));
 
 			return $q.reject(responseObj);
 		}

@@ -30,8 +30,7 @@
 		"morris.js": "0.5.1",
 		"form.validation": "*",
 		"angular-mocks": "~1.4.3",
-		"jasmine": "~2.1.3",
-		"json-stringify-safe": "~5.0.0"
+		"jasmine": "~2.1.3"
 	},
 	"copy": {
 		"js": {
@@ -66,8 +65,7 @@
 			"raphael/raphael.js": "raphael/raphael.js",
 			"form-validation/form-validation.js": "form.validation/dist/js/formValidation.js",
 			"form-validation/framework/bootstrap.js": "form.validation/dist/js/framework/bootstrap.js",
-			"form-validation/language/": "form.validation/dist/js/language/",
-			"json-stringify-safe/json-stringify-safe.js": "json-stringify-safe/stringify.js"
+			"form-validation/language/": "form.validation/dist/js/language/"
 		},
 		"less": {
 			"bootstrap": "bootstrap/less",
