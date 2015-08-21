@@ -21,7 +21,7 @@
 		"ng-table": "0.8.2",
 		"lodash": "~3.10.0",
 		"lodash-deep": "~1.6.0",
-		"moment": "2.9.0",
+		"moment": "~2.10.6",
 		"requirejs": "*",
 		"requirejs-domready": "~2.0.1",
 		"less-elements": "*",
