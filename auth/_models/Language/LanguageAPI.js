@@ -1,7 +1,7 @@
 define([
 	'seed/auth/module',
 	'moment'
-], function (module, moment) {
+], function (module) {
 	'use strict';
 
 	/**

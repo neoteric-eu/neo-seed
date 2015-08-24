@@ -71,7 +71,7 @@ define([
 				function normalizeLocale() {
 					var locale = moment.locale().split('-');
 
-					if (locale.length == 2) {
+					if (locale.length === 2) {
 						locale[1] = locale[1].toUpperCase();
 					}
 					return locale.join('-');
