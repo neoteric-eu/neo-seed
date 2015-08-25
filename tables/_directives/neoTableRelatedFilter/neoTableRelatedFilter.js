@@ -1,4 +1,4 @@
-define(['seed/components/module'], function (module) {
+define(['seed/tables/module'], function (module) {
 	'use strict';
 
 	/**
@@ -14,13 +14,13 @@ define(['seed/components/module'], function (module) {
 	 *   Function}}
 	 */
 	function neoTableRelatedFilter($log, $injector) {
-		$log = $log.getInstance('seed.components.neoTableRelatedFilter');
+		$log = $log.getInstance('seed.tables.neoTableRelatedFilter');
 
 		$log.debug('Initiated directive');
 
 		return {
 			restrict: 'EA',
-			templateUrl: 'seed/components/tables/directives/neoTableRelatedFilter/neoTableRelatedFilter.html',
+			templateUrl: 'seed/tables/_directives/neoTableRelatedFilter/neoTableRelatedFilter.html',
 			controllerAs: 'vm',
 			scope: true,
 			bindToController: {

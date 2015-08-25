@@ -3,14 +3,14 @@ define([
 	'angular',
 	'angular-table',
 	'angular-mocks',
-	'seed/components/module',
-	'seed/components/_includes',
+	'seed/table/module',
+	'seed/table/_includes',
 	'seed/helpers/_includes',
 	'seed/helpers/decorators/logDecorator'
 ], function () {
 	'use strict';
 
-	describe('module: components', function () {
+	describe('module: seed', function () {
 		describe('module: tables', function () {
 			describe('factory: NeoTableParams', function () {
 

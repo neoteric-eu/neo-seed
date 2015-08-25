@@ -1,10 +1,10 @@
-define(['../../module'], function (module) {
+define(['seed/tables/module'], function (module) {
 	'use strict';
 
 	/**
 	 * Configuration interface that utilize the amount of code
 	 * required to configure data-binding with ngTable library
-	 * @class
+	 * @class neoTableParams
 	 * @memberOf seed.components
 	 *
 	 * @link https://github.com/esvit/ng-table/wiki/Configuring-your-table-with-ngTableParams
@@ -34,7 +34,7 @@ define(['../../module'], function (module) {
 	 * @returns {Function} ngTable configuration factory
 	 */
 	function neoTableParams(ngTableParams, $log) {
-		$log = $log.getInstance('seed.components.neoTableParams');
+		$log = $log.getInstance('seed.tables.neoTableParams');
 
 		/**
 		 * ngTable configuration factory

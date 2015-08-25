@@ -1,4 +1,4 @@
-define(['seed/components/module'], function (module) {
+define(['seed/tables/module'], function (module) {
 	'use strict';
 
 	/**
@@ -12,13 +12,13 @@ define(['seed/components/module'], function (module) {
 	 *   bindToController: {ngModel: string}, controller: Function}}
 	 */
 	function neoTableDateFilter($log) {
-		$log = $log.getInstance('seed.components.neoTableDateFilter');
+		$log = $log.getInstance('seed.tables.neoTableDateFilter');
 
 		$log.debug('Initiated directive');
 
 		return {
 			restrict: 'EA',
-			templateUrl: 'seed/components/tables/directives/neoTableDateFilter/neoTableDateFilter.html',
+			templateUrl: 'seed/tables/_directives/neoTableDateFilter/neoTableDateFilter.html',
 			controllerAs: 'vm',
 			scope: true,
 			bindToController: {
@@ -26,7 +26,7 @@ define(['seed/components/module'], function (module) {
 			},
 
 			controller: function () {
-				var vm = this;
+				var vm = this || {};
 
 				// variables
 				vm.selectedDate = undefined;

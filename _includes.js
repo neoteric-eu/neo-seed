@@ -23,6 +23,10 @@ define([
 	'./forms/_includes',
 	'./forms/module',
 
+	// Tables
+	'./tables/_includes',
+	'./tables/module',
+
 	// Graphs
 	'./graphs/module',
 	'./graphs/includes',

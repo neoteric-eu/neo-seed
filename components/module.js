@@ -3,14 +3,10 @@
  * @memberof seed
  */
 
-
-define([
-	'angular',
-	'angular-table'
-], function (ng) {
+define(['angular'], function (ng) {
 	'use strict';
 
-	var module = ng.module('seed.components', ['ngTable']);
+	var module = ng.module('seed.components', []);
 
 	module.run(function ($log, neoTable) {
 		$log = $log.getInstance('seed.components.module');
