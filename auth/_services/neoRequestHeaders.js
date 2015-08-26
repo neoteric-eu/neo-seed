@@ -16,7 +16,7 @@ define(['seed/auth/module'], function (module) {
 		this.setAuthToken = function (token) {
 			$http.defaults.headers.common['Authorization'] = 'token ' + token;
 
-			$log.debug('Set Authorization header');
+			$log.debug('Set Authorization header ', token);
 		};
 
 		this.setCustomerId = function (customerId) {
@@ -35,3 +35,4 @@ define(['seed/auth/module'], function (module) {
 
 	module.service('neoRequestHeaders', neoRequestHeaders);
 });
+

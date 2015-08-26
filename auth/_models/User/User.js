@@ -27,9 +27,7 @@ define(['seed/auth/module'], function (module) {
 				avatar: {
 					init: 'assets/seed/img/avatar-default.png'
 				},
-
 				$config: {
-					urlPrefix: ' http://ntrc-delta.neoteric.eu:9000/api/v1/',
 					jsonMeta: '.'
 				},
 

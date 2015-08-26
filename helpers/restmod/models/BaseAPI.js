@@ -42,7 +42,8 @@ define(['seed/helpers/module'], function (module) {
 				return;
 			}
 
-			$log.debug('Model "' + this.model.name + '" called BaseAPI "build" method' + _.stringify(initValues));
+			$log.debug('Model "' + this.model.name + '" called BaseAPI "build" method with params: ' +
+				_.stringify(initValues));
 
 			return this.model.$build(initValues);
 		};
