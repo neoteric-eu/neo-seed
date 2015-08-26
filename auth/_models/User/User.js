@@ -29,7 +29,6 @@ define(['seed/auth/module'], function (module) {
 				},
 
 				$config: {
-					urlPrefix: ' http://ntrc-delta.neoteric.eu:9000/api/v1/',
 					jsonMeta: '.'
 				},
 

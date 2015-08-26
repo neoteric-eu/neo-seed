@@ -3,8 +3,8 @@ define([
 	'angular',
 	'angular-table',
 	'angular-mocks',
-	'seed/table/module',
-	'seed/table/_includes',
+	'seed/tables/module',
+	'seed/tables/_includes',
 	'seed/helpers/_includes',
 	'seed/helpers/decorators/logDecorator'
 ], function () {
@@ -14,16 +14,15 @@ define([
 		describe('module: tables', function () {
 			describe('factory: NeoTableParams', function () {
 
-				var NeoTableParams, mockedAPI, $rootScope, mockedDeferred;
+				var neoTableParams, mockedAPI, mockedDeferred;
 
 				beforeEach(function () {
 					// Instantiate the fake module
-					module('seed.components', 'seed.helpers', 'ngTable');
+					module('seed.tables', 'seed.helpers');
 
 					// Inject service into module
-					inject(function (_neoTableParams_, $q, _$rootScope_) {
-						NeoTableParams = _neoTableParams_;
-						$rootScope = _$rootScope_.$new();
+					inject(function (_neoTableParams_, $q) {
+						neoTableParams = _neoTableParams_;
 
 						mockedDeferred = $q.defer();
 
@@ -37,7 +36,7 @@ define([
 					// GIVEN
 					// WHEN
 					var result = function () {
-						new NeoTableParams();
+						new neoTableParams();
 					};
 
 					// THEN
@@ -47,7 +46,7 @@ define([
 				it('onGivenModelShouldReturnBasicConfig', function () {
 					// GIVEN
 					// WHEN
-					var result = new NeoTableParams(mockedAPI);
+					var result = new neoTableParams(mockedAPI);
 
 					// THEN
 					expect(result).toBeDefined();
@@ -56,7 +55,7 @@ define([
 				it('onGivenModelShouldReturnConfigWithDefaultParams', function () {
 					// GIVEN
 					// WHEN
-					var result = new NeoTableParams(mockedAPI);
+					var result = new neoTableParams(mockedAPI);
 
 					// THEN
 					var expectedResult = {
@@ -76,7 +75,7 @@ define([
 					var mockedQueryParams = jasmine.createSpy('queryParams');
 
 					// WHEN
-					new NeoTableParams(mockedAPI);
+					new neoTableParams(mockedAPI);
 
 					// THEN
 					expect(mockedQueryParams).toBeDefined();
@@ -85,7 +84,7 @@ define([
 				it('onGivenBeforeResolveFunctionShouldCallItWhenDataIsFetched', function () {
 					// GIVEN
 					var mockedOnBeforeResolve = jasmine.createSpy('onBeforeResolve');
-					var tableParams = new NeoTableParams(mockedAPI, {
+					var tableParams = new neoTableParams(mockedAPI, {
 						onBeforeResolve: mockedOnBeforeResolve
 					});
 
@@ -104,7 +103,7 @@ define([
 				it('onGivenAfterResolveFunctionShouldCallItWhenDataIsFetched', function () {
 					// GIVEN
 					var mockedOnAfterResolve = jasmine.createSpy('onAfterResolve');
-					var tableParams = new NeoTableParams(mockedAPI, {
+					var tableParams = new neoTableParams(mockedAPI, {
 						onAfterResolve: mockedOnAfterResolve
 					});
 
