@@ -6,8 +6,7 @@ define([
 	'seed/tables/module',
 	'seed/tables/_includes',
 	'seed/helpers/module',
-	'seed/helpers/_includes',
-	'seed/helpers/decorators/logDecorator'
+	'seed/helpers/_includes'
 ], function () {
 	'use strict';
 
