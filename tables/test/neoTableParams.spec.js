@@ -5,6 +5,7 @@ define([
 	'angular-mocks',
 	'seed/tables/module',
 	'seed/tables/_includes',
+	'seed/helpers/module',
 	'seed/helpers/_includes',
 	'seed/helpers/decorators/logDecorator'
 ], function () {
@@ -12,7 +13,7 @@ define([
 
 	describe('module: seed', function () {
 		describe('module: tables', function () {
-			describe('factory: NeoTableParams', function () {
+			describe('factory: neoTableParams', function () {
 
 				var neoTableParams, mockedAPI, mockedDeferred;
 

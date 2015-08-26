@@ -35,7 +35,7 @@ define(['seed/tables/module', 'angular-table'], function (module) {
 			} else {
 				$http
 					.get('seed/tables/' + templateName)
-					.success(function (template) {
+					.then(function (template) {
 						$templateCache.put(cacheKey, template);
 
 						$log.debug('Loaded neoTable ' +
@@ -43,7 +43,7 @@ define(['seed/tables/module', 'angular-table'], function (module) {
 							' template into cache under key: ' +
 							cacheKey);
 					})
-					.error(function () {
+					.catch(function () {
 						$log.error('Could not load neoTable ' + templateName + ' template');
 					});
 			}

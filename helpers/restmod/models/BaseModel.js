@@ -6,7 +6,7 @@ define(['seed/helpers/module'], function (app) {
 	 * @class BaseModel
 	 * @interface
 	 * @implements {seed.BaseAPI}
-	 * @memberOf seed
+	 * @memberOf seed.helpers
 	 *
 	 * @param restmod
 	 * @return {Object}
