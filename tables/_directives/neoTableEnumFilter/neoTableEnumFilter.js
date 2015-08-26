@@ -1,4 +1,4 @@
-define(['seed/components/module'], function (module) {
+define(['seed/tables/module'], function (module) {
 	'use strict';
 
 	/**
@@ -15,13 +15,13 @@ define(['seed/components/module'], function (module) {
 	 *   Function}}
 	 */
 	function neoTableEnumFilter($log, $injector) {
-		$log = $log.getInstance('seed.components.neoTableEnumFilter');
+		$log = $log.getInstance('seed.tables.neoTableEnumFilter');
 
 		$log.debug('Initiated directive');
 
 		return {
 			restrict: 'EA',
-			templateUrl: 'seed/components/tables/directives/neoTableEnumFilter/neoTableEnumFilter.html',
+			templateUrl: 'seed/tables/_directives/neoTableEnumFilter/neoTableEnumFilter.html',
 			controllerAs: 'vm',
 			scope: true,
 			bindToController: {

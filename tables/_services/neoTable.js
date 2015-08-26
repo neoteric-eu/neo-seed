@@ -1,16 +1,28 @@
-define([
-	'../../module',
-	'angular-table'
-], function (module) {
+define(['seed/tables/module', 'angular-table'], function (module) {
 	'use strict';
 
+	/**
+	 * Manages overwriting custom templates of angular tables
+	 * @class neoTable
+	 * @memberOf seed.tables
+	 *
+	 * @param $templateCache {Object} Template cashing helper
+	 * @param $http {Object} Angular low level communication service
+	 * @param $log {Object} Logging service
+	 * @return {{}}
+	 */
 	function neoTable($templateCache, $http, $log) {
-		$log = $log.getInstance('seed.components.neoTable');
+		$log = $log.getInstance('seed.tables.neoTable');
 
 		var neoTableBuilder = {};
 
+		/**
+		 * Helper caching function
+		 * @param templateName {String} path to HTML to be cached
+		 * @param cacheKey {String} Key under which template will be stored
+		 */
 		function loadTemplate(templateName, cacheKey) {
-			var template = $templateCache.get('seed/components/tables/' + templateName);
+			var template = $templateCache.get('seed/tables/' + templateName);
 
 			if (template) {
 				$templateCache.put(cacheKey, template);
@@ -22,7 +34,7 @@ define([
 
 			} else {
 				$http
-					.get('seed/components/tables/' + templateName)
+					.get('seed/tables/' + templateName)
 					.success(function (template) {
 						$templateCache.put(cacheKey, template);
 

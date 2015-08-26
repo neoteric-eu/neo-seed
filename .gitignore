@@ -1,6 +1,6 @@
 ### Extensions ###
-**/*.mo
-**/*.pot
+*.mo
+*.pot
 
 ### Files ###
 __misc/_templates/module.js

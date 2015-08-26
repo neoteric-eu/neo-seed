@@ -1,0 +1,146 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: src/seed/helpers/restmod/models/BaseAPI.js:127
+msgid "Are you sure you want to remove item?"
+msgstr "Are you sure you want to remove item?"
+
+#: src/seed/auth/login/forms/profileSelect/authProfileSelectForm.html:45
+msgid "Back"
+msgstr "Back"
+
+#: src/seed/auth/lock/forms/authLockForm.html:18
+msgid "Click here"
+msgstr "Click here"
+
+#: src/seed/helpers/restmod/models/BaseAPI.js:126
+msgid "Confirmation"
+msgstr "Confirmation"
+
+#: src/seed/auth/login/forms/login/authLoginForm.html:26
+msgid "Email"
+msgstr "Email"
+
+#: src/seed/components/messages/appMessages.js:20
+msgid "Error"
+msgstr "Error"
+
+#: src/seed/auth/login/forms/login/authLoginForm.html:41
+msgid "Forgot password?"
+msgstr "Forgot password?"
+
+#: src/seed/components/messages/appMessages.js:25
+msgid "Info"
+msgstr "Info"
+
+#: src/seed/components/messages/appMessages.js:126
+msgid "Internal server error"
+msgstr "Internal server error"
+
+#: src/seed/auth/login/forms/login/authLoginForm.html:49
+msgid "Log in"
+msgstr "Log in"
+
+#: src/seed/auth/lock/forms/authLockForm.html:17
+msgid "Logged as someone else?"
+msgstr "Logged as someone else?"
+
+#: src/seed/auth/login/forms/login/authLoginForm.html:56
+msgid "Login as"
+msgstr "Login as"
+
+#: src/seed/components/tables/partials/neo-footer.html:73
+msgid "Next"
+msgstr "Next"
+
+#: src/seed/helpers/restmod/models/BaseAPI.js:128
+msgid "No"
+msgstr "No"
+
+#: src/seed/auth/lock/forms/authLockForm.html:14
+#: src/seed/auth/login/forms/login/authLoginForm.html:36
+msgid "Password"
+msgstr "Password"
+
+#: src/seed/auth/login/forms/login/authLoginForm.html:9
+msgid "Please log in"
+msgstr "Please log in"
+
+#: src/seed/components/tables/partials/neo-footer.html:43
+msgid "Previous"
+msgstr "Previous"
+
+#: src/seed/components/customer/neoCustomerSwitcher.html:3
+msgid "Profiles"
+msgstr "Profiles"
+
+#: src/seed/auth/login/forms/profileSelect/authProfileSelectForm.html:38
+msgid "Select"
+msgstr "Select"
+
+#: src/seed/auth/login/forms/profileSelect/authProfileSelectForm.html:7
+msgid "Select profile"
+msgstr "Select profile"
+
+#: src/seed/components/tables/partials/neo-footer.html:5
+msgid "Showing"
+msgstr "Showing"
+
+#: src/seed/layout/partials/header.html:62
+msgid "Sign Out"
+msgstr "Sign Out"
+
+#: src/seed/components/messages/appMessages.js:10
+msgid "Success"
+msgstr "Success"
+
+#: src/seed/auth/lock/forms/authLockForm.html:25
+msgid "Unlock"
+msgstr "Unlock"
+
+#: src/seed/components/messages/appMessages.js:15
+msgid "Warning"
+msgstr "Warning"
+
+#: src/seed/auth/login/forms/login/authLoginForm.html:8
+msgid "Welcome!"
+msgstr "Welcome!"
+
+#: src/seed/auth/login/forms/login/authLoginForm.html:17
+msgid "Wrong e-mail or password."
+msgstr "Wrong e-mail or password."
+
+#: src/seed/helpers/restmod/models/BaseAPI.js:128
+#: src/seed/helpers/restmod/models/BaseAPI.js:130
+msgid "Yes"
+msgstr "Yes"
+
+#: src/seed/components/tables/partials/neo-footer.html:15
+msgid "entries paginated by"
+msgstr "entries paginated by"
+
+#: src/seed/components/tables/partials/neo-footer.html:30
+msgid "items per page"
+msgstr "items per page"
+
+#: src/seed/components/tables/partials/neo-footer.html:12
+msgid "of"
+msgstr "of"
+
+#: src/seed/components/tables/partials/neo-footer.html:8
+msgid "to"
+msgstr "to"
+
+#: src/seed/auth/login/forms/profileSelect/authProfileSelectForm.html:8
+msgid "to continue"
+msgstr "to continue"
