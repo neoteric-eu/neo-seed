@@ -34,18 +34,29 @@ define([
 
 				});
 
-				it('onInitShouldPopulateTemplateCache', function () {
+				it('should populate template cache on init', function () {
 					// GIVEN
-					$httpBackend.whenGET(/.*/).respond(201, '<div></div>');
+					$httpBackend.whenGET(/.*/).respond(201);
 
 					// WHEN
 					neoTable.init();
 
 					$httpBackend.flush();
 					// THEN
-					expect($templateCache.get).toHaveBeenCalled();
 					expect($templateCache.put).toHaveBeenCalled();
 					expect($log.error.logs.length).toBe(0);
+				});
+
+				it('should log error when template is not available', function () {
+					// GIVEN
+					$httpBackend.whenGET(/.*/).respond(404);
+
+					// WHEN
+					neoTable.init();
+
+					$httpBackend.flush();
+					// THEN
+					expect($log.error.logs.length).toBeGreaterThan(0);
 				});
 			});
 		});

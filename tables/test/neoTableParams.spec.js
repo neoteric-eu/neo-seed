@@ -32,7 +32,7 @@ define([
 
 				});
 
-				it('onEmptyConstructorShouldThrowError', function () {
+				it('should throw error on empty constructor', function () {
 					// GIVEN
 					// WHEN
 					var result = function () {
@@ -43,7 +43,7 @@ define([
 					expect(result).toThrowError('option "CollectionAPI" must be defined');
 				});
 
-				it('onGivenModelShouldReturnBasicConfig', function () {
+				it('should return basic config when provided only api', function () {
 					// GIVEN
 					// WHEN
 					var result = new neoTableParams(mockedAPI);
@@ -52,7 +52,7 @@ define([
 					expect(result).toBeDefined();
 				});
 
-				it('onGivenModelShouldReturnConfigWithDefaultParams', function () {
+				it('should return config with default params', function () {
 					// GIVEN
 					// WHEN
 					var result = new neoTableParams(mockedAPI);
@@ -70,7 +70,7 @@ define([
 					expect(result.parameters()).toEqual(expectedResult);
 				});
 
-				it('onCalledShouldSetQueryParams', function () {
+				it('should set query params', function () {
 					// GIVEN
 					var mockedQueryParams = jasmine.createSpy('queryParams');
 
@@ -81,7 +81,7 @@ define([
 					expect(mockedQueryParams).toBeDefined();
 				});
 
-				it('onGivenBeforeResolveFunctionShouldCallItWhenDataIsFetched', function () {
+				it('should call beforeResolve function when data is fetched', function () {
 					// GIVEN
 					var mockedOnBeforeResolve = jasmine.createSpy('onBeforeResolve');
 					var tableParams = new neoTableParams(mockedAPI, {
@@ -100,7 +100,7 @@ define([
 
 				});
 
-				it('onGivenAfterResolveFunctionShouldCallItWhenDataIsFetched', function () {
+				it('should call afterResolve function when data is fetched', function () {
 					// GIVEN
 					var mockedOnAfterResolve = jasmine.createSpy('onAfterResolve');
 					var tableParams = new neoTableParams(mockedAPI, {

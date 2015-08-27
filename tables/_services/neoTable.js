@@ -22,31 +22,19 @@ define(['seed/tables/module', 'angular-table'], function (module) {
 		 * @param cacheKey {String} Key under which template will be stored
 		 */
 		function loadTemplate(templateName, cacheKey) {
-			var template = $templateCache.get('seed/tables/' + templateName);
+			$http
+				.get('seed/tables/' + templateName)
+				.then(function (template) {
+					$templateCache.put(cacheKey, template);
 
-			if (template) {
-				$templateCache.put(cacheKey, template);
-
-				$log.debug('Loaded neoTable ' +
-					templateName +
-					' template into cache under key: ' +
-					cacheKey);
-
-			} else {
-				$http
-					.get('seed/tables/' + templateName)
-					.then(function (template) {
-						$templateCache.put(cacheKey, template);
-
-						$log.debug('Loaded neoTable ' +
-							templateName +
-							' template into cache under key: ' +
-							cacheKey);
-					})
-					.catch(function () {
-						$log.error('Could not load neoTable ' + templateName + ' template');
-					});
-			}
+					$log.debug('Loaded neoTable ' +
+						templateName +
+						' template into cache under key: ' +
+						cacheKey);
+				})
+				.catch(function () {
+					$log.error('Could not load neoTable ' + templateName + ' template');
+				});
 		}
 
 		neoTableBuilder.init = function () {
