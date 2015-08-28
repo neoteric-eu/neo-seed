@@ -21,10 +21,9 @@ define([
 					module('seed.tables', 'seed.helpers');
 
 					// Inject service into module
-					inject(function (_neoTableParams_, $q) {
-						neoTableParams = _neoTableParams_;
-
-						mockedDeferred = $q.defer();
+					inject(function ($injector) {
+						neoTableParams = $injector.get('neoTableParams');
+						mockedDeferred = $injector.get('$q').defer();
 
 						mockedAPI = jasmine.createSpyObj('RestmodCollection', ['filter']);
 						mockedAPI.filter.and.returnValue(mockedDeferred.promise);
