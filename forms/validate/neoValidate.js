@@ -1,5 +1,5 @@
 define([
-	'seed/module',
+	'seed/forms/module',
 	'form-validation',
 	'form-validation-bootstrap'
 ], function (module) {
@@ -30,7 +30,7 @@ define([
 					}
 				};
 
-				var options = _.mergeDefaults(scope.settings || {}, defaults);
+				var options = _.mergeDefaults(scope.neoValidate || {}, defaults);
 
 				form
 					.on('init.form.fv', function () {

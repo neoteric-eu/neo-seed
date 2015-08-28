@@ -1,5 +1,5 @@
 define([
-	'../../../components/module',
+	'seed/forms/module',
 	'angular-ui-select'
 ], function (module) {
 	'use strict';
@@ -10,31 +10,19 @@ define([
 		var neoSelectService = {};
 
 		function loadTemplate(templateName, cacheKey) {
-			var template = $templateCache.get('seed/forms/select/' + templateName);
+			$http
+				.get('seed/forms/select/' + templateName)
+				.then(function (template) {
+					$templateCache.put(cacheKey, template);
 
-			if (template) {
-				$templateCache.put(cacheKey, template);
-
-				$log.debug('Loaded neoSelect ' +
-					templateName +
-					' template into cache under key: ' +
-					cacheKey);
-
-			} else {
-				$http
-					.get('seed/forms/select/' + templateName)
-					.success(function (template) {
-						$templateCache.put(cacheKey, template);
-
-						$log.debug('Loaded neoSelect ' +
-							templateName +
-							' template into cache under key: ' +
-							cacheKey);
-					})
-					.error(function () {
-						$log.error('Could not load neoSelect ' + templateName + ' template');
-					});
-			}
+					$log.debug('Loaded neoSelect ' +
+						templateName +
+						' template into cache under key: ' +
+						cacheKey);
+				})
+				.catch(function () {
+					$log.error('Could not load neoSelect ' + templateName + ' template');
+				});
 		}
 
 		neoSelectService.init = function () {
