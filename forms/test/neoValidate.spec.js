@@ -10,7 +10,7 @@ define([
 	'seed/helpers/_includes',
 	'seed/forms/module',
 	'seed/forms/_includes'
-], function (ng) {
+], function () {
 	'use strict';
 
 	describe('module: seed', function () {

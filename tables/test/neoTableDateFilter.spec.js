@@ -25,7 +25,7 @@ define([
 
 						$httpBackend.whenGET(/.*/).respond(201, '<div></div>');
 
-						var el = angular.element("<neo-table-date-filter></neo-table-date-filter>");
+						var el = angular.element('<neo-table-date-filter></neo-table-date-filter>');
 						$compile(el)($rootScope.$new());
 						$httpBackend.flush();
 						$rootScope.$digest();
