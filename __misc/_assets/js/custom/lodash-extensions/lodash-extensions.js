@@ -1,8 +1,5 @@
 /**
- * Allows to recursively merge provided configuration params object with with defaults
- *
- * @example
- *  var options = _.mergeDefaults(defaults, parameters);
+ * Extends default lodash functions
  */
 define(['lodash', 'lodash-deep', 'json-stringify-safe'], function (_, lodashDeep, jsonStringify) {
 	// Extend lodash for deep functions

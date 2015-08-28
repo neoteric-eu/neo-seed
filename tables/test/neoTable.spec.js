@@ -36,12 +36,10 @@ define([
 
 				it('should populate template cache on init', function () {
 					// GIVEN
-					$httpBackend.whenGET(/.*/).respond(201);
 
 					// WHEN
 					neoTable.init();
 
-					$httpBackend.flush();
 					// THEN
 					expect($templateCache.put).toHaveBeenCalled();
 					expect($log.error.logs.length).toBe(0);
