@@ -50,7 +50,7 @@ define([
 						$rootScope = $injector.get('$rootScope');
 
 
-						element = angular.element("<neo-table-date-filter></neo-table-date-filter>");
+						element = angular.element('<neo-table-date-filter></neo-table-date-filter>');
 						$compile(element)($rootScope.$new());
 						$rootScope.$digest();
 
