@@ -38,6 +38,7 @@ define(['seed/tables/module'], function (module) {
 				vm.selectedItem = undefined;
 
 				// methods
+				vm.init = init;
 				vm.selectRelatedItem = selectRelatedItem;
 				vm.filterCollection = filterCollection;
 

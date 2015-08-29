@@ -49,7 +49,6 @@ define([
 						$compile = $injector.get('$compile');
 						$rootScope = $injector.get('$rootScope');
 
-
 						element = angular.element('<neo-table-date-filter></neo-table-date-filter>');
 						$compile(element)($rootScope.$new());
 						$rootScope.$digest();
@@ -65,7 +64,6 @@ define([
 				});
 
 				it('can be initialized through ngTable', function () {
-
 					var neoTableElement = angular.element(
 						'<table ng-table>' +
 						'<tbody><tr><td filter="{\'dueDate\': \'date\'}"><</td></tr></tbody>' +
@@ -76,11 +74,9 @@ define([
 					expect(neoTableElement.find('neo-table-date-filter').length).toEqual(1);
 				});
 
-				it('should contain initialized local variables and functions on init', function () {
+				it('should log error when enum can not be injected', function () {
 					// GIVEN
-
 					// WHEN
-
 					// THEN
 					expect(controller.changeDate).toBeDefined();
 					expect(controller.ngModel).toBeUndefined();

@@ -123,7 +123,7 @@ define([
 						}
 					};
 
-					it('Should accept configuration through js object', function () {
+					it('should accept configuration through js object', function () {
 
 						var scope = $rootScope.$new();
 						var spy = jasmine.createSpy('formValidation');
@@ -139,7 +139,7 @@ define([
 						$.fn.formValidation = formValidation;
 					});
 
-					it('Should make the form invalid if name is empty', function () {
+					it('should make the form invalid if name is empty', function () {
 
 						var scope = $rootScope.$new();
 						scope.settings = settings;
