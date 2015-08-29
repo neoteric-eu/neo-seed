@@ -26,7 +26,7 @@ define([
 		describe('module: tables', function () {
 			describe('service: neoTable', function () {
 
-				var neoTable, $httpBackend, $templateCache, $log;
+				var neoTable, $templateCache, $log;
 
 				beforeEach(function () {
 					// Instantiate the fake module
