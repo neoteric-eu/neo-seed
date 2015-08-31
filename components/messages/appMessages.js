@@ -1,4 +1,4 @@
-define(['seed/auth/module'], function (module) {
+define(['seed/components/module'], function (module) {
 	'use strict';
 
 	module.service('appMessages', function (gettext, gettextCatalog) {
@@ -35,40 +35,21 @@ define(['seed/auth/module'], function (module) {
 
 			hideTime: 2500, //ms
 
-			/**
-			 * Description
-			 * @method success
-			 * @param {} message
-			 */
 			success: function (message) {
 				appMessages.set(appMessages.type.success.key, message);
 				appMessages.apply();
 			},
-			/**
-			 * Description
-			 * @method warning
-			 * @param {} message
-			 */
+
 			warning: function (message) {
 				appMessages.set(appMessages.type.warning.key, message);
 				appMessages.apply();
 			},
-			/**
-			 * Description
-			 * @method error
-			 * @param {} message
-			 */
+
 			error: function (message) {
 				appMessages.set(appMessages.type.error.key, message);
 				appMessages.apply();
 			},
 
-			/**
-			 * Description
-			 * @method set
-			 * @param {} type
-			 * @param {} message
-			 */
 			set: function (type, message) {
 				if (angular.isUndefined(appMessages.data[type])) {
 					appMessages.data[type] = [];
@@ -84,11 +65,6 @@ define(['seed/auth/module'], function (module) {
 				appMessages.data[type].push(message);
 			},
 
-			/**
-			 * Description
-			 * @method get
-			 * @param {} type ret
-			 */
 			get: function (type) {
 				var ret = false;
 				if (!angular.isUndefined(appMessages.data[type]) && appMessages.data[type].length > 0) {
@@ -97,11 +73,6 @@ define(['seed/auth/module'], function (module) {
 				return ret;
 			},
 
-			/**
-			 * Description
-			 * @method getAll
-			 * @param {} type ret
-			 */
 			getAll: function (type) {
 				var ret = false;
 				if (!angular.isUndefined(appMessages.data[type]) && appMessages.data[type].length > 0) {
@@ -112,10 +83,6 @@ define(['seed/auth/module'], function (module) {
 				return ret;
 			},
 
-			/**
-			 * Description
-			 * @method apply
-			 */
 			apply: function () {
 				_.each(appMessages.type, function (type) {
 					var msgArray = appMessages.getAll(type.key);
