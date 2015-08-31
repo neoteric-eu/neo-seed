@@ -19,7 +19,6 @@ define(['seed/helpers/module'], function (module) {
 		 * @param enumerable
 		 */
 		var Enum = function (enumerable) {
-			if (_.isEmpty())
 			_.assign(this, enumerable);
 
 			Object.freeze(this);
