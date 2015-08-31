@@ -60,7 +60,6 @@ define([
 					neoTable.init();
 
 					// THEN
-					expect($templateCache.get).toHaveBeenCalled();
 					expect($templateCache.put).toHaveBeenCalled();
 					expect($log.error.logs.length).toBe(0);
 					expect($log.debug.logs.length).toBeGreaterThan(0);

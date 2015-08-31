@@ -4,6 +4,7 @@ define(['seed/helpers/module'], function (app) {
 	/**
 	 * Provides object serialization to url parameters
 	 * @class HttpRequestInterceptor
+	 * @memberOf seed.helpers
 	 *
 	 * @param $log {Object} Logging service
 	 * @return {{request: Function}}

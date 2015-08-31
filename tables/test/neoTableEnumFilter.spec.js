@@ -56,6 +56,7 @@ define([
 
 						controller = element.controller('neoTableEnumFilter');
 						scope = element.isolateScope() || element.scope();
+						$log.reset();
 					});
 
 				});
@@ -91,7 +92,6 @@ define([
 
 				it('should log error when provided enum can not be injected', function () {
 					// GIVEN
-					$log.error.logs = [];
 					controller.filterableEnum = 'NonExistingEnum';
 
 					// WHEN
@@ -103,7 +103,6 @@ define([
 
 				it('should update model when selected enum change', function () {
 					// GIVEN
-					$log.debug.logs = [];
 					var fakeEnumItem = {FAKE_ITEM: {label: 'fakeItem'}};
 					// WHEN
 					controller.filterableEnum = new BaseEnum(fakeEnumItem);
@@ -117,7 +116,6 @@ define([
 
 				it('should clear model when selected item is falsy value', function () {
 					// GIVEN
-					$log.debug.logs = [];
 					var fakeEnumItem = {FAKE_ITEM: {label: 'fakeItem'}};
 					// WHEN
 					controller.filterableEnum = new BaseEnum(fakeEnumItem);
