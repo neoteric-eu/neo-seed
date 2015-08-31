@@ -1,13 +1,14 @@
-define(['seed/module'], function (app) {
+define(['seed/helpers/module'], function (app) {
 	'use strict';
 
 	/**
 	 * JSON:API standard data interpreter settings
 	 * @interface
-	 * @memberOf app
-	 * @param restmod
-	 * @param appConf
-	 * @return {*|{$isAbstract, $$chain}}
+	 * @memberOf seed.helpers
+	 *
+	 * @param restmod {Object} Restmod service provider
+	 * @param appConf {Object} Application configuration
+	 * @return {void|*|{$isAbstract, $$chain}|Function|Object}
 	 */
 	function NeoStyleAPI(restmod, appConf) {
 		return restmod.mixin(

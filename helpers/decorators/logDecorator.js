@@ -3,9 +3,9 @@ define(['angular', 'moment', 'seed/helpers/module'], function (ng, moment, modul
 
 	/**
 	 * Enhance the logger object by adding date and path to calling module
-	 * @memberOf seed
+	 * @memberOf seed.helpers
 	 *
-	 * @param $delegate Reference to original $log object
+	 * @param $delegate {Object} Reference to original $log object
 	 * @returns {*}
 	 */
 	function $log($delegate) {

@@ -3,12 +3,11 @@ define(['seed/helpers/module'], function (module) {
 
 	/**
 	 * Base interface for augmenting enum functionality in app
-	 * @enum BaseEnum
 	 * @interface
-	 * @memberOf app
+	 * @memberOf seed.helpers
 	 *
-	 * @param $log
-	 * @return Enum
+	 * @param $log {Object} Logging service
+	 * @return {Function} Enum object
 	 */
 	function BaseEnum($log) {
 
