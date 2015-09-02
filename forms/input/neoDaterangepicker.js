@@ -78,7 +78,7 @@ define([
 				return {
 					startDate: moment(dates[0], defaults().locale.format),
 					endDate: moment(dates[1], defaults().locale.format)
-				}
+				};
 			}
 
 			/**
@@ -97,8 +97,7 @@ define([
 				ngModelCtrl.$parsers.push(parser);
 
 				//call plugin
-				element.daterangepicker(options, function (start, end, label) {
-				});
+				element.daterangepicker(options);
 
 				unregisterFn = scope.$root.$on('seed.languageAPI.setLanguage', function () {
 					//todo: add handler
