@@ -9,59 +9,51 @@ define([
 ], function (module, moment) {
 	'use strict';
 
-/**
- * Converts input[type=daterange] into datepicker with moment.js wrapped date parameter
- *
- * @param {string} ngModel Object which contains  assignable properties {startDate, endDate}
- * @param {string} options Object which is passed as options into daterangepicker
- *
- *  @example
- *  <input neo-daterangepicker="vm.options"
- *         ng-model="vm.dates"
- *         type="text"
- *         class="form-control">
- *
- */
-
-	module.directive('neoDaterangepicker', neoDaterangepicker);
-
-	function neoDaterangepicker($log) {
+	/**
+	 * Converts input[type=daterange] into datepicker with moment.js wrapped date parameter
+	 * @class neoDaterangepicker
+	 * @memberOf seed.forms
+	 *
+	 * @example
+	 *  <input neo-daterangepicker="vm.options"
+	 *         ng-model="vm.dates"
+	 *         type="text"
+	 *         class="form-control">
+	 *
+	 * @param $log {Object} Logging service
+	 * @return {{restrict: string, bindToController: {ngModel: string, neoDaterangepicker: string}, controllerAs: string,
+	 * scope: boolean, require: string[], link: link, controller: Controller}}
+	 */
+	function neoDaterangepicker($log, gettextCatalog) {
 
 		$log = $log.getInstance('seed.forms.daterange');
 		$log.debug('Initiated directive');
 
 		var directive = {
-			link: link,
 			restrict: 'A',
-			controller: Controller,
-			bindToController: {
+			scope: {
 				ngModel: '=',
 				neoDaterangepicker: '='
 			},
-			controllerAs: 'daterangeController',
-			scope: true,
-			require: ['ngModel', 'neoDaterangepicker']
+			require: ['ngModel'],
+			link: link
 		};
 
 		return directive;
 
 		function link(scope, element, attrs, ctrl) {
+			var vm = scope.vm = scope.vm || {};
 
-			var ngModelCtrl = ctrl[0];
-			var daterangeCtrl = ctrl[1];
+			var ngModelCtrl = ctrl[0], unregisterFn ;
 
-			daterangeCtrl.setModelController(ngModelCtrl);
-		}
+			vm.init = init;
 
-		/**
-		 * Directive controller
-		 * @param $scope
-		 * @param $element
-		 * @constructor
-		 */
-		function Controller($scope, $element,  $attrs, $transclude, gettextCatalog, $timeout) {
-			var that = this, unregisterFn;
+			init();
 
+			/**
+			 * Returns default plugin configuration
+			 * @returns {{separator: string, locale: {format: string, applyLabel: *, cancelLabel: *, customRangeLabel: *}}}
+			 */
 			function defaults() {
 				return {
 					separator: ' - ',
@@ -73,15 +65,6 @@ define([
 					}
 				};
 			}
-
-			/**
-			 * Sets ngModelController
-			 * @param modelCtrl
-			 */
-			this.setModelController = function(modelCtrl) {
-				this.modelCtrl = modelCtrl;
-				init();
-			};
 
 			/**
 			 * Converts string into moment dates
@@ -105,24 +88,27 @@ define([
 			function init() {
 
 				var model = {
-					startDate: that.ngModel.startDate,
-					endDate: that.ngModel.endDate
+					startDate: scope.ngModel.startDate,
+					endDate: scope.ngModel.endDate
 				};
 
-				var options = _.mergeDefaults(defaults(), that.neoDaterangepicker, model);
+				var options = _.mergeDefaults(defaults(), scope.neoDaterangepicker, model);
 				// configure parser
-				that.modelCtrl.$parsers.push(parser);
+				ngModelCtrl.$parsers.push(parser);
+
 				//call plugin
+				element.daterangepicker(options, function (start, end, label) {
+				});
 
-				$element.daterangepicker(options, function(start, end, label){});
-
-				unregisterFn = $scope.$root.$on('seed.languageAPI.setLanguage', function () {
+				unregisterFn = scope.$root.$on('seed.languageAPI.setLanguage', function () {
 					//todo: add handler
 				});
 
-				$scope.$on('$destroy', function () {
+				scope.$on('$destroy', function () {
 					cleanUp();
 				});
+
+				$log.debug('Initiated widget');
 			}
 
 			/**
@@ -133,8 +119,12 @@ define([
 				$element.data('daterangepicker').remove();
 			}
 
+			$log.debug('Initiated linking function');
+
 		}
 	}
+
+	module.directive('neoDaterangepicker', neoDaterangepicker);
 });
 
 
