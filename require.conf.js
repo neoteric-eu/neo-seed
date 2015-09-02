@@ -45,7 +45,8 @@ requirejs.config({
 
 		'form-validation': 'assets/vendor/js/form-validation/form-validation',
 		'form-validation-bootstrap': 'assets/vendor/js/form-validation/framework/bootstrap',
-		'json-stringify-safe': 'assets/seed/js/custom/lodash-extensions/json-stringify-safe'
+		'json-stringify-safe': 'assets/seed/js/custom/lodash-extensions/json-stringify-safe',
+		'daterangepicker': 'assets/vendor/js/bootstrap-daterangepicker/daterangepicker'
 	},
 
 	shim: {
@@ -90,7 +91,9 @@ requirejs.config({
 		'lodash-extensions': ['lodash'],
 
 		'form-validation': ['jquery'],
-		'form-validation-bootstrap': ['bootstrap', 'form-validation']
+		'form-validation-bootstrap': ['bootstrap', 'form-validation'],
+		'daterangepicker': ['jquery', 'bootstrap','moment']
+
 	},
 
 	priority: [

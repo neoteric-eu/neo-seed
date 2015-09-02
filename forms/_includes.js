@@ -6,7 +6,8 @@ define([
 	'./select/services/neoSelect',
 
 	// Input
-	'./input/neoDatepicker'
+	'./input/neoDatepicker',
+	'./input/neoDaterangepicker'
 ], function () {
 	'use strict';
 });
