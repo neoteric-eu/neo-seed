@@ -33,6 +33,9 @@
 		"jasmine": "~2.1.3",
 		"bootstrap-daterangepicker": "~2.0.9"
 	},
+	"resolutions": {
+		"moment": "2.10.6"
+	},
 	"copy": {
 		"js": {
 			"angular/angular.js": "angular/angular.js",
