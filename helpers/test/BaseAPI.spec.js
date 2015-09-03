@@ -243,7 +243,6 @@ define([
 				it('should throw error when try call save without passing model', inject(function ($injector) {
 					// GIVEN
 					var restmod = $injector.get('restmod');
-					var $timeout = $injector.get('$timeout');
 					var MockedModel = restmod.model('/mockedModels');
 					var MockedAPI = new BaseAPI(MockedModel);
 
