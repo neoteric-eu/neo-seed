@@ -1,7 +1,3 @@
-/**
- * Created by hp on 2015-08-31.
- */
-
 define([
 	'seed/forms/module',
 	'moment',
@@ -43,11 +39,9 @@ define([
 
 		function link(scope, element, attrs, ctrl) {
 			var vm = scope.vm = scope.vm || {};
-
 			var ngModelCtrl = ctrl[0], unregisterFn ;
 
 			vm.init = init;
-
 			init();
 
 			/**

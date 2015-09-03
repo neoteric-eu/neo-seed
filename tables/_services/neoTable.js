@@ -11,55 +11,22 @@ define(['seed/tables/module', 'angular-table'], function (module) {
 	 * @param $log {Object} Logging service
 	 * @return {{}}
 	 */
-	function neoTable($templateCache, $http, $log) {
+	function neoTable($log, neoTemplateLoader) {
 		$log = $log.getInstance('seed.tables.neoTable');
 
 		var neoTableBuilder = {};
 
-		/**
-		 * Helper caching function
-		 * @param templateName {String} path to HTML to be cached
-		 * @param cacheKey {String} Key under which template will be stored
-		 */
-		function loadTemplate(templateName, cacheKey) {
-			var template = $templateCache.get('seed/tables/' + templateName);
-
-			if (template) {
-				$templateCache.put(cacheKey, template);
-
-				$log.debug('Loaded neoTable ' +
-					templateName +
-					' template into cache under key: ' +
-					cacheKey);
-
-			} else {
-				$http
-					.get('seed/tables/' + templateName)
-					.then(function (template) {
-						$templateCache.put(cacheKey, template);
-
-						$log.debug('Loaded neoTable ' +
-							templateName +
-							' template into cache under key: ' +
-							cacheKey);
-					})
-					.catch(function () {
-						$log.error('Could not load neoTable ' + templateName + ' template');
-					});
-			}
-		}
-
 		neoTableBuilder.init = function () {
-			loadTemplate('partials/neo-header.html', 'ng-table/header.html');
-			loadTemplate('partials/neo-footer.html', 'ng-table/pager.html');
-			loadTemplate('partials/neo-sorting.html', 'ng-table/sorterRow.html');
-			loadTemplate('partials/neo-filters.html', 'ng-table/filterRow.html');
 
-			loadTemplate('filters/text-filter.html', 'ng-table/filters/text.html');
-			loadTemplate('filters/date-filter.html', 'ng-table/filters/date.html');
-			loadTemplate('filters/timestamp-filter.html', 'ng-table/filters/timestamp.html');
-			loadTemplate('filters/enum-filter.html', 'ng-table/filters/enum.html');
-			loadTemplate('filters/related-filter.html', 'ng-table/filters/related.html');
+			neoTemplateLoader.load('seed/tables/partials/neo-header.html', 'ng-table/header.html');
+			neoTemplateLoader.load('seed/tables/partials/neo-footer.html', 'ng-table/pager.html');
+			neoTemplateLoader.load('seed/tables/partials/neo-sorting.html', 'ng-table/sorterRow.html');
+			neoTemplateLoader.load('seed/tables/partials/neo-filters.html', 'ng-table/filterRow.html');
+			neoTemplateLoader.load('seed/tables/filters/text-filter.html', 'ng-table/filters/text.html');
+			neoTemplateLoader.load('seed/tables/filters/date-filter.html', 'ng-table/filters/date.html');
+			neoTemplateLoader.load('seed/tables/filters/timestamp-filter.html', 'ng-table/filters/timestamp.html');
+			neoTemplateLoader.load('seed/tables/filters/enum-filter.html', 'ng-table/filters/enum.html');
+			neoTemplateLoader.load('seed/tables/filters/related-filter.html', 'ng-table/filters/related.html');
 
 			$log.debug('Initiated service');
 		};
