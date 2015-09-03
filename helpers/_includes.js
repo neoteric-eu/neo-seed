@@ -5,7 +5,9 @@ define([
 	'./decorators/logDecorator',
 
 	'./enums/BaseEnum',
+
 	'./services/neoTemplateLoader',
+
 	'./restmod/serializers/datetime/DatetimeDecodeFilter',
 	'./restmod/serializers/datetime/DatetimeEncodeFilter',
 	'./restmod/serializers/date/DateDecodeFilter',

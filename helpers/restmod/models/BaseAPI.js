@@ -4,13 +4,13 @@ define(['seed/helpers/module'], function (module) {
 	/**
 	 * Base interface for REST communication with server
 	 * @interface
-	 * @memberOf seed
+	 * @memberOf seed.helpers
 	 *
 	 * @param $q {Object} AngularJS promise object
 	 * @param $log {Object} Logging provider
 	 * @param gettextCatalog {Object} Translation service
 	 * @param appMessages {Object} Browser notifications wrapper
-	 * @return {Object} REST interface for Restmod models
+	 * @return {API} REST interface for Restmod models
 	 */
 	function BaseAPI($q, $log, gettextCatalog, appMessages) {
 		$log = $log.getInstance('seed.BaseAPI');
@@ -18,11 +18,12 @@ define(['seed/helpers/module'], function (module) {
 		/**
 		 * API constructor takes model as a parameter
 		 * @constructs API
-		 * @param model
+		 *
+		 * @param model {restmod.model} Restmod model schema to wrap
 		 */
 		function API(model) {
 			if (_.isUndefined(model)) {
-				throw 'Argument "model" must be defined';
+				throw new Error('Argument "model" must be defined');
 			}
 
 			this.model = model;
@@ -33,7 +34,8 @@ define(['seed/helpers/module'], function (module) {
 		/**
 		 * Create new model locally based on init values
 		 * @abstract
-		 * @param initValues
+		 *
+		 * @param initValues {Object} Properties to build model with
 		 * @return {*}
 		 */
 		API.prototype.build = function (initValues) {
@@ -52,7 +54,8 @@ define(['seed/helpers/module'], function (module) {
 		/**
 		 * Fetches single model from server
 		 * @abstract
-		 * @param {String|Array} ids
+		 *
+		 * @param ids {String|Array} Set of ids to fetch
 		 * @param params {Object} Query parameters
 		 * @return {*}
 		 */
@@ -63,8 +66,7 @@ define(['seed/helpers/module'], function (module) {
 			}
 
 			$log.debug('Model "' + this.model.name + '" called BaseAPI "get" method with ID: ' +
-				_.stringify(ids) + ' and params: ' +
-				_.stringify(params));
+				_.stringify(ids) + ' and params: ' + _.stringify(params));
 
 			return this.model
 				.$find(ids, params)
@@ -75,7 +77,8 @@ define(['seed/helpers/module'], function (module) {
 		/**
 		 * Gets the list of models from the server
 		 * @abstract
-		 * @return {any|*}
+		 *
+		 * @return {*|IPromise<TResult>}
 		 */
 		API.prototype.fetch = function () {
 
@@ -91,7 +94,8 @@ define(['seed/helpers/module'], function (module) {
 		/**
 		 * Filters models on server side based on provided prams
 		 * @abstract
-		 * @param query CallExpression
+		 *
+		 * @param query {Object} Filtering parameters
 		 * @return {any|*}
 		 */
 		API.prototype.filter = function (query) {
@@ -109,7 +113,8 @@ define(['seed/helpers/module'], function (module) {
 		/**
 		 * Deletes the model form the server
 		 * @abstract
-		 * @param model CallExpression
+		 *
+		 * @param model {restmod.model} Restmod model instance
 		 * @return {*}
 		 */
 		API.prototype.remove = function (model) {
@@ -142,8 +147,7 @@ define(['seed/helpers/module'], function (module) {
 				}
 			});
 
-			$log.debug('Model "' +
-				this.model.name +
+			$log.debug('Model "' + this.model.name +
 				'" called BaseAPI "remove" method to remove model with ID: ' + model.id);
 
 			return def.promise;
@@ -152,7 +156,8 @@ define(['seed/helpers/module'], function (module) {
 		/**
 		 * Persists the model on the server
 		 * @abstract
-		 * @param model CallExpression
+		 *
+		 * @param model {restmod.model} Restmod model instance
 		 * @return {*}
 		 */
 		API.prototype.save = function (model) {
@@ -173,7 +178,6 @@ define(['seed/helpers/module'], function (module) {
 					'" called BaseAPI "save" method to update model');
 			}
 
-
 			return model
 				.$save()
 				.$asPromise()
@@ -188,8 +192,9 @@ define(['seed/helpers/module'], function (module) {
 		/**
 		 * Persists model nested as property collection
 		 * @abstract
-		 * @param model
-		 * @param parentProperty CallExpression
+		 *
+		 * @param model {Object} Model to be created
+		 * @param parentProperty {string} Reference parent property
 		 * @return {*}
 		 */
 		API.prototype.saveNested = function (model, parentProperty) {
@@ -203,7 +208,6 @@ define(['seed/helpers/module'], function (module) {
 				return $q.reject();
 			}
 
-
 			$log.debug('Model "' + this.model.name + '" called BaseAPI "save" method to create model: ' +
 				_.stringify(model) + ' for parent property: ' +
 				_.stringify(parentProperty));
@@ -213,6 +217,7 @@ define(['seed/helpers/module'], function (module) {
 				.$asPromise()
 				.then(function () {
 					appMessages.success('Saved ' + model.type);
+
 				})
 				.catch(handleError);
 		};
@@ -220,10 +225,9 @@ define(['seed/helpers/module'], function (module) {
 		//noinspection JSValidateJSDoc
 		/**
 		 * Shows in browser error messages when error occurs
-		 * @method handleError
-		 * @memberOf app.BaseAPI
-		 * @param response CallExpression
-		 * @return {*|Promise|Array}
+		 *
+		 * @param response {Object} Server response payload
+		 * @return {*}
 		 */
 		function handleError(response) {
 			var responseObj = response.$response.data || response.$response;

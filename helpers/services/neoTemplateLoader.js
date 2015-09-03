@@ -1,7 +1,6 @@
 define(['seed/helpers/module'], function (module) {
 	'use strict';
 
-
 	/**
 	 * Service Template loader service
  	 * @class neoTemplateLoader

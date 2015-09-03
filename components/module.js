@@ -8,10 +8,8 @@ define(['angular'], function (ng) {
 
 	var module = ng.module('seed.components', []);
 
-	module.run(function ($log, neoTable) {
+	module.run(function ($log) {
 		$log = $log.getInstance('seed.components.module');
-
-		neoTable.init();
 
 		$log.debug('Initiated module');
 	});

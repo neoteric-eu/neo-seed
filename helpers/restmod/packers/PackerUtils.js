@@ -1,27 +1,17 @@
 define([], function () {
 	'use strict';
 
+	/**
+	 * Helper methods for serializers
+	 * @type {{include: Function, exclude: Function, processFeature: Function}}
+	 */
 	var PackerUtils = {
-		/**
-		 * Description
-		 * @method include
-		 * @param {} _source
-		 * @param {} _list
-		 * @param {} _do
-		 */
 		include: function (_source, _list, _do) {
 			for (var i = 0, l = _list.length; i < l; i++) {
 				_do(_list[i], _source[_list[i]]);
 			}
 		},
 
-		/**
-		 * Description
-		 * @method exclude
-		 * @param {} _source
-		 * @param {} _skip
-		 * @param {} _do
-		 */
 		exclude: function (_source, _skip, _do) {
 			for (var key in _source) {
 				if (_source.hasOwnProperty(key) && _skip.indexOf(key) === -1) {
@@ -30,15 +20,6 @@ define([], function () {
 			}
 		},
 
-		/**
-		 * Description
-		 * @method processFeature
-		 * @param {} _raw
-		 * @param {} _name
-		 * @param {} _feature
-		 * @param {} _other
-		 * @param {} _do
-		 */
 		processFeature: function (_raw, _name, _feature, _other, _do) {
 			if (_feature === '.' || _feature === true) {
 				var skip = _.isUndefined(name) ? [] : [_name];
