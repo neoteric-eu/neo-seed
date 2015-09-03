@@ -45,8 +45,8 @@ define([
 					var tpl =  '<input neo-daterangepicker="vm.options" ng-model="vm.dates" type="text">';
 
 					var dates = {
-						startDate: moment("2015-06-25").startOf('day'),
-						endDate: moment("2015-08-15").startOf('day')
+						startDate: moment('2015-06-25').startOf('day'),
+						endDate: moment('2015-08-15').startOf('day')
 					};
 
 					var options = {
