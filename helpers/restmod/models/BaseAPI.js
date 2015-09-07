@@ -52,7 +52,7 @@ define(['seed/helpers/module'], function (module) {
 
 
 		/**
-		 * Fetches single model from server
+		 * Fetches single/set of models from server
 		 * @abstract
 		 *
 		 * @param ids {String|Array} Set of ids to fetch

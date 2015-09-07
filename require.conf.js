@@ -5,7 +5,6 @@ requirejs.config({
 		'appConfig': 'apps/module.conf',
 		// jQuery dependencies
 		'jquery': 'assets/vendor/js/jquery/jquery',
-		'jquery-ui': 'assets/vendor/js/jquery-ui',
 
 		// Angular dependencies
 		'angular': 'assets/vendor/js/angular/angular',
@@ -80,7 +79,6 @@ requirejs.config({
 
 		// Smart Admin plugins
 		'notification': ['jquery'],
-		'smartwidgets': ['jquery-ui/sortable'],
 
 		// Other vendor
 		'moment': {exports: 'moment'},
@@ -92,6 +90,7 @@ requirejs.config({
 
 		'form-validation': ['jquery'],
 		'form-validation-bootstrap': ['bootstrap', 'form-validation'],
+
 		'daterangepicker': ['jquery', 'bootstrap','moment']
 
 	},

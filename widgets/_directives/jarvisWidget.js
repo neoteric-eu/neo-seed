@@ -27,7 +27,7 @@ define(['seed/widgets/module'], function (module) {
 					'<input class="form-control" type="text">' +
 					'</div>');
 
-				element.addClass('jarviswidget jarviswidget-sortable');
+				element.addClass('jarviswidget');
 				$rootScope.$emit('jarvisWidgetAdded', element);
 
 			}

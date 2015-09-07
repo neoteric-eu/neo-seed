@@ -6,12 +6,12 @@ define(['seed/widgets/module'], function (module) {
 		var jarvisWidgetsDefaults = {
 			grid: 'article',
 			widgets: '.jarviswidget',
-			localStorage: true,
+			localStorage: false,
 			deleteSettingsKey: '#deletesettingskey-options',
 			settingsKeyLabel: 'Reset settings?',
 			deletePositionKey: '#deletepositionkey-options',
 			positionKeyLabel: 'Reset position?',
-			sortable: true,
+			sortable: false,
 			buttonsHidden: false,
 			// toggle button
 			toggleButton: true,

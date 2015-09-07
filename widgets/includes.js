@@ -1,6 +1,6 @@
 define([
-	'./directives/jarvisWidget',
-	'./directives/widgetGrid'
+	'./_directives/jarvisWidget',
+	'./_directives/widgetGrid'
 ], function () {
 	'use strict';
 });

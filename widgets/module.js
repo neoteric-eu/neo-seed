@@ -3,6 +3,12 @@ define(['angular'], function (ng) {
 
 	var module = ng.module('seed.widgets', []);
 
-	return module;
+	module.run(function ($log) {
+		$log = $log.getInstance('seed.widgets.module');
 
+		$log.debug('Initiated module');
+	});
+
+
+	return module;
 });
