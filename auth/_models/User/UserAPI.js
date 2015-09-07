@@ -14,7 +14,7 @@ define(['seed/auth/module'], function (module) {
 	 * @param User {Object} Model factory
 	 * @return {Function} Instantiated service
 	 */
-	var UserAPI = function ($log, $cookies, $rootScope, BaseAPI, User) {
+	var UserAPI = function ($log, $cookies, $rootScope, BaseAPI, User, $q) {
 
 		$log = $log.getInstance('seed.auth.UserAPI');
 		$log.debug('Initiated service');
@@ -30,8 +30,9 @@ define(['seed/auth/module'], function (module) {
 					$log.debug('Successfully logged user in');
 					return user;
 				})
-				.catch(function () {
+				.catch(function (reason) {
 					$log.error('Could not login the user');
+					return $q.reject(reason);
 				});
 		};
 
@@ -44,8 +45,9 @@ define(['seed/auth/module'], function (module) {
 					$log.debug('Successfully verified user session');
 					return user;
 				})
-				.catch(function () {
+				.catch(function (reason) {
 					$log.error('Use session experienced');
+					return $q.reject(reason);
 				});
 		};
 
@@ -58,6 +60,7 @@ define(['seed/auth/module'], function (module) {
 				})
 				.catch(function (response) {
 					$log.error('Could not logout the user', response);
+					return $q.reject(response);
 				});
 		};
 
