@@ -1,11 +1,12 @@
 <header id="header">
-	<div id="logo-group">
+	<!-- PLACE YOUR LOGO HERE -->
+	<span class="navbar-brand no-selection">
+		<img ng-src="{{::vm.appConf.generalSettings.logo}}" alt="SmartAdmin">
+		{{::vm.appConf.generalSettings.name}}
+	</span>
+	<!-- END LOGO PLACEHOLDER -->
 
-		<!-- PLACE YOUR LOGO HERE -->
-		<span id="logo"> <img src="assets/seed/img/container-logo.png" alt="SmartAdmin"> </span>
-		<!-- END LOGO PLACEHOLDER -->
-	</div>
-
+	<neo-activities></neo-activities>
 	<neo-customer-switcher></neo-customer-switcher>
 
 	<!-- pulled right: nav area -->

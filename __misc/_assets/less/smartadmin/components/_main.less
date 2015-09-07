@@ -303,16 +303,15 @@ aside {
 	float: left;
 }
 
-#logo-group span#activity {
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
+span#activity {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
 	cursor: default !important;
 	display: inline-block;
 	font-weight: bold;
-	height: 24px;
-	width: 24px;
-	padding: 2px;
+	height: 32px;
+	width: 32px;
 	text-align: center;
 	text-decoration: none !important;
 	-moz-user-select: none;
@@ -326,12 +325,14 @@ aside {
 	background-image: linear-gradient(top, lighten(@gray-lightest, 1.9%), darken(@gray-lightest, 1%));
 	border: 1px solid @gray-mid-light;
 	color: @dropdownbtn-icon-color;
-	font-size: 19px;
-	margin: 10px 0 0 0;
+	font-size: 18px;
+	margin: 0;
+	vertical-align: sub;
+	background-size: cover;
 	position: relative;
 }
 
-#logo-group span#activity:hover {
+span#activity:hover {
 	border: 1px solid @gray-mid-light;
 	transition: all 0.0s;
 	cursor: pointer !important;
@@ -339,15 +340,19 @@ aside {
 	box-shadow: inset 0px 0px 4px 1px rgba(red(@black), green(@black), blue(@black), 0.08);
 }
 
-#logo {
-	display: inline-block;
-	width: @asideWidth  - 45px;
-}
+.navbar-brand {
+	padding: 4px;
+	height: 48px;
+	width: @asideWidth;
+	font-weight: bold;
+	color: @gray-dark;
+	text-shadow: 2px 2px 0 white;
 
-#logo img {
-	width: 110px;
-	height: auto;
-	padding-left: 3px;
+	img {
+		display: inline;
+		height: 40px;
+		padding: 4px;
+	}
 }
 
 #activity b.badge {
@@ -355,7 +360,6 @@ aside {
 	top: -5px;
 	right: -5px;
 	cursor: pointer;
-	background: @blueSky;
 	display: inline-block;
 	font-size: 10px;
 	box-shadow: inset 1px 1px 0 rgba(red(@black), green(@black), blue(@black), 0.1), inset 0 -1px 0 rgba(red(@black), green(@black), blue(@black), 0.07);
@@ -364,7 +368,7 @@ aside {
 	border-radius: 50%;
 	-moz-border-radius: 50%;
 	-webkit-border-radius: 50%;
-	padding: 2px 4px 3px 4px;
+	padding: 0px 4px;
 	text-align: center;
 	line-height: normal;
 }
@@ -2621,8 +2625,8 @@ img.away {
 	display: none;
 	z-index: @ajax-dropdown-zindex;
 	background: white;
-	top: 48px;
-	left: 16px;
+	top: 43px;
+	left: 63px;
 	width: 344px;
 	height: 435px;
 	border-radius: 0px;
@@ -2734,7 +2738,7 @@ img.away {
 	-moz-border-radius: 50%;
 	display: block;
 	margin: 0 auto;
-	width: 46px;
+	width: 76px;
 	text-align: center;
 	color: #D1D1D1;
 	border-color: #D1D1D1;
