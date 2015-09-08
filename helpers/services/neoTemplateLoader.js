@@ -11,12 +11,6 @@ define(['seed/helpers/module'], function (module) {
 	 */
 	function neoTemplateLoader($templateCache, $http, $log) {
 
-		var service = {
-			load: loadTemplate
-		};
-
-		return service;
-
 		/**
 		 * Helper caching function. Loads template from either cache or through $http
 		 * and puts the template under cacheKey
@@ -27,7 +21,7 @@ define(['seed/helpers/module'], function (module) {
 		 * @returns
 		 *
 		 */
-		function loadTemplate(templateName, cacheKey) {
+		this.load = function(templateName, cacheKey) {
 			var template = $templateCache.get(templateName);
 
 			if (template) {
@@ -49,6 +43,7 @@ define(['seed/helpers/module'], function (module) {
 					});
 			}
 		}
+
 	}
 
 	module.service('neoTemplateLoader', neoTemplateLoader);
