@@ -17,8 +17,9 @@ define([
 	 *         class="form-control">
 	 *
 	 * @param $log {Object} Logging service
-	 * @return {{restrict: string, bindToController: {ngModel: string, neoDatepicker: string}, controllerAs: string,
-	 * scope: boolean, require: string[], link: link, controller: Controller}}
+	 * @return {{restrict: string, bindToController: {ngModel: string, neoDatepicker: string},
+	 *   controllerAs: string, scope: boolean, require: string[], link: link, controller:
+	 *   Controller}}
 	 */
 	function neoDatepicker($log, gettextCatalog) {
 
@@ -47,7 +48,8 @@ define([
 
 			/**
 			 * Returns default plugin configuration
-			 * @returns {{separator: string, locale: {format: string, applyLabel: *, cancelLabel: *, customRangeLabel: *}}}
+			 * @returns {{separator: string, locale: {format: string, applyLabel: *, cancelLabel: *,
+			 *   customRangeLabel: *}}}
 			 */
 			function defaults() {
 				return {
@@ -56,9 +58,9 @@ define([
 					//opens: 'left',
 					locale: {
 						format: 'L',
-						applyLabel: gettextCatalog.getString('apply'),
-						cancelLabel: gettextCatalog.getString('cancel'),
-						customRangeLabel: gettextCatalog.getString('custom range')
+						applyLabel: gettextCatalog.getString('Apply'),
+						cancelLabel: gettextCatalog.getString('Cancel'),
+						customRangeLabel: gettextCatalog.getString('Custom range')
 					}
 				};
 			}
