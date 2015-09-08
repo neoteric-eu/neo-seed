@@ -88,7 +88,9 @@ define([
 			function formatter (model) {
 				var textVal ;
 
-				if (!model) return ;
+				if (!model) {
+					return ;
+				}
 
 				if (options.singleDatePicker) {
 					return model.format('L');
@@ -128,7 +130,7 @@ define([
 					if (options.singleDatePicker) {
 						model = {
 							startDate: scope.ngModel
-						}
+						};
 					} else {
 						model = {
 							startDate: scope.ngModel.startDate,

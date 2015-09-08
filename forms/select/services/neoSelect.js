@@ -4,7 +4,7 @@ define([
 ], function (module) {
 	'use strict';
 
-	function neoSelect($log, neoTemplateLoader, $templateCache) {
+	function neoSelect($log, neoTemplateLoader) {
 		$log = $log.getInstance('seed.components.neoSelect');
 
 		var neoSelectService = {};
