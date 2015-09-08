@@ -15,7 +15,12 @@ define(['angular'], function (ng) {
 			},
 			views: {
 				root: {
-					templateUrl: 'seed/layout/layout.html'
+					controllerAs: 'vm',
+					controller: function (appConf) {
+						var vm = this;
+						vm.appConf = appConf;
+					},
+					templateUrl: 'seed/layout/views/view.html'
 				}
 			}
 		});

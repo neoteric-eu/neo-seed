@@ -1,8 +1,5 @@
 define([
-	'./activities/activities-controller',
-	'./activities/activities-dropdown-toggle-directive',
-	'./activities/activities-service',
-
+	'./activities/neoActivities',
 	'./customer/neoCustomerSwitcher',
 	'./language/neoLanguageSwitcher',
 	'./messages/appMessages',
