@@ -6,18 +6,13 @@ define(['seed/tables/module', 'angular-table'], function (module) {
 	 * @class neoTable
 	 * @memberOf seed.tables
 	 *
-	 * @param $templateCache {Object} Template cashing helper
-	 * @param $http {Object} Angular low level communication service
 	 * @param $log {Object} Logging service
-	 * @return {{}}
+	 * @param neoTemplateLoader
 	 */
 	function neoTable($log, neoTemplateLoader) {
 		$log = $log.getInstance('seed.tables.neoTable');
 
-		var neoTableBuilder = {};
-
-		neoTableBuilder.init = function () {
-
+		this.init = function init() {
 			neoTemplateLoader.load('seed/tables/partials/neo-header.html', 'ng-table/header.html');
 			neoTemplateLoader.load('seed/tables/partials/neo-footer.html', 'ng-table/pager.html');
 			neoTemplateLoader.load('seed/tables/partials/neo-sorting.html', 'ng-table/sorterRow.html');
@@ -30,8 +25,6 @@ define(['seed/tables/module', 'angular-table'], function (module) {
 
 			$log.debug('Initiated service');
 		};
-
-		return neoTableBuilder;
 	}
 
 	module.service('neoTable', neoTable);

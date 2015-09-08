@@ -11,7 +11,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: src/seed/helpers/restmod/models/BaseAPI.js:127
+#: src/seed/forms/input/neoDatepicker.js:59
+msgid "Apply"
+msgstr "Apply"
+
+#: src/seed/helpers/restmod/models/BaseAPI.js:133
 msgid "Are you sure you want to remove item?"
 msgstr "Are you sure you want to remove item?"
 
@@ -19,13 +23,21 @@ msgstr "Are you sure you want to remove item?"
 msgid "Back"
 msgstr "Back"
 
+#: src/seed/forms/input/neoDatepicker.js:60
+msgid "Cancel"
+msgstr "Cancel"
+
 #: src/seed/auth/lock/forms/authLockForm.html:18
 msgid "Click here"
 msgstr "Click here"
 
-#: src/seed/helpers/restmod/models/BaseAPI.js:126
+#: src/seed/helpers/restmod/models/BaseAPI.js:132
 msgid "Confirmation"
 msgstr "Confirmation"
+
+#: src/seed/forms/input/neoDatepicker.js:61
+msgid "Custom range"
+msgstr "Custom range"
 
 #: src/seed/auth/login/forms/login/authLoginForm.html:26
 msgid "Email"
@@ -43,7 +55,7 @@ msgstr "Forgot password?"
 msgid "Info"
 msgstr "Info"
 
-#: src/seed/components/messages/appMessages.js:126
+#: src/seed/components/messages/appMessages.js:93
 msgid "Internal server error"
 msgstr "Internal server error"
 
@@ -59,11 +71,11 @@ msgstr "Logged as someone else?"
 msgid "Login as"
 msgstr "Login as"
 
-#: src/seed/components/tables/partials/neo-footer.html:73
+#: src/seed/tables/partials/neo-footer.html:73
 msgid "Next"
 msgstr "Next"
 
-#: src/seed/helpers/restmod/models/BaseAPI.js:128
+#: src/seed/helpers/restmod/models/BaseAPI.js:134
 msgid "No"
 msgstr "No"
 
@@ -76,7 +88,7 @@ msgstr "Password"
 msgid "Please log in"
 msgstr "Please log in"
 
-#: src/seed/components/tables/partials/neo-footer.html:43
+#: src/seed/tables/partials/neo-footer.html:43
 msgid "Previous"
 msgstr "Previous"
 
@@ -92,11 +104,11 @@ msgstr "Select"
 msgid "Select profile"
 msgstr "Select profile"
 
-#: src/seed/components/tables/partials/neo-footer.html:5
+#: src/seed/tables/partials/neo-footer.html:5
 msgid "Showing"
 msgstr "Showing"
 
-#: src/seed/layout/partials/header.html:62
+#: src/seed/layout/partials/header.html:63
 msgid "Sign Out"
 msgstr "Sign Out"
 
@@ -120,24 +132,24 @@ msgstr "Welcome!"
 msgid "Wrong e-mail or password."
 msgstr "Wrong e-mail or password."
 
-#: src/seed/helpers/restmod/models/BaseAPI.js:128
-#: src/seed/helpers/restmod/models/BaseAPI.js:130
+#: src/seed/helpers/restmod/models/BaseAPI.js:134
+#: src/seed/helpers/restmod/models/BaseAPI.js:136
 msgid "Yes"
 msgstr "Yes"
 
-#: src/seed/components/tables/partials/neo-footer.html:15
+#: src/seed/tables/partials/neo-footer.html:15
 msgid "entries paginated by"
 msgstr "entries paginated by"
 
-#: src/seed/components/tables/partials/neo-footer.html:30
+#: src/seed/tables/partials/neo-footer.html:30
 msgid "items per page"
 msgstr "items per page"
 
-#: src/seed/components/tables/partials/neo-footer.html:12
+#: src/seed/tables/partials/neo-footer.html:12
 msgid "of"
 msgstr "of"
 
-#: src/seed/components/tables/partials/neo-footer.html:8
+#: src/seed/tables/partials/neo-footer.html:8
 msgid "to"
 msgstr "to"
 
