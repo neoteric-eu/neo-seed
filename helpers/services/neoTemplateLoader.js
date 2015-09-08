@@ -32,15 +32,14 @@ define(['seed/helpers/module'], function (module) {
 
 			if (template) {
 				$templateCache.put(cacheKey, template);
-
 				$log.debug('Loaded ' + templateName +
 					' template into cache under key: ' + cacheKey);
 
 			} else {
 				$http
 					.get(templateName)
-					.then(function (template) {
-						$templateCache.put(cacheKey, template);
+					.then(function (response) {
+						$templateCache.put(cacheKey, response.data);
 
 						$log.debug('Loaded ' + templateName +
 							' template into cache under key: ' + cacheKey);

@@ -22,7 +22,7 @@ define([
 	 */
 	function neoDaterangepicker($log, gettextCatalog) {
 
-		$log = $log.getInstance('seed.forms.daterange');
+		$log = $log.getInstance('seed.forms.daterangepicker');
 		$log.debug('Initiated directive');
 
 		var directive = {
@@ -40,6 +40,7 @@ define([
 		function link(scope, element, attrs, ctrl) {
 			var vm = scope.vm = scope.vm || {};
 			var ngModelCtrl = ctrl[0], unregisterFn ;
+			var options;
 
 			vm.init = init;
 			init();
@@ -51,6 +52,8 @@ define([
 			function defaults() {
 				return {
 					separator: ' - ',
+					singleDatePicker: false,
+					//opens: 'left',
 					locale: {
 						format: 'L',
 						applyLabel: gettextCatalog.getString('apply'),
@@ -68,11 +71,47 @@ define([
 			 *
 			 */
 			function parser(modelValue) {
-				var dates = modelValue.split(defaults().separator);
-				return {
-					startDate: moment(dates[0], defaults().locale.format),
-					endDate: moment(dates[1], defaults().locale.format)
-				};
+				var dates;
+
+				if (options.singleDatePicker) {
+					return moment(modelValue, defaults().locale.format);
+				} else {
+
+					dates = modelValue.split(defaults().separator);
+					return {
+						startDate: moment(dates[0], defaults().locale.format),
+						endDate: moment(dates[1], defaults().locale.format)
+					};
+				}
+			}
+
+			function formatter (model) {
+				var textVal ;
+
+				if (!model) return ;
+
+				if (options.singleDatePicker) {
+					return model.format('L');
+				}
+
+				textVal = model.startDate.format('L') ;
+				if (model.endDate) {
+					textVal = textVal + defaults().separator + model.endDate.format('L') ;
+				}
+				return textVal;
+			}
+
+			function render() {
+				element.val(ngModelCtrl.$viewValue);
+				var drp = element.data('daterangepicker');
+				if (drp) {
+					if (options.singleDatePicker ) {
+						element.data('daterangepicker').setStartDate(ngModelCtrl.$modelValue);
+					}	else {
+						element.data('daterangepicker').setStartDate(ngModelCtrl.$modelValue.startDate);
+						element.data('daterangepicker').setEndDate(ngModelCtrl.$modelValue.endDate);
+					}
+				}
 			}
 
 			/**
@@ -81,17 +120,30 @@ define([
 			 */
 			function init() {
 
-				var model = {
-					startDate: scope.ngModel.startDate,
-					endDate: scope.ngModel.endDate
-				};
+				var unbind = scope.$watch('ngModel', function() {
+					var model ;
 
-				var options = _.mergeDefaults(defaults(), scope.neoDaterangepicker, model);
-				// configure parser
-				ngModelCtrl.$parsers.push(parser);
+					options = _.merge(defaults(), scope.neoDaterangepicker);
 
-				//call plugin
-				element.daterangepicker(options);
+					if (options.singleDatePicker) {
+						model = {
+							startDate: scope.ngModel
+						}
+					} else {
+						model = {
+							startDate: scope.ngModel.startDate,
+							endDate: scope.ngModel.endDate
+						};
+					}
+					// configure parser, formatter and render
+					ngModelCtrl.$parsers.push(parser);
+					ngModelCtrl.$formatters.push(formatter);
+					ngModelCtrl.$render = render;
+
+					//call plugin
+					element.daterangepicker(_.merge(options, model));
+					unbind();
+				});
 
 				unregisterFn = scope.$root.$on('seed.languageAPI.setLanguage', function () {
 					//todo: add handler
@@ -109,7 +161,7 @@ define([
 			 */
 			function cleanUp() {
 				unregisterFn();
-				$element.data('daterangepicker').remove();
+				element.data('daterangepicker').remove();
 			}
 
 			$log.debug('Initiated linking function');
