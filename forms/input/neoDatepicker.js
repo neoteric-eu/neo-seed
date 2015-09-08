@@ -17,9 +17,11 @@ define([
 	 *         class="form-control">
 	 *
 	 * @param $log {Object} Logging service
-	 * @return {{restrict: string, bindToController: {ngModel: string, neoDatepicker: string},
-	 *   controllerAs: string, scope: boolean, require: string[], link: link, controller:
-	 *   Controller}}
+	 * @param gettextCatalog {Object} Translation catalog provider
+	 * @return {{
+	 *  restrict: string,
+	 *  scope: {ngModel: string, neoDatepicker: string}, require: string, link: Function
+	 * }}
 	 */
 	function neoDatepicker($log, gettextCatalog) {
 
@@ -64,7 +66,7 @@ define([
 				function init() {
 
 					var unbind = scope.$watch('ngModel', function () {
-						vm.settings = _.extend(vm.defaultOptions, scope.neoDatepicker);
+						vm.settings = _.merge(vm.defaultOptions, scope.neoDatepicker);
 
 						// Set up controller
 						setUpModelCtrl();
