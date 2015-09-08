@@ -7,7 +7,7 @@ define([
 
 	// Input
 	//'./input/neoDatepicker',
-	'./input/neoDaterangepicker'
+	'./input/neoDatepicker'
 ], function () {
 	'use strict';
 });

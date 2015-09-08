@@ -42,7 +42,7 @@ define([
 
 				describe('directive: neoDatarangepicker', function () {
 
-					var tpl =  '<input neo-daterangepicker="vm.options" ng-model="vm.dates" type="text">';
+					var tpl =  '<input neo-datepicker="vm.options" ng-model="vm.dates" type="text">';
 
 					var dates = {
 						startDate: moment('2015-06-25').startOf('day'),
