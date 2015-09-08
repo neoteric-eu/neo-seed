@@ -11,7 +11,7 @@ define([
 	 * @memberOf seed.forms
 	 *
 	 * @example
-	 *  <input neo-datepicker="vm.options"
+	 *  <input neo-datepicker="vm.vm.settings"
 	 *         ng-model="vm.dates"
 	 *         type="text"
 	 *         class="form-control">
@@ -23,36 +23,23 @@ define([
 	 */
 	function neoDatepicker($log, gettextCatalog) {
 
-		$log = $log.getInstance('seed.forms.daterangepicker');
+		$log = $log.getInstance('seed.forms.datepicker');
 		$log.debug('Initiated directive');
 
-		var directive = {
+		return {
 			restrict: 'A',
 			scope: {
 				ngModel: '=',
 				neoDatepicker: '='
 			},
-			require: ['ngModel'],
-			link: link
-		};
+			require: 'ngModel',
+			link: function link(scope, element, attrs, ngModelCtrl) {
+				var vm = scope.vm = scope.vm || {};
 
-		return directive;
+				var unregisterFn;
 
-		function link(scope, element, attrs, ctrl) {
-			var vm = scope.vm = scope.vm || {};
-			var ngModelCtrl = ctrl[0], unregisterFn ;
-			var options;
-
-			vm.init = init;
-			init();
-
-			/**
-			 * Returns default plugin configuration
-			 * @returns {{separator: string, locale: {format: string, applyLabel: *, cancelLabel: *,
-			 *   customRangeLabel: *}}}
-			 */
-			function defaults() {
-				return {
+				// variables
+				vm.defaultOptions = {
 					separator: ' - ',
 					singleDatePicker: false,
 					//opens: 'left',
@@ -63,116 +50,158 @@ define([
 						customRangeLabel: gettextCatalog.getString('Custom range')
 					}
 				};
-			}
+				vm.settings = undefined;
 
-			/**
-			 * Converts string into moment dates
-			 * @param {string} date string i.e. 01/01/2015 - 01/09/2015
-			 *
-			 * @return {Object} Return object hash with startDate and endDate keys.
-			 *
-			 */
-			function parser(modelValue) {
-				console.log('parser');
-				var dates;
+				// functions
+				vm.init = init;
+				vm.cleanUp = cleanUp;
+				init();
 
-				if (options.singleDatePicker) {
-					return moment(modelValue, defaults().locale.format);
-				} else {
+				/**
+				 * Initialize controller and call daterangepicker
+				 *
+				 */
+				function init() {
 
-					dates = modelValue.split(defaults().separator);
-					return {
-						startDate: moment(dates[0], defaults().locale.format),
-						endDate: moment(dates[1], defaults().locale.format)
-					};
-				}
-			}
+					var unbind = scope.$watch('ngModel', function () {
+						vm.settings = _.extend(vm.defaultOptions, scope.neoDatepicker);
 
-			function formatter (model) {
-				console.log('formatter');
-				var textVal ;
+						// Set up controller
+						setUpModelCtrl();
 
-				if (!model) {
-					return ;
-				}
+						// Call the plugin
+						element.daterangepicker(_.merge(vm.settings, getModel()));
 
-				if (options.singleDatePicker) {
-					return model.format('L');
+						unbind();
+					});
+
+					unregisterFn = scope.$root.$on('seed.languageAPI.setLanguage', function () {
+						//todo: add handler
+					});
+
+					scope.$on('$destroy', function () {
+						cleanUp();
+					});
 				}
 
-				textVal = model.startDate.format('L') ;
-				if (model.endDate) {
-					textVal = textVal + defaults().separator + model.endDate.format('L') ;
+				/**
+				 * Configure parser, formatter and render
+				 */
+				function setUpModelCtrl() {
+					ngModelCtrl.$parsers.push(parser);
+					ngModelCtrl.$formatters.push(formatter);
+					ngModelCtrl.$render = render;
 				}
-				return textVal;
-			}
 
-			function render() {
-				console.log('render');
-				element.val(ngModelCtrl.$viewValue);
-				var drp = element.data('daterangepicker');
-				if (drp) {
-					if (options.singleDatePicker ) {
-						element.data('daterangepicker').setStartDate(ngModelCtrl.$modelValue);
-					}	else {
-						element.data('daterangepicker').setStartDate(ngModelCtrl.$modelValue.startDate);
-						element.data('daterangepicker').setEndDate(ngModelCtrl.$modelValue.endDate);
-					}
+				/**
+				 * Clean up
+				 */
+				function cleanUp() {
+					unregisterFn();
+					element.data('daterangepicker').remove();
 				}
-			}
 
-			/**
-			 * Initialize controller and call daterangepicker
-			 *
-			 */
-			function init() {
+				/**
+				 * Checks in which mode datepicker was set up
+				 * @return {boolean}
+				 */
+				function isSingleDatePicker() {
+					return vm.settings.singleDatePicker;
+				}
 
-				var unbind = scope.$watch('ngModel', function() {
-					var model ;
-
-					options = _.merge(defaults(), scope.neoDatepicker);
-
-					if (options.singleDatePicker) {
-						model = {
+				/**
+				 * Returns datepicker model based on set up mode
+				 * @return {*}
+				 */
+				function getModel() {
+					if (isSingleDatePicker()) {
+						return {
 							startDate: scope.ngModel
 						};
 					} else {
-						model = {
+						return {
 							startDate: scope.ngModel.startDate,
 							endDate: scope.ngModel.endDate
 						};
 					}
-					// configure parser, formatter and render
-					ngModelCtrl.$parsers.push(parser);
-					ngModelCtrl.$formatters.push(formatter);
-					ngModelCtrl.$render = render;
-					//call plugin
-					element.daterangepicker(_.merge(options, model));
-					unbind();
-				});
+				}
 
-				unregisterFn = scope.$root.$on('seed.languageAPI.setLanguage', function () {
-					//todo: add handler
-				});
+				/**
+				 * Converts string into moment dates
+				 * @param modelValue {string} Date string i.e. 01/01/2015 - 01/09/2015
+				 *
+				 * @return {*} Return object hash with startDate and endDate keys.
+				 *
+				 */
+				function parser(modelValue) {
+					if (isSingleDatePicker()) {
+						var momentDate = moment(modelValue, vm.settings.locale.format);
 
-				scope.$on('$destroy', function () {
-					cleanUp();
-				});
+						if (momentDate.isValid()) {
+							return momentDate;
+						}
+					}
 
-				$log.debug('Initiated widget');
+					var dates = modelValue.split(vm.settings.separator);
+
+					var startDate = moment(dates[0], vm.settings.locale.format);
+					var endDate = moment(dates[1], vm.settings.locale.format);
+
+					if (startDate.isValid() && endDate.isValid()) {
+						return {
+							startDate: startDate,
+							endDate: endDate
+						};
+					}
+				}
+
+				/**
+				 * Converts moment dates into strings
+				 * @param model {Object} Moment dates
+				 *
+				 * @return {*} Converted dates
+				 */
+				function formatter(model) {
+					var textVal;
+
+					if (!model) {
+						return;
+					}
+
+					if (isSingleDatePicker()) {
+						return model.format('L');
+					} else {
+						textVal = model.startDate.format('L');
+						if (model.endDate) {
+							textVal = textVal + vm.settings.separator + model.endDate.format('L');
+						}
+					}
+
+					return textVal;
+				}
+
+				/**
+				 * Rendering function
+				 */
+				function render() {
+					element.val(ngModelCtrl.$viewValue);
+
+					var picker = element.data('daterangepicker');
+
+					if (picker) {
+						if (isSingleDatePicker()) {
+							element.data('daterangepicker').setStartDate(ngModelCtrl.$modelValue);
+						} else {
+							element.data('daterangepicker').setStartDate(ngModelCtrl.$modelValue.startDate);
+							element.data('daterangepicker').setEndDate(ngModelCtrl.$modelValue.endDate);
+						}
+					}
+				}
+
+				$log.debug('Called linking function');
+
 			}
-
-			/**
-			 * Clean up
-			 */
-			function cleanUp() {
-				unregisterFn();
-				element.data('daterangepicker').remove();
-			}
-
-			$log.debug('Initiated linking function');
-
-		}
+		};
 	}
 
 	module.directive('neoDatepicker', neoDatepicker);
