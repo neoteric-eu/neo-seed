@@ -9,7 +9,7 @@ define(['seed/helpers/module'], function (module) {
 	 * @returns {Object} neoTemplateLoader service
 	 *
 	 */
-	function neoTemplateLoader($templateCache, $http, $log) {
+	function NeoTemplateLoader($templateCache, $http, $log) {
 
 		/**
 		 * Helper caching function. Loads template from either cache or through $http
@@ -42,8 +42,8 @@ define(['seed/helpers/module'], function (module) {
 						$log.error('Could not load ' + templateName + ' template');
 					});
 			}
-		}
+		};
 	}
 
-	module.service('neoTemplateLoader', neoTemplateLoader);
+	module.service('neoTemplateLoader', NeoTemplateLoader);
 });

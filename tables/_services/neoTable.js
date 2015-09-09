@@ -9,7 +9,7 @@ define(['seed/tables/module', 'angular-table'], function (module) {
 	 * @param $log {Object} Logging service
 	 * @param neoTemplateLoader
 	 */
-	function neoTable($log, neoTemplateLoader) {
+	function NeoTable($log, neoTemplateLoader) {
 		$log = $log.getInstance('seed.tables.neoTable');
 
 		this.init = function init() {
@@ -27,5 +27,5 @@ define(['seed/tables/module', 'angular-table'], function (module) {
 		};
 	}
 
-	module.service('neoTable', neoTable);
+	module.service('neoTable', NeoTable);
 });
