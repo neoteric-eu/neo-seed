@@ -27,25 +27,14 @@
 		<i class="fa fa-lock fa-4x fa-border"></i>
 
 	</div>
-	<!--<div class="ajax-notifications custom-scroll" ng-switch="activeTab">-->
-	<!--<div ng-include="'seed/components/activities/tabs/tab-msgs.html'"-->
-	<!--ng-switch-when="msgs"></div>-->
-	<!--<div ng-include="'seed/components/activities/tabs/tab-notify.html'"-->
-	<!--ng-switch-when="notify"></div>-->
-	<!--<div ng-include="'seed/components/activities/tabs/tab-tasks.html'"-->
-	<!--ng-switch-when="tasks"></div>-->
-	<!--<div ng-include="'seed/components/activities/tabs/tab-default.html'"-->
-	<!--ng-switch-when="default"></div>-->
-	<!--</div>-->
-	<!-- end notification content -->
 
 	<!--FOOTER-->
-<span> Last updated on: {{vm.activities.last_update}}
-<button type="button" ng-click="vm.refresh()"
-				data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading..."
-				class="btn btn-xs btn-default pull-right">
-	<i class="fa fa-refresh"></i>
-</button>
-</span>
+	<span> Last updated on: {{vm.activities.last_update}}
+		<button type="button" ng-click="vm.refresh()"
+						data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading..."
+						class="btn btn-xs btn-default pull-right">
+			<i class="fa fa-refresh"></i>
+		</button>
+	</span>
 	<!--end:FOOTER-->
 </div>

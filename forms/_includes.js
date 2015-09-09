@@ -3,11 +3,11 @@ define([
 	'./validate/neoValidate',
 
 	// Select
-	'./select/services/neoSelect',
+	'./select/services/neoSelect'
 
 	// Input
 	//'./input/neoDatepicker',
-	'./input/neoDatepicker'
+	//'./input/neoDatepicker'
 ], function () {
 	'use strict';
 });
