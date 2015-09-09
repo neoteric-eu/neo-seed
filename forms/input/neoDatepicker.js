@@ -57,6 +57,7 @@ define([
 				// functions
 				vm.init = init;
 				vm.cleanUp = cleanUp;
+
 				init();
 
 				/**
@@ -64,17 +65,14 @@ define([
 				 *
 				 */
 				function init() {
+					vm.settings = _.merge(vm.defaultOptions, scope.neoDatepicker);
 
-					var unbind = scope.$watch('ngModel', function () {
-						vm.settings = _.merge(vm.defaultOptions, scope.neoDatepicker);
+					// Set up controller
+					setUpModelCtrl();
 
-						// Set up controller
-						setUpModelCtrl();
-
-						// Call the plugin
+					// Call the plugin
+					scope.$applyAsync(function () {
 						element.daterangepicker(_.merge(vm.settings, getModel()));
-
-						unbind();
 					});
 
 					unregisterFn = scope.$root.$on('seed.languageAPI.setLanguage', function () {
@@ -90,6 +88,8 @@ define([
 					scope.$on('$destroy', function () {
 						cleanUp();
 					});
+
+					$log.debug('Called linking function');
 				}
 
 				/**
@@ -198,16 +198,13 @@ define([
 
 					if (picker) {
 						if (isSingleDatePicker()) {
-							element.data('daterangepicker').setStartDate(ngModelCtrl.$modelValue);
+							picker.setStartDate(ngModelCtrl.$modelValue);
 						} else {
-							element.data('daterangepicker').setStartDate(ngModelCtrl.$modelValue.startDate);
-							element.data('daterangepicker').setEndDate(ngModelCtrl.$modelValue.endDate);
+							picker.setStartDate(ngModelCtrl.$modelValue.startDate);
+							picker.setEndDate(ngModelCtrl.$modelValue.endDate);
 						}
 					}
 				}
-
-				$log.debug('Called linking function');
-
 			}
 		};
 	}
