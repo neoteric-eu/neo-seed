@@ -42,7 +42,7 @@ define(['seed/helpers/module'], function (module) {
 						$log.error('Could not load ' + templateName + ' template');
 					});
 			}
-		}
+		};
 	}
 
 	module.service('neoTemplateLoader', neoTemplateLoader);
