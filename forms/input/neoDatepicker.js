@@ -78,7 +78,13 @@ define([
 					});
 
 					unregisterFn = scope.$root.$on('seed.languageAPI.setLanguage', function () {
-						//todo: add handler
+						var model = getModel();
+						model.startDate.locale(moment().locale());
+						if (model.endDate) {
+							model.endDate.locale(moment().locale());
+						}
+						element.data('daterangepicker').remove();
+						element.daterangepicker(_.merge(vm.settings, model));
 					});
 
 					scope.$on('$destroy', function () {
