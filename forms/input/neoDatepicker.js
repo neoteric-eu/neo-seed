@@ -65,24 +65,25 @@ define([
 				 *
 				 */
 				function init() {
-					vm.settings = _.merge(vm.defaultOptions, scope.neoDatepicker);
-
+					vm.settings = _.merge({}, vm.defaultOptions, scope.neoDatepicker);
 					// Set up controller
 					setUpModelCtrl();
 
 					// Call the plugin
 					scope.$applyAsync(function () {
-						element.daterangepicker(_.merge(vm.settings, getModel()));
+						element.daterangepicker(_.merge({}, vm.settings, getModel()));
 					});
 
 					unregisterFn = scope.$root.$on('seed.languageAPI.setLanguage', function () {
 						var model = getModel();
-						model.startDate.locale(moment().locale());
+						if (model.startDate) {
+							model.startDate.locale(moment().locale());
+						}
 						if (model.endDate) {
 							model.endDate.locale(moment().locale());
 						}
 						element.data('daterangepicker').remove();
-						element.daterangepicker(_.merge(vm.settings, model));
+						element.daterangepicker(_.merge({}, vm.settings, model));
 					});
 
 					scope.$on('$destroy', function () {
@@ -173,7 +174,7 @@ define([
 					var textVal;
 
 					if (!model) {
-						return;
+						return ;
 					}
 
 					if (isSingleDatePicker()) {
@@ -192,11 +193,15 @@ define([
 				 * Rendering function
 				 */
 				function render() {
-					element.val(ngModelCtrl.$viewValue);
-
 					var picker = element.data('daterangepicker');
 
+					element.val(ngModelCtrl.$viewValue);
+
 					if (picker) {
+						if (_.isEmpty(ngModelCtrl.$viewValue)) {
+							picker.clear();
+							return ;
+						}
 						if (isSingleDatePicker()) {
 							picker.setStartDate(ngModelCtrl.$modelValue);
 						} else {
