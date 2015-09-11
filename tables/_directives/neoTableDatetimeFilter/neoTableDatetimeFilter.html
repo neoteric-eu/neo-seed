@@ -1,9 +1,9 @@
 <div class="icon-addon addon-sm">
-	<input type="text"
-				 neo-datepicker="{allowEmpty: true}"
-				 ng-change="vm.changeDate()"
+	<input neo-datepicker="{allowEmpty: true}"
 				 ng-model="vm.selectedDate"
-				 class="form-control input-xs" />
+				 ng-change="vm.changeDate()"
+				 type="text"
+				 class="form-control input-xs">
 	<label class="fa fa-calendar"></label>
 	<i class="fa fa-trash-o clear-btn" aria-hidden="true"
 		 ng-show="vm.selectedDate !== undefined"

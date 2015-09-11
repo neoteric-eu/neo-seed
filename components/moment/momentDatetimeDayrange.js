@@ -21,6 +21,7 @@ define(['seed/components/module', 'moment'], function (module, moment) {
 			restrict: 'A',
 			require: '?ngModel',
 			link: function (scope, element, attrs, ngModel) {
+
 				ngModel.$formatters.push(function (value) {
 					if (!_.isUndefined(value)) {
 						return {

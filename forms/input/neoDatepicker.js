@@ -43,8 +43,7 @@ define([
 				// variables
 				vm.defaultOptions = {
 					separator: ' - ',
-					singleDatePicker: false,
-					//opens: 'left',
+					singleDatePicker: true,
 					locale: {
 						format: 'L',
 						applyLabel: gettextCatalog.getString('Apply'),
@@ -65,13 +64,14 @@ define([
 				 *
 				 */
 				function init() {
-					vm.settings = _.merge({}, vm.defaultOptions, scope.neoDatepicker);
-					// Set up controller
-					setUpModelCtrl();
 
 					// Call the plugin
 					scope.$applyAsync(function () {
+						vm.settings = _.merge({}, vm.defaultOptions, scope.neoDatepicker);
+						// Set up controller
+						setUpModelCtrl();
 						element.daterangepicker(_.merge({}, vm.settings, getModel()));
+
 					});
 
 					unregisterFn = scope.$root.$on('seed.languageAPI.setLanguage', function () {
