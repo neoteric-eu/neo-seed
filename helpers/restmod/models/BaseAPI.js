@@ -141,7 +141,10 @@ define(['seed/helpers/module'], function (module) {
 							appMessages.success('Removed ' + model.type);
 							def.resolve();
 						})
-						.catch(handleError);
+						.catch(function(response) {
+							handleError(response);
+							def.reject(response.$response.data || response.$response);
+						});
 				} else {
 					def.reject();
 				}
