@@ -10,6 +10,7 @@ define(['seed/components/module'], function (module) {
 			restrict: 'EA',
 			templateUrl: 'seed/components/activities/activities.html',
 			controllerAs: 'vm',
+			scope: true,
 			controller: function ($scope, $element) {
 				var vm = this;
 

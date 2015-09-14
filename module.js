@@ -39,7 +39,7 @@ define([
 		'app.conf',
 
 		// Seed modules
-		'seed.templates',
+		'seed.templateCache',
 		'seed.components',
 		'seed.helpers',
 		'seed.auth',

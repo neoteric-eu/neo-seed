@@ -1,7 +1,7 @@
 define(['angular'], function (ng) {
 	'use strict';
 
-	var module = ng.module('seed.layout', ['seed.auth', 'app']);
+	var module = ng.module('seed.layout', ['seed.auth', 'app.conf']);
 
 	module.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -16,11 +16,11 @@ define(['angular'], function (ng) {
 			views: {
 				root: {
 					controllerAs: 'vm',
+					templateUrl: 'seed/layout/views/view.html',
 					controller: function (appConf) {
 						var vm = this;
 						vm.appConf = appConf;
-					},
-					templateUrl: 'seed/layout/views/view.html'
+					}
 				}
 			}
 		});
