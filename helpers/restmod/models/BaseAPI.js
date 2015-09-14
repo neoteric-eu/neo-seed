@@ -185,7 +185,6 @@ define(['seed/helpers/module'], function (module) {
 				.$save()
 				.$asPromise()
 				.then(function (model) {
-					debugger;
 					appMessages.success('Created new ' + model.type);
 					return model;
 				})

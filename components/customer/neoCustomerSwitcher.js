@@ -29,6 +29,7 @@ define(['seed/components/module'], function (app) {
 
 				// Variables
 				vm.customerCollection = $scope.$root.user.customers;
+				vm.user = $scope.$root.user;
 				vm.activeCustomer = $scope.$root.customer;
 
 				// Functions
