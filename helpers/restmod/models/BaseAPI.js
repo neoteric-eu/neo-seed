@@ -168,7 +168,7 @@ define(['seed/helpers/module'], function (module) {
 				return $q.reject();
 			}
 
-			var isNew = model.$scope.$url('update');
+			var isNew = !model.$scope.$url('update');
 
 			if (isNew) {
 				model = this.model.$build(model);
@@ -187,9 +187,9 @@ define(['seed/helpers/module'], function (module) {
 				.$asPromise()
 				.then(function (model) {
 					if (isNew) {
-						appMessages.success('Updated ' + model.type);
-					} else {
 						appMessages.success('Created new ' + model.type);
+					} else {
+						appMessages.success('Updated ' + model.type);
 					}
 					return model;
 				})
