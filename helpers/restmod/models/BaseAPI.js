@@ -141,9 +141,8 @@ define(['seed/helpers/module'], function (module) {
 							appMessages.success('Removed ' + model.type);
 							def.resolve();
 						})
-						.catch(function(response) {
-							handleError(response);
-							def.reject(response.$response.data || response.$response);
+						.catch(function (response) {
+							def.reject(handleError(response));
 						});
 				} else {
 					def.reject();
@@ -169,7 +168,9 @@ define(['seed/helpers/module'], function (module) {
 				return $q.reject();
 			}
 
-			if (!_.has(model, 'id')) {
+			var isNew = !model.$scope.$url('update');
+
+			if (isNew) {
 				model = this.model.$build(model);
 
 				$log.debug('Model "' +
@@ -185,7 +186,11 @@ define(['seed/helpers/module'], function (module) {
 				.$save()
 				.$asPromise()
 				.then(function (model) {
-					appMessages.success('Created new ' + model.type);
+					if (isNew) {
+						appMessages.success('Created new ' + model.type);
+					} else {
+						appMessages.success('Updated ' + model.type);
+					}
 					return model;
 				})
 				.catch(handleError);
