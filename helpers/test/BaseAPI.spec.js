@@ -217,10 +217,12 @@ define([
 					$httpBackend.flush();
 					$timeout.flush();
 					expect(appMessages.success).toHaveBeenCalled();
+
 				}));
 
 				it('should build model from properties and save it', inject(function ($injector) {
 					// GIVEN
+
 					var restmod = $injector.get('restmod');
 					var appMessages = $injector.get('appMessages');
 					var $timeout = $injector.get('$timeout');
@@ -230,7 +232,7 @@ define([
 					spyOn(MockedModel, '$build').and.callThrough();
 
 					// WHEN
-					MockedAPI.save({label: 'mock'});
+					MockedAPI.save({label: 'mock'})
 
 					// THEN
 					$httpBackend.expectPOST('/mockedModels').respond(200);
@@ -239,6 +241,34 @@ define([
 					expect(appMessages.success).toHaveBeenCalled();
 					expect(MockedModel.$build).toHaveBeenCalled();
 				}));
+
+				it('should build model, save it and the update it', inject(function ($injector) {
+					// GIVEN
+
+					var restmod = $injector.get('restmod');
+					var appMessages = $injector.get('appMessages');
+					var $timeout = $injector.get('$timeout');
+					var MockedModel = restmod.model('/mockedModels');
+					var MockedAPI = new BaseAPI(MockedModel);
+					var savedModel;
+					// WHEN
+
+					MockedAPI.save({label: 'mock'}).then(function(model) {
+						savedModel = model;
+					});
+
+					// THEN
+					$httpBackend.expectPOST('/mockedModels').respond(200, {id:'id1', test: 'test'});
+					$httpBackend.flush();
+					$timeout.flush();
+
+					savedModel.label = 'mock2';
+					MockedAPI.save(savedModel);
+					$httpBackend.expectPUT('/mockedModels/id1').respond(200);
+					$httpBackend.flush();
+
+				}));
+
 
 				it('should throw error when try call save without passing model', inject(function ($injector) {
 					// GIVEN

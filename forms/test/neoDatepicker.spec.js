@@ -53,7 +53,7 @@ define([
 						singleDatePicker: true
 					};
 
-					it('should defaults to current date if ng-model is empty ', function () {
+					it('should defaults to current date if ng-model is empty and allowEmpty is not set', function () {
 
 						var scope = $rootScope.$new();
 						var vm = {
@@ -75,10 +75,11 @@ define([
 						var scope = $rootScope.$new();
 						var vm = {
 							dates: dates,
-							options: {}
+							options: {singleDatePicker: false}
 						};
 						scope.vm = vm;
 						// Compile a HTML containing the directive
+
 						var element = $compile(tpl)(scope);
 						$rootScope.$digest();
 						/* get datarangePicker instance */
