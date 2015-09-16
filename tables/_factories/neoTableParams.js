@@ -68,7 +68,6 @@ define(['seed/tables/module'], function (module) {
 			};
 
 			var options = _.mergeDefaults(parameters, defaults);
-
 			return new ngTableParams(options.params, {
 				total: 0,
 				groupBy: options.groupBy,
@@ -83,7 +82,6 @@ define(['seed/tables/module'], function (module) {
 							sort: params.sorting(),
 							filter: params.filter()
 						};
-
 						CollectionAPI
 							.filter(queryParams)
 							.then(function (models) {
