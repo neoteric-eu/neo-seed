@@ -1,6 +1,6 @@
 define([
-	'./_directives/neoKeep/neoKeep',
-	'./_directives/neoOmit/neoOmit',
+	'./_directives/neoPermissionOnly',
+	'./_directives/neoPermissionExcept',
 
 	'./_services/neoSession',
 	'./_services/neoRequestHeaders',

@@ -1,11 +1,13 @@
 define([
 	'seed/forms/module',
-	'form-validation',
-	'form-validation-bootstrap'
+	'form-validation/form-validation',
+	'form-validation/framework/bootstrap',
+	'form-validation/language/en_US',
+	'form-validation/language/pl_PL'
 ], function (module) {
 	'use strict';
 
-	function neoValidate($log) {
+	function neoValidate($log, LanguageAPI) {
 
 		$log = $log.getInstance('seed.forms.neoValidate');
 		$log.debug('Initiated directive');
@@ -17,9 +19,14 @@ define([
 			},
 			link: function (scope, form) {
 
+				var currentLanguage = LanguageAPI.getLanguage();
+
 				var defaults = {
 					framework: 'bootstrap',
-					fields: {},
+					locale: currentLanguage.locale,
+					addOns: {
+						i18n: {}
+					},
 					err: {
 						container: 'tooltip'
 					},
@@ -30,7 +37,20 @@ define([
 					}
 				};
 
-				var options = _.mergeDefaults(scope.neoValidate || {}, defaults);
+				var options = _.merge(defaults, scope.neoValidate);
+
+				scope.$on('seed.languageAPI.setLanguage', function (e, language) {
+					options.locale = language.locale;
+
+					form
+						.formValidation('destroy')
+						.on('init.form.fv', function () {
+							// Remove these irritating automatically added hidden submit buttons
+							form.find('.fv-hidden-submit').remove();
+						})
+						.formValidation(options)
+						.formValidation('validateContainer', form);
+				});
 
 				form
 					.on('init.form.fv', function () {

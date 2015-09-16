@@ -42,7 +42,7 @@ requirejs.config({
 		'raphael': 'assets/vendor/js/raphael/raphael',
 		'morris': 'assets/vendor/js/morris/morris',
 
-		'form-validation': 'assets/vendor/js/form-validation/form-validation',
+		'form-validation': 'assets/vendor/js/form-validation',
 		'form-validation-bootstrap': 'assets/vendor/js/form-validation/framework/bootstrap',
 		'json-stringify-safe': 'assets/seed/js/custom/lodash-extensions/json-stringify-safe',
 		'daterangepicker': 'assets/vendor/js/bootstrap-daterangepicker/daterangepicker'
@@ -89,9 +89,14 @@ requirejs.config({
 		'lodash-extensions': ['lodash'],
 
 		'form-validation': ['jquery'],
-		'form-validation-bootstrap': ['bootstrap', 'form-validation'],
+		'form-validation/language/pl_PL': ['form-validation/form-validation'],
+		'form-validation/language/en_US': ['form-validation/form-validation'],
+		'form-validation/framework/bootstrap': [
+			'bootstrap',
+			'form-validation/form-validation'
+		],
 
-		'daterangepicker': ['jquery', 'bootstrap','moment']
+		'daterangepicker': ['jquery', 'bootstrap', 'moment']
 
 	},
 
