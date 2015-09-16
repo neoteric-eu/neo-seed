@@ -1,3 +1,8 @@
+/**
+ * @namespace seed.auth
+ * @memberof seed
+ */
+
 define([
 	'angular',
 	'angular-cookies',
@@ -19,7 +24,7 @@ define([
 				abstract: true,
 				data: {
 					permissions: {
-						except: ['user'],
+						except: ['AUTHORIZED'],
 						redirectTo: appConf.generalSettings.defaultStateToRedirectAfterLogin
 					}
 				},
@@ -34,7 +39,7 @@ define([
 				url: '/logout',
 				data: {
 					permissions: {
-						only: ['user'],
+						only: ['AUTHORIZED'],
 						redirectTo: 'auth.login'
 					}
 				},
@@ -53,8 +58,7 @@ define([
 			});
 	});
 
-	module.run(function ($log, $rootScope, $state,
-		hotkeys, Permission, UserAPI, neoSession) {
+	module.run(function ($log, $rootScope, $state, hotkeys, UserAPI, neoSession) {
 
 		$log = $log.getInstance('seed.auth.module');
 
@@ -70,10 +74,6 @@ define([
 						$state.go('auth.lock');
 					});
 			}
-		});
-
-		Permission.defineRole('user', function () {
-			return neoSession.checkSession();
 		});
 
 		$log.debug('Initiated module');

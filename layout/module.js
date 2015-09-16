@@ -1,18 +1,12 @@
 define(['angular'], function (ng) {
 	'use strict';
 
-	var module = ng.module('seed.layout', ['seed.auth', 'app.conf']);
+	var module = ng.module('seed.layout', ['app.conf']);
 
 	module.config(function ($stateProvider, $urlRouterProvider) {
 
 		$stateProvider.state('app', {
 			abstract: true,
-			data: {
-				permissions: {
-					only: ['user'],
-					redirectTo: 'auth.login.loginForm'
-				}
-			},
 			views: {
 				root: {
 					controllerAs: 'vm',
@@ -22,12 +16,24 @@ define(['angular'], function (ng) {
 						vm.appConf = appConf;
 					}
 				}
+			},
+			data: {
+				permissions: {
+					only: ['AUTHORIZED'],
+					redirectTo: 'auth.login'
+				}
 			}
 		});
 
 		$urlRouterProvider.otherwise(function ($injector) {
 			var $state = $injector.get('$state');
 			$state.go('auth.login');
+		});
+	});
+
+	module.run(function (Permission, neoSession) {
+		Permission.defineRole('AUTHORIZED', function () {
+			return neoSession.checkSession();
 		});
 	});
 

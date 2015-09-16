@@ -44,6 +44,9 @@ define(['seed/auth/module'], function (module) {
 			$cookies.remove('activeCustomer');
 			$log.debug('Removed cookie objects');
 
+			Permission.roleValidations = _.pick(Permission.roleValidations, 'AUTHORIZED');
+			$log.debug('Cleared access rights');
+
 			$rootScope.user = undefined;
 			$rootScope.customer = undefined;
 			$log.debug('Removed global objects');
