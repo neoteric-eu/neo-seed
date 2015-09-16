@@ -232,7 +232,7 @@ define([
 					spyOn(MockedModel, '$build').and.callThrough();
 
 					// WHEN
-					MockedAPI.save({label: 'mock'})
+					MockedAPI.save({label: 'mock'});
 
 					// THEN
 					$httpBackend.expectPOST('/mockedModels').respond(200);
@@ -246,7 +246,6 @@ define([
 					// GIVEN
 
 					var restmod = $injector.get('restmod');
-					var appMessages = $injector.get('appMessages');
 					var $timeout = $injector.get('$timeout');
 					var MockedModel = restmod.model('/mockedModels');
 					var MockedAPI = new BaseAPI(MockedModel);
