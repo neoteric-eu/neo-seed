@@ -162,13 +162,14 @@ define(['seed/helpers/module'], function (module) {
 		 * @param model {restmod.model} Restmod model instance
 		 * @return {*}
 		 */
+
 		API.prototype.save = function (model) {
 			if (_.isUndefined(model)) {
 				$log.error('Parameter "model" must be defined');
 				return $q.reject();
 			}
 
-			var isNew = !model.$scope.$url('update');
+			var isNew = !model.$pk;
 
 			if (isNew) {
 				model = this.model.$build(model);
