@@ -29,7 +29,7 @@ define(['seed/auth/module'], function (module) {
 						});
 				} catch (e) {
 					element.hide();
-					$log.error(e.message + ': ' + attrs.neoPermissionExcept);
+					$log.info(e.message + ': ' + attrs.neoPermissionExcept);
 				}
 
 				$log.debug('Called linking function');
