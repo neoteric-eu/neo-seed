@@ -203,10 +203,10 @@ define([
 							return ;
 						}
 						if (isSingleDatePicker()) {
-							picker.setStartDate(ngModelCtrl.$modelValue);
+							picker.setStartDate(ngModelCtrl.$modelValue, false);
 						} else {
-							picker.setStartDate(ngModelCtrl.$modelValue.startDate);
-							picker.setEndDate(ngModelCtrl.$modelValue.endDate);
+							picker.setStartDate(ngModelCtrl.$modelValue.startDate, false);
+							picker.setEndDate(ngModelCtrl.$modelValue.endDate, false);
 						}
 					}
 				}
