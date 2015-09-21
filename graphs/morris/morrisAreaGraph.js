@@ -17,7 +17,8 @@ define(['seed/graphs/module', 'morris'], function (module) {
 			replace: true,
 			template: '<div class="chart no-padding"></div>',
 			scope: {
-				graphConfig: '='
+				graphConfig: '=',
+				config: '='
 			},
 			/**
 			 * Description
@@ -26,13 +27,21 @@ define(['seed/graphs/module', 'morris'], function (module) {
 			 * @param {} element
 			 */
 			link: function (scope, element) {
-				var morris = Morris.Area(_.extend({
-					element: element
-				}, scope.graphConfig));
+
+				var morris ;
+
+				scope.config.then(function() {
+					scope.$applyAsync(function() {
+						morris = Morris.Area(_.extend({
+							element: element
+						}, scope.graphConfig));
+					});
+				});
 
 				// listen to data changes
 				scope.$watch('graphConfig.data', function (newData, oldData) {
-					if (newData !== oldData) {
+
+					if (newData !== oldData && morris) {
 						morris.setData(newData);
 					}
 				});
