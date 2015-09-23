@@ -32,13 +32,27 @@ define(['seed/helpers/module'], function (module) {
 		}
 
 		/**
+		 * Creates new model collection
+		 * @abstract
+		 *
+		 * @return {*}
+		 * @param params {Object} Additional query params
+		 * @param scope {Object} Scope override
+		 */
+		API.prototype.collection = function (params, scope) {
+			return this.model.$collection(params, scope);
+		};
+
+		/**
 		 * Create new model locally based on init values
 		 * @abstract
 		 *
 		 * @param initValues {Object} Properties to build model with
+		 * @param isDataRaw {Boolean} Whether data should treated as non encoded and chain encoding
+		 *   automatically based on defined relations or not. Disabled by default
 		 * @return {*}
 		 */
-		API.prototype.build = function (initValues) {
+		API.prototype.build = function (initValues, isDataRaw) {
 			if (!_.isUndefined(initValues) && !_.isObject(initValues)) {
 				$log.error('Parameter "initValues" must be Object');
 				return;
@@ -47,7 +61,11 @@ define(['seed/helpers/module'], function (module) {
 			$log.debug('Model "' + this.model.name + '" called BaseAPI "build" method with params: ' +
 				_.stringify(initValues));
 
-			return this.model.$build(initValues);
+			if (isDataRaw) {
+				return this.model.$buildRaw(initValues);
+			} else {
+				return this.model.$build(initValues);
+			}
 		};
 
 
