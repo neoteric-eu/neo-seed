@@ -79,6 +79,7 @@ requirejs.config({
 
 		// Smart Admin plugins
 		'notification': ['jquery'],
+		'smartwidgets': ['jquery'],
 
 		// Other vendor
 		'moment': {exports: 'moment'},
