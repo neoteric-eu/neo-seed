@@ -24,7 +24,7 @@
 		"requirejs-domready": "~2.0.1",
 		"less-elements": "*",
 		"animate.less": "*",
-		"font-awesome": "~4.3.0",
+		"font-awesome": "~4.4.0",
 		"morris.js": "0.5.1",
 		"form-validation": "formvalidation/formvalidation#master",
 		"angular-mocks": "~1.4.3",
