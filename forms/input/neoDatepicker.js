@@ -173,7 +173,7 @@ define([
 				function formatter(model) {
 					var textVal;
 
-					if (!model) {
+					if (!model || !moment.isMoment(model)) {
 						return ;
 					}
 
