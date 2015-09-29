@@ -65,6 +65,8 @@ define([
 				 */
 				function init() {
 
+					//scope
+
 					// Call the plugin
 					scope.$applyAsync(function () {
 						vm.settings = _.merge({}, vm.defaultOptions, scope.neoDatepicker);
@@ -173,9 +175,15 @@ define([
 				function formatter(model) {
 					var textVal;
 
-					if (!model || !moment.isMoment(model)) {
+					if (!model) {
 						return ;
 					}
+					//if (isSingleDatePicker() && (!model || !moment.isMoment(model))) {
+					//	if (model) {
+					//		$log.debug(model +  ' is not a moment object');
+					//	}
+					//	return ;
+					//}
 
 					if (isSingleDatePicker()) {
 						return model.format('L');

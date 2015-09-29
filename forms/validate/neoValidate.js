@@ -14,6 +14,7 @@ define([
 
 		return {
 			restrict: 'A',
+			priority: 400,
 			scope: {
 				neoValidate: '='
 			},
@@ -40,24 +41,34 @@ define([
 				var options = _.merge(defaults, scope.neoValidate);
 
 				scope.$on('seed.languageAPI.setLanguage', function (e, language) {
+
+					if (currentLanguage.locale === language.locale) {
+						return ;
+					}
+
 					options.locale = language.locale;
 
+					scope.$applyAsync(function() {
+						form
+							.formValidation('destroy')
+							.on('init.form.fv', function () {
+								// Remove these irritating automatically added hidden submit buttons
+								form.find('.fv-hidden-submit').remove();
+							})
+							.formValidation(options)
+							.formValidation('validateContainer', form);
+					});
+
+				});
+
+				scope.$applyAsync(function() {
 					form
-						.formValidation('destroy')
 						.on('init.form.fv', function () {
 							// Remove these irritating automatically added hidden submit buttons
 							form.find('.fv-hidden-submit').remove();
 						})
-						.formValidation(options)
-						.formValidation('validateContainer', form);
+						.formValidation(options);
 				});
-
-				form
-					.on('init.form.fv', function () {
-						// Remove these irritating automatically added hidden submit buttons
-						form.find('.fv-hidden-submit').remove();
-					})
-					.formValidation(options);
 
 				$log.debug('Called linking function');
 			}
