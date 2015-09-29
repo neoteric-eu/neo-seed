@@ -59,9 +59,9 @@
 			"moment/moment.js": "moment/min/moment-with-locales.js",
 			"morris/morris.js": "morris.js/morris.js",
 			"raphael/raphael.js": "raphael/raphael.js",
-		  "form-validation/form-validation.js": "form-validation/dist/js/formValidation.js",
-		  "form-validation/framework/bootstrap.js": "form-validation/dist/js/framework/bootstrap.js",
-		  "form-validation/language/": "form-validation/dist/js/language/",
+		  "form-validation/form-validation.js": "form.validation/dist/js/formValidation.js",
+		  "form-validation/framework/bootstrap.js": "form.validation/dist/js/framework/bootstrap.js",
+		  "form-validation/language/": "form.validation/dist/js/language/",
 			"bootstrap-daterangepicker": "bootstrap-daterangepicker/daterangepicker.js"
 		},
 		"less": {
@@ -70,7 +70,7 @@
 			"animate/animate.less": "animate.less/animate.less",
 			"animate/source": "animate.less/source",
 			"font-awesome/": "font-awesome/less",
-		  "form-validation/formValidation.less": "form-validation/dist/css/formValidation.css",
+		  "form-validation/formValidation.less": "form.validation/dist/css/formValidation.css",
 			"ui-select/select.less": "angular-ui-select/dist/select.css",
 			"hotkeys/hotkeys.less": "angular-hotkeys/build/hotkeys.css",
 			"bootstrap-daterangepicker/daterangepicker.less": "bootstrap-daterangepicker/daterangepicker.css"
