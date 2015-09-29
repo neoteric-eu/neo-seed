@@ -3,13 +3,16 @@ define(['seed/helpers/module'], function (module) {
 
 	/**
 	 * Service Template loader service
- 	 * @class neoTemplateLoader
+	 * @class neoTemplateLoader
 	 * @memberOf seed.helpers
 	 *
 	 * @returns {Object} neoTemplateLoader service
 	 *
 	 */
 	function neoTemplateLoader($templateCache, $http, $log) {
+
+		$log = $log.getInstance('seed.helpers.neoTemplateLoader');
+		$log.debug('Initiated service');
 
 		/**
 		 * Helper caching function. Loads template from either cache or through $http
@@ -21,7 +24,7 @@ define(['seed/helpers/module'], function (module) {
 		 * @returns
 		 *
 		 */
-		this.load  = function(templateName, cacheKey) {
+		this.load = function (templateName, cacheKey) {
 			var template = $templateCache.get(templateName);
 
 			if (template) {
