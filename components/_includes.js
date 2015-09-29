@@ -5,6 +5,7 @@ define([
 	'./messages/appMessages',
 	'./preload/neoPreload',
 
+	'./moment/neoMomentTime',
 	'./moment/neoMomentDate',
 	'./moment/neoMomentDatetime',
 	'./moment/momentDatetimeDayrange'
