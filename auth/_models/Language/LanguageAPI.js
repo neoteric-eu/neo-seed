@@ -52,10 +52,11 @@ define([
 		function getLanguage() {
 			var lang = $cookies.getObject('lang') ;
 
-			if (lang == undefined || lang.name == undefined || lang.code == undefined || locale == undefined) {
+			if (lang === undefined || lang.name === undefined || lang.code === undefined || locale === undefined) {
 				return appConf.languageSettings.defaultLanguage;
-			} else
+			} else {
 				return lang;
+			}
 		}
 
 		/**
