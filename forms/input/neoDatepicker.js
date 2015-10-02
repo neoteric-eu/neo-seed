@@ -64,9 +64,8 @@ define([
 				 *
 				 */
 				function init() {
-
 					//scope
-
+					vm.settings = _.merge({}, vm.defaultOptions, scope.neoDatepicker);
 					// Call the plugin
 					scope.$applyAsync(function () {
 						vm.settings = _.merge({}, vm.defaultOptions, scope.neoDatepicker);
@@ -78,10 +77,10 @@ define([
 
 					unregisterFn = scope.$root.$on('seed.languageAPI.setLanguage', function () {
 						var model = getModel();
-						if (model.startDate) {
+						if (model.startDate && moment.isMoment(model.startDate)) {
 							model.startDate.locale(moment().locale());
 						}
-						if (model.endDate) {
+						if (model.endDate && moment.isMoment(model.endDate)) {
 							model.endDate.locale(moment().locale());
 						}
 						element.data('daterangepicker').remove();
@@ -178,12 +177,6 @@ define([
 					if (!model) {
 						return ;
 					}
-					//if (isSingleDatePicker() && (!model || !moment.isMoment(model))) {
-					//	if (model) {
-					//		$log.debug(model +  ' is not a moment object');
-					//	}
-					//	return ;
-					//}
 
 					if (isSingleDatePicker()) {
 						return model.format('L');

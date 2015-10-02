@@ -43,11 +43,20 @@ define([
 				.$asPromise()
 				.then(function (collection) {
 					self.languageCollection = collection;
-					self.setLanguage($cookies.getObject('lang') || appConf.languageSettings.defaultLanguage);
+					self.setLanguage(getLanguage());
 				});
 
 			$log.debug('Set up application language collection');
 		};
+
+		function getLanguage() {
+			var lang = $cookies.getObject('lang') ;
+
+			if (lang == undefined || lang.name == undefined || lang.code == undefined || locale == undefined) {
+				return appConf.languageSettings.defaultLanguage;
+			} else
+				return lang;
+		}
 
 		/**
 		 * Set application interface language
