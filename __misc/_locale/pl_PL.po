@@ -53,7 +53,7 @@ msgstr "Błąd"
 
 #: src/seed/auth/login/forms/login/authLoginForm.html:41
 msgid "Forgot password?"
-msgstr "Zapomniałeś hasło?"
+msgstr "Zapomniałeś hasła?"
 
 #: src/seed/components/messages/appMessages.js:25
 msgid "Info"
@@ -130,7 +130,7 @@ msgstr "do"
 
 #: src/seed/auth/login/forms/profileSelect/authProfileSelectForm.html:8
 msgid "to continue"
-msgstr "kontynuowanie"
+msgstr "aby kontynuować"
 
 #: src/seed/auth/lock/forms/authLockForm.html:25
 msgid "Unlock"
