@@ -38,7 +38,7 @@ define([
 					}
 				};
 
-				var options = _.merge(defaults, scope.neoValidate);
+				var options = {};
 
 				scope.$on('seed.languageAPI.setLanguage', function (e, language) {
 
@@ -49,6 +49,7 @@ define([
 					options.locale = language.locale;
 
 					scope.$applyAsync(function() {
+						options = _.merge(defaults, scope.neoValidate);
 						form
 							.formValidation('destroy')
 							.on('init.form.fv', function () {
@@ -62,12 +63,15 @@ define([
 				});
 
 				scope.$applyAsync(function() {
+
+					options = _.merge(defaults, scope.neoValidate);
 					form
 						.on('init.form.fv', function () {
 							// Remove these irritating automatically added hidden submit buttons
 							form.find('.fv-hidden-submit').remove();
 						})
 						.formValidation(options);
+
 				});
 
 				$log.debug('Called linking function');
