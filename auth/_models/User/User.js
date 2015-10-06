@@ -28,7 +28,8 @@ define(['seed/auth/module'], function (module) {
 					init: 'assets/seed/img/avatar-default.png'
 				},
 				$config: {
-					jsonMeta: '.'
+					jsonMeta: '.',
+					urlPrefix: 'http://mordor.neoteric.eu:4300/api/v2/'
 				},
 
 				$extend: {
@@ -42,8 +43,8 @@ define(['seed/auth/module'], function (module) {
 									login: this.login,
 									password: this.password
 								}
-							}, function (_data) {
-								this.$unwrap(_data.data, null);
+							}, function(_response) {
+								this.$unwrap(_response.data.data, null);
 							}, null);
 						},
 
@@ -52,8 +53,8 @@ define(['seed/auth/module'], function (module) {
 							return this.$send({
 								method: 'POST',
 								url: this.$scope.$url() + '/logout'
-							}, function (_data) {
-								this.$unwrap(_data.data, null);
+							}, function(_response) {
+								this.$unwrap(_response.data.data, null);
 							}, null);
 						},
 
@@ -66,8 +67,8 @@ define(['seed/auth/module'], function (module) {
 								data: {
 									token: $cookies.getObject('token')
 								}
-							}, function (_data) {
-								this.$unwrap(_data.data);
+							}, function(_response) {
+								this.$unwrap(_response.data.data, null);
 							}, null);
 						}
 					},
