@@ -83,7 +83,9 @@ define([
 						if (model.endDate && moment.isMoment(model.endDate)) {
 							model.endDate.locale(moment().locale());
 						}
-						element.data('daterangepicker') && element.data('daterangepicker').remove();
+						if ( element.data('daterangepicker') !== undefined ) {
+							element.data('daterangepicker').remove();
+						}
 						element.daterangepicker(_.merge({}, vm.settings, model));
 					});
 
