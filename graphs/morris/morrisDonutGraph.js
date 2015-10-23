@@ -17,7 +17,8 @@ define(['seed/graphs/module', 'morris'], function (module) {
 			replace: true,
 			template: '<div class="chart no-padding"></div>',
 			scope: {
-				graphConfig: '='
+				graphConfig: '=',
+				config: '='
 			},
 			/**
 			 * Description
@@ -26,21 +27,29 @@ define(['seed/graphs/module', 'morris'], function (module) {
 			 * @param {} element
 			 */
 			link: function (scope, element) {
-				var morris = Morris.Donut(_.extend({
-					element: element
-				}, scope.graphConfig));
 
-				// listen to data changes
-				var unwatch = scope.$watch('graphConfig.data', function (newData, oldData) {
-					if (newData !== oldData) {
-						morris.setData(newData);
-					}
+				var morris;
+
+				scope.config
+					.then(function() {
+						scope.$applyAsync(function() {
+
+							morris = Morris.Donut(_.extend({
+								element: element
+							}, scope.graphConfig));
+
+							initWatch();
+					});
 				});
 
-				// destroy watch with scope
-				scope.$on('destroy', function () {
-					unwatch();
-				});
+				function initWatch() {
+					// listen to data changes
+					scope.$watch('graphConfig.data', function (newData, oldData) {
+						if (newData !== oldData ) {
+							morris.setData(newData);
+						}
+					});
+				}
 			}
 		};
 	}
