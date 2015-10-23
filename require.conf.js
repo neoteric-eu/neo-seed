@@ -1,6 +1,11 @@
 // jshint unused: false
 requirejs.config({
 	baseUrl: '/',
+	deps: [
+		'lodash-extensions',
+		'bootstrap',
+		'appConfig'
+	],
 	paths: {
 		'appConfig': 'apps/module.conf',
 		// jQuery dependencies
