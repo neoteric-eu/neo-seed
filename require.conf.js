@@ -2,7 +2,6 @@
 requirejs.config({
 	baseUrl: '/',
 	paths: {
-		'appConfig': 'apps/module.conf',
 		// jQuery dependencies
 		'jquery': 'assets/vendor/js/jquery/jquery',
 
@@ -34,7 +33,6 @@ requirejs.config({
 
 		// Other vendor
 		'moment': 'assets/vendor/js/moment/moment',
-		'domReady': 'assets/vendor/js/requirejs-domready/requirejs-domready',
 		'lodash': 'assets/vendor/js/lodash/lodash',
 		'lodash-deep': 'assets/vendor/js/lodash-deep/lodash-deep',
 		'lodash-extensions': 'assets/seed/js/custom/lodash-extensions/lodash-extensions',
