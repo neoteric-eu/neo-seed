@@ -5,7 +5,6 @@ define([
 	'./actions/resetWidgets',
 	'./actions/resetWidgets',
 
-	'./directives/smartSpeech',
 	'./directives/smartMenu',
 	'./directives/bigBreadcrumbs',
 	'./directives/stateBreadcrumbs',

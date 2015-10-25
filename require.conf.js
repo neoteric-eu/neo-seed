@@ -2,7 +2,6 @@
 requirejs.config({
 	baseUrl: '/',
 	paths: {
-		'appConfig': 'apps/module.conf',
 		// jQuery dependencies
 		'jquery': 'assets/vendor/js/jquery/jquery',
 

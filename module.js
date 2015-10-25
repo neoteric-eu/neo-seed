@@ -18,7 +18,8 @@ define([
 	'angular-restmod-preload',
 	'angular-restmod-find-many',
 	'smartwidgets',
-	'notification'
+	'notification',
+	'lodash-extensions'
 ], function (ng) {
 	'use strict';
 
