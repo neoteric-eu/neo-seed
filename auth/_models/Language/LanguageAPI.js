@@ -50,9 +50,9 @@ define([
 		};
 
 		function getLanguage() {
-			var lang = $cookies.getObject('lang') ;
+			var lang = $cookies.getObject('lang');
 
-			if (lang === undefined || lang.name === undefined || lang.code === undefined || locale === undefined) {
+			if (!_.isUndefined(lang)) {
 				return appConf.languageSettings.defaultLanguage;
 			} else {
 				return lang;

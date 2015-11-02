@@ -9,7 +9,8 @@ define([
 	'./directives/bigBreadcrumbs',
 	'./directives/stateBreadcrumbs',
 	'./directives/hrefVoid',
-	'./directives/neoNavigation'
+	'./directives/neoNavigation',
+	'./directives/euLogotypes/neoEuLogotypes'
 ], function() {
 	'use strict';
 });
