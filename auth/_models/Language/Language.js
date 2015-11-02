@@ -17,10 +17,6 @@ define(['seed/auth/module'], function (module) {
 					Resource: {
 						$setSelected: function (locale) {
 							this.$selected = locale;
-						},
-
-						$findByCode: function (code) {
-							return _.findWhere(this, {code: code.toLowerCase()});
 						}
 					}
 				}

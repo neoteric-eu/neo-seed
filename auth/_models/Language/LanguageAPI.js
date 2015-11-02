@@ -21,7 +21,7 @@ define([
 	 * @return {Function} Instantiated service
 	 */
 	var LanguageAPI = function ($log, $cookies, $rootScope, Language, BaseAPI,
-		gettextCatalog, amMoment, appConf) {
+															gettextCatalog, amMoment, appConf) {
 
 		$log = $log.getInstance('seed.auth.LanguageAPI');
 		$log.debug('Initiated service');
@@ -43,21 +43,15 @@ define([
 				.$asPromise()
 				.then(function (collection) {
 					self.languageCollection = collection;
-					self.setLanguage(getLanguage());
+					var language = $cookies.getObject('lang');
+					if (!_.isObject(language)) {
+						language = appConf.languageSettings.defaultLanguage;
+					}
+					self.setLanguage(language);
 				});
 
 			$log.debug('Set up application language collection');
 		};
-
-		function getLanguage() {
-			var lang = $cookies.getObject('lang');
-
-			if (!_.isUndefined(lang)) {
-				return appConf.languageSettings.defaultLanguage;
-			} else {
-				return lang;
-			}
-		}
 
 		/**
 		 * Set application interface language
@@ -65,14 +59,10 @@ define([
 		 */
 		api.setLanguage = function (language) {
 
-			if (_.isString(language)) {
-				language = this.languageCollection.$findByCode(language);
-			}
-
 			api.languageCollection.$setSelected(language);
 
 			// Write locale to cookie
-			$cookies.putObject('lang', language.code);
+			$cookies.putObject('lang', language);
 
 			// Update libraries locale settings
 			gettextCatalog.setCurrentLanguage(language.locale);
@@ -88,13 +78,7 @@ define([
 		 * @return {seed.auth.Language} Language instance
 		 */
 		api.getLanguage = function () {
-			var language = this.languageCollection.$selected || $cookies.getObject('lang');
-
-			if (!_.isObject(language)) {
-				language = this.languageCollection.$findByCode(language);
-			}
-
-			return language;
+			return this.languageCollection.$selected || $cookies.getObject('lang');
 		};
 
 		return api;
