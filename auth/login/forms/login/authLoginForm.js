@@ -25,7 +25,7 @@ define(['seed/auth/module'], function (module) {
 			controllerAs: 'vm',
 
 			controller: function ($scope) {
-				var vm = this;
+				var vm = this || {};
 
 				// variables
 				vm.user = UserAPI.build();
@@ -51,7 +51,7 @@ define(['seed/auth/module'], function (module) {
 				 */
 				function login() {
 					if (_.isEmpty(vm.user.login) || _.isEmpty(vm.user.password)) {
-						return ;
+						return;
 					}
 
 					UserAPI
@@ -66,12 +66,15 @@ define(['seed/auth/module'], function (module) {
 							if (vm.user.customers.length > 1) {
 								$state.transitionTo('auth.profileSelect', {}, {notify: true, reload: false});
 							} else {
-								neoSession.setSession(vm.user, _.first(vm.user.customers));
-								if ($rootScope.requestedState) {
-									$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
-								} else {
-									$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
-								}
+								neoSession
+									.setSession(vm.user, _.first(vm.user.customers))
+									.then(function(){
+										if ($rootScope.requestedState) {
+											$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
+										} else {
+											$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
+										}
+									});
 							}
 						})
 						.catch(function () {

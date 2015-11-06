@@ -63,13 +63,14 @@ define(['seed/auth/module'], function (module) {
 				}
 
 				function login() {
-					neoSession.setSession(vm.user, vm.activeCustomer);
-
-					if ($rootScope.requestedState) {
-						$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
-					} else {
-						$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
-					}
+					neoSession.setSession(vm.user, vm.activeCustomer)
+						.then(function () {
+							if ($rootScope.requestedState) {
+								$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
+							} else {
+								$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
+							}
+						});
 
 					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);
 				}
