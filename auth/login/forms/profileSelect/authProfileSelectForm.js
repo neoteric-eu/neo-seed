@@ -8,12 +8,13 @@ define(['seed/auth/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param $state {Object} State helper service
+	 * @param $rootScope {Function} Angular top-level namespace
 	 * @param neoSession {Object} Session service
 	 * @param appConf {Object} Application configuration
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope:
 	 *   {redirectToState: string}, controller: Function}}
 	 */
-	function authProfileSelectForm($log, $state, neoSession, appConf) {
+	function authProfileSelectForm($log, $state, neoSession, appConf, $rootScope) {
 		$log = $log.getInstance('seed.auth.login.authProfileSelectForm');
 
 		$log.debug('Initiated directive');
@@ -62,8 +63,14 @@ define(['seed/auth/module'], function (module) {
 				}
 
 				function login() {
-					neoSession.setSession(vm.user, vm.activeCustomer);
-					$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
+					neoSession.setSession(vm.user, vm.activeCustomer)
+						.then(function () {
+							if ($rootScope.requestedState) {
+								$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
+							} else {
+								$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
+							}
+						});
 
 					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);
 				}

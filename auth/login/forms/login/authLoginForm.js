@@ -7,14 +7,14 @@ define(['seed/auth/module'], function (module) {
 	 * @memberOf seed.auth.login
 	 *
 	 * @param $log {Object} Logging service
-	 * @param $cookies {Function} Cookie service
+	 * @param $rootScope {Function} Angular top-level namespace
 	 * @param $state {Object} State helper service
 	 * @param neoSession {Object} Session service
 	 * @param appConf {Object} Application configuration
 	 * @param UserAPI {Object} Interface for REST communication with server
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function authLoginForm($log, $cookies, $state, appConf, UserAPI, neoSession) {
+	function authLoginForm($log, $state, appConf, UserAPI, neoSession, $rootScope) {
 
 		$log = $log.getInstance('seed.auth.login.authLoginForm');
 		$log.debug('Initiated directive');
@@ -25,7 +25,7 @@ define(['seed/auth/module'], function (module) {
 			controllerAs: 'vm',
 
 			controller: function ($scope) {
-				var vm = this;
+				var vm = this || {};
 
 				// variables
 				vm.user = UserAPI.build();
@@ -51,7 +51,7 @@ define(['seed/auth/module'], function (module) {
 				 */
 				function login() {
 					if (_.isEmpty(vm.user.login) || _.isEmpty(vm.user.password)) {
-						return ;
+						return;
 					}
 
 					UserAPI
@@ -66,8 +66,13 @@ define(['seed/auth/module'], function (module) {
 							if (vm.user.customers.length > 1) {
 								$state.transitionTo('auth.profileSelect', {}, {notify: true, reload: false});
 							} else {
-								neoSession.setSession(vm.user, _.first(vm.user.customers));
-								$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
+								neoSession.setSession(vm.user, _.first(vm.user.customers)).then(function () {
+									if ($rootScope.requestedState) {
+										$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
+									} else {
+										$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
+									}
+								});
 							}
 						})
 						.catch(function () {

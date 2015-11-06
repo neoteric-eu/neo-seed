@@ -17,6 +17,9 @@ define(['seed/auth/module'], function (module) {
 					Record: {
 						$setSelected: function (customer) {
 							this.$selected = customer;
+						},
+						$hasPermission: function (permission) {
+							return _.includes(this.featureKeys, permission);
 						}
 					}
 				}

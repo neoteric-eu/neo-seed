@@ -12,46 +12,66 @@ define(['seed/auth/module'], function (module) {
 	 * @param $rootScope {Object} Angular global scope helper
 	 */
 	var neoSession = function ($log, $cookies, Permission, $q, $rootScope,
-		neoRequestHeaders, UserAPI) {
+														 neoRequestHeaders, UserAPI) {
 
 		$log = $log.getInstance('seed.auth.neoSession');
 		$log.debug('Initiated service');
 
 		this.setSession = function (user, customer) {
-			Permission.defineManyRoles(
-				customer.featureKeys,
-				function (stateParams, roleName) {
-					return _.where(customer, roleName);
-				});
-			$log.debug('Set access rights');
+			var dfd = $q.defer();
 
-			$cookies.putObject('activeCustomer', customer.customerId);
-			$cookies.putObject('token', user.$metadata.token);
-			$log.debug('Set cookie objects');
+			try {
+				Permission.defineManyRoles(
+					customer.featureKeys,
+					function (stateParams, roleName) {
+						return customer.$hasPermission(roleName);
+					});
+				$log.debug('Set access rights');
 
-			$rootScope.user = user;
-			$rootScope.customer = customer;
-			$log.debug('Set customer and user objects available globally');
+				$cookies.putObject('activeCustomer', customer.customerId);
+				$cookies.putObject('token', user.$metadata.token);
+				$log.debug('Set cookie objects');
 
-			neoRequestHeaders.setCustomerId(customer.customerId);
-			neoRequestHeaders.setAuthToken(user.$metadata.token);
+				$rootScope.user = user;
+				$rootScope.customer = customer;
+				$log.debug('Set customer and user objects available globally');
 
-			$log.debug('Set new user session');
+				neoRequestHeaders.setCustomerId(customer.customerId);
+				neoRequestHeaders.setAuthToken(user.$metadata.token);
+
+				$log.debug('Set new user session');
+				dfd.resolve();
+
+			} catch (e) {
+				$log.error('Error setting up user session', e);
+				dfd.reject(e);
+			}
+
+			return dfd.promise;
 		};
 
 		this.clearSession = function () {
-			$cookies.remove('token');
-			$cookies.remove('activeCustomer');
-			$log.debug('Removed cookie objects');
+			var dfd = $q.defer();
 
-			Permission.roleValidations = _.pick(Permission.roleValidations, 'AUTHORIZED');
-			$log.debug('Cleared access rights');
+			try {
+				$cookies.remove('token');
+				$cookies.remove('activeCustomer');
+				$log.debug('Removed cookie objects');
 
-			$rootScope.user = undefined;
-			$rootScope.customer = undefined;
-			$log.debug('Removed global objects');
+				Permission.roleValidations = _.pick(Permission.roleValidations, 'AUTHORIZED');
+				$log.debug('Cleared access rights');
 
-			neoRequestHeaders.clearHeaders();
+				$rootScope.user = undefined;
+				$rootScope.customer = undefined;
+				$log.debug('Removed global objects');
+
+				neoRequestHeaders.clearHeaders();
+
+			} catch (e) {
+				$log.error('Error clearing user session', e);
+				dfd.reject(e);
+			}
+
 
 			$log.debug('Cleared user session');
 		};
@@ -68,20 +88,30 @@ define(['seed/auth/module'], function (module) {
 				UserAPI
 					.authInfo()
 					.then(function (user) {
+						// When reload page set session again
 						if (!($rootScope.user && $rootScope.customer)) {
 							var customer = _.findWhere(user.customers, {customerId: activeCustomer});
-							self.setSession(user, customer);
+							debugger;
+							self.setSession(user, customer)
+								.then(function () {
+									dfd.resolve();
+								});
+						} else {
+							// Or pass it
+							dfd.resolve();
 						}
-						dfd.resolve();
 
 						$log.debug('Successfully checked if user user session is still valid');
 
 					})
-					.catch(function (reason) {
-						self.clearSession();
-						dfd.reject(reason);
+					.catch(function (e) {
+						self
+							.clearSession()
+							.finally(function () {
+								dfd.reject(e);
+							});
 
-						$log.error('Error while checking user session');
+						$log.error('Error while checking user session', e);
 					});
 			} else {
 				$log.debug('User does not have set in cookie either token or activeCustomer');
