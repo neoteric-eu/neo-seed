@@ -91,7 +91,6 @@ define(['seed/auth/module'], function (module) {
 						// When reload page set session again
 						if (!($rootScope.user && $rootScope.customer)) {
 							var customer = _.findWhere(user.customers, {customerId: activeCustomer});
-							debugger;
 							self.setSession(user, customer)
 								.then(function () {
 									dfd.resolve();

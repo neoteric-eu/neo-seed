@@ -1,8 +1,28 @@
-## 1.1.0
-- Migrated dependencies from container to seed
-- Enabled changelog in release
-- added CHANGELOG and README
+<a name="1.1.2"></a>
+## [1.1.2](//compare/v1.1.1...v1.1.2) (2015-11-06)
 
-*Please update manually the following files when upgrading from 1.0.0+ :*
-- container.js
-- apps/_includes.js
+### Bug Fixes
+
+* **session:** #3242 - Application haven't loaded permissions properly on kick off 5b69b8b, closes #3242
+* **views:** #3204 - Remove  hrefVoid directive from all views 0742832, closes #3204
+
+### Features
+
+* **auth:** Redirection to initial address after logging in b2add59, closes #3119
+
+<a name="1.1.1"></a>
+## [1.1.1](//compare/v1.1.0...v1.1.1) (2015-11-02)
+
+### Bug Fixes
+
+* **layout:** #3203 - Added optional showing of EU logotypes e01e2a0, closes #3203
+* **components:** #3203 - Fixed initial language selection. f60d394
+
+<a name="1.1.0"></a>
+## [1.1.0](//compare/v1.0.9...v1.1.0) (2015-10-26)
+
+### Features
+
+* **seed:** Migrated dependencies from container to seed
+* **seed:** Enabled changelog in release
+* **seed:** added CHANGELOG and README
