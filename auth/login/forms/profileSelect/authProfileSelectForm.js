@@ -8,6 +8,7 @@ define(['seed/auth/module'], function (module) {
 	 *
 	 * @param $log {Object} Logging service
 	 * @param $state {Object} State helper service
+	 * @param $rootScope {Function} Angular top-level namespace
 	 * @param neoSession {Object} Session service
 	 * @param appConf {Object} Application configuration
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope:

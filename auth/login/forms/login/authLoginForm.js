@@ -7,7 +7,7 @@ define(['seed/auth/module'], function (module) {
 	 * @memberOf seed.auth.login
 	 *
 	 * @param $log {Object} Logging service
-	 * @param $cookies {Function} Cookie service
+	 * @param $rootScope {Function} Angular top-level namespace
 	 * @param $state {Object} State helper service
 	 * @param neoSession {Object} Session service
 	 * @param appConf {Object} Application configuration
