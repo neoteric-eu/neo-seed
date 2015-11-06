@@ -14,7 +14,7 @@ define(['seed/auth/module'], function (module) {
 	 * @param UserAPI {Object} Interface for REST communication with server
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function authLoginForm($log, $cookies, $state, appConf, UserAPI, neoSession) {
+	function authLoginForm($log, $state, appConf, UserAPI, neoSession, $rootScope) {
 
 		$log = $log.getInstance('seed.auth.login.authLoginForm');
 		$log.debug('Initiated directive');
@@ -67,7 +67,11 @@ define(['seed/auth/module'], function (module) {
 								$state.transitionTo('auth.profileSelect', {}, {notify: true, reload: false});
 							} else {
 								neoSession.setSession(vm.user, _.first(vm.user.customers));
-								$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
+								if ($rootScope.requestedState) {
+									$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
+								} else {
+									$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
+								}
 							}
 						})
 						.catch(function () {

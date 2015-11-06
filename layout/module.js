@@ -31,7 +31,15 @@ define(['angular'], function (ng) {
 		});
 	});
 
-	module.run(function (Permission, neoSession) {
+	module.run(function (Permission, neoSession, $rootScope) {
+
+		$rootScope.$on('$stateChangePermissionDenied', function(event, toState, toParams) {
+			$rootScope.requestedState = {
+				toState: toState.name,
+				toParams: toParams
+			};
+		});
+
 		Permission.defineRole('AUTHORIZED', function () {
 			return neoSession.checkSession();
 		});
