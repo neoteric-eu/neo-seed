@@ -3,6 +3,8 @@ define(['seed/module', 'moment'], function (app, moment) {
 
 	/**
 	 * @constructor DateDecodeFilter
+	 * @deprecated
+	 *
 	 * @example
 	 *  angular.restmod('resource').mix({
 	 *  	createdAt: {
@@ -12,7 +14,9 @@ define(['seed/module', 'moment'], function (app, moment) {
 	 * @see https://github.com/platanus/angular-restmod#decode
 	 * @return {Function}
 	 */
-	function DateDecodeFilter() {
+	function DateDecodeFilter($log) {
+		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in DateSerializer');
+
 		return function (val) {
 			return moment(val, 'YYYY-MM-DD');
 		};

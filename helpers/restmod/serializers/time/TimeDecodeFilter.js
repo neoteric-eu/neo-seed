@@ -3,6 +3,8 @@ define(['seed/module', 'moment'], function (app, moment) {
 
 	/**
 	 * @constructor TimeDecodeFilter
+	 * @deprecated
+	 *
 	 * @example
 	 *  angular.restmod('resource').mix({
 	 *  	createdAt: {
@@ -13,6 +15,8 @@ define(['seed/module', 'moment'], function (app, moment) {
 	 * @return {Function}
 	 */
 	function TimeDecodeFilter() {
+		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in TimeSerializer');
+
 		return function (val) {
 			return moment(val, 'HH:mm');
 		};
