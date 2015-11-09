@@ -34,10 +34,13 @@ define(['angular'], function (ng) {
 	module.run(function (Permission, neoSession, $rootScope) {
 
 		$rootScope.$on('$stateChangePermissionDenied', function (event, toState, toParams) {
-			$rootScope.requestedState = {
-				toState: toState.name,
-				toParams: toParams
-			};
+			$rootScope.requestedState = undefined;
+			if (toState.name !== 'auth.logout') {
+				$rootScope.requestedState = {
+					toState: toState.name,
+					toParams: toParams
+				};
+			}
 		});
 
 		Permission.defineRole('AUTHORIZED', function () {
