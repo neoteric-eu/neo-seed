@@ -6,9 +6,7 @@ define([
 	'./actions/resetWidgets',
 
 	'./directives/smartMenu',
-	'./directives/bigBreadcrumbs',
-	'./directives/stateBreadcrumbs',
-	'./directives/hrefVoid',
+	'./directives/neoStateBreadcrumbs',
 	'./directives/neoNavigation',
 	'./directives/euLogotypes/neoEuLogotypes'
 ], function() {
