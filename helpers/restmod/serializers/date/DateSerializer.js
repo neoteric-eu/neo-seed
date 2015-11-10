@@ -32,7 +32,7 @@ define(['seed/helpers/module', 'moment'], function (module, moment) {
 		return {
 			decode: decode,
 			encode: encode
-		}
+		};
 
 	}
 
