@@ -11,7 +11,7 @@
 		"angular-cookies": "1.4.x",
 		"angular-moment": "0.10.3",
 		"angular-gettext": "2.1.2",
-		"angular-hotkeys": "chieffancypants/angular-hotkeys#1.4.5",
+		"chieffancypants/angular-hotkeys": "1.6.0",
 		"angular-loading-bar": "0.8.0",
 		"angular-permission": "1.1.1",
 		"angular-restmod": "1.1.9",
@@ -28,8 +28,10 @@
 		"font-awesome": "4.x",
 		"morris.js": "0.5.1",
 		"form.validation": "latest",
-		"jasmine": "2.1.x",
 		"bootstrap-daterangepicker": "kobalka/bootstrap-daterangepicker#2.0.11"
+	},
+	"devDependencies": {
+		"jasmine": "2.1.x"
 	},
 	"copy": {
 		"js": {
