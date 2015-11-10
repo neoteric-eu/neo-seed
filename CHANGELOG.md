@@ -1,3 +1,27 @@
+<a name="1.1.3"></a>
+## [1.1.3](//compare/v1.1.2...v1.1.3) (2015-11-10)
+
+### 
+
+### Bug Fixes
+
+* **auth:** #3119 - Redirection to initial address after logging in dec29f2, closes #3119
+* **layout:** #3249 - Directive state-breadcrumbs links to state and its parents 1b73730, closes #3249
+* **helpers** #3134 - Transforming decodeFilters and encodeFilters into Serializers
+
+### BREAKING CHANGES
+
+* layout: Directive `<state-breadcrumbs>` renamed to `<neo-state-breadcrumbs>`
+* helpers: Instead of serializing properties with: 
+```
+encode: 'DateEncode',
+dencode: 'DateDecode'
+```
+now use: 
+```
+serialize: 'Date'
+```
+
 <a name="1.1.2"></a>
 ## [1.1.2](//compare/v1.1.1...v1.1.2) (2015-11-06)
 
