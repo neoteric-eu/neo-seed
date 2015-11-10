@@ -17,6 +17,11 @@ define([
 	'./restmod/serializers/enum/EnumDecodeFilter',
 	'./restmod/serializers/enum/EnumEncodeFilter',
 
+	'./restmod/serializers/datetime/DatetimeSerializer',
+	'./restmod/serializers/date/DateSerializer',
+	'./restmod/serializers/time/TimeSerializer',
+	'./restmod/serializers/enum/EnumSerializer',
+
 	'./restmod/models/BaseAPI',
 	'./restmod/models/BaseModel',
 	'./restmod/styles/NeoStyleAPI',

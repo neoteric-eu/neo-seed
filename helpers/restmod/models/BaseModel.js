@@ -14,14 +14,12 @@ define(['seed/helpers/module'], function (app) {
 	function BaseModel(restmod) {
 		return restmod.mixin({
 			createdAt: {
-				encode: 'DatetimeEncode',
-				decode: 'DatetimeDecode',
+				serialize: 'Datetime',
 				mask: 'CU'
 			},
 
 			updatedAt: {
-				encode: 'DatetimeEncode',
-				decode: 'DatetimeDecode',
+				serialize: 'Datetime',
 				mask: 'CU'
 			},
 

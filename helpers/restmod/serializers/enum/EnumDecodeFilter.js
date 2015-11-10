@@ -3,6 +3,7 @@ define(['seed/module'], function (app) {
 
 	/**
 	 * @constructor EnumDecodeFilter
+	 * @deprecated
 	 *
 	 * @example
 	 *  angular.restmod('resource').mix({
@@ -13,7 +14,9 @@ define(['seed/module'], function (app) {
 	 * @see https://github.com/platanus/angular-restmod#decode
 	 * @return {Function}
 	 */
-	function EnumDecodeFilter() {
+	function EnumDecodeFilter($log) {
+		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in EnumSerializer');
+
 		return function (key, Enum) {
 			return Enum.getValueByKey(key);
 		};
