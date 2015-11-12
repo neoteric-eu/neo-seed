@@ -32,7 +32,7 @@ define(['seed/helpers/module'], function (module) {
 		return {
 			decode: decode,
 			encode: encode
-		}
+		};
 
 	}
 
