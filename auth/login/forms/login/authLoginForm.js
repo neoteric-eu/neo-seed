@@ -30,6 +30,7 @@ define(['seed/auth/module'], function (module) {
 				// variables
 				vm.user = UserAPI.build();
 				vm.predefinedLogins = appConf.environmentSettings.predefinedLogins;
+				vm.appConf = appConf;
 
 				// methods
 				vm.login = login;

@@ -41,6 +41,12 @@
 				<a ui-sref="auth.forgotPassword">{{'Forgot password?'|translate}}</a>
 			</div>
 		</section>
+
+		<section ng-if="vm.appConf.generalSettings.showEuLogotypes"
+						 style="height: 125px">
+			<neo-eu-logotypes></neo-eu-logotypes>
+		</section>
+
 	</fieldset>
 
 	<footer>
