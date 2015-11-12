@@ -3,7 +3,7 @@ define(['seed/layout/module'], function (module) {
 
 	/**
 	 * Creates a Breadcrumbs line based on state data.title attribute
-	 * @class stateBreadcrumbs
+	 * @class neoStateBreadcrumbs
 	 * @memberOf seed.layout.directives
 	 *
 	 * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
@@ -13,7 +13,7 @@ define(['seed/layout/module'], function (module) {
 	 * @example
 	 * 		<state-breadcrumbs></state-breadcrumbs>
 	 *
-	 * 	Staate definition object
+	 * 	State definition object
 	 *
 	 * 	.state('app.tasks.tracker.entries', {
    *		url: '...',
@@ -69,7 +69,7 @@ define(['seed/layout/module'], function (module) {
 				}
 			}
 		};
-	};
+	}
 
 	module.directive('neoStateBreadcrumbs', neoStateBreadcrumbs);
 
