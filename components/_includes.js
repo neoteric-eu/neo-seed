@@ -4,6 +4,7 @@ define([
 	'./language/neoLanguageSwitcher',
 	'./messages/appMessages',
 	'./preload/neoPreload',
+	'./pageTitle/neoPageTitle',
 
 	'./moment/neoMomentTime',
 	'./moment/neoMomentDate',
