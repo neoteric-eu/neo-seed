@@ -66,14 +66,15 @@ define(['seed/auth/module'], function (module) {
 				$log.debug('Removed global objects');
 
 				neoRequestHeaders.clearHeaders();
+				dfd.resolve();
 
 			} catch (e) {
 				$log.error('Error clearing user session', e);
 				dfd.reject(e);
 			}
 
-
 			$log.debug('Cleared user session');
+			return dfd.promise;
 		};
 
 		this.checkSession = function () {
