@@ -6,10 +6,12 @@ define(['seed/helpers/module'], function (module) {
 	 * @class neoTemplateLoader
 	 * @memberOf seed.helpers
 	 *
-	 * @returns {Object} neoTemplateLoader service
-	 *
+	 * @param $templateCache {Object} Cache provider
+	 * @param $http {Object} HTTP interface
+	 * @param $log {Object} Logging service
+	 * @param $q {Object} Promise factory
 	 */
-	function neoTemplateLoader($templateCache, $http, $log) {
+	function neoTemplateLoader($templateCache, $http, $log, $q) {
 
 		$log = $log.getInstance('seed.helpers.neoTemplateLoader');
 		$log.debug('Initiated service');
@@ -18,33 +20,46 @@ define(['seed/helpers/module'], function (module) {
 		 * Helper caching function. Loads template from either cache or through $http
 		 * and puts the template under cacheKey
 		 *
-		 * @param templateName {String} path to HTML to be cached
+		 * @param templatePath {String} path to HTML to be cached
 		 * @param cacheKey {String} Key under which template will be stored
 		 *
 		 * @returns
 		 *
 		 */
-		this.load = function (templateName, cacheKey) {
-			var template = $templateCache.get(templateName);
+		this.load = function (templatePath, cacheKey) {
+			var dfd = $q.defer();
+
+			// If custom cache key is not provided store it at default key
+			if (_.isUndefined(cacheKey)) {
+				cacheKey = templatePath;
+			}
+
+			var template = $templateCache.get(templatePath);
 
 			if (template) {
 				$templateCache.put(cacheKey, template);
-				$log.debug('Loaded ' + templateName +
-					' template into cache under key: ' + cacheKey);
+				dfd.resolve(template);
 
+				$log.debug('Loaded ' + templatePath + ' template into cache under key: ' + cacheKey);
 			} else {
+
 				$http
-					.get(templateName)
+					.get(templatePath)
 					.then(function (response) {
 						$templateCache.put(cacheKey, response.data);
 
-						$log.debug('Loaded ' + templateName +
-							' template into cache under key: ' + cacheKey);
+						dfd.resolve(response.data);
+						$log.debug('Loaded ' + templatePath + ' template into cache under key: ' + cacheKey);
+
 					})
-					.catch(function () {
-						$log.error('Could not load ' + templateName + ' template');
+					.catch(function (err) {
+						dfd.reject(err);
+
+						$log.error('Could not load ' + templatePath + ' template');
 					});
 			}
+
+			return dfd.promise;
 		};
 	}
 

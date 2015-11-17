@@ -1,19 +1,19 @@
-define(['seed/layout/module'], function (module) {
+define(['seed/components/module'], function (module) {
 	'use strict';
 
 	/**
 	 * Creates a Breadcrumbs line based on state data.title attribute
 	 * @class neoStateBreadcrumbs
-	 * @memberOf seed.layout.directives
+	 * @memberOf seed.components
 	 *
 	 * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
 	 * @param $rootScope
 	 * @param $state
 	 *
 	 * @example
-	 * 		<state-breadcrumbs></state-breadcrumbs>
+	 *  <state-breadcrumbs></state-breadcrumbs>
 	 *
-	 * 	State definition object
+	 *  State definition object:
 	 *
 	 * 	.state('app.tasks.tracker.entries', {
    *		url: '...',
@@ -28,7 +28,7 @@ define(['seed/layout/module'], function (module) {
 		return {
 			restrict: 'E',
 			replace: true,
-			templateUrl: 'seed/layout/directives/neoStateBreadcrumbs.html',
+			templateUrl: 'seed/components/breadcrumbs/neoStateBreadcrumbs.html',
 			scope: {},
 			link: function (scope) {
 
