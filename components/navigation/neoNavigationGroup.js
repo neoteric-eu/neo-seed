@@ -76,7 +76,7 @@ define(['seed/components/module'], function (module) {
 									$(this)
 										.removeClass('open')
 										.find('ul:first')
-										.slideUp(200)
+										.slideUp(200);
 								});
 						});
 

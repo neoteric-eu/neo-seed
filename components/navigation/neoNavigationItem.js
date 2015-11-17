@@ -67,7 +67,7 @@ define(['seed/components/module'], function (module) {
 					return $state.includes(vm.state);
 				}
 			}
-		}
+		};
 	}
 
 	module.directive('neoNavigationItem', neoNavigationItem);
