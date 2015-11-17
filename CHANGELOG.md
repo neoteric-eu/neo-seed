@@ -1,3 +1,32 @@
+<a name="1.1.4"></a>
+## [1.1.4](//compare/v1.1.3...v1.1.4) (2015-11-17)
+
+
+### Bug Fixes
+
+* **neoSession:** #3304 - clearSession haven't returned the promise. 57eea04
+* **theme.app.js:** #3292 - Remove theme.app.js acc2848
+
+### Features
+
+* **neoNavigation:** #3133 - Remove smart-menu.js e2db72a, closes #3133
+* **neoPageTitle:** #3304 - Add missing neoPageTitle directive c0f39cb, closes #3304
+
+
+### BREAKING CHANGES
+
+* neoPageTitle: 
+	Now application is bootstrapped on `<html>` tag instead of `<body>`. 
+	Please manually update files: `src/container.js` and `config/protractor/protractor.conf.js` 
+	in application container.
+	
+* neoNavigation: 
+	From now every `_navigation.html` file has to be structured 
+	based on `neoNavigationGroup` and `neoNavigationItem` directives. 
+	See included examples in documentation of those directives.
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](//compare/v1.1.2...v1.1.3) (2015-11-10)
 
