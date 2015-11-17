@@ -1,4 +1,4 @@
-define(['seed/layout/module'], function (module) {
+define(['seed/components/module'], function (module) {
 	'use strict';
 
 	function bigBreadcrumbs() {
@@ -13,7 +13,6 @@ define(['seed/layout/module'], function (module) {
 
 			link: function (scope, element) {
 				var first = _.first(scope.items);
-
 				var icon = scope.icon || 'home';
 
 				element

@@ -1,10 +1,10 @@
-define(['seed/layout/module'], function (module) {
+define(['seed/components/module'], function (module) {
 	'use strict';
 
 	function neoEuLogotypes() {
 		return {
 			restrict: 'E',
-			templateUrl: 'seed/layout/directives/euLogotypes/neoEuLogotypes.html'
+			templateUrl: 'seed/components/euLogotypes/neoEuLogotypes.html'
 		};
 	}
 
