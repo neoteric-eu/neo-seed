@@ -49,8 +49,11 @@ define([
 							UserAPI
 								.logout($rootScope.user)
 								.then(function () {
-									neoSession.clearSession();
-									$state.go('auth.login');
+									neoSession
+										.clearSession()
+										.finally(function () {
+											$state.go('auth.login');
+										});
 								});
 						}
 					}
@@ -70,8 +73,11 @@ define([
 				UserAPI
 					.logout($rootScope.user)
 					.then(function () {
-						neoSession.clearSession();
-						$state.go('auth.lock');
+						neoSession
+							.clearSession()
+							.finally(function () {
+								$state.go('auth.lock');
+							});
 					});
 			}
 		});
