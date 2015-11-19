@@ -25,15 +25,13 @@
 
 * neoPageTitle: 
 	Now application is bootstrapped on `<html>` tag instead of `<body>`. 
-	Please manually update files: `src/container.js` and `config/protractor/protractor.conf.js` 
+	Please manually update files:  `src/index.html`, `src/container.js` and `config/protractor/protractor.conf.js` 
 	in application container.
 	
 * neoNavigation: 
 	From now every `_navigation.html` file has to be structured 
 	based on `neoNavigationGroup` and `neoNavigationItem` directives. 
 	See included examples in documentation of those directives.
-
-
 
 <a name="1.1.3"></a>
 ## [1.1.3](//compare/v1.1.2...v1.1.3) (2015-11-10)
