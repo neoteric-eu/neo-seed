@@ -1,3 +1,11 @@
+<a name="1.1.5"></a>
+## [1.1.5](//compare/v1.1.4...v1.1.5) (2015-11-19)
+
+### Features
+
+* **BaseModel** #3331 - Extend BaseModel for FindMany extension
+
+
 <a name="1.1.4"></a>
 ## [1.1.4](//compare/v1.1.3...v1.1.4) (2015-11-17)
 
