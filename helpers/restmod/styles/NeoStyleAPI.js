@@ -1,4 +1,8 @@
-define(['seed/helpers/module'], function (app) {
+define([
+	'seed/helpers/module',
+	'angular-restmod/preload',
+	'angular-restmod/find-many'
+], function (app) {
 	'use strict';
 
 	/**
@@ -13,6 +17,7 @@ define(['seed/helpers/module'], function (app) {
 	function NeoStyleAPI(restmod, appConf) {
 		return restmod.mixin(
 			'DefaultPacker',
+			'restmod.FindMany',
 			'restmod.Preload',
 			'BaseModel', {
 				$config: {

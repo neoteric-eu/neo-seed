@@ -15,8 +15,6 @@ define([
 	'angular-loading-bar',
 	'angular-moment',
 	'angular-restmod',
-	'angular-restmod-preload',
-	'angular-restmod-find-many',
 	'smartwidgets',
 	'notification',
 	'lodash-extensions'

@@ -5,7 +5,7 @@ define(['seed/helpers/module'], function (app) {
 	 * Restmod base model for all instances
 	 * @class BaseModel
 	 * @interface
-	 * @implements {seed.BaseAPI}
+	 * @implements {seed.helpers.BaseAPI}
 	 * @memberOf seed.helpers
 	 *
 	 * @param restmod
@@ -25,12 +25,6 @@ define(['seed/helpers/module'], function (app) {
 
 			$extend: {
 				Model: {
-					/**
-					 * Description
-					 * @method encodeUrlName
-					 * @param {String} _name
-					 * @return {String} _name
-					 */
 					encodeUrlName: function (_name) {
 						return _name;
 					}
