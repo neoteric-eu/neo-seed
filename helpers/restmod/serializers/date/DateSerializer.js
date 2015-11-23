@@ -1,4 +1,4 @@
-define(['seed/helpers/module', 'moment'], function (module, moment) {
+define(['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -14,17 +14,18 @@ define(['seed/helpers/module', 'moment'], function (module, moment) {
 	 *
 	 * @see https://github.com/platanus/angular-restmod/blob/master/dist/angular-restmod.js#L2064
 	 * @param $log {Object} Logging service
+	 * @param DateSerializerService {Object} Serialization service
 	 * @return {{decode: decode, encode: encode}}
 	 */
-	function DateSerializer($log) {
+	function DateSerializer($log, DateSerializerService) {
 		$log = $log.getInstance('seed.helpers.DateSerializer');
 
 		function decode(val) {
-			return moment(val, 'YYYY-MM-DD');
+			return DateSerializerService.decode(val);
 		}
 
 		function encode(val) {
-			return val.format('YYYY-MM-DD');
+			return DateSerializerService.encode(val);
 		}
 
 		$log.debug('Initialized factory');

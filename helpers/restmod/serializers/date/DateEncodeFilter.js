@@ -1,4 +1,4 @@
-define(['seed/module', 'moment'], function (app) {
+define(['seed/module'], function (module) {
 	'use strict';
 
 	/**
@@ -12,15 +12,18 @@ define(['seed/module', 'moment'], function (app) {
 	 * 		}
 	 * 	});
 	 * @see https://github.com/platanus/angular-restmod#encode
+	 *
+	 * @param $log {Object} Logging service
+	 * @param DateSerializerService {Object} Serialization service
 	 * @return {Function}
 	 */
-	function DateEncodeFilter($log) {
+	function DateEncodeFilter($log, DateSerializerService) {
 		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in DateSerializer');
 
 		return function (val) {
-			return val.format('YYYY-MM-DD');
+			return DateSerializerService.encode(val);
 		};
 	}
 
-	app.factory('DateEncodeFilter', DateEncodeFilter);
+	module.factory('DateEncodeFilter', DateEncodeFilter);
 });

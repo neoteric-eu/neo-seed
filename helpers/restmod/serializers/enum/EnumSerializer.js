@@ -14,17 +14,18 @@ define(['seed/helpers/module'], function (module) {
 	 *
 	 * @see https://github.com/platanus/angular-restmod/blob/master/dist/angular-restmod.js#L2064
 	 * @param $log {Object} Logging service
+	 * @param EnumSerializerService {Object} Serialization service
 	 * @return {{decode: decode, encode: encode}}
 	 */
-	function EnumSerializer($log) {
+	function EnumSerializer($log, EnumSerializerService) {
 		$log = $log.getInstance('seed.helpers.EnumSerializer');
 
 		function decode(key, Enum) {
-			return Enum.getValueByKey(key);
+			return EnumSerializerService.decode(key, Enum);
 		}
 
 		function encode(val, Enum) {
-			return Enum.getKeyByValue(val);
+			return EnumSerializerService.encode(val, Enum);
 		}
 
 		$log.debug('Initialized factory');

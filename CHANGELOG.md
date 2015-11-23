@@ -1,3 +1,13 @@
+<a name="1.1.6"></a>
+## [1.1.6](//compare/v1.1.5...v1.1.6) (2015-11-23)
+
+
+### Bug Fixes
+
+* **Serializer:** #3343 - Handling marshaling errors in date/time/datetime models e912f4a
+
+
+
 <a name="1.1.5"></a>
 ## [1.1.5](//compare/v1.1.4...v1.1.5) (2015-11-19)
 
