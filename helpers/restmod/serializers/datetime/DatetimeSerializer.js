@@ -1,4 +1,4 @@
-define(['seed/helpers/module', 'moment'], function (module, moment) {
+define(['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -14,17 +14,18 @@ define(['seed/helpers/module', 'moment'], function (module, moment) {
 	 *
 	 * @see https://github.com/platanus/angular-restmod/blob/master/dist/angular-restmod.js#L2064
 	 * @param $log {Object} Logging service
+	 * @param DatetimeSerializerService {Object} Serialization service
 	 * @return {{decode: decode, encode: encode}}
 	 */
-	function DatetimeSerializer($log) {
+	function DatetimeSerializer($log, DatetimeSerializerService) {
 		$log = $log.getInstance('seed.helpers.DatetimeSerializer');
 
 		function decode(val) {
-			return moment(val, moment.ISO_8601);
+			return DatetimeSerializerService.decode(val);
 		}
 
 		function encode(val) {
-			return val.utc().toISOString();
+			DatetimeSerializerService.encode(val);
 		}
 
 		$log.debug('Initialized factory');
@@ -33,7 +34,6 @@ define(['seed/helpers/module', 'moment'], function (module, moment) {
 			decode: decode,
 			encode: encode
 		};
-
 	}
 
 	module.factory('DatetimeSerializer', DatetimeSerializer);

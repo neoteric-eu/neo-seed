@@ -1,4 +1,4 @@
-define(['seed/module'], function (app) {
+define(['seed/module'], function (module) {
 	'use strict';
 
 	/**
@@ -12,15 +12,18 @@ define(['seed/module'], function (app) {
 	 * 		}
 	 *	});
 	 * @see https://github.com/platanus/angular-restmod#decode
+	 *
+	 * @param $log {Object} Logging service
+	 * @param EnumSerializerService {Object} Serialization service
 	 * @return {Function}
 	 */
-	function EnumDecodeFilter($log) {
+	function EnumDecodeFilter($log, EnumSerializerService) {
 		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in EnumSerializer');
 
 		return function (key, Enum) {
-			return Enum.getValueByKey(key);
+			return EnumSerializerService.decode(key, Enum);
 		};
 	}
 
-	app.factory('EnumDecodeFilter', EnumDecodeFilter);
+	module.factory('EnumDecodeFilter', EnumDecodeFilter);
 });
