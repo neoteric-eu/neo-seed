@@ -25,7 +25,7 @@ define(['seed/helpers/module'], function (module) {
 		}
 
 		function encode(val) {
-			DatetimeSerializerService.encode(val);
+			return DatetimeSerializerService.encode(val);
 		}
 
 		$log.debug('Initialized factory');
