@@ -1,4 +1,4 @@
-define(['seed/helpers/module', 'moment'], function (module, moment) {
+define(['seed/helpers/module', '../../../../../../bower_components/moment/moment'], function (module, moment) {
 	'use strict';
 
 	/**
