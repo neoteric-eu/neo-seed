@@ -19,14 +19,22 @@ define(['seed/helpers/module', 'moment'], function (module, moment) {
 			} else {
 				// @todo: Handle on backend returning null values for unset fields
 				if (!_.isNull(val)) {
-					$log.error('Could not serialize to moment object from date value: ' + val);
+					$log.error('Could not serialize from date value to moment object: ' + val);
 				}
 				return undefined;
 			}
 		};
 
 		this.encode = function (val) {
-			return val.format('YYYY-MM-DD');
+			if (_.isEmpty(val)) {
+				return;
+			}
+
+			if (_.isFunction(val.isValid) && val.isValid()) {
+				return val.format('YYYY-MM-DD');
+			} else {
+				throw new Error('Could not serialize from moment object to date value: ' + val);
+			}
 		};
 
 		$log.debug('Initialized service');
