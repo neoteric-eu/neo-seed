@@ -26,7 +26,15 @@ define(['seed/helpers/module', 'moment'], function (module, moment) {
 		};
 
 		this.encode = function (val) {
-			return val.format('YYYY-MM-DD');
+			if (_.isEmpty(val)) {
+				return;
+			}
+
+			if (_.isFunction(val.isValid) && val.isValid()) {
+				return val.format('YYYY-MM-DD');
+			} else {
+				throw new Error('Could not serialize from moment object to date value: ' + val);
+			}
 		};
 
 		$log.debug('Initialized service');
