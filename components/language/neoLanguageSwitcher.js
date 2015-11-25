@@ -32,19 +32,7 @@ define(['seed/components/module'], function (module) {
 				vm.activeLanguage = LanguageAPI.getLanguage();
 
 				// methods
-				vm.init = init;
 				vm.setLanguageActive = setLanguageActive;
-
-				init();
-
-				/**
-				 * Initializes controller on set-up
-				 */
-				function init() {
-					LanguageAPI.init();
-
-					$log.debug('Initiated controller');
-				}
 
 				/**
 				 * Change application language
@@ -56,6 +44,9 @@ define(['seed/components/module'], function (module) {
 
 					$log.debug('Switched application language');
 				}
+
+
+				$log.debug('Initiated controller');
 
 			}
 		};

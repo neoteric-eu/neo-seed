@@ -12,16 +12,15 @@ define(['seed/helpers/module', 'moment'], function (module, moment) {
 		$log = $log.getInstance('seed.helpers.DatetimeSerializerService');
 
 		this.decode = function (val) {
-
 			var decodedDate = moment(val, moment.ISO_8601);
+
 			if (decodedDate.isValid()) {
 				return decodedDate;
 			} else {
 				// @todo: Handle on backend returning null values for unset fields
 				if (!_.isNull(val)) {
-					$log.error('Could not serialize to moment object from timestamp value: ' + val);
+					throw new Error('Could not serialize from timestamp value to moment object: ' + val);
 				}
-				return undefined;
 			}
 		};
 
