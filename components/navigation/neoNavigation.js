@@ -30,18 +30,16 @@ define(['seed/components/module'], function (module) {
 					.sortBy('order')
 					.pluck('path')
 					.map(function (path) {
-						return neoTemplateLoader
-							.load(path + '/__misc/_navigation/navigation.html')
-							.then(function (template) {
-								var compiled = $compile(template)($scope);
-								$element.contents().append(compiled);
-							});
+						return neoTemplateLoader.load(path + '/__misc/_navigation/navigation.html');
 					})
 					.value();
 
 				$q
 					.all(promises)
-					.then(function () {
+					.then(function (templates) {
+						var html = templates.join();
+						$element.contents().append($compile(html)($scope));
+
 						// Async apply is not working here (ಠ╭╮ಠ)
 						$timeout(function () {
 							$element
@@ -56,7 +54,10 @@ define(['seed/components/module'], function (module) {
 										.find('ul:first')
 										.slideDown(0);
 								});
-						}, 0);
+						});
+					})
+					.catch(function () {
+						$log.error('Error loading navigation templates');
 					});
 
 				$log.debug('Called linking function');
