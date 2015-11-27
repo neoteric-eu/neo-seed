@@ -9,6 +9,7 @@ define(['angular', 'moment', 'seed/helpers/module'], function (ng, moment, modul
 	 * @returns {*}
 	 */
 	function $log($delegate) {
+		'ngInject';
 
 		$delegate.getInstance = getInstance;
 
