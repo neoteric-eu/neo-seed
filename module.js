@@ -59,7 +59,7 @@ define([
 		cfpLoadingBarProvider.includeSpinner = false;
 		cfpLoadingBarProvider.latencyThreshold = 500;
 
-		$locationProvider.html5Mode(appConf.environmentSettings.modRewriteEnabled);
+		$locationProvider.html5Mode(true);
 		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
 
 		// Add the interceptors to the $httpProvider.
