@@ -28,10 +28,10 @@ define(['seed/components/module'], function (module) {
 				var promises = _
 					.chain(appConf.appsSettings)
 					.sortBy('order')
-					.pluck('path')
-					.map(function (path) {
+					.pluck('directory')
+					.map(function (directory) {
 						return neoTemplateLoader
-							.load(path + '/__misc/_navigation/navigation.html')
+							.load('apps/' + directory + '/__misc/_navigation/navigation.html')
 							.then(function (template) {
 								var compiled = $compile(template)($scope);
 								$element.contents().append(compiled);
