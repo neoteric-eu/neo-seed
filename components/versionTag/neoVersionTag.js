@@ -4,16 +4,15 @@ define(['seed/components/module'], function (module) {
 	/**
 	 * Displays the version and build number at the bottom of side navigation panel
 	 * @class neoVersionTag
-	 * @memberOf package
+	 * @memberOf seed.components
 	 *
 	 * @param $log {Object} Logging service
-	 * @return {{restrict: string, templateUrl: string, scope: boolean, link: link}}
-	 * @param appConf
+	 * @param appConf {Object} Container configuration
+	 * @return {{restrict: string, templateUrl: string, scope: boolean, link: Function}}
 	 */
-
 	function neoVersionTag($log, appConf) {
 
-		$log = $log.getInstance('package.neoVersionTag');
+		$log = $log.getInstance('seed.components.neoVersionTag');
 		$log.debug('Initiated directive');
 
 		return {
@@ -29,7 +28,6 @@ define(['seed/components/module'], function (module) {
 	}
 
 	module.directive('neoVersionTag', neoVersionTag);
-
 });
 
 
