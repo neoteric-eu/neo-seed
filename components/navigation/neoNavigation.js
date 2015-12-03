@@ -28,9 +28,9 @@ define(['seed/components/module'], function (module) {
 				var promises = _
 					.chain(appConf.appsSettings)
 					.sortBy('order')
-					.pluck('path')
-					.map(function (path) {
-						return neoTemplateLoader.load(path + '/__misc/_navigation/navigation.html');
+					.pluck('directory')
+					.map(function (directory) {
+						return neoTemplateLoader.load('apps/' + directory + '/__misc/_navigation/navigation.html');
 					})
 					.value();
 
