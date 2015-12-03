@@ -26,7 +26,6 @@ define([
 	'./restmod/serializers/enum/EnumSerializerService',
 	'./restmod/serializers/enum/EnumDecodeFilter',
 	'./restmod/serializers/enum/EnumEncodeFilter',
-	'./restmod/serializers/enum/EnumSerializer',
 
 	'./restmod/models/BaseAPI',
 	'./restmod/models/BaseModel',

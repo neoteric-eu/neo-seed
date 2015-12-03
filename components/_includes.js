@@ -3,7 +3,6 @@ define([
 	'./customer/neoCustomerSwitcher',
 	'./language/neoLanguageSwitcher',
 	'./messages/appMessages',
-	'./preload/neoPreload',
 	'./euLogotypes/neoEuLogotypes',
 
 	'./breadcrumbs/neoStateBreadcrumbs',

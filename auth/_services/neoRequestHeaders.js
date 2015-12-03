@@ -25,9 +25,16 @@ define(['seed/auth/module'], function (module) {
 			$log.debug('Set X-Customer-Id header');
 		};
 
+		this.setAcceptLanguage = function (language) {
+			$http.defaults.headers.common['Accept-Language'] = language;
+
+			$log.debug('Set Accept-Language header');
+		};
+
 		this.clearHeaders = function () {
 			delete $http.defaults.headers.common['Authorization'];
 			delete $http.defaults.headers.common['X-Customer-Id'];
+			delete $http.defaults.headers.common['Accept-Language'];
 
 			$log.debug('Cleared headers');
 		};

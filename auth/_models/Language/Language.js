@@ -3,7 +3,7 @@ define(['seed/auth/module'], function (module) {
 
 	/**
 	 * @constructor
-	 * @implements {seed.BaseModel}
+	 * @implements {seed.helpers.BaseModel}
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface

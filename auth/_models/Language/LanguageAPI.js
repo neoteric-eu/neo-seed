@@ -7,12 +7,14 @@ define([
 	/**
 	 * Interface for REST communication with server
 	 * @constructor
-	 * @implements {seed.BaseAPI}
+	 * @implements {seed.helpers.BaseAPI}
 	 * @memberOf seed.auth
 	 *
 	 * @param $log {Object} Logging service
+	 * @param $window {Object} Window service
 	 * @param $cookies {Function} Cookie service
-	 * @param Language  {Object} Model factory
+	 * @param Language {Object} Model factory
+	 * @param neoRequestHeaders {Object} Header manipulation service
 	 * @param BaseAPI {Function} Base interface for REST communication with server
 	 * @param $rootScope {Object} Global scope provider
 	 * @param appConf {Object} Application configuration
@@ -20,7 +22,7 @@ define([
 	 * @param amMoment {Object} Moment configuration provider
 	 * @return {Function} Instantiated service
 	 */
-	var LanguageAPI = function ($log, $cookies, $rootScope, Language, BaseAPI,
+	var LanguageAPI = function ($log, $window, $cookies, $rootScope, Language, neoRequestHeaders, BaseAPI,
 															gettextCatalog, amMoment, appConf) {
 
 		$log = $log.getInstance('seed.auth.LanguageAPI');
@@ -28,29 +30,46 @@ define([
 
 		var api = new BaseAPI(Language);
 
-		this.languageCollection = [];
+		api.languageCollection = [];
 
 		/**
-		 * Initiate the collection of the languages
-		 * and assign them to $rootScope.
+		 * Initiate the collection of the languages and set application language.
 		 */
 		api.init = function () {
-			var self = this;
-			Language
+			api.languageCollection = Language
 				.$collection()
-				.$build(appConf.languageSettings.languageCollection)
-				.$reveal()
-				.$asPromise()
-				.then(function (collection) {
-					self.languageCollection = collection;
-					var language = $cookies.getObject('lang');
-					if (!_.isObject(language)) {
-						language = appConf.languageSettings.defaultLanguage;
+				.$build(appConf.languageSettings.languageCollection);
+
+			if (_.some(api.languageCollection, function (language) {
+					if (_.has(language, 'locale')) {
+						return _.contains(language.locale, '_');
 					}
-					self.setLanguage(language);
-				});
+				})) {
+				$log.error('At current state the translations will not work.');
+				$log.error('Locale format are now aligned with ISO format (pl_PL -> pl-PL)');
+				$log.error('Update: .pot files along with translation.js and change language.json locale in your container configuration.');
+			}
 
 			$log.debug('Set up application language collection');
+
+			var cookieLang = $cookies.getObject('lang');
+
+			if (_.isObject(cookieLang)) {
+				api.setLanguage(cookieLang);
+				$log.debug('Set up application language from cookie');
+				return;
+			}
+
+			var browserLang = $window.navigator.language || $window.navigator.userLanguage || $window.navigator.systemLanguage;
+
+			if (_.some(api.languageCollection, {locale: browserLang})) {
+				api.setLanguage(_.find(api.languageCollection, {locale: browserLang}));
+				$log.debug('Set up application language from browser preferences');
+				return;
+			}
+
+			api.setLanguage(appConf.languageSettings.defaultLanguage);
+			$log.debug('Set up application language from defaults');
 		};
 
 		/**
@@ -63,6 +82,8 @@ define([
 
 			// Write locale to cookie
 			$cookies.putObject('lang', language);
+			// Update headers
+			neoRequestHeaders.setAcceptLanguage(language.locale);
 
 			// Update libraries locale settings
 			gettextCatalog.setCurrentLanguage(language.locale);
@@ -78,7 +99,7 @@ define([
 		 * @return {seed.auth.Language} Language instance
 		 */
 		api.getLanguage = function () {
-			return this.languageCollection.$selected || $cookies.getObject('lang');
+			return api.languageCollection.$selected;
 		};
 
 		return api;
