@@ -1,3 +1,20 @@
+<a name="1.2.0"></a>
+# [1.2.0](//compare/v1.1.7...v1.2.0) (2015-12-03)
+
+### Bug Fixes
+
+* **EnumSerializer:** #3329 - EnumSerializer doesn't work 489ac2e
+* **neoNavigation:** #3354 - Guarantee order of navigation items in neoNavigation 217786b, closes #3354
+* **neoPreload:** #3353 - Remove neoPreload 0735062, closes #3353
+* **Serializer:** #3343 - Handling demarshaling errors in date/time/datetime models 9330c0c
+
+### Features
+
+* **LanguageAPI:** #3330 - Add Accept-Language to neoRequestHeaders dfe7ede
+* **neoNavigation:** #3251 - Parametrise environment configuration of the application 7c7384d, closes #3251
+* **neoVersionTag:** #3394 - Add container version directive 75a9c47
+
+
 <a name="1.1.6"></a>
 ## [1.1.6](//compare/v1.1.5...v1.1.6) (2015-11-23)
 
