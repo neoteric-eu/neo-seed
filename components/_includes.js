@@ -12,6 +12,7 @@ define([
 	'./navigation/neoNavigationGroup',
 	'./navigation/neoNavigationItem',
 	'./pageTitle/neoPageTitle',
+	'./versionTag/neoVersionTag',
 
 	'./moment/neoMomentTime',
 	'./moment/neoMomentDate',
