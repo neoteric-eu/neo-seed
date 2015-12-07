@@ -1,0 +1,132 @@
+/*
+ * AJAX DROPDOWN
+ */
+
+.ajax-dropdown > :first-child {
+	margin: 0 0 3px 0;
+	padding: 0 0 9px 0;
+}
+
+.ajax-dropdown {
+	position: absolute;
+	display: none;
+	z-index: @ajax-dropdown-zindex;
+	background: white;
+	top: 43px;
+	left: 63px;
+	width: 344px;
+	height: 435px;
+	border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-box-shadow: 0 2px 4px rgba(30, 30, 100, 0.25);
+	-moz-box-shadow: 0 2px 4px rgba(30, 30, 100, 0.25);
+	box-shadow: 0 2px 4px rgba(30, 30, 100, 0.25);
+	padding: 10px;
+	background: @white;
+	border: 1px solid #b3b3b3;
+}
+
+.ajax-dropdown:after, .ajax-dropdown:before {
+	bottom: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.ajax-dropdown:after {
+	border-color: rgba(red(@white), green(@white), blue(@white), 0);
+	border-bottom-color: @ajaxdrop-arrow-top-color;
+	border-width: @ajaxdropdown-arrow-size;
+	left: 50%;
+	margin-left: -@ajaxdropdown-arrow-size;
+}
+
+.ajax-dropdown:before {
+	border-color: rgba(131, 131, 131, 0);
+	border-bottom-color: @ajaxdrop-arrow-bottom-color;
+	border-width: @ajaxdropdown-arrow-bottom;
+	left: 50%;
+	margin-left: -@ajaxdropdown-arrow-bottom;
+}
+
+.ajax-dropdown .btn-group .btn {
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
+/* better for 3 childs*/
+
+.ajax-dropdown .btn-group > :nth-child(2) {
+	border-right-width: 0px;
+	border-left-width: 0px;
+}
+
+.ajax-dropdown .btn-group > :last-child {
+	border-right-width: 1px !important;
+}
+
+/* better for 4+ childs
+ .ajax-dropdown .btn-group >:first-child {
+ border-right-width:1px;
+ }
+
+ .ajax-dropdown .btn-group >:nth-child(n+2) {
+ border-left-width:0px;
+ }
+
+ .ajax-dropdown .btn-group >:last-child {
+ border-right-width:1px !important;
+ }	*/
+
+.ajax-dropdown .btn-group .btn:active {
+	top: 0px;
+	left: 0px;
+}
+
+.ajax-notifications {
+	height: @ajaxdropdown-height;
+	display: block;
+	overflow: auto;
+	margin-right: -10px;
+	margin-left: -10px;
+	border-bottom: 1px solid #CECECE;
+	border-top: 1px solid #CECECE;
+	background: #E9E9E9;
+}
+
+.ajax-notifications .alert.alert-transparent {
+	background-color: transparent;
+	border-color: transparent;
+	color: #757575;
+	margin: 13px 10px;
+}
+
+.ajax-notifications .alert > :first-child {
+	margin-bottom: 10px;
+	font-weight: 400;
+}
+
+.ajax-dropdown > :last-child {
+	font-size: 13px;
+	display: block;
+	padding: 5px 0;
+	line-height: 22px;
+	font-weight: 400;
+}
+
+.ajax-dropdown .fa-4x.fa-border {
+	border-width: 3px;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	display: block;
+	margin: 0 auto;
+	width: 76px;
+	text-align: center;
+	color: #D1D1D1;
+	border-color: #D1D1D1;
+}

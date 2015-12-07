@@ -1,0 +1,21 @@
+/*
+ * LEFT PANEL
+ */
+
+#left-panel {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: @left-panel-zindex;
+	padding-top: @smart-navbar-height;
+}
+
+/*
+ * ANIMATION
+ */
+
+#left-panel {
+	-webkit-transition: 250ms cubic-bezier(0.1, 0.57, 0.1, 1);
+	transition: 250ms cubic-bezier(0.1, 0.57, 0.1, 1);
+	-webkit-transform: translate(0px, 0px) translateZ(0px);
+}

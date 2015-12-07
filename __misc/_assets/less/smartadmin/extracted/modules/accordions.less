@@ -1,0 +1,60 @@
+/*
+ * ACCORDIONS
+ */
+
+.smart-accordion-default.panel-group {
+	margin-bottom: 0px;
+}
+
+.smart-accordion-default.panel-group .panel + .panel {
+	margin-top: -1px;
+}
+
+.smart-accordion-default.panel-group .panel-heading {
+	padding: 0px;
+}
+
+.smart-accordion-default.panel-group .panel-title a {
+	display: block;
+	padding: 10px 15px;
+	text-decoration: none !important;
+}
+
+.smart-accordion-default .panel-heading, .panel-group .panel {
+	border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+}
+
+.smart-accordion-default .panel-default > .panel-heading {
+	background-color: lighten(@gray-lightest, 3.5%);
+}
+
+.smart-accordion-default .panel-default {
+	border-color: lighten(@gray-light, 16.5%);
+}
+
+.smart-accordion-default .panel-title > a > :first-child {
+	display: none;
+}
+
+.smart-accordion-default .panel-title > a.collapsed > .fa {
+	display: none;
+}
+
+.smart-accordion-default .panel-title > a.collapsed > :first-child {
+	display: inline-block;
+}
+
+.no-padding .smart-accordion-default > div {
+	border-left: none !important;
+	border-right: none !important;
+}
+
+.no-padding .smart-accordion-default > div:first-child {
+	border-top: none !important;
+}
+
+.no-padding .smart-accordion-default > div:last-child {
+	border-bottom: none !important;
+}

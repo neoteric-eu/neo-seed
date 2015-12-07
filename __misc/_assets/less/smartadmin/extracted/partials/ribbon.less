@@ -1,0 +1,52 @@
+/*
+ * RIBBON
+ */
+
+#ribbon {
+	min-height: @ribbon-height;
+	background: @ribbonBGColor;
+	padding: 0 13px;
+	position: relative;
+}
+
+#ribbon .breadcrumb {
+	display: inline-block;
+	margin: 0;
+	padding: 11px 34px 11px 0 !important;
+	background: none;
+	vertical-align: top;
+}
+
+#ribbon .breadcrumb a, #ribbon .breadcrumb {
+	color: #BBB !important;
+	text-decoration: none !Important;
+}
+
+#ribbon .breadcrumb > .active, #ribbon .breadcrumb li:last-child {
+	color: #E4E4E4;
+}
+
+.fixed-ribbon #ribbon {
+	position: fixed;
+	right: 0;
+	left: @asideWidth;
+	top: @smart-navbar-height;
+	z-index: @fixed-ribbon-zindex;
+}
+
+.container.fixed-ribbon #ribbon {
+	width: 944px;
+	left: 590px;
+}
+
+.fixed-ribbon #content {
+	padding-top: @smart-navbar-height  + 1;
+}
+
+.minified.fixed-ribbon #ribbon {
+	left: 45px;
+}
+
+.hidden-menu.fixed-ribbon #ribbon {
+	left: 10px;
+}
