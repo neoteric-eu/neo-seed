@@ -16,8 +16,7 @@ define([
 	'angular-moment',
 	'angular-restmod',
 	'smartwidgets',
-	'notification',
-	'lodash-extensions'
+	'notification'
 ], function (ng) {
 	'use strict';
 
@@ -38,7 +37,6 @@ define([
 		'app.conf',
 
 		// Seed modules
-		'seed.templateCache',
 		'seed.components',
 		'seed.helpers',
 		'seed.auth',
