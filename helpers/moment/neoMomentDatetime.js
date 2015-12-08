@@ -1,45 +1,40 @@
-define(['seed/components/module', 'moment'], function (module, moment) {
+define(['seed/helpers/module', 'moment'], function (module, moment) {
 	'use strict';
 
 	/**
-	 * Applies moment filtering on date based elements
+	 * Applies moment filtering on datetime based elements
 	 * Can be used along with DateEncode and DateDecode serializers from restmod
-	 * @class momentDatetimeDayrange
+	 * @class neoMomentDatetime
 	 * @memberOf seed.components
 	 *
 	 * @example
-	 * <input type="date" moment-datetime-dayrange></div>
+	 * <input type="date" moment-datetime></input>
 	 *
 	 * @param $log {Object} Logging service
-	 * @todo Add to seed
 	 * @return {{restrict: string, require: string, link: Function}}
 	 */
-	function momentDatetimeDayrange($log) {
+	function neoMomentDatetime($log) {
+
+		$log = $log.getInstance('seed.components.neoMomentDatetime');
+
 		$log.debug('Initiated directive');
 
 		return {
 			restrict: 'A',
 			require: '?ngModel',
 			link: function (scope, element, attrs, ngModel) {
-
 				ngModel.$formatters.push(function (value) {
 					if (!_.isUndefined(value)) {
-						return {
-							lte: value.lte.format('YYYY-MM-DD'),
-							gte: value.gte.format('YYYY-MM-DD')
-						};
+						return value.format(moment.ISO_8601);
 					}
 				});
 
 				ngModel.$parsers.push(function (value) {
 					if (!_.isUndefined(value)) {
-						var momentDate = moment(value, 'YYYY-MM-DD');
+						var momentDate = moment(value);
 
 						if (momentDate.isValid()) {
-							return {
-								gte: momentDate.toISOString(),
-								lte: momentDate.add(1, 'days').toISOString()
-							};
+							return momentDate.toISOString();
 						} else {
 							return undefined;
 						}
@@ -51,5 +46,5 @@ define(['seed/components/module', 'moment'], function (module, moment) {
 		};
 	}
 
-	module.directive('momentDatetimeDayrange', momentDatetimeDayrange);
+	module.directive('neoMomentDatetime', neoMomentDatetime);
 });

@@ -39,14 +39,12 @@ requirejs.config({
 		'moment': 'assets/vendor/js/moment/moment',
 		'lodash': 'assets/vendor/js/lodash/lodash',
 		'lodash-deep': 'assets/vendor/js/lodash-deep/lodash-deep',
-		'lodash-extensions': 'assets/seed/js/custom/lodash-extensions/lodash-extensions',
 
 		'raphael': 'assets/vendor/js/raphael/raphael',
 		'morris': 'assets/vendor/js/morris/morris',
 
 		'form-validation': 'assets/vendor/js/form-validation',
 		'form-validation-bootstrap': 'assets/vendor/js/form-validation/framework/bootstrap',
-		'json-stringify-safe': 'assets/seed/js/custom/lodash-extensions/json-stringify-safe',
 		'daterangepicker': 'assets/vendor/js/bootstrap-daterangepicker/daterangepicker'
 	},
 

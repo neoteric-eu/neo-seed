@@ -8,6 +8,13 @@ define([
 
 	'./services/neoTemplateLoader',
 
+	'./lodash/lodashExtensions',
+
+	'./moment/momentDatetimeDayrange',
+	'./moment/neoMomentDate',
+	'./moment/neoMomentDatetime',
+	'./moment/neoMomentTime',
+
 	'./restmod/serializers/datetime/DatetimeSerializerService',
 	'./restmod/serializers/datetime/DatetimeDecodeFilter',
 	'./restmod/serializers/datetime/DatetimeEncodeFilter',
