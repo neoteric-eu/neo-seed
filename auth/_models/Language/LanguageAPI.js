@@ -40,16 +40,6 @@ define([
 				.$collection()
 				.$build(appConf.languageSettings.languageCollection);
 
-			if (_.some(api.languageCollection, function (language) {
-					if (_.has(language, 'locale')) {
-						return _.contains(language.locale, '_');
-					}
-				})) {
-				$log.error('At current state the translations will not work.');
-				$log.error('Locale format are now aligned with ISO format (pl_PL -> pl-PL)');
-				$log.error('Update: .pot files along with translation.js and change language.json locale in your container configuration.');
-			}
-
 			$log.debug('Set up application language collection');
 
 			var cookieLang = $cookies.getObject('lang');
@@ -62,8 +52,8 @@ define([
 
 			var browserLang = $window.navigator.language || $window.navigator.userLanguage || $window.navigator.systemLanguage;
 
-			if (_.some(api.languageCollection, {locale: browserLang})) {
-				api.setLanguage(_.find(api.languageCollection, {locale: browserLang}));
+			if (_.some(api.languageCollection, {localeISO: browserLang})) {
+				api.setLanguage(_.find(api.languageCollection, {localeISO: browserLang}));
 				$log.debug('Set up application language from browser preferences');
 				return;
 			}
@@ -83,11 +73,11 @@ define([
 			// Write locale to cookie
 			$cookies.putObject('lang', language);
 			// Update headers
-			neoRequestHeaders.setAcceptLanguage(language.locale);
+			neoRequestHeaders.setAcceptLanguage(language.localeISO);
 
 			// Update libraries locale settings
 			gettextCatalog.setCurrentLanguage(language.locale);
-			amMoment.changeLocale(language.locale);
+			amMoment.changeLocale(language.localeISO);
 
 			$rootScope.$broadcast('seed.languageAPI.setLanguage', language);
 
