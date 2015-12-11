@@ -52,8 +52,8 @@ define([
 
 			var browserLang = $window.navigator.language || $window.navigator.userLanguage || $window.navigator.systemLanguage;
 
-			if (_.some(api.languageCollection, {localeISO: browserLang})) {
-				api.setLanguage(_.find(api.languageCollection, {localeISO: browserLang}));
+			if (_.some(api.languageCollection, {locale: browserLang})) {
+				api.setLanguage(_.find(api.languageCollection, {locale: browserLang}));
 				$log.debug('Set up application language from browser preferences');
 				return;
 			}
@@ -73,15 +73,15 @@ define([
 			// Write locale to cookie
 			$cookies.putObject('lang', language);
 			// Update headers
-			neoRequestHeaders.setAcceptLanguage(language.localeISO);
+			neoRequestHeaders.setAcceptLanguage(language.locale);
 
 			// Update libraries locale settings
-			gettextCatalog.setCurrentLanguage(language.locale);
-			amMoment.changeLocale(language.localeISO);
+			gettextCatalog.setCurrentLanguage(language.localePOSIX);
+			amMoment.changeLocale(language.locale);
 
 			$rootScope.$broadcast('seed.languageAPI.setLanguage', language);
 
-			$log.debug('Set application language to: ' + language.locale);
+			$log.debug('Set application language to: ' + language.localePOSIX);
 		};
 
 		/**
