@@ -1,3 +1,13 @@
+<a name="1.2.3"></a>
+## [1.2.3](//compare/v1.2.2...v1.2.3) (2015-12-11)
+
+
+### Bug Fixes
+
+* **lodash:** Fixed Jshint errors in lodash extensions. 30907e2
+
+
+
 <a name="1.2.2"></a>
 ## [1.2.2](//compare/v1.2.1...v1.2.2) (2015-12-11)
 
