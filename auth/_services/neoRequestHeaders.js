@@ -25,6 +25,12 @@ define(['seed/auth/module'], function (module) {
 			$log.debug('Set X-Customer-Id header');
 		};
 
+		/**
+		 * Accept-Language value is set based on:
+		 * @see https://en.wikipedia.org/wiki/Content_negotiation
+		 * @see https://en.wikipedia.org/wiki/IETF_language_tag
+		 * @see http://tools.ietf.org/html/rfc7231#section-5.3
+		 */
 		this.setAcceptLanguage = function (language) {
 			$http.defaults.headers.common['Accept-Language'] = language;
 

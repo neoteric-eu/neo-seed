@@ -40,16 +40,6 @@ define([
 				.$collection()
 				.$build(appConf.languageSettings.languageCollection);
 
-			if (_.some(api.languageCollection, function (language) {
-					if (_.has(language, 'locale')) {
-						return _.contains(language.locale, '_');
-					}
-				})) {
-				$log.error('At current state the translations will not work.');
-				$log.error('Locale format are now aligned with ISO format (pl_PL -> pl-PL)');
-				$log.error('Update: .pot files along with translation.js and change language.json locale in your container configuration.');
-			}
-
 			$log.debug('Set up application language collection');
 
 			var cookieLang = $cookies.getObject('lang');
@@ -86,12 +76,12 @@ define([
 			neoRequestHeaders.setAcceptLanguage(language.locale);
 
 			// Update libraries locale settings
-			gettextCatalog.setCurrentLanguage(language.locale);
+			gettextCatalog.setCurrentLanguage(language.localePOSIX);
 			amMoment.changeLocale(language.locale);
 
 			$rootScope.$broadcast('seed.languageAPI.setLanguage', language);
 
-			$log.debug('Set application language to: ' + language.locale);
+			$log.debug('Set application language to: ' + language.localePOSIX);
 		};
 
 		/**
