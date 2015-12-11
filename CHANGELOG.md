@@ -1,3 +1,18 @@
+<a name="1.2.2"></a>
+## [1.2.2](//compare/v1.2.1...v1.2.2) (2015-12-11)
+
+
+### Bug Fixes
+
+* **LanguageAPI:** #3424 - Enable both ISO and POSIX language codes 59ed5db, closes #3424
+
+
+### BREAKING CHANGES
+
+* LanguageAPI: Manually update `config/settings/language.json`
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](//compare/v1.2.0...v1.2.1) (2015-12-03)
 
