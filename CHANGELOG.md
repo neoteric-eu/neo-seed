@@ -1,17 +1,25 @@
+<a name="1.2.6"></a>
+## [1.2.6](//compare/v1.2.5...v1.2.6) (2015-12-14)
+
+
+
+<a name="1.2.5"></a>
+## [1.2.5](//compare/v1.2.4...v1.2.5) (2015-12-14)
+
+
+### Bug Fixes
+
+* **jsonStringify:** Reverted jsonStringify to use ~ operators. b8be205
+
+
+
 <a name="1.2.4"></a>
-## [1.2.4](//compare/v1.2.4...v1.2.4) (2015-12-14)
+## [1.2.4](//compare/v1.2.4...v1.2.5) (2015-12-14)
 
 
 ### Bug Fixes
 
 * **locale:** updated language files to dasherized. a956771
-
-
-
-<a name="1.2.4"></a>
-## [1.2.4](//compare/v1.2.3...v1.2.4) (2015-12-11)
-
-
 
 
 <a name="1.2.3"></a>
