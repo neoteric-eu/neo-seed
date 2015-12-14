@@ -9,7 +9,7 @@ msgstr ""
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "X-Generator: Poedit 1.5.4\n"
-"Language: en-GB\n"
+"Language: en_GB\n"
 
 #: src/seed/forms/input/neoDatepicker.js:49
 msgid "Apply"
