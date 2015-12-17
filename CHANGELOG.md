@@ -1,3 +1,33 @@
+<a name="2.0.0"></a>
+# [2.0.0](//compare/v1.2.6...v2.0.0) (2015-12-17)
+
+
+### Features
+
+* **styles:** #3448 - Abstract less configuration from seed to container configuration 0933430, closes #3448
+
+
+### BREAKING CHANGES
+
+* styles: From now on Yeoman generator have to be used to install container.
+
+NPM set-up:
+```
+npm set registry http://ntrc-delta.neoteric.eu:4873
+npm install -g generator-neo
+```
+
+And from container catalog run:
+`yo neo`
+
+Remove from container **all** files except:
+- `src/config`
+- `src/bower.json`
+- `.bowerrc`
+
+Include all custom application styles from index.html to `src/config/styles/apps.less`.
+
+
 <a name="1.2.6"></a>
 ## [1.2.6](//compare/v1.2.5...v1.2.6) (2015-12-14)
 
