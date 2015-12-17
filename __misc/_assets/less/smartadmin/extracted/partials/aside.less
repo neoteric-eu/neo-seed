@@ -1,0 +1,15 @@
+@import "/src/seed/__misc/_assets/less/_variables";
+
+aside {
+	display: block;
+	/*overflow: hidden;*/
+	background: @asideColor-end;
+	background: url(@asideDataURL);
+	background: -moz-linear-gradient(left, @asideColor-end 93%, @asideColor-start 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(93%, @asideColor-end), color-stop(100%, @asideColor-start));
+	background: -webkit-linear-gradient(left, @asideColor-end 93%, @asideColor-start 100%);
+	background: -o-linear-gradient(left, @asideColor-end 93%, @asideColor-start 100%);
+	background: -ms-linear-gradient(left, @asideColor-end 93%, @asideColor-start 100%);
+	background: linear-gradient(to right, @asideColor-end 93%, @asideColor-start 100%);
+	min-height: 100%;
+}

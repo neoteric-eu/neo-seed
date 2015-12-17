@@ -1,0 +1,55 @@
+@import "/src/seed/__misc/_assets/less/_variables";
+
+/*
+ * Center Canvas
+ */
+.center-canvas, .center-child-canvas > canvas {
+	display: block !important;
+	margin: 0 auto !important;
+}
+
+/*
+ * JUST A BORDER
+ */
+.bordered {
+	border: 1px solid rgba(red(@black), green(@black), blue(@black), .2);
+}
+
+.bordered:hover {
+	border: 1px solid rgba(red(@black), green(@black), blue(@black), .4);
+}
+
+/*
+ * WEBKIT IOS HIGHLIGHT COLOR
+ *
+ */
+a:link, .btn, button {
+	-webkit-tap-highlight-color: fade(@red, 50%);
+}
+
+.login-info, .login-info *, #logo-group *, .minified .menu-item-parent {
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+/*
+ * BS2 useful classes
+ * these classes and its importance was overlooked in BS3
+ */
+
+.hidden-desktop {
+	display: none !important;
+}
+
+/*
+ * SIGNS
+ */
+.percent-sign:after, .degree-sign:after {
+	content: " %";
+	line-height: normal;
+}
+
+.degree-sign:after {
+	content: "°F";
+}

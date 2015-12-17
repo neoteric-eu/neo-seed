@@ -1,0 +1,52 @@
+@import "/src/seed/__misc/_assets/less/_variables";
+
+/*
+ * Alerts
+ */
+.alert {
+	margin-bottom: 20px;
+	margin-top: 0px;
+	padding: 5px 15px 5px 34px;
+	color: #675100;
+	border-width: 0px;
+	border-left-width: 5px;
+	padding: 10px;
+	border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	.close {
+		top: 0px;
+		right: -5px;
+		line-height: 20px;
+	}
+
+}
+
+.alert-heading {
+	font-weight: 600;
+}
+
+.alert-danger {
+	border-color: darken(@state-danger-border, 10%);
+	color: @white;
+	background-color: darken(@state-danger-bg, 33%);
+	text-shadow: none;
+}
+
+.alert-warning {
+	border-color: lighten(@state-warning-border, 5%);
+	color: darken(@state-warning-text, 19%);
+	background-color: lighten(spin(@state-warning-border, 8), 22%);
+}
+
+.alert-success {
+	border-color: lighten(@state-success-border, 25%);
+	color: darken(@state-success-text, 10%);
+	background-color: darken(lighten(spin(@state-success-text, -20), 50%), 8%);
+}
+
+.alert-info {
+	border-color: @state-info-border;
+	color: darken(@state-info-text, 3%);
+	background-color: @state-info-bg;
+}

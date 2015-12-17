@@ -1,0 +1,111 @@
+@import "/src/seed/__misc/_assets/less/_variables";
+
+/*
+ * NOTIFICATIONS : MAIL
+ */
+
+.notification-body *, .notification-body:before *, .notification-body:after * {
+	box-sizing: border-box !important;
+	-webkit-box-sizing: border-box !important;
+	-moz-box-sizing: border-box !important;
+}
+
+.notification-body {
+	padding: 0 0 0 3px;
+	margin: 0;
+	list-style: none;
+}
+
+.notification-body > li {
+	border-bottom: 1px solid #E9E9E9;
+	position: relative;
+}
+
+.notification-body > li > span {
+	background: @white;
+	display: block;
+	min-height: 25px;
+	overflow: hidden;
+	padding: 8px 10px 13px;
+	white-space: normal;
+}
+
+.notification-body > li > span:hover {
+	background: #F0F4F7;
+	color: #667F8F;
+}
+
+.notification-body > li a.msg {
+	padding-left: 50px !important;
+}
+
+.notification-body > li a, .notification-body > li a:hover {
+	text-decoration: none;
+}
+
+.notification-body > li a, .notification-body > li a span {
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+.notification-body > li a, .notification-body > li a:hover {
+	text-decoration: none;
+}
+
+.notification-body > li:hover .progress {
+	background: @white;
+	box-shadow: 0 1px 0 rgba(red(@black), green(@black), blue(@black), 0), 0 0 0 1px #A7A7A7 inset;
+	-webkit-box-shadow: 0 1px 0 rgba(red(@black), green(@black), blue(@black), 0), 0 0 0 1px #CCC inset;
+	-moz-box-shadow: 0 1px 0 transparent, 0 0 0 1px lighten(@gray-lighter, 10%) inset;
+}
+
+.notification-body > li:hover .text-muted {
+	color: @gray-dark;
+}
+
+.notification-body .from {
+	font-size: @font-size-base  + 1px;
+	line-height: normal;
+	color: @gray-dark;
+	font-weight: normal;
+	margin-right: 60px;
+	margin-bottom: 6px;
+	height: 20px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.notification-body .unread .from {
+	font-weight: bold;
+}
+
+.notification-body .unread {
+	background: #FFFFE0;
+}
+
+.notification-body time {
+	position: absolute;
+	top: 3px;
+	right: 0;
+	font-size: 11px;
+	font-weight: normal;
+	color: #058dc7;
+}
+
+.notification-body .msg-body, .notification-body .subject {
+	font-size: @font-size-base;
+	color: #A0A0A0;
+	max-height: 35px;
+	width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.notification-body .subject {
+	font-size: @font-size-base;
+	color: @gray-dark;
+	max-height: 22px;
+}
