@@ -39,6 +39,7 @@
     "tools/",
     "Gruntfile.js",
     ".gitignore",
+    ".bowerrc",
     ".jshintrc",
     "package.json"
   ],

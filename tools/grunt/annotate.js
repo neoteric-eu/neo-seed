@@ -3,6 +3,6 @@ module.exports = {
 		singleQuotes: true
 	},
 	build: {
-		files: {'<%= paths.build %>/neo-seed.js': '<%= paths.build %>/neo-seed.js'}
+		files: {'<%= paths.build %>/module.js': '<%= paths.build %>/module.js'}
 	}
 };

@@ -8,7 +8,7 @@ module.exports = function () {
 					expand: true,
 					dot: true,
 					cwd: '<%= paths.assets %>/seed',
-					dest: '<%= paths.build %>/assets',
+					dest: '<%= paths.build %>/__misc/_assets',
 					src: [
 						'**'
 					]

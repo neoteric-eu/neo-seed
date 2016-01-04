@@ -6,7 +6,7 @@ module.exports = function () {
       options: {
         baseUrl: 'src/',
         optimize: 'none',
-        out: '<%= paths.build %>/neo-seed.js',
+        out: '<%= paths.build %>/module.js',
         generateSourceMaps: false,
         preserveLicenseComments: false,
         useStrict: true,
