@@ -1,0 +1,83 @@
+{
+  "name": "neo-seed",
+  "version": "2.1.0",
+  "dependencies": {
+    "angular": "1.4.x",
+    "bootstrap": "3.x",
+    "jquery": "2.1.x",
+    "angular-animate": "1.4.x",
+    "angular-sanitize": "1.4.x",
+    "angular-cookies": "1.4.x",
+    "angular-moment": "0.10.3",
+    "angular-gettext": "2.1.2",
+    "angular-hotkeys": "chieffancypants/angular-hotkeys#1.6.0",
+    "angular-loading-bar": "0.8.0",
+    "angular-permission": "1.1.1",
+    "angular-restmod": "1.1.9",
+    "angular-bootstrap": "0.14.3",
+    "angular-ui-select": "0.13.1",
+    "angular-ui-router": "0.2.15",
+    "ng-table": "0.8.3",
+    "lodash": "3.10.x",
+    "lodash-deep": "1.6.x",
+    "moment": "2.10.x",
+    "requirejs": "2.1.x",
+    "less-elements": "latest",
+    "animate.less": "latest",
+    "font-awesome": "4.x",
+    "morris.js": "0.5.1",
+    "form.validation": "latest",
+    "bootstrap-daterangepicker": "kobalka/bootstrap-daterangepicker#2.0.11"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.4.x"
+  },
+  "copy": {
+    "js": {
+      "angular/angular.js": "angular/angular.js",
+      "angular-animate/angular-animate.js": "angular-animate/angular-animate.js",
+      "angular-cookies/angular-cookies.js": "angular-cookies/angular-cookies.js",
+      "angular-gettext/angular-gettext.js": "angular-gettext/dist/angular-gettext.js",
+      "angular-hotkeys/angular-hotkeys.js": "angular-hotkeys/build/hotkeys.js",
+      "angular-loading-bar/angular-loading-bar.js": "angular-loading-bar/build/loading-bar.js",
+      "angular-mocks/angular-mocks.js": "angular-mocks/angular-mocks.js",
+      "angular-moment/angular-moment.js": "angular-moment/angular-moment.js",
+      "angular-permission/angular-permission.js": "angular-permission/dist/angular-permission.js",
+      "angular-restmod/angular-restmod.js": "angular-restmod/dist/angular-restmod-bundle.js",
+      "angular-restmod/styles/ams.js": "angular-restmod/dist/styles/ams.js",
+      "angular-restmod/plugins": "angular-restmod/dist/plugins/*.min.js",
+      "angular-sanitize/angular-sanitize.js": "angular-sanitize/angular-sanitize.js",
+      "angular-table/angular-table.js": "ng-table/dist/ng-table.js",
+      "angular-ui-bootstrap/angular-ui-bootstrap.js": "angular-bootstrap/ui-bootstrap.js",
+      "angular-ui-bootstrap/angular-ui-bootstrap-tpls.js": "angular-bootstrap/ui-bootstrap-tpls.js",
+      "angular-ui-router/angular-ui-router.js": "angular-ui-router/release/angular-ui-router.js",
+      "angular-ui-select/angular-ui-select.js": "angular-ui-select/dist/select.js",
+      "bootstrap/bootstrap.js": "bootstrap/dist/js/bootstrap.js",
+      "jquery/jquery.js": "jquery/dist/jquery.js",
+      "lodash/lodash.js": "lodash/lodash.js",
+      "lodash-deep/lodash-deep.js": "lodash-deep/lodash-deep.js",
+      "moment/moment.js": "moment/min/moment-with-locales.js",
+      "morris/morris.js": "morris.js/morris.js",
+      "raphael/raphael.js": "raphael/raphael.js",
+      "form-validation/form-validation.js": "form.validation/dist/js/formValidation.js",
+      "form-validation/framework/bootstrap.js": "form.validation/dist/js/framework/bootstrap.js",
+      "form-validation/language/": "form.validation/dist/js/language/",
+      "bootstrap-daterangepicker": "bootstrap-daterangepicker/daterangepicker.js"
+    },
+    "less": {
+      "bootstrap": "bootstrap/less",
+      "elements/elements.less": "less-elements/elements.less",
+      "animate/animate.less": "animate.less/animate.less",
+      "animate/source": "animate.less/source",
+      "font-awesome/": "font-awesome/less",
+      "form.validation/formValidation.less": "form.validation/dist/css/formValidation.css",
+      "ui-select/select.less": "angular-ui-select/dist/select.css",
+      "hotkeys/hotkeys.less": "angular-hotkeys/build/hotkeys.css",
+      "bootstrap-daterangepicker/daterangepicker.less": "bootstrap-daterangepicker/daterangepicker.css"
+    },
+    "fonts": {
+      "font-awesome": "font-awesome/fonts/",
+      "glyphicons": "bootstrap/fonts"
+    }
+  }
+}

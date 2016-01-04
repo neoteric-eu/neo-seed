@@ -1,0 +1,67 @@
+@import "/src/config/styles/variables";
+
+/*
+ * Table
+ */
+
+.table.has-tickbox thead tr th:first-child {
+	width: 18px;
+}
+
+.table.has-tickbox.smart-form thead tr th:first-child .radio, .table.has-tickbox.smart-form thead tr th:first-child .checkbox, .table.has-tickbox.smart-form tbody tr td:first-child .radio, .table.has-tickbox.smart-form tbody tr td:first-child .checkbox {
+	padding: 0px !important;
+}
+
+.table thead tr, .fc-border-separate thead tr {
+	background-color: @gray-lighter;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@table-header-color-start), to(@table-header-color-end));
+	background-image: -webkit-linear-gradient(top,@table-header-color-start 0,@table-header-color-end 100%);
+	background-image: -moz-linear-gradient(top,@table-header-color-start 0,@table-header-color-end 100%);
+	background-image: -ms-linear-gradient(top,@table-header-color-start 0,@table-header-color-end 100%);
+	background-image: -o-linear-gradient(top,@table-header-color-start 0,@table-header-color-end 100%);
+	background-image: -linear-gradient(top,@table-header-color-start 0,@table-header-color-end 100%);
+	font-size: 12px;
+}
+
+.fc-border-separate thead tr th {
+	padding: 4px;
+	line-height: 1.428571429;
+}
+
+.table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+	border-width: 1px;
+}
+
+.no-padding > .table-bordered, .no-padding > .table-responsive > .table-bordered {
+	border: none !important;
+}
+
+.no-padding > .table-bordered thead tr th:first-child, .no-padding > .table-bordered thead tr td:first-child, .no-padding > .table-bordered tbody tr td:first-child, .no-padding > .table-responsive > .table-bordered thead tr th:first-child, .no-padding > .table-responsive > .table-bordered thead tr td:first-child, .no-padding > .table-responsive > .table-bordered tbody tr td:first-child {
+	border-left-width: 0px !important;
+}
+
+.no-padding > .table-bordered thead tr th:last-child, .no-padding > .table-bordered tbody tr td:last-child, .no-padding > .table-responsive > .table-bordered thead tr th:last-child, .no-padding > .table-responsive > .table-bordered tbody tr td:last-child {
+	border-right-width: 0px !important;
+}
+
+.no-padding > .table-bordered tbody tr:last-child td, .no-padding > .table-responsive > .table-bordered tbody tr:last-child td {
+	border-bottom-width: 0px !important;
+}
+
+.no-padding .table-responsive .table {
+	margin-bottom: 0;
+}
+
+.no-padding .note-editable .table-bordered {
+	border: 1px solid darken(@gray-lighter, 7%) !important;
+}
+
+.smart-form.table td .radio i, .smart-form.table td .checkbox i, .smart-form.table th .radio i, .smart-form.table th .checkbox i {
+	top: 0px !important;
+}
+
+/* condenced table */
+
+.table-condensed.table > tbody > tr > td, .table-condensed.table > tbody > tr > th, .table-condensed.table > tfoot > tr > td, .table-condensed.table > tfoot > tr > th, .table-condensed.table > thead > tr > td, .table-condensed.table > thead > tr > th {
+	padding: 5px 10px !important;
+}
