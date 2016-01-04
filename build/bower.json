@@ -32,10 +32,15 @@
   "devDependencies": {
     "angular-mocks": "1.4.x"
   },
+  "main": [
+    "build/neo-seed.js"
+  ],
   "ignore": [
-    "src/",
     "tools/",
-    "Gruntfile.js"
+    "Gruntfile.js",
+    ".gitignore",
+    ".jshintrc",
+    "package.json"
   ],
   "copy": {
     "js": {
