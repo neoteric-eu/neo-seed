@@ -14,9 +14,7 @@ module.exports = function () {
 					]
 				},
 				{
-					'<%= paths.build %>/bower.json': '<%= paths.seed %>/bower.json',
 					'<%= paths.build %>/require.conf.js': '<%= paths.seed %>/require.conf.js'
-
 				}
 			]
 		}

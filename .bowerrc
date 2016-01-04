@@ -1,6 +1,5 @@
 {
-  "cwd": "src/seed",
-  "directory": "../../bower_components",
+  "directory": "bower_components",
   "registry": {
     "search": [
       "https://bower.herokuapp.com",

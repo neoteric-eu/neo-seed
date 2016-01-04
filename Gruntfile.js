@@ -3,7 +3,7 @@ module.exports = function (grunt) {
 
 	var path = require('path');
 	var pkg = require('./package.json');
-	var bower = grunt.file.readJSON('src/seed/bower.json');
+	var bower = grunt.file.readJSON('./bower.json');
 
 	// Time how long tasks take. Can help when optimizing build times
 	require('time-grunt')(grunt);
