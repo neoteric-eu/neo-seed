@@ -3659,7 +3659,7 @@ define('seed/auth/login/forms/login/authLoginForm',['seed/auth/module'], functio
 	module.directive('authLoginForm', authLoginForm);
 });
 
-define('seed/auth/login/forms/profileSelect/authProfileSelectForm.js',['seed/auth/module'], function (module) {
+define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/module'], function (module) {
 	'use strict';
 
 	/**
@@ -3745,7 +3745,7 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm.js',['seed/aut
 
 define('seed/auth/login/_includes',[
 	'./forms/login/authLoginForm',
-	'./forms/profileSelect/authProfileSelectForm.js'
+	'./forms/profileSelect/authProfileSelectForm'
 ], function () {
 	'use strict';
 });
