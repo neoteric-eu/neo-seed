@@ -1,0 +1,13 @@
+<ui-select ng-model="vm.selectedItem"
+           on-select="vm.selectEnumItem($item, $model)">
+
+    <ui-select-match allow-clear="true">
+        <span>{{$select.selected[vm.displayProperty]}}</span>
+    </ui-select-match>
+
+    <ui-select-choices
+            repeat="item[vm.displayProperty] as item in vm.filterableEnum.getEnumAsArray()">
+        {{item[vm.displayProperty]}}
+    </ui-select-choices>
+
+</ui-select>

@@ -1,10 +1,14 @@
 {
-	"registry": {
-		"search": [
-			"http://mordor.neoteric.eu:3500",
-			"https://bower.herokuapp.com"
-		],
-		"register": "http://mordor.neoteric.eu:3500",
-		"publish": "http://mordor.neoteric.eu:3500"
-	}
+  "cwd": "src/seed",
+  "directory": "../../bower_components",
+  "registry": {
+    "search": [
+      "https://bower.herokuapp.com",
+      "http://mordor.neoteric.eu:3500"
+    ],
+    "registry": {
+      "register": "http://mordor.neoteric.eu:3500",
+      "publish": "http://mordor.neoteric.eu:3500"
+    }
+  }
 }
