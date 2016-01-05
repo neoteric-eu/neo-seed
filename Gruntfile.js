@@ -51,5 +51,4 @@ module.exports = function (grunt) {
 
 	grunt.task.renameTask('nggettext_compile', 'gettext-compile');
 	grunt.task.renameTask('nggettext_extract', 'gettext-extract');
-	grunt.task.renameTask('ngAnnotate', 'annotate');
 };

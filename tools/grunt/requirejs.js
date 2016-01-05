@@ -16,7 +16,6 @@ module.exports = function () {
         optimizeAllPluginResources: true,
         waitSeconds: 0,
         include: [
-          'seed/_includes',
           'seed/module'
         ],
         paths: {

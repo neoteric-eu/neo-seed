@@ -16,7 +16,8 @@ define([
 	'angular-moment',
 	'angular-restmod',
 	'smartwidgets',
-	'notification'
+	'notification',
+	'./_includes'
 ], function (ng) {
 	'use strict';
 

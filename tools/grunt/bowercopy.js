@@ -7,7 +7,7 @@ module.exports = function (grunt) {
 	var bowerFiles = [];
 
 	grunt.file
-		.expand({filter: 'isFile'}, ['src/**/bower.json'])
+		.expand({filter: 'isFile'}, ['bower.json'])
 		.forEach(function (bowerPath) {
 			try {
 				bowerFiles.push(grunt.file.readJSON(bowerPath));

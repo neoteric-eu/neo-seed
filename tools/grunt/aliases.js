@@ -59,7 +59,6 @@ module.exports = {
 		'templates-cache',
 		'copy:build',
 		'requirejs',
-		'annotate',
 		'clean:postBuild'
 	],
 

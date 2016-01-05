@@ -1,4 +1,4 @@
-define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint quotmark: false*/ "use strict"; return angular.module("seed.templateCache",[]).run(['$templateCache', '$log', function ($templateCache, $log) {$log = $log.getInstance('seed.templateCache.module');  
+define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint quotmark: false*/ "use strict"; return angular.module("seed.templateCache",[]).run(function ($templateCache, $log) {$log = $log.getInstance('seed.templateCache.module');  
 
   $templateCache.put('seed/auth/lock/forms/authLockForm.html',
     "<form class=neo-form><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{vm.user.getFullName()}} <small><i class=\"fa fa-lock text-muted\"></i> &nbsp;Locked</small></h1></fieldset><fieldset><div class=input-icon-right><i class=\"icon-append fa fa-lock\"></i> <input class=form-control type=password placeholder=\"{{'Password'|translate}}\"></div><p class=\"no-margin margin-top-5\">{{'Logged as someone else?'|translate}} <a ui-sref=auth.login>{{'Click here'|translate}}</a></p></fieldset><footer><button type=submit class=\"btn btn-primary\">{{'Unlock'|translate}}</button></footer></form>"
@@ -148,7 +148,7 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
   $templateCache.put('seed/tables/partials/neo-sorting.html',
     "<tr><th title={{$column.headerTitle(this)}} ng-repeat=\"$column in $columns\" ng-click=\"sortBy($column, $event)\" ng-if=$column.show(this) ng-init=\"template=$column.headerTemplateURL(this)\" class=\"no-selection {{$column.class(this)}}\" ng-class=\"{'sorting': $column.sortable(this),'sorting-asc': params.sorting()[$column.sortable(this)]=='asc','sorting-desc': params.sorting()[$column.sortable(this)]=='desc'}\"><div ng-if=!template ng-show=!template ng-bind=$column.title(this) class=neo-table-header></div><div ng-if=template ng-include=template></div></th></tr>"
   );
- $log.debug('Initiated module');}]);});
+ $log.debug('Initiated module');});});
 define('seed/__misc/_locale/translation',['angular', 'angular-gettext'], function (angular) {
 angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
 /* jshint -W100 */
@@ -176,7 +176,6 @@ define('seed/helpers/interceptors/HttpRequestInterceptor',['seed/helpers/module'
 	 * @param $log {Object} Logging service
 	 * @return {{request: Function}}
 	 */
-	HttpRequestInterceptor.$inject = ['$log'];
 	function HttpRequestInterceptor($log) {
 
 		$log = $log.getInstance('seed.helpers.HttpRequestInterceptor');
@@ -225,7 +224,6 @@ define('seed/helpers/interceptors/HttpErrorInterceptor',['seed/helpers/module'],
 	 * @param $injector {Object} Angular Dependency Injection provider
 	 * @return {{responseError: Function}}
 	 */
-	HttpErrorInterceptor.$inject = ['$log', '$q', '$injector'];
 	function HttpErrorInterceptor($log, $q, $injector) {
 
 		$log = $log.getInstance('seed.helpers.HttpErrorInterceptor');
@@ -265,7 +263,6 @@ define('seed/helpers/decorators/logDecorator',['angular', 'moment', 'seed/helper
 	 * @param $delegate {Object} Reference to original $log object
 	 * @returns {*}
 	 */
-	$log.$inject = ['$delegate'];
 	function $log($delegate) {
 		'ngInject';
 
@@ -320,7 +317,6 @@ define('seed/helpers/enums/BaseEnum',['seed/helpers/module'], function (module) 
 	 * @param $log {Object} Logging service
 	 * @return {Function} Enum object
 	 */
-	BaseEnum.$inject = ['$log'];
 	function BaseEnum($log) {
 
 		/**
@@ -410,7 +406,6 @@ define('seed/helpers/services/neoTemplateLoader',['seed/helpers/module'], functi
 	 * @param $log {Object} Logging service
 	 * @param $q {Object} Promise factory
 	 */
-	neoTemplateLoader.$inject = ['$templateCache', '$http', '$log', '$q'];
 	function neoTemplateLoader($templateCache, $http, $log, $q) {
 
 		$log = $log.getInstance('seed.helpers.neoTemplateLoader');
@@ -559,7 +554,6 @@ define('seed/helpers/moment/momentDatetimeDayrange',['seed/helpers/module', 'mom
 	 * @todo Add to seed
 	 * @return {{restrict: string, require: string, link: Function}}
 	 */
-	momentDatetimeDayrange.$inject = ['$log'];
 	function momentDatetimeDayrange($log) {
 		$log.debug('Initiated directive');
 
@@ -615,7 +609,6 @@ define('seed/helpers/moment/neoMomentDate',['seed/helpers/module', 'moment'], fu
 	 * @param $log {Object} Logging service
 	 * @return {{restrict: string, require: string, link: Function}}
 	 */
-	neoMomentDate.$inject = ['$log'];
 	function neoMomentDate($log) {
 
 		$log = $log.getInstance('seed.components.neoMomentDate');
@@ -666,7 +659,6 @@ define('seed/helpers/moment/neoMomentDatetime',['seed/helpers/module', 'moment']
 	 * @param $log {Object} Logging service
 	 * @return {{restrict: string, require: string, link: Function}}
 	 */
-	neoMomentDatetime.$inject = ['$log'];
 	function neoMomentDatetime($log) {
 
 		$log = $log.getInstance('seed.components.neoMomentDatetime');
@@ -718,7 +710,6 @@ define('seed/helpers/moment/neoMomentTime',['seed/helpers/module', 'moment'], fu
 	 * @param $log {Object} Logging service
 	 * @return {{restrict: string, require: string, link: Function}}
 	 */
-	neoMomentTime.$inject = ['$log'];
 	function neoMomentTime($log) {
 
 		$log = $log.getInstance('seed.components.neoMomentTime');
@@ -764,7 +755,6 @@ define('seed/helpers/restmod/serializers/datetime/DatetimeSerializerService',['s
 	 * @param $log {Object} Logging service
 	 * @return {{decode: decode, encode: encode}}
 	 */
-	DatetimeSerializerService.$inject = ['$log'];
 	function DatetimeSerializerService($log) {
 		$log = $log.getInstance('seed.helpers.DatetimeSerializerService');
 
@@ -799,87 +789,7 @@ define('seed/helpers/restmod/serializers/datetime/DatetimeSerializerService',['s
 	module.service('DatetimeSerializerService', DatetimeSerializerService);
 });
 
-/**
- * @namespace seed
- */
-
-define('seed/module',[
-	'angular',
-	'angular-animate',
-	'angular-sanitize',
-	'angular-ui-router',
-	'angular-ui-bootstrap',
-	'angular-ui-bootstrap-tpls',
-	'angular-ui-select',
-	'angular-gettext',
-	'angular-permission',
-	'angular-loading-bar',
-	'angular-moment',
-	'angular-restmod',
-	'smartwidgets',
-	'notification'
-], function (ng) {
-	'use strict';
-
-	var seed = ng.module('seed', [
-		'ngAnimate',
-		'ngSanitize',
-
-		'gettext',
-		'permission',
-		'angularMoment',
-		'restmod',
-		'angular-loading-bar',
-
-		'ui.bootstrap',
-		'ui.select',
-		'ui.router',
-
-		'app.conf',
-
-		// Seed modules
-		'seed.templateCache',
-		'seed.components',
-		'seed.helpers',
-		'seed.auth',
-		'seed.layout',
-		'seed.forms',
-		'seed.tables',
-		'seed.graphs',
-		'seed.widgets'
-	]);
-
-	seed.config(['$provide', '$httpProvider', '$locationProvider', 'cfpLoadingBarProvider', '$logProvider', 'restmodProvider', 'uiSelectConfig', 'appConf', function ($provide, $httpProvider, $locationProvider, cfpLoadingBarProvider,
-												$logProvider, restmodProvider, uiSelectConfig, appConf) {
-
-		restmodProvider.rebase('NeoStyleAPI');
-
-		uiSelectConfig.theme = 'bootstrap';
-
-		cfpLoadingBarProvider.includeSpinner = false;
-		cfpLoadingBarProvider.latencyThreshold = 500;
-
-		$locationProvider.html5Mode(true);
-		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
-
-		// Add the interceptors to the $httpProvider.
-		$httpProvider.interceptors.push('HttpErrorInterceptor');
-		$httpProvider.interceptors.push('HttpRequestInterceptor');
-	}]);
-
-	seed.run(['gettextCatalog', 'LanguageAPI', '$log', 'appConf', function (gettextCatalog, LanguageAPI, $log, appConf) {
-		$log = $log.getInstance('seed.module');
-
-		LanguageAPI.init();
-		gettextCatalog.debug = appConf.environmentSettings.debugEnabled;
-
-		$log.debug('Set up seed configuration');
-	}]);
-
-	return seed;
-});
-
-define('seed/helpers/restmod/serializers/datetime/DatetimeDecodeFilter',['seed/module'], function (module) {
+define('seed/helpers/restmod/serializers/datetime/DatetimeDecodeFilter',['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -898,7 +808,6 @@ define('seed/helpers/restmod/serializers/datetime/DatetimeDecodeFilter',['seed/m
 	 * @param DatetimeSerializerService {Object} Serialization service
 	 * @return {Function}
 	 */
-	DatetimeDecodeFilter.$inject = ['$log', 'DatetimeSerializerService'];
 	function DatetimeDecodeFilter($log, DatetimeSerializerService) {
 		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in DatetimeSerializer');
 
@@ -910,7 +819,7 @@ define('seed/helpers/restmod/serializers/datetime/DatetimeDecodeFilter',['seed/m
 	module.factory('DatetimeDecodeFilter', DatetimeDecodeFilter);
 });
 
-define('seed/helpers/restmod/serializers/datetime/DatetimeEncodeFilter',['seed/module'], function (module) {
+define('seed/helpers/restmod/serializers/datetime/DatetimeEncodeFilter',['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -929,7 +838,6 @@ define('seed/helpers/restmod/serializers/datetime/DatetimeEncodeFilter',['seed/m
 	 * @param DatetimeSerializerService {Object} Serialization service
 	 * @return {Function}
 	 */
-	DatetimeEncodeFilter.$inject = ['$log', 'DatetimeSerializerService'];
 	function DatetimeEncodeFilter($log, DatetimeSerializerService) {
 		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in DatetimeSerializer');
 
@@ -960,7 +868,6 @@ define('seed/helpers/restmod/serializers/datetime/DatetimeSerializer',['seed/hel
 	 * @param DatetimeSerializerService {Object} Serialization service
 	 * @return {{decode: decode, encode: encode}}
 	 */
-	DatetimeSerializer.$inject = ['$log', 'DatetimeSerializerService'];
 	function DatetimeSerializer($log, DatetimeSerializerService) {
 		$log = $log.getInstance('seed.helpers.DatetimeSerializer');
 
@@ -993,7 +900,6 @@ define('seed/helpers/restmod/serializers/date/DateSerializerService',['seed/help
 	 * @param $log {Object} Logging service
 	 * @return {{decode: decode, encode: encode}}
 	 */
-	DateSerializerService.$inject = ['$log'];
 	function DateSerializerService($log) {
 		$log = $log.getInstance('seed.helpers.DateSerializerService');
 
@@ -1029,7 +935,7 @@ define('seed/helpers/restmod/serializers/date/DateSerializerService',['seed/help
 	module.service('DateSerializerService', DateSerializerService);
 });
 
-define('seed/helpers/restmod/serializers/date/DateDecodeFilter',['seed/module'], function (module) {
+define('seed/helpers/restmod/serializers/date/DateDecodeFilter',['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -1048,7 +954,6 @@ define('seed/helpers/restmod/serializers/date/DateDecodeFilter',['seed/module'],
 	 * @param DateSerializerService {Object} Serialization service
 	 * @return {Function}
 	 */
-	DateDecodeFilter.$inject = ['$log', 'DateSerializerService'];
 	function DateDecodeFilter($log, DateSerializerService) {
 		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in DateSerializer');
 
@@ -1060,7 +965,7 @@ define('seed/helpers/restmod/serializers/date/DateDecodeFilter',['seed/module'],
 	module.factory('DateDecodeFilter', DateDecodeFilter);
 });
 
-define('seed/helpers/restmod/serializers/date/DateEncodeFilter',['seed/module'], function (module) {
+define('seed/helpers/restmod/serializers/date/DateEncodeFilter',['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -1079,7 +984,6 @@ define('seed/helpers/restmod/serializers/date/DateEncodeFilter',['seed/module'],
 	 * @param DateSerializerService {Object} Serialization service
 	 * @return {Function}
 	 */
-	DateEncodeFilter.$inject = ['$log', 'DateSerializerService'];
 	function DateEncodeFilter($log, DateSerializerService) {
 		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in DateSerializer');
 
@@ -1110,7 +1014,6 @@ define('seed/helpers/restmod/serializers/date/DateSerializer',['seed/helpers/mod
 	 * @param DateSerializerService {Object} Serialization service
 	 * @return {{decode: decode, encode: encode}}
 	 */
-	DateSerializer.$inject = ['$log', 'DateSerializerService'];
 	function DateSerializer($log, DateSerializerService) {
 		$log = $log.getInstance('seed.helpers.DateSerializer');
 
@@ -1144,7 +1047,6 @@ define('seed/helpers/restmod/serializers/time/TimeSerializerService',['seed/help
 	 * @param $log {Object} Logging service
 	 * @return {{decode: decode, encode: encode}}
 	 */
-	TimeSerializerService.$inject = ['$log'];
 	function TimeSerializerService($log) {
 		$log = $log.getInstance('seed.helpers.TimeSerializerService');
 
@@ -1180,7 +1082,7 @@ define('seed/helpers/restmod/serializers/time/TimeSerializerService',['seed/help
 	module.service('TimeSerializerService', TimeSerializerService);
 });
 
-define('seed/helpers/restmod/serializers/time/TimeDecodeFilter',['seed/module'], function (module) {
+define('seed/helpers/restmod/serializers/time/TimeDecodeFilter',['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -1200,7 +1102,6 @@ define('seed/helpers/restmod/serializers/time/TimeDecodeFilter',['seed/module'],
 	 * @param TimeSerializerService {Object} Serialization service
 	 * @return {Function}
 	 */
-	TimeDecodeFilter.$inject = ['$log', 'TimeSerializerService'];
 	function TimeDecodeFilter($log, TimeSerializerService) {
 		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in TimeSerializer');
 
@@ -1212,7 +1113,7 @@ define('seed/helpers/restmod/serializers/time/TimeDecodeFilter',['seed/module'],
 	module.factory('TimeDecodeFilter', TimeDecodeFilter);
 });
 
-define('seed/helpers/restmod/serializers/time/TimeEncodeFilter',['seed/module'], function (module) {
+define('seed/helpers/restmod/serializers/time/TimeEncodeFilter',['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -1231,7 +1132,6 @@ define('seed/helpers/restmod/serializers/time/TimeEncodeFilter',['seed/module'],
 	 * @param TimeSerializerService {Object} Serialization service
 	 * @return {Function}
 	 */
-	TimeEncodeFilter.$inject = ['$log', 'TimeSerializerService'];
 	function TimeEncodeFilter($log, TimeSerializerService) {
 		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in TimeSerializer');
 
@@ -1262,7 +1162,6 @@ define('seed/helpers/restmod/serializers/time/TimeSerializer',['seed/helpers/mod
 	 * @param TimeSerializerService {Object} Serialization service
 	 * @return {{decode: decode, encode: encode}}
 	 */
-	TimeSerializer.$inject = ['$log', 'TimeSerializerService'];
 	function TimeSerializer($log, TimeSerializerService) {
 		$log = $log.getInstance('seed.helpers.TimeSerializer');
 
@@ -1304,7 +1203,6 @@ define('seed/helpers/restmod/serializers/enum/EnumSerializerService',['seed/help
 	 * @param $log {Object} Logging service
 	 * @return {{decode: decode, encode: encode}}
 	 */
-	EnumSerializerService.$inject = ['$log'];
 	function EnumSerializerService($log) {
 		$log = $log.getInstance('seed.helpers.EnumSerializerService');
 
@@ -1323,7 +1221,7 @@ define('seed/helpers/restmod/serializers/enum/EnumSerializerService',['seed/help
 	module.service('EnumSerializerService', EnumSerializerService);
 });
 
-define('seed/helpers/restmod/serializers/enum/EnumDecodeFilter',['seed/module'], function (module) {
+define('seed/helpers/restmod/serializers/enum/EnumDecodeFilter',['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -1342,7 +1240,6 @@ define('seed/helpers/restmod/serializers/enum/EnumDecodeFilter',['seed/module'],
 	 * @param EnumSerializerService {Object} Serialization service
 	 * @return {Function}
 	 */
-	EnumDecodeFilter.$inject = ['$log', 'EnumSerializerService'];
 	function EnumDecodeFilter($log, EnumSerializerService) {
 		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in EnumSerializer');
 
@@ -1354,7 +1251,7 @@ define('seed/helpers/restmod/serializers/enum/EnumDecodeFilter',['seed/module'],
 	module.factory('EnumDecodeFilter', EnumDecodeFilter);
 });
 
-define('seed/helpers/restmod/serializers/enum/EnumEncodeFilter',['seed/module'], function (module) {
+define('seed/helpers/restmod/serializers/enum/EnumEncodeFilter',['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -1374,7 +1271,6 @@ define('seed/helpers/restmod/serializers/enum/EnumEncodeFilter',['seed/module'],
 	 * @param EnumSerializerService {Object} Serialization service
 	 * @return {Function}
 	 */
-	EnumEncodeFilter.$inject = ['$log', 'EnumSerializerService'];
 	function EnumEncodeFilter($log, EnumSerializerService) {
 		$log.warn('Decoders and encoders will be deprecated in favor of serializers. See example usage in EnumSerializer');
 
@@ -1400,7 +1296,6 @@ define('seed/helpers/restmod/models/BaseAPI',['seed/helpers/module'], function (
 	 * @param appMessages {Object} Browser notifications wrapper
 	 * @return {API} REST interface for Restmod models
 	 */
-	BaseAPI.$inject = ['$q', '$log', 'gettextCatalog', 'appMessages'];
 	function BaseAPI($q, $log, gettextCatalog, appMessages) {
 		$log = $log.getInstance('seed.BaseAPI');
 
@@ -1677,7 +1572,6 @@ define('seed/helpers/restmod/models/BaseModel',['seed/helpers/module'], function
 	 * @param restmod
 	 * @return {Object}
 	 */
-	BaseModel.$inject = ['restmod'];
 	function BaseModel(restmod) {
 		return restmod.mixin({
 			createdAt: {
@@ -1719,7 +1613,6 @@ define('seed/helpers/restmod/styles/NeoStyleAPI',[
 	 * @param appConf {Object} Application configuration
 	 * @return {void|*|{$isAbstract, $$chain}|Function|Object}
 	 */
-	NeoStyleAPI.$inject = ['restmod', 'appConf'];
 	function NeoStyleAPI(restmod, appConf) {
 		return restmod.mixin(
 			'DefaultPacker',
@@ -1834,11 +1727,11 @@ define('seed/components/module',['angular'], function (ng) {
 
 	var module = ng.module('seed.components', []);
 
-	module.run(['$log', function ($log) {
+	module.run(function ($log) {
 		$log = $log.getInstance('seed.components.module');
 
 		$log.debug('Initiated module');
-	}]);
+	});
 
 	return module;
 });
@@ -1856,7 +1749,7 @@ define('seed/components/activities/neoActivities',['seed/components/module'], fu
 			templateUrl: 'seed/components/activities/activities.html',
 			controllerAs: 'vm',
 			scope: true,
-			controller: ['$scope', '$element', function ($scope, $element) {
+			controller: function ($scope, $element) {
 				var vm = this;
 
 				vm.user = $scope.$root.user;
@@ -1903,7 +1796,7 @@ define('seed/components/activities/neoActivities',['seed/components/module'], fu
 						$element.removeClass('active');
 					}
 				});
-			}]
+			}
 		};
 	}
 
@@ -1926,7 +1819,6 @@ define('seed/components/customer/neoCustomerSwitcher',['seed/components/module']
 	 * @param $window {Object} Window object helper
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	neoCustomerSwitcher.$inject = ['$log', '$cookies', '$window'];
 	function neoCustomerSwitcher($log, $cookies, $window) {
 		$log = $log.getInstance('seed.components.neoCustomerSwitcher');
 
@@ -1937,7 +1829,7 @@ define('seed/components/customer/neoCustomerSwitcher',['seed/components/module']
 			templateUrl: 'seed/components/customer/neoCustomerSwitcher.html',
 			controllerAs: 'vm',
 			scope: true,
-			controller: ['$scope', function ($scope) {
+			controller: function ($scope) {
 				var vm = this;
 
 				// Variables
@@ -1958,7 +1850,7 @@ define('seed/components/customer/neoCustomerSwitcher',['seed/components/module']
 
 
 				$log.debug('Initiated controller');
-			}]
+			}
 		};
 	}
 
@@ -1980,7 +1872,6 @@ define('seed/components/language/neoLanguageSwitcher',['seed/components/module']
 	 * @param LanguageAPI {Object} Interface for REST communication with server
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	neoLanguageSwitcher.$inject = ['$log', 'LanguageAPI'];
 	function neoLanguageSwitcher($log, LanguageAPI) {
 		$log = $log.getInstance('seed.components.neoLanguageSwitcher');
 
@@ -2026,7 +1917,7 @@ define('seed/components/language/neoLanguageSwitcher',['seed/components/module']
 define('seed/components/messages/appMessages',['seed/components/module'], function (module) {
 	'use strict';
 
-	module.service('appMessages', ['gettext', 'gettextCatalog', function (gettext, gettextCatalog) {
+	module.service('appMessages', function (gettext, gettextCatalog) {
 
 		var appMessages = {
 			data: {},
@@ -2128,7 +2019,7 @@ define('seed/components/messages/appMessages',['seed/components/module'], functi
 		};
 
 		return appMessages;
-	}]);
+	});
 });
 
 define('seed/components/euLogotypes/neoEuLogotypes',['seed/components/module'], function (module) {
@@ -2170,7 +2061,6 @@ define('seed/components/breadcrumbs/neoStateBreadcrumbs',['seed/components/modul
    *			})
 	 */
 
-	neoStateBreadcrumbs.$inject = ['$rootScope', '$state'];
 	function neoStateBreadcrumbs($rootScope, $state) {
 		return {
 			restrict: 'E',
@@ -2273,7 +2163,6 @@ define('seed/components/navigation/neoNavigation',['seed/components/module'], fu
 	 * @param appConf {Object} Application configuration
 	 * @return {{restrict: string, template: string, controller: Function}}
 	 */
-	neoNavigation.$inject = ['$log', '$state', '$q', '$compile', '$timeout', 'neoTemplateLoader', 'appConf'];
 	function neoNavigation($log, $state, $q, $compile, $timeout, neoTemplateLoader, appConf) {
 
 		$log = $log.getInstance('seed.components.neoNavigation');
@@ -2283,7 +2172,7 @@ define('seed/components/navigation/neoNavigation',['seed/components/module'], fu
 			restrict: 'E',
 			template: '<ul></ul>',
 
-			controller: ['$scope', '$element', function ($scope, $element) {
+			controller: function ($scope, $element) {
 				var promises = _
 					.chain(appConf.appsSettings)
 					.sortBy('order')
@@ -2320,7 +2209,7 @@ define('seed/components/navigation/neoNavigation',['seed/components/module'], fu
 					});
 
 				$log.debug('Called linking function');
-			}]
+			}
 		};
 	}
 
@@ -2363,7 +2252,6 @@ define('seed/components/navigation/neoNavigationGroup',['seed/components/module'
 	 * 	controller: Function
 	 * }}
 	 */
-	neoNavigationGroup.$inject = ['$log', '$state'];
 	function neoNavigationGroup($log, $state) {
 
 		$log = $log.getInstance('seed.components.neoNavigationGroup');
@@ -2383,7 +2271,7 @@ define('seed/components/navigation/neoNavigationGroup',['seed/components/module'
 				state: '@'
 			},
 
-			controller: ['$scope', '$element', function ($scope, $element) {
+			controller: function ($scope, $element) {
 				var vm = this || {};
 
 				// variables
@@ -2428,7 +2316,7 @@ define('seed/components/navigation/neoNavigationGroup',['seed/components/module'
 				}
 
 				$log.debug('Initiated controller');
-			}]
+			}
 		};
 	}
 
@@ -2462,7 +2350,6 @@ define('seed/components/navigation/neoNavigationItem',['seed/components/module']
 	 * 	controller: Function
 	 * }}
 	 */
-	neoNavigationItem.$inject = ['$log', '$state'];
 	function neoNavigationItem($log, $state) {
 
 		$log = $log.getInstance('seed.components.neoNavigationItem');
@@ -2480,7 +2367,7 @@ define('seed/components/navigation/neoNavigationItem',['seed/components/module']
 				state: '@',
 				label: '@'
 			},
-			controller: ['$element', function ($element) {
+			controller: function ($element) {
 				var vm = this || {};
 
 				// variables
@@ -2504,7 +2391,7 @@ define('seed/components/navigation/neoNavigationItem',['seed/components/module']
 				function isActive() {
 					return $state.includes(vm.state);
 				}
-			}]
+			}
 		};
 	}
 
@@ -2538,11 +2425,10 @@ define('seed/components/pageTitle/neoPageTitle',['seed/components/module'], func
 	 * @param appConf {Object} Application configuration
 	 * @returns {{restrict: string, controller: Function}}
 	 */
-	neoPageTitle.$inject = ['$log', 'appConf'];
 	function neoPageTitle($log, appConf) {
 		return {
 			restrict: 'A',
-			controller: ['$scope', '$element', 'gettextCatalog', function ($scope, $element, gettextCatalog) {
+			controller: function ($scope, $element, gettextCatalog) {
 
 				$log = $log.getInstance('seed.components.neoPageTitle');
 				$log.debug('Initiated directive');
@@ -2559,7 +2445,7 @@ define('seed/components/pageTitle/neoPageTitle',['seed/components/module'], func
 				});
 
 				$log.debug('Initiated controller');
-			}]
+			}
 		};
 	}
 
@@ -2578,7 +2464,6 @@ define('seed/components/versionTag/neoVersionTag',['seed/components/module'], fu
 	 * @param appConf {Object} Container configuration
 	 * @return {{restrict: string, templateUrl: string, scope: boolean, link: Function}}
 	 */
-	neoVersionTag.$inject = ['$log', 'appConf'];
 	function neoVersionTag($log, appConf) {
 
 		$log = $log.getInstance('seed.components.neoVersionTag');
@@ -2626,7 +2511,7 @@ define('seed/layout/module',['angular'], function (ng) {
 
 	var module = ng.module('seed.layout', ['app.conf']);
 
-	module.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+	module.config(function ($stateProvider, $urlRouterProvider) {
 
 		$stateProvider.state('app', {
 			abstract: true,
@@ -2634,10 +2519,10 @@ define('seed/layout/module',['angular'], function (ng) {
 				root: {
 					controllerAs: 'vm',
 					templateUrl: 'seed/layout/views/view.html',
-					controller: ['appConf', function (appConf) {
+					controller: function (appConf) {
 						var vm = this;
 						vm.appConf = appConf;
-					}]
+					}
 				}
 			},
 			data: {
@@ -2652,9 +2537,9 @@ define('seed/layout/module',['angular'], function (ng) {
 			var $state = $injector.get('$state');
 			$state.go('auth.login');
 		});
-	}]);
+	});
 
-	module.run(['Permission', 'neoSession', '$rootScope', function (Permission, neoSession, $rootScope) {
+	module.run(function (Permission, neoSession, $rootScope) {
 
 		$rootScope.$on('$stateChangePermissionDenied', function (event, toState, toParams) {
 			$rootScope.requestedState = undefined;
@@ -2669,7 +2554,7 @@ define('seed/layout/module',['angular'], function (ng) {
 		Permission.defineRole('AUTHORIZED', function () {
 			return neoSession.checkSession();
 		});
-	}]);
+	});
 
 	return module;
 });
@@ -2789,7 +2674,7 @@ define('seed/auth/module',[
 		'seed.auth.lock'
 	]);
 
-	module.config(['$stateProvider', 'appConf', function ($stateProvider, appConf) {
+	module.config(function ($stateProvider, appConf) {
 
 		$stateProvider
 			.state('auth', {
@@ -2817,7 +2702,7 @@ define('seed/auth/module',[
 				},
 				views: {
 					auth: {
-						controller: ['$rootScope', '$state', 'UserAPI', 'neoSession', function ($rootScope, $state, UserAPI, neoSession) {
+						controller: function ($rootScope, $state, UserAPI, neoSession) {
 							UserAPI
 								.logout($rootScope.user)
 								.then(function () {
@@ -2827,13 +2712,13 @@ define('seed/auth/module',[
 											$state.go('auth.login');
 										});
 								});
-						}]
+						}
 					}
 				}
 			});
-	}]);
+	});
 
-	module.run(['$log', '$rootScope', '$state', 'hotkeys', 'UserAPI', 'neoSession', function ($log, $rootScope, $state, hotkeys, UserAPI, neoSession) {
+	module.run(function ($log, $rootScope, $state, hotkeys, UserAPI, neoSession) {
 
 		$log = $log.getInstance('seed.auth.module');
 
@@ -2855,7 +2740,7 @@ define('seed/auth/module',[
 		});
 
 		$log.debug('Initiated module');
-	}]);
+	});
 
 	return module;
 });
@@ -2872,7 +2757,6 @@ define('seed/auth/_directives/neoPermissionOnly',['seed/auth/module'], function 
 	 * @param Permission {Object} Access permission service
 	 * @return {{restrict: string, link: Function}}
 	 */
-	neoPermissionOnly.$inject = ['$log', 'Permission'];
 	function neoPermissionOnly($log, Permission) {
 
 		$log = $log.getInstance('seed.auth.neoPermissionOnly');
@@ -2915,7 +2799,6 @@ define('seed/auth/_directives/neoPermissionExcept',['seed/auth/module'], functio
 	 * @param Permission {Object} Access permission service
 	 * @return {{restrict: string, link: Function}}
 	 */
-	neoPermissionExcept.$inject = ['$log', 'Permission'];
 	function neoPermissionExcept($log, Permission) {
 
 		$log = $log.getInstance('seed.auth.neoPermissionExcept');
@@ -3070,7 +2953,6 @@ define('seed/auth/_services/neoSession',['seed/auth/module'], function (module) 
 			return dfd.promise;
 		};
 	};
-	neoSession.$inject = ['$log', '$cookies', 'Permission', '$q', '$rootScope', 'neoRequestHeaders', 'UserAPI'];
 
 	module.service('neoSession', neoSession);
 });
@@ -3122,7 +3004,6 @@ define('seed/auth/_services/neoRequestHeaders',['seed/auth/module'], function (m
 			$log.debug('Cleared headers');
 		};
 	};
-	neoRequestHeaders.$inject = ['$log', '$http'];
 
 	module.service('neoRequestHeaders', neoRequestHeaders);
 });
@@ -3217,7 +3098,6 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 				}
 			});
 	};
-	User.$inject = ['restmod', '$cookies'];
 
 	module.factory('User', User);
 });
@@ -3290,7 +3170,6 @@ define('seed/auth/_models/User/UserAPI',['seed/auth/module'], function (module) 
 
 		return api;
 	};
-	UserAPI.$inject = ['$log', '$cookies', '$rootScope', 'BaseAPI', 'User', '$q'];
 
 	module.service('UserAPI', UserAPI);
 });
@@ -3352,7 +3231,6 @@ define('seed/auth/_models/User/UserPacker',[
 			});
 		});
 	};
-	UserPacker.$inject = ['$log', 'restmod', 'RMPackerCache'];
 
 	app.factory('UserPacker', UserPacker);
 });
@@ -3384,7 +3262,6 @@ define('seed/auth/_models/Customer/Customer',['seed/auth/module'], function (mod
 				}
 			});
 	};
-	Customer.$inject = ['restmod'];
 
 	module.factory('Customer', Customer);
 });
@@ -3424,7 +3301,6 @@ define('seed/auth/_models/Customer/CustomerAPI',['seed/auth/module'], function (
 
 		return api;
 	};
-	CustomerAPI.$inject = ['$log', '$cookies', 'Customer', 'BaseAPI'];
 
 	module.service('CustomerAPI', CustomerAPI);
 });
@@ -3527,7 +3403,6 @@ define('seed/auth/_models/Language/LanguageAPI',[
 
 		return api;
 	};
-	LanguageAPI.$inject = ['$log', '$window', '$cookies', '$rootScope', 'Language', 'neoRequestHeaders', 'BaseAPI', 'gettextCatalog', 'amMoment', 'appConf'];
 
 	module.service('LanguageAPI', LanguageAPI);
 });
@@ -3558,7 +3433,6 @@ define('seed/auth/_models/Language/Language',['seed/auth/module'], function (mod
 				}
 			});
 	};
-	Language.$inject = ['restmod'];
 
 	module.factory('Language', Language);
 });
@@ -3579,7 +3453,6 @@ define('seed/auth/login/forms/login/authLoginForm',['seed/auth/module'], functio
 	 * @param UserAPI {Object} Interface for REST communication with server
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	authLoginForm.$inject = ['$log', '$state', 'appConf', 'UserAPI', 'neoSession', '$rootScope'];
 	function authLoginForm($log, $state, appConf, UserAPI, neoSession, $rootScope) {
 
 		$log = $log.getInstance('seed.auth.login.authLoginForm');
@@ -3590,7 +3463,7 @@ define('seed/auth/login/forms/login/authLoginForm',['seed/auth/module'], functio
 			templateUrl: 'seed/auth/login/forms/login/authLoginForm.html',
 			controllerAs: 'vm',
 
-			controller: ['$scope', function ($scope) {
+			controller: function ($scope) {
 				var vm = this || {};
 
 				// variables
@@ -3652,7 +3525,7 @@ define('seed/auth/login/forms/login/authLoginForm',['seed/auth/module'], functio
 				}
 
 				$log.debug('Initiated controller');
-			}]
+			}
 		};
 	}
 
@@ -3675,7 +3548,6 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/m
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope:
 	 *   {redirectToState: string}, controller: Function}}
 	 */
-	authProfileSelectForm.$inject = ['$log', '$state', 'neoSession', 'appConf', '$rootScope'];
 	function authProfileSelectForm($log, $state, neoSession, appConf, $rootScope) {
 		$log = $log.getInstance('seed.auth.login.authProfileSelectForm');
 
@@ -3689,7 +3561,7 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/m
 				redirectToState: '&'
 			},
 
-			controller: ['$scope', function ($scope) {
+			controller: function ($scope) {
 				var vm = this;
 
 				// variables
@@ -3736,7 +3608,7 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/m
 
 					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);
 				}
-			}]
+			}
 		};
 	}
 
@@ -3755,7 +3627,7 @@ define('seed/auth/login/module',['angular'], function (ng) {
 
 	var module = ng.module('seed.auth.login', []);
 
-	module.config(['$stateProvider', function ($stateProvider) {
+	module.config(function ($stateProvider) {
 
 		$stateProvider
 			.state('auth.login', {
@@ -3775,12 +3647,12 @@ define('seed/auth/login/module',['angular'], function (ng) {
 					}
 				}
 			});
-	}]);
+	});
 
-	module.run(['$log', function ($log) {
+	module.run(function ($log) {
 		$log = $log.getInstance('seed.auth.login.module');
 		$log.debug('Initiated module');
-	}]);
+	});
 
 	return module;
 });
@@ -3792,7 +3664,7 @@ define('seed/auth/lock/module',[
 
 	var module = ng.module('seed.auth.lock', []);
 
-	module.config(['$stateProvider', function ($stateProvider) {
+	module.config(function ($stateProvider) {
 
 		$stateProvider
 			.state('auth.lock', {
@@ -3806,12 +3678,12 @@ define('seed/auth/lock/module',[
 					title: 'Locked Screen'
 				}
 			});
-	}]);
+	});
 
-	module.run(['$log', function ($log) {
+	module.run(function ($log) {
 		$log = $log.getInstance('seed.auth.lock.module');
 		$log.debug('Initiated module');
-	}]);
+	});
 
 	return module;
 });
@@ -3830,7 +3702,6 @@ define('seed/auth/lock/forms/authLockForm',['seed/auth/lock/module'], function (
 	 * @param appConf {Object} Application configuration
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	authLockForm.$inject = ['$log', '$state', 'neoSession', 'appConf'];
 	function authLockForm($log, $state, neoSession, appConf) {
 
 		$log = $log.getInstance('seed.auth.login.authLockForm');
@@ -3841,7 +3712,7 @@ define('seed/auth/lock/forms/authLockForm',['seed/auth/lock/module'], function (
 			templateUrl: 'seed/auth/lock/forms/authLockForm.html',
 			controllerAs: 'vm',
 
-			controller: ['$scope', function ($scope) {
+			controller: function ($scope) {
 				var vm = this;
 
 				// variables
@@ -3865,7 +3736,7 @@ define('seed/auth/lock/forms/authLockForm',['seed/auth/lock/module'], function (
 
 					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);
 				}
-			}]
+			}
 		};
 	}
 
@@ -3911,13 +3782,13 @@ define('seed/forms/module',['angular'], function (ng) {
 
 	var module = ng.module('seed.forms', ['seed.helpers']);
 
-	module.run(['$log', 'neoSelect', function ($log, neoSelect) {
+	module.run(function ($log, neoSelect) {
 		$log = $log.getInstance('seed.forms');
 
 		neoSelect.init();
 
 		$log.debug('Initiated module');
-	}]);
+	});
 
 	return module;
 });
@@ -3931,7 +3802,6 @@ define('seed/forms/validate/neoValidate',[
 ], function (module) {
 	'use strict';
 
-	neoValidate.$inject = ['$log', 'LanguageAPI'];
 	function neoValidate($log, LanguageAPI) {
 
 		$log = $log.getInstance('seed.forms.neoValidate');
@@ -4014,7 +3884,6 @@ define('seed/forms/select/services/neoSelect',[
 ], function (module) {
 	'use strict';
 
-	neoSelect.$inject = ['$log', 'neoTemplateLoader'];
 	function neoSelect($log, neoTemplateLoader) {
 		$log = $log.getInstance('seed.components.neoSelect');
 
@@ -4056,7 +3925,6 @@ define('seed/forms/input/neoDatepicker',[
 	 *  scope: {ngModel: string, neoDatepicker: string}, require: string, link: Function
 	 * }}
 	 */
-	neoDatepicker.$inject = ['$log', 'gettextCatalog'];
 	function neoDatepicker($log, gettextCatalog) {
 
 		$log = $log.getInstance('seed.forms.datepicker');
@@ -4282,13 +4150,13 @@ define('seed/tables/module',[
 
 	var module = ng.module('seed.tables', ['ngTable']);
 
-	module.run(['$log', 'neoTable', function ($log, neoTable) {
+	module.run(function ($log, neoTable) {
 		$log = $log.getInstance('seed.tables.module');
 
 		neoTable.init();
 
 		$log.debug('Initiated module');
-	}]);
+	});
 
 	return module;
 });
@@ -4304,7 +4172,6 @@ define('seed/tables/_services/neoTable',['seed/tables/module', 'angular-table'],
 	 * @param $log {Object} Logging service
 	 * @param neoTemplateLoader
 	 */
-	neoTable.$inject = ['$log', 'neoTemplateLoader'];
 	function neoTable($log, neoTemplateLoader) {
 		$log = $log.getInstance('seed.tables.neoTable');
 
@@ -4361,7 +4228,6 @@ define('seed/tables/_factories/neoTableParams',['seed/tables/module'], function 
 	 * @param $log {Object} Logging service
 	 * @returns {Function} ngTable configuration factory
 	 */
-	neoTableParams.$inject = ['ngTableParams', '$log'];
 	function neoTableParams(ngTableParams, $log) {
 		$log = $log.getInstance('seed.tables.neoTableParams');
 
@@ -4462,7 +4328,6 @@ define('seed/tables/_directives/neoTableEnumFilter/neoTableEnumFilter',['seed/ta
 	 *   bindToController: {enumName: string, displayProperty: string, ngModel: string}, controller:
 	 *   Function}}
 	 */
-	neoTableEnumFilter.$inject = ['$log', '$injector'];
 	function neoTableEnumFilter($log, $injector) {
 
 		$log = $log.getInstance('seed.tables.neoTableEnumFilter');
@@ -4541,7 +4406,6 @@ define('seed/tables/_directives/neoTableRelatedFilter/neoTableRelatedFilter',['s
 	 *   bindToController: {apiName: string, displayProperty: string, ngModel: string}, controller:
 	 *   Function}}
 	 */
-	neoTableRelatedFilter.$inject = ['$log', '$injector'];
 	function neoTableRelatedFilter($log, $injector) {
 		$log = $log.getInstance('seed.tables.neoTableRelatedFilter');
 
@@ -4639,7 +4503,6 @@ define('seed/tables/_directives/neoTableDateFilter/neoTableDateFilter',['seed/ta
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope: boolean,
 	 *   bindToController: {ngModel: string}, controller: Function}}
 	 */
-	neoTableDateFilter.$inject = ['$log'];
 	function neoTableDateFilter($log) {
 		$log = $log.getInstance('seed.tables.neoTableDateFilter');
 
@@ -4690,7 +4553,6 @@ define('seed/tables/_directives/neoTableDatetimeFilter/neoTableDatetimeFilter',[
 	 *   bindToController: {ngModel: string}, controller: Function}}
 	 */
 
-	neoTableDatetimeFilter.$inject = ['$log'];
 	function neoTableDatetimeFilter($log) {
 		$log = $log.getInstance('seed.tables.neoTableDatetimeFilter');
 
@@ -4992,11 +4854,11 @@ define('seed/widgets/module',['angular'], function (ng) {
 
 	var module = ng.module('seed.widgets', []);
 
-	module.run(['$log', function ($log) {
+	module.run(function ($log) {
 		$log = $log.getInstance('seed.widgets.module');
 
 		$log.debug('Initiated module');
-	}]);
+	});
 
 
 	return module;
@@ -5017,7 +4879,7 @@ define('seed/widgets/module',['angular'], function (ng) {
 define('seed/widgets/_directives/jarvisWidget',['seed/widgets/module'], function (module) {
 	'use strict';
 
-	module.directive('jarvisWidget', ['$rootScope', function ($rootScope) {
+	module.directive('jarvisWidget', function ($rootScope) {
 		return {
 			restrict: 'A',
 			compile: function (element) {
@@ -5036,13 +4898,13 @@ define('seed/widgets/_directives/jarvisWidget',['seed/widgets/module'], function
 
 			}
 		};
-	}]);
+	});
 });
 
 define('seed/widgets/_directives/widgetGrid',['seed/widgets/module'], function (module) {
 	'use strict';
 
-	module.directive('widgetGrid', ['$rootScope', '$compile', '$q', '$state', '$timeout', function ($rootScope, $compile, $q, $state, $timeout) {
+	module.directive('widgetGrid', function ($rootScope, $compile, $q, $state, $timeout) {
 
 		var jarvisWidgetsDefaults = {
 			grid: 'article',
@@ -5211,7 +5073,7 @@ define('seed/widgets/_directives/widgetGrid',['seed/widgets/module'], function (
 
 			}
 		};
-	}]);
+	});
 
 
 });
@@ -5231,18 +5093,19 @@ define('seed/_includes',[
 
 	// Core app generics
 	'./helpers/_includes',
+	'./helpers/module',
 
 	// Core apps components
-	'./components/module',
 	'./components/_includes',
+	'./components/module',
 
 	// Layout
-	'./layout/module',
 	'./layout/_includes',
+	'./layout/module',
 
 	// Authentication
-	'./auth/module',
 	'./auth/_includes',
+	'./auth/module',
 
 	// Forms
 	'./forms/_includes',
@@ -5253,13 +5116,94 @@ define('seed/_includes',[
 	'./tables/module',
 
 	// Graphs
-	'./graphs/module',
 	'./graphs/includes',
+	'./graphs/module',
 
 	// Widgets
-	'./widgets/module',
-	'./widgets/includes'
+	'./widgets/includes',
+	'./widgets/module'
 ], function () {
 	'use strict';
+});
+
+/**
+ * @namespace seed
+ */
+
+define('seed/module',[
+	'angular',
+	'angular-animate',
+	'angular-sanitize',
+	'angular-ui-router',
+	'angular-ui-bootstrap',
+	'angular-ui-bootstrap-tpls',
+	'angular-ui-select',
+	'angular-gettext',
+	'angular-permission',
+	'angular-loading-bar',
+	'angular-moment',
+	'angular-restmod',
+	'smartwidgets',
+	'notification',
+	'seed/_includes'
+], function (ng) {
+	'use strict';
+
+	var seed = ng.module('seed', [
+		'ngAnimate',
+		'ngSanitize',
+
+		'gettext',
+		'permission',
+		'angularMoment',
+		'restmod',
+		'angular-loading-bar',
+
+		'ui.bootstrap',
+		'ui.select',
+		'ui.router',
+
+		'app.conf',
+
+		// Seed modules
+		'seed.templateCache',
+		'seed.components',
+		'seed.helpers',
+		'seed.auth',
+		'seed.layout',
+		'seed.forms',
+		'seed.tables',
+		'seed.graphs',
+		'seed.widgets'
+	]);
+
+	seed.config(function ($provide, $httpProvider, $locationProvider, cfpLoadingBarProvider,
+												$logProvider, restmodProvider, uiSelectConfig, appConf) {
+
+		restmodProvider.rebase('NeoStyleAPI');
+
+		uiSelectConfig.theme = 'bootstrap';
+
+		cfpLoadingBarProvider.includeSpinner = false;
+		cfpLoadingBarProvider.latencyThreshold = 500;
+
+		$locationProvider.html5Mode(true);
+		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
+
+		// Add the interceptors to the $httpProvider.
+		$httpProvider.interceptors.push('HttpErrorInterceptor');
+		$httpProvider.interceptors.push('HttpRequestInterceptor');
+	});
+
+	seed.run(function (gettextCatalog, LanguageAPI, $log, appConf) {
+		$log = $log.getInstance('seed.module');
+
+		LanguageAPI.init();
+		gettextCatalog.debug = appConf.environmentSettings.debugEnabled;
+
+		$log.debug('Set up seed configuration');
+	});
+
+	return seed;
 });
 

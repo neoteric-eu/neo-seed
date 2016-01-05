@@ -6,18 +6,19 @@ define([
 
 	// Core app generics
 	'./helpers/_includes',
+	'./helpers/module',
 
 	// Core apps components
-	'./components/module',
 	'./components/_includes',
+	'./components/module',
 
 	// Layout
-	'./layout/module',
 	'./layout/_includes',
+	'./layout/module',
 
 	// Authentication
-	'./auth/module',
 	'./auth/_includes',
+	'./auth/module',
 
 	// Forms
 	'./forms/_includes',
@@ -28,12 +29,12 @@ define([
 	'./tables/module',
 
 	// Graphs
-	'./graphs/module',
 	'./graphs/includes',
+	'./graphs/module',
 
 	// Widgets
-	'./widgets/module',
-	'./widgets/includes'
+	'./widgets/includes',
+	'./widgets/module'
 ], function () {
 	'use strict';
 });
