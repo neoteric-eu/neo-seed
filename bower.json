@@ -34,7 +34,7 @@
   },
   "main": [
     "build/module.js",
-    "build/require.conf.js",
+    "build/require.conf.js"
   ],
   "ignore": [
     "tools/",
