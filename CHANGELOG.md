@@ -1,3 +1,16 @@
+<a name="2.1.0"></a>
+# [2.1.0](//compare/v2.0.2...v2.1.0) (2016-01-05)
+
+### Features
+
+* **Grunt:** #3123 - Create independent seed building process 94eb0e4
+
+
+### Bug Fixes
+
+* **unit tests** Fixed back to work unit tests
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](//compare/v2.0.1...v2.0.2) (2015-12-21)
 
