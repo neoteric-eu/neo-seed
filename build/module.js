@@ -1490,7 +1490,7 @@ define('seed/helpers/restmod/models/BaseAPI',['seed/helpers/module'], function (
 				.$asPromise()
 				.then(function (model) {
 					if (isNew) {
-						appMessages.success('Created new ' + model.type);
+						appMessages.success('Created new ' + model.t);
 					} else {
 						appMessages.success('Updated ' + model.type);
 					}
@@ -1914,7 +1914,7 @@ define('seed/components/language/neoLanguageSwitcher',['seed/components/module']
 	module.directive('neoLanguageSwitcher', neoLanguageSwitcher);
 });
 
-define('seed/components/messages/appMessages',['seed/components/module'], function (module) {
+define('seed/components/messages/appMessages',['seed/components/module', 'notification'], function (module) {
 	'use strict';
 
 	module.service('appMessages', function (gettext, gettextCatalog) {
@@ -4849,7 +4849,7 @@ define('seed/graphs/includes',[
 
 
 
-define('seed/widgets/module',['angular'], function (ng) {
+define('seed/widgets/module',['angular', 'smartwidgets'], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.widgets', []);
@@ -5143,9 +5143,7 @@ define('seed/module',[
 	'angular-loading-bar',
 	'angular-moment',
 	'angular-restmod',
-	'smartwidgets',
-	'notification',
-	'seed/_includes'
+	'./_includes'
 ], function (ng) {
 	'use strict';
 

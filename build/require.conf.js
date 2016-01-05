@@ -93,7 +93,7 @@ requirejs.config({
 		'lodash-deep': ['lodash'],
 		'lodash-extensions': ['lodash'],
 
-		'form-validation': ['jquery'],
+		'form-validation/form-validation': ['jquery'],
 		'form-validation/language/pl_PL': ['form-validation/form-validation'],
 		'form-validation/language/en_US': ['form-validation/form-validation'],
 		'form-validation/framework/bootstrap': [
