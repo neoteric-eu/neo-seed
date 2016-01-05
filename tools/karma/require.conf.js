@@ -16,7 +16,7 @@ requirejs(['/base/src/seed/require.conf.js'], function () {
 		baseUrl: '/base/src/',
 		// Additional libraries
 		paths: {
-			'angular-mocks': 'assets/vendor/js/angular-mocks/angular-mocks'
+			'angular-mocks': '../bower_components/angular-mocks/angular-mocks'
 		},
 
 		shim: {

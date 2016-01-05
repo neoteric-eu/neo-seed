@@ -1,3 +1,12 @@
+<a name="2.1.1"></a>
+## [2.1.1](//compare/v2.1.0...v2.1.1) (2016-01-05)
+
+
+### Bug Fixes
+
+* **unit tests** Fixed angular-mocks dependency path
+
+
 <a name="2.1.0"></a>
 # [2.1.0](//compare/v2.0.2...v2.1.0) (2016-01-05)
 
