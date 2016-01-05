@@ -1,8 +1,6 @@
 define([
 	'angular',
 	'angular-mocks',
-	'seed/helpers/module',
-	'seed/helpers/_includes',
 	'seed/forms/module',
 	'seed/forms/_includes'
 ], function () {
@@ -16,8 +14,22 @@ define([
 					$rootScope, $httpBackend;
 
 				beforeEach(function () {
-					// Instantiate the fake module
-					module('seed.forms', 'seed.helpers');
+					// Instantiate the fake modules
+					module(function ($provide) {
+						var LanguageAPI = jasmine.createSpyObj('LanguageAPI', ['getLanguage']);
+						LanguageAPI.getLanguage.and.callFake(function () {
+							return {
+								name: 'English',
+								code: 'gb',
+								locale: 'en-GB',
+								localePOSIX: 'en_GB'
+							};
+						});
+
+						$provide.value('LanguageAPI', LanguageAPI);
+					});
+
+					module('seed.forms');
 
 					// Inject service into module
 					inject(function (_$injector_, _$compile_, _$rootScope_, _$httpBackend_) {

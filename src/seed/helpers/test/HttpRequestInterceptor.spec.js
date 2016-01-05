@@ -1,7 +1,7 @@
 define([
 	'angular',
-	'angular-table',
 	'angular-mocks',
+	'angular-ui-router',
 	'seed/helpers/module',
 	'seed/helpers/_includes'
 ], function () {

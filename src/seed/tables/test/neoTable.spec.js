@@ -1,5 +1,6 @@
 define([
 	'angular',
+	'angular-gettext',
 	'angular-table',
 	'angular-mocks',
 	'seed/tables/module',

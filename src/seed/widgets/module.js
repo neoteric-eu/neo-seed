@@ -1,4 +1,4 @@
-define(['angular'], function (ng) {
+define(['angular', 'smartwidgets'], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.widgets', []);

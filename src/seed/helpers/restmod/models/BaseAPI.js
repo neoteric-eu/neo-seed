@@ -206,7 +206,7 @@ define(['seed/helpers/module'], function (module) {
 				.$asPromise()
 				.then(function (model) {
 					if (isNew) {
-						appMessages.success('Created new ' + model.type);
+						appMessages.success('Created new ' + model.t);
 					} else {
 						appMessages.success('Updated ' + model.type);
 					}

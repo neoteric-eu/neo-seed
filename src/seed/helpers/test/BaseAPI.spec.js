@@ -3,7 +3,9 @@ define([
 	'angular-table',
 	'angular-mocks',
 	'seed/helpers/module',
-	'seed/helpers/_includes'
+	'seed/helpers/_includes',
+	'seed/components/module',
+	'seed/components/_includes'
 ], function () {
 	'use strict';
 

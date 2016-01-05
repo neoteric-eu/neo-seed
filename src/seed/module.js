@@ -15,8 +15,6 @@ define([
 	'angular-loading-bar',
 	'angular-moment',
 	'angular-restmod',
-	'smartwidgets',
-	'notification',
 	'./_includes'
 ], function (ng) {
 	'use strict';

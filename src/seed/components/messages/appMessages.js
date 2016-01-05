@@ -1,4 +1,4 @@
-define(['seed/components/module'], function (module) {
+define(['seed/components/module', 'notification'], function (module) {
 	'use strict';
 
 	module.service('appMessages', function (gettext, gettextCatalog) {
