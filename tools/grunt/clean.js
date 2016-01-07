@@ -25,8 +25,7 @@ module.exports = {
 		files: [{
 			expand: true,
 			src: [
-				'<%= paths.build %>',
-				'<%= paths.test %>'
+				'<%= paths.build %>'
 			]
 		}]
 	},
