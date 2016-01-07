@@ -52,7 +52,6 @@
       "angular-gettext/angular-gettext.js": "angular-gettext/dist/angular-gettext.js",
       "angular-hotkeys/angular-hotkeys.js": "angular-hotkeys/build/hotkeys.js",
       "angular-loading-bar/angular-loading-bar.js": "angular-loading-bar/build/loading-bar.js",
-      "angular-mocks/angular-mocks.js": "angular-mocks/angular-mocks.js",
       "angular-moment/angular-moment.js": "angular-moment/angular-moment.js",
       "angular-permission/angular-permission.js": "angular-permission/dist/angular-permission.js",
       "angular-restmod/angular-restmod.js": "angular-restmod/dist/angular-restmod-bundle.js",
