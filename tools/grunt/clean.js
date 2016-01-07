@@ -4,7 +4,6 @@ module.exports = {
 			expand: true,
 			src: [
 				'bower_components',
-				'<%= paths.build %>',
 				'<%= paths.tmp %>',
 				'<%= paths.release %>',
 				'<%= paths.test %>',

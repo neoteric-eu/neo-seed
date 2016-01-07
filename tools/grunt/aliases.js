@@ -34,12 +34,7 @@ module.exports = {
 	 * ========================================
 	 */
 
-	// Checks unit-test code coverage
-	'coverage': [
-		'karma:coverage'
-	],
-
-	// Executes complete app testing
+	// Executes complete app unit testing with coverage
 	'test': [
 		'jshint',
 		'karma:unit'

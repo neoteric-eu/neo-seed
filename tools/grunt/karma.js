@@ -2,7 +2,7 @@ module.exports = {
 	unit: {
 		configFile: 'tools/karma/karma.conf.js',
 
-		reporters: ['mocha', 'junit'],
+		reporters: ['mocha', 'junit', 'coverage'],
 
 		junitReporter: {
 			outputFile: '<%= paths.test %>/results/unit/results.xml'
@@ -24,23 +24,6 @@ module.exports = {
 
 		requireJsWrapper: {
 			dependencies: ['angular']
-		}
-	},
-	coverage: {
-		configFile: 'tools/karma/karma.conf.js',
-		preprocessors: {
-			'<%= paths.seed %>/**/!(*.spec).js': 'coverage'
-		},
-
-		reporters: ['coverage'],
-		background: true,
-
-		coverageReporter: {
-			dir: '<%= paths.test %>/results/coverage/',
-			reporters: [
-				{type: 'cobertura', subdir: 'cobertura'},
-				{type: 'html', subdir: 'html'}
-			]
 		}
 	}
 };
