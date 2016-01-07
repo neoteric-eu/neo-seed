@@ -24,6 +24,14 @@ module.exports = {
 
 		requireJsWrapper: {
 			dependencies: ['angular']
+		},
+
+		coverageReporter: {
+			dir: '<%= paths.test %>/results/coverage/',
+			reporters: [
+				{type: 'cobertura', subdir: 'cobertura'},
+				{type: 'html', subdir: 'html'}
+			]
 		}
 	}
 };
