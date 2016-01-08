@@ -3,12 +3,10 @@ module.exports = {
 		files: [{
 			expand: true,
 			src: [
-				'bower_components',
 				'<%= paths.tmp %>',
 				'<%= paths.release %>',
 				'<%= paths.test %>',
 				'<%= paths.docs %>',
-				'<%= paths.src %>/require.js',
 				'<%= paths.assets %>'
 			]
 		}]
