@@ -1,3 +1,15 @@
+<a name="2.1.3"></a>
+## [2.1.3](//compare/v2.1.2...v2.1.3) (2016-01-08)
+
+
+### Bug Fixes
+
+* **Grunt:** Updated cleanup aliases 01ce01f
+* **Grunt:** Updated coverage aliases 34b9b34
+* **Grunt:** Updated coverage aliases 4e21623
+
+
+
 <a name="2.1.2"></a>
 ## [2.1.2](//compare/v2.1.1...v2.1.2) (2016-01-07)
 
