@@ -1,3 +1,12 @@
+<a name="2.1.4"></a>
+## [2.1.4](//compare/v2.1.3...v2.1.4) (2016-01-11)
+### Bug Fixes
+
+* **grunt:** Removed cleaning of bower_components catalog in favor of `bower cache clean`
+
+
+
+
 <a name="2.1.3"></a>
 ## [2.1.3](//compare/v2.1.2...v2.1.3) (2016-01-08)
 
