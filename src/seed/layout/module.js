@@ -3,7 +3,7 @@ define(['angular'], function (ng) {
 
 	var module = ng.module('seed.layout', ['app.conf']);
 
-	module.config(function ($stateProvider, $urlRouterProvider) {
+	module.config(function ($stateProvider, $urlRouterProvider, appConf) {
 
 		$stateProvider.state('app', {
 			abstract: true,
@@ -27,7 +27,7 @@ define(['angular'], function (ng) {
 
 		$urlRouterProvider.otherwise(function ($injector) {
 			var $state = $injector.get('$state');
-			$state.go('auth.login');
+			$state.go(appConf.generalSettings.defaultRedirectState);
 		});
 	});
 

@@ -68,7 +68,7 @@ define(['seed/auth/module'], function (module) {
 							if ($rootScope.requestedState) {
 								$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
 							} else {
-								$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
+								$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
 							}
 						});
 
