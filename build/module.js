@@ -2511,7 +2511,7 @@ define('seed/layout/module',['angular'], function (ng) {
 
 	var module = ng.module('seed.layout', ['app.conf']);
 
-	module.config(function ($stateProvider, $urlRouterProvider) {
+	module.config(function ($stateProvider, $urlRouterProvider, appConf) {
 
 		$stateProvider.state('app', {
 			abstract: true,
@@ -2535,7 +2535,7 @@ define('seed/layout/module',['angular'], function (ng) {
 
 		$urlRouterProvider.otherwise(function ($injector) {
 			var $state = $injector.get('$state');
-			$state.go('auth.login');
+			$state.go(appConf.generalSettings.defaultRedirectState);
 		});
 	});
 
@@ -3512,7 +3512,7 @@ define('seed/auth/login/forms/login/authLoginForm',['seed/auth/module'], functio
 										if ($rootScope.requestedState) {
 											$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
 										} else {
-											$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
+											$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
 										}
 									});
 							}
@@ -3602,7 +3602,7 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/m
 							if ($rootScope.requestedState) {
 								$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
 							} else {
-								$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
+								$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
 							}
 						});
 

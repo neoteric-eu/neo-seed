@@ -1,3 +1,13 @@
+<a name="2.1.5"></a>
+## [2.1.5](//compare/v2.1.4...v2.1.5) (2016-01-13)
+
+
+### Features
+
+* **config:** #3487 -  Enable default redirect customization 765aa72
+
+
+
 <a name="2.1.4"></a>
 ## [2.1.4](//compare/v2.1.3...v2.1.4) (2016-01-11)
 ### Bug Fixes
