@@ -1,4 +1,4 @@
-define(['seed/helpers/module', 'moment'], function (module, moment) {
+define(['seed/helpers/module', 'moment', 'lodash'], function (module, moment, _) {
 	'use strict';
 
 	/**
@@ -30,7 +30,7 @@ define(['seed/helpers/module', 'moment'], function (module, moment) {
 			}
 
 			if (_.isFunction(val.isValid) && val.isValid()) {
-				return val.utc().toISOString();
+				return moment(val).utc().toISOString();
 			} else {
 				throw new Error('Could not serialize from moment object to timestamp value: ' + val);
 			}
