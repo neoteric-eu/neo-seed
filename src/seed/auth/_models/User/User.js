@@ -19,7 +19,12 @@ define(['seed/auth/module'], function (module) {
 					hasMany: 'Customer'
 				},
 				language: {
-					hasOne: 'Language'
+					encode: function (lang) {
+						return lang.localePOSIX;
+					},
+					decode: function (locale) {
+						return LanguageAPI.getByLocale(locale);
+					}
 				},
 				password: {
 					volatile: true
