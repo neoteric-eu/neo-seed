@@ -7,10 +7,12 @@ define(['seed/auth/module'], function (module) {
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
+	 * @param $http {$http} The $http service is a core Angular service that facilitates communication with the remote
+	 * HTTP servers via the browser's XMLHttpRequest object or via JSONP.
 	 * @param $cookies {Function} Cookie service
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, $cookies) {
+	var User = function (restmod, $http, $cookies) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
@@ -71,7 +73,27 @@ define(['seed/auth/module'], function (module) {
 							}, null);
 						}
 					},
-
+					Model: {
+						$passwordResetInit: function (email) {
+							return $http({
+								method: 'POST',
+								url: this.$url() + '/password/reset/init',
+								data: {
+									email: email
+								}
+							});
+						},
+						$passwordResetFinish: function (token, password) {
+							return $http({
+								method: 'POST',
+								url: this.$url() + '/password/reset/finish',
+								data: {
+									token: token,
+									newPassword: password
+								}
+							});
+						}
+					},
 					Record: {
 						/**
 						 * Return user's concatenated name and surname
