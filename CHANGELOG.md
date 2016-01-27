@@ -1,3 +1,11 @@
+<a name="2.2.5"></a>
+## [2.2.5](//compare/v2.2.4...v2.2.5) (2016-01-27)
+
+### Features
+
+* **components:** Added cookie policy banner 78a8a9f
+
+
 <a name="2.2.4"></a>
 ## [2.2.3](//compare/v2.1.5...v2.2.4) (2016-01-21)
 

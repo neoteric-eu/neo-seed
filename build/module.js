@@ -30,6 +30,11 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
   );
 
 
+  $templateCache.put('seed/components/cookieConsent/cookieConsent.html',
+    "<div><div class=padding-10>We use cookies to ensure that we give you the best experience on our website. If you continue without changing your settings, we'll assume that you are happy to receive all cookies from this website. If you would like to change your preferences you may do so by following the instructions <a href=\"http://www.aboutcookies.org/Default.aspx?page=1\">here</a>.</div><div class=text-align-right><button type=button ng-click=vm.acceptCookies()>Accept</button></div></div>"
+  );
+
+
   $templateCache.put('seed/components/customer/neoCustomerSwitcher.html',
     "<div class=\"project-context hidden-xs dropdown\"><span class=label>{{::vm.user.email}}</span><div class=dropdown dropdown><div class=\"project-selector dropdown-toggle\" dropdown-toggle><span ng-bind-html=vm.activeCustomer.customerName></span> <i class=\"fa fa-angle-down\"></i></div><ul class=dropdown-menu><li ng-repeat=\"customer in vm.customerCollection\"><a ng-click=vm.setActiveCustomer(customer)><i ng-show=\"customer.customerId === vm.activeCustomer.customerId\" class=\"fa fa-hand-o-right\"></i> {{customer.customerName}}</a></li></ul></div></div>"
   );
@@ -81,7 +86,7 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 
 
   $templateCache.put('seed/layout/views/view.html',
-    "<div ng-include=\"'seed/layout/partials/header.html'\"></div><div ng-include=\"'seed/layout/partials/navigation.html'\"></div><div id=main role=main><div id=ribbon><span class=ribbon-button-alignment><span id=refresh class=\"btn btn-ribbon\" reset-widgets tooltip-placement=bottom tooltip-html-unsafe=\"<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.\"><i class=\"fa fa-refresh\"></i></span></span><neo-state-breadcrumbs></neo-state-breadcrumbs></div><div data-ui-view=content data-autoscroll=false></div></div>"
+    "<cookie-consent></cookie-consent><div ng-include=\"'seed/layout/partials/header.html'\"></div><div ng-include=\"'seed/layout/partials/navigation.html'\"></div><div id=main role=main><div id=ribbon><span class=ribbon-button-alignment><span id=refresh class=\"btn btn-ribbon\" reset-widgets tooltip-placement=bottom tooltip-html-unsafe=\"<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.\"><i class=\"fa fa-refresh\"></i></span></span><neo-state-breadcrumbs></neo-state-breadcrumbs></div><div data-ui-view=content data-autoscroll=false></div></div>"
   );
 
 
@@ -2487,6 +2492,51 @@ define('seed/components/versionTag/neoVersionTag',['seed/components/module'], fu
 
 
 
+define('seed/components/cookieConsent/cookieConsent',['seed/components/module'], function (module) {
+    'use strict';
+
+    /**
+     * Creates a Breadcrumbs line based on state data.title attribute
+     * @class cookieConsent
+     * @memberOf seed.components
+     *
+     * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
+     * @param $cookies
+     *              <cookie-consent></cookie-consent>
+     */
+
+    function cookieConsent($cookies) {
+        return {
+            restrict: 'E',
+            templateUrl: 'seed/components/cookieConsent/cookieConsent.html',
+            scope: {},
+            controllerAs: 'vm',
+            controller: function ($element) {
+                var vm = this || {};
+
+                vm.init = init;
+                vm.acceptCookies = acceptCookies;
+
+                vm.init();
+
+                function init () {
+                   if($cookies.getObject('cookieConsent')) {
+                       $element.hide();
+                   }
+                }
+
+                function acceptCookies () {
+                    $cookies.putObject('cookieConsent', true);
+                    $element.hide();
+                }
+            }
+        };
+    }
+
+    module.directive('cookieConsent', cookieConsent);
+
+});
+
 define('seed/components/_includes',[
 	'./activities/neoActivities',
 	'./customer/neoCustomerSwitcher',
@@ -2501,7 +2551,9 @@ define('seed/components/_includes',[
 	'./navigation/neoNavigationGroup',
 	'./navigation/neoNavigationItem',
 	'./pageTitle/neoPageTitle',
-	'./versionTag/neoVersionTag'
+	'./versionTag/neoVersionTag',
+
+	'./cookieConsent/cookieConsent'
 ], function () {
 	'use strict';
 });
