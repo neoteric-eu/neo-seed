@@ -12,7 +12,9 @@ define([
 	'./navigation/neoNavigationGroup',
 	'./navigation/neoNavigationItem',
 	'./pageTitle/neoPageTitle',
-	'./versionTag/neoVersionTag'
+	'./versionTag/neoVersionTag',
+
+	'./cookieConsent/cookieConsent'
 ], function () {
 	'use strict';
 });
