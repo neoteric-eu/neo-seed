@@ -60,9 +60,13 @@ define([
 		$locationProvider.html5Mode(true);
 		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
 
+		// $http improvements
+		$httpProvider.useApplyAsync(true);
+		$httpProvider.useLegacyPromiseExtensions(false);
+		$httpProvider.defaults.paramSerializer = '$httpParamSerializerJQLike';
+
 		// Add the interceptors to the $httpProvider.
 		$httpProvider.interceptors.push('HttpErrorInterceptor');
-		$httpProvider.interceptors.push('HttpRequestInterceptor');
 	});
 
 	seed.run(function (gettextCatalog, LanguageAPI, $log, appConf) {
