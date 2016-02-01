@@ -1,3 +1,17 @@
+<a name="2.2.7"></a>
+## [2.2.7](//compare/v2.2.6...v2.2.7) (2016-02-01)
+
+
+### Bug Fixes
+
+* **DatetimeSerializerService:** Decode date without modyfing source object 8f44938
+* **User,Language:** Fix user language model encode/decode 01611b3
+
+### Features
+
+* Replace HttpRequestInterceptor with build in , turn off legacy promise extension 968b5e5
+
+
 <a name="2.2.6"></a>
 ## [2.2.6](//compare/v2.2.5...v2.2.6) (2016-01-27)
 
