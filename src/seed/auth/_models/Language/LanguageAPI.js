@@ -92,6 +92,19 @@ define([
 			return api.languageCollection.$selected;
 		};
 
+		/**
+		 * Get model Language by locale
+		 * @param locale
+		 * @returns {Language|RecordApi}
+		 */
+		api.getByLocale = function (locale) {
+			var lang = _.find(api.languageCollection, {localePOSIX: locale});
+			if(!lang) {
+				$log.error('Could not find locale: ', locale);
+			}
+			return Language.$buildRaw(lang || {});
+		};
+
 		return api;
 	};
 
