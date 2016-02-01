@@ -30,7 +30,7 @@ define(['seed/helpers/module', 'moment', 'lodash'], function (module, moment, _)
 			}
 
 			if (_.isFunction(val.isValid) && val.isValid()) {
-				return moment(val).utc().toISOString();
+				return val.clone().utc().toISOString();
 			} else {
 				throw new Error('Could not serialize from moment object to timestamp value: ' + val);
 			}
