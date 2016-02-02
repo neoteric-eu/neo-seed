@@ -1,7 +1,8 @@
 module.exports = {
 	build: {
 		src: [
-			'<%= paths.seed %>/**/*.js'
+			'<%= paths.seed %>/**/*.js',
+			'README.md'
 		],
 		options: {
 			destination: 'docs',

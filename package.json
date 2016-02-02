@@ -48,7 +48,7 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "install": "grunt preInstall && grunt install && grunt postInstall",
+    "start": "grunt preInstall && grunt install && grunt postInstall",
     "postinstall": "npm prune"
   }
 }
