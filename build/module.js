@@ -376,9 +376,6 @@ define('seed/helpers/services/neoTemplateLoader',['seed/helpers/module'], functi
 		 *
 		 * @param templatePath {String} path to HTML to be cached
 		 * @param cacheKey {String} Key under which template will be stored
-		 *
-		 * @returns
-		 *
 		 */
 		this.load = function (templatePath, cacheKey) {
 			var dfd = $q.defer();
@@ -2686,7 +2683,7 @@ define('seed/auth/module',[
 				data: {
 					permissions: {
 						except: ['AUTHORIZED'],
-						redirectTo: appConf.generalSettings.defaultStateToRedirectAfterLogin
+						redirectTo: appConf.generalSettings.defaultRedirectStateAfterLogin
 					}
 				},
 				views: {
