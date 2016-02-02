@@ -25,7 +25,7 @@ define([
 				data: {
 					permissions: {
 						except: ['AUTHORIZED'],
-						redirectTo: appConf.generalSettings.defaultStateToRedirectAfterLogin
+						redirectTo: appConf.generalSettings.defaultRedirectStateAfterLogin
 					}
 				},
 				views: {
