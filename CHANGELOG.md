@@ -1,3 +1,17 @@
+<a name="2.2.10"></a>
+## [2.2.10](//compare/v2.2.9...v2.2.10) (2016-02-02)
+
+
+### Bug Fixes
+
+* **auth:** Fixed broken redirection of defaultRedirectStateAfterLogin cc2030a
+
+### Features
+
+* **README:** Added readme file and documentation generation 24b5b4d
+
+
+
 <a name="2.2.7"></a>
 ## [2.2.7](//compare/v2.2.6...v2.2.7) (2016-02-01)
 
