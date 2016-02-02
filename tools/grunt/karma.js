@@ -5,7 +5,8 @@ module.exports = {
 		reporters: ['mocha', 'junit', 'coverage'],
 
 		junitReporter: {
-			outputFile: '<%= paths.test %>/results/unit/results.xml'
+			outputFile: '<%= paths.test %>/results/unit/results.xml',
+			useBrowserName: false
 		},
 
 		preprocessors: {
