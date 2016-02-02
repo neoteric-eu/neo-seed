@@ -170,52 +170,6 @@ define('seed/helpers/module',['angular'], function (ng) {
 	return module;
 });
 
-define('seed/helpers/interceptors/HttpRequestInterceptor',['seed/helpers/module'], function (app) {
-	'use strict';
-
-	/**
-	 * Provides object serialization to url parameters
-	 * @class HttpRequestInterceptor
-	 * @memberOf seed.helpers
-	 *
-	 * @param $log {Object} Logging service
-	 * @return {{request: Function}}
-	 */
-	function HttpRequestInterceptor($log) {
-
-		$log = $log.getInstance('seed.helpers.HttpRequestInterceptor');
-		$log.debug('Initiated factory');
-
-		return {
-			request: function (config) {
-				var uri = config.url;
-
-				//Serialize query string parameters in a way the web API understands.
-				if (config.params) {
-					var serializedParams;
-
-					try {
-						serializedParams = $.param(config.params, false);
-					} catch (e) {
-						$log.error('Error serializing request params: ' + _.stringify(config.params));
-					}
-					// Append it to request url
-					if (serializedParams) {
-						uri = uri + '?' + serializedParams;
-					}
-					// Prevent angular do that
-					config.params = null;
-				}
-
-				config.url = uri;
-				return config;
-			}
-		};
-	}
-
-	app.factory('HttpRequestInterceptor', HttpRequestInterceptor);
-});
-
 define('seed/helpers/interceptors/HttpErrorInterceptor',['seed/helpers/module'], function (app) {
 	'use strict';
 
@@ -750,7 +704,7 @@ define('seed/helpers/moment/neoMomentTime',['seed/helpers/module', 'moment'], fu
 	module.directive('neoMomentTime', neoMomentTime);
 });
 
-define('seed/helpers/restmod/serializers/datetime/DatetimeSerializerService',['seed/helpers/module', 'moment'], function (module, moment) {
+define('seed/helpers/restmod/serializers/datetime/DatetimeSerializerService',['seed/helpers/module', 'moment', 'lodash'], function (module, moment, _) {
 	'use strict';
 
 	/**
@@ -782,7 +736,7 @@ define('seed/helpers/restmod/serializers/datetime/DatetimeSerializerService',['s
 			}
 
 			if (_.isFunction(val.isValid) && val.isValid()) {
-				return val.utc().toISOString();
+				return val.clone().utc().toISOString();
 			} else {
 				throw new Error('Could not serialize from moment object to timestamp value: ' + val);
 			}
@@ -793,7 +747,6 @@ define('seed/helpers/restmod/serializers/datetime/DatetimeSerializerService',['s
 
 	module.service('DatetimeSerializerService', DatetimeSerializerService);
 });
-
 define('seed/helpers/restmod/serializers/datetime/DatetimeDecodeFilter',['seed/helpers/module'], function (module) {
 	'use strict';
 
@@ -1679,7 +1632,6 @@ define('seed/helpers/restmod/packers/PackerUtils',[], function () {
 });
 
 define('seed/helpers/_includes',[
-	'./interceptors/HttpRequestInterceptor',
 	'./interceptors/HttpErrorInterceptor',
 
 	'./decorators/logDecorator',
@@ -3082,7 +3034,12 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 					hasMany: 'Customer'
 				},
 				language: {
-					hasOne: 'Language'
+					encode: function (lang) {
+						return lang.localePOSIX;
+					},
+					decode: function (locale) {
+						return LanguageAPI.getByLocale(locale);
+					}
 				},
 				password: {
 					volatile: true
@@ -3453,6 +3410,19 @@ define('seed/auth/_models/Language/LanguageAPI',[
 			return api.languageCollection.$selected;
 		};
 
+		/**
+		 * Get model Language by locale
+		 * @param locale
+		 * @returns {Language|RecordApi}
+		 */
+		api.getByLocale = function (locale) {
+			var lang = _.find(api.languageCollection, {localePOSIX: locale});
+			if(!lang) {
+				$log.error('Could not find locale: ', locale);
+			}
+			return Language.$buildRaw(lang || {});
+		};
+
 		return api;
 	};
 
@@ -3470,12 +3440,22 @@ define('seed/auth/_models/Language/Language',['seed/auth/module'], function (mod
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
+	 * @param appConf {appConf} app configuration
 	 * @return {*|Model} Model instance
 	 */
-	var Language = function (restmod) {
+	var Language = function (restmod, appConf) {
 		return restmod
 			.model('/language')
 			.mix({
+				code: {
+					init: appConf.languageSettings.defaultLanguage.code
+				},
+				locale: {
+					init: appConf.languageSettings.defaultLanguage.locale
+				},
+				localePOSIX: {
+					init: appConf.languageSettings.defaultLanguage.localePOSIX
+				},
 				$extend: {
 					Resource: {
 						$setSelected: function (locale) {
@@ -5240,9 +5220,13 @@ define('seed/module',[
 		$locationProvider.html5Mode(true);
 		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
 
+		// $http improvements
+		$httpProvider.useApplyAsync(true);
+		$httpProvider.useLegacyPromiseExtensions(false);
+		$httpProvider.defaults.paramSerializer = '$httpParamSerializerJQLike';
+
 		// Add the interceptors to the $httpProvider.
 		$httpProvider.interceptors.push('HttpErrorInterceptor');
-		$httpProvider.interceptors.push('HttpRequestInterceptor');
 	});
 
 	seed.run(function (gettextCatalog, LanguageAPI, $log, appConf) {

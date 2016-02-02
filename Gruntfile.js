@@ -5,9 +5,6 @@ module.exports = function (grunt) {
 	var pkg = require('./package.json');
 	var bower = grunt.file.readJSON('./bower.json');
 
-	// Time how long tasks take. Can help when optimizing build times
-	require('time-grunt')(grunt);
-
 	// Load grunt config automatically
 	require('load-grunt-config')(grunt, {
 		// Path to task.js files, defaults to grunt dir

@@ -22,9 +22,6 @@ define(['seed/helpers/module'], function (module) {
 		 *
 		 * @param templatePath {String} path to HTML to be cached
 		 * @param cacheKey {String} Key under which template will be stored
-		 *
-		 * @returns
-		 *
 		 */
 		this.load = function (templatePath, cacheKey) {
 			var dfd = $q.defer();
