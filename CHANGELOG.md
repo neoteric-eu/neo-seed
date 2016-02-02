@@ -1,3 +1,13 @@
+<a name="2.2.11"></a>
+## [2.2.11](//compare/v2.2.10...v2.2.11) (2016-02-02)
+
+
+### Bug Fixes
+
+* **User:** Added missing LanguageAPI dependency. f1b9d7d
+
+
+
 <a name="2.2.10"></a>
 ## [2.2.10](//compare/v2.2.9...v2.2.10) (2016-02-02)
 

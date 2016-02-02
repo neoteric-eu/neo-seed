@@ -3015,14 +3015,15 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 
 	/**
 	 * @constructor
-	 * @implements {seed.BaseModel}
+	 * @implements {seed.helpers.BaseModel}
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
 	 * @param $cookies {Function} Cookie service
+	 * @param LanguageAPI {seed.auth.LanguageAPI} Language service
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, $cookies) {
+	var User = function (restmod, $cookies, LanguageAPI) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
