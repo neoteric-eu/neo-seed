@@ -1,5 +1,3 @@
-![Seed Logo](https://www.willbox.co.uk/wp-content/uploads/2014/08/banner-homepage.jpg)
-
 ## ![Installation](https://gitlab.neoteric.eu/frontend/neo-container/wikis/assets/stop-icon.png) Installation
 Project requires having installed:
 
