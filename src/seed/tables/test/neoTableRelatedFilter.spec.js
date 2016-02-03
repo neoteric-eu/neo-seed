@@ -123,7 +123,7 @@ define([
 					controller.filterableAPI = MockedAPI;
 
 					// WHEN
-					controller.filterCollection('');
+					controller.filterCollection(null);
 					$httpBackend.flush();
 
 					// THEN
