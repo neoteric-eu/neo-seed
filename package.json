@@ -25,7 +25,7 @@
     "grunt-rev": "0.1.x",
     "grunt-shell": "1.1.x",
     "grunt-usemin": "3.x",
-    "ink-docstrap": "^1.1.1",
+    "neo-docstrap": "1.x",
     "istanbul": "0.3.x",
     "jasmine-core": "2.1.x",
     "jasmine-reporters": "2.0.x",

@@ -6,7 +6,7 @@ module.exports = {
 		],
 		options: {
 			destination: 'docs',
-			template: 'node_modules/ink-docstrap/template',
+			template: 'node_modules/neo-docstrap/template',
 			configure: 'tools/jsdocs/jsdoc.conf.json'
 		}
 	}

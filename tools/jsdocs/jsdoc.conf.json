@@ -6,6 +6,7 @@
 	"plugins/markdown"
   ],
   "templates": {
+	"logoFile":"https://gitlab.neoteric.eu/uploads/project/avatar/23/seed_3.png",
 	"cleverLinks": true,
 	"monospaceLinks": true,
 	"dateFormat": "ddd MMM YYYY",
