@@ -1,3 +1,12 @@
+<a name="2.2.12"></a>
+## [2.2.12](//compare/v2.2.11...v2.2.12) (2016-02-03)
+
+
+### Bug Fixes
+
+* **overrides.less:** Overrides import hotfix. 7988419
+
+
 <a name="2.2.11"></a>
 ## [2.2.11](//compare/v2.2.10...v2.2.11) (2016-02-02)
 
