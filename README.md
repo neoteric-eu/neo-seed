@@ -12,6 +12,7 @@ After downloading the project form Gitlab repository run command from command li
 # install global dependencies
 npm install -g bower phantom
 # install dependencies
+bower install --force
 npm install
 # run grunt installation tasks
 npm start
