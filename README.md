@@ -29,7 +29,7 @@ npm link -s src/seed [container-path]/src/seed
 
 Before contributing please read following documents:
 
-* [Code style guide] (https://gitlab.neoteric.eu/frontend/neo-container/wikis/guidlines)
+* [Code style guide](https://gitlab.neoteric.eu/frontend/neo-container/wikis/guidlines)
 * [Commit message format](https://gitlab.neoteric.eu/frontend/neo-container/wikis/commit-message) 
 
 Make sure that every changes you make are bound to ticket from [Taiga neoStack project](https://taiga.neoteric.eu/project/bmogadorski-neostack/).
