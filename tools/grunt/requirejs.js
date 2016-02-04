@@ -54,7 +54,6 @@ module.exports = function () {
           // Other vendor
           'moment': 'empty:',
           'lodash': 'empty:',
-          'lodash-deep': 'empty:',
 
           'raphael': 'empty:',
           'morris': 'empty:',
