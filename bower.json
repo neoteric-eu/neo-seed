@@ -25,7 +25,6 @@
     "less-elements": "latest",
     "animate.less": "latest",
     "font-awesome": "4.x",
-    "morris.js": "0.5.1",
     "form.validation": "latest",
     "bootstrap-daterangepicker": "kobalka/bootstrap-daterangepicker#2.0.11"
   },

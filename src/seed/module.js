@@ -43,7 +43,6 @@ define([
 		'seed.layout',
 		'seed.forms',
 		'seed.tables',
-		'seed.graphs',
 		'seed.widgets'
 	]);
 
