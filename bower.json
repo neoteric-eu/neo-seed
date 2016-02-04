@@ -67,7 +67,6 @@
       "lodash/lodash.js": "lodash/lodash.js",
       "lodash-deep/lodash-deep.js": "lodash-deep/lodash-deep.js",
       "moment/moment.js": "moment/min/moment-with-locales.js",
-      "morris/morris.js": "morris.js/morris.js",
       "raphael/raphael.js": "raphael/raphael.js",
       "form-validation/form-validation.js": "form.validation/dist/js/formValidation.js",
       "form-validation/framework/bootstrap.js": "form.validation/dist/js/framework/bootstrap.js",
