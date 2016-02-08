@@ -37,7 +37,6 @@ requirejs.config({
 		// Other vendor
 		'moment': 'assets/vendor/js/moment/moment',
 		'lodash': 'assets/vendor/js/lodash/lodash',
-		'lodash-deep': 'assets/vendor/js/lodash-deep/lodash-deep',
 
 		'raphael': 'assets/vendor/js/raphael/raphael',
 		'morris': 'assets/vendor/js/morris/morris',
@@ -88,7 +87,6 @@ requirejs.config({
 
 		'morris': ['raphael', 'jquery'],
 
-		'lodash-deep': ['lodash'],
 		'lodash-extensions': ['lodash'],
 
 		'form-validation/form-validation': ['jquery'],
