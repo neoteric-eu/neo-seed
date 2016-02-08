@@ -12,7 +12,6 @@ requirejs.config({
 		'angular-ui-bootstrap-tpls': 'assets/vendor/js/angular-ui-bootstrap/angular-ui-bootstrap-tpls',
 		'angular-cookies': 'assets/vendor/js/angular-cookies/angular-cookies',
 		'angular-gettext': 'assets/vendor/js/angular-gettext/angular-gettext',
-		'angular-hotkeys': 'assets/vendor/js/angular-hotkeys/angular-hotkeys',
 		'angular-loading-bar': 'assets/vendor/js/angular-loading-bar/angular-loading-bar',
 		'angular-moment': 'assets/vendor/js/angular-moment/angular-moment',
 		'angular-permission': 'assets/vendor/js/angular-permission/angular-permission',
@@ -38,9 +37,6 @@ requirejs.config({
 		// Other vendor
 		'moment': 'assets/vendor/js/moment/moment',
 		'lodash': 'assets/vendor/js/lodash/lodash',
-		'lodash-deep': 'assets/vendor/js/lodash-deep/lodash-deep',
-
-		'raphael': 'assets/vendor/js/raphael/raphael',
 
 		'form-validation': 'assets/vendor/js/form-validation',
 		'form-validation-bootstrap': 'assets/vendor/js/form-validation/framework/bootstrap',
@@ -60,7 +56,6 @@ requirejs.config({
 		'angular-ui-bootstrap-tpls': ['angular-ui-bootstrap'],
 		'angular-cookies': ['angular'],
 		'angular-gettext': ['angular'],
-		'angular-hotkeys': ['angular'],
 		'angular-mocks': ['angular'],
 		'angular-loading-bar': ['angular'],
 		'angular-moment': ['angular', 'moment'],
@@ -87,7 +82,6 @@ requirejs.config({
 		// Other vendor
 		'moment': {exports: 'moment'},
 
-		'lodash-deep': ['lodash'],
 		'lodash-extensions': ['lodash'],
 
 		'form-validation/form-validation': ['jquery'],

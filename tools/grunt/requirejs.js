@@ -28,7 +28,6 @@ module.exports = function () {
           'angular-ui-bootstrap-tpls': 'empty:',
           'angular-cookies': 'empty:',
           'angular-gettext': 'empty:',
-          'angular-hotkeys': 'empty:',
           'angular-loading-bar': 'empty:',
           'angular-moment': 'empty:',
           'angular-permission': 'empty:',
@@ -54,7 +53,6 @@ module.exports = function () {
           // Other vendor
           'moment': 'empty:',
           'lodash': 'empty:',
-          'lodash-deep': 'empty:',
 
           'raphael': 'empty:',
 
