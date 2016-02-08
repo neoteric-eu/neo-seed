@@ -1,3 +1,26 @@
+<a name="2.2.13"></a>
+## [2.2.13](//compare/v2.2.12...v2.2.13) (2016-02-08)
+
+
+### Bug Fixes
+
+* **bower:** changed order of resolving registries 72d8c61
+
+### Features
+
+* **cookieConsent:** #39 - general config to show/hide cookie consent 78bcd94
+* **lodash-deep:** #44 - remove lodash-deep dependency 774453a
+* **angular-hotkeys:** #45 - remove angular-hotkeys dependency de863f2
+* **morris:** #47 - remove additional morris dependency 0c5c4b2
+
+BREAKING CHANGE:
+Following dependencies are _deprecated_ and should be replaced/removed from projects:
+- `lodash-deep`
+- `angular-hotkeys`
+- `morris`
+- `raphael`
+
+
 <a name="2.2.12"></a>
 ## [2.2.12](//compare/v2.2.11...v2.2.12) (2016-02-03)
 

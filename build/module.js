@@ -86,7 +86,7 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 
 
   $templateCache.put('seed/layout/views/view.html',
-    "<cookie-consent></cookie-consent><div ng-include=\"'seed/layout/partials/header.html'\"></div><div ng-include=\"'seed/layout/partials/navigation.html'\"></div><div id=main role=main><div id=ribbon><span class=ribbon-button-alignment><span id=refresh class=\"btn btn-ribbon\" reset-widgets tooltip-placement=bottom tooltip-html-unsafe=\"<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.\"><i class=\"fa fa-refresh\"></i></span></span><neo-state-breadcrumbs></neo-state-breadcrumbs></div><div data-ui-view=content data-autoscroll=false></div></div>"
+    "<cookie-consent ng-if=vm.appConf.generalSettings.showCookieConsent></cookie-consent><div ng-include=\"'seed/layout/partials/header.html'\"></div><div ng-include=\"'seed/layout/partials/navigation.html'\"></div><div id=main role=main><div id=ribbon><span class=ribbon-button-alignment><span id=refresh class=\"btn btn-ribbon\" reset-widgets tooltip-placement=bottom tooltip-html-unsafe=\"<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.\"><i class=\"fa fa-refresh\"></i></span></span><neo-state-breadcrumbs></neo-state-breadcrumbs></div><div data-ui-view=content data-autoscroll=false></div></div>"
   );
 
 
@@ -465,11 +465,8 @@ define('seed/helpers/lodash/jsonStringify',[],function () {
 /**
  * Extends default lodash functions
  */
-define('seed/helpers/lodash/lodashExtensions',['lodash', 'lodash-deep', './jsonStringify'], function (_, lodashDeep, jsonStringify) {
+define('seed/helpers/lodash/lodashExtensions',['lodash', './jsonStringify'], function (_, jsonStringify) {
 	'use strict';
-
-	// Extend lodash for deep functions
-	_.mixin(lodashDeep);
 
 	// Extend lodash with stringify function
 	_.mixin(jsonStringify);
@@ -2663,14 +2660,12 @@ define('seed/layout/_includes',[
 
 define('seed/auth/module',[
 	'angular',
-	'angular-cookies',
-	'angular-hotkeys'
+	'angular-cookies'
 ], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.auth', [
 		'ngCookies',
-		'cfp.hotkeys',
 		'seed.auth.login',
 		'seed.auth.lock'
 	]);
@@ -2719,26 +2714,8 @@ define('seed/auth/module',[
 			});
 	});
 
-	module.run(function ($log, $rootScope, $state, hotkeys, UserAPI, neoSession) {
-
+	module.run(function ($log) {
 		$log = $log.getInstance('seed.auth.module');
-
-		// Bound globally shortcut to lock screen
-		hotkeys.add({
-			combo: 'alt+l',
-			description: 'Lock screen',
-			callback: function () {
-				UserAPI
-					.logout($rootScope.user)
-					.then(function () {
-						neoSession
-							.clearSession()
-							.finally(function () {
-								$state.go('auth.lock');
-							});
-					});
-			}
-		});
 
 		$log.debug('Initiated module');
 	});
@@ -4646,239 +4623,6 @@ define('seed/tables/_includes',[
 	'use strict';
 });
 
-define('seed/graphs/module',['angular'], function (ng) {
-	'use strict';
-
-	var module = ng.module('seed.graphs', []);
-
-	return module;
-});
-
-define('seed/graphs/morris/morrisDonutGraph',['seed/graphs/module', 'morris'], function (module) {
-	'use strict';
-
-	/**
-	 * Creates area graph with morris library
-	 * @constructor morrisDonutGraph
-	 *
-	 * @link https://github.com/morrisjs/morris.js
-	 * @example
-	 * <morris-donut-graph graph-config="configObject"></morris-donut-graph>
-	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string},
-	 *   link: Function}}
-	 */
-	function morrisDonutGraph() {
-		return {
-			restrict: 'E',
-			replace: true,
-			template: '<div class="chart no-padding"></div>',
-			scope: {
-				graphConfig: '=',
-				config: '='
-			},
-			/**
-			 * Description
-			 * @method link
-			 * @param {} scope
-			 * @param {} element
-			 */
-			link: function (scope, element) {
-
-				var morris;
-
-				scope.config
-					.then(function () {
-						scope.$applyAsync(function () {
-
-							morris = Morris.Donut(_.extend({
-								element: element
-							}, scope.graphConfig));
-
-							initWatch();
-						});
-					});
-
-				function initWatch() {
-					// listen to data changes
-					scope.$watch('graphConfig.data', function (newData, oldData) {
-						if (newData !== oldData) {
-							morris.setData(newData);
-						}
-					});
-				}
-			}
-		};
-	}
-
-	return module.directive('morrisDonutGraph', morrisDonutGraph);
-});
-
-define('seed/graphs/morris/morrisAreaGraph',['seed/graphs/module', 'morris'], function (module) {
-	'use strict';
-
-	/**
-	 * Creates area graph with morris library
-	 * @constructor morrisAreaGraph
-	 *
-	 * @link https://github.com/morrisjs/morris.js
-	 * @example
-	 *  <morris-area-graph graph-config="configObject"></morris-area-graph>
-	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string},
-	 *   link: Function}}
-	 */
-	function morrisAreaGraph() {
-		return {
-			restrict: 'E',
-			replace: true,
-			template: '<div class="chart no-padding"></div>',
-			scope: {
-				graphConfig: '=',
-				config: '='
-			},
-			/**
-			 * Description
-			 * @method link
-			 * @param {} scope
-			 * @param {} element
-			 */
-			link: function (scope, element) {
-
-				var morris;
-
-				scope.config.then(function () {
-					scope.$applyAsync(function () {
-						morris = Morris.Area(_.extend({
-							element: element
-						}, scope.graphConfig));
-					});
-				});
-
-				// listen to data changes
-				scope.$watch('graphConfig.data', function (newData, oldData) {
-
-					if (newData !== oldData && morris) {
-						morris.setData(newData);
-					}
-				});
-
-			}
-		};
-	}
-
-	return module.directive('morrisAreaGraph', morrisAreaGraph);
-});
-
-define('seed/graphs/morris/morrisLineGraph',['seed/graphs/module', 'morris'], function (module) {
-	'use strict';
-
-	/**
-	 * Creates area graph with morris library
-	 * @constructor morrisLineGraph
-	 *
-	 * @link https://github.com/morrisjs/morris.js
-	 * @example
-	 *  <morris-line-graph graph-config="configObject"></morris-line-graph>
-	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string},
-	 *   link: Function}}
-	 */
-	function morrisLineGraph() {
-		return {
-			restrict: 'E',
-			replace: true,
-			template: '<div class="chart no-padding"></div>',
-			scope: {
-				graphConfig: '='
-			},
-			/**
-			 * Description
-			 * @method link
-			 * @param {} scope
-			 * @param {} element
-			 */
-			link: function (scope, element) {
-				var morris = Morris.Line(_.extend({
-					element: element
-				}, scope.graphConfig));
-
-				// listen to data changes
-				var unwatch = scope.$watch('graphConfig.data', function (newData, oldData) {
-					if (newData !== oldData) {
-						morris.setData(newData);
-					}
-				});
-
-				// destroy watch with scope
-				scope.$on('destroy', function () {
-					unwatch();
-				});
-			}
-		};
-	}
-
-	return module.directive('morrisLineGraph', morrisLineGraph);
-});
-
-define('seed/graphs/morris/morrisBarGraph',['seed/graphs/module', 'morris'], function (module) {
-	'use strict';
-
-	/**
-	 * Creates line bar with morris library
-	 * @constructor morrisBarGraph
-	 *
-	 * @link https://github.com/morrisjs/morris.js
-	 * @example
-	 *  <morris-bar-graph graph-config="configObject"></morris-bar-graph>
-	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string},
-	 *   link: Function}}
-	 */
-	function morrisBarGraph() {
-		return {
-			restrict: 'E',
-			replace: true,
-			template: '<div class="chart no-padding"></div>',
-			scope: {
-				graphConfig: '='
-			},
-			/**
-			 * Description
-			 * @method link
-			 * @param {} scope
-			 * @param {} element
-			 */
-			link: function (scope, element) {
-				var morris = Morris.Bar(_.extend({
-					element: element
-				}, scope.graphConfig));
-
-				// listen to data changes
-				var unwatch = scope.$watch('graphConfig.data', function (newData, oldData) {
-					if (newData !== oldData) {
-						morris.setData(newData);
-					}
-				});
-
-				// destroy watch with scope
-				scope.$on('destroy', function () {
-					unwatch();
-				});
-			}
-		};
-	}
-
-	return module.directive('morrisBarGraph', morrisBarGraph);
-});
-
-define('seed/graphs/includes',[
-	'./morris/morrisDonutGraph',
-	'./morris/morrisAreaGraph',
-	'./morris/morrisLineGraph',
-	'./morris/morrisBarGraph'
-], function () {
-	'use strict';
-});
-
-
-
 define('seed/widgets/module',['angular', 'smartwidgets'], function (ng) {
 	'use strict';
 
@@ -4889,7 +4633,6 @@ define('seed/widgets/module',['angular', 'smartwidgets'], function (ng) {
 
 		$log.debug('Initiated module');
 	});
-
 
 	return module;
 });
@@ -5145,10 +4888,6 @@ define('seed/_includes',[
 	'./tables/_includes',
 	'./tables/module',
 
-	// Graphs
-	'./graphs/includes',
-	'./graphs/module',
-
 	// Widgets
 	'./widgets/includes',
 	'./widgets/module'
@@ -5201,7 +4940,6 @@ define('seed/module',[
 		'seed.layout',
 		'seed.forms',
 		'seed.tables',
-		'seed.graphs',
 		'seed.widgets'
 	]);
 
