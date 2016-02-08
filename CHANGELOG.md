@@ -30,7 +30,6 @@
 * **README:** Added readme file and documentation generation 24b5b4d
 
 
-
 <a name="2.2.7"></a>
 ## [2.2.7](//compare/v2.2.6...v2.2.7) (2016-02-01)
 
