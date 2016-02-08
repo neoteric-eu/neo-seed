@@ -1,11 +1,8 @@
 /**
  * Extends default lodash functions
  */
-define(['lodash', 'lodash-deep', './jsonStringify'], function (_, lodashDeep, jsonStringify) {
+define(['lodash', './jsonStringify'], function (_, jsonStringify) {
 	'use strict';
-
-	// Extend lodash for deep functions
-	_.mixin(lodashDeep);
 
 	// Extend lodash with stringify function
 	_.mixin(jsonStringify);
