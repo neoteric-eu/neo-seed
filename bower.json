@@ -23,7 +23,6 @@
     "less-elements": "latest",
     "animate.less": "latest",
     "font-awesome": "4.x",
-    "morris.js": "0.5.1",
     "form.validation": "latest",
     "bootstrap-daterangepicker": "kobalka/bootstrap-daterangepicker#2.0.11"
   },
@@ -64,7 +63,6 @@
       "jquery/jquery.js": "jquery/dist/jquery.js",
       "lodash/lodash.js": "lodash/lodash.js",
       "moment/moment.js": "moment/min/moment-with-locales.js",
-      "morris/morris.js": "morris.js/morris.js",
       "raphael/raphael.js": "raphael/raphael.js",
       "form-validation/form-validation.js": "form.validation/dist/js/formValidation.js",
       "form-validation/framework/bootstrap.js": "form.validation/dist/js/framework/bootstrap.js",

@@ -38,9 +38,6 @@ requirejs.config({
 		'moment': 'assets/vendor/js/moment/moment',
 		'lodash': 'assets/vendor/js/lodash/lodash',
 
-		'raphael': 'assets/vendor/js/raphael/raphael',
-		'morris': 'assets/vendor/js/morris/morris',
-
 		'form-validation': 'assets/vendor/js/form-validation',
 		'form-validation-bootstrap': 'assets/vendor/js/form-validation/framework/bootstrap',
 		'daterangepicker': 'assets/vendor/js/bootstrap-daterangepicker/daterangepicker'
@@ -84,8 +81,6 @@ requirejs.config({
 
 		// Other vendor
 		'moment': {exports: 'moment'},
-
-		'morris': ['raphael', 'jquery'],
 
 		'lodash-extensions': ['lodash'],
 

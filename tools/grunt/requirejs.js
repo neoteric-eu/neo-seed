@@ -55,7 +55,6 @@ module.exports = function () {
           'lodash': 'empty:',
 
           'raphael': 'empty:',
-          'morris': 'empty:',
 
           'form-validation': 'empty:',
           'form-validation-bootstrap': 'empty:',
