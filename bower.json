@@ -63,7 +63,6 @@
       "jquery/jquery.js": "jquery/dist/jquery.js",
       "lodash/lodash.js": "lodash/lodash.js",
       "moment/moment.js": "moment/min/moment-with-locales.js",
-      "raphael/raphael.js": "raphael/raphael.js",
       "form-validation/form-validation.js": "form.validation/dist/js/formValidation.js",
       "form-validation/framework/bootstrap.js": "form.validation/dist/js/framework/bootstrap.js",
       "form-validation/language/": "form.validation/dist/js/language/",
