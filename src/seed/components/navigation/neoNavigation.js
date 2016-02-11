@@ -27,6 +27,9 @@ define(['seed/components/module'], function (module) {
 			controller: function ($scope, $element) {
 				var promises = _
 					.chain(appConf.appsSettings)
+					.filter(function(app){
+						return !_.isUndefined(app.order);
+					})
 					.sortBy('order')
 					.pluck('directory')
 					.map(function (directory) {
