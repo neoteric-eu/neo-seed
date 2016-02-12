@@ -21,7 +21,7 @@ define(['seed/auth/module'], function (module) {
 				},
 				language: {
 					encode: function (lang) {
-						return lang.localePOSIX;
+						return lang.localePOSIX || LanguageAPI.getLanguage().localePOSIX;
 					},
 					decode: function (locale) {
 						return LanguageAPI.getByLocale(locale);
@@ -29,6 +29,12 @@ define(['seed/auth/module'], function (module) {
 				},
 				password: {
 					volatile: true
+				},
+				requireConfirmation: {
+					init: false
+				},
+				acceptTermsOfService: {
+					init: false
 				},
 				avatar: {
 					init: 'assets/seed/img/avatar-default.png'
@@ -72,6 +78,17 @@ define(['seed/auth/module'], function (module) {
 								data: {
 									token: $cookies.getObject('token')
 								}
+							}, function (_response) {
+								this.$unwrap(_response.data, null);
+							}, null);
+						},
+
+						$register: function () {
+							//noinspection JSUnresolvedFunction
+							return this.$send({
+								method: 'POST',
+								url: '/register',
+								data: this
 							}, function (_response) {
 								this.$unwrap(_response.data, null);
 							}, null);
