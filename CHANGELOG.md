@@ -1,3 +1,12 @@
+<a name="2.2.15"></a>
+## [2.2.15](//compare/v2.2.13...v2.2.15) (2016-02-12)
+
+
+### Features
+
+* **neoNavigation:** #38 - Allow app to have no navigation file 3a018aa
+
+
 <a name="2.2.13"></a>
 ## [2.2.13](//compare/v2.2.12...v2.2.13) (2016-02-08)
 
