@@ -22,7 +22,7 @@ npm start
 To continuously develop library you have to symlink source code of neo-seed to any container project:
 
 ```javascript
-ln -s [absolute-path-to-no-seed]src/seed [absolute-path-to-container-path]/src/
+npm link -s src/seed [container-path]/src/seed
 ```
 
 ## ![Guidelines](https://gitlab.neoteric.eu/frontend/neo-container/wikis/assets/favourite-2-icon.png) Guidelines
