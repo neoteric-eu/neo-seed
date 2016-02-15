@@ -1,6 +1,6 @@
 /**
  * @namespace seed.auth
- * @memberof seed
+ * @memberOf seed
  */
 
 define([
@@ -12,6 +12,7 @@ define([
 	var module = ng.module('seed.auth', [
 		'ngCookies',
 		'seed.auth.login',
+		'seed.auth.register',
 		'seed.auth.lock'
 	]);
 

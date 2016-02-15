@@ -9,9 +9,10 @@ define(['seed/auth/module'], function (module) {
 	 * @param restmod {Object} Data model layer interface
 	 * @param $cookies {Function} Cookie service
 	 * @param LanguageAPI {seed.auth.LanguageAPI} Language service
+	 * @param appConf {Object} Application configuration
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, $cookies, LanguageAPI) {
+	var User = function (restmod, $cookies, LanguageAPI, appConf) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
@@ -21,10 +22,13 @@ define(['seed/auth/module'], function (module) {
 				},
 				language: {
 					encode: function (lang) {
-						return lang.localePOSIX || LanguageAPI.getLanguage().localePOSIX;
+						return lang.localePOSIX;
 					},
 					decode: function (locale) {
 						return LanguageAPI.getByLocale(locale);
+					},
+					init: function(){
+						return LanguageAPI.getLanguage().localePOSIX;
 					}
 				},
 				password: {
@@ -87,7 +91,7 @@ define(['seed/auth/module'], function (module) {
 							//noinspection JSUnresolvedFunction
 							return this.$send({
 								method: 'POST',
-								url: '/register',
+								url: appConf.environmentSettings.apiUrl + 'registration',
 								data: this
 							}, function (_response) {
 								this.$unwrap(_response.data, null);

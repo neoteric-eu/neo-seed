@@ -1,7 +1,6 @@
 define([
 	// Forms
-	'./forms/resendRegistration',
-	'./forms/authRegisterForm'
+	'./forms/register/authRegisterForm'
 ], function () {
 	'use strict';
 });
