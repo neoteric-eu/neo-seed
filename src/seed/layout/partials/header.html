@@ -1,0 +1,50 @@
+<header id="header">
+    <!-- PLACE YOUR LOGO HERE -->
+
+    <div class="navbar-brand no-selection">
+        <img ng-src="{{::vm.appConf.generalSettings.logo}}"/>
+        {{::vm.appConf.generalSettings.name}}
+    </div>
+    <!-- END LOGO PLACEHOLDER -->
+
+    <neo-activities></neo-activities>
+    <neo-customer-switcher></neo-customer-switcher>
+
+    <!-- pulled right: nav area -->
+    <div class="pull-right">
+
+        <!-- collapse menu button -->
+        <div id="hide-menu" class="btn-header pull-right">
+        <span> <a toggle-menu title="Collapse Menu"><i
+                class="fa fa-bars"></i></a> </span>
+        </div>
+        <!-- end collapse menu -->
+
+        <!-- fullscreen button -->
+        <div class="btn-header transparent pull-right">
+        <span>
+					<a full-screen title="Full Screen">
+                        <i class="fa fa-arrows-alt"></i>
+                    </a>
+				</span>
+        </div>
+        <!-- end fullscreen button -->
+
+        <!-- logout button -->
+        <div id="logout" class="btn-header transparent pull-right">
+			<span>
+				<a ui-sref="auth.logout" title="{{'Sign Out'|translate}}">
+                    <i class="fa fa-sign-out"></i>
+                </a>
+			</span>
+        </div>
+        <!-- end logout button -->
+
+        <!-- multiple lang dropdown : find all flags in the flags page -->
+        <neo-language-switcher></neo-language-switcher>
+        <!-- end multiple lang -->
+
+    </div>
+    <!-- end pulled right: nav area -->
+
+</header>

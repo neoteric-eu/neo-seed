@@ -1,10 +1,12 @@
 {
-	"registry": {
-		"search": [
-			"http://mordor.neoteric.eu:3500",
-			"https://bower.herokuapp.com"
-		],
-		"register": "http://mordor.neoteric.eu:3500",
-		"publish": "http://mordor.neoteric.eu:3500"
-	}
+  "registry": {
+    "search": [
+      "http://mordor.neoteric.eu:3500",
+      "https://bower.herokuapp.com"
+    ],
+    "registry": {
+      "register": "http://mordor.neoteric.eu:3500",
+      "publish": "http://mordor.neoteric.eu:3500"
+    }
+  }
 }

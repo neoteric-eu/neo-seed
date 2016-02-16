@@ -1,0 +1,31 @@
+@import "/src/config/styles/variables";
+
+/*
+ * Timeline Seperator
+ */
+
+.timeline-seperator {
+	display: block;
+	text-align: center;
+	color: @gray-light;
+	margin: 20px 0 0;
+	& > :first-child {
+		padding: 4px 5px;
+		border: 1px dashed rgba(red(@black), green(@black), blue(@black), 0.1);
+		background: @white;
+		font-size: 11px;
+		border-radius: 4px;
+	}
+}
+
+.timeline-seperator .btn, .timeline-seperator .btn + .dropdown-menu {
+	margin-right: 15px;
+}
+
+.timeline-seperator:after {
+	display: block;
+	content: " ";
+	margin: 0 20px;
+	border-bottom: 1px dashed rgba(red(@black), green(@black), blue(@black), 0.1);
+	margin-top: -8px;
+}

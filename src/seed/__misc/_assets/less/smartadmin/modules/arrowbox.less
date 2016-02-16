@@ -1,0 +1,61 @@
+@import "/src/config/styles/variables";
+
+/*
+ * ARROW BOX
+ */
+
+.arrow-box-up:after, .arrow-box-up:before {
+	bottom: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow-box-up:after {
+	border-color: rgba(red(@white), green(@white), blue(@white), 0);
+	border-bottom-color: @white;
+	border-width: 7px;
+	left: 50%;
+	margin-left: -7px;
+}
+
+.arrow-box-up:before {
+	border-color: rgba(131, 131, 131, 0);
+	border-bottom-color: #838383;
+	border-width: 8px;
+	left: 50%;
+	margin-left: -8px;
+}
+
+/*
+ * right
+ */
+
+.arrow-box-up-right:after, .arrow-box-up-right:before {
+	bottom: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow-box-up-right:after {
+	border-color: rgba(red(@white), green(@white), blue(@white), 0);
+	border-bottom-color: @white;
+	border-width: 7px;
+	right: 10px;
+	margin-left: -7px;
+}
+
+.arrow-box-up-right:before {
+	border-color: rgba(131, 131, 131, 0);
+	border-bottom-color: #838383;
+	border-width: 8px;
+	right: 9px;
+	margin-left: -8px;
+}

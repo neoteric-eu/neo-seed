@@ -1,3 +1,204 @@
+<a name="2.2.13"></a>
+## [2.2.13](//compare/v2.2.12...v2.2.13) (2016-02-08)
+
+
+### Bug Fixes
+
+* **bower:** changed order of resolving registries 72d8c61
+
+### Features
+
+* **cookieConsent:** #39 - general config to show/hide cookie consent 78bcd94
+* **lodash-deep:** #44 - remove lodash-deep dependency 774453a
+* **angular-hotkeys:** #45 - remove angular-hotkeys dependency de863f2
+* **morris:** #47 - remove additional morris dependency 0c5c4b2
+
+BREAKING CHANGE:
+Following dependencies are _deprecated_ and should be replaced/removed from projects:
+- `lodash-deep`
+- `angular-hotkeys`
+- `morris`
+- `raphael`
+
+
+<a name="2.2.12"></a>
+## [2.2.12](//compare/v2.2.11...v2.2.12) (2016-02-03)
+
+
+### Bug Fixes
+
+* **overrides.less:** Overrides import hotfix. 7988419
+
+
+<a name="2.2.11"></a>
+## [2.2.11](//compare/v2.2.10...v2.2.11) (2016-02-02)
+
+
+### Bug Fixes
+
+* **User:** Added missing LanguageAPI dependency. f1b9d7d
+
+
+
+<a name="2.2.10"></a>
+## [2.2.10](//compare/v2.2.9...v2.2.10) (2016-02-02)
+
+
+### Bug Fixes
+
+* **auth:** Fixed broken redirection of defaultRedirectStateAfterLogin cc2030a
+
+### Features
+
+* **README:** Added readme file and documentation generation 24b5b4d
+
+
+<a name="2.2.7"></a>
+## [2.2.7](//compare/v2.2.6...v2.2.7) (2016-02-01)
+
+
+### Bug Fixes
+
+* **DatetimeSerializerService:** Decode date without modyfing source object 8f44938
+* **User,Language:** Fix user language model encode/decode 01611b3
+
+### Features
+
+* Replace HttpRequestInterceptor with build in , turn off legacy promise extension 968b5e5
+
+
+<a name="2.2.6"></a>
+## [2.2.6](//compare/v2.2.5...v2.2.6) (2016-01-27)
+
+
+### Bug Fixes
+
+* Added missing less file 1671909
+
+
+
+<a name="2.2.5"></a>
+## [2.2.5](//compare/v2.2.4...v2.2.5) (2016-01-27)
+
+### Features
+
+* **components:** Added cookie policy banner 78a8a9f
+
+
+<a name="2.2.4"></a>
+## [2.2.3](//compare/v2.1.5...v2.2.4) (2016-01-21)
+
+
+
+<a name="2.1.5"></a>
+## [2.1.5](//compare/v2.1.4...v2.1.5) (2016-01-13)
+
+
+### Features
+
+* **config:** #3487 -  Enable default redirect customization 765aa72
+
+
+
+<a name="2.1.4"></a>
+## [2.1.4](//compare/v2.1.3...v2.1.4) (2016-01-11)
+### Bug Fixes
+
+* **grunt:** Removed cleaning of bower_components catalog in favor of `bower cache clean`
+
+
+
+
+<a name="2.1.3"></a>
+## [2.1.3](//compare/v2.1.2...v2.1.3) (2016-01-08)
+
+
+### Bug Fixes
+
+* **Grunt:** Updated cleanup aliases 01ce01f
+* **Grunt:** Updated coverage aliases 34b9b34
+* **Grunt:** Updated coverage aliases 4e21623
+
+
+
+<a name="2.1.2"></a>
+## [2.1.2](//compare/v2.1.1...v2.1.2) (2016-01-07)
+
+
+### Bug Fixes
+
+* **bower.json:** Removed copying angular-mocks 61350b7
+
+
+
+<a name="2.1.1"></a>
+## [2.1.1](//compare/v2.1.0...v2.1.1) (2016-01-05)
+
+
+### Bug Fixes
+
+* **unit tests** Fixed angular-mocks dependency path
+
+
+<a name="2.1.0"></a>
+# [2.1.0](//compare/v2.0.2...v2.1.0) (2016-01-05)
+
+### Features
+
+* **Grunt:** #3123 - Create independent seed building process 94eb0e4
+
+
+### Bug Fixes
+
+* **unit tests** Fixed back to work unit tests
+
+
+<a name="2.0.2"></a>
+## [2.0.2](//compare/v2.0.1...v2.0.2) (2015-12-21)
+
+
+
+
+<a name="2.0.1"></a>
+## [2.0.1](//compare/v2.0.0...v2.0.1) (2015-12-17)
+
+
+### Bug Fixes
+
+* **header.html:** Removed speech button from header. 4e2833b
+
+
+
+<a name="2.0.0"></a>
+# [2.0.0](//compare/v1.2.6...v2.0.0) (2015-12-17)
+
+
+### Features
+
+* **styles:** #3448 - Abstract less configuration from seed to container configuration 0933430, closes #3448
+
+
+### BREAKING CHANGES
+
+* styles: From now on Yeoman generator have to be used to install container.
+
+NPM set-up:
+```
+npm set registry http://ntrc-delta.neoteric.eu:4873
+npm install -g generator-neo
+```
+
+And from container catalog run:
+`yo neo`
+
+Remove from container **all** files except:
+- `src/config`
+- `src/bower.json`
+- `.bowerrc`
+
+Include all custom application styles from index.html to `src/config/styles/apps.less`.
+
+
 <a name="1.2.6"></a>
 ## [1.2.6](//compare/v1.2.5...v1.2.6) (2015-12-14)
 

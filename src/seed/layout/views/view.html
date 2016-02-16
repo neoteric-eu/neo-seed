@@ -1,0 +1,45 @@
+<!-- COOKIE CONSENT -->
+<cookie-consent ng-if="vm.appConf.generalSettings.showCookieConsent"></cookie-consent>
+<!-- END COOKIE CONSENT -->
+
+<!-- HEADER -->
+<div ng-include="'seed/layout/partials/header.html'"></div>
+<!-- END HEADER -->
+
+
+<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<div ng-include="'seed/layout/partials/navigation.html'"></div>
+
+<!-- END NAVIGATION -->
+<!-- MAIN PANEL -->
+<div id="main" role="main">
+
+    <!-- RIBBON -->
+    <div id="ribbon">
+
+				<span class="ribbon-button-alignment">
+					<span id="refresh" class="btn btn-ribbon" reset-widgets
+                          tooltip-placement="bottom"
+                          tooltip-html-unsafe="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.">
+						<i class="fa fa-refresh"></i>
+					</span>
+				</span>
+
+        <!-- breadcrumb -->
+        <neo-state-breadcrumbs></neo-state-breadcrumbs>
+        <!-- end breadcrumb -->
+
+
+    </div>
+    <!-- END RIBBON -->
+
+    <div data-ui-view="content" data-autoscroll="false"></div>
+
+</div>
+<!-- END MAIN PANEL -->
+
+<!-- PAGE FOOTER -->
+<!-- END PAGE FOOTER -->
+
+

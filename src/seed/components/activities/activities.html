@@ -1,0 +1,40 @@
+<span id="activity"
+      class="activity-dropdown"
+      ng-style="{'background-image':'url('+ vm.user.avatar +')'}">
+	<b class="badge bounceIn animated">0</b>
+</span>
+
+<div class="ajax-dropdown">
+    <div class="btn-group btn-group-justified" data-toggle="buttons">
+        <label class="btn btn-default"
+               ng-class="{active : isActive(type.name)}"
+               ng-repeat="(key, value) in vm.activities" ng-click="vm.setTab(type.name)">
+            <input type="radio" name="activity">
+            {{value.label}}
+        </label>
+    </div>
+
+
+    <!-- notification content -->
+    <div class="ajax-notifications custom-scroll">
+
+        <div class="alert alert-transparent text-center">
+            <h4>Click a button to show messages here</h4>
+            This blank page message helps protect your privacy, or you can show the first message here
+            automatically.
+        </div>
+
+        <i class="fa fa-lock fa-4x fa-border"></i>
+
+    </div>
+
+    <!--FOOTER-->
+	<span> Last updated on: {{vm.activities.last_update}}
+		<button type="button" ng-click="vm.refresh()"
+                data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading..."
+                class="btn btn-xs btn-default pull-right">
+            <i class="fa fa-refresh"></i>
+        </button>
+	</span>
+    <!--end:FOOTER-->
+</div>
