@@ -8,6 +8,8 @@ define([
 	'./services/neoTemplateLoader',
 
 	'./lodash/lodashExtensions',
+	'./eventAggregator/EventAggregatorService',
+	'./eventAggregator/EventAggregatorFactory',
 
 	'./moment/momentDatetimeDayrange',
 	'./moment/neoMomentDate',
