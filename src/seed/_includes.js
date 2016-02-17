@@ -26,11 +26,7 @@ define([
 
 	// Tables
 	'./tables/_includes',
-	'./tables/module',
-
-	// Widgets
-	'./widgets/includes',
-	'./widgets/module'
+	'./tables/module'
 ], function () {
 	'use strict';
 });

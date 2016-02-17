@@ -31,7 +31,6 @@ requirejs.config({
 		'bootstrap': 'assets/vendor/js/bootstrap/bootstrap',
 
 		// Smart Admin plugins
-		'smartwidgets': 'assets/seed/js/smartadmin/smartwidgets/jarvis.widget',
 		'notification': 'assets/seed/js/smartadmin/notification/SmartNotification',
 
 		// Other vendor
@@ -77,7 +76,6 @@ requirejs.config({
 
 		// Smart Admin plugins
 		'notification': ['jquery'],
-		'smartwidgets': ['jquery'],
 
 		// Other vendor
 		'moment': {exports: 'moment'},
