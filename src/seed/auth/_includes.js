@@ -20,6 +20,9 @@ define([
 	'./login/_includes',
 	'./login/module',
 
+	'./register/_includes',
+	'./register/module',
+
 	'./password/_includes',
 
 	'./lock/_includes',

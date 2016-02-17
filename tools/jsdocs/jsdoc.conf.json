@@ -1,29 +1,31 @@
 {
-	"tags": {
-		"allowUnknownTags": true
-	},
-	"plugins": [
-		"plugins/markdown"
-	],
-	"templates": {
-		"cleverLinks": false,
-		"monospaceLinks": false,
-		"dateFormat": "ddd MMM Do YYYY",
-		"outputSourceFiles": true,
-		"outputSourcePath": true,
-		"systemName": "NeoB2B",
-		"footer": "",
-		"copyright": "",
-		"navType": "vertical",
-		"theme": "united",
-		"linenums": true,
-		"collapseSymbols": false,
-		"inverseNav": true,
-		"highlightTutorialCode": true,
-		"protocol": "html://"
-	},
-	"markdown": {
-		"parser": "gfm",
-		"hardwrap": true
-	}
+  "tags": {
+	"allowUnknownTags": true
+  },
+  "plugins": [
+	"plugins/markdown"
+  ],
+  "templates": {
+	"logoFile":"https://gitlab.neoteric.eu/uploads/project/avatar/23/seed_3.png",
+	"cleverLinks": true,
+	"monospaceLinks": true,
+	"dateFormat": "ddd MMM YYYY",
+	"outputSourceFiles": true,
+	"outputSourcePath": false,
+	"systemName": "neo-seed",
+	"footer": "",
+	"copyright": "Neoteric",
+	"navType": "vertical",
+	"theme": "paper",
+	"syntaxTheme": "default",
+	"linenums": true,
+	"collapseSymbols": false,
+	"inverseNav": true,
+	"highlightTutorialCode": true,
+	"protocol": "html://"
+  },
+  "markdown": {
+	"parser": "gfm",
+	"hardwrap": true
+  }
 }

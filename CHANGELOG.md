@@ -1,5 +1,101 @@
-<a name="2.2.1"></a>
-## [2.2.1](//compare/v2.1.5...v2.2.1) (2016-01-21)
+<a name="2.2.15"></a>
+## [2.2.15](//compare/v2.2.13...v2.2.15) (2016-02-12)
+
+
+### Features
+
+* **neoNavigation:** #38 - Allow app to have no navigation file 3a018aa
+
+
+<a name="2.2.13"></a>
+## [2.2.13](//compare/v2.2.12...v2.2.13) (2016-02-08)
+
+
+### Bug Fixes
+
+* **bower:** changed order of resolving registries 72d8c61
+
+### Features
+
+* **cookieConsent:** #39 - general config to show/hide cookie consent 78bcd94
+* **lodash-deep:** #44 - remove lodash-deep dependency 774453a
+* **angular-hotkeys:** #45 - remove angular-hotkeys dependency de863f2
+* **morris:** #47 - remove additional morris dependency 0c5c4b2
+
+BREAKING CHANGE:
+Following dependencies are _deprecated_ and should be replaced/removed from projects:
+- `lodash-deep`
+- `angular-hotkeys`
+- `morris`
+- `raphael`
+
+
+<a name="2.2.12"></a>
+## [2.2.12](//compare/v2.2.11...v2.2.12) (2016-02-03)
+
+
+### Bug Fixes
+
+* **overrides.less:** Overrides import hotfix. 7988419
+
+
+<a name="2.2.11"></a>
+## [2.2.11](//compare/v2.2.10...v2.2.11) (2016-02-02)
+
+
+### Bug Fixes
+
+* **User:** Added missing LanguageAPI dependency. f1b9d7d
+
+
+
+<a name="2.2.10"></a>
+## [2.2.10](//compare/v2.2.9...v2.2.10) (2016-02-02)
+
+
+### Bug Fixes
+
+* **auth:** Fixed broken redirection of defaultRedirectStateAfterLogin cc2030a
+
+### Features
+
+* **README:** Added readme file and documentation generation 24b5b4d
+
+
+<a name="2.2.7"></a>
+## [2.2.7](//compare/v2.2.6...v2.2.7) (2016-02-01)
+
+
+### Bug Fixes
+
+* **DatetimeSerializerService:** Decode date without modyfing source object 8f44938
+* **User,Language:** Fix user language model encode/decode 01611b3
+
+### Features
+
+* Replace HttpRequestInterceptor with build in , turn off legacy promise extension 968b5e5
+
+
+<a name="2.2.6"></a>
+## [2.2.6](//compare/v2.2.5...v2.2.6) (2016-01-27)
+
+
+### Bug Fixes
+
+* Added missing less file 1671909
+
+
+
+<a name="2.2.5"></a>
+## [2.2.5](//compare/v2.2.4...v2.2.5) (2016-01-27)
+
+### Features
+
+* **components:** Added cookie policy banner 78a8a9f
+
+
+<a name="2.2.4"></a>
+## [2.2.3](//compare/v2.1.5...v2.2.4) (2016-01-21)
 
 
 

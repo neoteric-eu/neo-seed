@@ -28,10 +28,6 @@ define([
 	'./tables/_includes',
 	'./tables/module',
 
-	// Graphs
-	'./graphs/includes',
-	'./graphs/module',
-
 	// Widgets
 	'./widgets/includes',
 	'./widgets/module'

@@ -1,19 +1,18 @@
 /**
  * @namespace seed.auth
- * @memberof seed
+ * @memberOf seed
  */
 
 define([
 	'angular',
-	'angular-cookies',
-	'angular-hotkeys'
+	'angular-cookies'
 ], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.auth', [
 		'ngCookies',
-		'cfp.hotkeys',
 		'seed.auth.login',
+		'seed.auth.register',
 		'seed.auth.lock'
 	]);
 
@@ -25,7 +24,7 @@ define([
 				data: {
 					permissions: {
 						except: ['AUTHORIZED'],
-						redirectTo: appConf.generalSettings.defaultStateToRedirectAfterLogin
+						redirectTo: appConf.generalSettings.defaultRedirectStateAfterLogin
 					}
 				},
 				views: {
@@ -61,26 +60,8 @@ define([
 			});
 	});
 
-	module.run(function ($log, $rootScope, $state, hotkeys, UserAPI, neoSession) {
-
+	module.run(function ($log) {
 		$log = $log.getInstance('seed.auth.module');
-
-		// Bound globally shortcut to lock screen
-		hotkeys.add({
-			combo: 'alt+l',
-			description: 'Lock screen',
-			callback: function () {
-				UserAPI
-					.logout($rootScope.user)
-					.then(function () {
-						neoSession
-							.clearSession()
-							.finally(function () {
-								$state.go('auth.lock');
-							});
-					});
-			}
-		});
 
 		$log.debug('Initiated module');
 	});

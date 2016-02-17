@@ -1,5 +1,4 @@
 define([
-	'./interceptors/HttpRequestInterceptor',
 	'./interceptors/HttpErrorInterceptor',
 
 	'./decorators/logDecorator',
@@ -9,6 +8,7 @@ define([
 	'./services/neoTemplateLoader',
 
 	'./lodash/lodashExtensions',
+	'./eventAggregator/EventAggregatorFactory',
 
 	'./moment/momentDatetimeDayrange',
 	'./moment/neoMomentDate',

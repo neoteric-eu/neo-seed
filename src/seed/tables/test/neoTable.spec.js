@@ -32,13 +32,13 @@ define([
 					// Instantiate the fake module
 					module(
 						'gettext',
-						'seed.templates'
+						'seed.templateCache'
 					);
 				});
 
 				beforeEach(function () {
 					// Instantiate the fake module
-					module('seed.tables', 'seed.helpers');
+					module('seed.templateCache', 'seed.helpers','seed.tables');
 
 					module(function ($provide) {
 						$templateCache = jasmine.createSpyObj('$templateCache', ['get', 'put']);

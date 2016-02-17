@@ -30,6 +30,11 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
   );
 
 
+  $templateCache.put('seed/components/cookieConsent/cookieConsent.html',
+    "<div><div class=padding-10>We use cookies to ensure that we give you the best experience on our website. If you continue without changing your settings, we'll assume that you are happy to receive all cookies from this website. If you would like to change your preferences you may do so by following the instructions <a href=\"http://www.aboutcookies.org/Default.aspx?page=1\">here</a>.</div><div class=text-align-right><button type=button ng-click=vm.acceptCookies()>Accept</button></div></div>"
+  );
+
+
   $templateCache.put('seed/components/customer/neoCustomerSwitcher.html',
     "<div class=\"project-context hidden-xs dropdown\"><span class=label>{{::vm.user.email}}</span><div class=dropdown dropdown><div class=\"project-selector dropdown-toggle\" dropdown-toggle><span ng-bind-html=vm.activeCustomer.customerName></span> <i class=\"fa fa-angle-down\"></i></div><ul class=dropdown-menu><li ng-repeat=\"customer in vm.customerCollection\"><a ng-click=vm.setActiveCustomer(customer)><i ng-show=\"customer.customerId === vm.activeCustomer.customerId\" class=\"fa fa-hand-o-right\"></i> {{customer.customerName}}</a></li></ul></div></div>"
   );
@@ -81,7 +86,7 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 
 
   $templateCache.put('seed/layout/views/view.html',
-    "<div ng-include=\"'seed/layout/partials/header.html'\"></div><div ng-include=\"'seed/layout/partials/navigation.html'\"></div><div id=main role=main><div id=ribbon><span class=ribbon-button-alignment><span id=refresh class=\"btn btn-ribbon\" reset-widgets tooltip-placement=bottom tooltip-html-unsafe=\"<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.\"><i class=\"fa fa-refresh\"></i></span></span><neo-state-breadcrumbs></neo-state-breadcrumbs></div><div data-ui-view=content data-autoscroll=false></div></div>"
+    "<cookie-consent ng-if=vm.appConf.generalSettings.showCookieConsent></cookie-consent><div ng-include=\"'seed/layout/partials/header.html'\"></div><div ng-include=\"'seed/layout/partials/navigation.html'\"></div><div id=main role=main><div id=ribbon><span class=ribbon-button-alignment><span id=refresh class=\"btn btn-ribbon\" reset-widgets tooltip-placement=bottom tooltip-html-unsafe=\"<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.\"><i class=\"fa fa-refresh\"></i></span></span><neo-state-breadcrumbs></neo-state-breadcrumbs></div><div data-ui-view=content data-autoscroll=false></div></div>"
   );
 
 
@@ -163,52 +168,6 @@ define('seed/helpers/module',['angular'], function (ng) {
 	var module = ng.module('seed.helpers', []);
 
 	return module;
-});
-
-define('seed/helpers/interceptors/HttpRequestInterceptor',['seed/helpers/module'], function (app) {
-	'use strict';
-
-	/**
-	 * Provides object serialization to url parameters
-	 * @class HttpRequestInterceptor
-	 * @memberOf seed.helpers
-	 *
-	 * @param $log {Object} Logging service
-	 * @return {{request: Function}}
-	 */
-	function HttpRequestInterceptor($log) {
-
-		$log = $log.getInstance('seed.helpers.HttpRequestInterceptor');
-		$log.debug('Initiated factory');
-
-		return {
-			request: function (config) {
-				var uri = config.url;
-
-				//Serialize query string parameters in a way the web API understands.
-				if (config.params) {
-					var serializedParams;
-
-					try {
-						serializedParams = $.param(config.params, false);
-					} catch (e) {
-						$log.error('Error serializing request params: ' + _.stringify(config.params));
-					}
-					// Append it to request url
-					if (serializedParams) {
-						uri = uri + '?' + serializedParams;
-					}
-					// Prevent angular do that
-					config.params = null;
-				}
-
-				config.url = uri;
-				return config;
-			}
-		};
-	}
-
-	app.factory('HttpRequestInterceptor', HttpRequestInterceptor);
 });
 
 define('seed/helpers/interceptors/HttpErrorInterceptor',['seed/helpers/module'], function (app) {
@@ -417,9 +376,6 @@ define('seed/helpers/services/neoTemplateLoader',['seed/helpers/module'], functi
 		 *
 		 * @param templatePath {String} path to HTML to be cached
 		 * @param cacheKey {String} Key under which template will be stored
-		 *
-		 * @returns
-		 *
 		 */
 		this.load = function (templatePath, cacheKey) {
 			var dfd = $q.defer();
@@ -509,11 +465,8 @@ define('seed/helpers/lodash/jsonStringify',[],function () {
 /**
  * Extends default lodash functions
  */
-define('seed/helpers/lodash/lodashExtensions',['lodash', 'lodash-deep', './jsonStringify'], function (_, lodashDeep, jsonStringify) {
+define('seed/helpers/lodash/lodashExtensions',['lodash', './jsonStringify'], function (_, jsonStringify) {
 	'use strict';
-
-	// Extend lodash for deep functions
-	_.mixin(lodashDeep);
 
 	// Extend lodash with stringify function
 	_.mixin(jsonStringify);
@@ -745,7 +698,7 @@ define('seed/helpers/moment/neoMomentTime',['seed/helpers/module', 'moment'], fu
 	module.directive('neoMomentTime', neoMomentTime);
 });
 
-define('seed/helpers/restmod/serializers/datetime/DatetimeSerializerService',['seed/helpers/module', 'moment'], function (module, moment) {
+define('seed/helpers/restmod/serializers/datetime/DatetimeSerializerService',['seed/helpers/module', 'moment', 'lodash'], function (module, moment, _) {
 	'use strict';
 
 	/**
@@ -777,7 +730,7 @@ define('seed/helpers/restmod/serializers/datetime/DatetimeSerializerService',['s
 			}
 
 			if (_.isFunction(val.isValid) && val.isValid()) {
-				return val.utc().toISOString();
+				return val.clone().utc().toISOString();
 			} else {
 				throw new Error('Could not serialize from moment object to timestamp value: ' + val);
 			}
@@ -788,7 +741,6 @@ define('seed/helpers/restmod/serializers/datetime/DatetimeSerializerService',['s
 
 	module.service('DatetimeSerializerService', DatetimeSerializerService);
 });
-
 define('seed/helpers/restmod/serializers/datetime/DatetimeDecodeFilter',['seed/helpers/module'], function (module) {
 	'use strict';
 
@@ -1674,7 +1626,6 @@ define('seed/helpers/restmod/packers/PackerUtils',[], function () {
 });
 
 define('seed/helpers/_includes',[
-	'./interceptors/HttpRequestInterceptor',
 	'./interceptors/HttpErrorInterceptor',
 
 	'./decorators/logDecorator',
@@ -2149,20 +2100,6 @@ define('seed/components/breadcrumbs/bigBreadcrumbs',['seed/components/module'], 
 define('seed/components/navigation/neoNavigation',['seed/components/module'], function (module) {
 	'use strict';
 
-	/**
-	 * Composes container navigation using templates placed in appName/_config/navigation.html
-	 * @class neoNavigation
-	 * @memberOf seed.components
-	 *
-	 * @param $log {Object} Logging service
-	 * @param $state {Object} State helper
-	 * @param $q {Object} Angular implementation of promises
-	 * @param $compile {Function} Compiles an HTML string or DOM into a template
-	 * @param $timeout {Function} Timeout service
-	 * @param neoTemplateLoader {Object} Caching utility
-	 * @param appConf {Object} Application configuration
-	 * @return {{restrict: string, template: string, controller: Function}}
-	 */
 	function neoNavigation($log, $state, $q, $compile, $timeout, neoTemplateLoader, appConf) {
 
 		$log = $log.getInstance('seed.components.neoNavigation');
@@ -2171,44 +2108,92 @@ define('seed/components/navigation/neoNavigation',['seed/components/module'], fu
 		return {
 			restrict: 'E',
 			template: '<ul></ul>',
+			scope: {},
+			controllerAs: 'vm',
 
+			/**
+			 * Composes container navigation using templates placed in `src/app{appName}/__misc/_navigation/navigation.html`
+			 * from `src/config/apps.json`. Navigation elements are added using [neoNavigationItem]{@link
+			 * seed.components.neoNavigationItem} and [neoNavigationGroup]{@link seed.components.neoNavigationGroup}
+			 * directives.
+			 * @class neoNavigation
+			 * @memberOf seed.components
+			 *
+			 * @example
+			 * <neo-navigation></neo-navigation>
+			 *
+			 * @requires $log - Logging service
+			 * @requires $state - State helper
+			 * @requires $q - Angular implementation of promises
+			 * @requires $compile - Compiles an HTML string or DOM into a template
+			 * @requires $timeout - Timeout service
+			 * @requires neoTemplateLoader - Caching utility
+			 * @requires appConf - Application configuration
+			 *
+			 * @param $scope {Object} Angular scope provider
+			 * @param $element {Object} Angular HTML element provider
+			 */
 			controller: function ($scope, $element) {
-				var promises = _
-					.chain(appConf.appsSettings)
-					.sortBy('order')
-					.pluck('directory')
-					.map(function (directory) {
-						return neoTemplateLoader.load('apps/' + directory + '/__misc/_navigation/navigation.html');
-					})
-					.value();
+				/** @lends seed.components.neoNavigation.prototype */
+				var vm = this;
 
-				$q
-					.all(promises)
-					.then(function (templates) {
-						var html = templates.join();
-						$element.contents().append($compile(html)($scope));
+				// variables
+				/**
+				 * @property templatePromises {Array} Set of promises loading navigation template HTML
+				 */
+				vm.templatePromises = [];
 
-						// Async apply is not working here (ಠ╭╮ಠ)
-						$timeout(function () {
-							$element
-								.find('a[ui-sref]')
-								.filter(function () {
-									return $state.includes($(this).attr('ui-sref'));
-								})
-								.parents('li:not(:first)')
-								.each(function () {
-									$(this)
-										.addClass('open')
-										.find('ul:first')
-										.slideDown(0);
+				// methods
+				/**
+				 * @method
+				 * @description initializes directive
+				 */
+				vm.init = init;
+
+				vm.init();
+
+
+				function init() {
+					vm.templatePromises = _
+							.chain(appConf.appsSettings)
+							.filter(function (app) {
+								return !_.isUndefined(app.order);
+							})
+							.sortBy('order')
+							.pluck('directory')
+							.map(function (directory) {
+								return neoTemplateLoader.load('apps/' + directory + '/__misc/_navigation/navigation.html');
+							})
+							.value();
+
+					$q
+							.all(vm.templatePromises)
+							.then(function (templates) {
+								var html = templates.join();
+								$element.contents().append($compile(html)($scope));
+
+								// Async apply is not working here (ಠ╭╮ಠ)
+								$timeout(function () {
+									$element
+											.find('a[ui-sref]')
+											.filter(function () {
+												return $state.includes($(this).attr('ui-sref'));
+											})
+											.parents('li:not(:first)')
+											.each(function () {
+												$(this)
+														.addClass('open')
+														.find('ul:first')
+														.slideDown(0);
+											});
 								});
+							})
+							.catch(function () {
+								$log.error('Error loading navigation templates');
 						});
-					})
-					.catch(function () {
-						$log.error('Error loading navigation templates');
-					});
 
-				$log.debug('Called linking function');
+					$log.debug('Initialized controller');
+				}
 			}
 		};
 	}
@@ -2487,6 +2472,51 @@ define('seed/components/versionTag/neoVersionTag',['seed/components/module'], fu
 
 
 
+define('seed/components/cookieConsent/cookieConsent',['seed/components/module'], function (module) {
+    'use strict';
+
+    /**
+     * Creates a Breadcrumbs line based on state data.title attribute
+     * @class cookieConsent
+     * @memberOf seed.components
+     *
+     * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
+     * @param $cookies
+     *              <cookie-consent></cookie-consent>
+     */
+
+    function cookieConsent($cookies) {
+        return {
+            restrict: 'E',
+            templateUrl: 'seed/components/cookieConsent/cookieConsent.html',
+            scope: {},
+            controllerAs: 'vm',
+            controller: function ($element) {
+                var vm = this || {};
+
+                vm.init = init;
+                vm.acceptCookies = acceptCookies;
+
+                vm.init();
+
+                function init () {
+                   if($cookies.getObject('cookieConsent')) {
+                       $element.hide();
+                   }
+                }
+
+                function acceptCookies () {
+                    $cookies.putObject('cookieConsent', true);
+                    $element.hide();
+                }
+            }
+        };
+    }
+
+    module.directive('cookieConsent', cookieConsent);
+
+});
+
 define('seed/components/_includes',[
 	'./activities/neoActivities',
 	'./customer/neoCustomerSwitcher',
@@ -2501,7 +2531,9 @@ define('seed/components/_includes',[
 	'./navigation/neoNavigationGroup',
 	'./navigation/neoNavigationItem',
 	'./pageTitle/neoPageTitle',
-	'./versionTag/neoVersionTag'
+	'./versionTag/neoVersionTag',
+
+	'./cookieConsent/cookieConsent'
 ], function () {
 	'use strict';
 });
@@ -2662,14 +2694,12 @@ define('seed/layout/_includes',[
 
 define('seed/auth/module',[
 	'angular',
-	'angular-cookies',
-	'angular-hotkeys'
+	'angular-cookies'
 ], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.auth', [
 		'ngCookies',
-		'cfp.hotkeys',
 		'seed.auth.login',
 		'seed.auth.lock'
 	]);
@@ -2682,7 +2712,7 @@ define('seed/auth/module',[
 				data: {
 					permissions: {
 						except: ['AUTHORIZED'],
-						redirectTo: appConf.generalSettings.defaultStateToRedirectAfterLogin
+						redirectTo: appConf.generalSettings.defaultRedirectStateAfterLogin
 					}
 				},
 				views: {
@@ -2718,26 +2748,8 @@ define('seed/auth/module',[
 			});
 	});
 
-	module.run(function ($log, $rootScope, $state, hotkeys, UserAPI, neoSession) {
-
+	module.run(function ($log) {
 		$log = $log.getInstance('seed.auth.module');
-
-		// Bound globally shortcut to lock screen
-		hotkeys.add({
-			combo: 'alt+l',
-			description: 'Lock screen',
-			callback: function () {
-				UserAPI
-					.logout($rootScope.user)
-					.then(function () {
-						neoSession
-							.clearSession()
-							.finally(function () {
-								$state.go('auth.lock');
-							});
-					});
-			}
-		});
 
 		$log.debug('Initiated module');
 	});
@@ -3014,14 +3026,15 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 
 	/**
 	 * @constructor
-	 * @implements {seed.BaseModel}
+	 * @implements {seed.helpers.BaseModel}
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
 	 * @param $cookies {Function} Cookie service
+	 * @param LanguageAPI {seed.auth.LanguageAPI} Language service
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, $cookies) {
+	var User = function (restmod, $cookies, LanguageAPI) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
@@ -3030,7 +3043,12 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 					hasMany: 'Customer'
 				},
 				language: {
-					hasOne: 'Language'
+					encode: function (lang) {
+						return lang.localePOSIX;
+					},
+					decode: function (locale) {
+						return LanguageAPI.getByLocale(locale);
+					}
 				},
 				password: {
 					volatile: true
@@ -3401,6 +3419,19 @@ define('seed/auth/_models/Language/LanguageAPI',[
 			return api.languageCollection.$selected;
 		};
 
+		/**
+		 * Get model Language by locale
+		 * @param locale
+		 * @returns {Language|RecordApi}
+		 */
+		api.getByLocale = function (locale) {
+			var lang = _.find(api.languageCollection, {localePOSIX: locale});
+			if(!lang) {
+				$log.error('Could not find locale: ', locale);
+			}
+			return Language.$buildRaw(lang || {});
+		};
+
 		return api;
 	};
 
@@ -3418,12 +3449,22 @@ define('seed/auth/_models/Language/Language',['seed/auth/module'], function (mod
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
+	 * @param appConf {appConf} app configuration
 	 * @return {*|Model} Model instance
 	 */
-	var Language = function (restmod) {
+	var Language = function (restmod, appConf) {
 		return restmod
 			.model('/language')
 			.mix({
+				code: {
+					init: appConf.languageSettings.defaultLanguage.code
+				},
+				locale: {
+					init: appConf.languageSettings.defaultLanguage.locale
+				},
+				localePOSIX: {
+					init: appConf.languageSettings.defaultLanguage.localePOSIX
+				},
 				$extend: {
 					Resource: {
 						$setSelected: function (locale) {
@@ -4616,239 +4657,6 @@ define('seed/tables/_includes',[
 	'use strict';
 });
 
-define('seed/graphs/module',['angular'], function (ng) {
-	'use strict';
-
-	var module = ng.module('seed.graphs', []);
-
-	return module;
-});
-
-define('seed/graphs/morris/morrisDonutGraph',['seed/graphs/module', 'morris'], function (module) {
-	'use strict';
-
-	/**
-	 * Creates area graph with morris library
-	 * @constructor morrisDonutGraph
-	 *
-	 * @link https://github.com/morrisjs/morris.js
-	 * @example
-	 * <morris-donut-graph graph-config="configObject"></morris-donut-graph>
-	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string},
-	 *   link: Function}}
-	 */
-	function morrisDonutGraph() {
-		return {
-			restrict: 'E',
-			replace: true,
-			template: '<div class="chart no-padding"></div>',
-			scope: {
-				graphConfig: '=',
-				config: '='
-			},
-			/**
-			 * Description
-			 * @method link
-			 * @param {} scope
-			 * @param {} element
-			 */
-			link: function (scope, element) {
-
-				var morris;
-
-				scope.config
-					.then(function () {
-						scope.$applyAsync(function () {
-
-							morris = Morris.Donut(_.extend({
-								element: element
-							}, scope.graphConfig));
-
-							initWatch();
-						});
-					});
-
-				function initWatch() {
-					// listen to data changes
-					scope.$watch('graphConfig.data', function (newData, oldData) {
-						if (newData !== oldData) {
-							morris.setData(newData);
-						}
-					});
-				}
-			}
-		};
-	}
-
-	return module.directive('morrisDonutGraph', morrisDonutGraph);
-});
-
-define('seed/graphs/morris/morrisAreaGraph',['seed/graphs/module', 'morris'], function (module) {
-	'use strict';
-
-	/**
-	 * Creates area graph with morris library
-	 * @constructor morrisAreaGraph
-	 *
-	 * @link https://github.com/morrisjs/morris.js
-	 * @example
-	 *  <morris-area-graph graph-config="configObject"></morris-area-graph>
-	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string},
-	 *   link: Function}}
-	 */
-	function morrisAreaGraph() {
-		return {
-			restrict: 'E',
-			replace: true,
-			template: '<div class="chart no-padding"></div>',
-			scope: {
-				graphConfig: '=',
-				config: '='
-			},
-			/**
-			 * Description
-			 * @method link
-			 * @param {} scope
-			 * @param {} element
-			 */
-			link: function (scope, element) {
-
-				var morris;
-
-				scope.config.then(function () {
-					scope.$applyAsync(function () {
-						morris = Morris.Area(_.extend({
-							element: element
-						}, scope.graphConfig));
-					});
-				});
-
-				// listen to data changes
-				scope.$watch('graphConfig.data', function (newData, oldData) {
-
-					if (newData !== oldData && morris) {
-						morris.setData(newData);
-					}
-				});
-
-			}
-		};
-	}
-
-	return module.directive('morrisAreaGraph', morrisAreaGraph);
-});
-
-define('seed/graphs/morris/morrisLineGraph',['seed/graphs/module', 'morris'], function (module) {
-	'use strict';
-
-	/**
-	 * Creates area graph with morris library
-	 * @constructor morrisLineGraph
-	 *
-	 * @link https://github.com/morrisjs/morris.js
-	 * @example
-	 *  <morris-line-graph graph-config="configObject"></morris-line-graph>
-	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string},
-	 *   link: Function}}
-	 */
-	function morrisLineGraph() {
-		return {
-			restrict: 'E',
-			replace: true,
-			template: '<div class="chart no-padding"></div>',
-			scope: {
-				graphConfig: '='
-			},
-			/**
-			 * Description
-			 * @method link
-			 * @param {} scope
-			 * @param {} element
-			 */
-			link: function (scope, element) {
-				var morris = Morris.Line(_.extend({
-					element: element
-				}, scope.graphConfig));
-
-				// listen to data changes
-				var unwatch = scope.$watch('graphConfig.data', function (newData, oldData) {
-					if (newData !== oldData) {
-						morris.setData(newData);
-					}
-				});
-
-				// destroy watch with scope
-				scope.$on('destroy', function () {
-					unwatch();
-				});
-			}
-		};
-	}
-
-	return module.directive('morrisLineGraph', morrisLineGraph);
-});
-
-define('seed/graphs/morris/morrisBarGraph',['seed/graphs/module', 'morris'], function (module) {
-	'use strict';
-
-	/**
-	 * Creates line bar with morris library
-	 * @constructor morrisBarGraph
-	 *
-	 * @link https://github.com/morrisjs/morris.js
-	 * @example
-	 *  <morris-bar-graph graph-config="configObject"></morris-bar-graph>
-	 * @return {{restrict: string, replace: boolean, template: string, scope: {graphConfig: string},
-	 *   link: Function}}
-	 */
-	function morrisBarGraph() {
-		return {
-			restrict: 'E',
-			replace: true,
-			template: '<div class="chart no-padding"></div>',
-			scope: {
-				graphConfig: '='
-			},
-			/**
-			 * Description
-			 * @method link
-			 * @param {} scope
-			 * @param {} element
-			 */
-			link: function (scope, element) {
-				var morris = Morris.Bar(_.extend({
-					element: element
-				}, scope.graphConfig));
-
-				// listen to data changes
-				var unwatch = scope.$watch('graphConfig.data', function (newData, oldData) {
-					if (newData !== oldData) {
-						morris.setData(newData);
-					}
-				});
-
-				// destroy watch with scope
-				scope.$on('destroy', function () {
-					unwatch();
-				});
-			}
-		};
-	}
-
-	return module.directive('morrisBarGraph', morrisBarGraph);
-});
-
-define('seed/graphs/includes',[
-	'./morris/morrisDonutGraph',
-	'./morris/morrisAreaGraph',
-	'./morris/morrisLineGraph',
-	'./morris/morrisBarGraph'
-], function () {
-	'use strict';
-});
-
-
-
 define('seed/widgets/module',['angular', 'smartwidgets'], function (ng) {
 	'use strict';
 
@@ -4859,7 +4667,6 @@ define('seed/widgets/module',['angular', 'smartwidgets'], function (ng) {
 
 		$log.debug('Initiated module');
 	});
-
 
 	return module;
 });
@@ -5115,10 +4922,6 @@ define('seed/_includes',[
 	'./tables/_includes',
 	'./tables/module',
 
-	// Graphs
-	'./graphs/includes',
-	'./graphs/module',
-
 	// Widgets
 	'./widgets/includes',
 	'./widgets/module'
@@ -5171,7 +4974,6 @@ define('seed/module',[
 		'seed.layout',
 		'seed.forms',
 		'seed.tables',
-		'seed.graphs',
 		'seed.widgets'
 	]);
 
@@ -5188,9 +4990,13 @@ define('seed/module',[
 		$locationProvider.html5Mode(true);
 		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
 
+		// $http improvements
+		$httpProvider.useApplyAsync(true);
+		$httpProvider.useLegacyPromiseExtensions(false);
+		$httpProvider.defaults.paramSerializer = '$httpParamSerializerJQLike';
+
 		// Add the interceptors to the $httpProvider.
 		$httpProvider.interceptors.push('HttpErrorInterceptor');
-		$httpProvider.interceptors.push('HttpRequestInterceptor');
 	});
 
 	seed.run(function (gettextCatalog, LanguageAPI, $log, appConf) {

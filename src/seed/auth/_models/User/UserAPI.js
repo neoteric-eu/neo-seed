@@ -36,6 +36,20 @@ define(['seed/auth/module'], function (module) {
 				});
 		};
 
+		api.register = function (user) {
+			return user
+				.$register()
+				.$asPromise()
+				.then(function (user) {
+					$log.debug('Successfully registered new user');
+					return user;
+				})
+				.catch(function (reason) {
+					$log.error('Error registering new user');
+					return $q.reject(reason);
+				});
+		};
+
 		api.authInfo = function authInfo() {
 			return User
 				.$build()

@@ -23,7 +23,9 @@ define([
 
 				it('should decorate logs when set instance', function () {
 					// GIVEN
+					$log.reset();
 					$log = $log.getInstance('SampleInstance');
+
 
 					// WHEN
 					$log.debug('debug');

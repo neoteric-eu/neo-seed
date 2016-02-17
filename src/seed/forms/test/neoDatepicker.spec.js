@@ -19,7 +19,7 @@ define([
 				beforeEach(function () {
 					// Instantiate the fake module
 					module(
-						'gettext', 'seed.templates'
+						'gettext', 'seed.templateCache'
 					);
 				});
 
@@ -28,10 +28,10 @@ define([
 					module('seed.forms', 'seed.helpers');
 
 					// Inject service into module
-					inject(function (_$injector_, _$compile_, _$rootScope_, _$httpBackend_) {
-						$compile = _$compile_;
-						$rootScope = _$rootScope_;
-						$httpBackend = _$httpBackend_;
+					inject(function ($injector) {
+						$compile = $injector.get('$compile');
+						$rootScope = $injector.get('$rootScope');
+						$httpBackend = $injector.get('$httpBackend');
 					});
 				});
 

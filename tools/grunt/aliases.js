@@ -9,8 +9,7 @@ module.exports = {
 	// Run along with npm install
 	// Set up application repositories
 	preInstall: [
-		'clean:install',
-		'shell:bower-install'
+		'clean:install'
 	],
 
 	// Internally used by Grunt for installation,

@@ -54,7 +54,7 @@ module.exports = function (config) {
 		},
 
 		ngHtml2JsPreprocessor: {
-			moduleName: 'seed.templates',
+			moduleName: 'seed.templateCache',
 			stripPrefix: 'src/'
 		},
 
@@ -63,7 +63,6 @@ module.exports = function (config) {
 		},
 
 		// Continuous Integration mode
-		// if true, it capture browsers, run tests and exit
 		singleRun: true,
 
 		colors: true

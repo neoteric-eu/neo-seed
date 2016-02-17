@@ -3,28 +3,47 @@ define(['seed/auth/module'], function (module) {
 
 	/**
 	 * @constructor
-	 * @implements {seed.BaseModel}
+	 * @implements {seed.helpers.BaseModel}
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
 	 * @param $http {$http} The $http service is a core Angular service that facilitates communication with the remote
 	 * HTTP servers via the browser's XMLHttpRequest object or via JSONP.
 	 * @param $cookies {Function} Cookie service
+	 * @param LanguageAPI {seed.auth.LanguageAPI} Language service
+	 * @param appConf {Object} Application configuration
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, $http, $cookies) {
+	var User = function (restmod, $cookies, $http, LanguageAPI, appConf) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
 			.mix('UserPacker', {
+				email: {
+					init: undefined
+				},
 				customers: {
 					hasMany: 'Customer'
 				},
 				language: {
-					hasOne: 'Language'
+					encode: function (lang) {
+						return lang.localePOSIX;
+					},
+					decode: function (locale) {
+						return LanguageAPI.getByLocale(locale);
+					},
+					init: function(){
+						return LanguageAPI.getLanguage().localePOSIX;
+					}
 				},
 				password: {
 					volatile: true
+				},
+				requireConfirmation: {
+					init: false
+				},
+				acceptTermsOfService: {
+					init: false
 				},
 				avatar: {
 					init: 'assets/seed/img/avatar-default.png'
@@ -68,6 +87,17 @@ define(['seed/auth/module'], function (module) {
 								data: {
 									token: $cookies.getObject('token')
 								}
+							}, function (_response) {
+								this.$unwrap(_response.data, null);
+							}, null);
+						},
+
+						$register: function () {
+							//noinspection JSUnresolvedFunction
+							return this.$send({
+								method: 'POST',
+								url: appConf.environmentSettings.apiUrl + 'registration',
+								data: this
 							}, function (_response) {
 								this.$unwrap(_response.data, null);
 							}, null);

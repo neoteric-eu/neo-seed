@@ -9,6 +9,5 @@ define(['angular', 'smartwidgets'], function (ng) {
 		$log.debug('Initiated module');
 	});
 
-
 	return module;
 });
