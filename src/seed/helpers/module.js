@@ -9,7 +9,7 @@ define(['angular'], function (ng) {
 	var module = ng.module('seed.helpers', []);
 
 	module.run(function ($log) {
-		$log = $log.getInstance('seed.tables.module');
+		$log = $log.getInstance('seed.helpers.module');
 
 		$log.debug('Initiated module');
 	});
