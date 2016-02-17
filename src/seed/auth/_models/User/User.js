@@ -17,6 +17,9 @@ define(['seed/auth/module'], function (module) {
 		return restmod
 			.model('/users')
 			.mix('UserPacker', {
+				email: {
+					init: undefined
+				},
 				customers: {
 					hasMany: 'Customer'
 				},
