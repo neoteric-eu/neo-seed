@@ -24,7 +24,8 @@
     "animate.less": "latest",
     "font-awesome": "4.x",
     "form.validation": "latest",
-    "bootstrap-daterangepicker": "kobalka/bootstrap-daterangepicker#2.0.11"
+    "bootstrap-daterangepicker": "kobalka/bootstrap-daterangepicker#2.0.11",
+    "zxcvbn": "4.2.x"
   },
   "devDependencies": {
     "angular-mocks": "1.4.x"
@@ -66,7 +67,8 @@
       "form-validation/form-validation.js": "form.validation/dist/js/formValidation.js",
       "form-validation/framework/bootstrap.js": "form.validation/dist/js/framework/bootstrap.js",
       "form-validation/language/": "form.validation/dist/js/language/",
-      "bootstrap-daterangepicker": "bootstrap-daterangepicker/daterangepicker.js"
+      "bootstrap-daterangepicker": "bootstrap-daterangepicker/daterangepicker.js",
+      "zxcvbn/zxcvbn.js": "zxcvbn/dist/zxcvbn.js"
     },
     "less": {
       "bootstrap": "bootstrap/less",

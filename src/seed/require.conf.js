@@ -36,6 +36,7 @@ requirejs.config({
 
 		// Other vendor
 		'moment': 'assets/vendor/js/moment/moment',
+		'zxcvbn': 'assets/vendor/js/zxcvbn/zxcvbn',
 		'lodash': 'assets/vendor/js/lodash/lodash',
 
 		'form-validation': 'assets/vendor/js/form-validation',

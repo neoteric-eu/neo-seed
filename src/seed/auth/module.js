@@ -13,6 +13,7 @@ define([
 		'ngCookies',
 		'seed.auth.login',
 		'seed.auth.register',
+		'seed.auth.password',
 		'seed.auth.lock'
 	]);
 
