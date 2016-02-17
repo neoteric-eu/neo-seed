@@ -29,6 +29,7 @@ define([
 					vent.subscribe('someEvent', null, function () {
 						handler();
 					});
+
 					vent.publish('someEvent');
 					expect(handler).toHaveBeenCalled();
 				}));
@@ -53,10 +54,10 @@ define([
 					var scope2 = rootScope.$new();
 					var cnt1 = 0, cnt2 = 0;
 					var handler1 = function () {
-						cnt1 += 1
+						cnt1 += 1;
 					};
 					var handler2 = function () {
-						cnt2 += 1
+						cnt2 += 1;
 					};
 
 					vent.subscribe('someEvent', scope1, handler1);
