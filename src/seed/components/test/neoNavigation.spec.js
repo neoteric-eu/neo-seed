@@ -15,8 +15,7 @@ define([
 				var $compile, $rootScope, $log, $q, neoTemplateLoader;
 
 				beforeEach(function () {
-					// Instantiate the fake module
-					module('seed.components', 'seed.helpers', 'ui.router', function($provide) {
+					module(function($provide) {
 						$provide.constant('appConf', {
 							appsSettings: [
 								{
@@ -35,6 +34,8 @@ define([
 								}]
 						});
 					});
+
+					module('seed.components', 'seed.helpers', 'ui.router');
 				});
 
 				beforeEach(function () {

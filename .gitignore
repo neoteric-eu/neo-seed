@@ -1,10 +1,10 @@
 ### Directories ###
-release/
-docs/
-node_modules/
-bower_components/
-src/assets/
-test/
+/release/
+/docs/
+/node_modules/
+/bower_components/
+/src/assets/
+/test/
 .tmp/
 
 
