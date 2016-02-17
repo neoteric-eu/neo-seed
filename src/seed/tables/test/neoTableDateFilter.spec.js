@@ -32,7 +32,7 @@ define([
 					// Instantiate the fake module
 					module(
 						'gettext',
-						'seed.templates'
+						'seed.templateCache'
 					);
 				});
 

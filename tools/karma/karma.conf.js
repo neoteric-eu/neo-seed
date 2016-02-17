@@ -54,7 +54,7 @@ module.exports = function (config) {
 		},
 
 		ngHtml2JsPreprocessor: {
-			moduleName: 'seed.templates',
+			moduleName: 'seed.templateCache',
 			stripPrefix: 'src/'
 		},
 

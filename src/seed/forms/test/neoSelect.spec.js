@@ -17,7 +17,7 @@ define([
 					// this is required so angular won't try to load template from the server
 					// templates are preprocessed by karma-ng-html2js-preprocessor - see karma.conf.js
 					module(
-						'seed.templates'
+						'seed.templateCache'
 					);
 				});
 
