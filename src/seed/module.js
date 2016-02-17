@@ -46,7 +46,7 @@ define([
 		'seed.widgets'
 	]);
 
-	seed.config(function ($provide, $httpProvider, $locationProvider, cfpLoadingBarProvider,
+	seed.config(function ($provide, $httpProvider, $locationProvider, $compileProvider, cfpLoadingBarProvider,
 												$logProvider, restmodProvider, uiSelectConfig, appConf) {
 
 		restmodProvider.rebase('NeoStyleAPI');
@@ -58,6 +58,12 @@ define([
 
 		$locationProvider.html5Mode(true);
 		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
+
+		/**
+		 * Production improvements
+		 * @see https://code.angularjs.org/1.4.9/docs/guide/production
+ 		 */
+		$compileProvider.debugInfoEnabled(appConf.environmentSettings.debugEnabled);
 
 		// $http improvements
 		$httpProvider.useApplyAsync(true);
