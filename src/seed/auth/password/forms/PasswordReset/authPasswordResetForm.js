@@ -31,10 +31,12 @@ define(['seed/auth/password/module'], function (module) {
 				vm.formValidators = {
 					fields: {
 						repassword: {
-							callback: {
-								message: gettextCatalog.getString('Passwords must match'),
-								callback: function () {
-									return vm.user.password === vm.user.repassword;
+							validators: {
+								callback: {
+									message: gettextCatalog.getString('Passwords must match'),
+									callback: function () {
+										return vm.user.password === vm.user.repassword;
+									}
 								}
 							}
 						}

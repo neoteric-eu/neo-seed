@@ -1,5 +1,5 @@
 <form class="neo-form"
-			neo-validate>
+			neo-validate="vm.formValidators">
 
 	<fieldset>
 		<h1 class="text-center">{{'Registration'|translate}}</h1>
@@ -30,6 +30,15 @@
 						 data-fv-notempty="true"
 						 placeholder="{{'Password'|translate}}"
 						 ng-model="vm.user.password">
+		</section>
+
+		<section class="form-group">
+			<input type="password"
+						 class="form-control"
+						 name="repassword"
+						 data-fv-notempty="true"
+						 placeholder="{{'Repeat password'|translate}}"
+						 ng-model="vm.user.repassword">
 		</section>
 
 		<section class="form-group">

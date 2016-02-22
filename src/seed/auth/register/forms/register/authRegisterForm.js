@@ -1,7 +1,7 @@
 define(['seed/auth/register/module'], function (module) {
 	'use strict';
 
-	function authRegisterForm($log, $state, UserAPI, appConf) {
+	function authRegisterForm($log, $state, gettextCatalog, UserAPI, appConf) {
 
 		$log = $log.getInstance('apps.seed.auth.register.authRegisterForm');
 		$log.debug('Initiated directive');
@@ -15,6 +15,7 @@ define(['seed/auth/register/module'], function (module) {
 		 * @requires $state
 		 * @requires UserAPI
 		 * @requires appConf
+		 * @requires gettextCatalog
 		 */
 		return {
 			restrict: 'E',
@@ -29,14 +30,34 @@ define(['seed/auth/register/module'], function (module) {
 				 * @property user {User} User instance to be registered
 				 */
 				vm.user = UserAPI.build();
+
 				/**
 				 * @property registrationForm {Object} Reference to Angular form object
 				 */
 				vm.registrationForm = undefined;
+
 				/**
 				 * @property registrationError {Object|Array} Server response error holder
 				 */
 				vm.registrationError = undefined;
+
+				/**
+				 * @property registrationError {Object} Validator properties
+				 */
+				vm.formValidators = {
+					fields: {
+						repassword: {
+							validators: {
+								callback: {
+									message: gettextCatalog.getString('Passwords must match'),
+									callback: function () {
+										return vm.user.password === vm.user.repassword;
+									}
+								}
+							}
+						}
+					}
+				};
 
 				vm.register = register;
 
