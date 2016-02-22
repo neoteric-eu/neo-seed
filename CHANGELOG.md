@@ -1,3 +1,13 @@
+<a name="2.3.0"></a>
+# [2.3.0](//compare/v2.2.15...v2.3.0) (2016-02-22)
+
+
+### Features
+
+* **registration:** #14 - User registration b102093
+* **resetPassword:** #15 - User password reset ef41122
+
+
 <a name="2.2.15"></a>
 ## [2.2.15](//compare/v2.2.13...v2.2.15) (2016-02-12)
 
