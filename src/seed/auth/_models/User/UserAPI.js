@@ -78,6 +78,32 @@ define(['seed/auth/module'], function (module) {
 				});
 		};
 
+		api.resetPasswordInit = function (user) {
+			return user
+				.$passwordResetInit()
+				.$asPromise()
+				.then(function () {
+					$log.debug('Sent email with password');
+				})
+				.catch(function (response) {
+					$log.error('Error sending email with password reset', response);
+					return $q.reject(response);
+				});
+		};
+
+		api.resetPassword = function (user) {
+			return user
+				.$passwordReset()
+				.$asPromise()
+				.then(function () {
+					$log.debug('Changed user password');
+				})
+				.catch(function (response) {
+					$log.error('Error changing user password', response);
+					return $q.reject(response);
+				});
+		};
+
 		return api;
 	};
 

@@ -9,6 +9,8 @@ define([
 	'seed/helpers/module',
 	'seed/components/_includes',
 	'seed/components/module',
+	'seed/forms/_includes',
+	'seed/forms/module',
 	'seed/auth/register/forms/register/authRegisterForm.html',
 	'seed/auth/views/view.html'
 ], function () {
@@ -18,7 +20,7 @@ define([
 		describe('module: auth', function () {
 			describe('directive: authRegisterForm', function () {
 
-				var $compile, $rootScope, $state, $q, UserAPI, LanguageAPI;
+				var $compile, $rootScope, $state, $timeout, $q, UserAPI, LanguageAPI;
 
 				beforeEach(function () {
 					module(function ($provide) {
@@ -38,10 +40,9 @@ define([
 					});
 
 					module('ui.router', 'angularMoment', 'restmod', 'gettext',
-						'seed.templates', 'seed.helpers', 'seed.components',
+						'seed.templateCache', 'seed.forms', 'seed.helpers', 'seed.components',
 						'seed.auth');
 				});
-
 
 				beforeEach(function () {
 					inject(function ($injector) {
@@ -49,12 +50,13 @@ define([
 						$state = $injector.get('$state');
 						$rootScope = $injector.get('$rootScope');
 						$q = $injector.get('$q');
+						$timeout = $injector.get('$timeout');
 						UserAPI = $injector.get('UserAPI');
 						LanguageAPI = $injector.get('LanguageAPI');
 					});
 				});
 
-				it('should navigate to login page after successful registration', function () {
+				fit('should navigate to login page after successful registration', function () {
 					// GIVEN
 					spyOn(UserAPI, 'register').and.callFake(function () {
 						return $q.resolve();
@@ -64,26 +66,30 @@ define([
 						return {localePOSIX: 'en_GB'};
 					});
 
+					spyOn($state, 'go').and.callFake(function (state) {
+						return $q.resolve(state);
+					});
+
 					var scope = $rootScope.$new();
 					var element = $compile('<auth-register-form></auth-register-form>')(scope);
 					$rootScope.$digest();
+					$timeout.flush();
 
 					var vm = element.controller('authRegisterForm');
-					vm.registrationForm.$valid = true;
 
 					// WHEN
 					vm.register();
 					$rootScope.$digest();
 
 					// THEN
-					expect($state.current.name).toEqual('auth.login');
+					expect($state.current.name).toEqual(appConf.generalSettings.defaultRedirectStateAfterLogin);
 				});
 
 				it('should return error when rejected registration', function () {
 					// GIVEN
 					var mockedError = 'Tragical error';
 					spyOn(UserAPI, 'register').and.callFake(function () {
-						return $q.reject(mockedError);
+						return $q.reject({message: mockedError});
 					});
 
 					spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
@@ -93,9 +99,9 @@ define([
 					var scope = $rootScope.$new();
 					var element = $compile('<auth-register-form></auth-register-form>')(scope);
 					$rootScope.$digest();
+					$timeout.flush();
 
 					var vm = element.controller('authRegisterForm');
-					vm.registrationForm.$valid = true;
 
 					// WHEN
 					vm.register();

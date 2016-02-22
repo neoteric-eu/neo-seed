@@ -37,6 +37,9 @@ define(['seed/auth/module'], function (module) {
 				password: {
 					volatile: true
 				},
+				token: {
+					volatile: true
+				},
 				requireConfirmation: {
 					init: false
 				},
@@ -46,6 +49,7 @@ define(['seed/auth/module'], function (module) {
 				avatar: {
 					init: 'assets/seed/img/avatar-default.png'
 				},
+
 				$config: {
 					jsonMeta: '.'
 				},
@@ -99,6 +103,27 @@ define(['seed/auth/module'], function (module) {
 							}, function (_response) {
 								this.$unwrap(_response.data, null);
 							}, null);
+						},
+
+						$passwordResetInit: function () {
+							return this.$send({
+								method: 'POST',
+								url: this.$scope.$url() + '/password/reset/init',
+								data: {
+									email: this.email
+								}
+							});
+						},
+
+						$passwordReset: function () {
+							return this.$send({
+								method: 'POST',
+								url: this.$scope.$url() + '/password/reset/finish',
+								data: {
+									token: this.token,
+									newPassword: this.password
+								}
+							});
 						}
 					},
 

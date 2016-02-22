@@ -23,6 +23,9 @@ define([
 	'./register/_includes',
 	'./register/module',
 
+	'./password/_includes',
+	'./password/module',
+
 	'./lock/_includes',
 	'./lock/module'
 ], function () {
