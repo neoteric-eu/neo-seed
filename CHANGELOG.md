@@ -1,3 +1,13 @@
+<a name="2.3.2"></a>
+## [2.3.2](//compare/v2.3.1...v2.3.2) (2016-02-22)
+
+
+### Bug Fixes
+
+* **module.js:** #99 - enable legacy promise extensions 2e7e1cf
+
+
+
 <a name="2.3.1"></a>
 ## [2.3.1](//compare/v2.3.0...v2.3.1) (2016-02-22)
 
