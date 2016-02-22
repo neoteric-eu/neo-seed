@@ -1,6 +1,6 @@
 define([
-	'./widgets/resetPasswordForm',
-	'./widgets/newPasswordForm'
+	'./forms/passwordReset/authPasswordResetForm',
+	'./forms/passwordResetInit/authPasswordResetInitForm'
 ], function () {
 	'use strict';
 });

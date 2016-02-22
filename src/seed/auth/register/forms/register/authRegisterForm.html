@@ -1,87 +1,56 @@
 <form class="neo-form"
-      novalidate
-      name="vm.registrationForm"
-      ng-submit="vm.register()">
+			neo-validate>
 
-    <img ng-src="{{vm.user.avatar}}">
+	<fieldset>
+		<h1 class="text-center">{{'Registration'|translate}}</h1>
+	</fieldset>
 
-    <fieldset>
-        <h1 class="text-center">{{'Registration'|translate}}</h1>
-    </fieldset>
+	<fieldset>
+		<section class="form-group" ng-show="vm.registrationError">
+			<p class="alert alert-danger" ng-model="formError">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				{{vm.registrationError}}
+			</p>
+		</section>
 
-    <fieldset>
-        <section class="form-group" ng-show="vm.registrationError">
-            <p class="alert alert-danger" ng-model="formError">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{vm.registrationError}}
-            </p>
-        </section>
+		<section class="form-group">
+			<input type="email"
+						 name="email"
+						 data-fv-notempty="true"
+						 data-fv-emailaddress="true"
+						 class="form-control"
+						 placeholder="{{'Email'|translate}}"
+						 ng-model="vm.user.email">
+		</section>
 
-        <section class="form-group"
-                 ng-class="{'has-error': (vm.registrationForm.$submitted || vm.registrationForm.email.$touched)
-        && vm.registrationForm.email.$invalid}">
-            <div class="input-icon-right">
-                <i class="icon-append fa fa-user"></i>
-                <input type="email"
-                       name="email"
-                       class="form-control"
-                       placeholder="{{'Email'|translate}}"
-                       required
-                       ng-model="vm.user.email">
+		<section class="form-group">
+			<input type="password"
+						 class="form-control"
+						 name="password"
+						 data-fv-notempty="true"
+						 placeholder="{{'Password'|translate}}"
+						 ng-model="vm.user.password">
+		</section>
 
-            <span class="help-block"
-                  ng-show="(vm.registrationForm.$submitted || vm.registrationForm.email.$touched)
-                  && vm.registrationForm.email.$invalid">
-            {{'Valid email is required'|translate}}
-            </span>
+		<section class="form-group">
+			<input type="checkbox"
+						 data-fv-notempty="true"
+						 ng-model="vm.model.acceptTermsOfService"
+						 name="acceptTermsOfService">
+			{{'I agree to the terms and policy'|translate}}
+		</section>
+	</fieldset>
 
-            </div>
-        </section>
+	<footer>
+		<button type="submit"
+						class="btn btn-primary"
+						ng-click="vm.register()">
+			{{'Register'|translate}}
+		</button>
 
-        <section class="form-group"
-                 ng-class="{'has-error': (vm.registrationForm.$submitted || vm.registrationForm.password.$touched) && vm.registrationForm.password.$invalid}">
-            <div class="input-icon-right">
-                <i class="icon-append fa fa-lock"></i>
-                <input type="password"
-                       class="form-control"
-                       name="password"
-                       placeholder="{{'Password'|translate}}"
-                       required
-                       ng-model="vm.user.password">
-
-
-			<span class="help-block"
-                  ng-show="(vm.registrationForm.$submitted || vm.registrationForm.password.$touched)
-                  && vm.registrationForm.password.$invalid">
-				{{'Password is required'|translate}}
-			</span>
-            </div>
-        </section>
-
-        <section class="checkbox"
-                 ng-class="{'has-error': (vm.registrationForm.$submitted && vm.registrationForm.acceptTermsOfService.$invalid) ||
-             (vm.registrationForm.acceptTermsOfService.$invalid && vm.registrationForm.acceptTermsOfService.$touched)}">
-            <label>
-                <input type="checkbox"
-                       ng-model="vm.model.acceptTermsOfService"
-                       name="acceptTermsOfService"
-                       required>
-                {{'I agree to the terms and policy'|translate}}
-            </label>
-			<span class="help-block" ng-show="vm.form.$submitted && (!vm.model.acceptTermsOfService)">
-				{{'You must accept terms and policy'|translate}}
-			</span>
-        </section>
-    </fieldset>
-
-    <footer>
-        <button type="submit"
-                class="btn btn-primary">
-            {{'Register'|translate}}
-        </button>
-        <button class="btn btn-default pull-left"
-                ui-sref="auth.login">
-            {{'Log in'|translate}}
-        </button>
-    </footer>
+		<button class="btn btn-default pull-left"
+						ui-sref="auth.login">
+			{{'Log in'|translate}}
+		</button>
+	</footer>
 </form>

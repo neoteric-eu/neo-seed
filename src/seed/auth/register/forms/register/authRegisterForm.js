@@ -1,7 +1,7 @@
 define(['seed/auth/register/module'], function (module) {
 	'use strict';
 
-	function authRegisterForm($log, $state, UserAPI) {
+	function authRegisterForm($log, $state, UserAPI, appConf) {
 
 		$log = $log.getInstance('apps.seed.auth.register.authRegisterForm');
 		$log.debug('Initiated directive');
@@ -14,13 +14,14 @@ define(['seed/auth/register/module'], function (module) {
 		 * @requires $log
 		 * @requires $state
 		 * @requires UserAPI
+		 * @requires appConf
 		 */
 		return {
 			restrict: 'E',
 			templateUrl: 'seed/auth/register/forms/register/authRegisterForm.html',
 			scope: {},
 			controllerAs: 'vm',
-			controller: function () {
+			controller: function ($element) {
 				/** @lends seed.auth.registration.authRegisterForm.prototype */
 				var vm = this;
 
@@ -47,20 +48,23 @@ define(['seed/auth/register/module'], function (module) {
 				function register() {
 					vm.registrationError = undefined;
 
-					if (!vm.registrationForm.$valid) {
-						return;
+					var formValidation = $element.find('form').data('formValidation');
+
+					formValidation.validate();
+
+					if (formValidation.isValid()) {
+						UserAPI
+							.register(vm.user)
+							.then(function () {
+								$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
+							})
+							.catch(function (error) {
+								vm.registrationError = error.$response.data.message;
+							});
 					}
 
-					UserAPI
-						.register(vm.user)
-						.then(function () {
-							$state.go('auth.login');
-						})
-						.catch(function (error) {
-							vm.registrationError = error;
-							vm.registrationForm.$submitted = false;
-							vm.registrationForm.$setUntouched();
-						});
+
+					$log.debug('Submitted registration form');
 				}
 
 				$log.debug('Initiated controller');

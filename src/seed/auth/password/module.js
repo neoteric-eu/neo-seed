@@ -11,16 +11,11 @@ define(['angular'], function (ng) {
 				}
 			})
 
-			.state('auth.password', {
-				abstract: true,
-				url: '/password'
-			})
-
-			.state('auth.password.reset', {
-				url: '/reset',
+			.state('auth.passwordReset', {
+				url: '/password/reset',
 				views: {
-					'content': {
-						template: '<reset-password-form></reset-password-form>'
+					'auth': {
+						template: '<auth-password-reset-init-form></auth-password-reset-init-form>'
 					}
 				},
 				data: {
@@ -28,16 +23,11 @@ define(['angular'], function (ng) {
 				}
 			})
 
-			.state('auth.password.reset.finish', {
-				onEnter: function ($state, $stateParams) {
-					if (!$stateParams.token) {
-						return $state.go('auth.login');
-					}
-				},
-				url: '/:token',
+			.state('auth.passwordResetFinish', {
+				url: '/password/reset/:token',
 				views: {
 					'auth': {
-						template: '<new-password-form></new-password-form>'
+						template: '<auth-password-reset-form></auth-password-reset-form>'
 					}
 				},
 				data: {
