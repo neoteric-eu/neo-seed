@@ -15,6 +15,21 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
   );
 
 
+  $templateCache.put('seed/auth/password/forms/passwordReset/authPasswordResetForm.html',
+    "<form class=neo-form neo-validate=vm.formValidators><fieldset><h1 class=text-center>{{'Choose new password'|translate}}</h1></fieldset><fieldset><section class=form-group ng-if=vm.formError><div class=\"alert alert-danger\"><button type=button class=close data-dismiss=alert>&times;</button> {{vm.formError}}</div></section><section class=form-group ng-if=vm.formSuccess><div class=\"alert alert-success\"><button type=button class=close data-dismiss=alert>&times;</button> <span>{{'The password has ben reset! You will be redirected to'|translate}} <a ui-sref=auth.login>login</a> {{' page in 4 sec...'|translate}}</span></div></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-lock\"></i> <input type=password name=password placeholder=\"{{'New password'|translate}}\" class=form-control ng-model=vm.user.password></div></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-lock\"></i> <input type=password name=repassword placeholder=\"{{'Repeat password'|translate}}\" class=form-control ng-model=vm.user.repassword></div></section></fieldset><footer><button type=submit class=\"btn btn-primary\" ng-click=vm.reset()>{{'Reset'|translate}}</button></footer></form>"
+  );
+
+
+  $templateCache.put('seed/auth/password/forms/passwordResetInit/authPasswordResetInitForm.html',
+    "<form class=neo-form neo-validate><fieldset><h1 class=text-center>{{'Reset password'|translate}}</h1></fieldset><fieldset><section class=form-group ng-if=vm.formError><div class=\"alert alert-danger\"><button type=button class=close data-dismiss=alert>&times;</button> {{vm.formError}}</div></section><section class=form-group ng-if=vm.formSuccess><div class=\"alert alert-success\"><button type=button class=close data-dismiss=alert>&times;</button> {{'The password reset link has been sent to the provided email. Check your inbox and follow the ' + 'instructions from the email. If there is nothing new in your inbox, please remember to check the ' + 'spam folder.'|translate}}</div></section><section class=form-group><input type=email name=email data-fv-notempty=true data-fv-emailaddress=true ng-model=vm.user.email class=form-control></section><div class=\"note padding-top-10\">{{'Please provide an email address to which the password reset link will be sent.'|translate}}</div></fieldset><footer><button type=button class=\"btn btn-primary\" ng-click=vm.reset()>{{'Reset'|translate}}</button></footer></form>"
+  );
+
+
+  $templateCache.put('seed/auth/register/forms/register/authRegisterForm.html',
+    "<form class=neo-form neo-validate=vm.formValidators><fieldset><h1 class=text-center>{{'Registration'|translate}}</h1></fieldset><fieldset><section class=form-group ng-show=vm.registrationError><p class=\"alert alert-danger\" ng-model=formError><button type=button class=close data-dismiss=alert>&times;</button> {{vm.registrationError}}</p></section><section class=form-group><input type=email name=email data-fv-notempty=true data-fv-emailaddress=true class=form-control placeholder=\"{{'Email'|translate}}\" ng-model=vm.user.email></section><section class=form-group><input type=password class=form-control name=password data-fv-notempty=true placeholder=\"{{'Password'|translate}}\" ng-model=vm.user.password></section><section class=form-group><input type=password class=form-control name=repassword data-fv-notempty=true placeholder=\"{{'Repeat password'|translate}}\" ng-model=vm.user.repassword></section><section class=form-group><input type=checkbox data-fv-notempty=true ng-model=vm.model.acceptTermsOfService name=acceptTermsOfService> {{'I agree to the terms and policy'|translate}}</section></fieldset><footer><button type=submit class=\"btn btn-primary\" ng-click=vm.register()>{{'Register'|translate}}</button> <button class=\"btn btn-default pull-left\" ui-sref=auth.login>{{'Log in'|translate}}</button></footer></form>"
+  );
+
+
   $templateCache.put('seed/auth/views/view.html',
     "<div class=row><div class=\"col-xs-12 col-sm-12 col-md-4 col-md-offset-4 lockscreen animated flipInY\"><div class=\"well well-light no-padding\" ui-view=auth></div></div></div>"
   );
@@ -157,15 +172,26 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 define('seed/__misc/_locale/translation',['angular', 'angular-gettext'], function (angular) {
 angular.module('gettext').run(['gettextCatalog', function (gettextCatalog) {
 /* jshint -W100 */
-    gettextCatalog.setStrings('en_GB', {"Apply":"Apply","Are you sure you want to remove item?":"Are you sure you want to remove item?","Back":"Back","Cancel":"Cancel","Click here":"Click here","Confirmation":"Confirmation","Custom range":"Custom range","Email":"Email","entries paginated by":"entries paginated by","Error":"Error","Forgot password?":"Forgot password?","Info":"Info","Internal server error":"Internal server error","items per page":"items per page","Log in":"Log in","Logged as someone else?":"Logged as someone else?","Login as":"Login as","Next":"Next","No":"No","of":"of","Password":"Password","Please log in":"Please log in","Previous":"Previous","Select":"Select","Select profile":"Select profile","Showing":"Showing","Sign Out":"Sign Out","Success":"Success","to":"to","to continue":"to continue","Unlock":"Unlock","Warning":"Warning","Welcome!":"Welcome!","Wrong e-mail or password.":"Wrong e-mail or password.","Yes":"Yes"});
-    gettextCatalog.setStrings('pl_PL', {"Apply":"Zatwierdź","Are you sure you want to remove item?":"Czy na pewno chcesz usunąć ten element?","Back":"Powrót","Cancel":"Anuluj","Click here":"Kliknij tutaj","Confirmation":"Potwierdzenie","Custom range":"Inny zakres","Email":"Email","entries paginated by":"elementów po","Error":"Błąd","Forgot password?":"Zapomniałeś hasła?","Info":"Info","Internal server error":"Wewnętrzny błąd serwera","items per page":"na stronie","Log in":"Zaloguj","Logged as someone else?":"Zalogowany jako inny?","Login as":"Zaloguj jako","Next":"Następny","No":"Nie","of":"z","Password":"Hasło","Please log in":"Zaloguj się","Previous":"Poprzedni","Select":"Wybierz","Select profile":"Wybierz profil","Showing":"Pokazuje","Sign Out":"Wyloguj","Success":"Sukces","to":"do","to continue":"aby kontynuować","Unlock":"Odblokuj","Warning":"Ostrzeżenie","Welcome!":"Witaj!","Wrong e-mail or password.":"Błędny e-mail lub hasło","Yes":"Tak"});
+    gettextCatalog.setStrings('en_GB', {"Apply":"Apply","Are you sure you want to remove item?":"Are you sure you want to remove item?","Back":"Back","Cancel":"Cancel","Choose new password":"Choose new password","Click here":"Click here","Confirmation":"Confirmation","Custom range":"Custom range","Email":"Email","entries paginated by":"entries paginated by","Error":"Error","Forgot password?":"Forgot password?","I agree to the terms and policy":"I agree to the terms and policy","Info":"Info","Internal server error":"Internal server error","items per page":"items per page","Log in":"Log in","Logged as someone else?":"Logged as someone else?","Login as":"Login as","New password":"New password","Next":"Next","No":"No","No account found with that email address.":"No account found with that email address.","No active password reset requests are associated with that email address":"No active password reset requests are associated with that email address","of":"of","page in 4 sec...":"page in 4 sec…","Password":"Password","Passwords must match":"Passwords must match","Please log in":"Please log in","Please provide an email address to which the password reset link will be sent.":"Please provide an email address to which the password reset link will be sent.","Previous":"Previous","Register":"Register","Registration":"Registration","Repeat password":"Repeat password","Reset":"Reset","Reset password":"Reset password","Select":"Select","Select profile":"Select profile","Showing":"Showing","Sign Out":"Sign Out","Success":"Success","The password has ben reset! You will be redirected to":"The password has ben reset! You will be redirected to","to":"to","to continue":"to continue","Unlock":"Unlock","Warning":"Warning","Welcome!":"Welcome!","Wrong e-mail or password.":"Wrong e-mail or password.","Yes":"Yes"});
+    gettextCatalog.setStrings('pl_PL', {"Apply":"Zatwierdź","Are you sure you want to remove item?":"Czy na pewno chcesz usunąć ten element?","Back":"Powrót","Cancel":"Anuluj","Choose new password":"Podaj nowe hasło","Click here":"Kliknij tutaj","Confirmation":"Potwierdzenie","Custom range":"Inny zakres","Email":"Email","entries paginated by":"elementów po","Error":"Błąd","Forgot password?":"Zapomniałeś hasła?","I agree to the terms and policy":"Akceptuję terminy i warunki korzystania z serwisu","Info":"Info","Internal server error":"Wewnętrzny błąd serwera","items per page":"na stronie","Log in":"Zaloguj","Logged as someone else?":"Zalogowany jako inny?","Login as":"Zaloguj jako","New password":"Nowe hasło","Next":"Następny","No":"Nie","No account found with that email address.":"Nie znaleziono konta z takim adresem email.","No active password reset requests are associated with that email address":"Nie odnaleziono żądania zresetowania hasła powiązanych z tym adresem email.","of":"z","page in 4 sec...":"za 4 sekundy…","Password":"Hasło","Passwords must match":"Hasła muszą być identyczne","Please log in":"Zaloguj się","Please provide an email address to which the password reset link will be sent.":"Podaj adres mailowy na które ma zostać wysłany link resetujący hasło.","Previous":"Poprzedni","Register":"Zarejestruj","Registration":"Rejestracja","Repeat password":"Powtórz hasło","Reset":"Zresetuj","Reset password":"Zresetuj hasło","Select":"Wybierz","Select profile":"Wybierz profil","Showing":"Pokazuje","Sign Out":"Wyloguj","Success":"Sukces","The password has ben reset! You will be redirected to":"Hasło zostało zresetowane. Zastaniesz przekierowany do ","to":"do","to continue":"aby kontynuować","Unlock":"Odblokuj","Warning":"Ostrzeżenie","Welcome!":"Witaj!","Wrong e-mail or password.":"Błędny e-mail lub hasło","Yes":"Tak"});
 /* jshint +W100 */
 }]);
 });
+/**
+ * @namespace seed.helpers
+ * @memberOf seed
+ */
+
 define('seed/helpers/module',['angular'], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.helpers', []);
+
+	module.run(function ($log) {
+		$log = $log.getInstance('seed.helpers.module');
+
+		$log.debug('Initiated module');
+	});
 
 	return module;
 });
@@ -490,6 +516,82 @@ define('seed/helpers/lodash/lodashExtensions',['lodash', './jsonStringify'], fun
 	};
 
 });
+
+define('seed/helpers/eventAggregator/EventAggregatorFactory',['seed/helpers/module'], function (module) {
+	'use strict';
+	/**
+	 * Returns new instance of event aggregator.
+	 * @class EventAggregatorFactory
+	 * @memberOf seed.helpers
+	 *
+	 * @example
+	 * define(['apps/example/module'], function (module) {
+	 * 	'use strict';
+	 *
+	 * 	function exampleAppEventAggregator(EventAggregatorFactory) {
+	 * 		return new EventAggregatorFactory();
+	 * 	}
+	 *
+	 * 	module.service('exampleAppEventAggregator', exampleAppEventAggregator);
+	 * });
+	 *
+	 * @requires $rootScope
+	 *
+	 * @return EventAggregator {seed.helpers.EventAggregator}
+	 *
+	 */
+	function EventAggregatorFactory($rootScope) {
+
+		/**
+		 * Event aggregator allow to create detached from DOM, virtual $rootScopes that
+		 * keeps publishing/subscribing events without chained DOM-based emitting/broadcasting.
+		 * @constructor seed.helpers.EventAggregator
+		 */
+		function EventAggregator() {
+			/**
+			 * @property $eventBus {Object} Instance of virtual scope
+			 */
+			this.$eventBus = $rootScope.$new(true);
+		}
+
+		/**
+		 * @method publish
+		 * @memberOf seed.helpers.EventAggregator.prototype
+		 *
+		 * @param name {String} Event name to broadcast.
+		 * @param [args] {...*} Optional one or more arguments which will be passed onto the event listeners.
+		 */
+		EventAggregator.prototype.publish = function (name, args) {
+			this.$eventBus.$broadcast(name, args);
+		};
+
+		/**
+		 * @method subscribe
+		 * @memberOf seed.helpers.EventAggregator.prototype
+		 *
+		 * @param name {String} Event name to listen on.
+		 * @param listener {function} Function to call when the event is emitted.
+		 * @param [scope] {Object} Scope object to attach listener that will be destroyed along with scope
+		 * @returns {function} Returns a deregistration function for this listener.
+		 */
+		EventAggregator.prototype.subscribe = function (name, scope, listener) {
+
+			var unbind = this.$eventBus.$on(name, listener);
+
+			if (scope) {
+				scope.$on('$destroy', function () {
+					unbind();
+				});
+			}
+			return unbind;
+		};
+
+		return EventAggregator;
+	}
+
+	module.factory('EventAggregatorFactory', EventAggregatorFactory);
+});
+
 
 define('seed/helpers/moment/momentDatetimeDayrange',['seed/helpers/module', 'moment'], function (module, moment) {
 	'use strict';
@@ -1635,6 +1737,7 @@ define('seed/helpers/_includes',[
 	'./services/neoTemplateLoader',
 
 	'./lodash/lodashExtensions',
+	'./eventAggregator/EventAggregatorFactory',
 
 	'./moment/momentDatetimeDayrange',
 	'./moment/neoMomentDate',
@@ -2112,10 +2215,8 @@ define('seed/components/navigation/neoNavigation',['seed/components/module'], fu
 			controllerAs: 'vm',
 
 			/**
-			 * Composes container navigation using templates placed in `src/app{appName}/__misc/_navigation/navigation.html`
-			 * from `src/config/apps.json`. Navigation elements are added using [neoNavigationItem]{@link
-			 * seed.components.neoNavigationItem} and [neoNavigationGroup]{@link seed.components.neoNavigationGroup}
-			 * directives.
+			 * Composes container navigation using templates placed in `src/app{appName}/__misc/_navigation/navigation.html` from `src/config/apps.json`.
+			 * Navigation elements are added using [neoNavigationItem]{@link seed.components.neoNavigationItem} and [neoNavigationGroup]{@link seed.components.neoNavigationGroup} directives.
 			 * @class neoNavigation
 			 * @memberOf seed.components
 			 *
@@ -2153,43 +2254,43 @@ define('seed/components/navigation/neoNavigation',['seed/components/module'], fu
 				vm.init();
 
 
-				function init() {
+				function init(){
 					vm.templatePromises = _
-							.chain(appConf.appsSettings)
-							.filter(function (app) {
-								return !_.isUndefined(app.order);
-							})
-							.sortBy('order')
-							.pluck('directory')
-							.map(function (directory) {
-								return neoTemplateLoader.load('apps/' + directory + '/__misc/_navigation/navigation.html');
-							})
-							.value();
+						.chain(appConf.appsSettings)
+						.filter(function(app){
+							return !_.isUndefined(app.order);
+						})
+						.sortBy('order')
+						.pluck('directory')
+						.map(function (directory) {
+							return neoTemplateLoader.load('apps/' + directory + '/__misc/_navigation/navigation.html');
+						})
+						.value();
 
 					$q
-							.all(vm.templatePromises)
-							.then(function (templates) {
-								var html = templates.join();
-								$element.contents().append($compile(html)($scope));
+						.all(vm.templatePromises)
+						.then(function (templates) {
+							var html = templates.join();
+							$element.contents().append($compile(html)($scope));
 
-								// Async apply is not working here (ಠ╭╮ಠ)
-								$timeout(function () {
-									$element
-											.find('a[ui-sref]')
-											.filter(function () {
-												return $state.includes($(this).attr('ui-sref'));
-											})
-											.parents('li:not(:first)')
-											.each(function () {
-												$(this)
-														.addClass('open')
-														.find('ul:first')
-														.slideDown(0);
-											});
-								});
-							})
-							.catch(function () {
-								$log.error('Error loading navigation templates');
+							// Async apply is not working here (ಠ╭╮ಠ)
+							$timeout(function () {
+								$element
+									.find('a[ui-sref]')
+									.filter(function () {
+										return $state.includes($(this).attr('ui-sref'));
+									})
+									.parents('li:not(:first)')
+									.each(function () {
+										$(this)
+											.addClass('open')
+											.find('ul:first')
+											.slideDown(0);
+									});
+							});
+						})
+						.catch(function () {
+							$log.error('Error loading navigation templates');
 						});
 
 					$log.debug('Initialized controller');
@@ -2689,7 +2790,7 @@ define('seed/layout/_includes',[
 
 /**
  * @namespace seed.auth
- * @memberof seed
+ * @memberOf seed
  */
 
 define('seed/auth/module',[
@@ -2701,6 +2802,8 @@ define('seed/auth/module',[
 	var module = ng.module('seed.auth', [
 		'ngCookies',
 		'seed.auth.login',
+		'seed.auth.register',
+		'seed.auth.password',
 		'seed.auth.lock'
 	]);
 
@@ -3032,13 +3135,17 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 	 * @param restmod {Object} Data model layer interface
 	 * @param $cookies {Function} Cookie service
 	 * @param LanguageAPI {seed.auth.LanguageAPI} Language service
+	 * @param appConf {Object} Application configuration
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, $cookies, LanguageAPI) {
+	var User = function (restmod, $cookies, LanguageAPI, appConf) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
 			.mix('UserPacker', {
+				email: {
+					init: undefined
+				},
 				customers: {
 					hasMany: 'Customer'
 				},
@@ -3048,14 +3155,27 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 					},
 					decode: function (locale) {
 						return LanguageAPI.getByLocale(locale);
+					},
+					init: function(){
+						return LanguageAPI.getLanguage().localePOSIX;
 					}
 				},
 				password: {
 					volatile: true
 				},
+				token: {
+					volatile: true
+				},
+				requireConfirmation: {
+					init: false
+				},
+				acceptTermsOfService: {
+					init: false
+				},
 				avatar: {
 					init: 'assets/seed/img/avatar-default.png'
 				},
+
 				$config: {
 					jsonMeta: '.'
 				},
@@ -3098,6 +3218,38 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 							}, function (_response) {
 								this.$unwrap(_response.data, null);
 							}, null);
+						},
+
+						$register: function () {
+							//noinspection JSUnresolvedFunction
+							return this.$send({
+								method: 'POST',
+								url: appConf.environmentSettings.apiUrl + 'registration',
+								data: this
+							}, function (_response) {
+								this.$unwrap(_response.data, null);
+							}, null);
+						},
+
+						$passwordResetInit: function () {
+							return this.$send({
+								method: 'POST',
+								url: this.$scope.$url() + '/password/reset/init',
+								data: {
+									email: this.email
+								}
+							});
+						},
+
+						$passwordReset: function () {
+							return this.$send({
+								method: 'POST',
+								url: this.$scope.$url() + '/password/reset/finish',
+								data: {
+									token: this.token,
+									newPassword: this.password
+								}
+							});
 						}
 					},
 
@@ -3158,6 +3310,20 @@ define('seed/auth/_models/User/UserAPI',['seed/auth/module'], function (module) 
 				});
 		};
 
+		api.register = function (user) {
+			return user
+				.$register()
+				.$asPromise()
+				.then(function (user) {
+					$log.debug('Successfully registered new user');
+					return user;
+				})
+				.catch(function (reason) {
+					$log.error('Error registering new user');
+					return $q.reject(reason);
+				});
+		};
+
 		api.authInfo = function authInfo() {
 			return User
 				.$build()
@@ -3182,6 +3348,32 @@ define('seed/auth/_models/User/UserAPI',['seed/auth/module'], function (module) 
 				})
 				.catch(function (response) {
 					$log.error('Could not logout the user', response);
+					return $q.reject(response);
+				});
+		};
+
+		api.resetPasswordInit = function (user) {
+			return user
+				.$passwordResetInit()
+				.$asPromise()
+				.then(function () {
+					$log.debug('Sent email with password');
+				})
+				.catch(function (response) {
+					$log.error('Error sending email with password reset', response);
+					return $q.reject(response);
+				});
+		};
+
+		api.resetPassword = function (user) {
+			return user
+				.$passwordReset()
+				.$asPromise()
+				.then(function () {
+					$log.debug('Changed user password');
+				})
+				.catch(function (response) {
+					$log.error('Error changing user password', response);
 					return $q.reject(response);
 				});
 		};
@@ -3698,6 +3890,332 @@ define('seed/auth/login/module',['angular'], function (ng) {
 	return module;
 });
 
+/**
+ * @namespace seed.auth.registration
+ * @memberOf seed.auth
+ */
+
+define('seed/auth/register/module',[
+	'angular'
+], function (ng) {
+	'use strict';
+
+	/**
+	 * Enables use registration
+	 * @class module
+	 * @memberOf seed.auth.registration
+	 */
+	var module = ng.module('seed.auth.register', []);
+
+	module.config(function ($stateProvider, gettext) {
+		$stateProvider
+			.state('auth.register', {
+				url: '/register',
+				views: {
+					auth: {
+						template: '<auth-register-form></auth-register-form>'
+					}
+				},
+				data: {
+					title: gettext('Register')
+				}
+			});
+	});
+
+
+	module.run(function ($log) {
+		$log = $log.getInstance('seed.auth.register.module');
+		$log.debug('Initiated module');
+	});
+
+	return module;
+});
+
+define('seed/auth/register/forms/register/authRegisterForm',['seed/auth/register/module'], function (module) {
+	'use strict';
+
+	function authRegisterForm($log, $state, gettextCatalog, UserAPI, appConf) {
+
+		$log = $log.getInstance('apps.seed.auth.register.authRegisterForm');
+		$log.debug('Initiated directive');
+
+		/**
+		 * Renders default styled registration form template, allowing to add new users to applications.
+		 * @class authRegisterForm
+		 * @memberOf seed.auth.registration
+		 *
+		 * @requires $log
+		 * @requires $state
+		 * @requires UserAPI
+		 * @requires appConf
+		 * @requires gettextCatalog
+		 */
+		return {
+			restrict: 'E',
+			templateUrl: 'seed/auth/register/forms/register/authRegisterForm.html',
+			scope: {},
+			controllerAs: 'vm',
+			controller: function ($element) {
+				/** @lends seed.auth.registration.authRegisterForm.prototype */
+				var vm = this;
+
+				/**
+				 * @property user {User} User instance to be registered
+				 */
+				vm.user = UserAPI.build();
+
+				/**
+				 * @property registrationForm {Object} Reference to Angular form object
+				 */
+				vm.registrationForm = undefined;
+
+				/**
+				 * @property registrationError {Object|Array} Server response error holder
+				 */
+				vm.registrationError = undefined;
+
+				/**
+				 * @property registrationError {Object} Validator properties
+				 */
+				vm.formValidators = {
+					fields: {
+						repassword: {
+							validators: {
+								callback: {
+									message: gettextCatalog.getString('Passwords must match'),
+									callback: function () {
+										return vm.user.password === vm.user.repassword;
+									}
+								}
+							}
+						}
+					}
+				};
+
+				vm.register = register;
+
+				/**
+				 * @method
+				 * @memberOf seed.auth.registration.authRegisterForm.prototype
+				 * @description Triggers user registration
+				 */
+				function register() {
+					vm.registrationError = undefined;
+
+					var formValidation = $element.find('form').data('formValidation');
+
+					formValidation.validate();
+
+					if (formValidation.isValid()) {
+						UserAPI
+							.register(vm.user)
+							.then(function () {
+								$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
+							})
+							.catch(function (error) {
+								vm.registrationError = error.$response.data.message;
+							});
+					}
+
+
+					$log.debug('Submitted registration form');
+				}
+
+				$log.debug('Initiated controller');
+			}
+		};
+	}
+
+	module.directive('authRegisterForm', authRegisterForm);
+});
+
+
+
+define('seed/auth/register/_includes',[
+	// Forms
+	'./forms/register/authRegisterForm'
+], function () {
+	'use strict';
+});
+
+define('seed/auth/password/module',['angular'], function (ng) {
+	'use strict';
+
+	var module = ng.module('seed.auth.password', []);
+
+	module.config(function ($stateProvider, gettext) {
+		$stateProvider
+			.state('auth.forgotPassword', {
+				onEnter: function ($state) {
+					$state.go('auth.password.reset');
+				}
+			})
+
+			.state('auth.passwordReset', {
+				url: '/password/reset',
+				views: {
+					'auth': {
+						template: '<auth-password-reset-init-form></auth-password-reset-init-form>'
+					}
+				},
+				data: {
+					title: gettext('Reset password')
+				}
+			})
+
+			.state('auth.passwordResetFinish', {
+				url: '/password/reset/:token',
+				views: {
+					'auth': {
+						template: '<auth-password-reset-form></auth-password-reset-form>'
+					}
+				},
+				data: {
+					title: gettext('New password')
+				}
+			});
+	});
+
+	module.run(function ($log) {
+		$log = $log.getInstance('seed.auth.password.module');
+
+		$log.debug('Initiated module');
+	});
+
+	return module;
+});
+
+define('seed/auth/password/forms/passwordReset/authPasswordResetForm',['seed/auth/password/module'], function (module) {
+	'use strict';
+
+	function authPasswordResetForm() {
+		return {
+			restrict: 'E',
+			scope: {},
+			controllerAs: 'vm',
+			templateUrl: 'seed/auth/password/forms/passwordReset/authPasswordResetForm.html',
+			controller: function ($state, $element, $timeout, $stateParams, gettext, UserAPI, gettextCatalog) {
+				var vm = this;
+
+				// variables
+				vm.user = UserAPI.build();
+				vm.error = undefined;
+				vm.formSuccess = false;
+
+				// methods
+				vm.init = init;
+
+				vm.init();
+
+				function init() {
+					if (!$stateParams.token) {
+						return $state.go('auth.login');
+					}
+
+					vm.user.token = $stateParams.token;
+				}
+
+				vm.formValidators = {
+					fields: {
+						repassword: {
+							validators: {
+								callback: {
+									message: gettextCatalog.getString('Passwords must match'),
+									callback: function () {
+										return vm.user.password === vm.user.repassword;
+									}
+								}
+							}
+						}
+					}
+				};
+
+				vm.reset = function () {
+					var formValidation = $element.find('form').data('formValidation');
+
+					formValidation.validate();
+
+					if (formValidation.isValid()) {
+						UserAPI.resetPassword(vm.user)
+							.then(function () {
+								vm.formSuccess = true;
+
+
+								$timeout(function () {
+									$state.go('auth.login');
+								}, 4000);
+
+							})
+							.catch(function (response) {
+								vm.formError = _.first(response.$response.data);
+
+								if (response.$response.status === 404) {
+									vm.formError = gettextCatalog.getString('No active password reset requests are associated with that email address');
+								}
+							});
+					}
+				};
+			}
+		};
+	}
+
+	module.directive('authPasswordResetForm', authPasswordResetForm);
+});
+
+define('seed/auth/password/forms/passwordResetInit/authPasswordResetInitForm',['seed/auth/password/module'], function (module) {
+	'use strict';
+
+	function authPasswordResetInitForm() {
+		return {
+			restrict: 'E',
+			scope: {},
+			controllerAs: 'vm',
+			templateUrl: 'seed/auth/password/forms/passwordResetInit/authPasswordResetInitForm.html',
+			controller: function ($element, $state, UserAPI, gettextCatalog) {
+				var vm = this;
+
+				// variables
+				vm.user = UserAPI.build();
+				vm.formError = undefined;
+				vm.formSuccess = false;
+
+				// methods
+				vm.reset = reset;
+
+				function reset() {
+					vm.formError = undefined;
+
+					var formValidation = $element.find('form').data('formValidation');
+
+					formValidation.validate();
+
+					if (formValidation.isValid()) {
+						UserAPI
+							.resetPasswordInit(vm.user)
+							.then(function () {
+								vm.formSuccess = true;
+							})
+							.catch(function (response) {
+								if (response.$response.status === 404) {
+									vm.formError = gettextCatalog.getString('No account found with that email address.');
+								}
+							});
+					}
+				}
+			}
+		};
+	}
+
+	module.directive('authPasswordResetInitForm', authPasswordResetInitForm);
+});
+
+define('seed/auth/password/_includes',[
+	'./forms/passwordReset/authPasswordResetForm',
+	'./forms/passwordResetInit/authPasswordResetInitForm'
+], function () {
+	'use strict';
+});
+
 define('seed/auth/lock/module',[
 	'angular'
 ], function (ng) {
@@ -3811,6 +4329,12 @@ define('seed/auth/_includes',[
 
 	'./login/_includes',
 	'./login/module',
+
+	'./register/_includes',
+	'./register/module',
+
+	'./password/_includes',
+	'./password/module',
 
 	'./lock/_includes',
 	'./lock/module'
