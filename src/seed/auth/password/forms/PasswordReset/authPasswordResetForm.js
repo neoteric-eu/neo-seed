@@ -47,7 +47,7 @@ define(['seed/auth/password/module'], function (module) {
 					formValidation.validate();
 
 					if (formValidation.isValid()) {
-						UserAPI.resetPasswordFinish(vm.user)
+						UserAPI.resetPassword(vm.user)
 							.then(function () {
 								vm.formSuccess = true;
 

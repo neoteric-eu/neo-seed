@@ -115,7 +115,7 @@ define(['seed/auth/module'], function (module) {
 							});
 						},
 
-						$passwordResetFinish: function () {
+						$passwordReset: function () {
 							return this.$send({
 								method: 'POST',
 								url: this.$scope.$url() + '/password/reset/finish',

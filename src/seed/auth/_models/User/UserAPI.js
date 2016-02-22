@@ -91,9 +91,9 @@ define(['seed/auth/module'], function (module) {
 				});
 		};
 
-		api.resetPasswordFinish = function (user) {
+		api.resetPassword = function (user) {
 			return user
-				.$passwordResetFinish()
+				.$passwordReset()
 				.$asPromise()
 				.then(function () {
 					$log.debug('Changed user password');
