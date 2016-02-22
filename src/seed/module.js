@@ -61,7 +61,7 @@ define([
 
 		// $http improvements
 		$httpProvider.useApplyAsync(true);
-		$httpProvider.useLegacyPromiseExtensions(false);
+		$httpProvider.useLegacyPromiseExtensions(true);
 		$httpProvider.defaults.paramSerializer = '$httpParamSerializerJQLike';
 
 		// Add the interceptors to the $httpProvider.
