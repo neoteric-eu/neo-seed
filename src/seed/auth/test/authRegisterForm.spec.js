@@ -56,7 +56,7 @@ define([
 					});
 				});
 
-				fit('should navigate to login page after successful registration', function () {
+				it('should navigate to login page after successful registration', function () {
 					// GIVEN
 					spyOn(UserAPI, 'register').and.callFake(function () {
 						return $q.resolve();
@@ -82,14 +82,21 @@ define([
 					$rootScope.$digest();
 
 					// THEN
-					expect($state.current.name).toEqual(appConf.generalSettings.defaultRedirectStateAfterLogin);
+					expect($state.go).toHaveBeenCalledWith('app.dashboard');
 				});
 
 				it('should return error when rejected registration', function () {
 					// GIVEN
 					var mockedError = 'Tragical error';
+
 					spyOn(UserAPI, 'register').and.callFake(function () {
-						return $q.reject({message: mockedError});
+						return $q.reject({
+							$response: {
+								data: {
+									message: mockedError
+								}
+							}
+						});
 					});
 
 					spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
@@ -109,7 +116,6 @@ define([
 
 					// THEN
 					expect(vm.registrationError).toBe(mockedError);
-					expect(vm.registrationForm.$submitted).toBeFalsy();
 				});
 			});
 		});

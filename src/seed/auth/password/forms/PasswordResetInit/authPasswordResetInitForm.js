@@ -6,7 +6,7 @@ define(['seed/auth/password/module'], function (module) {
 			restrict: 'E',
 			scope: {},
 			controllerAs: 'vm',
-			templateUrl: 'seed/auth/password/forms/PasswordResetInit/authPasswordResetInitForm.html',
+			templateUrl: 'seed/auth/password/forms/passwordResetInit/authPasswordResetInitForm.html',
 			controller: function ($element, $state, UserAPI, gettextCatalog) {
 				var vm = this;
 
