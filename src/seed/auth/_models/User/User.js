@@ -30,12 +30,15 @@ define(['seed/auth/module'], function (module) {
 					decode: function (locale) {
 						return LanguageAPI.getByLocale(locale);
 					},
-					init: function(){
+					init: function () {
 						return LanguageAPI.getLanguage().localePOSIX;
 					}
 				},
 				password: {
 					volatile: true
+				},
+				repassword: {
+					mask: true
 				},
 				token: {
 					volatile: true

@@ -12,22 +12,8 @@ define(['seed/auth/password/module'], function (module) {
 
 				// variables
 				vm.user = UserAPI.build();
-				vm.error = undefined;
+				vm.formError = undefined;
 				vm.formSuccess = false;
-
-				// methods
-				vm.init = init;
-
-				vm.init();
-
-				function init() {
-					if (!$stateParams.token) {
-						return $state.go('auth.login');
-					}
-
-					vm.user.token = $stateParams.token;
-				}
-
 				vm.formValidators = {
 					fields: {
 						repassword: {
@@ -43,6 +29,16 @@ define(['seed/auth/password/module'], function (module) {
 					}
 				};
 
+				// methods
+				vm.init = init;
+
+				vm.init();
+
+				function init() {
+					vm.user.token = $stateParams.token;
+				}
+
+
 				vm.reset = function () {
 					var formValidation = $element.find('form').data('formValidation');
 
@@ -52,7 +48,6 @@ define(['seed/auth/password/module'], function (module) {
 						UserAPI.resetPassword(vm.user)
 							.then(function () {
 								vm.formSuccess = true;
-
 
 								$timeout(function () {
 									$state.go('auth.login');

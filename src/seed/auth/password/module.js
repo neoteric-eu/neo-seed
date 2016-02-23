@@ -5,12 +5,6 @@ define(['angular'], function (ng) {
 
 	module.config(function ($stateProvider, gettext) {
 		$stateProvider
-			.state('auth.forgotPassword', {
-				onEnter: function ($state) {
-					$state.go('auth.password.reset');
-				}
-			})
-
 			.state('auth.passwordReset', {
 				url: '/password/reset',
 				views: {
