@@ -6,7 +6,7 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 
 
   $templateCache.put('seed/auth/login/forms/login/authLoginForm.html',
-    "<form class=neo-form ng-submit=vm.login() novalidate><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{'Welcome!'|translate}} <small>{{'Please log in'|translate}}</small></h1></fieldset><fieldset><section class=form-group ng-show=vm.formError><p class=\"alert alert-danger\" ng-model=formError><button type=button class=close data-dismiss=alert>&times;</button> {{'Wrong e-mail or password.'|translate}}</p></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-user\"></i> <input type=email class=form-control placeholder=\"{{'Email'|translate}}\" ng-model=vm.user.login></div></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-lock\"></i> <input type=password class=form-control placeholder=\"{{'Password'|translate}}\" ng-model=vm.user.password></div><div class=note><a ui-sref=auth.passwordReset>{{'Forgot password?'|translate}}</a></div></section><section ng-if=vm.appConf.generalSettings.showEuLogotypes style=\"height: 125px\"><neo-eu-logotypes></neo-eu-logotypes></section></fieldset><footer><button type=submit class=\"btn btn-primary\">{{'Log in'|translate}}</button><div class=btn-group ng-show=vm.predefinedLogins.length><button class=\"btn btn-default dropdown-toggle\" data-toggle=dropdown>{{'Login as'|translate}} <span class=caret></span></button><ul class=dropdown-menu><li ng-repeat=\"user in vm.predefinedLogins\"><a href ng-click=vm.loginAs(user)>{{ user.login }}</a></li></ul></div></footer></form>"
+    "<form class=neo-form ng-submit=vm.login() novalidate><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{'Welcome!'|translate}} <small>{{'Please log in'|translate}}</small></h1></fieldset><fieldset><section class=form-group ng-show=vm.formError><p class=\"alert alert-danger\" ng-model=formError><button type=button class=close data-dismiss=alert>&times;</button> {{'Wrong e-mail or password.'|translate}}</p></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-user\"></i> <input type=email class=form-control placeholder=\"{{'Email'|translate}}\" ng-model=vm.user.login></div></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-lock\"></i> <input type=password class=form-control placeholder=\"{{'Password'|translate}}\" ng-model=vm.user.password></div><div class=note><a ui-sref=auth.passwordReset>{{'Forgot password?'|translate}}</a></div></section><section ng-if=vm.appConf.generalSettings.showEuLogotypes style=\"height: 125px\"><neo-eu-logotypes></neo-eu-logotypes></section></fieldset><footer><button type=button class=\"btn btn-default\" ui-sref=auth.register>{{'Register'|translate}}</button><div class=\"btn-group pull-right\"><button type=submit class=\"btn btn-primary\">{{'Log in'|translate}}</button> <button type=button class=\"btn btn-primary dropdown-toggle\" ng-show=vm.predefinedLogins.length data-toggle=dropdown><span class=caret></span></button><ul class=dropdown-menu ng-show=vm.predefinedLogins.length><li ng-repeat=\"user in vm.predefinedLogins\"><a href ng-click=vm.loginAs(user)>{{ user.login }}</a></li></ul></div></footer></form>"
   );
 
 
@@ -26,7 +26,7 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 
 
   $templateCache.put('seed/auth/register/forms/register/authRegisterForm.html',
-    "<form class=neo-form neo-validate=vm.formValidators><fieldset><h1 class=text-center>{{'Registration'|translate}}</h1></fieldset><fieldset><section class=form-group ng-show=vm.registrationError><p class=\"alert alert-danger\" ng-model=formError><button type=button class=close data-dismiss=alert>&times;</button> {{vm.registrationError}}</p></section><section class=form-group><input type=email name=email data-fv-notempty=true data-fv-emailaddress=true class=form-control placeholder=\"{{'Email'|translate}}\" ng-model=vm.user.email></section><section class=form-group><input type=password class=form-control name=password data-fv-notempty=true placeholder=\"{{'Password'|translate}}\" ng-model=vm.user.password></section><section class=form-group><input type=password class=form-control name=repassword data-fv-notempty=true placeholder=\"{{'Repeat password'|translate}}\" ng-model=vm.user.repassword></section><section class=form-group><input type=checkbox data-fv-notempty=true ng-model=vm.model.acceptTermsOfService name=acceptTermsOfService> {{'I agree to the terms and policy'|translate}}</section></fieldset><footer><button type=submit class=\"btn btn-primary\" ng-click=vm.register()>{{'Register'|translate}}</button> <button class=\"btn btn-default pull-left\" ui-sref=auth.login>{{'Log in'|translate}}</button></footer></form>"
+    "<form class=neo-form neo-validate=vm.formValidators><fieldset><h1 class=text-center>{{'Registration'|translate}}</h1></fieldset><fieldset><section class=form-group ng-show=vm.registrationError><p class=\"alert alert-danger\" ng-model=formError><button type=button class=close data-dismiss=alert>&times;</button> {{vm.registrationError}}</p></section><section class=form-group><input type=email name=email data-fv-notempty=true data-fv-emailaddress=true class=form-control placeholder=\"{{'Email'|translate}}\" ng-model=vm.user.email></section><section class=form-group><input type=password class=form-control name=password data-fv-notempty=true placeholder=\"{{'Password'|translate}}\" ng-model=vm.user.password></section><section class=form-group><input type=password class=form-control name=repassword data-fv-notempty=true placeholder=\"{{'Repeat password'|translate}}\" ng-model=vm.user.repassword></section><section class=form-group><input type=checkbox data-fv-notempty=true ng-model=vm.model.acceptTermsOfService name=acceptTermsOfService> {{'I agree to the terms and policy'|translate}}</section></fieldset><footer><button type=submit class=\"btn btn-primary pull-right\" ng-click=vm.register()>{{'Register'|translate}}</button> <button class=\"btn btn-default pull-left\" ui-sref=auth.login>{{'Log in'|translate}}</button></footer></form>"
   );
 
 
@@ -2948,7 +2948,6 @@ define('seed/auth/_services/neoSession',['seed/auth/module'], function (module) 
 	'use strict';
 
 	/**
-	 *
 	 * @param $log {Object} Logging service
 	 * @param $cookies {Function} Cookie service
 	 * @param Permission {Object} ACL service
@@ -2957,13 +2956,16 @@ define('seed/auth/_services/neoSession',['seed/auth/module'], function (module) 
 	 * @param UserAPI {Object} Interface for REST communication with server
 	 * @param $rootScope {Object} Angular global scope helper
 	 */
-	var neoSession = function ($log, $cookies, Permission, $q, $rootScope,
-														 neoRequestHeaders, UserAPI) {
+	var neoSession = function ($log, $cookies, Permission, $q, $rootScope, neoRequestHeaders, UserAPI) {
 
 		$log = $log.getInstance('seed.auth.neoSession');
 		$log.debug('Initiated service');
 
-		this.setSession = function (user, customer) {
+		this.setSession = setSession;
+		this.clearSession = clearSession;
+		this.checkSession = checkSession;
+
+		function setSession(user, customer) {
 			var dfd = $q.defer();
 
 			try {
@@ -2994,9 +2996,9 @@ define('seed/auth/_services/neoSession',['seed/auth/module'], function (module) 
 			}
 
 			return dfd.promise;
-		};
+		}
 
-		this.clearSession = function () {
+		function clearSession() {
 			var dfd = $q.defer();
 
 			try {
@@ -3021,9 +3023,9 @@ define('seed/auth/_services/neoSession',['seed/auth/module'], function (module) 
 
 			$log.debug('Cleared user session');
 			return dfd.promise;
-		};
+		}
 
-		this.checkSession = function () {
+		function checkSession() {
 			var dfd = $q.defer(),
 				self = this,
 				token = $cookies.getObject('token'),
@@ -3066,7 +3068,7 @@ define('seed/auth/_services/neoSession',['seed/auth/module'], function (module) 
 			}
 
 			return dfd.promise;
-		};
+		}
 	};
 
 	module.service('neoSession', neoSession);
@@ -3087,17 +3089,30 @@ define('seed/auth/_services/neoRequestHeaders',['seed/auth/module'], function (m
 		$log = $log.getInstance('app.auth.neoRequestHeaders');
 		$log.debug('Initiated service');
 
-		this.setAuthToken = function (token) {
+		this.setAuthToken = setAuthToken;
+		this.setCustomerId = setCustomerId;
+		this.setAcceptLanguage = setAcceptLanguage;
+		this.clearHeaders = clearHeaders;
+
+		function setAuthToken(token) {
+			if (_.isUndefined(token)) {
+				throw 'Session token is not defined';
+			}
+
 			$http.defaults.headers.common['Authorization'] = 'token ' + token;
 
 			$log.debug('Set Authorization header ', token);
-		};
+		}
 
-		this.setCustomerId = function (customerId) {
+		function setCustomerId(customerId) {
+			if (_.isUndefined(customerId)) {
+				throw 'CustomerId is not defined';
+			}
+
 			$http.defaults.headers.common['X-Customer-Id'] = customerId;
 
 			$log.debug('Set X-Customer-Id header');
-		};
+		}
 
 		/**
 		 * Accept-Language value is set based on:
@@ -3105,19 +3120,19 @@ define('seed/auth/_services/neoRequestHeaders',['seed/auth/module'], function (m
 		 * @see https://en.wikipedia.org/wiki/IETF_language_tag
 		 * @see http://tools.ietf.org/html/rfc7231#section-5.3
 		 */
-		this.setAcceptLanguage = function (language) {
+		function setAcceptLanguage(language) {
 			$http.defaults.headers.common['Accept-Language'] = language;
 
 			$log.debug('Set Accept-Language header');
-		};
+		}
 
-		this.clearHeaders = function () {
+		function clearHeaders() {
 			delete $http.defaults.headers.common['Authorization'];
 			delete $http.defaults.headers.common['X-Customer-Id'];
 			delete $http.defaults.headers.common['Accept-Language'];
 
 			$log.debug('Cleared headers');
-		};
+		}
 	};
 
 	module.service('neoRequestHeaders', neoRequestHeaders);
@@ -3937,7 +3952,7 @@ define('seed/auth/register/module',[
 define('seed/auth/register/forms/register/authRegisterForm',['seed/auth/register/module'], function (module) {
 	'use strict';
 
-	function authRegisterForm($log, $state, gettextCatalog, UserAPI, appConf) {
+	function authRegisterForm($log, $state, gettextCatalog, UserAPI, neoSession, appConf) {
 
 		$log = $log.getInstance('apps.seed.auth.register.authRegisterForm');
 		$log.debug('Initiated directive');
@@ -3951,6 +3966,7 @@ define('seed/auth/register/forms/register/authRegisterForm',['seed/auth/register
 		 * @requires $state
 		 * @requires UserAPI
 		 * @requires appConf
+		 * @requires neoSession
 		 * @requires gettextCatalog
 		 */
 		return {
@@ -4012,8 +4028,12 @@ define('seed/auth/register/forms/register/authRegisterForm',['seed/auth/register
 					if (formValidation.isValid()) {
 						UserAPI
 							.register(vm.user)
-							.then(function () {
-								$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
+							.then(function (user) {
+								neoSession
+									.setSession(user, _.first(user.customers))
+									.then(function () {
+										$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
+									});
 							})
 							.catch(function (error) {
 								vm.registrationError = error.$response.data.message;

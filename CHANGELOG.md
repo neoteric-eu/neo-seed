@@ -1,3 +1,13 @@
+<a name="2.3.3"></a>
+## [2.3.3](//compare/v2.3.2...v2.3.3) (2016-02-24)
+
+
+### Bug Fixes
+
+* **register:** #103 - Registration endpoint does not return a token 276a336
+
+
+
 <a name="2.3.2"></a>
 ## [2.3.2](//compare/v2.3.1...v2.3.2) (2016-02-22)
 
