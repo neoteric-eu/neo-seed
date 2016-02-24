@@ -19,8 +19,8 @@ define(['seed/auth/module'], function (module) {
 		this.clearHeaders = clearHeaders;
 
 		function setAuthToken(token) {
-			if (_.isUndefined(token)) {
-				throw 'Session token is not defined';
+			if (_.isEmpty(token)) {
+				throw new Error('Token in Authorization header must not be empty');
 			}
 
 			$http.defaults.headers.common['Authorization'] = 'token ' + token;
@@ -29,8 +29,8 @@ define(['seed/auth/module'], function (module) {
 		}
 
 		function setCustomerId(customerId) {
-			if (_.isUndefined(customerId)) {
-				throw 'CustomerId is not defined';
+			if (_.isEmpty(customerId)) {
+				throw new Error('CustomerId in X-Customer header must not be empty');
 			}
 
 			$http.defaults.headers.common['X-Customer-Id'] = customerId;
@@ -45,6 +45,10 @@ define(['seed/auth/module'], function (module) {
 		 * @see http://tools.ietf.org/html/rfc7231#section-5.3
 		 */
 		function setAcceptLanguage(language) {
+			if (_.isEmpty(language)) {
+				throw new Error('Language in AcceptLanguage header must not be empty');
+			}
+
 			$http.defaults.headers.common['Accept-Language'] = language;
 
 			$log.debug('Set Accept-Language header');
