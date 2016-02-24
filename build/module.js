@@ -6,7 +6,7 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 
 
   $templateCache.put('seed/auth/login/forms/login/authLoginForm.html',
-    "<form class=neo-form ng-submit=vm.login() novalidate><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{'Welcome!'|translate}} <small>{{'Please log in'|translate}}</small></h1></fieldset><fieldset><section class=form-group ng-show=vm.formError><p class=\"alert alert-danger\" ng-model=formError><button type=button class=close data-dismiss=alert>&times;</button> {{'Wrong e-mail or password.'|translate}}</p></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-user\"></i> <input type=email class=form-control placeholder=\"{{'Email'|translate}}\" ng-model=vm.user.login></div></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-lock\"></i> <input type=password class=form-control placeholder=\"{{'Password'|translate}}\" ng-model=vm.user.password></div><div class=note><a ui-sref=auth.forgotPassword>{{'Forgot password?'|translate}}</a></div></section><section ng-if=vm.appConf.generalSettings.showEuLogotypes style=\"height: 125px\"><neo-eu-logotypes></neo-eu-logotypes></section></fieldset><footer><button type=submit class=\"btn btn-primary\">{{'Log in'|translate}}</button><div class=btn-group ng-show=vm.predefinedLogins.length><button class=\"btn btn-default dropdown-toggle\" data-toggle=dropdown>{{'Login as'|translate}} <span class=caret></span></button><ul class=dropdown-menu><li ng-repeat=\"user in vm.predefinedLogins\"><a href ng-click=vm.loginAs(user)>{{ user.login }}</a></li></ul></div></footer></form>"
+    "<form class=neo-form ng-submit=vm.login() novalidate><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{'Welcome!'|translate}} <small>{{'Please log in'|translate}}</small></h1></fieldset><fieldset><section class=form-group ng-show=vm.formError><p class=\"alert alert-danger\" ng-model=formError><button type=button class=close data-dismiss=alert>&times;</button> {{'Wrong e-mail or password.'|translate}}</p></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-user\"></i> <input type=email class=form-control placeholder=\"{{'Email'|translate}}\" ng-model=vm.user.login></div></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-lock\"></i> <input type=password class=form-control placeholder=\"{{'Password'|translate}}\" ng-model=vm.user.password></div><div class=note><a ui-sref=auth.passwordReset>{{'Forgot password?'|translate}}</a></div></section><section ng-if=vm.appConf.generalSettings.showEuLogotypes style=\"height: 125px\"><neo-eu-logotypes></neo-eu-logotypes></section></fieldset><footer><button type=submit class=\"btn btn-primary\">{{'Log in'|translate}}</button><div class=btn-group ng-show=vm.predefinedLogins.length><button class=\"btn btn-default dropdown-toggle\" data-toggle=dropdown>{{'Login as'|translate}} <span class=caret></span></button><ul class=dropdown-menu><li ng-repeat=\"user in vm.predefinedLogins\"><a href ng-click=vm.loginAs(user)>{{ user.login }}</a></li></ul></div></footer></form>"
   );
 
 
@@ -3156,12 +3156,15 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 					decode: function (locale) {
 						return LanguageAPI.getByLocale(locale);
 					},
-					init: function(){
+					init: function () {
 						return LanguageAPI.getLanguage().localePOSIX;
 					}
 				},
 				password: {
 					volatile: true
+				},
+				repassword: {
+					mask: true
 				},
 				token: {
 					volatile: true
@@ -4045,12 +4048,6 @@ define('seed/auth/password/module',['angular'], function (ng) {
 
 	module.config(function ($stateProvider, gettext) {
 		$stateProvider
-			.state('auth.forgotPassword', {
-				onEnter: function ($state) {
-					$state.go('auth.password.reset');
-				}
-			})
-
 			.state('auth.passwordReset', {
 				url: '/password/reset',
 				views: {
@@ -4099,22 +4096,8 @@ define('seed/auth/password/forms/passwordReset/authPasswordResetForm',['seed/aut
 
 				// variables
 				vm.user = UserAPI.build();
-				vm.error = undefined;
+				vm.formError = undefined;
 				vm.formSuccess = false;
-
-				// methods
-				vm.init = init;
-
-				vm.init();
-
-				function init() {
-					if (!$stateParams.token) {
-						return $state.go('auth.login');
-					}
-
-					vm.user.token = $stateParams.token;
-				}
-
 				vm.formValidators = {
 					fields: {
 						repassword: {
@@ -4130,6 +4113,16 @@ define('seed/auth/password/forms/passwordReset/authPasswordResetForm',['seed/aut
 					}
 				};
 
+				// methods
+				vm.init = init;
+
+				vm.init();
+
+				function init() {
+					vm.user.token = $stateParams.token;
+				}
+
+
 				vm.reset = function () {
 					var formValidation = $element.find('form').data('formValidation');
 
@@ -4139,7 +4132,6 @@ define('seed/auth/password/forms/passwordReset/authPasswordResetForm',['seed/aut
 						UserAPI.resetPassword(vm.user)
 							.then(function () {
 								vm.formSuccess = true;
-
 
 								$timeout(function () {
 									$state.go('auth.login');
@@ -5516,7 +5508,7 @@ define('seed/module',[
 
 		// $http improvements
 		$httpProvider.useApplyAsync(true);
-		$httpProvider.useLegacyPromiseExtensions(false);
+		$httpProvider.useLegacyPromiseExtensions(true);
 		$httpProvider.defaults.paramSerializer = '$httpParamSerializerJQLike';
 
 		// Add the interceptors to the $httpProvider.

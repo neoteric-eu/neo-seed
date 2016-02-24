@@ -13,17 +13,30 @@ define(['seed/auth/module'], function (module) {
 		$log = $log.getInstance('app.auth.neoRequestHeaders');
 		$log.debug('Initiated service');
 
-		this.setAuthToken = function (token) {
+		this.setAuthToken = setAuthToken;
+		this.setCustomerId = setCustomerId;
+		this.setAcceptLanguage = setAcceptLanguage;
+		this.clearHeaders = clearHeaders;
+
+		function setAuthToken(token) {
+			if (_.isUndefined(token)) {
+				throw 'Session token is not defined';
+			}
+
 			$http.defaults.headers.common['Authorization'] = 'token ' + token;
 
 			$log.debug('Set Authorization header ', token);
-		};
+		}
 
-		this.setCustomerId = function (customerId) {
+		function setCustomerId(customerId) {
+			if (_.isUndefined(customerId)) {
+				throw 'CustomerId is not defined';
+			}
+
 			$http.defaults.headers.common['X-Customer-Id'] = customerId;
 
 			$log.debug('Set X-Customer-Id header');
-		};
+		}
 
 		/**
 		 * Accept-Language value is set based on:
@@ -31,19 +44,19 @@ define(['seed/auth/module'], function (module) {
 		 * @see https://en.wikipedia.org/wiki/IETF_language_tag
 		 * @see http://tools.ietf.org/html/rfc7231#section-5.3
 		 */
-		this.setAcceptLanguage = function (language) {
+		function setAcceptLanguage(language) {
 			$http.defaults.headers.common['Accept-Language'] = language;
 
 			$log.debug('Set Accept-Language header');
-		};
+		}
 
-		this.clearHeaders = function () {
+		function clearHeaders() {
 			delete $http.defaults.headers.common['Authorization'];
 			delete $http.defaults.headers.common['X-Customer-Id'];
 			delete $http.defaults.headers.common['Accept-Language'];
 
 			$log.debug('Cleared headers');
-		};
+		}
 	};
 
 	module.service('neoRequestHeaders', neoRequestHeaders);

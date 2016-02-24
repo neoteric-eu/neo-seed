@@ -2,7 +2,6 @@ define(['seed/auth/module'], function (module) {
 	'use strict';
 
 	/**
-	 *
 	 * @param $log {Object} Logging service
 	 * @param $cookies {Function} Cookie service
 	 * @param Permission {Object} ACL service
@@ -11,13 +10,16 @@ define(['seed/auth/module'], function (module) {
 	 * @param UserAPI {Object} Interface for REST communication with server
 	 * @param $rootScope {Object} Angular global scope helper
 	 */
-	var neoSession = function ($log, $cookies, Permission, $q, $rootScope,
-														 neoRequestHeaders, UserAPI) {
+	var neoSession = function ($log, $cookies, Permission, $q, $rootScope, neoRequestHeaders, UserAPI) {
 
 		$log = $log.getInstance('seed.auth.neoSession');
 		$log.debug('Initiated service');
 
-		this.setSession = function (user, customer) {
+		this.setSession = setSession;
+		this.clearSession = clearSession;
+		this.checkSession = checkSession;
+
+		function setSession(user, customer) {
 			var dfd = $q.defer();
 
 			try {
@@ -48,9 +50,9 @@ define(['seed/auth/module'], function (module) {
 			}
 
 			return dfd.promise;
-		};
+		}
 
-		this.clearSession = function () {
+		function clearSession() {
 			var dfd = $q.defer();
 
 			try {
@@ -75,9 +77,9 @@ define(['seed/auth/module'], function (module) {
 
 			$log.debug('Cleared user session');
 			return dfd.promise;
-		};
+		}
 
-		this.checkSession = function () {
+		function checkSession() {
 			var dfd = $q.defer(),
 				self = this,
 				token = $cookies.getObject('token'),
@@ -120,7 +122,7 @@ define(['seed/auth/module'], function (module) {
 			}
 
 			return dfd.promise;
-		};
+		}
 	};
 
 	module.service('neoSession', neoSession);

@@ -3,6 +3,7 @@ define([
 	'angular-mocks',
 	'angular-moment',
 	'angular-restmod',
+	'angular-permission',
 	'seed/auth/_includes',
 	'seed/auth/module',
 	'seed/helpers/_includes',
@@ -20,7 +21,7 @@ define([
 		describe('module: auth', function () {
 			describe('directive: authRegisterForm', function () {
 
-				var $compile, $rootScope, $state, $timeout, $q, UserAPI, LanguageAPI;
+				var $compile, $rootScope, $state, $timeout, $q, neoSession, UserAPI, LanguageAPI;
 
 				beforeEach(function () {
 					module(function ($provide) {
@@ -39,7 +40,8 @@ define([
 						});
 					});
 
-					module('ui.router', 'angularMoment', 'restmod', 'gettext',
+					module(
+						'permission', 'ui.router', 'angularMoment', 'restmod', 'gettext',
 						'seed.templateCache', 'seed.forms', 'seed.helpers', 'seed.components',
 						'seed.auth');
 				});
@@ -51,6 +53,7 @@ define([
 						$rootScope = $injector.get('$rootScope');
 						$q = $injector.get('$q');
 						$timeout = $injector.get('$timeout');
+						neoSession = $injector.get('neoSession');
 						UserAPI = $injector.get('UserAPI');
 						LanguageAPI = $injector.get('LanguageAPI');
 					});
@@ -59,11 +62,17 @@ define([
 				it('should navigate to login page after successful registration', function () {
 					// GIVEN
 					spyOn(UserAPI, 'register').and.callFake(function () {
-						return $q.resolve();
+						return $q.resolve({
+							customers: []
+						});
 					});
 
 					spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
 						return {localePOSIX: 'en_GB'};
+					});
+
+					spyOn(neoSession, 'setSession').and.callFake(function () {
+						return $q.resolve();
 					});
 
 					spyOn($state, 'go').and.callFake(function (state) {

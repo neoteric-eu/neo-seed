@@ -1,75 +1,81 @@
 <form class="neo-form"
-      ng-submit="vm.login()"
-      novalidate>
+			ng-submit="vm.login()"
+			novalidate>
 
-    <img ng-src="{{vm.user.avatar}}">
+	<img ng-src="{{vm.user.avatar}}">
 
-    <fieldset>
-        <h1 class="text-center">{{'Welcome!'|translate}}
-            <small> {{'Please log in'|translate}}</small>
-        </h1>
-    </fieldset>
+	<fieldset>
+		<h1 class="text-center">{{'Welcome!'|translate}}
+			<small> {{'Please log in'|translate}}</small>
+		</h1>
+	</fieldset>
 
-    <fieldset>
-        <section class="form-group" ng-show="vm.formError">
-            <p class="alert alert-danger" ng-model="formError">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{'Wrong e-mail or password.'|translate}}
-            </p>
-        </section>
+	<fieldset>
+		<section class="form-group" ng-show="vm.formError">
+			<p class="alert alert-danger" ng-model="formError">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				{{'Wrong e-mail or password.'|translate}}
+			</p>
+		</section>
 
-        <section class="form-group">
-            <div class="input-icon-right">
-                <i class="icon-append fa fa-user"></i>
-                <input type="email"
-                       class="form-control"
-                       placeholder="{{'Email'|translate}}"
-                       ng-model="vm.user.login">
-            </div>
-        </section>
+		<section class="form-group">
+			<div class="input-icon-right">
+				<i class="icon-append fa fa-user"></i>
+				<input type="email"
+							 class="form-control"
+							 placeholder="{{'Email'|translate}}"
+							 ng-model="vm.user.login">
+			</div>
+		</section>
 
-        <section class="form-group">
-            <div class="input-icon-right">
-                <i class="icon-append fa fa-lock"></i>
-                <input type="password"
-                       class="form-control"
-                       placeholder="{{'Password'|translate}}"
-                       ng-model="vm.user.password">
-            </div>
+		<section class="form-group">
+			<div class="input-icon-right">
+				<i class="icon-append fa fa-lock"></i>
+				<input type="password"
+							 class="form-control"
+							 placeholder="{{'Password'|translate}}"
+							 ng-model="vm.user.password">
+			</div>
 
-            <div class="note">
-                <a ui-sref="auth.passwordReset">{{'Forgot password?'|translate}}</a>
-            </div>
-        </section>
+			<div class="note">
+				<a ui-sref="auth.passwordReset">{{'Forgot password?'|translate}}</a>
+			</div>
+		</section>
 
-        <section ng-if="vm.appConf.generalSettings.showEuLogotypes"
-                 style="height: 125px">
-            <neo-eu-logotypes></neo-eu-logotypes>
-        </section>
+		<section ng-if="vm.appConf.generalSettings.showEuLogotypes"
+						 style="height: 125px">
+			<neo-eu-logotypes></neo-eu-logotypes>
+		</section>
 
-    </fieldset>
+	</fieldset>
 
-    <footer>
-        <button type="submit"
-                class="btn btn-primary">
-            {{'Log in'|translate}}
-        </button>
+	<footer>
+		<button type="button"
+						class="btn btn-default"
+						ui-sref="auth.register">
+			{{'Register'|translate}}
+		</button>
 
-        <div class="btn-group"
-             ng-show="vm.predefinedLogins.length">
+		<div class="btn-group pull-right">
+			<button type="submit"
+							class="btn btn-primary">
+				{{'Log in'|translate}}
+			</button>
 
-            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                {{'Login as'|translate}}
-                <span class="caret"></span>
-            </button>
+			<button type="button"
+							class="btn btn-primary dropdown-toggle"
+							ng-show="vm.predefinedLogins.length"
+							data-toggle="dropdown">
+				<span class="caret"></span>
+			</button>
 
-            <ul class="dropdown-menu">
-                <li ng-repeat="user in vm.predefinedLogins">
-                    <a href ng-click="vm.loginAs(user)">{{ user.login }}</a>
-                </li>
-            </ul>
-
-        </div>
-    </footer>
+			<ul class="dropdown-menu"
+					ng-show="vm.predefinedLogins.length">
+				<li ng-repeat="user in vm.predefinedLogins">
+					<a href ng-click="vm.loginAs(user)">{{ user.login }}</a>
+				</li>
+			</ul>
+		</div>
+	</footer>
 </form>
 

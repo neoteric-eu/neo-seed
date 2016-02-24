@@ -1,7 +1,7 @@
 define(['seed/auth/register/module'], function (module) {
 	'use strict';
 
-	function authRegisterForm($log, $state, gettextCatalog, UserAPI, appConf) {
+	function authRegisterForm($log, $state, gettextCatalog, UserAPI, neoSession, appConf) {
 
 		$log = $log.getInstance('apps.seed.auth.register.authRegisterForm');
 		$log.debug('Initiated directive');
@@ -15,6 +15,7 @@ define(['seed/auth/register/module'], function (module) {
 		 * @requires $state
 		 * @requires UserAPI
 		 * @requires appConf
+		 * @requires neoSession
 		 * @requires gettextCatalog
 		 */
 		return {
@@ -76,8 +77,12 @@ define(['seed/auth/register/module'], function (module) {
 					if (formValidation.isValid()) {
 						UserAPI
 							.register(vm.user)
-							.then(function () {
-								$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
+							.then(function (user) {
+								neoSession
+									.setSession(user, _.first(user.customers))
+									.then(function () {
+										$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
+									});
 							})
 							.catch(function (error) {
 								vm.registrationError = error.$response.data.message;
