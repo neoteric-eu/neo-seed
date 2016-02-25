@@ -17,17 +17,11 @@ define([
 		'seed.auth.lock'
 	]);
 
-	module.config(function ($stateProvider, appConf) {
+	module.config(function ($stateProvider) {
 
 		$stateProvider
 			.state('auth', {
 				abstract: true,
-				data: {
-					permissions: {
-						except: ['AUTHORIZED'],
-						redirectTo: appConf.generalSettings.defaultRedirectStateAfterLogin
-					}
-				},
 				views: {
 					root: {
 						templateUrl: 'seed/auth/views/view.html'

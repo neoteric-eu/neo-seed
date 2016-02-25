@@ -1,4 +1,4 @@
-define(['seed/helpers/module'], function (app) {
+define(['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -37,5 +37,5 @@ define(['seed/helpers/module'], function (app) {
 		};
 	}
 
-	app.factory('HttpErrorInterceptor', HttpErrorInterceptor);
+	module.factory('HttpErrorInterceptor', HttpErrorInterceptor);
 });
