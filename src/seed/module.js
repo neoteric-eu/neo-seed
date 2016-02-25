@@ -56,7 +56,7 @@ define([
 		cfpLoadingBarProvider.includeSpinner = false;
 		cfpLoadingBarProvider.latencyThreshold = 500;
 
-		$locationProvider.html5Mode(true);
+		$locationProvider.html5Mode(appConf.generalSettings.html5ModeEnabled);
 		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
 
 		// $http improvements
