@@ -1,3 +1,13 @@
+<a name="2.3.4"></a>
+## [2.3.4](//compare/v2.3.3...v2.3.4) (2016-02-25)
+
+
+### Bug Fixes
+
+* **config:** Enabled html5mode configuration d711a67
+
+
+
 <a name="2.3.3"></a>
 ## [2.3.3](//compare/v2.3.2...v2.3.3) (2016-02-24)
 
