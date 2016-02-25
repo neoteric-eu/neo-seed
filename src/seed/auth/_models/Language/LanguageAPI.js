@@ -1,7 +1,4 @@
-define([
-	'seed/auth/module',
-	'moment'
-], function (module) {
+define(['seed/auth/module'], function (module) {
 	'use strict';
 
 	/**

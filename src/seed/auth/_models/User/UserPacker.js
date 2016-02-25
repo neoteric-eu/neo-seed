@@ -1,7 +1,7 @@
 define([
 	'seed/auth/module',
 	'seed/helpers/restmod/packers/PackerUtils'
-], function (app, PackerUtils) {
+], function (module, PackerUtils) {
 	'use strict';
 
 	/**
@@ -54,5 +54,5 @@ define([
 		});
 	};
 
-	app.factory('UserPacker', UserPacker);
+	module.factory('UserPacker', UserPacker);
 });
