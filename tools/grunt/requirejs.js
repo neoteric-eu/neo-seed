@@ -47,7 +47,6 @@ module.exports = function () {
           'bootstrap': 'empty:',
 
           // Smart Admin plugins
-          'smartwidgets': 'empty:',
           'notification': 'empty:',
 
           // Other vendor
