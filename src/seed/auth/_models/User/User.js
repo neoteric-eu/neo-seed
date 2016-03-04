@@ -34,6 +34,9 @@ define(['seed/auth/module'], function (module) {
 						return LanguageAPI.getLanguage().localePOSIX;
 					}
 				},
+				timezone: {
+					init: undefined
+				},
 				password: {
 					volatile: true
 				},
