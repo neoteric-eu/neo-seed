@@ -35,6 +35,7 @@ requirejs.config({
 
 		// Other vendor
 		'moment': 'assets/vendor/js/moment/moment',
+		'moment-timezone': 'assets/vendor/js/moment-timezone/moment-timezone-with-data',
 		'lodash': 'assets/vendor/js/lodash/lodash',
 
 		'form-validation': 'assets/vendor/js/form-validation',
@@ -79,6 +80,7 @@ requirejs.config({
 
 		// Other vendor
 		'moment': {exports: 'moment'},
+		'moment-timezone': ['moment'],
 
 		'lodash-extensions': ['lodash'],
 
