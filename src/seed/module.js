@@ -42,8 +42,7 @@ define([
 		'seed.auth',
 		'seed.layout',
 		'seed.forms',
-		'seed.tables',
-		'seed.widgets'
+		'seed.tables'
 	]);
 
 	seed.config(function ($provide, $httpProvider, $locationProvider, cfpLoadingBarProvider,

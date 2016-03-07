@@ -1,6 +1,6 @@
 {
   "name": "neo-seed",
-  "version": "2.3.4",
+  "version": "2.4.0",
   "dependencies": {
     "angular": "1.4.x",
     "bootstrap": "3.x",
@@ -19,6 +19,7 @@
     "ng-table": "0.8.3",
     "lodash": "3.10.x",
     "moment": "2.10.x",
+    "moment-timezone": "0.5.x",
     "requirejs": "2.1.x",
     "less-elements": "latest",
     "animate.less": "latest",
@@ -63,6 +64,7 @@
       "jquery/jquery.js": "jquery/dist/jquery.js",
       "lodash/lodash.js": "lodash/lodash.js",
       "moment/moment.js": "moment/min/moment-with-locales.js",
+      "moment-timezone/moment-timezone-with-data.js": "moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js",
       "form-validation/form-validation.js": "form.validation/dist/js/formValidation.js",
       "form-validation/framework/bootstrap.js": "form.validation/dist/js/framework/bootstrap.js",
       "form-validation/language/": "form.validation/dist/js/language/",

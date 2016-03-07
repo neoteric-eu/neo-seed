@@ -1,3 +1,23 @@
+<a name="2.4.0"></a>
+# [2.4.0](//compare/v2.3.7...v2.4.0) (2016-03-04)
+
+
+
+
+<a name="2.3.7"></a>
+## [2.3.7](//compare/v2.3.6...v2.3.7) (2016-03-04)
+
+
+### Features
+
+* **timezone:** Extend user model with timezone and set the default timezone on user session ini a1b894a
+* **jarvis-widget:** Removed jarvis-widgets support a1b894a5
+
+
+<a name="2.3.6"></a>
+## [2.3.6](//compare/v2.3.4...v2.3.6) (2016-02-29)
+
+
 <a name="2.3.4"></a>
 ## [2.3.4](//compare/v2.3.3...v2.3.4) (2016-02-25)
 

@@ -31,11 +31,11 @@ requirejs.config({
 		'bootstrap': 'assets/vendor/js/bootstrap/bootstrap',
 
 		// Smart Admin plugins
-		'smartwidgets': 'assets/seed/js/smartadmin/smartwidgets/jarvis.widget',
 		'notification': 'assets/seed/js/smartadmin/notification/SmartNotification',
 
 		// Other vendor
 		'moment': 'assets/vendor/js/moment/moment',
+		'moment-timezone': 'assets/vendor/js/moment-timezone/moment-timezone-with-data',
 		'lodash': 'assets/vendor/js/lodash/lodash',
 
 		'form-validation': 'assets/vendor/js/form-validation',
@@ -77,10 +77,10 @@ requirejs.config({
 
 		// Smart Admin plugins
 		'notification': ['jquery'],
-		'smartwidgets': ['jquery'],
 
 		// Other vendor
 		'moment': {exports: 'moment'},
+		'moment-timezone': ['moment'],
 
 		'lodash-extensions': ['lodash'],
 

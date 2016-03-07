@@ -1,4 +1,4 @@
-define(['seed/auth/module'], function (module) {
+define(['seed/auth/module', 'moment', 'moment-timezone'], function (module, moment) {
 	'use strict';
 
 	/**
@@ -33,6 +33,11 @@ define(['seed/auth/module'], function (module) {
 				$cookies.putObject('activeCustomer', customer.customerId);
 				$cookies.putObject('token', user.$metadata.token);
 				$log.debug('Set cookie objects');
+
+				$log.debug('Set timezone');
+				if (user.timezone) {
+					moment.tz.setDefault(user.timezone);
+				}
 
 				$rootScope.user = user;
 				$rootScope.customer = customer;
