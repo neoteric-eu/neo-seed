@@ -5,11 +5,13 @@
 
 define([
 	'angular',
-	'angular-cookies'
+	'angular-cookies',
+	'angular-permission'
 ], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.auth', [
+		'permission',
 		'ngCookies',
 		'seed.auth.login',
 		'seed.auth.register',
