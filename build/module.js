@@ -3261,7 +3261,7 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 							//noinspection JSUnresolvedFunction
 							return this.$send({
 								method: 'POST',
-								url: appConf.environmentSettings.apiUrl + 'registration',
+								url: appConf.environmentSettings.apiUrl + '/registration',
 								data: this
 							}, function (_response) {
 								this.$unwrap(_response.data, null);
@@ -3308,7 +3308,6 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 
 	module.factory('User', User);
 });
-
 define('seed/auth/_models/User/UserAPI',['seed/auth/module'], function (module) {
 	'use strict';
 
