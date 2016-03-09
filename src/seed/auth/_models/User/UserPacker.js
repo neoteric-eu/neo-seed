@@ -9,11 +9,12 @@ define([
 	 * @constructor
 	 * @memberOf seed.auth
 	 *
+	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Data model layer interface
 	 * @param RMPackerCache {Object} Restmod cache service
-	 * @return {*|{$isAbstract, $$chain}}
+	 * @return {Function|Object|*|{$isAbstract, $$chain}}
 	 */
-	var UserPacker = function ($log, restmod, RMPackerCache) {
+	function UserPacker($log, restmod, RMPackerCache) {
 
 		$log = $log.getInstance('seed.auth.UserPacker');
 		$log.debug('Initiated factory');
@@ -52,7 +53,7 @@ define([
 				return _.isUndefined(name) ? _raw : _raw[name];
 			});
 		});
-	};
+	}
 
 	app.factory('UserPacker', UserPacker);
 });

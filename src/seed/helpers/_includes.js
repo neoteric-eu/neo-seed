@@ -1,5 +1,6 @@
 define([
 	'./interceptors/HttpErrorInterceptor',
+	'./interceptors/HttpRequestInterceptor',
 
 	'./decorators/logDecorator',
 
