@@ -1,7 +1,8 @@
 define([
+	'angular',
 	'seed/auth/module',
 	'seed/helpers/restmod/packers/PackerUtils'
-], function (app, PackerUtils) {
+], function (ng, module, PackerUtils) {
 	'use strict';
 
 	/**
@@ -21,6 +22,7 @@ define([
 
 		return restmod.mixin(function () {
 			this.define('Model.unpack', function (_resource, _raw) {
+
 				var name,
 					links = this.getProperty('jsonLinks', 'included'),
 					meta = this.getProperty('jsonMeta', 'token');
@@ -34,6 +36,10 @@ define([
 					if (_resource.$response.config.url.match(/authInfo$/) ||
 						_resource.$response.config.url.match(/login$/)) {
 						name = 'user';
+
+						if (_raw.data) {
+							_raw = _raw.data;
+						}
 					}
 				}
 
@@ -55,5 +61,5 @@ define([
 		});
 	}
 
-	app.factory('UserPacker', UserPacker);
+	module.factory('UserPacker', UserPacker);
 });
