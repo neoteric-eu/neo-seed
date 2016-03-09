@@ -9,7 +9,7 @@ define([
 
 	describe('module: seed', function () {
 		describe('module: helpers', function () {
-			describe('interceptor: HttpErrorInterceptor', function () {
+			describe('interceptor: HttpRequestInterceptor', function () {
 
 				var $http, HttpRequestInterceptor;
 
