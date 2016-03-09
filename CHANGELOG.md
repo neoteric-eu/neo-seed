@@ -1,13 +1,12 @@
-<a name="2.4.1"></a>
-## [2.4.1](//compare/v2.4.0...v2.4.1) (2016-03-07)
+<a name="2.4.2"></a>
+## [2.4.2](//compare/v2.3.8...v2.4.2) (2016-03-09)
 
 
+### Features
 
-
-<a name="2.4.0"></a>
-# [2.4.0](//compare/v2.3.7...v2.4.0) (2016-03-04)
-
-
+* **seed/module:** Disable debug data on production env d341037
+* **HttpRequestInterceptor:** #82 - Enabled query param serializing strategy based on API version 2f1196b
+* **UserPacker:** - Unpacking for authInfo and login in API v2 3132477
 
 
 <a name="2.3.7"></a>

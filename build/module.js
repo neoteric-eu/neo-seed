@@ -238,6 +238,41 @@ define('seed/helpers/interceptors/HttpErrorInterceptor',['seed/helpers/module'],
 	app.factory('HttpErrorInterceptor', HttpErrorInterceptor);
 });
 
+define('seed/helpers/interceptors/HttpRequestInterceptor',['seed/helpers/module'], function (module) {
+	'use strict';
+
+	/**
+	 * @class HttpRequestInterceptor
+	 * @memberOf seed.helpers
+	 *
+	 * @param $log {Object} Logging service
+	 * @param $httpParamSerializer
+	 * @param $httpParamSerializerJQLike
+	 * @return {{transformRequest: transformRequest}}
+	 */
+	function HttpRequestInterceptor($log, $httpParamSerializer, $httpParamSerializerJQLike) {
+
+		$log = $log.getInstance('seed.helpers.HttpRequestInterceptor');
+		$log.debug('Initiated factory');
+
+		return {
+			transformRequest: function (request) {
+				if (request.params) {
+					if (request.url.match(/api\/(v1|v2)/)) {
+						request.params = $httpParamSerializerJQLike(request.params);
+					} else {
+						request.params = $httpParamSerializer(request.params);
+					}
+				}
+
+				return request;
+			}
+		};
+	}
+
+	module.factory('HttpRequestInterceptor', HttpRequestInterceptor);
+});
+
 define('seed/helpers/decorators/logDecorator',['angular', 'moment', 'seed/helpers/module'], function (ng, moment, module) {
 	'use strict';
 
@@ -1729,6 +1764,7 @@ define('seed/helpers/restmod/packers/PackerUtils',[], function () {
 
 define('seed/helpers/_includes',[
 	'./interceptors/HttpErrorInterceptor',
+	'./interceptors/HttpRequestInterceptor',
 
 	'./decorators/logDecorator',
 
@@ -3423,9 +3459,10 @@ define('seed/auth/_models/User/UserAPI',['seed/auth/module'], function (module) 
 
 
 define('seed/auth/_models/User/UserPacker',[
+	'angular',
 	'seed/auth/module',
 	'seed/helpers/restmod/packers/PackerUtils'
-], function (app, PackerUtils) {
+], function (ng, module, PackerUtils) {
 	'use strict';
 
 	/**
@@ -3433,17 +3470,19 @@ define('seed/auth/_models/User/UserPacker',[
 	 * @constructor
 	 * @memberOf seed.auth
 	 *
+	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Data model layer interface
 	 * @param RMPackerCache {Object} Restmod cache service
-	 * @return {*|{$isAbstract, $$chain}}
+	 * @return {Function|Object|*|{$isAbstract, $$chain}}
 	 */
-	var UserPacker = function ($log, restmod, RMPackerCache) {
+	function UserPacker($log, restmod, RMPackerCache) {
 
 		$log = $log.getInstance('seed.auth.UserPacker');
 		$log.debug('Initiated factory');
 
 		return restmod.mixin(function () {
 			this.define('Model.unpack', function (_resource, _raw) {
+
 				var name,
 					links = this.getProperty('jsonLinks', 'included'),
 					meta = this.getProperty('jsonMeta', 'token');
@@ -3457,6 +3496,10 @@ define('seed/auth/_models/User/UserPacker',[
 					if (_resource.$response.config.url.match(/authInfo$/) ||
 						_resource.$response.config.url.match(/login$/)) {
 						name = 'user';
+
+						if (_raw.data) {
+							_raw = _raw.data;
+						}
 					}
 				}
 
@@ -3476,9 +3519,9 @@ define('seed/auth/_models/User/UserPacker',[
 				return _.isUndefined(name) ? _raw : _raw[name];
 			});
 		});
-	};
+	}
 
-	app.factory('UserPacker', UserPacker);
+	module.factory('UserPacker', UserPacker);
 });
 
 define('seed/auth/_models/Customer/Customer',['seed/auth/module'], function (module) {
@@ -5291,7 +5334,7 @@ define('seed/module',[
 		'seed.tables'
 	]);
 
-	seed.config(function ($provide, $httpProvider, $locationProvider, cfpLoadingBarProvider,
+	seed.config(function ($provide, $httpProvider, $locationProvider, $compileProvider, cfpLoadingBarProvider,
 												$logProvider, restmodProvider, uiSelectConfig, appConf) {
 
 		restmodProvider.rebase('NeoStyleAPI');
@@ -5304,10 +5347,15 @@ define('seed/module',[
 		$locationProvider.html5Mode(appConf.generalSettings.html5ModeEnabled);
 		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
 
+		/**
+		 * Production improvements
+		 * @see https://code.angularjs.org/1.4.9/docs/guide/production
+ 		 */
+		$compileProvider.debugInfoEnabled(appConf.environmentSettings.debugEnabled);
+
 		// $http improvements
 		$httpProvider.useApplyAsync(true);
 		$httpProvider.useLegacyPromiseExtensions(true);
-		$httpProvider.defaults.paramSerializer = '$httpParamSerializerJQLike';
 
 		// Add the interceptors to the $httpProvider.
 		$httpProvider.interceptors.push('HttpErrorInterceptor');
