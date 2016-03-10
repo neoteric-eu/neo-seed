@@ -1,17 +1,4 @@
 define([
-	'angular',
-	'angular-mocks',
-	'angular-moment',
-	'angular-restmod',
-	'angular-permission',
-	'seed/auth/_includes',
-	'seed/auth/module',
-	'seed/helpers/_includes',
-	'seed/helpers/module',
-	'seed/components/_includes',
-	'seed/components/module',
-	'seed/forms/_includes',
-	'seed/forms/module',
 	'seed/auth/register/forms/register/authRegisterForm.html',
 	'seed/auth/views/view.html'
 ], function () {
@@ -23,29 +10,6 @@ define([
 				describe('directive: authRegisterForm', function () {
 
 					var $compile, $rootScope, $state, $timeout, $q, neoSession, UserAPI, LanguageAPI;
-
-					beforeEach(function () {
-						module(function ($provide) {
-							$provide.constant('appConf', {
-								generalSettings: {
-									defaultRedirectStateAfterLogin: 'app.dashboard'
-								},
-								languageSettings: {
-									defaultLanguage: {
-										name: 'English',
-										code: 'gb',
-										locale: 'en-GB',
-										localePOSIX: 'en_GB'
-									}
-								}
-							});
-						});
-
-						module(
-							'permission', 'ui.router', 'angularMoment', 'restmod', 'gettext',
-							'seed.templateCache', 'seed.forms', 'seed.helpers', 'seed.components',
-							'seed.auth');
-					});
 
 					beforeEach(function () {
 						inject(function ($injector) {

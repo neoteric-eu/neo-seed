@@ -5,12 +5,29 @@
 
 define([
 	'angular',
-	'angular-cookies'
+	'angular-moment',
+	'angular-cookies',
+	'angular-gettext',
+	'angular-ui-router',
+	'angular-restmod',
+	'angular-permission'
 ], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.auth', [
+		// libs
+		'angularMoment',
 		'ngCookies',
+		'ui.router',
+		'gettext',
+		'restmod',
+		'permission',
+		// seed modules
+		'seed.templateCache',
+		'seed.helpers',
+		'seed.components',
+		'seed.forms',
+		// sub-modules
 		'seed.auth.login',
 		'seed.auth.register',
 		'seed.auth.password',
@@ -62,8 +79,7 @@ define([
 	});
 
 	module.run(function ($log) {
-		$log = $log.getInstance('seed.auth.module');
-
+		$log = $log.getInstance('seed.auth');
 		$log.debug('Initiated module');
 	});
 

@@ -1,16 +1,4 @@
 define([
-	'angular',
-	'angular-mocks',
-	'angular-moment',
-	'angular-restmod',
-	'seed/auth/_includes',
-	'seed/auth/module',
-	'seed/helpers/_includes',
-	'seed/helpers/module',
-	'seed/components/_includes',
-	'seed/components/module',
-	'seed/forms/_includes',
-	'seed/forms/module',
 	'seed/auth/password/forms/passwordReset/authPasswordResetForm.html'
 ], function () {
 	'use strict';
@@ -21,32 +9,6 @@ define([
 				describe('directive: authPasswordResetForm', function () {
 
 					var $compile, $rootScope, $state, $timeout, $q, $stateParams, UserAPI, LanguageAPI;
-
-					beforeEach(function () {
-						module(function ($provide) {
-							$provide.constant('appConf', {
-								generalSettings: {
-									defaultRedirectStateAfterLogin: 'app.dashboard'
-								},
-								languageSettings: {
-									defaultLanguage: {
-										name: 'English',
-										code: 'gb',
-										locale: 'en-GB',
-										localePOSIX: 'en_GB'
-									}
-								}
-							});
-
-							$provide.service('$stateParams', {
-								token: 'token'
-							});
-						});
-
-						module('ui.router', 'angularMoment', 'restmod', 'gettext',
-							'seed.templateCache', 'seed.forms', 'seed.helpers', 'seed.components',
-							'seed.auth');
-					});
 
 					beforeEach(function () {
 						inject(function ($injector) {
