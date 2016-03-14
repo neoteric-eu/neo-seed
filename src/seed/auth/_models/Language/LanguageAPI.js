@@ -1,7 +1,8 @@
 define([
 	'seed/auth/module',
+	'lodash',
 	'moment'
-], function (module) {
+], function (module, _) {
 	'use strict';
 
 	/**
@@ -12,12 +13,12 @@ define([
 	 *
 	 * @param $log {Object} Logging service
 	 * @param $window {Object} Window service
-	 * @param $cookies {Function} Cookie service
+	 * @param $cookies {angular-cookies} Cookie service
 	 * @param Language {Object} Model factory
-	 * @param neoRequestHeaders {Object} Header manipulation service
+	 * @param neoRequestHeaders {neoRequestHeaders} Header manipulation service
 	 * @param BaseAPI {Function} Base interface for REST communication with server
 	 * @param $rootScope {Object} Global scope provider
-	 * @param appConf {Object} Application configuration
+	 * @param appConf {appConf} Application configuration
 	 * @param gettextCatalog {Object} translation catalog provider
 	 * @param amMoment {Object} Moment configuration provider
 	 * @return {Function} Instantiated service
@@ -38,7 +39,7 @@ define([
 		api.init = function () {
 			api.languageCollection = Language
 				.$collection()
-				.$build(appConf.languageSettings.languageCollection);
+				.$decode(appConf.languageSettings.languageCollection);
 
 			$log.debug('Set up application language collection');
 
@@ -67,11 +68,14 @@ define([
 		 * @param language {seed.auth.Language} Language instance
 		 */
 		api.setLanguage = function (language) {
+			if(!_.isObject(language)) {
+				$log.error('Param language have to be an object');
+			}
 
 			api.languageCollection.$setSelected(language);
 
 			// Write locale to cookie
-			$cookies.putObject('lang', language);
+			$cookies.put('lang', _.stringify(language));
 			// Update headers
 			neoRequestHeaders.setAcceptLanguage(language.locale);
 
