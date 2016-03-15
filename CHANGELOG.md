@@ -1,3 +1,12 @@
+<a name="2.4.3"></a>
+## [2.4.3](//compare/v2.4.2...v2.4.3) (2016-03-15)
+
+
+### Bug Fixes
+
+* **BaseApi:** Fixed typo in message aab659e
+
+
 <a name="2.4.2"></a>
 ## [2.4.2](//compare/v2.3.8...v2.4.2) (2016-03-09)
 

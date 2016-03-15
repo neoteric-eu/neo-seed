@@ -1579,7 +1579,7 @@ define('seed/helpers/restmod/models/BaseAPI',['seed/helpers/module'], function (
 				.$asPromise()
 				.then(function (model) {
 					if (isNew) {
-						appMessages.success('Created new ' + model.t);
+						appMessages.success('Created new ' + model.type);
 					} else {
 						appMessages.success('Updated ' + model.type);
 					}
