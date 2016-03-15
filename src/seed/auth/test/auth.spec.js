@@ -32,4 +32,5 @@ define([
 	require(['seed/auth/test/password/authPasswordResetForm.spec']);
 	require(['seed/auth/test/password/authPasswordResetInitForm.spec']);
 	require(['seed/auth/test/register/authRegisterForm.spec']);
+	require(['seed/auth/test/login/authLoginForm.spec']);
 });
