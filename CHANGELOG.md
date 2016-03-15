@@ -1,3 +1,13 @@
+<a name="2.4.4"></a>
+## [2.4.4](//compare/v2.4.3...v2.4.4) (2016-03-15)
+
+
+### Bug Fixes
+
+* **Language:** Fix language build from raw collection f757482
+
+
+
 <a name="2.4.3"></a>
 ## [2.4.3](//compare/v2.4.2...v2.4.3) (2016-03-15)
 

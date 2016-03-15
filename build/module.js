@@ -3210,6 +3210,9 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 		return restmod
 			.model('/users')
 			.mix('UserPacker', {
+				type: {
+					init: 'User'
+				},
 				email: {
 					init: undefined
 				},
@@ -3598,8 +3601,9 @@ define('seed/auth/_models/Customer/CustomerAPI',['seed/auth/module'], function (
 
 define('seed/auth/_models/Language/LanguageAPI',[
 	'seed/auth/module',
+	'lodash',
 	'moment'
-], function (module) {
+], function (module, _) {
 	'use strict';
 
 	/**
@@ -3610,12 +3614,12 @@ define('seed/auth/_models/Language/LanguageAPI',[
 	 *
 	 * @param $log {Object} Logging service
 	 * @param $window {Object} Window service
-	 * @param $cookies {Function} Cookie service
+	 * @param $cookies {angular-cookies} Cookie service
 	 * @param Language {Object} Model factory
-	 * @param neoRequestHeaders {Object} Header manipulation service
+	 * @param neoRequestHeaders {neoRequestHeaders} Header manipulation service
 	 * @param BaseAPI {Function} Base interface for REST communication with server
 	 * @param $rootScope {Object} Global scope provider
-	 * @param appConf {Object} Application configuration
+	 * @param appConf {appConf} Application configuration
 	 * @param gettextCatalog {Object} translation catalog provider
 	 * @param amMoment {Object} Moment configuration provider
 	 * @return {Function} Instantiated service
@@ -3636,7 +3640,7 @@ define('seed/auth/_models/Language/LanguageAPI',[
 		api.init = function () {
 			api.languageCollection = Language
 				.$collection()
-				.$build(appConf.languageSettings.languageCollection);
+				.$decode(appConf.languageSettings.languageCollection);
 
 			$log.debug('Set up application language collection');
 
@@ -3665,11 +3669,14 @@ define('seed/auth/_models/Language/LanguageAPI',[
 		 * @param language {seed.auth.Language} Language instance
 		 */
 		api.setLanguage = function (language) {
+			if (!_.isObject(language)) {
+				$log.error('Param language have to be an object');
+			}
 
 			api.languageCollection.$setSelected(language);
 
 			// Write locale to cookie
-			$cookies.putObject('lang', language);
+			$cookies.put('lang', _.stringify(language));
 			// Update headers
 			neoRequestHeaders.setAcceptLanguage(language.locale);
 
@@ -3715,15 +3722,22 @@ define('seed/auth/_models/Language/Language',['seed/auth/module'], function (mod
 	'use strict';
 
 	/**
-	 * @constructor
 	 * @implements {seed.helpers.BaseModel}
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
 	 * @param appConf {appConf} app configuration
-	 * @return {*|Model} Model instance
+	 * @param appConf.languageSettings {appConf.languageSettings} language settings
+	 *
+	 * @class Language
+	 * @type {RecordApi}
+	 * @property {string} code - The language code
+	 * @property {string} locale - The language locale
+	 * @property {string} localePOSIX - The posix locale code
+	 *
+	 * @returns {Language} Model instance
 	 */
-	var Language = function (restmod, appConf) {
+	function Language(restmod, appConf) {
 		return restmod
 			.model('/language')
 			.mix({
@@ -3744,7 +3758,7 @@ define('seed/auth/_models/Language/Language',['seed/auth/module'], function (mod
 					}
 				}
 			});
-	};
+	}
 
 	module.factory('Language', Language);
 });

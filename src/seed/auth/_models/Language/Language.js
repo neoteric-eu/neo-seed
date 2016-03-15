@@ -38,7 +38,7 @@ define(['seed/auth/module'], function (module) {
 					}
 				}
 			});
-	};
+	}
 
 	module.factory('Language', Language);
 });
