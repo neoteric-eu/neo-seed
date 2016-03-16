@@ -2831,12 +2831,29 @@ define('seed/layout/_includes',[
 
 define('seed/auth/module',[
 	'angular',
-	'angular-cookies'
+	'angular-moment',
+	'angular-cookies',
+	'angular-gettext',
+	'angular-ui-router',
+	'angular-restmod',
+	'angular-permission'
 ], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.auth', [
+		// libs
+		'angularMoment',
 		'ngCookies',
+		'ui.router',
+		'gettext',
+		'restmod',
+		'permission',
+		// seed modules
+		'seed.templateCache',
+		'seed.helpers',
+		'seed.components',
+		'seed.forms',
+		// sub-modules
 		'seed.auth.login',
 		'seed.auth.register',
 		'seed.auth.password',
@@ -2888,8 +2905,7 @@ define('seed/auth/module',[
 	});
 
 	module.run(function ($log) {
-		$log = $log.getInstance('seed.auth.module');
-
+		$log = $log.getInstance('seed.auth');
 		$log.debug('Initiated module');
 	});
 
@@ -3793,6 +3809,7 @@ define('seed/auth/login/forms/login/authLoginForm',['seed/auth/module'], functio
 				var vm = this || {};
 
 				// variables
+				vm.formError = false;
 				vm.user = UserAPI.build();
 				vm.predefinedLogins = appConf.environmentSettings.predefinedLogins;
 				vm.appConf = appConf;
@@ -3834,7 +3851,7 @@ define('seed/auth/login/forms/login/authLoginForm',['seed/auth/module'], functio
 							} else {
 								neoSession
 									.setSession(vm.user, _.first(vm.user.customers))
-									.then(function(){
+									.then(function () {
 										if ($rootScope.requestedState) {
 											$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
 										} else {
@@ -4068,6 +4085,8 @@ define('seed/auth/register/forms/register/authRegisterForm',['seed/auth/register
 				 */
 				vm.registrationError = undefined;
 
+				vm.register = register;
+
 				/**
 				 * @property registrationError {Object} Validator properties
 				 */
@@ -4085,8 +4104,6 @@ define('seed/auth/register/forms/register/authRegisterForm',['seed/auth/register
 						}
 					}
 				};
-
-				vm.register = register;
 
 				/**
 				 * @method

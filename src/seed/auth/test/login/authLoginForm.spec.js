@@ -87,7 +87,8 @@ define([
 						// THEN
 						expect($state.current.name).toEqual('');
 					});
-					it('should navigate by default to selection of profile when successfully logged in with user with multiple profiles', function ($injector) {
+
+					it('should navigate by default to selection of profile when successfully logged in with user with multiple profiles', function () {
 						// GIVEN
 						spyOn(UserAPI, 'login').and.callFake(function () {
 							return $q.resolve(UserAPI.build({customers: ['profile1', 'profile2']}));
@@ -96,8 +97,6 @@ define([
 						spyOn(neoSession, 'setSession').and.callFake(function () {
 							return $q.resolve();
 						});
-
-						var appConf = $injector('appConf');
 
 						var scope = $rootScope.$new();
 						var element = $compile('<auth-login-form></auth-login-form>')(scope);
