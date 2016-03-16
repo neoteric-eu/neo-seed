@@ -2,15 +2,22 @@ define(['seed/auth/module'], function (module) {
 	'use strict';
 
 	/**
-	 * @constructor
 	 * @implements {seed.helpers.BaseModel}
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
 	 * @param appConf {appConf} app configuration
-	 * @return {*|Model} Model instance
+	 * @param appConf.languageSettings {appConf.languageSettings} language settings
+	 *
+	 * @class Language
+	 * @type {RecordApi}
+	 * @property {string} code - The language code
+	 * @property {string} locale - The language locale
+	 * @property {string} localePOSIX - The posix locale code
+	 *
+	 * @returns {Language} Model instance
 	 */
-	var Language = function (restmod, appConf) {
+	function Language(restmod, appConf) {
 		return restmod
 			.model('/language')
 			.mix({
@@ -31,7 +38,7 @@ define(['seed/auth/module'], function (module) {
 					}
 				}
 			});
-	};
+	}
 
 	module.factory('Language', Language);
 });
