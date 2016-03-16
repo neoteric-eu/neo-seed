@@ -1,5 +1,6 @@
 define([
-	'seed/auth/login/forms/login/authLoginForm.html'
+	'seed/auth/login/forms/login/authLoginForm.html',
+	'seed/components/euLogotypes/neoEuLogotypes.html'
 ], function () {
 	'use strict';
 
@@ -8,7 +9,7 @@ define([
 			describe('module: login', function () {
 				describe('directive: authLoginForm', function () {
 
-					var $compile, $rootScope, LanguageAPI;
+					var $q, $state, $compile, $timeout, $rootScope, neoSession, LanguageAPI, UserAPI;
 
 					beforeEach(function () {
 						module(function ($provide) {
@@ -18,6 +19,17 @@ define([
 										login: 'exampleUser',
 										password: 'examplePassword'
 									}]
+								},
+								generalSettings: {
+									defaultRedirectStateAfterLogin: 'app.dashboard'
+								},
+								languageSettings: {
+									defaultLanguage: {
+										name: 'English',
+										code: 'gb',
+										locale: 'en-GB',
+										localePOSIX: 'en_GB'
+									}
 								}
 							});
 						});
@@ -25,56 +37,179 @@ define([
 
 					beforeEach(function () {
 						inject(function ($injector) {
+							$q = $injector.get('$q');
+							$state = $injector.get('$state');
 							$compile = $injector.get('$compile');
+							$timeout = $injector.get('$timeout');
 							$rootScope = $injector.get('$rootScope');
+							neoSession = $injector.get('neoSession');
 							LanguageAPI = $injector.get('LanguageAPI');
+							UserAPI = $injector.get('UserAPI');
 						});
 					});
 
-					//it('should set user login and password for predefined logins', function () {
+					beforeEach(function () {
+						spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
+							return {localePOSIX: 'en_GB'};
+						});
+					});
+
+					it('should set user login and password for predefined logins', function () {
+						// GIVEN
+						var scope = $rootScope.$new();
+						var element = $compile('<auth-login-form></auth-login-form>')(scope);
+						$rootScope.$digest();
+
+						var vm = element.controller('authLoginForm');
+						var sut = {
+							login: 'exampleUser',
+							password: 'examplePassword'
+						};
+						// WHEN
+						vm.loginAs(sut);
+
+						// THEN
+						expect(vm.user).toEqual(jasmine.objectContaining(sut));
+					});
+
+					it('should not log in if user has not provided login and email in form', function () {
+						// GIVEN
+						var scope = $rootScope.$new();
+						var element = $compile('<auth-login-form></auth-login-form>')(scope);
+						$rootScope.$digest();
+
+						var vm = element.controller('authLoginForm');
+
+						// WHEN
+						vm.login();
+						$timeout.flush();
+
+						// THEN
+						expect($state.current.name).toEqual('');
+					});
+					it('should navigate by default to selection of profile when successfully logged in with user with multiple profiles', function ($injector) {
+						// GIVEN
+						spyOn(UserAPI, 'login').and.callFake(function () {
+							return $q.resolve(UserAPI.build({customers: ['profile1', 'profile2']}));
+						});
+
+						spyOn(neoSession, 'setSession').and.callFake(function () {
+							return $q.resolve();
+						});
+
+						var appConf = $injector('appConf');
+
+						var scope = $rootScope.$new();
+						var element = $compile('<auth-login-form></auth-login-form>')(scope);
+						$rootScope.$digest();
+
+						var vm = element.controller('authLoginForm');
+						vm.user.$extend({
+							login: 'exampleUser',
+							password: 'examplePassword'
+						});
+
+						// WHEN
+						vm.login();
+						$timeout.flush();
+
+						// THEN
+						expect(UserAPI.login).toHaveBeenCalled();
+						expect($rootScope.user).toBeDefined();
+						expect($state.current.name).toEqual('auth.profileSelect');
+					});
+
+					it('should redirect by default to defaultRedirectStateAfterLogin when successfully logged in with one profile', function ($injector) {
+						// GIVEN
+						spyOn(UserAPI, 'login').and.callFake(function () {
+							return $q.resolve(UserAPI.build());
+						});
+
+						spyOn(neoSession, 'setSession').and.callFake(function () {
+							return $q.resolve();
+						});
+
+						var appConf = $injector('appConf');
+
+						var scope = $rootScope.$new();
+						var element = $compile('<auth-login-form></auth-login-form>')(scope);
+						$rootScope.$digest();
+
+						var vm = element.controller('authLoginForm');
+						vm.user.$extend({
+							login: 'exampleUser',
+							password: 'examplePassword'
+						});
+
+						// WHEN
+						vm.login();
+						$rootScope.$digest();
+						$timeout.flush();
+
+						// THEN
+						expect(UserAPI.login).toHaveBeenCalled();
+						expect($rootScope.user).toBeDefined();
+						expect($state.current.name).toEqual(appConf.generalSettings.defaultRedirectStateAfterLogin);
+					});
+
+					//it('should redirect to requestedState if defined when successfully logged in with one profile', function ($injector) {
 					//	// GIVEN
-					//	spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
-					//		return {localePOSIX: 'en_GB'};
+					//	spyOn(UserAPI, 'login').and.callFake(function () {
+					//		return $q.resolve(UserAPI.build());
 					//	});
+					//
+					//	spyOn(neoSession, 'setSession').and.callFake(function () {
+					//		return $q.resolve();
+					//	});
+					//
+					//	var appConf = $injector('appConf');
 					//
 					//	var scope = $rootScope.$new();
 					//	var element = $compile('<auth-login-form></auth-login-form>')(scope);
 					//	$rootScope.$digest();
+					//	$rootScope.requestedState = 'app.dashboard';
 					//
 					//	var vm = element.controller('authLoginForm');
-					//	var sut = {
+					//
+					//	vm.user.$extend({
 					//		login: 'exampleUser',
 					//		password: 'examplePassword'
-					//	};
-					//	// WHEN
-					//	vm.loginAs(sut);
-					//
-					//	// THEN
-					//	expect(vm.user).toEqual(sut);
-					//});
-
-					//it('should return error when rejected registration', function () {
-					//	// GIVEN
-					//	var mockedError = 'Tragical error';
-					//
-					//	spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
-					//		return {localePOSIX: 'en_GB'};
 					//	});
 					//
-					//	var scope = $rootScope.$new();
-					//	var element = $compile('<auth-register-form></auth-register-form>')(scope);
+					//	// WHEN
+					//	vm.login();
 					//	$rootScope.$digest();
 					//	$timeout.flush();
 					//
-					//	var vm = element.controller('authRegisterForm');
-					//
-					//	// WHEN
-					//	vm.register();
-					//	$rootScope.$digest();
-					//
 					//	// THEN
-					//	expect(vm.registrationError).toBe(mockedError);
+					//	expect($state.current.name).toEqual('app.dashboard');
 					//});
+
+					it('should show form error when login is rejected', function () {
+						// GIVEN
+						spyOn(UserAPI, 'login').and.callFake(function () {
+							return $q.reject();
+						});
+
+						var scope = $rootScope.$new();
+						var element = $compile('<auth-login-form></auth-login-form>')(scope);
+						$rootScope.$digest();
+
+						var vm = element.controller('authLoginForm');
+
+						vm.user.$extend({
+							login: 'exampleUser',
+							password: 'examplePassword'
+						});
+
+						// WHEN
+						vm.login();
+						$timeout.flush();
+
+						// THEN
+						expect(UserAPI.login).toHaveBeenCalled();
+						expect(vm.formError).toBeTruthy();
+					});
 				});
 			});
 		});
