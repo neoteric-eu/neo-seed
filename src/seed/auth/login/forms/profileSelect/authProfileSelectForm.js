@@ -38,6 +38,7 @@ define(['seed/auth/module'], function (module) {
 				vm.setCustomerActive = setCustomerActive;
 				vm.isCustomerActive = isCustomerActive;
 				vm.login = login;
+				vm.init = init;
 
 				init();
 
@@ -63,7 +64,8 @@ define(['seed/auth/module'], function (module) {
 				}
 
 				function login() {
-					neoSession.setSession(vm.user, vm.activeCustomer)
+					neoSession
+						.setSession(vm.user, vm.activeCustomer)
 						.then(function () {
 							if ($rootScope.requestedState) {
 								$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
