@@ -16,7 +16,10 @@ define(['seed/components/module'], function (module) {
 				if(appConf.generalSettings.favicon.sizes) {
 					tElement.attr('sizes', appConf.generalSettings.favicon.sizes);
 				}
-				tElement.attr('href', appConf.generalSettings.favicon.uri);
+
+				if (appConf.generalSettings.favicon.uri) {
+					tElement.attr('href', appConf.generalSettings.favicon.uri);
+				}
 			}
 		};
 	}
