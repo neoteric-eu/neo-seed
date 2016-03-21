@@ -66,7 +66,7 @@ define(['seed/auth/module'], function (module) {
 							$log.debug('Logged in user with ID: ' + user.id);
 
 							if (vm.user.customers.length > 1) {
-								$state.transitionTo('auth.profileSelect', {}, {notify: true, reload: false});
+								$state.go('auth.profileSelect', {}, {notify: true, reload: false});
 							} else {
 								neoSession
 									.setSession(vm.user, _.first(vm.user.customers))

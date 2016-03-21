@@ -9,7 +9,7 @@ define([
 			describe('module: login', function () {
 				describe('directive: authLoginForm', function () {
 
-					var $q, $state, $compile, $timeout, $rootScope, neoSession, LanguageAPI, UserAPI;
+					var $q, $state, $compile, $timeout, $rootScope, neoSession, LanguageAPI, UserAPI, Permission;
 
 					beforeEach(function () {
 						module(function ($provide) {
@@ -45,6 +45,7 @@ define([
 							neoSession = $injector.get('neoSession');
 							LanguageAPI = $injector.get('LanguageAPI');
 							UserAPI = $injector.get('UserAPI');
+							Permission = $injector.get('Permission');
 						});
 					});
 
@@ -88,11 +89,22 @@ define([
 						expect($state.current.name).toEqual('');
 					});
 
-					it('should navigate by default to selection of profile when successfully logged in with user with multiple profiles', function () {
+					it('should navigate by default to selection of profile when successfully logged in with user with multiple profiles', function ($inject) {
 						// GIVEN
 						spyOn(UserAPI, 'login').and.callFake(function () {
-							return $q.resolve(UserAPI.build({customers: ['profile1', 'profile2']}));
+							return $q.resolve(UserAPI.build({
+								customers: [
+									{
+										featureKeys: []
+									},
+									{
+										featureKeys: []
+									}
+								]
+							}));
 						});
+
+						var $state = $inject('$state');
 
 						spyOn(neoSession, 'setSession').and.callFake(function () {
 							return $q.resolve();
