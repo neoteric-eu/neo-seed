@@ -97,7 +97,7 @@ define([
 						expect(vm.activeCustomer).toEqual(sut);
 					});
 
-					fit('should navigate by default to selection of profile when successfully logged in with user with multiple profiles', function () {
+					it('should navigate by default to selection of profile when successfully logged in with user with multiple profiles', function () {
 						//GIVEN
 						spyOn(UserAPI, 'login').and.callFake(function () {
 							return $q.resolve(UserAPI.build({
