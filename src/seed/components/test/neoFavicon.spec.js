@@ -51,19 +51,6 @@ define([
           expect(element.attr('sizes')).toBe(generalSettings.favicon.sizes);
         });
 
-        it('should not change anything if favicon is not available', function () {
-          // GIVEN
-          appConf.generalSettings = {favicon: undefined};
-          var scope = $rootScope.$new();
-          var element = $compile('<link neo-favicon/>')(scope);
-
-          // WHEN
-
-          // THEN
-          expect(element.attr('href')).toBeUndefined();
-          expect(element.attr('sizes')).toBeUndefined();
-        });
-
         it('should set only href attribute', function () {
           // GIVEN
           appConf.generalSettings = {
@@ -82,22 +69,34 @@ define([
           expect(element.attr('sizes')).toBeUndefined();
         });
 
-        it('should set only sizes attribute', function () {
+        it('should remove element when favicon is not available', function () {
+          // GIVEN
+          appConf.generalSettings = {favicon: undefined};
+          var scope = $rootScope.$new();
+          var element = $compile('<head><link neo-favicon/></head>')(scope);
+
+          // WHEN
+          scope.$digest();
+
+          // THEN
+          expect(element.html()).toBe('');
+        });
+
+        it('should remove element when favicon has only size set', function () {
           // GIVEN
           appConf.generalSettings = {
             favicon: {
               sizes: generalSettings.favicon.sizes
             }
           };
-
           var scope = $rootScope.$new();
-          var element = $compile('<link neo-favicon/>')(scope);
+          var element = $compile('<head><link neo-favicon/></head>')(scope);
 
           // WHEN
+          scope.$digest();
 
           // THEN
-          expect(element.attr('href')).toBeUndefined();
-          expect(element.attr('sizes')).toBe(generalSettings.favicon.sizes);
+          expect(element.html()).toBe('');
         });
       });
     });

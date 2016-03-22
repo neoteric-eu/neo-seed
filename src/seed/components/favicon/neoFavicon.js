@@ -9,7 +9,9 @@ define(['seed/components/module'], function (module) {
 				$log = $log.getInstance('seed.components.neoFavicon');
 				$log.debug('Initiated directive');
 
-				if(!appConf.generalSettings.favicon) {
+				if(!appConf.generalSettings.favicon || !appConf.generalSettings.favicon.uri) {
+					tElement.remove();
+
 					return;
 				}
 
@@ -17,9 +19,7 @@ define(['seed/components/module'], function (module) {
 					tElement.attr('sizes', appConf.generalSettings.favicon.sizes);
 				}
 
-				if (appConf.generalSettings.favicon.uri) {
-					tElement.attr('href', appConf.generalSettings.favicon.uri);
-				}
+				tElement.attr('href', appConf.generalSettings.favicon.uri);
 			}
 		};
 	}
