@@ -13,7 +13,7 @@ define([
 
 					beforeEach(function () {
 						module('ui.router', function ($injector) {
-							$stateProvider = $injector.get('$stateProvider')
+							$stateProvider = $injector.get('$stateProvider');
 						});
 						inject(function ($injector) {
 							$q = $injector.get('$q');
@@ -25,7 +25,7 @@ define([
 							Permission = $injector.get('Permission');
 							neoSession = $injector.get('neoSession');
 							$rootScope = $injector.get('$rootScope');
-							appConf = $injector.get('appConf')
+							appConf = $injector.get('appConf');
 						});
 					});
 
@@ -51,7 +51,7 @@ define([
 							spyOn(neoSession, 'setSession').and.callFake(function () {
 								return $q.resolve();
 							});
-						})
+						});
 					});
 
 
