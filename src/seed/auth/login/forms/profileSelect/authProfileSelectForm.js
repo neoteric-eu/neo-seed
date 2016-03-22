@@ -14,7 +14,7 @@ define(['seed/auth/module'], function (module) {
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope:
 	 *   {redirectToState: string}, controller: Function}}
 	 */
-	function authProfileSelectForm($log, $state, neoSession, appConf, $rootScope) {
+	function authProfileSelectForm($log, $state, neoSession, appConf) {
 		$log = $log.getInstance('seed.auth.login.authProfileSelectForm');
 
 		$log.debug('Initiated directive');
@@ -67,8 +67,8 @@ define(['seed/auth/module'], function (module) {
 					neoSession
 						.setSession(vm.user, vm.activeCustomer)
 						.then(function () {
-							if ($rootScope.requestedState) {
-								$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
+							if ($scope.$root.requestedState) {
+								$state.go($scope.$root.requestedState.toState, $scope.$root.requestedState.toParams);
 							} else {
 								$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
 							}
