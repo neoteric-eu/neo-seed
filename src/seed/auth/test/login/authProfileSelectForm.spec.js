@@ -15,6 +15,9 @@ define([
 						module('ui.router', function ($injector) {
 							$stateProvider = $injector.get('$stateProvider');
 						});
+					});
+					
+					beforeEach(function () {
 						inject(function ($injector) {
 							$q = $injector.get('$q');
 							$compile = $injector.get('$compile');
@@ -37,20 +40,18 @@ define([
 					});
 
 					beforeEach(function () {
-						inject(function () {
-							spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
-								return {localePOSIX: 'en_GB'};
-							});
-							scope.$root.user = UserAPI.build({
-								login: 'exampleUser',
-								password: 'examplePassword'
-							});
-							spyOn(Permission, 'authorize').and.callFake(function () {
-								return $q.resolve();
-							});
-							spyOn(neoSession, 'setSession').and.callFake(function () {
-								return $q.resolve();
-							});
+						spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
+							return {localePOSIX: 'en_GB'};
+						});
+						scope.$root.user = UserAPI.build({
+							login: 'exampleUser',
+							password: 'examplePassword'
+						});
+						spyOn(Permission, 'authorize').and.callFake(function () {
+							return $q.resolve();
+						});
+						spyOn(neoSession, 'setSession').and.callFake(function () {
+							return $q.resolve();
 						});
 					});
 

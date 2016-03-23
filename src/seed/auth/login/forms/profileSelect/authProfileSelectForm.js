@@ -76,6 +76,8 @@ define(['seed/auth/module'], function (module) {
 
 					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);
 				}
+
+				$log.debug('Initiated controller');
 			}
 		};
 	}
