@@ -24,10 +24,11 @@ define([
           inject(function ($injector) {
             $compile = $injector.get('$compile');
             $rootScope = $injector.get('$rootScope');
+            $log = $injector.get('$log');
           });
         });
 
-        fit('should should render EU logotypes', function () {
+        it('should should render EU logotypes', function () {
           // GIVEN
           var scope = $rootScope.$new();
           var element = $compile('<neo-eu-logotypes></neo-eu-logotypes>')(scope);
