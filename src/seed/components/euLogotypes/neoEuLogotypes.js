@@ -1,12 +1,15 @@
 define(['seed/components/module'], function (module) {
-	'use strict';
+  'use strict';
 
-	function neoEuLogotypes() {
-		return {
-			restrict: 'E',
-			templateUrl: 'seed/components/euLogotypes/neoEuLogotypes.html'
-		};
-	}
+  function neoEuLogotypes($log) {
+    $log = $log.getInstance('seed.components.neoEuLogotypes');
+    $log.debug('Initiated directive');
 
-	module.directive('neoEuLogotypes', neoEuLogotypes);
+    return {
+      restrict: 'E',
+      templateUrl: 'seed/components/euLogotypes/neoEuLogotypes.html'
+    };
+  }
+
+  module.directive('neoEuLogotypes', neoEuLogotypes);
 });
