@@ -8,10 +8,15 @@ define(['seed/components/module'], function (module) {
      *
      * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
      * @param $cookies
+     * @param $log {Object} Logging service
      *              <cookie-consent></cookie-consent>
      */
 
-    function cookieConsent($cookies) {
+    function cookieConsent($cookies, $log) {
+        $log = $log.getInstance('seed.components.cookieConsent');
+
+        $log.debug('Initiated directive');
+        
         return {
             restrict: 'E',
             templateUrl: 'seed/components/cookieConsent/cookieConsent.html',
@@ -35,6 +40,8 @@ define(['seed/components/module'], function (module) {
                     $cookies.putObject('cookieConsent', true);
                     $element.hide();
                 }
+
+                $log.debug('Initiated controller');
             }
         };
     }
