@@ -7,6 +7,50 @@ define([
 	'use strict';
 
 	beforeEach(function () {
+		module(function ($provide) {
+			$provide.constant('appConf', {
+				environmentSettings: {
+					predefinedLogins: [{
+						login: 'exampleUser',
+						password: 'examplePassword'
+					}]
+				},
+				generalSettings: {
+					defaultRedirectStateAfterLogin: 'app.dashboard'
+				},
+				languageSettings: {
+					defaultLanguage: {
+						name: 'English',
+						code: 'gb',
+						locale: 'en-GB',
+						localePOSIX: 'en_GB'
+					},
+					languageCollection: [
+						{
+							name: 'Polski',
+							code: 'pl',
+							locale: 'pl-PL',
+							localePOSIX: 'pl_PL'
+						},
+						{
+							name: 'English',
+							code: 'gb',
+							locale: 'en-GB',
+							localePOSIX: 'en_GB'
+						},
+						{
+							name: 'Deutsch',
+							code: 'de',
+							locale: 'de-DE',
+							localePOSIX: 'de_DE'
+						}
+					]
+				}
+			});
+		});
+	});
+
+	beforeEach(function () {
 		module('seed.components');
 	});
 
