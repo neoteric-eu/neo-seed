@@ -4,6 +4,7 @@ define([
 
 	'./_services/neoSession',
 	'./_services/neoRequestHeaders',
+	'./_services/neoLanguage',
 
 	'./_models/User/User',
 	'./_models/User/UserAPI',

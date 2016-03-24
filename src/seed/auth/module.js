@@ -5,6 +5,8 @@
 
 define([
 	'angular',
+	'moment',
+	'moment-timezone',
 	'angular-moment',
 	'angular-cookies',
 	'angular-gettext',
@@ -78,9 +80,11 @@ define([
 			});
 	});
 
-	module.run(function ($log) {
+	module.run(function ($log, neoLanguage) {
 		$log = $log.getInstance('seed.auth');
 		$log.debug('Initiated module');
+
+		neoLanguage.init();
 	});
 
 	return module;

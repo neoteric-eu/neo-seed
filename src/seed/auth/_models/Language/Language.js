@@ -29,13 +29,6 @@ define(['seed/auth/module'], function (module) {
 				},
 				localePOSIX: {
 					init: appConf.languageSettings.defaultLanguage.localePOSIX
-				},
-				$extend: {
-					Resource: {
-						$setSelected: function (locale) {
-							this.$selected = locale;
-						}
-					}
 				}
 			});
 	}

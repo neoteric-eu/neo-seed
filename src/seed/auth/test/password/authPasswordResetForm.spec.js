@@ -8,7 +8,7 @@ define([
 			describe('module: password', function () {
 				describe('directive: authPasswordResetForm', function () {
 
-					var $compile, $rootScope, $state, $timeout, $q, $stateParams, UserAPI, LanguageAPI;
+					var $compile, $rootScope, $state, $timeout, $q, $stateParams, UserAPI;
 
 					beforeEach(function () {
 						inject(function ($injector) {
@@ -19,13 +19,6 @@ define([
 							$q = $injector.get('$q');
 							$timeout = $injector.get('$timeout');
 							UserAPI = $injector.get('UserAPI');
-							LanguageAPI = $injector.get('LanguageAPI');
-						});
-					});
-
-					beforeEach(function () {
-						spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
-							return {localePOSIX: 'en_GB'};
 						});
 					});
 
@@ -47,7 +40,7 @@ define([
 
 					it('should navigate to login page after successful password reset', function () {
 						// GIVEN
-						spyOn(UserAPI, 'resetPassword').and.callFake(function () {
+						spyOn(UserAPI, 'resetPasswordFinish').and.callFake(function () {
 							return $q.resolve();
 						});
 
@@ -75,7 +68,7 @@ define([
 					it('should show error when server rejects password reset returning cause', function () {
 						// GIVEN
 						var rejectionCause = 'Rejection cause';
-						spyOn(UserAPI, 'resetPassword').and.callFake(function () {
+						spyOn(UserAPI, 'resetPasswordFinish').and.callFake(function () {
 							return $q.reject({
 								$response: {
 									data: [rejectionCause]
@@ -100,7 +93,7 @@ define([
 
 					it('should show error when server rejects with 404', function () {
 						// GIVEN
-						spyOn(UserAPI, 'resetPassword').and.callFake(function () {
+						spyOn(UserAPI, 'resetPasswordFinish').and.callFake(function () {
 							return $q.reject({
 								$response: {
 									status: 404

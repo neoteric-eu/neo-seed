@@ -7,7 +7,7 @@ define([
 ], function (module) {
 	'use strict';
 
-	function neoValidate($log, LanguageAPI) {
+	function neoValidate($log, neoLanguage) {
 
 		$log = $log.getInstance('seed.forms.neoValidate');
 		$log.debug('Initiated directive');
@@ -20,7 +20,7 @@ define([
 			},
 			link: function (scope, form) {
 
-				var currentLanguage = LanguageAPI.getLanguage();
+				var currentLanguage = neoLanguage.getActiveLanguage();
 
 				var defaults = {
 					framework: 'bootstrap',

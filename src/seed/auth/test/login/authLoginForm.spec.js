@@ -23,7 +23,6 @@ define([
 							$compile = $injector.get('$compile');
 							$timeout = $injector.get('$timeout');
 							UserAPI = $injector.get('UserAPI');
-							LanguageAPI = $injector.get('LanguageAPI');
 							$state = $injector.get('$state');
 							Permission = $injector.get('Permission');
 							neoSession = $injector.get('neoSession');
@@ -36,12 +35,10 @@ define([
 						inject(function ($injector) {
 							scope = $injector.get('$rootScope').$new();
 
-							spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
-								return {localePOSIX: 'en_GB'};
-							});
 							spyOn(Permission, 'authorize').and.callFake(function () {
 								return $q.resolve();
 							});
+
 							spyOn(neoSession, 'setSession').and.callFake(function () {
 								return $q.resolve();
 							});

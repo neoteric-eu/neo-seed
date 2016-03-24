@@ -15,20 +15,6 @@ define([
 
 				beforeEach(function () {
 					// Instantiate the fake modules
-					module(function ($provide) {
-						var LanguageAPI = jasmine.createSpyObj('LanguageAPI', ['getLanguage']);
-						LanguageAPI.getLanguage.and.callFake(function () {
-							return {
-								name: 'English',
-								code: 'gb',
-								locale: 'en-GB',
-								localePOSIX: 'en_GB'
-							};
-						});
-
-						$provide.value('LanguageAPI', LanguageAPI);
-					});
-
 					module('seed.forms');
 
 					// Inject service into module
