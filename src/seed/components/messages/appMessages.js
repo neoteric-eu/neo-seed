@@ -1,7 +1,10 @@
 define(['seed/components/module', 'notification'], function (module) {
 	'use strict';
 
-	module.service('appMessages', function (gettext, gettextCatalog) {
+	module.service('appMessages', function (gettext, gettextCatalog, $log) {
+
+		$log = $log.getInstance('seed.components.appMessages');
+		$log.debug('Initiated service');
 
 		var appMessages = {
 			data: {},

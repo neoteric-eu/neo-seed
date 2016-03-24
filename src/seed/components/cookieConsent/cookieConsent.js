@@ -1,44 +1,51 @@
 define(['seed/components/module'], function (module) {
-    'use strict';
+	'use strict';
 
-    /**
-     * Creates a Breadcrumbs line based on state data.title attribute
-     * @class cookieConsent
-     * @memberOf seed.components
-     *
-     * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
-     * @param $cookies
-     *              <cookie-consent></cookie-consent>
-     */
+	/**
+	 * Creates a Breadcrumbs line based on state data.title attribute
+	 * @class cookieConsent
+	 * @memberOf seed.components
+	 *
+	 * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
+	 * @param $cookies
+	 * @param $log {Object} Logging service
+	 *              <cookie-consent></cookie-consent>
+	 */
 
-    function cookieConsent($cookies) {
-        return {
-            restrict: 'E',
-            templateUrl: 'seed/components/cookieConsent/cookieConsent.html',
-            scope: {},
-            controllerAs: 'vm',
-            controller: function ($element) {
-                var vm = this || {};
+	function cookieConsent($cookies, $log) {
+		$log = $log.getInstance('seed.components.cookieConsent');
 
-                vm.init = init;
-                vm.acceptCookies = acceptCookies;
+		$log.debug('Initiated directive');
 
-                vm.init();
+		return {
+			restrict: 'E',
+			templateUrl: 'seed/components/cookieConsent/cookieConsent.html',
+			scope: {},
+			controllerAs: 'vm',
+			controller: function ($element) {
+				var vm = this || {};
 
-                function init () {
-                   if($cookies.getObject('cookieConsent')) {
-                       $element.hide();
-                   }
-                }
+				vm.init = init;
+				vm.acceptCookies = acceptCookies;
 
-                function acceptCookies () {
-                    $cookies.putObject('cookieConsent', true);
-                    $element.hide();
-                }
-            }
-        };
-    }
+				vm.init();
 
-    module.directive('cookieConsent', cookieConsent);
+				function init() {
+					if ($cookies.getObject('cookieConsent')) {
+						$element.hide();
+					}
+				}
+
+				function acceptCookies() {
+					$cookies.putObject('cookieConsent', true);
+					$element.hide();
+				}
+
+				$log.debug('Initiated controller');
+			}
+		};
+	}
+
+	module.directive('cookieConsent', cookieConsent);
 
 });

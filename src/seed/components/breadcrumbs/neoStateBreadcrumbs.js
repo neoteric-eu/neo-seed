@@ -9,9 +9,10 @@ define(['seed/components/module'], function (module) {
 	 * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
 	 * @param $rootScope
 	 * @param $state
+	 * @param $log {Object} Logging service
 	 *
 	 * @example
-	 *  <state-breadcrumbs></state-breadcrumbs>
+	 *  <neo-state-breadcrumbs></neo-state-breadcrumbs>
 	 *
 	 *  State definition object:
 	 *
@@ -24,15 +25,20 @@ define(['seed/components/module'], function (module) {
    *			})
 	 */
 
-	function neoStateBreadcrumbs($rootScope, $state) {
+	function neoStateBreadcrumbs($rootScope, $state, $log) {
+		$log = $log.getInstance('seed.components.neoStateBreadcrumbs');
+
+		$log.debug('Initiated directive');
+
 		return {
 			restrict: 'E',
 			replace: true,
 			templateUrl: 'seed/components/breadcrumbs/neoStateBreadcrumbs.html',
 			scope: {},
-			link: function (scope) {
+			controllerAs: 'vm',
+			controller: function () {
 
-				var vm = scope.vm || (scope.vm = {});
+				var vm = this || {};
 
 				/**
 				 * Recreate on state change
@@ -53,20 +59,22 @@ define(['seed/components/module'], function (module) {
 					vm.crumbs = breadcrumbs;
 				}
 
-				function fetchBreadcrumbs(stateName, breadcrunbs) {
+				function fetchBreadcrumbs(stateName, breadcrumbs) {
 					var state = $state.get(stateName);
 
-					if (state && state.data && state.data.title && breadcrunbs.indexOf(state.data.title) === -1) {
-						breadcrunbs.unshift({title: state.data.title, stateName: state.name});
+					if (state && state.data && state.data.title && breadcrumbs.indexOf(state.data.title) === -1) {
+						breadcrumbs.unshift({title: state.data.title, stateName: state.name});
 					}
 
 					var parentName = stateName.replace(/.?\w+$/, '');
 					if (parentName) {
-						return fetchBreadcrumbs(parentName, breadcrunbs);
+						return fetchBreadcrumbs(parentName, breadcrumbs);
 					} else {
-						return breadcrunbs;
+						return breadcrumbs;
 					}
 				}
+
+				$log.debug('Initiated controller');
 			}
 		};
 	}
