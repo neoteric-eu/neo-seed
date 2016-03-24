@@ -3,7 +3,7 @@ define([
   'angular-mocks',
   'seed/components/_includes',
   'seed/components/module',
-  'seed/helpers/_includes',
+  'seed/helpers/_includes'
 ], function () {
   'use strict';
 
@@ -12,7 +12,7 @@ define([
       describe('directive: bigBreadcrumbs', function () {
 
         var $compile, $rootScope, $log;
-        var scope, element, vm;
+        var scope;
 
         beforeEach(function () {
           module('seed.components');
