@@ -1,71 +1,71 @@
 define([
-  'seed/components/cookieConsent/cookieConsent.html'
+	'seed/components/cookieConsent/cookieConsent.html'
 ], function () {
-  'use strict';
+	'use strict';
 
-  describe('module: seed', function () {
-    describe('module: components', function () {
-      describe('directive: cookieConsent', function () {
+	describe('module: seed', function () {
+		describe('module: components', function () {
+			describe('directive: cookieConsent', function () {
 
-        var $compile, $rootScope, $log, $cookies;
-        var scope, element, vm;
+				var $compile, $rootScope, $log, $cookies;
+				var scope, element, vm;
 
-        beforeEach(function () {
-          // Inject service into module
-          inject(function ($injector) {
-            $compile = $injector.get('$compile');
-            $rootScope = $injector.get('$rootScope');
-            $log = $injector.get('$log');
-            $cookies = $injector.get('$cookies');
-          });
+				beforeEach(function () {
+					// Inject service into module
+					inject(function ($injector) {
+						$compile = $injector.get('$compile');
+						$rootScope = $injector.get('$rootScope');
+						$log = $injector.get('$log');
+						$cookies = $injector.get('$cookies');
+					});
 
-          scope = $rootScope.$new();
-          $cookies.remove('cookieConsent');
-        });
+					scope = $rootScope.$new();
+					$cookies.remove('cookieConsent');
+				});
 
-        it('should contain init and acceptCookies methods', function () {
-          // GIVEN
-          element = $compile('<cookie-consent></cookie-consent>')(scope);
-          scope.$digest();
-          vm = element.controller('cookieConsent');
+				it('should contain init and acceptCookies methods', function () {
+					// GIVEN
+					element = $compile('<cookie-consent></cookie-consent>')(scope);
+					scope.$digest();
+					vm = element.controller('cookieConsent');
 
-          // WHEN
+					// WHEN
 
-          // THEN
-          expect(vm.init).toBeDefined();
-          expect(vm.acceptCookies).toBeDefined();
-        });
+					// THEN
+					expect(vm.init).toBeDefined();
+					expect(vm.acceptCookies).toBeDefined();
+				});
 
-        it('should hide element when accepting cookies policy', function () {
-          // GIVEN
-          element = $compile('<cookie-consent></cookie-consent>')(scope);
-          scope.$digest();
-          vm = element.controller('cookieConsent');
+				it('should hide element when accepting cookies policy', function () {
+					// GIVEN
+					element = $compile('<cookie-consent></cookie-consent>')(scope);
+					scope.$digest();
+					vm = element.controller('cookieConsent');
 
-          // WHEN
-          vm.acceptCookies();
-          scope.$digest();
+					// WHEN
+					vm.acceptCookies();
+					scope.$digest();
 
-          // THEN
-          expect($cookies.getObject('cookieConsent')).toBe(true);
-          expect(element[0].style.display).toBe('none');
-        });
+					// THEN
+					expect($cookies.getObject('cookieConsent')).toBe(true);
+					expect(element[0].style.display).toBe('none');
+				});
 
-        it('should hide element on init if cookie is present', function () {
-          // GIVEN
-          $cookies.putObject('cookieConsent', true);
+				it('should hide element on init if cookie is present', function () {
+					// GIVEN
+					$cookies.putObject('cookieConsent', true);
 
-          element = $compile('<cookie-consent></cookie-consent>')(scope);
-          scope.$digest();
-          vm = element.controller('cookieConsent');
+					element = $compile('<cookie-consent></cookie-consent>')(scope);
+					scope.$digest();
+					vm = element.controller('cookieConsent');
 
-          // WHEN
+					// WHEN
 
-          // THEN
-          expect(element[0].style.display).toBe('none');
-        });
-      });
-    });
-  });
+					// THEN
+					expect(element[0].style.display).toBe('none');
+				});
+			});
+		});
+	});
 });
 

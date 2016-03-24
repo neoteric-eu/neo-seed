@@ -5,7 +5,7 @@ define(['seed/components/module'], function (module) {
 		$log = $log.getInstance('seed.components.bigBreadcrumbs');
 
 		$log.debug('Initiated directive');
-		
+
 		return {
 			restrict: 'E',
 			replace: true,

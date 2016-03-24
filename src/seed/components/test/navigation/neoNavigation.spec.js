@@ -8,7 +8,7 @@ define([], function () {
 				var $compile, $rootScope, $log, $q, neoTemplateLoader;
 
 				beforeEach(function () {
-					module(function($provide) {
+					module(function ($provide) {
 						$provide.constant('appConf', {
 							appsSettings: [
 								{
@@ -44,7 +44,7 @@ define([], function () {
 
 				it('should return templates in order', function () {
 					// GIVEN
-					spyOn(neoTemplateLoader, 'load').and.callFake(function(path){
+					spyOn(neoTemplateLoader, 'load').and.callFake(function (path) {
 						return $q.resolve(path.split('/')[1]);
 					});
 
@@ -56,12 +56,12 @@ define([], function () {
 					scope.$digest();
 
 					// THEN
-					expect(_.pluck(vm.templatePromises, '$$state.value')).toEqual(['one','two']);
+					expect(_.pluck(vm.templatePromises, '$$state.value')).toEqual(['one', 'two']);
 				});
 
 				it('should filter applications without order property', function () {
 					// GIVEN
-					spyOn(neoTemplateLoader, 'load').and.callFake(function(path){
+					spyOn(neoTemplateLoader, 'load').and.callFake(function (path) {
 						return $q.resolve(path.split('/')[1]);
 					});
 
@@ -78,7 +78,7 @@ define([], function () {
 
 				it('should log an error if could not load templates', function () {
 					// GIVEN
-					spyOn(neoTemplateLoader, 'load').and.callFake(function(){
+					spyOn(neoTemplateLoader, 'load').and.callFake(function () {
 						return $q.reject();
 					});
 

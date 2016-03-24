@@ -57,13 +57,13 @@ define([], function () {
 
 				it('should return all messages for given type and then empty messages list', function () {
 					var allMessages;
-					
+
 					appMessages.set(appMessages.type.success.key, 'This is test');
 
 					allMessages = appMessages.getAll(appMessages.type.success.key);
 					expect(allMessages).toBeArray();
 					expect(allMessages.length).toBe(1);
-					
+
 					expect(appMessages.getAll(appMessages.type.success.key)).toBe(false);
 				});
 			});
