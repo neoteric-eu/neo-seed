@@ -1,9 +1,4 @@
 define([
-  'angular',
-  'angular-mocks',
-  'seed/components/_includes',
-  'seed/components/module',
-  'seed/helpers/_includes',
   'seed/components/breadcrumbs/neoStateBreadcrumbs.html'
 ], function () {
   'use strict';
@@ -34,7 +29,7 @@ define([
         };
 
         beforeEach(function () {
-          module('seed.components', 'ui.router', function ($injector) {
+          module('ui.router', function ($injector) {
             $stateProvider = $injector.get('$stateProvider');
           });
         });

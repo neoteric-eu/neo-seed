@@ -1,10 +1,4 @@
-define([
-  'angular',
-  'angular-mocks',
-  'seed/components/_includes',
-  'seed/components/module',
-  'seed/helpers/_includes'
-], function () {
+define([], function () {
   'use strict';
 
   describe('module: seed', function () {
@@ -13,10 +7,6 @@ define([
 
         var $compile, $rootScope, $log;
         var scope;
-
-        beforeEach(function () {
-          module('seed.components');
-        });
 
         beforeEach(function () {
           // Inject service into module

@@ -1,10 +1,4 @@
 define([
-  'angular',
-  'angular-mocks',
-  'seed/components/_includes',
-  'seed/components/module',
-  'seed/helpers/_includes',
-  'seed/helpers/module',
   'seed/components/customer/neoCustomerSwitcher.html'
 ], function () {
   'use strict';
@@ -14,10 +8,6 @@ define([
       describe('directive: neoCustomerSwitcher', function () {
 
         var $compile, $rootScope, $log, $cookies, $window;
-
-        beforeEach(function () {
-          module('seed.components');
-        });
 
         beforeEach(function () {
           // Inject service into module

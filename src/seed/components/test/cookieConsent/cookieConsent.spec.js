@@ -1,9 +1,4 @@
 define([
-  'angular',
-  'angular-mocks',
-  'seed/components/_includes',
-  'seed/components/module',
-  'seed/helpers/_includes',
   'seed/components/cookieConsent/cookieConsent.html'
 ], function () {
   'use strict';
@@ -14,10 +9,6 @@ define([
 
         var $compile, $rootScope, $log, $cookies;
         var scope, element, vm;
-
-        beforeEach(function () {
-          module('seed.components');
-        });
 
         beforeEach(function () {
           // Inject service into module

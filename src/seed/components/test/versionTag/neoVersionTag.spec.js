@@ -1,8 +1,5 @@
 define([
-  'angular',
-  'angular-mocks',
-  'seed/components/_includes',
-  'seed/components/module',
+  'seed/components/versionTag/neoVersionTag.html'
 ], function () {
   'use strict';
 
@@ -12,17 +9,14 @@ define([
 
         var $compile, $rootScope, $log, appConf;
         var generalSettings = {
-          name: 'custom page title'
+          version: '1.0',
+          ciBuildNumber: '1234'
         };
 
         beforeEach(function () {
           module(function ($provide) {
-            $provide.constant('appConf', {
-              generalSettings: generalSettings
-            });
+            $provide.value('appConf');
           });
-
-          module('seed.components');
         });
 
         beforeEach(function () {
@@ -35,36 +29,34 @@ define([
           });
         });
 
-        it('should set page title from general settings', function () {
+        it('should display version tag with version and ci build version', function () {
           // GIVEN
+          appConf.generalSettings = generalSettings;
           var scope = $rootScope.$new();
-          var element = $compile('<title neo-page-title/>')(scope);
+          var element = $compile('<neo-version-tag/>')(scope);
 
           // WHEN
-          $rootScope.$broadcast('$stateChangeStart', {});
-
           scope.$digest();
 
           // THEN
-          expect(element.text()).toBe(generalSettings.name);
+          expect(element.text().indexOf('ver: ' + generalSettings.version)).toBeGreaterThan(-1);
+          expect(element.find('span').text()).toBe('(#' + generalSettings.ciBuildNumber + ')');
         });
 
-        it('should set page title passed in toState', function () {
+        it('should display only version tag', function () {
           // GIVEN
+          appConf.generalSettings = {
+            version: generalSettings.version
+          };
           var scope = $rootScope.$new();
-          var element = $compile('<title neo-page-title/>')(scope);
+          var element = $compile('<neo-version-tag/>')(scope);
 
           // WHEN
-          $rootScope.$broadcast('$stateChangeStart', {
-            data: {
-              title: 'custom state title'
-            }
-          });
-
           scope.$digest();
 
           // THEN
-          expect(element.text()).toBe(generalSettings.name + ' | custom state title');
+          expect(element.text().indexOf('ver: ' + generalSettings.version)).toBeGreaterThan(-1);
+          expect(element.find('span').length).toBe(0);
         });
       });
     });

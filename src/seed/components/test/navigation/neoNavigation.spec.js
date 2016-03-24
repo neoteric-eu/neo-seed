@@ -1,11 +1,4 @@
-define([
-	'angular',
-	'angular-mocks',
-	'seed/components/_includes',
-	'seed/components/module',
-	'seed/helpers/_includes',
-	'seed/helpers/module'
-], function () {
+define([], function () {
 	'use strict';
 
 	describe('module: seed', function () {
@@ -35,7 +28,7 @@ define([
 						});
 					});
 
-					module('seed.components', 'seed.helpers', 'ui.router');
+					module('seed.helpers', 'ui.router');
 				});
 
 				beforeEach(function () {
