@@ -9,6 +9,12 @@ define([
 	beforeEach(function () {
 		module(function ($provide) {
 			$provide.constant('appConf', {
+				environmentSettings: {
+					predefinedLogins: [{
+						login: 'exampleUser',
+						password: 'examplePassword'
+					}]
+				},
 				generalSettings: {
 					defaultRedirectStateAfterLogin: 'app.dashboard'
 				},
