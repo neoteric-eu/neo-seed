@@ -133,7 +133,7 @@ define(['seed/auth/module'], function (module) {
 
 						return $q.reject(response);
 					});
-			};
+			}
 
 			return api;
 		};

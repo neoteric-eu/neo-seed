@@ -9,7 +9,7 @@ define([
 			describe('module: login', function () {
 				describe('directive: authLoginForm', function () {
 
-					var $q, scope, $state, $compile, $stateProvider, appConf, $rootScope, element, $timeout, UserAPI, LanguageAPI, Permission, neoSession;
+					var $q, scope, $state, $compile, $stateProvider, appConf, $rootScope, element, $timeout, UserAPI, Permission, neoSession;
 
 					beforeEach(function () {
 						module('ui.router', function ($injector) {

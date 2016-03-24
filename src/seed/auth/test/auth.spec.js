@@ -27,22 +27,22 @@ define([
 					},
 					languageCollection: [
 						{
-							"name": "Polski",
-							"code": "pl",
-							"locale": "pl-PL",
-							"localePOSIX": "pl_PL"
+							name: 'Polski',
+							code: 'pl',
+							locale: 'pl-PL',
+							localePOSIX: 'pl_PL'
 						},
 						{
-							"name": "English",
-							"code": "gb",
-							"locale": "en-GB",
-							"localePOSIX": "en_GB"
+							name: 'English',
+							code: 'gb',
+							locale: 'en-GB',
+							localePOSIX: 'en_GB'
 						},
 						{
-							"name": "Deutsch",
-							"code": "de",
-							"locale": "de-DE",
-							"localePOSIX": "de_DE"
+							name: 'Deutsch',
+							code: 'de',
+							locale: 'de-DE',
+							localePOSIX: 'de_DE'
 						}
 					]
 				}

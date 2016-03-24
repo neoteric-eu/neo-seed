@@ -28,8 +28,8 @@ define(['seed/auth/module'], function (module) {
 			var cookieLang = $cookies.getObject('lang');
 
 			if (isLanguageAvailable(cookieLang)) {
-				var lang = getLanguageByLocale(cookieLang);
-				setActiveLanguage(lang);
+				var cookieLanguageObject = getLanguageByLocale(cookieLang);
+				setActiveLanguage(cookieLanguageObject);
 
 				$log.debug('Set up application with language from cookies');
 				return;
@@ -38,8 +38,8 @@ define(['seed/auth/module'], function (module) {
 			var browserLang = detectBrowserLanguage();
 
 			if (isLanguageAvailable(browserLang)) {
-				var lang = getLanguageByLocale(browserLang);
-				setActiveLanguage(lang);
+				var browserLanguageObject = getLanguageByLocale(browserLang);
+				setActiveLanguage(browserLanguageObject);
 
 				$log.debug('Set up application with language from browser preferences');
 				return;
