@@ -80,7 +80,7 @@ define([
 			});
 	});
 
-	module.run(function ($log, neoLanguage) {
+	module.run(function ($log) {
 		$log = $log.getInstance('seed.auth');
 		$log.debug('Initiated module');
 
