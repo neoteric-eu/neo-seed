@@ -49,7 +49,7 @@ define([], function () {
 						expect(activeLanguage.localePOSIX).toBe('en_GB');
 					});
 
-					fit('should initialize activeLanguage from browser settings when provided', function () {
+					it('should initialize activeLanguage from browser settings when provided', function () {
 						// GIVEN
 						var browserLocale;
 
