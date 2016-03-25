@@ -1,7 +1,11 @@
-<a name="2.4.5"></a>
-## [2.4.5](//compare/v2.4.4...v2.4.5) (2016-03-16)
+<a name="2.4.6"></a>
+## [2.4.6](//compare/v2.4.4...v2.4.6) (2016-03-25)
 
 
+### Bug Fixes
+
+* **cookieConsent** Adding logs to cookieConsent af4ebe4
+* **HttpRequestInterceptor** Solved HttpRequestInterceptor not transforming request 0288903
 
 
 <a name="2.4.4"></a>
