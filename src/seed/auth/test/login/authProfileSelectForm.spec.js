@@ -9,8 +9,14 @@ define([
 			describe('module: login', function () {
 				describe('directive: authProfileSelectForm', function () {
 
-					var $q, scope, $state, $compile, element, $timeout, UserAPI, LanguageAPI, Permission;
+					var $q, scope, $state, $compile, $stateProvider, appConf, $rootScope, element, $timeout, UserAPI, LanguageAPI, Permission, neoSession;
 
+					beforeEach(function () {
+						module('ui.router', function ($injector) {
+							$stateProvider = $injector.get('$stateProvider');
+						});
+					});
+					
 					beforeEach(function () {
 						inject(function ($injector) {
 							$q = $injector.get('$q');
@@ -20,6 +26,9 @@ define([
 							LanguageAPI = $injector.get('LanguageAPI');
 							$state = $injector.get('$state');
 							Permission = $injector.get('Permission');
+							neoSession = $injector.get('neoSession');
+							$rootScope = $injector.get('$rootScope');
+							appConf = $injector.get('appConf');
 						});
 					});
 
@@ -30,13 +39,25 @@ define([
 						element = $compile('<auth-profile-select-form></auth-profile-select-form>')(scope);
 					});
 
-
-					it('should go to auth.login state on init if user is not set', function () {
-						//GIVEN
+					beforeEach(function () {
+						spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
+							return {localePOSIX: 'en_GB'};
+						});
+						scope.$root.user = UserAPI.build({
+							login: 'exampleUser',
+							password: 'examplePassword'
+						});
 						spyOn(Permission, 'authorize').and.callFake(function () {
 							return $q.resolve();
 						});
+						spyOn(neoSession, 'setSession').and.callFake(function () {
+							return $q.resolve();
+						});
+					});
 
+
+					it('should go to auth.login state on init if user is not set', function () {
+						//GIVEN
 						//WHEN
 						scope.$digest();
 
@@ -48,13 +69,7 @@ define([
 						//GIVEN
 						var sut = 'exampleCustomer';
 
-						spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
-							return {localePOSIX: 'en_GB'};
-						});
-
-						scope.$root.user = UserAPI.build({
-							login: 'exampleUser',
-							password: 'examplePassword',
+						scope.$root.user.$extend({
 							customers: [sut]
 						});
 
@@ -67,90 +82,91 @@ define([
 					});
 
 					it('should on click set activeCustomer selected by user', function () {
-					});
+						//GIVEN
+						var sut = 'customer2';
 
-					it('should on click set activeCustomer selected by user', function () {
-					});
+						scope.$root.user.$extend({
+							customers: ['customer1', sut]
+						});
 
+						//WHEN
+						scope.$digest();
+						var vm = element.controller('authProfileSelectForm');
+						vm.setCustomerActive(sut);
+
+						//THEN
+						expect(vm.activeCustomer).toEqual(sut);
+					});
 
 					it('should navigate by default to selection of profile when successfully logged in with user with multiple profiles', function () {
-						// GIVEN
-						//spyOn(UserAPI, 'login').and.callFake(function () {
-						//	return $q.resolve(UserAPI.build({
-						//		customers: [
-						//			{
-						//				featureKeys: []
-						//			},
-						//			{
-						//				featureKeys: []
-						//			}
-						//		]
-						//	}));
-						//});
-						//
-						//var $state = $inject('$state');
-						//
-						//spyOn($state, 'go').and.callFake(function () {
-						//	return $q.resolve();
-						//});
-						//
-						//spyOn(neoSession, 'setSession').and.callFake(function () {
-						//	return $q.resolve();
-						//});
-						//
-						//var scope = $rootScope.$new();
-						//var element = $compile('<auth-login-form></auth-login-form>')(scope);
-						//$rootScope.$digest();
-						//
-						//var vm = element.controller('authLoginForm');
-						//vm.user.$extend({
-						//	login: 'exampleUser',
-						//	password: 'examplePassword'
-						//});
-						//
-						//// WHEN
-						//vm.login();
-						//$timeout.flush();
-						//
-						//// THEN
-						//expect(UserAPI.login).toHaveBeenCalled();
-						//expect($rootScope.user).toBeDefined();
-						//expect($state.go).toHaveBeenCalledWith('auth.profileSelect', {}, {notify: true, reload: false});
+						//GIVEN
+						spyOn(UserAPI, 'login').and.callFake(function () {
+							return $q.resolve(UserAPI.build({
+								customers: [
+									{
+										featureKeys: []
+									},
+									{
+										featureKeys: []
+									}
+								]
+							}));
+						});
+
+						$rootScope.$digest();
+						var vm = element.controller('authProfileSelectForm');
+						scope.$root.requestedState = {
+							toState: 'app.dashboard'
+						};
+
+						vm.activeCustomer = 'customer';
+
+						$stateProvider
+							.state('app', {
+								abstract: true
+							})
+							.state('app.dashboard', {
+								url: '/dashboard'
+							});
+
+						// WHEN
+						vm.login();
+						$timeout.flush();
+
+						// THEN
+						expect($state.current.name).toEqual('app.dashboard');
 					});
 
 					it('should redirect by default to defaultRedirectStateAfterLogin when successfully logged in with one profile', function () {
-						// GIVEN
-						//	spyOn(UserAPI, 'login').and.callFake(function () {
-						//		return $q.resolve(UserAPI.build());
-						//	});
-						//
-						//	spyOn(neoSession, 'setSession').and.callFake(function () {
-						//		return $q.resolve();
-						//	});
-						//
-						//	var appConf = $injector('appConf');
-						//
-						//	var scope = $rootScope.$new();
-						//	var element = $compile('<auth-login-form></auth-login-form>')(scope);
-						//	$rootScope.$digest();
-						//
-						//	var vm = element.controller('authLoginForm');
-						//	vm.user.$extend({
-						//		login: 'exampleUser',
-						//		password: 'examplePassword'
-						//	});
-						//
-						//	// WHEN
-						//	vm.login();
-						//	$rootScope.$digest();
-						//	$timeout.flush();
-						//
-						//	// THEN
-						//	expect(UserAPI.login).toHaveBeenCalled();
-						//	expect($rootScope.user).toBeDefined();
-						//	expect($state.current.name).toEqual(appConf.generalSettings.defaultRedirectStateAfterLogin);
-					});
+						//GIVEN
+						$stateProvider
+							.state('app', {
+								abstract: true
+							})
+							.state('app.dashboard', {
+								url: '/dashboard'
+							});
 
+						var sut = {
+							customerName: 'customer'
+						};
+
+						$rootScope.$digest();
+						var vm = element.controller('authProfileSelectForm');
+						vm.activeCustomer = sut;
+
+						scope.$root.user.$extend({
+							customers: [sut]
+						});
+
+						// WHEN
+						vm.login();
+						scope.$digest();
+						$timeout.flush();
+
+						// THEN
+						expect($state.current.name).toEqual(appConf.generalSettings.defaultRedirectStateAfterLogin);
+					});
 				});
 			});
 		});

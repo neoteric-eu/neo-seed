@@ -5,7 +5,7 @@ define(['seed/components/module'], function (module) {
 	 * This directive is complete fake. SSE are required to make it work.
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function neoActivities() {
+	function neoActivities($document) {
 		return {
 			restrict: 'EA',
 			templateUrl: 'seed/components/activities/activities.html',
@@ -13,6 +13,8 @@ define(['seed/components/module'], function (module) {
 			scope: true,
 			controller: function ($scope, $element) {
 				var vm = this;
+				var ajax_dropdown = $element.find('.ajax-dropdown');
+				var badge = $element.find('.badge');
 
 				vm.user = $scope.$root.user;
 				vm.setTab = setTab;
@@ -29,33 +31,35 @@ define(['seed/components/module'], function (module) {
 					return false;
 				}
 
-				var ajax_dropdown = null;
+				function openAjaxDropdown(timeout) {
+					timeout = timeout || 150;
+
+					ajax_dropdown.fadeIn(timeout);
+					$element.addClass('active');
+				}
+
+				function closeAjaxDropdown(timeout) {
+					timeout = timeout || 150;
+
+					ajax_dropdown.fadeOut(timeout);
+					$element.removeClass('active');
+				}
 
 				$element.on('click', function () {
-					var badge = $(this).find('.badge');
-
 					if (badge.hasClass('bg-color-red')) {
 						badge.removeClass('bg-color-red').text(0);
 					}
 
-					ajax_dropdown = $(this).find('.ajax-dropdown');
-
-					if (!ajax_dropdown.is(':visible')) {
-						ajax_dropdown.fadeIn(150);
-						$(this).addClass('active');
-					}
-					else {
-						ajax_dropdown.fadeOut(150);
-						$(this).removeClass('active');
+					if (ajax_dropdown.css('display') !== 'block') {
+						openAjaxDropdown(150);
+					} else {
+						closeAjaxDropdown(150);
 					}
 				});
 
-				$(document).mouseup(function (e) {
-					if (ajax_dropdown && !ajax_dropdown.is(e.target) &&
-						ajax_dropdown.has(e.target).length ===
-						0) {
-						ajax_dropdown.fadeOut(150);
-						$element.removeClass('active');
+				$document.on('mouseup', function (e) {
+					if (ajax_dropdown && !$(e.target).closest(ajax_dropdown).length) {
+						closeAjaxDropdown(150);
 					}
 				});
 			}

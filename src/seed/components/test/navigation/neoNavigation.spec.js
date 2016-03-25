@@ -1,11 +1,4 @@
-define([
-	'angular',
-	'angular-mocks',
-	'seed/components/_includes',
-	'seed/components/module',
-	'seed/helpers/_includes',
-	'seed/helpers/module'
-], function () {
+define([], function () {
 	'use strict';
 
 	describe('module: seed', function () {
@@ -15,7 +8,7 @@ define([
 				var $compile, $rootScope, $log, $q, neoTemplateLoader;
 
 				beforeEach(function () {
-					module(function($provide) {
+					module(function ($provide) {
 						$provide.constant('appConf', {
 							appsSettings: [
 								{
@@ -35,7 +28,7 @@ define([
 						});
 					});
 
-					module('seed.components', 'seed.helpers', 'ui.router');
+					module('seed.helpers', 'ui.router');
 				});
 
 				beforeEach(function () {
@@ -51,7 +44,7 @@ define([
 
 				it('should return templates in order', function () {
 					// GIVEN
-					spyOn(neoTemplateLoader, 'load').and.callFake(function(path){
+					spyOn(neoTemplateLoader, 'load').and.callFake(function (path) {
 						return $q.resolve(path.split('/')[1]);
 					});
 
@@ -63,12 +56,12 @@ define([
 					scope.$digest();
 
 					// THEN
-					expect(_.pluck(vm.templatePromises, '$$state.value')).toEqual(['one','two']);
+					expect(_.pluck(vm.templatePromises, '$$state.value')).toEqual(['one', 'two']);
 				});
 
 				it('should filter applications without order property', function () {
 					// GIVEN
-					spyOn(neoTemplateLoader, 'load').and.callFake(function(path){
+					spyOn(neoTemplateLoader, 'load').and.callFake(function (path) {
 						return $q.resolve(path.split('/')[1]);
 					});
 
@@ -85,7 +78,7 @@ define([
 
 				it('should log an error if could not load templates', function () {
 					// GIVEN
-					spyOn(neoTemplateLoader, 'load').and.callFake(function(){
+					spyOn(neoTemplateLoader, 'load').and.callFake(function () {
 						return $q.reject();
 					});
 

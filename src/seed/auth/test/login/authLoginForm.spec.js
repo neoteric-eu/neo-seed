@@ -9,56 +9,49 @@ define([
 			describe('module: login', function () {
 				describe('directive: authLoginForm', function () {
 
-					var $q, $state, $compile, $timeout, $rootScope, neoSession, LanguageAPI, UserAPI, Permission;
+					var $q, scope, $state, $compile, $stateProvider, appConf, $rootScope, element, $timeout, UserAPI, LanguageAPI, Permission, neoSession;
 
 					beforeEach(function () {
-						module(function ($provide) {
-							$provide.constant('appConf', {
-								environmentSettings: {
-									predefinedLogins: [{
-										login: 'exampleUser',
-										password: 'examplePassword'
-									}]
-								},
-								generalSettings: {
-									defaultRedirectStateAfterLogin: 'app.dashboard'
-								},
-								languageSettings: {
-									defaultLanguage: {
-										name: 'English',
-										code: 'gb',
-										locale: 'en-GB',
-										localePOSIX: 'en_GB'
-									}
-								}
-							});
+						module('ui.router', function ($injector) {
+							$stateProvider = $injector.get('$stateProvider');
 						});
 					});
 
 					beforeEach(function () {
 						inject(function ($injector) {
 							$q = $injector.get('$q');
-							$state = $injector.get('$state');
 							$compile = $injector.get('$compile');
 							$timeout = $injector.get('$timeout');
-							$rootScope = $injector.get('$rootScope');
-							neoSession = $injector.get('neoSession');
-							LanguageAPI = $injector.get('LanguageAPI');
 							UserAPI = $injector.get('UserAPI');
+							LanguageAPI = $injector.get('LanguageAPI');
+							$state = $injector.get('$state');
 							Permission = $injector.get('Permission');
+							neoSession = $injector.get('neoSession');
+							$rootScope = $injector.get('$rootScope');
+							appConf = $injector.get('appConf');
 						});
 					});
 
 					beforeEach(function () {
-						spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
-							return {localePOSIX: 'en_GB'};
+						inject(function ($injector) {
+							scope = $injector.get('$rootScope').$new();
+
+							spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
+								return {localePOSIX: 'en_GB'};
+							});
+							spyOn(Permission, 'authorize').and.callFake(function () {
+								return $q.resolve();
+							});
+							spyOn(neoSession, 'setSession').and.callFake(function () {
+								return $q.resolve();
+							});
+
+							element = $compile('<auth-login-form></auth-login-form>')(scope);
 						});
 					});
 
 					it('should set user login and password for predefined logins', function () {
 						// GIVEN
-						var scope = $rootScope.$new();
-						var element = $compile('<auth-login-form></auth-login-form>')(scope);
 						$rootScope.$digest();
 
 						var vm = element.controller('authLoginForm');
@@ -73,10 +66,8 @@ define([
 						expect(vm.user).toEqual(jasmine.objectContaining(sut));
 					});
 
-					it('should not log in if user has not provided login and email in form', function () {
+					it('should not log in if user has not provided login and password in form', function () {
 						// GIVEN
-						var scope = $rootScope.$new();
-						var element = $compile('<auth-login-form></auth-login-form>')(scope);
 						$rootScope.$digest();
 
 						var vm = element.controller('authLoginForm');
@@ -89,7 +80,7 @@ define([
 						expect($state.current.name).toEqual('');
 					});
 
-					it('should navigate by default to selection of profile when successfully logged in with user with multiple profiles', function ($inject) {
+					it('should navigate by default to selection of profile when successfully logged in with user with multiple profiles', function () {
 						// GIVEN
 						spyOn(UserAPI, 'login').and.callFake(function () {
 							return $q.resolve(UserAPI.build({
@@ -104,97 +95,106 @@ define([
 							}));
 						});
 
-						var $state = $inject('$state');
-
-						spyOn(neoSession, 'setSession').and.callFake(function () {
-							return $q.resolve();
-						});
-
-						var scope = $rootScope.$new();
-						var element = $compile('<auth-login-form></auth-login-form>')(scope);
 						$rootScope.$digest();
 
 						var vm = element.controller('authLoginForm');
-						vm.user.$extend({
+
+						$stateProvider
+							.state('app', {
+								abstract: true
+							})
+							.state('app.dashboard', {
+								url: '/dashboard'
+							});
+
+						vm.user = {
 							login: 'exampleUser',
 							password: 'examplePassword'
-						});
+						};
 
 						// WHEN
 						vm.login();
 						$timeout.flush();
+						$rootScope.$digest();
 
 						// THEN
-						expect(UserAPI.login).toHaveBeenCalled();
-						expect($rootScope.user).toBeDefined();
 						expect($state.current.name).toEqual('auth.profileSelect');
 					});
 
-					it('should redirect by default to defaultRedirectStateAfterLogin when successfully logged in with one profile', function ($injector) {
+					it('should redirect to requestedState if defined when successfully logged in with one profile', function () {
 						// GIVEN
 						spyOn(UserAPI, 'login').and.callFake(function () {
-							return $q.resolve(UserAPI.build());
+							return $q.resolve(UserAPI.build({
+									customers: [
+										{
+											featureKeys: []
+										}
+									]
+								}
+							));
 						});
 
-						spyOn(neoSession, 'setSession').and.callFake(function () {
-							return $q.resolve();
-						});
-
-						var appConf = $injector('appConf');
-
-						var scope = $rootScope.$new();
-						var element = $compile('<auth-login-form></auth-login-form>')(scope);
 						$rootScope.$digest();
 
 						var vm = element.controller('authLoginForm');
-						vm.user.$extend({
+						scope.$root.requestedState = {
+							toState: 'app.dashboard'
+						};
+
+						$stateProvider
+							.state('app', {
+								abstract: true
+							})
+							.state('app.dashboard', {
+								url: '/dashboard'
+							});
+
+						vm.user = {
 							login: 'exampleUser',
 							password: 'examplePassword'
-						});
+						};
 
 						// WHEN
 						vm.login();
-						$rootScope.$digest();
 						$timeout.flush();
+						$rootScope.$digest();
 
 						// THEN
-						expect(UserAPI.login).toHaveBeenCalled();
-						expect($rootScope.user).toBeDefined();
-						expect($state.current.name).toEqual(appConf.generalSettings.defaultRedirectStateAfterLogin);
+						expect($state.current.name).toEqual('app.dashboard');
 					});
 
-					//it('should redirect to requestedState if defined when successfully logged in with one profile', function ($injector) {
-					//	// GIVEN
-					//	spyOn(UserAPI, 'login').and.callFake(function () {
-					//		return $q.resolve(UserAPI.build());
-					//	});
-					//
-					//	spyOn(neoSession, 'setSession').and.callFake(function () {
-					//		return $q.resolve();
-					//	});
-					//
-					//	var appConf = $injector('appConf');
-					//
-					//	var scope = $rootScope.$new();
-					//	var element = $compile('<auth-login-form></auth-login-form>')(scope);
-					//	$rootScope.$digest();
-					//	$rootScope.requestedState = 'app.dashboard';
-					//
-					//	var vm = element.controller('authLoginForm');
-					//
-					//	vm.user.$extend({
-					//		login: 'exampleUser',
-					//		password: 'examplePassword'
-					//	});
-					//
-					//	// WHEN
-					//	vm.login();
-					//	$rootScope.$digest();
-					//	$timeout.flush();
-					//
-					//	// THEN
-					//	expect($state.current.name).toEqual('app.dashboard');
-					//});
+
+					it('should redirect by default to defaultRedirectStateAfterLogin when successfully logged in with one profile', function () {
+						// GIVEN
+						spyOn(UserAPI, 'login').and.callFake(function () {
+							return $q.resolve(UserAPI.build({
+								customers: []
+							}));
+						});
+
+						$stateProvider
+							.state('app', {
+								abstract: true
+							})
+							.state('app.dashboard', {
+								url: '/dashboard'
+							});
+
+						$rootScope.$digest();
+						var vm = element.controller('authLoginForm');
+						vm.user = {
+							login: 'exampleUser',
+							password: 'examplePassword'
+						};
+
+						// WHEN
+						vm.login();
+						$timeout.flush();
+						$rootScope.$digest();
+
+						// THEN
+						expect($state.current.name).toEqual(appConf.generalSettings.defaultRedirectStateAfterLogin);
+					});
 
 					it('should show form error when login is rejected', function () {
 						// GIVEN
