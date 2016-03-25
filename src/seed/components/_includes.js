@@ -14,7 +14,8 @@ define([
 	'./pageTitle/neoPageTitle',
 	'./versionTag/neoVersionTag',
 
-	'./cookieConsent/cookieConsent'
+	'./cookieConsent/cookieConsent',
+	'./favicon/neoFavicon'
 ], function () {
 	'use strict';
 });
