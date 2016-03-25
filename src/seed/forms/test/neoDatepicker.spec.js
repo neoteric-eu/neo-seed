@@ -51,11 +51,10 @@ define([
 					it('should defaults to current date if ng-model is empty and allowEmpty is not set', function () {
 
 						var scope = $rootScope.$new();
-						var vm = {
+						scope.vm = {
 							dates: {},
 							options: {}
 						};
-						scope.vm = vm;
 						// Compile a HTML containing the directive
 						var element = $compile(tpl)(scope);
 						$rootScope.$digest();
@@ -90,11 +89,10 @@ define([
 					it('should accept configuration and create widget in single mode ', function () {
 
 						var scope = $rootScope.$new();
-						var vm = {
+						scope.vm = {
 							dates: {},
 							options: options
 						};
-						scope.vm = vm;
 						// Compile a HTML containing the directive
 						var element = $compile(tpl)(scope);
 						$rootScope.$digest();
@@ -105,6 +103,124 @@ define([
 						expect(element.val().length).toEqual(moment().format(dr.locale.format).length);
 					});
 
+					it('should clean up on scope destroy', function () {
+						var scope = $rootScope.$new();
+						scope.vm = {
+							dates: {},
+							options: options
+						};
+
+						var element = $compile(tpl)(scope);
+						$rootScope.$digest();
+
+						expect(element.data('daterangepicker')).toBeDefined();
+
+						scope.$destroy();
+
+						expect(element.data('daterangepicker')).toBeUndefined();
+					});
+
+					it('should clear datepicker', function () {
+						var scope = $rootScope.$new();
+						scope.vm = {
+							dates: moment('2016-03-25').startOf('day'),
+							options: {
+								singleDatePicker: true
+							}
+						};
+
+						var element = $compile(tpl)(scope);
+						$rootScope.$digest();
+
+						var datepicker = element.data('daterangepicker');
+						spyOn(datepicker, 'clear');
+
+						scope.vm.dates = null;
+
+						scope.$digest();
+
+						expect(datepicker.clear).toHaveBeenCalled();
+					});
+
+					describe('update values (startDate only)', function () {
+						var scope;
+
+						beforeEach(function () {
+							scope = $rootScope.$new();
+							scope.vm = {
+								dates: {
+									startDate: moment('2016-03-25').startOf('day')
+								},
+								options: options
+							};
+						});
+
+						it('should change settings after language change (for startDate only)', function () {
+							$compile(tpl)(scope);
+							$rootScope.$digest();
+
+							$rootScope.$broadcast('seed.languageAPI.setLanguage');
+							expect(scope.vm.dates.locale()).toBe(moment().locale());
+						});
+
+						it('should re-render datepicker (for startDate only)', function () {
+							var element = $compile(tpl)(scope);
+							$rootScope.$digest();
+
+							var datepicker = element.data('daterangepicker');
+							spyOn(datepicker, 'setStartDate');
+
+							scope.vm.dates = moment('2016-03-27').startOf('day');
+							scope.$digest();
+
+							expect(datepicker.setStartDate).toHaveBeenCalled();
+						});
+					});
+
+					describe('update values (startDate only)', function () {
+						var scope;
+
+						beforeEach(function () {
+							scope = $rootScope.$new();
+							scope.vm = {
+								dates: {
+									startDate: moment('2016-03-25').startOf('day'),
+									endDate: moment('2016-03-26').startOf('day')
+								},
+								options: {
+									singleDatePicker: false
+								}
+							};
+						});
+
+						it('should change settings after language change', function () {
+							$compile(tpl)(scope);
+							$rootScope.$digest();
+
+							$rootScope.$broadcast('seed.languageAPI.setLanguage');
+							expect(scope.vm.dates.startDate.locale()).toBe(moment().locale());
+							expect(scope.vm.dates.endDate.locale()).toBe(moment().locale());
+						});
+
+						it('should re-render datepicker', function () {
+							var element = $compile(tpl)(scope);
+							$rootScope.$digest();
+
+							var datepicker = element.data('daterangepicker');
+							spyOn(datepicker, 'setStartDate');
+							spyOn(datepicker, 'setEndDate');
+
+							scope.vm.dates = {
+								startDate: moment('2016-03-25').startOf('day'),
+								endDate: moment('2016-03-27').startOf('day')
+							};
+
+							scope.$digest();
+
+							expect(datepicker.setStartDate).toHaveBeenCalled();
+							expect(datepicker.setEndDate).toHaveBeenCalled();
+						});
+					});
 				});
 			});
 		});
