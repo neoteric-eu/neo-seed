@@ -11,7 +11,7 @@ define([
 		describe('module: helpers', function () {
 			describe('interceptor: HttpRequestInterceptor', function () {
 
-				var $http, HttpRequestInterceptor;
+				var $http, HttpRequestInterceptor, $httpParamSerializer, $httpParamSerializerJQLike;
 
 				beforeEach(function () {
 					module('seed.helpers', 'ui.router');
@@ -19,6 +19,8 @@ define([
 					inject(function ($injector) {
 						$http = $injector.get('$http');
 						HttpRequestInterceptor = $injector.get('HttpRequestInterceptor');
+						$httpParamSerializer = $injector.get('$httpParamSerializer');
+						$httpParamSerializerJQLike = $injector.get('$httpParamSerializerJQLike');
 					});
 				});
 
@@ -34,10 +36,10 @@ define([
 					};
 
 					// WHEN
-					var transformedRequest = HttpRequestInterceptor.transformRequest(request);
+					var transformedRequest = HttpRequestInterceptor.request(request);
 
 					// THEN
-					expect(transformedRequest.params).toEqual('filters%5Bproperty%5D=value');
+					expect(transformedRequest.paramSerializer).toEqual($httpParamSerializerJQLike);
 				});
 
 				it('should transform query params in JQLike style for API in version 2.0', function () {
@@ -52,10 +54,10 @@ define([
 					};
 
 					// WHEN
-					var transformedRequest = HttpRequestInterceptor.transformRequest(request);
+					var transformedRequest = HttpRequestInterceptor.request(request);
 
 					// THEN
-					expect(transformedRequest.params).toEqual('filters%5Bproperty%5D=value');
+					expect(transformedRequest.paramSerializer).toEqual($httpParamSerializerJQLike);
 				});
 
 				it('should transform query params in JQLike style for API in version 3.0', function () {
@@ -70,10 +72,10 @@ define([
 					};
 
 					// WHEN
-					var transformedRequest = HttpRequestInterceptor.transformRequest(request);
+					var transformedRequest = HttpRequestInterceptor.request(request);
 
 					// THEN
-					expect(transformedRequest.params).toEqual('filters=%7B%22property%22:%22value%22%7D');
+					expect(transformedRequest.paramSerializer).toEqual($httpParamSerializer);
 				});
 			});
 		});

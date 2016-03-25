@@ -11,7 +11,7 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 
 
   $templateCache.put('seed/auth/login/forms/profileSelect/authProfileSelectForm.html',
-    "<form class=neo-form ng-submit=vm.login() novalidate><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{'Select profile'|translate}} <small>{{'to continue'|translate}}</small></h1></fieldset><fieldset><div class=\"panel panel-default\"><div class=list-group><button type=button ng-repeat=\"customer in vm.user.customers\" ng-class=\"{'list-group-item-info' : vm.isCustomerActive(customer)}\" ng-click=vm.setCustomerActive(customer) class=list-group-item>{{customer.customerName}} <i class=\"pull-right fa\" ng-class=\"{ 'fa-check-square': vm.isCustomerActive(customer), 'fa-square-o': !vm.isCustomerActive(customer) }\"></i></button></div></div></fieldset><footer><button type=submit class=\"btn btn-primary\">{{'Select'|translate}}</button><div class=btn-group><a class=\"btn btn-default\" ui-sref=auth.login>{{'Back'|translate}}</a></div></footer></form>"
+		"<form class=neo-form novalidate><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{'Select profile'|translate}} <small>{{'to continue'|translate}}</small></h1></fieldset><fieldset><div class=\"panel panel-default\"><div class=list-group><button type=button ng-repeat=\"customer in vm.user.customers\" ng-class=\"{'list-group-item-info' : vm.isCustomerActive(customer)}\" ng-click=vm.setCustomerActive(customer) class=list-group-item>{{customer.customerName}} <i class=\"pull-right fa\" ng-class=\"{ 'fa-check-square': vm.isCustomerActive(customer), 'fa-square-o': !vm.isCustomerActive(customer) }\"></i></button></div></div></fieldset><footer><button type=submit ng-click=vm.login() class=\"btn btn-primary\">{{'Select'|translate}}</button><div class=btn-group><a class=\"btn btn-default\" ui-sref=auth.login>{{'Back'|translate}}</a></div></footer></form>"
   );
 
 
@@ -256,12 +256,12 @@ define('seed/helpers/interceptors/HttpRequestInterceptor',['seed/helpers/module'
 		$log.debug('Initiated factory');
 
 		return {
-			transformRequest: function (request) {
+			request: function (request) {
 				if (request.params) {
 					if (request.url.match(/api\/(v1|v2)/)) {
-						request.params = $httpParamSerializerJQLike(request.params);
+						request.paramSerializer = $httpParamSerializerJQLike;
 					} else {
-						request.params = $httpParamSerializer(request.params);
+						request.paramSerializer = $httpParamSerializer;
 					}
 				}
 
@@ -1833,7 +1833,7 @@ define('seed/components/activities/neoActivities',['seed/components/module'], fu
 	 * This directive is complete fake. SSE are required to make it work.
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function neoActivities() {
+	function neoActivities($document) {
 		return {
 			restrict: 'EA',
 			templateUrl: 'seed/components/activities/activities.html',
@@ -1841,6 +1841,8 @@ define('seed/components/activities/neoActivities',['seed/components/module'], fu
 			scope: true,
 			controller: function ($scope, $element) {
 				var vm = this;
+				var ajax_dropdown = $element.find('.ajax-dropdown');
+				var badge = $element.find('.badge');
 
 				vm.user = $scope.$root.user;
 				vm.setTab = setTab;
@@ -1857,33 +1859,35 @@ define('seed/components/activities/neoActivities',['seed/components/module'], fu
 					return false;
 				}
 
-				var ajax_dropdown = null;
+				function openAjaxDropdown(timeout) {
+					timeout = timeout || 150;
+
+					ajax_dropdown.fadeIn(timeout);
+					$element.addClass('active');
+				}
+
+				function closeAjaxDropdown(timeout) {
+					timeout = timeout || 150;
+
+					ajax_dropdown.fadeOut(timeout);
+					$element.removeClass('active');
+				}
 
 				$element.on('click', function () {
-					var badge = $(this).find('.badge');
-
 					if (badge.hasClass('bg-color-red')) {
 						badge.removeClass('bg-color-red').text(0);
 					}
 
-					ajax_dropdown = $(this).find('.ajax-dropdown');
-
-					if (!ajax_dropdown.is(':visible')) {
-						ajax_dropdown.fadeIn(150);
-						$(this).addClass('active');
-					}
-					else {
-						ajax_dropdown.fadeOut(150);
-						$(this).removeClass('active');
+					if (ajax_dropdown.css('display') !== 'block') {
+						openAjaxDropdown(150);
+					} else {
+						closeAjaxDropdown(150);
 					}
 				});
 
-				$(document).mouseup(function (e) {
-					if (ajax_dropdown && !ajax_dropdown.is(e.target) &&
-						ajax_dropdown.has(e.target).length ===
-						0) {
-						ajax_dropdown.fadeOut(150);
-						$element.removeClass('active');
+				$document.on('mouseup', function (e) {
+					if (ajax_dropdown && !$(e.target).closest(ajax_dropdown).length) {
+						closeAjaxDropdown(150);
 					}
 				});
 			}
@@ -2007,7 +2011,10 @@ define('seed/components/language/neoLanguageSwitcher',['seed/components/module']
 define('seed/components/messages/appMessages',['seed/components/module', 'notification'], function (module) {
 	'use strict';
 
-	module.service('appMessages', function (gettext, gettextCatalog) {
+	module.service('appMessages', function (gettext, gettextCatalog, $log) {
+
+		$log = $log.getInstance('seed.components.appMessages');
+		$log.debug('Initiated service');
 
 		var appMessages = {
 			data: {},
@@ -2115,7 +2122,10 @@ define('seed/components/messages/appMessages',['seed/components/module', 'notifi
 define('seed/components/euLogotypes/neoEuLogotypes',['seed/components/module'], function (module) {
 	'use strict';
 
-	function neoEuLogotypes() {
+	function neoEuLogotypes($log) {
+		$log = $log.getInstance('seed.components.neoEuLogotypes');
+		$log.debug('Initiated directive');
+
 		return {
 			restrict: 'E',
 			templateUrl: 'seed/components/euLogotypes/neoEuLogotypes.html'
@@ -2136,9 +2146,10 @@ define('seed/components/breadcrumbs/neoStateBreadcrumbs',['seed/components/modul
 	 * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
 	 * @param $rootScope
 	 * @param $state
+	 * @param $log {Object} Logging service
 	 *
 	 * @example
-	 *  <state-breadcrumbs></state-breadcrumbs>
+	 *  <neo-state-breadcrumbs></neo-state-breadcrumbs>
 	 *
 	 *  State definition object:
 	 *
@@ -2151,15 +2162,20 @@ define('seed/components/breadcrumbs/neoStateBreadcrumbs',['seed/components/modul
    *			})
 	 */
 
-	function neoStateBreadcrumbs($rootScope, $state) {
+	function neoStateBreadcrumbs($rootScope, $state, $log) {
+		$log = $log.getInstance('seed.components.neoStateBreadcrumbs');
+
+		$log.debug('Initiated directive');
+
 		return {
 			restrict: 'E',
 			replace: true,
 			templateUrl: 'seed/components/breadcrumbs/neoStateBreadcrumbs.html',
 			scope: {},
-			link: function (scope) {
+			controllerAs: 'vm',
+			controller: function () {
 
-				var vm = scope.vm || (scope.vm = {});
+				var vm = this || {};
 
 				/**
 				 * Recreate on state change
@@ -2180,20 +2196,22 @@ define('seed/components/breadcrumbs/neoStateBreadcrumbs',['seed/components/modul
 					vm.crumbs = breadcrumbs;
 				}
 
-				function fetchBreadcrumbs(stateName, breadcrunbs) {
+				function fetchBreadcrumbs(stateName, breadcrumbs) {
 					var state = $state.get(stateName);
 
-					if (state && state.data && state.data.title && breadcrunbs.indexOf(state.data.title) === -1) {
-						breadcrunbs.unshift({title: state.data.title, stateName: state.name});
+					if (state && state.data && state.data.title && breadcrumbs.indexOf(state.data.title) === -1) {
+						breadcrumbs.unshift({title: state.data.title, stateName: state.name});
 					}
 
 					var parentName = stateName.replace(/.?\w+$/, '');
 					if (parentName) {
-						return fetchBreadcrumbs(parentName, breadcrunbs);
+						return fetchBreadcrumbs(parentName, breadcrumbs);
 					} else {
-						return breadcrunbs;
+						return breadcrumbs;
 					}
 				}
+
+				$log.debug('Initiated controller');
 			}
 		};
 	}
@@ -2205,7 +2223,11 @@ define('seed/components/breadcrumbs/neoStateBreadcrumbs',['seed/components/modul
 define('seed/components/breadcrumbs/bigBreadcrumbs',['seed/components/module'], function (module) {
 	'use strict';
 
-	function bigBreadcrumbs() {
+	function bigBreadcrumbs($log) {
+		$log = $log.getInstance('seed.components.bigBreadcrumbs');
+
+		$log.debug('Initiated directive');
+
 		return {
 			restrict: 'E',
 			replace: true,
@@ -2229,6 +2251,8 @@ define('seed/components/breadcrumbs/bigBreadcrumbs',['seed/components/module'], 
 							.find('h1')
 							.append(' <span>> ' + item + '</span>');
 					});
+
+				$log.debug('Linked directive');
 			}
 		};
 	}
@@ -2610,47 +2634,54 @@ define('seed/components/versionTag/neoVersionTag',['seed/components/module'], fu
 
 
 define('seed/components/cookieConsent/cookieConsent',['seed/components/module'], function (module) {
-    'use strict';
+	'use strict';
 
-    /**
-     * Creates a Breadcrumbs line based on state data.title attribute
-     * @class cookieConsent
-     * @memberOf seed.components
-     *
-     * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
-     * @param $cookies
-     *              <cookie-consent></cookie-consent>
-     */
+	/**
+	 * Creates a Breadcrumbs line based on state data.title attribute
+	 * @class cookieConsent
+	 * @memberOf seed.components
+	 *
+	 * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
+	 * @param $cookies
+	 * @param $log {Object} Logging service
+	 *              <cookie-consent></cookie-consent>
+	 */
 
-    function cookieConsent($cookies) {
-        return {
-            restrict: 'E',
-            templateUrl: 'seed/components/cookieConsent/cookieConsent.html',
-            scope: {},
-            controllerAs: 'vm',
-            controller: function ($element) {
-                var vm = this || {};
+	function cookieConsent($cookies, $log) {
+		$log = $log.getInstance('seed.components.cookieConsent');
 
-                vm.init = init;
-                vm.acceptCookies = acceptCookies;
+		$log.debug('Initiated directive');
 
-                vm.init();
+		return {
+			restrict: 'E',
+			templateUrl: 'seed/components/cookieConsent/cookieConsent.html',
+			scope: {},
+			controllerAs: 'vm',
+			controller: function ($element) {
+				var vm = this || {};
 
-                function init () {
-                   if($cookies.getObject('cookieConsent')) {
-                       $element.hide();
-                   }
-                }
+				vm.init = init;
+				vm.acceptCookies = acceptCookies;
 
-                function acceptCookies () {
-                    $cookies.putObject('cookieConsent', true);
-                    $element.hide();
-                }
-            }
-        };
-    }
+				vm.init();
 
-    module.directive('cookieConsent', cookieConsent);
+				function init() {
+					if ($cookies.getObject('cookieConsent')) {
+						$element.hide();
+					}
+				}
+
+				function acceptCookies() {
+					$cookies.putObject('cookieConsent', true);
+					$element.hide();
+				}
+
+				$log.debug('Initiated controller');
+			}
+		};
+	}
+
+	module.directive('cookieConsent', cookieConsent);
 
 });
 
@@ -3847,7 +3878,7 @@ define('seed/auth/login/forms/login/authLoginForm',['seed/auth/module'], functio
 							$log.debug('Logged in user with ID: ' + user.id);
 
 							if (vm.user.customers.length > 1) {
-								$state.transitionTo('auth.profileSelect', {}, {notify: true, reload: false});
+								$state.go('auth.profileSelect', {}, {notify: true, reload: false});
 							} else {
 								neoSession
 									.setSession(vm.user, _.first(vm.user.customers))
@@ -3891,7 +3922,7 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/m
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope:
 	 *   {redirectToState: string}, controller: Function}}
 	 */
-	function authProfileSelectForm($log, $state, neoSession, appConf, $rootScope) {
+	function authProfileSelectForm($log, $state, neoSession, appConf) {
 		$log = $log.getInstance('seed.auth.login.authProfileSelectForm');
 
 		$log.debug('Initiated directive');
@@ -3915,6 +3946,7 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/m
 				vm.setCustomerActive = setCustomerActive;
 				vm.isCustomerActive = isCustomerActive;
 				vm.login = login;
+				vm.init = init;
 
 				init();
 
@@ -3940,10 +3972,11 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/m
 				}
 
 				function login() {
-					neoSession.setSession(vm.user, vm.activeCustomer)
+					neoSession
+						.setSession(vm.user, vm.activeCustomer)
 						.then(function () {
-							if ($rootScope.requestedState) {
-								$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
+							if ($scope.$root.requestedState) {
+								$state.go($scope.$root.requestedState.toState, $scope.$root.requestedState.toParams);
 							} else {
 								$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
 							}
@@ -3951,6 +3984,8 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/m
 
 					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);
 				}
+
+				$log.debug('Initiated controller');
 			}
 		};
 	}
@@ -5390,6 +5425,7 @@ define('seed/module',[
 
 		// Add the interceptors to the $httpProvider.
 		$httpProvider.interceptors.push('HttpErrorInterceptor');
+		$httpProvider.interceptors.push('HttpRequestInterceptor');
 	});
 
 	seed.run(function (gettextCatalog, LanguageAPI, $log, appConf) {
