@@ -6,6 +6,9 @@ define([
 	'./_services/neoRequestHeaders',
 	'./_services/neoLanguage',
 
+	'./_values/availableLanguages',
+	'./_values/activeLanguage',
+
 	'./_models/User/User',
 	'./_models/User/UserAPI',
 	'./_models/User/UserPacker',

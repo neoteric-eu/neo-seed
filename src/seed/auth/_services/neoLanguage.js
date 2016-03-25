@@ -1,37 +1,47 @@
 define(['seed/auth/module'], function (module) {
 	'use strict';
 
+	/**
+	 * Service for manipulating language changes
+	 *
+	 * @class neoLanguage
+	 * @memberOf seed.auth
+	 */
 	function neoLanguage($log, $rootScope, $cookies, $window,
+											 availableLanguages, activeLanguage,
 											 gettextCatalog, amMoment,
-											 appConf, LanguageAPI, neoRequestHeaders) {
+											 LanguageAPI, appConf, neoRequestHeaders) {
 
 		$log = $log.getInstance('app.auth.neoLanguage');
 		$log.debug('Initiated service');
 
-		var availableLanguagesCollection;
-		var activeLanguage;
+		var defaultLanguage;
 
 		this.init = init;
 		this.getLanguageByLocale = getLanguageByLocale;
 		this.isLanguageAvailable = isLanguageAvailable;
-		this.getActiveLanguage = getActiveLanguage;
 		this.setActiveLanguage = setActiveLanguage;
 
 		/**
-		 * Initiates available language collection and set application language.
+		 * Initiates available language collection and select initial language
+		 * @method
 		 */
 		function init() {
-			availableLanguagesCollection = LanguageAPI
+			_.extend(availableLanguages, LanguageAPI
 				.collection()
-				.$decode(appConf.languageSettings.languageCollection);
+				.$decode(appConf.languageSettings.languageCollection));
+			$log.debug('Initiated available languages collection');
 
-			var cookieLang = $cookies.getObject('lang');
+			defaultLanguage = LanguageAPI.build(appConf.languageSettings.defaultLanguage);
+			$log.debug('Initiated default language');
+
+			var cookieLang = detectCookieLanguage();
 
 			if (isLanguageAvailable(cookieLang)) {
 				var cookieLanguageObject = getLanguageByLocale(cookieLang);
 				setActiveLanguage(cookieLanguageObject);
 
-				$log.debug('Set up application with language from cookies');
+				$log.debug('Set up container with language from cookies');
 				return;
 			}
 
@@ -41,17 +51,39 @@ define(['seed/auth/module'], function (module) {
 				var browserLanguageObject = getLanguageByLocale(browserLang);
 				setActiveLanguage(browserLanguageObject);
 
-				$log.debug('Set up application with language from browser preferences');
+				$log.debug('Set up container with language from browser preferences');
 				return;
 			}
 
-			setActiveLanguage(appConf.languageSettings.defaultLanguage);
-
-			$log.debug('Set up application with language from default settings');
+			setActiveLanguage(defaultLanguage);
+			$log.debug('Set up container with language from default settings');
 		}
 
 		/**
-		 * Retrieve browser language
+		 * Retrieve language from cookie
+		 * @method
+		 * @private
+		 *
+		 * @returns {string} cookie locale string
+		 */
+		function detectCookieLanguage() {
+			try {
+				var cookieLang = $cookies.get('lang');
+
+				// Duck-typing based detection if string is serialized JSON object
+				if (cookieLang.indexOf('{')) {
+					$cookies.remove('lang');
+				}
+
+				return cookieLang;
+			} catch (err) {
+				$cookies.remove('lang');
+			}
+		}
+
+		/**
+		 * Retrieve language from brwser preferences
+		 * @method
 		 * @private
 		 *
 		 * @returns {string} browser locale string
@@ -64,32 +96,42 @@ define(['seed/auth/module'], function (module) {
 
 		/**
 		 * Finds if language is defined in language collection by locale
-		 *
+		 * @method
 		 * @param locale {String}
+		 *
 		 * @returns {boolean}
 		 */
 		function isLanguageAvailable(locale) {
-			return _.some(availableLanguagesCollection, function (language) {
-				return language.locale === locale ||
-					language.localePOSIX === locale ||
-					language.code === locale;
-			});
+			if (_.isEmpty(locale)) {
+				return false;
+			}
+
+			try {
+				return _.some(availableLanguages, function (language) {
+					return language.locale === locale ||
+						language.localePOSIX === locale ||
+						language.code === locale;
+				});
+			} catch (err) {
+				throw new ReferenceError('Malformed "availableLanguages" collection');
+			}
 		}
 
 		/**
 		 * Set application interface language
+		 * @method
 		 *
 		 * @param language {seed.auth.Language}
 		 */
 		function setActiveLanguage(language) {
 			if (!isLanguageAvailable(language.locale)) {
-				throw new ReferenceError('Could not find language in list of available ones');
+				language = defaultLanguage;
 			}
 
-			activeLanguage = language;
+			_.extend(activeLanguage, language);
 
 			// Write locale to cookie
-			$cookies.putObject('lang', activeLanguage);
+			$cookies.put('lang', activeLanguage.locale);
 			// Update headers
 			neoRequestHeaders.setAcceptLanguage(language.locale);
 
@@ -103,28 +145,24 @@ define(['seed/auth/module'], function (module) {
 		}
 
 		/**
-		 * Get application interface language
-		 *
-		 * @return {seed.auth.Language}
-		 */
-		function getActiveLanguage() {
-			return activeLanguage;
-		}
-
-		/**
-		 * Get Language by it's POSIX locale name
+		 * Find language by it's locale name
+		 * @method
 		 *
 		 * @param locale {String} locale string
 		 * @returns {seed.auth.Language}
 		 */
 		function getLanguageByLocale(locale) {
-			return _.find(availableLanguagesCollection, function (language) {
-				if (language.locale === locale ||
-					language.localePOSIX === locale ||
-					language.code === locale) {
-					return language;
-				}
-			});
+			try {
+				return _.find(availableLanguages, function (language) {
+					if (language.locale === locale ||
+						language.localePOSIX === locale ||
+						language.code === locale) {
+						return language;
+					}
+				});
+			} catch (err) {
+				throw new ReferenceError('Malformed "availableLanguages" collection');
+			}
 		}
 	}
 

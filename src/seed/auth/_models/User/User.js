@@ -11,7 +11,7 @@ define(['seed/auth/module'], function (module) {
 	 * @param neoLanguage {seed.auth.neoLanguage} Language service
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, $cookies, neoLanguage) {
+	var User = function (restmod, $cookies, neoLanguage, activeLanguage) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
@@ -33,7 +33,7 @@ define(['seed/auth/module'], function (module) {
 						return neoLanguage.getLanguageByLocale(locale);
 					},
 					init: function () {
-						return neoLanguage.getActiveLanguage().localePOSIX;
+						return activeLanguage.localePOSIX;
 					}
 				},
 				timezone: {

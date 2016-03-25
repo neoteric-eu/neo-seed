@@ -4,7 +4,7 @@ define(['seed/auth/module'], function (module) {
 	/**
 	 * Interface for REST communication with server
 	 * @constructor
-	 * @implements {seed.helpers.BaseAPI}
+	 * @extends {seed.helpers.BaseAPI}
 	 * @memberOf seed.auth
 	 *
 	 * @param $log {Object} Logging service

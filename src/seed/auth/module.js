@@ -84,7 +84,7 @@ define([
 		$log = $log.getInstance('seed.auth');
 		$log.debug('Initiated module');
 
-		neoLanguage.init();
+		//neoLanguage.init();
 	});
 
 	return module;
