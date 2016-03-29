@@ -27,6 +27,34 @@ define(['seed/auth/module'], function (module) {
 		 * @method
 		 */
 		function init() {
+
+			initAvailableLanguagesCollection();
+			initDefaultLanguage();
+
+			var cookieLang = detectCookieLanguage();
+
+			if (isLanguageAvailable(cookieLang)) {
+				setActiveLanguageFromCookie(cookieLang);
+				return;
+			}
+
+			var browserLang = detectBrowserLanguage();
+
+			if (isLanguageAvailable(browserLang)) {
+				setActiveLanguageFromBrowser(browserLang);
+				return;
+			}
+
+			setActiveLanguage(defaultLanguage);
+			$log.debug('Set up container with language from default settings');
+		}
+
+		/**
+		 * Initialize availableLanguages collection based on provided config
+		 * @method
+		 * @private
+		 */
+		function initAvailableLanguagesCollection() {
 			try {
 				_.assign(availableLanguages, LanguageAPI
 					.collection()
@@ -35,32 +63,17 @@ define(['seed/auth/module'], function (module) {
 			} catch (err) {
 				throw new ReferenceError('Malformed "availableLanguages" collection');
 			}
+		}
 
+
+		/**
+		 * Builds defaultLanguage object based on provided config
+		 * @method
+		 * @private
+		 */
+		function initDefaultLanguage() {
 			defaultLanguage = LanguageAPI.build(appConf.languageSettings.defaultLanguage);
 			$log.debug('Initiated default language');
-
-			var cookieLang = detectCookieLanguage();
-
-			if (isLanguageAvailable(cookieLang)) {
-				var cookieLanguageObject = getLanguageByLocale(cookieLang);
-				setActiveLanguage(cookieLanguageObject);
-
-				$log.debug('Set up container with language from cookies');
-				return;
-			}
-
-			var browserLang = detectBrowserLanguage();
-
-			if (isLanguageAvailable(browserLang)) {
-				var browserLanguageObject = getLanguageByLocale(browserLang);
-				setActiveLanguage(browserLanguageObject);
-
-				$log.debug('Set up container with language from browser preferences');
-				return;
-			}
-
-			setActiveLanguage(defaultLanguage);
-			$log.debug('Set up container with language from default settings');
 		}
 
 		/**
@@ -87,16 +100,45 @@ define(['seed/auth/module'], function (module) {
 		}
 
 		/**
+		 * Set activeLanguage based on cookie stored locale
+		 * @method
+		 * @private
+		 *
+		 * @param cookieLang {String} Cookie locale string
+		 */
+		function setActiveLanguageFromCookie(cookieLang) {
+			var cookieLanguageObject = getLanguageByLocale(cookieLang);
+			setActiveLanguage(cookieLanguageObject);
+
+			$log.debug('Set up container with language from cookies');
+		}
+
+		/**
 		 * Retrieve language from brwser preferences
 		 * @method
 		 * @private
 		 *
-		 * @returns {string} browser locale string
+		 * @returns {string} Browser locale string
 		 */
 		function detectBrowserLanguage() {
 			return $window.navigator.language ||
 				$window.navigator.userLanguage ||
 				$window.navigator.systemLanguage;
+		}
+
+
+		/**
+		 * Set activeLanguage based on browser locale
+		 * @method
+		 * @private
+		 *
+		 * @param browserLang {String} Browser locale string
+		 */
+		function setActiveLanguageFromBrowser(browserLang) {
+			var browserLanguageObject = getLanguageByLocale(browserLang);
+			setActiveLanguage(browserLanguageObject);
+
+			$log.debug('Set up container with language from browser preferences');
 		}
 
 		/**
