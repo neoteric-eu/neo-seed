@@ -70,6 +70,7 @@ define([
 
 		// Add the interceptors to the $httpProvider.
 		$httpProvider.interceptors.push('HttpErrorInterceptor');
+		$httpProvider.interceptors.push('HttpRequestInterceptor');
 	});
 
 	seed.run(function (gettextCatalog, LanguageAPI, $log, appConf) {

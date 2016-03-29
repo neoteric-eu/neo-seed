@@ -64,4 +64,5 @@ define([
 	require(['seed/components/test/navigation/neoNavigation.spec']);
 	require(['seed/components/test/pageTitle/neoPageTitle.spec']);
 	require(['seed/components/test/versionTag/neoVersionTag.spec']);
+	require(['seed/components/test/favicon/neoFavicon.spec']);
 });

@@ -16,12 +16,12 @@ define(['seed/helpers/module'], function (module) {
 		$log.debug('Initiated factory');
 
 		return {
-			transformRequest: function (request) {
+			request: function (request) {
 				if (request.params) {
 					if (request.url.match(/api\/(v1|v2)/)) {
-						request.params = $httpParamSerializerJQLike(request.params);
+						request.paramSerializer = $httpParamSerializerJQLike;
 					} else {
-						request.params = $httpParamSerializer(request.params);
+						request.paramSerializer = $httpParamSerializer;
 					}
 				}
 
