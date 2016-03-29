@@ -27,10 +27,14 @@ define(['seed/auth/module'], function (module) {
 		 * @method
 		 */
 		function init() {
-			_.extend(availableLanguages, LanguageAPI
-				.collection()
-				.$decode(appConf.languageSettings.languageCollection));
-			$log.debug('Initiated available languages collection');
+			try {
+				_.assign(availableLanguages, LanguageAPI
+					.collection()
+					.$decode(appConf.languageSettings.languageCollection));
+				$log.debug('Initiated available languages collection');
+			} catch (err) {
+				throw new ReferenceError('Malformed "availableLanguages" collection');
+			}
 
 			defaultLanguage = LanguageAPI.build(appConf.languageSettings.defaultLanguage);
 			$log.debug('Initiated default language');
@@ -64,15 +68,16 @@ define(['seed/auth/module'], function (module) {
 		 * @method
 		 * @private
 		 *
-		 * @returns {string} cookie locale string
+		 * @returns {*} cookie locale string
 		 */
 		function detectCookieLanguage() {
 			try {
 				var cookieLang = $cookies.get('lang');
 
 				// Duck-typing based detection if string is serialized JSON object
-				if (cookieLang.indexOf('{')) {
+				if (cookieLang.indexOf('{') >= 0) {
 					$cookies.remove('lang');
+					return;
 				}
 
 				return cookieLang;
@@ -102,19 +107,11 @@ define(['seed/auth/module'], function (module) {
 		 * @returns {boolean}
 		 */
 		function isLanguageAvailable(locale) {
-			if (_.isEmpty(locale)) {
-				return false;
-			}
-
-			try {
-				return _.some(availableLanguages, function (language) {
-					return language.locale === locale ||
-						language.localePOSIX === locale ||
-						language.code === locale;
-				});
-			} catch (err) {
-				throw new ReferenceError('Malformed "availableLanguages" collection');
-			}
+			return _.some(availableLanguages, function (language) {
+				return language.locale === locale ||
+					language.localePOSIX === locale ||
+					language.code === locale;
+			});
 		}
 
 		/**
@@ -124,11 +121,11 @@ define(['seed/auth/module'], function (module) {
 		 * @param language {seed.auth.Language}
 		 */
 		function setActiveLanguage(language) {
-			if (!isLanguageAvailable(language.locale)) {
-				language = defaultLanguage;
+			if (_.isUndefined(language.locale) && !isLanguageAvailable(language.locale)) {
+				throw new ReferenceError('Trying to set language to not available one');
 			}
 
-			_.extend(activeLanguage, language);
+			_.assign(activeLanguage, language);
 
 			// Write locale to cookie
 			$cookies.put('lang', activeLanguage.locale);
@@ -152,17 +149,13 @@ define(['seed/auth/module'], function (module) {
 		 * @returns {seed.auth.Language}
 		 */
 		function getLanguageByLocale(locale) {
-			try {
-				return _.find(availableLanguages, function (language) {
-					if (language.locale === locale ||
-						language.localePOSIX === locale ||
-						language.code === locale) {
-						return language;
-					}
-				});
-			} catch (err) {
-				throw new ReferenceError('Malformed "availableLanguages" collection');
-			}
+			return _.find(availableLanguages, function (language) {
+				if (language.locale === locale ||
+					language.localePOSIX === locale ||
+					language.code === locale) {
+					return language;
+				}
+			});
 		}
 	}
 
