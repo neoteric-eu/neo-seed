@@ -138,7 +138,7 @@ define([], function () {
 						// THEN
 						expect(function () {
 							neoLanguage.setActiveLanguage({});
-						}).toThrowError('Trying to set language to not available one')
+						}).toThrowError('Trying to set language to not available one');
 					});
 
 					it('should update activeLanguage value if is on list of available languages', function () {
