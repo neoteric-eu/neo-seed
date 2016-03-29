@@ -8,6 +8,7 @@ define([
 
 	'./_values/availableLanguages',
 	'./_values/activeLanguage',
+	'./_values/defaultLanguage',
 
 	'./_models/User/User',
 	'./_models/User/UserAPI',

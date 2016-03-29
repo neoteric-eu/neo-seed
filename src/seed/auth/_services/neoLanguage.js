@@ -8,14 +8,12 @@ define(['seed/auth/module'], function (module) {
 	 * @memberOf seed.auth
 	 */
 	function neoLanguage($log, $rootScope, $cookies, $window,
-											 availableLanguages, activeLanguage,
+											 availableLanguages, activeLanguage, defaultLanguage,
 											 gettextCatalog, amMoment,
 											 LanguageAPI, appConf, neoRequestHeaders) {
 
 		$log = $log.getInstance('app.auth.neoLanguage');
 		$log.debug('Initiated service');
-
-		var defaultLanguage;
 
 		this.init = init;
 		this.getLanguageByLocale = getLanguageByLocale;

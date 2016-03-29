@@ -6,8 +6,7 @@ define(['seed/auth/module'], function (module) {
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
-	 * @param appConf {appConf} app configuration
-	 * @param appConf.languageSettings {appConf.languageSettings} language settings
+	 * @param defaultLanguage {seed.auth.Language} Default application language
 	 *
 	 * @class Language
 	 * @type {RecordApi}
@@ -17,18 +16,18 @@ define(['seed/auth/module'], function (module) {
 	 *
 	 * @returns {Language} Model instance
 	 */
-	function Language(restmod, appConf) {
+	function Language(restmod, defaultLanguage) {
 		return restmod
 			.model('/language')
 			.mix({
 				code: {
-					init: appConf.languageSettings.defaultLanguage.code
+					init: defaultLanguage.code
 				},
 				locale: {
-					init: appConf.languageSettings.defaultLanguage.locale
+					init: defaultLanguage.locale
 				},
 				localePOSIX: {
-					init: appConf.languageSettings.defaultLanguage.localePOSIX
+					init: defaultLanguage.localePOSIX
 				}
 			});
 	}
