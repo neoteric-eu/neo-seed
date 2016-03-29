@@ -177,7 +177,7 @@ define([
 						});
 					});
 
-					describe('update values (startDate only)', function () {
+					describe('update values (startDate and endDate)', function () {
 						var scope;
 
 						beforeEach(function () {
