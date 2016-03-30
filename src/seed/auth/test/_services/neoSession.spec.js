@@ -153,7 +153,9 @@ define(['moment', 'moment-timezone'], function (moment) {
 					// THEN
 					expect(called).toBeFalsy();
 				});
-			
+
+				it('should set ')
+				
 			});
 		});
 	});
