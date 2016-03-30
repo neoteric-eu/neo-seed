@@ -1,14 +1,15 @@
 define([
-	'./_interceptors/HttpErrorInterceptor',
+	'./interceptors/HttpErrorInterceptor',
+	'./interceptors/HttpRequestInterceptor',
 
-	'./_decorators/logDecorator',
+	'./decorators/logDecorator',
 
-	'./_enums/BaseEnum',
+	'./enums/BaseEnum',
 
-	'./_services/templateLoader/neoTemplateLoader',
-	'./_services/eventAggregator/EventAggregatorFactory',
+	'./services/neoTemplateLoader',
 
 	'./lodash/lodashExtensions',
+	'./eventAggregator/EventAggregatorFactory',
 
 	'./moment/momentDatetimeDayrange',
 	'./moment/neoMomentDate',

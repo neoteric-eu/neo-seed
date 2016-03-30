@@ -11,7 +11,7 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 
 
   $templateCache.put('seed/auth/login/forms/profileSelect/authProfileSelectForm.html',
-    "<form class=neo-form ng-submit=vm.login() novalidate><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{'Select profile'|translate}} <small>{{'to continue'|translate}}</small></h1></fieldset><fieldset><div class=\"panel panel-default\"><div class=list-group><button type=button ng-repeat=\"customer in vm.user.customers\" ng-class=\"{'list-group-item-info' : vm.isCustomerActive(customer)}\" ng-click=vm.setCustomerActive(customer) class=list-group-item>{{customer.customerName}} <i class=\"pull-right fa\" ng-class=\"{ 'fa-check-square': vm.isCustomerActive(customer), 'fa-square-o': !vm.isCustomerActive(customer) }\"></i></button></div></div></fieldset><footer><button type=submit class=\"btn btn-primary\">{{'Select'|translate}}</button><div class=btn-group><a class=\"btn btn-default\" ui-sref=auth.login>{{'Back'|translate}}</a></div></footer></form>"
+		"<form class=neo-form novalidate><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{'Select profile'|translate}} <small>{{'to continue'|translate}}</small></h1></fieldset><fieldset><div class=\"panel panel-default\"><div class=list-group><button type=button ng-repeat=\"customer in vm.user.customers\" ng-class=\"{'list-group-item-info' : vm.isCustomerActive(customer)}\" ng-click=vm.setCustomerActive(customer) class=list-group-item>{{customer.customerName}} <i class=\"pull-right fa\" ng-class=\"{ 'fa-check-square': vm.isCustomerActive(customer), 'fa-square-o': !vm.isCustomerActive(customer) }\"></i></button></div></div></fieldset><footer><button type=submit ng-click=vm.login() class=\"btn btn-primary\">{{'Select'|translate}}</button><div class=btn-group><a class=\"btn btn-default\" ui-sref=auth.login>{{'Back'|translate}}</a></div></footer></form>"
   );
 
 
@@ -236,6 +236,41 @@ define('seed/helpers/interceptors/HttpErrorInterceptor',['seed/helpers/module'],
 	}
 
 	app.factory('HttpErrorInterceptor', HttpErrorInterceptor);
+});
+
+define('seed/helpers/interceptors/HttpRequestInterceptor',['seed/helpers/module'], function (module) {
+	'use strict';
+
+	/**
+	 * @class HttpRequestInterceptor
+	 * @memberOf seed.helpers
+	 *
+	 * @param $log {Object} Logging service
+	 * @param $httpParamSerializer
+	 * @param $httpParamSerializerJQLike
+	 * @return {{transformRequest: transformRequest}}
+	 */
+	function HttpRequestInterceptor($log, $httpParamSerializer, $httpParamSerializerJQLike) {
+
+		$log = $log.getInstance('seed.helpers.HttpRequestInterceptor');
+		$log.debug('Initiated factory');
+
+		return {
+			request: function (request) {
+				if (request.params) {
+					if (request.url.match(/api\/(v1|v2)/)) {
+						request.paramSerializer = $httpParamSerializerJQLike;
+					} else {
+						request.paramSerializer = $httpParamSerializer;
+					}
+				}
+
+				return request;
+			}
+		};
+	}
+
+	module.factory('HttpRequestInterceptor', HttpRequestInterceptor);
 });
 
 define('seed/helpers/decorators/logDecorator',['angular', 'moment', 'seed/helpers/module'], function (ng, moment, module) {
@@ -1544,7 +1579,7 @@ define('seed/helpers/restmod/models/BaseAPI',['seed/helpers/module'], function (
 				.$asPromise()
 				.then(function (model) {
 					if (isNew) {
-						appMessages.success('Created new ' + model.t);
+						appMessages.success('Created new ' + model.type);
 					} else {
 						appMessages.success('Updated ' + model.type);
 					}
@@ -1729,6 +1764,7 @@ define('seed/helpers/restmod/packers/PackerUtils',[], function () {
 
 define('seed/helpers/_includes',[
 	'./interceptors/HttpErrorInterceptor',
+	'./interceptors/HttpRequestInterceptor',
 
 	'./decorators/logDecorator',
 
@@ -1797,7 +1833,7 @@ define('seed/components/activities/neoActivities',['seed/components/module'], fu
 	 * This directive is complete fake. SSE are required to make it work.
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function neoActivities() {
+	function neoActivities($document) {
 		return {
 			restrict: 'EA',
 			templateUrl: 'seed/components/activities/activities.html',
@@ -1805,6 +1841,8 @@ define('seed/components/activities/neoActivities',['seed/components/module'], fu
 			scope: true,
 			controller: function ($scope, $element) {
 				var vm = this;
+				var ajax_dropdown = $element.find('.ajax-dropdown');
+				var badge = $element.find('.badge');
 
 				vm.user = $scope.$root.user;
 				vm.setTab = setTab;
@@ -1821,33 +1859,35 @@ define('seed/components/activities/neoActivities',['seed/components/module'], fu
 					return false;
 				}
 
-				var ajax_dropdown = null;
+				function openAjaxDropdown(timeout) {
+					timeout = timeout || 150;
+
+					ajax_dropdown.fadeIn(timeout);
+					$element.addClass('active');
+				}
+
+				function closeAjaxDropdown(timeout) {
+					timeout = timeout || 150;
+
+					ajax_dropdown.fadeOut(timeout);
+					$element.removeClass('active');
+				}
 
 				$element.on('click', function () {
-					var badge = $(this).find('.badge');
-
 					if (badge.hasClass('bg-color-red')) {
 						badge.removeClass('bg-color-red').text(0);
 					}
 
-					ajax_dropdown = $(this).find('.ajax-dropdown');
-
-					if (!ajax_dropdown.is(':visible')) {
-						ajax_dropdown.fadeIn(150);
-						$(this).addClass('active');
-					}
-					else {
-						ajax_dropdown.fadeOut(150);
-						$(this).removeClass('active');
+					if (ajax_dropdown.css('display') !== 'block') {
+						openAjaxDropdown(150);
+					} else {
+						closeAjaxDropdown(150);
 					}
 				});
 
-				$(document).mouseup(function (e) {
-					if (ajax_dropdown && !ajax_dropdown.is(e.target) &&
-						ajax_dropdown.has(e.target).length ===
-						0) {
-						ajax_dropdown.fadeOut(150);
-						$element.removeClass('active');
+				$document.on('mouseup', function (e) {
+					if (ajax_dropdown && !$(e.target).closest(ajax_dropdown).length) {
+						closeAjaxDropdown(150);
 					}
 				});
 			}
@@ -1971,7 +2011,10 @@ define('seed/components/language/neoLanguageSwitcher',['seed/components/module']
 define('seed/components/messages/appMessages',['seed/components/module', 'notification'], function (module) {
 	'use strict';
 
-	module.service('appMessages', function (gettext, gettextCatalog) {
+	module.service('appMessages', function (gettext, gettextCatalog, $log) {
+
+		$log = $log.getInstance('seed.components.appMessages');
+		$log.debug('Initiated service');
 
 		var appMessages = {
 			data: {},
@@ -2079,7 +2122,10 @@ define('seed/components/messages/appMessages',['seed/components/module', 'notifi
 define('seed/components/euLogotypes/neoEuLogotypes',['seed/components/module'], function (module) {
 	'use strict';
 
-	function neoEuLogotypes() {
+	function neoEuLogotypes($log) {
+		$log = $log.getInstance('seed.components.neoEuLogotypes');
+		$log.debug('Initiated directive');
+
 		return {
 			restrict: 'E',
 			templateUrl: 'seed/components/euLogotypes/neoEuLogotypes.html'
@@ -2100,9 +2146,10 @@ define('seed/components/breadcrumbs/neoStateBreadcrumbs',['seed/components/modul
 	 * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
 	 * @param $rootScope
 	 * @param $state
+	 * @param $log {Object} Logging service
 	 *
 	 * @example
-	 *  <state-breadcrumbs></state-breadcrumbs>
+	 *  <neo-state-breadcrumbs></neo-state-breadcrumbs>
 	 *
 	 *  State definition object:
 	 *
@@ -2115,15 +2162,20 @@ define('seed/components/breadcrumbs/neoStateBreadcrumbs',['seed/components/modul
    *			})
 	 */
 
-	function neoStateBreadcrumbs($rootScope, $state) {
+	function neoStateBreadcrumbs($rootScope, $state, $log) {
+		$log = $log.getInstance('seed.components.neoStateBreadcrumbs');
+
+		$log.debug('Initiated directive');
+
 		return {
 			restrict: 'E',
 			replace: true,
 			templateUrl: 'seed/components/breadcrumbs/neoStateBreadcrumbs.html',
 			scope: {},
-			link: function (scope) {
+			controllerAs: 'vm',
+			controller: function () {
 
-				var vm = scope.vm || (scope.vm = {});
+				var vm = this || {};
 
 				/**
 				 * Recreate on state change
@@ -2144,20 +2196,22 @@ define('seed/components/breadcrumbs/neoStateBreadcrumbs',['seed/components/modul
 					vm.crumbs = breadcrumbs;
 				}
 
-				function fetchBreadcrumbs(stateName, breadcrunbs) {
+				function fetchBreadcrumbs(stateName, breadcrumbs) {
 					var state = $state.get(stateName);
 
-					if (state && state.data && state.data.title && breadcrunbs.indexOf(state.data.title) === -1) {
-						breadcrunbs.unshift({title: state.data.title, stateName: state.name});
+					if (state && state.data && state.data.title && breadcrumbs.indexOf(state.data.title) === -1) {
+						breadcrumbs.unshift({title: state.data.title, stateName: state.name});
 					}
 
 					var parentName = stateName.replace(/.?\w+$/, '');
 					if (parentName) {
-						return fetchBreadcrumbs(parentName, breadcrunbs);
+						return fetchBreadcrumbs(parentName, breadcrumbs);
 					} else {
-						return breadcrunbs;
+						return breadcrumbs;
 					}
 				}
+
+				$log.debug('Initiated controller');
 			}
 		};
 	}
@@ -2169,7 +2223,11 @@ define('seed/components/breadcrumbs/neoStateBreadcrumbs',['seed/components/modul
 define('seed/components/breadcrumbs/bigBreadcrumbs',['seed/components/module'], function (module) {
 	'use strict';
 
-	function bigBreadcrumbs() {
+	function bigBreadcrumbs($log) {
+		$log = $log.getInstance('seed.components.bigBreadcrumbs');
+
+		$log.debug('Initiated directive');
+
 		return {
 			restrict: 'E',
 			replace: true,
@@ -2193,6 +2251,8 @@ define('seed/components/breadcrumbs/bigBreadcrumbs',['seed/components/module'], 
 							.find('h1')
 							.append(' <span>> ' + item + '</span>');
 					});
+
+				$log.debug('Linked directive');
 			}
 		};
 	}
@@ -2574,47 +2634,54 @@ define('seed/components/versionTag/neoVersionTag',['seed/components/module'], fu
 
 
 define('seed/components/cookieConsent/cookieConsent',['seed/components/module'], function (module) {
-    'use strict';
+	'use strict';
 
-    /**
-     * Creates a Breadcrumbs line based on state data.title attribute
-     * @class cookieConsent
-     * @memberOf seed.components
-     *
-     * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
-     * @param $cookies
-     *              <cookie-consent></cookie-consent>
-     */
+	/**
+	 * Creates a Breadcrumbs line based on state data.title attribute
+	 * @class cookieConsent
+	 * @memberOf seed.components
+	 *
+	 * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
+	 * @param $cookies
+	 * @param $log {Object} Logging service
+	 *              <cookie-consent></cookie-consent>
+	 */
 
-    function cookieConsent($cookies) {
-        return {
-            restrict: 'E',
-            templateUrl: 'seed/components/cookieConsent/cookieConsent.html',
-            scope: {},
-            controllerAs: 'vm',
-            controller: function ($element) {
-                var vm = this || {};
+	function cookieConsent($cookies, $log) {
+		$log = $log.getInstance('seed.components.cookieConsent');
 
-                vm.init = init;
-                vm.acceptCookies = acceptCookies;
+		$log.debug('Initiated directive');
 
-                vm.init();
+		return {
+			restrict: 'E',
+			templateUrl: 'seed/components/cookieConsent/cookieConsent.html',
+			scope: {},
+			controllerAs: 'vm',
+			controller: function ($element) {
+				var vm = this || {};
 
-                function init () {
-                   if($cookies.getObject('cookieConsent')) {
-                       $element.hide();
-                   }
-                }
+				vm.init = init;
+				vm.acceptCookies = acceptCookies;
 
-                function acceptCookies () {
-                    $cookies.putObject('cookieConsent', true);
-                    $element.hide();
-                }
-            }
-        };
-    }
+				vm.init();
 
-    module.directive('cookieConsent', cookieConsent);
+				function init() {
+					if ($cookies.getObject('cookieConsent')) {
+						$element.hide();
+					}
+				}
+
+				function acceptCookies() {
+					$cookies.putObject('cookieConsent', true);
+					$element.hide();
+				}
+
+				$log.debug('Initiated controller');
+			}
+		};
+	}
+
+	module.directive('cookieConsent', cookieConsent);
 
 });
 
@@ -2795,12 +2862,29 @@ define('seed/layout/_includes',[
 
 define('seed/auth/module',[
 	'angular',
-	'angular-cookies'
+	'angular-moment',
+	'angular-cookies',
+	'angular-gettext',
+	'angular-ui-router',
+	'angular-restmod',
+	'angular-permission'
 ], function (ng) {
 	'use strict';
 
 	var module = ng.module('seed.auth', [
+		// libs
+		'angularMoment',
 		'ngCookies',
+		'ui.router',
+		'gettext',
+		'restmod',
+		'permission',
+		// seed modules
+		'seed.templateCache',
+		'seed.helpers',
+		'seed.components',
+		'seed.forms',
+		// sub-modules
 		'seed.auth.login',
 		'seed.auth.register',
 		'seed.auth.password',
@@ -2852,8 +2936,7 @@ define('seed/auth/module',[
 	});
 
 	module.run(function ($log) {
-		$log = $log.getInstance('seed.auth.module');
-
+		$log = $log.getInstance('seed.auth');
 		$log.debug('Initiated module');
 	});
 
@@ -3174,6 +3257,9 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 		return restmod
 			.model('/users')
 			.mix('UserPacker', {
+				type: {
+					init: 'User'
+				},
 				email: {
 					init: undefined
 				},
@@ -3261,7 +3347,7 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 							//noinspection JSUnresolvedFunction
 							return this.$send({
 								method: 'POST',
-								url: appConf.environmentSettings.apiUrl + 'registration',
+								url: appConf.environmentSettings.apiUrl + '/registration',
 								data: this
 							}, function (_response) {
 								this.$unwrap(_response.data, null);
@@ -3308,7 +3394,6 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 
 	module.factory('User', User);
 });
-
 define('seed/auth/_models/User/UserAPI',['seed/auth/module'], function (module) {
 	'use strict';
 
@@ -3424,9 +3509,10 @@ define('seed/auth/_models/User/UserAPI',['seed/auth/module'], function (module) 
 
 
 define('seed/auth/_models/User/UserPacker',[
+	'angular',
 	'seed/auth/module',
 	'seed/helpers/restmod/packers/PackerUtils'
-], function (app, PackerUtils) {
+], function (ng, module, PackerUtils) {
 	'use strict';
 
 	/**
@@ -3434,17 +3520,19 @@ define('seed/auth/_models/User/UserPacker',[
 	 * @constructor
 	 * @memberOf seed.auth
 	 *
+	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Data model layer interface
 	 * @param RMPackerCache {Object} Restmod cache service
-	 * @return {*|{$isAbstract, $$chain}}
+	 * @return {Function|Object|*|{$isAbstract, $$chain}}
 	 */
-	var UserPacker = function ($log, restmod, RMPackerCache) {
+	function UserPacker($log, restmod, RMPackerCache) {
 
 		$log = $log.getInstance('seed.auth.UserPacker');
 		$log.debug('Initiated factory');
 
 		return restmod.mixin(function () {
 			this.define('Model.unpack', function (_resource, _raw) {
+
 				var name,
 					links = this.getProperty('jsonLinks', 'included'),
 					meta = this.getProperty('jsonMeta', 'token');
@@ -3458,6 +3546,10 @@ define('seed/auth/_models/User/UserPacker',[
 					if (_resource.$response.config.url.match(/authInfo$/) ||
 						_resource.$response.config.url.match(/login$/)) {
 						name = 'user';
+
+						if (_raw.data) {
+							_raw = _raw.data;
+						}
 					}
 				}
 
@@ -3477,9 +3569,9 @@ define('seed/auth/_models/User/UserPacker',[
 				return _.isUndefined(name) ? _raw : _raw[name];
 			});
 		});
-	};
+	}
 
-	app.factory('UserPacker', UserPacker);
+	module.factory('UserPacker', UserPacker);
 });
 
 define('seed/auth/_models/Customer/Customer',['seed/auth/module'], function (module) {
@@ -3556,8 +3648,9 @@ define('seed/auth/_models/Customer/CustomerAPI',['seed/auth/module'], function (
 
 define('seed/auth/_models/Language/LanguageAPI',[
 	'seed/auth/module',
+	'lodash',
 	'moment'
-], function (module) {
+], function (module, _) {
 	'use strict';
 
 	/**
@@ -3568,12 +3661,12 @@ define('seed/auth/_models/Language/LanguageAPI',[
 	 *
 	 * @param $log {Object} Logging service
 	 * @param $window {Object} Window service
-	 * @param $cookies {Function} Cookie service
+	 * @param $cookies {angular-cookies} Cookie service
 	 * @param Language {Object} Model factory
-	 * @param neoRequestHeaders {Object} Header manipulation service
+	 * @param neoRequestHeaders {neoRequestHeaders} Header manipulation service
 	 * @param BaseAPI {Function} Base interface for REST communication with server
 	 * @param $rootScope {Object} Global scope provider
-	 * @param appConf {Object} Application configuration
+	 * @param appConf {appConf} Application configuration
 	 * @param gettextCatalog {Object} translation catalog provider
 	 * @param amMoment {Object} Moment configuration provider
 	 * @return {Function} Instantiated service
@@ -3594,7 +3687,7 @@ define('seed/auth/_models/Language/LanguageAPI',[
 		api.init = function () {
 			api.languageCollection = Language
 				.$collection()
-				.$build(appConf.languageSettings.languageCollection);
+				.$decode(appConf.languageSettings.languageCollection);
 
 			$log.debug('Set up application language collection');
 
@@ -3623,11 +3716,14 @@ define('seed/auth/_models/Language/LanguageAPI',[
 		 * @param language {seed.auth.Language} Language instance
 		 */
 		api.setLanguage = function (language) {
+			if (!_.isObject(language)) {
+				$log.error('Param language have to be an object');
+			}
 
 			api.languageCollection.$setSelected(language);
 
 			// Write locale to cookie
-			$cookies.putObject('lang', language);
+			$cookies.put('lang', _.stringify(language));
 			// Update headers
 			neoRequestHeaders.setAcceptLanguage(language.locale);
 
@@ -3673,15 +3769,22 @@ define('seed/auth/_models/Language/Language',['seed/auth/module'], function (mod
 	'use strict';
 
 	/**
-	 * @constructor
 	 * @implements {seed.helpers.BaseModel}
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
 	 * @param appConf {appConf} app configuration
-	 * @return {*|Model} Model instance
+	 * @param appConf.languageSettings {appConf.languageSettings} language settings
+	 *
+	 * @class Language
+	 * @type {RecordApi}
+	 * @property {string} code - The language code
+	 * @property {string} locale - The language locale
+	 * @property {string} localePOSIX - The posix locale code
+	 *
+	 * @returns {Language} Model instance
 	 */
-	var Language = function (restmod, appConf) {
+	function Language(restmod, appConf) {
 		return restmod
 			.model('/language')
 			.mix({
@@ -3702,7 +3805,7 @@ define('seed/auth/_models/Language/Language',['seed/auth/module'], function (mod
 					}
 				}
 			});
-	};
+	}
 
 	module.factory('Language', Language);
 });
@@ -3737,6 +3840,7 @@ define('seed/auth/login/forms/login/authLoginForm',['seed/auth/module'], functio
 				var vm = this || {};
 
 				// variables
+				vm.formError = false;
 				vm.user = UserAPI.build();
 				vm.predefinedLogins = appConf.environmentSettings.predefinedLogins;
 				vm.appConf = appConf;
@@ -3774,11 +3878,11 @@ define('seed/auth/login/forms/login/authLoginForm',['seed/auth/module'], functio
 							$log.debug('Logged in user with ID: ' + user.id);
 
 							if (vm.user.customers.length > 1) {
-								$state.transitionTo('auth.profileSelect', {}, {notify: true, reload: false});
+								$state.go('auth.profileSelect', {}, {notify: true, reload: false});
 							} else {
 								neoSession
 									.setSession(vm.user, _.first(vm.user.customers))
-									.then(function(){
+									.then(function () {
 										if ($rootScope.requestedState) {
 											$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
 										} else {
@@ -3818,7 +3922,7 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/m
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope:
 	 *   {redirectToState: string}, controller: Function}}
 	 */
-	function authProfileSelectForm($log, $state, neoSession, appConf, $rootScope) {
+	function authProfileSelectForm($log, $state, neoSession, appConf) {
 		$log = $log.getInstance('seed.auth.login.authProfileSelectForm');
 
 		$log.debug('Initiated directive');
@@ -3842,6 +3946,7 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/m
 				vm.setCustomerActive = setCustomerActive;
 				vm.isCustomerActive = isCustomerActive;
 				vm.login = login;
+				vm.init = init;
 
 				init();
 
@@ -3867,10 +3972,11 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/m
 				}
 
 				function login() {
-					neoSession.setSession(vm.user, vm.activeCustomer)
+					neoSession
+						.setSession(vm.user, vm.activeCustomer)
 						.then(function () {
-							if ($rootScope.requestedState) {
-								$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
+							if ($scope.$root.requestedState) {
+								$state.go($scope.$root.requestedState.toState, $scope.$root.requestedState.toParams);
 							} else {
 								$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
 							}
@@ -3878,6 +3984,8 @@ define('seed/auth/login/forms/profileSelect/authProfileSelectForm',['seed/auth/m
 
 					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);
 				}
+
+				$log.debug('Initiated controller');
 			}
 		};
 	}
@@ -4012,6 +4120,8 @@ define('seed/auth/register/forms/register/authRegisterForm',['seed/auth/register
 				 */
 				vm.registrationError = undefined;
 
+				vm.register = register;
+
 				/**
 				 * @property registrationError {Object} Validator properties
 				 */
@@ -4029,8 +4139,6 @@ define('seed/auth/register/forms/register/authRegisterForm',['seed/auth/register
 						}
 					}
 				};
-
-				vm.register = register;
 
 				/**
 				 * @method
@@ -5292,7 +5400,7 @@ define('seed/module',[
 		'seed.tables'
 	]);
 
-	seed.config(function ($provide, $httpProvider, $locationProvider, cfpLoadingBarProvider,
+	seed.config(function ($provide, $httpProvider, $locationProvider, $compileProvider, cfpLoadingBarProvider,
 												$logProvider, restmodProvider, uiSelectConfig, appConf) {
 
 		restmodProvider.rebase('NeoStyleAPI');
@@ -5305,13 +5413,19 @@ define('seed/module',[
 		$locationProvider.html5Mode(appConf.generalSettings.html5ModeEnabled);
 		$logProvider.debugEnabled(appConf.environmentSettings.debugEnabled);
 
+		/**
+		 * Production improvements
+		 * @see https://code.angularjs.org/1.4.9/docs/guide/production
+ 		 */
+		$compileProvider.debugInfoEnabled(appConf.environmentSettings.debugEnabled);
+
 		// $http improvements
 		$httpProvider.useApplyAsync(true);
 		$httpProvider.useLegacyPromiseExtensions(true);
-		$httpProvider.defaults.paramSerializer = '$httpParamSerializerJQLike';
 
 		// Add the interceptors to the $httpProvider.
 		$httpProvider.interceptors.push('HttpErrorInterceptor');
+		$httpProvider.interceptors.push('HttpRequestInterceptor');
 	});
 
 	seed.run(function (gettextCatalog, LanguageAPI, $log, appConf) {

@@ -2,36 +2,35 @@ define(['seed/auth/module'], function (module) {
 	'use strict';
 
 	/**
-	 * @constructor
 	 * @implements {seed.helpers.BaseModel}
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
-	 * @param appConf {appConf} app configuration
-	 * @return {*|Model} Model instance
+	 * @param defaultLanguage {seed.auth.Language} Default application language
+	 *
+	 * @class Language
+	 * @type {RecordApi}
+	 * @property {string} code - The language code
+	 * @property {string} locale - The language locale
+	 * @property {string} localePOSIX - The posix locale code
+	 *
+	 * @returns {Language} Model instance
 	 */
-	var Language = function (restmod, appConf) {
+	function Language(restmod, defaultLanguage) {
 		return restmod
 			.model('/language')
 			.mix({
 				code: {
-					init: appConf.languageSettings.defaultLanguage.code
+					init: defaultLanguage.code
 				},
 				locale: {
-					init: appConf.languageSettings.defaultLanguage.locale
+					init: defaultLanguage.locale
 				},
 				localePOSIX: {
-					init: appConf.languageSettings.defaultLanguage.localePOSIX
-				},
-				$extend: {
-					Resource: {
-						$setSelected: function (locale) {
-							this.$selected = locale;
-						}
-					}
+					init: defaultLanguage.localePOSIX
 				}
 			});
-	};
+	}
 
 	module.factory('Language', Language);
 });

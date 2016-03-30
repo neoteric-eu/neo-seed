@@ -1,16 +1,4 @@
 define([
-	'angular',
-	'angular-mocks',
-	'angular-moment',
-	'angular-restmod',
-	'seed/auth/_includes',
-	'seed/auth/module',
-	'seed/helpers/_includes',
-	'seed/helpers/module',
-	'seed/components/_includes',
-	'seed/components/module',
-	'seed/forms/_includes',
-	'seed/forms/module',
 	'seed/auth/password/forms/passwordReset/authPasswordResetForm.html'
 ], function () {
 	'use strict';
@@ -20,33 +8,7 @@ define([
 			describe('module: password', function () {
 				describe('directive: authPasswordResetForm', function () {
 
-					var $compile, $rootScope, $state, $timeout, $q, $stateParams, UserAPI, LanguageAPI;
-
-					beforeEach(function () {
-						module(function ($provide) {
-							$provide.constant('appConf', {
-								generalSettings: {
-									defaultRedirectStateAfterLogin: 'app.dashboard'
-								},
-								languageSettings: {
-									defaultLanguage: {
-										name: 'English',
-										code: 'gb',
-										locale: 'en-GB',
-										localePOSIX: 'en_GB'
-									}
-								}
-							});
-
-							$provide.service('$stateParams', {
-								token: 'token'
-							});
-						});
-
-						module('ui.router', 'angularMoment', 'restmod', 'gettext',
-							'seed.templateCache', 'seed.forms', 'seed.helpers', 'seed.components',
-							'seed.auth');
-					});
+					var $compile, $rootScope, $state, $timeout, $q, $stateParams, UserAPI;
 
 					beforeEach(function () {
 						inject(function ($injector) {
@@ -57,13 +19,6 @@ define([
 							$q = $injector.get('$q');
 							$timeout = $injector.get('$timeout');
 							UserAPI = $injector.get('UserAPI');
-							LanguageAPI = $injector.get('LanguageAPI');
-						});
-					});
-
-					beforeEach(function () {
-						spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
-							return {localePOSIX: 'en_GB'};
 						});
 					});
 
@@ -85,7 +40,7 @@ define([
 
 					it('should navigate to login page after successful password reset', function () {
 						// GIVEN
-						spyOn(UserAPI, 'resetPassword').and.callFake(function () {
+						spyOn(UserAPI, 'resetPasswordFinish').and.callFake(function () {
 							return $q.resolve();
 						});
 
@@ -113,7 +68,7 @@ define([
 					it('should show error when server rejects password reset returning cause', function () {
 						// GIVEN
 						var rejectionCause = 'Rejection cause';
-						spyOn(UserAPI, 'resetPassword').and.callFake(function () {
+						spyOn(UserAPI, 'resetPasswordFinish').and.callFake(function () {
 							return $q.reject({
 								$response: {
 									data: [rejectionCause]
@@ -138,7 +93,7 @@ define([
 
 					it('should show error when server rejects with 404', function () {
 						// GIVEN
-						spyOn(UserAPI, 'resetPassword').and.callFake(function () {
+						spyOn(UserAPI, 'resetPasswordFinish').and.callFake(function () {
 							return $q.reject({
 								$response: {
 									status: 404

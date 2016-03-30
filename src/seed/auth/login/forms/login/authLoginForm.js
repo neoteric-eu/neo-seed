@@ -28,6 +28,7 @@ define(['seed/auth/module'], function (module) {
 				var vm = this || {};
 
 				// variables
+				vm.formError = false;
 				vm.user = UserAPI.build();
 				vm.predefinedLogins = appConf.environmentSettings.predefinedLogins;
 				vm.appConf = appConf;
@@ -65,11 +66,11 @@ define(['seed/auth/module'], function (module) {
 							$log.debug('Logged in user with ID: ' + user.id);
 
 							if (vm.user.customers.length > 1) {
-								$state.transitionTo('auth.profileSelect', {}, {notify: true, reload: false});
+								$state.go('auth.profileSelect', {}, {notify: true, reload: false});
 							} else {
 								neoSession
 									.setSession(vm.user, _.first(vm.user.customers))
-									.then(function(){
+									.then(function () {
 										if ($rootScope.requestedState) {
 											$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
 										} else {

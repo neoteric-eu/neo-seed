@@ -42,6 +42,8 @@ define(['seed/auth/register/module'], function (module) {
 				 */
 				vm.registrationError = undefined;
 
+				vm.register = register;
+
 				/**
 				 * @property registrationError {Object} Validator properties
 				 */
@@ -59,8 +61,6 @@ define(['seed/auth/register/module'], function (module) {
 						}
 					}
 				};
-
-				vm.register = register;
 
 				/**
 				 * @method

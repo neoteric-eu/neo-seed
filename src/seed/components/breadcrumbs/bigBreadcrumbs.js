@@ -1,7 +1,11 @@
 define(['seed/components/module'], function (module) {
 	'use strict';
 
-	function bigBreadcrumbs() {
+	function bigBreadcrumbs($log) {
+		$log = $log.getInstance('seed.components.bigBreadcrumbs');
+
+		$log.debug('Initiated directive');
+
 		return {
 			restrict: 'E',
 			replace: true,
@@ -25,6 +29,8 @@ define(['seed/components/module'], function (module) {
 							.find('h1')
 							.append(' <span>> ' + item + '</span>');
 					});
+
+				$log.debug('Linked directive');
 			}
 		};
 	}

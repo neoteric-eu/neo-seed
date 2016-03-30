@@ -1,7 +1,8 @@
 define([
+	'angular',
 	'seed/auth/module',
 	'seed/helpers/restmod/packers/PackerUtils'
-], function (module, PackerUtils) {
+], function (ng, module, PackerUtils) {
 	'use strict';
 
 	/**
@@ -9,17 +10,19 @@ define([
 	 * @constructor
 	 * @memberOf seed.auth
 	 *
+	 * @param $log {Object} Logging service
 	 * @param restmod {Object} Data model layer interface
 	 * @param RMPackerCache {Object} Restmod cache service
-	 * @return {*|{$isAbstract, $$chain}}
+	 * @return {Function|Object|*|{$isAbstract, $$chain}}
 	 */
-	var UserPacker = function ($log, restmod, RMPackerCache) {
+	function UserPacker($log, restmod, RMPackerCache) {
 
 		$log = $log.getInstance('seed.auth.UserPacker');
 		$log.debug('Initiated factory');
 
 		return restmod.mixin(function () {
 			this.define('Model.unpack', function (_resource, _raw) {
+
 				var name,
 					links = this.getProperty('jsonLinks', 'included'),
 					meta = this.getProperty('jsonMeta', 'token');
@@ -33,6 +36,10 @@ define([
 					if (_resource.$response.config.url.match(/authInfo$/) ||
 						_resource.$response.config.url.match(/login$/)) {
 						name = 'user';
+
+						if (_raw.data) {
+							_raw = _raw.data;
+						}
 					}
 				}
 
@@ -52,7 +59,7 @@ define([
 				return _.isUndefined(name) ? _raw : _raw[name];
 			});
 		});
-	};
+	}
 
 	module.factory('UserPacker', UserPacker);
 });

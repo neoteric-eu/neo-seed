@@ -1,7 +1,41 @@
-<a name="2.4.0"></a>
-# [2.4.0](//compare/v2.3.7...v2.4.0) (2016-03-04)
+<a name="2.4.6"></a>
+## [2.4.6](//compare/v2.4.4...v2.4.6) (2016-03-25)
 
 
+### Bug Fixes
+
+* **cookieConsent** Adding logs to cookieConsent af4ebe4
+* **HttpRequestInterceptor** Solved HttpRequestInterceptor not transforming request 0288903
+
+
+<a name="2.4.4"></a>
+## [2.4.4](//compare/v2.4.3...v2.4.4) (2016-03-15)
+
+
+### Bug Fixes
+
+* **Language:** Fix language build from raw collection f757482
+
+
+
+<a name="2.4.3"></a>
+## [2.4.3](//compare/v2.4.2...v2.4.3) (2016-03-15)
+
+
+### Bug Fixes
+
+* **BaseApi:** Fixed typo in message aab659e
+
+
+<a name="2.4.2"></a>
+## [2.4.2](//compare/v2.3.8...v2.4.2) (2016-03-09)
+
+
+### Features
+
+* **seed/module:** Disable debug data on production env d341037
+* **HttpRequestInterceptor:** #82 - Enabled query param serializing strategy based on API version 2f1196b
+* **UserPacker:** - Unpacking for authInfo and login in API v2 3132477
 
 
 <a name="2.3.7"></a>

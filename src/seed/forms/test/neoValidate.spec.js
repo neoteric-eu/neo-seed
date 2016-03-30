@@ -10,31 +10,17 @@ define([
 		describe('module: forms', function () {
 			describe('directive: neoValidate', function () {
 
-				var $compile,
-					$rootScope, $httpBackend;
+				var $compile, $rootScope, $httpBackend, $browser;
 
 				beforeEach(function () {
 					// Instantiate the fake modules
-					module(function ($provide) {
-						var LanguageAPI = jasmine.createSpyObj('LanguageAPI', ['getLanguage']);
-						LanguageAPI.getLanguage.and.callFake(function () {
-							return {
-								name: 'English',
-								code: 'gb',
-								locale: 'en-GB',
-								localePOSIX: 'en_GB'
-							};
-						});
-
-						$provide.value('LanguageAPI', LanguageAPI);
-					});
-
 					module('seed.forms');
 
 					// Inject service into module
-					inject(function (_$injector_, _$compile_, _$rootScope_, _$httpBackend_) {
+					inject(function (_$injector_, _$compile_, _$rootScope_, _$browser_, _$httpBackend_) {
 						$compile = _$compile_;
 						$rootScope = _$rootScope_;
+						$browser = _$browser_;
 						$httpBackend = _$httpBackend_;
 						$httpBackend.whenGET(/.*\.html/).respond(201, '<div></div>');
 					});
@@ -102,6 +88,49 @@ define([
 						element.find('input').val('John Smith');
 						formValidation.validate();
 						expect(formValidation.isValid()).toBeTruthy();
+					});
+
+					it('should validate form on locale change', function (done) {
+						// GIVEN
+						var element = $compile(template1)($rootScope);
+						$rootScope.$digest();
+
+						spyOn(element, 'formValidation');
+						spyOn(element, 'on');
+
+						// WHEN
+						$rootScope.$broadcast('seed.languageAPI.setLanguage', {
+							locale: 'pl-PL'
+						});
+
+						$rootScope.$applyAsync();
+						$browser.defer.flush();
+
+						done();
+
+						// THEN
+						expect(element.formValidation).toHaveBeenCalledWith('destroy');
+						expect(element.on).toHaveBeenCalledWith('init.form.fv');
+					});
+
+					it('should skip validation if new locale is current locale', function () {
+						// GIVEN
+						$compile(template1)($rootScope);
+						$rootScope.$digest();
+
+						var spy = jasmine.createSpy('formValidation');
+						var formValidation = $.fn.formValidation;
+						$.fn.formValidation = spy;
+
+						// WHEN
+						$rootScope.$broadcast('seed.languageAPI.setLanguage', {
+							locale: 'en-GB'
+						});
+						$rootScope.$digest();
+
+						// THEN
+						expect(spy).not.toHaveBeenCalled();
+						$.fn.formValidation = formValidation;
 					});
 				});
 

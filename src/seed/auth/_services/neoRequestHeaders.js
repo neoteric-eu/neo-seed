@@ -7,16 +7,27 @@ define(['seed/auth/module'], function (module) {
 	 * @memberOf seed.auth
 	 *
 	 * @param $http {Object} Facilitates communication with the remote HTTP servers
-	 * @param $log
+	 * @param $log {Object} Logging service
+	 * @param $rootScope {Object} Angular top level scope
+	 * @param authConf {seed.auth.authConf} Module configuration
 	 */
-	var neoRequestHeaders = function ($log, $http) {
+	var neoRequestHeaders = function ($log, $http, $rootScope, authConf) {
 		$log = $log.getInstance('app.auth.neoRequestHeaders');
 		$log.debug('Initiated service');
 
+		this.init = init;
 		this.setAuthToken = setAuthToken;
 		this.setCustomerId = setCustomerId;
 		this.setAcceptLanguage = setAcceptLanguage;
 		this.clearHeaders = clearHeaders;
+
+		init();
+
+		function init() {
+			$rootScope.$on(authConf.neoLanguage.events.setActiveLanguage, function (language) {
+				neoRequestHeaders.setAcceptLanguage(language.locale);
+			});
+		}
 
 		function setAuthToken(token) {
 			if (_.isEmpty(token)) {

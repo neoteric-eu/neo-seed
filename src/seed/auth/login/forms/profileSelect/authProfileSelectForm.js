@@ -14,7 +14,7 @@ define(['seed/auth/module'], function (module) {
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, scope:
 	 *   {redirectToState: string}, controller: Function}}
 	 */
-	function authProfileSelectForm($log, $state, neoSession, appConf, $rootScope) {
+	function authProfileSelectForm($log, $state, neoSession, appConf) {
 		$log = $log.getInstance('seed.auth.login.authProfileSelectForm');
 
 		$log.debug('Initiated directive');
@@ -38,6 +38,7 @@ define(['seed/auth/module'], function (module) {
 				vm.setCustomerActive = setCustomerActive;
 				vm.isCustomerActive = isCustomerActive;
 				vm.login = login;
+				vm.init = init;
 
 				init();
 
@@ -63,10 +64,11 @@ define(['seed/auth/module'], function (module) {
 				}
 
 				function login() {
-					neoSession.setSession(vm.user, vm.activeCustomer)
+					neoSession
+						.setSession(vm.user, vm.activeCustomer)
 						.then(function () {
-							if ($rootScope.requestedState) {
-								$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
+							if ($scope.$root.requestedState) {
+								$state.go($scope.$root.requestedState.toState, $scope.$root.requestedState.toParams);
 							} else {
 								$state.go(appConf.generalSettings.defaultRedirectStateAfterLogin);
 							}
@@ -74,6 +76,8 @@ define(['seed/auth/module'], function (module) {
 
 					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);
 				}
+
+				$log.debug('Initiated controller');
 			}
 		};
 	}
