@@ -73,10 +73,10 @@ define([
 		$httpProvider.interceptors.push('HttpRequestInterceptor');
 	});
 
-	seed.run(function (gettextCatalog, LanguageAPI, $log, appConf) {
+	seed.run(function (gettextCatalog, neoLanguage, $log, appConf) {
 		$log = $log.getInstance('seed.module');
 
-		LanguageAPI.init();
+		neoLanguage.init();
 		gettextCatalog.debug = appConf.environmentSettings.debugEnabled;
 
 		$log.debug('Set up seed configuration');

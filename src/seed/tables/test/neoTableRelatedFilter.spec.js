@@ -116,8 +116,8 @@ define([
 					expect($log.error.logs.length).toBe(1);
 				});
 
-				it('should filter related collection by provided filter', function () {
-					console.log('This works locally, but not on jenkins. Dunno why...');
+				//it('should filter related collection by provided filter', function () {
+				//console.log('This works locally, but not on jenkins. Dunno why...');
 					//// GIVEN
 					//$httpBackend.whenGET(/.*/).respond(201, [{id: 20, label: 'fakeItem'}]);
 					//controller.displayProperty = 'label';
@@ -130,7 +130,7 @@ define([
 					//// THEN
 					//expect(controller.filteredCollection).toBeDefined();
 					//expect(controller.filteredCollection.length).toBe(1);
-				});
+				//});
 
 				it('should update model when selected related model change', function () {
 					// GIVEN

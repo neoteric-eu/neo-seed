@@ -86,7 +86,7 @@ define([
 					// WHEN
 					$document.triggerHandler({
 						type: 'mouseup',
-						target: 'body',
+						target: 'body'
 					});
 
 					// THEN
