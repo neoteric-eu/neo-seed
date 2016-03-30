@@ -9,7 +9,7 @@ define(['seed/auth/module'], function (module) {
 	 */
 	function neoLanguage($log, $rootScope, $cookies, $window,
 											 availableLanguages, activeLanguage, defaultLanguage,
-											 gettextCatalog, amMoment,
+											 gettextCatalog, amMoment, authConf,
 											 LanguageAPI, appConf, neoRequestHeaders) {
 
 		$log = $log.getInstance('app.auth.neoLanguage');
@@ -51,6 +51,8 @@ define(['seed/auth/module'], function (module) {
 		 * Initialize availableLanguages collection based on provided config
 		 * @method
 		 * @private
+		 *
+		 * @throws {ReferenceError}
 		 */
 		function initAvailableLanguagesCollection() {
 			try {
@@ -142,6 +144,7 @@ define(['seed/auth/module'], function (module) {
 		/**
 		 * Finds if language is defined in language collection by locale
 		 * @method
+		 *
 		 * @param locale {String}
 		 *
 		 * @returns {boolean}
@@ -158,6 +161,8 @@ define(['seed/auth/module'], function (module) {
 		 * Set application interface language
 		 * @method
 		 *
+		 * @throws {ReferenceError}
+		 *
 		 * @param language {seed.auth.Language}
 		 */
 		function setActiveLanguage(language) {
@@ -169,14 +174,12 @@ define(['seed/auth/module'], function (module) {
 
 			// Write locale to cookie
 			$cookies.put('lang', activeLanguage.locale);
-			// Update headers
-			neoRequestHeaders.setAcceptLanguage(language.locale);
 
 			// Update libraries locale settings
 			gettextCatalog.setCurrentLanguage(language.localePOSIX);
 			amMoment.changeLocale(language.locale, null);
 
-			$rootScope.$broadcast('seed.auth.neoLanguage::setActiveLanguage', language);
+			$rootScope.$broadcast(authConf.neoLanguage.events.setActiveLanguage, language);
 
 			$log.debug('Set application language to: ' + language.localePOSIX);
 		}
