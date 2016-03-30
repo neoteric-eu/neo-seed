@@ -6,6 +6,8 @@ define([
 	'./_services/neoRequestHeaders',
 	'./_services/neoLanguage',
 
+	'./_constants/authConf',
+
 	'./_values/availableLanguages',
 	'./_values/activeLanguage',
 	'./_values/defaultLanguage',
