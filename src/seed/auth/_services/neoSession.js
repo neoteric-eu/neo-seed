@@ -4,13 +4,13 @@ define(['seed/auth/module', 'moment', 'moment-timezone'], function (module, mome
 	/**
 	 * @param $log {Object} Logging service
 	 * @param $cookies {Function} Cookie service
-	 * @param Permission {Object} ACL service
+	 * @param PermissionStore {Object} ACL service
 	 * @param $q {Object} Angular promise provider
 	 * @param neoRequestHeaders {Object} Request decorator
 	 * @param UserAPI {Object} Interface for REST communication with server
 	 * @param $rootScope {Object} Angular global scope helper
 	 */
-	var neoSession = function ($log, $cookies, Permission, $q, $rootScope, neoRequestHeaders, UserAPI) {
+	var neoSession = function ($log, $cookies, PermissionStore, $q, $rootScope, neoRequestHeaders, UserAPI) {
 
 		$log = $log.getInstance('seed.auth.neoSession');
 		$log.debug('Initiated service');
@@ -23,7 +23,7 @@ define(['seed/auth/module', 'moment', 'moment-timezone'], function (module, mome
 			var dfd = $q.defer();
 
 			try {
-				Permission.defineManyRoles(
+				PermissionStore.defineManyPermissions(
 					customer.featureKeys,
 					function (stateParams, roleName) {
 						return customer.$hasPermission(roleName);
@@ -65,7 +65,7 @@ define(['seed/auth/module', 'moment', 'moment-timezone'], function (module, mome
 				$cookies.remove('activeCustomer');
 				$log.debug('Removed cookie objects');
 
-				Permission.roleValidations = _.pick(Permission.roleValidations, 'AUTHORIZED');
+				PermissionStore.clearStore();
 				$log.debug('Cleared access rights');
 
 				$rootScope.user = undefined;

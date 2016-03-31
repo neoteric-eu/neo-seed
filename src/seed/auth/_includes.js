@@ -1,7 +1,4 @@
 define([
-	'./_directives/neoPermissionOnly',
-	'./_directives/neoPermissionExcept',
-
 	'./_services/neoSession',
 	'./_services/neoRequestHeaders',
 	'./_services/neoLanguage',

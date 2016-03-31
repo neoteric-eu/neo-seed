@@ -9,7 +9,7 @@ define([
 			describe('module: login', function () {
 				describe('directive: authLoginForm', function () {
 
-					var $q, scope, $state, $compile, $stateProvider, appConf, $rootScope, element, $timeout, UserAPI, Permission, neoSession;
+					var $q, scope, $state, $compile, $stateProvider, appConf, $rootScope, element, $timeout, UserAPI, Authorization, neoSession;
 
 					beforeEach(function () {
 						module('ui.router', function ($injector) {
@@ -24,7 +24,7 @@ define([
 							$timeout = $injector.get('$timeout');
 							UserAPI = $injector.get('UserAPI');
 							$state = $injector.get('$state');
-							Permission = $injector.get('Permission');
+							Authorization = $injector.get('Authorization');
 							neoSession = $injector.get('neoSession');
 							$rootScope = $injector.get('$rootScope');
 							appConf = $injector.get('appConf');
@@ -35,7 +35,7 @@ define([
 						inject(function ($injector) {
 							scope = $injector.get('$rootScope').$new();
 
-							spyOn(Permission, 'authorize').and.callFake(function () {
+							spyOn(Authorization, 'authorize').and.callFake(function () {
 								return $q.resolve();
 							});
 
