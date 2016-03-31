@@ -65,7 +65,7 @@ define(['seed/auth/module', 'moment', 'moment-timezone'], function (module, mome
 				$cookies.remove('activeCustomer');
 				$log.debug('Removed cookie objects');
 
-				PermissionStore.roleValidations = _.pick(PermissionStore.roleValidations, 'AUTHORIZED');
+				PermissionStore.clearStore();
 				$log.debug('Cleared access rights');
 
 				$rootScope.user = undefined;
