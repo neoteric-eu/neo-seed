@@ -8,11 +8,10 @@ define(['seed/auth/module'], function (module) {
 	 *
 	 * @param restmod {Object} Data model layer interface
 	 * @param $cookies {Function} Cookie service
-	 * @param LanguageAPI {seed.auth.LanguageAPI} Language service
-	 * @param appConf {Object} Application configuration
+	 * @param neoLanguage {seed.auth.neoLanguage} Language service
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, $cookies, LanguageAPI, appConf) {
+	var User = function (restmod, $cookies, neoLanguage, activeLanguage) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
@@ -31,10 +30,10 @@ define(['seed/auth/module'], function (module) {
 						return lang.localePOSIX;
 					},
 					decode: function (locale) {
-						return LanguageAPI.getByLocale(locale);
+						return neoLanguage.getLanguageByLocale(locale);
 					},
 					init: function () {
-						return LanguageAPI.getLanguage().localePOSIX;
+						return activeLanguage.localePOSIX;
 					}
 				},
 				timezone: {
@@ -64,78 +63,6 @@ define(['seed/auth/module'], function (module) {
 				},
 
 				$extend: {
-					Resource: {
-						$login: function () {
-							//noinspection JSUnresolvedFunction
-							return this.$send({
-								method: 'POST',
-								url: this.$scope.$url() + '/login',
-								data: {
-									login: this.login,
-									password: this.password
-								}
-							}, function (_response) {
-								this.$unwrap(_response.data, null);
-							}, null);
-						},
-
-						$logout: function () {
-							//noinspection JSUnresolvedFunction
-							return this.$send({
-								method: 'POST',
-								url: this.$scope.$url() + '/logout'
-							}, function (_response) {
-								this.$unwrap(_response.data, null);
-							}, null);
-						},
-
-						$authInfo: function () {
-							//noinspection JSUnresolvedFunction
-							return this.$send({
-								method: 'GET',
-								url: this.$scope.$url() + '/authInfo',
-								cache: true,
-								data: {
-									token: $cookies.getObject('token')
-								}
-							}, function (_response) {
-								this.$unwrap(_response.data, null);
-							}, null);
-						},
-
-						$register: function () {
-							//noinspection JSUnresolvedFunction
-							return this.$send({
-								method: 'POST',
-								url: appConf.environmentSettings.apiUrl + '/registration',
-								data: this
-							}, function (_response) {
-								this.$unwrap(_response.data, null);
-							}, null);
-						},
-
-						$passwordResetInit: function () {
-							return this.$send({
-								method: 'POST',
-								url: this.$scope.$url() + '/password/reset/init',
-								data: {
-									email: this.email
-								}
-							});
-						},
-
-						$passwordReset: function () {
-							return this.$send({
-								method: 'POST',
-								url: this.$scope.$url() + '/password/reset/finish',
-								data: {
-									token: this.token,
-									newPassword: this.password
-								}
-							});
-						}
-					},
-
 					Record: {
 						/**
 						 * Return user's concatenated name and surname

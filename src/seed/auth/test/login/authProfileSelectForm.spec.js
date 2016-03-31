@@ -9,7 +9,7 @@ define([
 			describe('module: login', function () {
 				describe('directive: authProfileSelectForm', function () {
 
-					var $q, scope, $state, $compile, $stateProvider, appConf, $rootScope, element, $timeout, UserAPI, LanguageAPI, Permission, neoSession;
+					var $q, scope, $state, $compile, $stateProvider, appConf, $rootScope, element, $timeout, UserAPI, Authorization, neoSession;
 
 					beforeEach(function () {
 						module('ui.router', function ($injector) {
@@ -23,9 +23,8 @@ define([
 							$compile = $injector.get('$compile');
 							$timeout = $injector.get('$timeout');
 							UserAPI = $injector.get('UserAPI');
-							LanguageAPI = $injector.get('LanguageAPI');
 							$state = $injector.get('$state');
-							Permission = $injector.get('Permission');
+							Authorization = $injector.get('Authorization');
 							neoSession = $injector.get('neoSession');
 							$rootScope = $injector.get('$rootScope');
 							appConf = $injector.get('appConf');
@@ -40,14 +39,13 @@ define([
 					});
 
 					beforeEach(function () {
-						spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
-							return {localePOSIX: 'en_GB'};
-						});
+
 						scope.$root.user = UserAPI.build({
 							login: 'exampleUser',
 							password: 'examplePassword'
 						});
-						spyOn(Permission, 'authorize').and.callFake(function () {
+
+						spyOn(Authorization, 'authorize').and.callFake(function () {
 							return $q.resolve();
 						});
 						spyOn(neoSession, 'setSession').and.callFake(function () {

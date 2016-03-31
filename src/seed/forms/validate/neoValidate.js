@@ -7,7 +7,7 @@ define([
 ], function (module) {
 	'use strict';
 
-	function neoValidate($log, LanguageAPI) {
+	function neoValidate($log, activeLanguage) {
 
 		$log = $log.getInstance('seed.forms.neoValidate');
 		$log.debug('Initiated directive');
@@ -20,11 +20,9 @@ define([
 			},
 			link: function (scope, form) {
 
-				var currentLanguage = LanguageAPI.getLanguage();
-
 				var defaults = {
 					framework: 'bootstrap',
-					locale: currentLanguage.locale,
+					locale: activeLanguage.locale,
 					addOns: {
 						i18n: {}
 					},
@@ -40,11 +38,7 @@ define([
 
 				var options = {};
 
-				scope.$on('seed.languageAPI.setLanguage', function (e, language) {
-
-					if (currentLanguage.locale === language.locale) {
-						return;
-					}
+				scope.$on('seed.auth.neoLanguage::setActiveLanguage', function (e, language) {
 
 					options.locale = language.locale;
 

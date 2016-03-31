@@ -5,6 +5,8 @@
 
 define([
 	'angular',
+	'moment',
+	'moment-timezone',
 	'angular-moment',
 	'angular-cookies',
 	'angular-gettext',

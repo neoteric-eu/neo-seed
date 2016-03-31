@@ -1,9 +1,13 @@
 define([
-	'./_directives/neoPermissionOnly',
-	'./_directives/neoPermissionExcept',
-
 	'./_services/neoSession',
 	'./_services/neoRequestHeaders',
+	'./_services/neoLanguage',
+
+	'./_constants/authConf',
+
+	'./_values/availableLanguages',
+	'./_values/activeLanguage',
+	'./_values/defaultLanguage',
 
 	'./_models/User/User',
 	'./_models/User/UserAPI',

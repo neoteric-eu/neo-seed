@@ -5,7 +5,7 @@ define([
 
 	var module = ng.module('seed.auth.lock', []);
 
-	module.config(function ($stateProvider) {
+	module.config(function ($stateProvider, gettext) {
 
 		$stateProvider
 			.state('auth.lock', {
@@ -16,7 +16,11 @@ define([
 					}
 				},
 				data: {
-					title: 'Locked Screen'
+					title: gettext('Locked Screen'),
+					permissions: {
+						only: ['AUTHORIZED'],
+						redirectTo: 'auth.login'
+					}
 				}
 			});
 	});

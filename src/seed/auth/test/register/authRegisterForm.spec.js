@@ -9,7 +9,7 @@ define([
 			describe('module: register', function () {
 				describe('directive: authRegisterForm', function () {
 
-					var $compile, $rootScope, $state, $timeout, $q, neoSession, UserAPI, LanguageAPI;
+					var $compile, $rootScope, $state, $timeout, $q, neoSession, UserAPI;
 
 					beforeEach(function () {
 						inject(function ($injector) {
@@ -20,7 +20,6 @@ define([
 							$timeout = $injector.get('$timeout');
 							neoSession = $injector.get('neoSession');
 							UserAPI = $injector.get('UserAPI');
-							LanguageAPI = $injector.get('LanguageAPI');
 						});
 					});
 
@@ -30,10 +29,6 @@ define([
 							return $q.resolve({
 								customers: []
 							});
-						});
-
-						spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
-							return {localePOSIX: 'en_GB'};
 						});
 
 						spyOn(neoSession, 'setSession').and.callFake(function () {
@@ -71,10 +66,6 @@ define([
 									}
 								}
 							});
-						});
-
-						spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
-							return {localePOSIX: 'en_GB'};
 						});
 
 						var scope = $rootScope.$new();
