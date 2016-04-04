@@ -56,7 +56,7 @@ define([], function () {
 						neoCookie.setCustomer('exampleCustomerId');
 
 						// THEN
-						expect($cookies.put).toHaveBeenCalledWith('activeCustomer', 'exampleCustomerId')
+						expect($cookies.put).toHaveBeenCalledWith('activeCustomer', 'exampleCustomerId');
 					});
 				});
 
@@ -91,7 +91,7 @@ define([], function () {
 						neoCookie.setToken('exampleToken');
 
 						// THEN
-						expect($cookies.put).toHaveBeenCalledWith('token', 'exampleToken')
+						expect($cookies.put).toHaveBeenCalledWith('token', 'exampleToken');
 					});
 				});
 
@@ -126,7 +126,7 @@ define([], function () {
 						neoCookie.setLanguage('exampleLanguage');
 
 						// THEN
-						expect($cookies.put).toHaveBeenCalledWith('lang', 'exampleLanguage')
+						expect($cookies.put).toHaveBeenCalledWith('lang', 'exampleLanguage');
 					});
 				});
 
