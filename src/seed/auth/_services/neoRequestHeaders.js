@@ -24,8 +24,8 @@ define(['seed/auth/module'], function (module) {
 		init();
 
 		function init() {
-			$rootScope.$on(authConf.neoLanguage.events.setActiveLanguage, function (language) {
-				neoRequestHeaders.setAcceptLanguage(language.locale);
+			$rootScope.$on(authConf.neoLanguage.events.setActiveLanguage, function (event, language) {
+				setAcceptLanguage(language.locale);
 			});
 		}
 

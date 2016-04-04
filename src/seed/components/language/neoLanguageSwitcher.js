@@ -13,7 +13,7 @@ define(['seed/components/module'], function (module) {
 	 * @param LanguageAPI {Object} Interface for REST communication with server
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function neoLanguageSwitcher($log, LanguageAPI) {
+	function neoLanguageSwitcher($log, neoLanguage, availableLanguages, activeLanguage) {
 		$log = $log.getInstance('seed.components.neoLanguageSwitcher');
 
 		$log.debug('Initiated directive');
@@ -28,8 +28,8 @@ define(['seed/components/module'], function (module) {
 				var vm = this;
 
 				// variables
-				vm.languageCollection = LanguageAPI.languageCollection;
-				vm.activeLanguage = LanguageAPI.getLanguage();
+				vm.languageCollection = availableLanguages;
+				vm.activeLanguage = activeLanguage;
 
 				// methods
 				vm.setLanguageActive = setLanguageActive;
@@ -39,7 +39,7 @@ define(['seed/components/module'], function (module) {
 				 * @param language {seed.auth.Language} Language model
 				 */
 				function setLanguageActive(language) {
-					LanguageAPI.setLanguage(language);
+					neoLanguage.setActiveCustomer(language);
 					vm.activeLanguage = language;
 
 					$log.debug('Switched application language');
