@@ -159,7 +159,7 @@ define(['seed/auth/module'], function (module) {
 			var cookieValue = $cookies.get(key);
 
 			// Duck-typing based detection if string is serialized JSON object or object-like string
-			if (cookieValue.indexOf('{') >= 0 || cookieValue.indexOf('"') >= 0) {
+			if (cookieValue && (cookieValue.indexOf('{') >= 0 || cookieValue.indexOf('"') >= 0)) {
 				$cookies.remove(key);
 			}
 		}
