@@ -2,7 +2,11 @@ define([
 	'angular',
 	'angular-mocks',
 	'seed/components/_includes',
-	'seed/components/module'
+	'seed/components/module',
+	'seed/helpers/_includes',
+	'seed/helpers/module',
+	'seed/auth/_includes',
+	'seed/auth/module'
 ], function () {
 	'use strict';
 
