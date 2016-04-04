@@ -12,8 +12,8 @@ define(['seed/auth/module'], function (module) {
 		$log = $log.getInstance('app.auth.neoCookie');
 		$log.debug('Initiated service');
 
-		this.getCustomer = getActiveCustomer;
-		this.setCustomer = setActiveCustomer;
+		this.getCustomer = getCustomer;
+		this.setCustomer = setCustomer;
 		this.removeCustomer = removeCustomer;
 
 		this.getToken = getToken;
@@ -33,7 +33,8 @@ define(['seed/auth/module'], function (module) {
 		 *
 		 * @returns {String} Active customer ID
 		 */
-		function getActiveCustomer() {
+		function getCustomer() {
+			removeCookieValueIfObject('activeCustomer');
 			return $cookies.get('activeCustomer');
 		}
 
@@ -42,12 +43,11 @@ define(['seed/auth/module'], function (module) {
 		 *
 		 * @param customerId {String} Active customer ID
 		 */
-		function setActiveCustomer(customerId) {
+		function setCustomer(customerId) {
 			if (!_.isString(customerId)) {
 				throw new TypeError('Parameter "customerId" must be String');
 			}
 
-			removeObjectKey(customerId);
 			$cookies.put('activeCustomer', customerId);
 		}
 
@@ -64,6 +64,7 @@ define(['seed/auth/module'], function (module) {
 		 * @returns {String} Session token
 		 */
 		function getToken() {
+			removeCookieValueIfObject('token');
 			return $cookies.get('token');
 		}
 
@@ -77,7 +78,6 @@ define(['seed/auth/module'], function (module) {
 				throw new TypeError('Parameter "token" must be String');
 			}
 
-			removeObjectKey(token);
 			$cookies.put('token', token);
 		}
 
@@ -94,6 +94,7 @@ define(['seed/auth/module'], function (module) {
 		 * @returns {String} locale code
 		 */
 		function getLanguage() {
+			removeCookieValueIfObject('lang');
 			return $cookies.get('lang');
 		}
 
@@ -107,7 +108,6 @@ define(['seed/auth/module'], function (module) {
 				throw new TypeError('Parameter "locale" must be String');
 			}
 
-			removeObjectKey(locale);
 			$cookies.put('lang', locale);
 		}
 
@@ -151,17 +151,15 @@ define(['seed/auth/module'], function (module) {
 		 * @method
 		 * @private
 		 *
+		 * This method should be deprecated as soon as possible
+		 *
 		 * @param key {String} Cookie key to test
 		 */
-		function removeObjectKey(key) {
-			try {
-				var cookieValue = $cookies.get(key);
+		function removeCookieValueIfObject(key) {
+			var cookieValue = $cookies.get(key);
 
-				// Duck-typing based detection if string is serialized JSON object
-				if (cookieValue.indexOf('{') >= 0) {
-					$cookies.remove(key);
-				}
-			} catch (err) {
+			// Duck-typing based detection if string is serialized JSON object or object-like string
+			if (cookieValue.indexOf('{') >= 0 || cookieValue.indexOf('"') >= 0) {
 				$cookies.remove(key);
 			}
 		}
