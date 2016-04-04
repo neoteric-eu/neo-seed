@@ -5,7 +5,7 @@ define([], function () {
 		describe('module: components', function () {
 			describe('directive: neoPageTitle', function () {
 
-				var $compile, $rootScope, $log, appConf;
+				var $compile, $rootScope, $stateProvider, $state, appConf;
 				var generalSettings = {
 					name: 'custom page title'
 				};
@@ -16,16 +16,30 @@ define([], function () {
 							generalSettings: generalSettings
 						});
 					});
+
+					module('ui.router', function ($injector) {
+						$stateProvider = $injector.get('$stateProvider');
+					});
 				});
 
 				beforeEach(function () {
 					// Inject service into module
 					inject(function ($injector) {
 						$compile = $injector.get('$compile');
+						$state = $injector.get('$state');
 						$rootScope = $injector.get('$rootScope');
-						$log = $injector.get('$log');
 						appConf = $injector.get('appConf');
 					});
+				});
+
+				beforeEach(function () {
+					$stateProvider
+						.state('emptyTitle', {})
+						.state('customTitle', {
+							data: {
+								title: 'custom state title'
+							}
+						});
 				});
 
 				it('should set page title from general settings', function () {
@@ -34,7 +48,7 @@ define([], function () {
 					var element = $compile('<title neo-page-title/>')(scope);
 
 					// WHEN
-					$rootScope.$broadcast('$stateChangeStart', {});
+					$state.go('emptyTitle');
 
 					scope.$digest();
 
@@ -44,15 +58,12 @@ define([], function () {
 
 				it('should set page title passed in toState', function () {
 					// GIVEN
+
 					var scope = $rootScope.$new();
 					var element = $compile('<title neo-page-title/>')(scope);
 
 					// WHEN
-					$rootScope.$broadcast('$stateChangeStart', {
-						data: {
-							title: 'custom state title'
-						}
-					});
+					$state.go('customTitle');
 
 					scope.$digest();
 
