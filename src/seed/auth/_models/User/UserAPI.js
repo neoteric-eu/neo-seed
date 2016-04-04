@@ -92,7 +92,7 @@ define(['seed/auth/module'], function (module) {
 				});
 		};
 
-		api.resetPassword = function (user) {
+		api.resetPasswordFinish = function (user) {
 			return user
 				.$passwordReset()
 				.$asPromise()
