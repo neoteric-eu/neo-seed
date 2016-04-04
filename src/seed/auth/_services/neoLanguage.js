@@ -6,11 +6,24 @@ define(['seed/auth/module'], function (module) {
 	 *
 	 * @class neoLanguage
 	 * @memberOf seed.auth
+	 *
+	 * @param $log
+	 * @param $rootScope
+	 * @param $window
+	 * @param availableLanguages
+	 * @param activeLanguage
+	 * @param defaultLanguage
+	 * @param gettextCatalog
+	 * @param amMoment
+	 * @param authConf
+	 * @param neoCookie {seed.auth.neoCookie}
+	 * @param LanguageAPI
+	 * @param appConf
 	 */
-	function neoLanguage($log, $rootScope, $cookies, $window,
+	function neoLanguage($log, $rootScope, $window,
 											 availableLanguages, activeLanguage, defaultLanguage,
 											 gettextCatalog, amMoment, authConf,
-											 LanguageAPI, appConf) {
+											 neoCookie, LanguageAPI, appConf) {
 
 		$log = $log.getInstance('app.auth.neoLanguage');
 		$log.debug('Initiated service');
@@ -29,7 +42,7 @@ define(['seed/auth/module'], function (module) {
 			initAvailableLanguagesCollection();
 			initDefaultLanguage();
 
-			var cookieLang = detectCookieLanguage();
+			var cookieLang = neoCookie.getLanguage();
 
 			if (isLanguageAvailable(cookieLang)) {
 				setActiveLanguageFromCookie(cookieLang);
@@ -74,29 +87,6 @@ define(['seed/auth/module'], function (module) {
 		function initDefaultLanguage() {
 			defaultLanguage = LanguageAPI.build(appConf.languageSettings.defaultLanguage);
 			$log.debug('Initiated default language');
-		}
-
-		/**
-		 * Retrieve language from cookie
-		 * @method
-		 * @private
-		 *
-		 * @returns {*} cookie locale string
-		 */
-		function detectCookieLanguage() {
-			try {
-				var cookieLang = $cookies.get('lang');
-
-				// Duck-typing based detection if string is serialized JSON object
-				if (cookieLang.indexOf('{') >= 0) {
-					$cookies.remove('lang');
-					return;
-				}
-
-				return cookieLang;
-			} catch (err) {
-				$cookies.remove('lang');
-			}
 		}
 
 		/**
@@ -173,7 +163,7 @@ define(['seed/auth/module'], function (module) {
 			_.assign(activeLanguage, language);
 
 			// Write locale to cookie
-			$cookies.put('lang', activeLanguage.locale);
+			neoCookie.setLanguage(activeLanguage.locale);
 
 			// Update libraries locale settings
 			gettextCatalog.setCurrentLanguage(language.localePOSIX);

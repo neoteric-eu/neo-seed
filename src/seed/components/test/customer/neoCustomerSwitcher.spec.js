@@ -7,7 +7,7 @@ define([
 		describe('module: components', function () {
 			describe('directive: neoCustomerSwitcher', function () {
 
-				var $compile, $rootScope, $log, $cookies, $window;
+				var $compile, $rootScope, $log, neoCookie, $window;
 
 				beforeEach(function () {
 					// Inject service into module
@@ -15,7 +15,7 @@ define([
 						$compile = $injector.get('$compile');
 						$rootScope = $injector.get('$rootScope');
 						$log = $injector.get('$log');
-						$cookies = $injector.get('$cookies');
+						neoCookie = $injector.get('neoCookie');
 						$window = $injector.get('$window');
 					});
 
@@ -30,9 +30,14 @@ define([
 					};
 
 					$rootScope.customer = {
-						name: 'testCustomer',
+						name: 'testCustomer'
 					};
 				});
+
+				afterEach(function () {
+					neoCookie.removeCustomer();
+				});
+
 
 				it('should should set actuve customer and user according to root scope', function () {
 					// GIVEN
@@ -54,7 +59,7 @@ define([
 					// GIVEN
 					var selectedCustomer = {
 						customerId: 'testId',
-						customerName: 'testCustomer',
+						customerName: 'testCustomer'
 					};
 
 					spyOn($window.location, 'reload').and.callFake(function () {
@@ -72,7 +77,7 @@ define([
 
 					// THEN
 					expect($rootScope.customer).toEqual(selectedCustomer);
-					expect($cookies.getObject('activeCustomer')).toBe(selectedCustomer.customerId);
+					expect(neoCookie.getCustomer()).toBe(selectedCustomer.customerId);
 					expect($window.location.reload).toHaveBeenCalled();
 				});
 			});

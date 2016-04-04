@@ -6,13 +6,14 @@ define(['seed/components/module'], function (module) {
 	 * @class cookieConsent
 	 * @memberOf seed.components
 	 *
-	 * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
-	 * @param $cookies
+	 * @example
+	 *  <cookie-consent></cookie-consent>
+	 *
 	 * @param $log {Object} Logging service
-	 *              <cookie-consent></cookie-consent>
+	 * @param neoCookie {seed.auth.neoCookie}
 	 */
 
-	function cookieConsent($cookies, $log) {
+	function cookieConsent($log, neoCookie) {
 		$log = $log.getInstance('seed.components.cookieConsent');
 
 		$log.debug('Initiated directive');
@@ -31,13 +32,14 @@ define(['seed/components/module'], function (module) {
 				vm.init();
 
 				function init() {
-					if ($cookies.getObject('cookieConsent')) {
+					var isCookieConsentAccepted = neoCookie.getCookieConsent();
+					if (isCookieConsentAccepted) {
 						$element.hide();
 					}
 				}
 
 				function acceptCookies() {
-					$cookies.putObject('cookieConsent', true);
+					neoCookie.setCookieConsent(true);
 					$element.hide();
 				}
 

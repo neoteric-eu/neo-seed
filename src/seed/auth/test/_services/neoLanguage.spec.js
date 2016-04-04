@@ -10,7 +10,7 @@ define([], function () {
 				var LanguageAPI;
 				var availableLanguages;
 				var activeLanguage;
-				var $cookies;
+				var neoCookie;
 				var $window;
 
 				var _navigator;
@@ -20,7 +20,7 @@ define([], function () {
 						neoLanguage = $injector.get('neoLanguage');
 						LanguageAPI = $injector.get('LanguageAPI');
 						$window = $injector.get('$window');
-						$cookies = $injector.get('$cookies');
+						neoCookie = $injector.get('neoCookie');
 						availableLanguages = $injector.get('availableLanguages');
 						activeLanguage = $injector.get('activeLanguage');
 						appConf = $injector.get('appConf');
@@ -33,7 +33,7 @@ define([], function () {
 				afterEach(function () {
 					// Revert navigator changes
 					$window.navigator = _navigator;
-					$cookies.remove('lang');
+					neoCookie.removeLanguage();
 				});
 
 				describe('method: init', function () {
@@ -60,24 +60,13 @@ define([], function () {
 
 					it('should initialize activeLanguage from cookie settings when provided', function () {
 						// GIVEN
-						$cookies.put('lang', 'en-GB');
+						neoCookie.setLanguage('en-GB');
 
 						// WHEN
 						neoLanguage.init();
 
 						// THEN
 						expect(activeLanguage.locale).toBe('en-GB');
-					});
-
-					it('should clear "lang" cookie value if is set as object and insert string instead', function () {
-						// GIVEN
-						$cookies.putObject('lang', {locale: 'en-GB'});
-
-						// WHEN
-						neoLanguage.init();
-
-						// THEN
-						expect($cookies.get('lang')).toEqual(jasmine.any(String));
 					});
 
 					it('should initialize activeLanguage from browser settings when provided', function () {

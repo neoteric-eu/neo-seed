@@ -3,14 +3,14 @@ define(['seed/auth/module', 'moment', 'moment-timezone'], function (module, mome
 
 	/**
 	 * @param $log {Object} Logging service
-	 * @param $cookies {Function} Cookie service
+	 * @param neoCookie {seed.auth.neoCookie} Cookie service
 	 * @param PermissionStore {Object} ACL service
 	 * @param $q {Object} Angular promise provider
 	 * @param neoRequestHeaders {Object} Request decorator
 	 * @param UserAPI {Object} Interface for REST communication with server
 	 * @param $rootScope {Object} Angular global scope helper
 	 */
-	var neoSession = function ($log, $cookies, PermissionStore, $q, $rootScope, neoRequestHeaders, UserAPI) {
+	var neoSession = function ($log, neoCookie, PermissionStore, $q, $rootScope, neoRequestHeaders, UserAPI) {
 
 		$log = $log.getInstance('seed.auth.neoSession');
 		$log.debug('Initiated service');
@@ -30,8 +30,8 @@ define(['seed/auth/module', 'moment', 'moment-timezone'], function (module, mome
 					});
 				$log.debug('Set access rights');
 
-				$cookies.putObject('activeCustomer', customer.customerId);
-				$cookies.putObject('token', user.$metadata.token);
+				neoCookie.setCustomer(customer.customerId);
+				neoCookie.setToken(user.$metadata.token);
 				$log.debug('Set cookie objects');
 
 				$log.debug('Set timezone');
@@ -61,8 +61,8 @@ define(['seed/auth/module', 'moment', 'moment-timezone'], function (module, mome
 			var dfd = $q.defer();
 
 			try {
-				$cookies.remove('token');
-				$cookies.remove('activeCustomer');
+				neoCookie.removeToken();
+				neoCookie.removeCustomer();
 				$log.debug('Removed cookie objects');
 
 				PermissionStore.clearStore();
@@ -87,8 +87,8 @@ define(['seed/auth/module', 'moment', 'moment-timezone'], function (module, mome
 		function checkSession() {
 			var dfd = $q.defer(),
 				self = this,
-				token = $cookies.getObject('token'),
-				activeCustomer = $cookies.getObject('activeCustomer');
+				token = neoCookie.getToken(),
+				activeCustomer = neoCookie.getCustomer();
 
 			if (token && activeCustomer) {
 				neoRequestHeaders.setAuthToken(token);

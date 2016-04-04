@@ -7,11 +7,10 @@ define(['seed/auth/module'], function (module) {
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
-	 * @param $cookies {Function} Cookie service
 	 * @param neoLanguage {seed.auth.neoLanguage} Language service
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, $cookies, neoLanguage, activeLanguage) {
+	var User = function (restmod, neoLanguage, activeLanguage) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
@@ -93,10 +92,7 @@ define(['seed/auth/module'], function (module) {
 							return this.$send({
 								method: 'GET',
 								url: this.$scope.$url() + '/authInfo',
-								cache: true,
-								data: {
-									token: $cookies.getObject('token')
-								}
+								cache: true
 							}, function (_response) {
 								this.$unwrap(_response.data, null);
 							}, null);

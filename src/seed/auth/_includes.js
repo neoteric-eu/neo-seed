@@ -2,6 +2,7 @@ define([
 	'./_services/neoSession',
 	'./_services/neoRequestHeaders',
 	'./_services/neoLanguage',
+	'./_services/neoCookie',
 
 	'./_constants/authConf',
 
