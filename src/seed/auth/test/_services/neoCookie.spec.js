@@ -3,7 +3,7 @@ define([], function () {
 
 	describe('module: seed', function () {
 		describe('module: auth', function () {
-			fdescribe('service: neoCookie', function () {
+			describe('service: neoCookie', function () {
 
 				/**
 				 * @type {seed.auth.neoCookie}
