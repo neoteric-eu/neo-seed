@@ -154,7 +154,7 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 			} else {
 				$log.debug('User does not have set in cookie either token or activeCustomer');
 
-				Q.reject();
+				$q.reject();
 			}
 
 			return $q.promise;
