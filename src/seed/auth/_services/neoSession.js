@@ -66,7 +66,6 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 			}
 		}
 
-// @todo
 		function setGlobalObjects(user, customer) {
 			$rootScope.user = user;
 			$rootScope.customer = customer;

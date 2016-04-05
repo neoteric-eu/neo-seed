@@ -146,7 +146,7 @@ define(['moment', 'moment-timezone'], function (moment) {
 					neoSession
 						.clearSession(user)
 						.then(function () {
-							called = false
+							called = false;
 						});
 
 					$rootScope.$apply();
@@ -155,7 +155,7 @@ define(['moment', 'moment-timezone'], function (moment) {
 					expect(called).toBeFalsy();
 				});
 
-				fdescribe('method: checkSession', function () {
+				describe('method: checkSession', function () {
 
 					it('should return rejected promise when user does not have set token and active customer set', function () {
 						// GIVEN
@@ -165,7 +165,7 @@ define(['moment', 'moment-timezone'], function (moment) {
 						neoSession
 							.checkSession()
 							.catch(function () {
-								wasCalled = true
+								wasCalled = true;
 							});
 
 						$rootScope.$apply();
