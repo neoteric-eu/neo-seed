@@ -33,7 +33,8 @@ define([], function () {
 				afterEach(function () {
 					// Revert navigator changes
 					$window.navigator = _navigator;
-					neoCookie.removeLanguage();
+
+					neoCookie.clearCookie();
 				});
 
 				describe('method: init', function () {

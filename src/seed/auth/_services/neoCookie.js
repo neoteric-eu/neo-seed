@@ -9,8 +9,10 @@ define(['seed/auth/module'], function (module) {
 	 */
 	function neoCookie($log, $cookies) {
 
-		$log = $log.getInstance('app.auth.neoCookie');
+		$log = $log.getInstance('seed.auth.neoCookie');
 		$log.debug('Initiated service');
+
+		var self = this;
 
 		this.getCustomer = getCustomer;
 		this.setCustomer = setCustomer;
@@ -28,18 +30,23 @@ define(['seed/auth/module'], function (module) {
 		this.setCookieConsent = setCookieConsent;
 		this.removeCookieConsent = removeCookieConsent;
 
+		this.clearCookie = clearCookie;
+
 		/**
 		 * @method
 		 *
 		 * @returns {String} Active customer ID
 		 */
 		function getCustomer() {
+			$log.debug('Fetched "activeCustomer" value from cookie');
+
 			removeCookieValueIfObject('activeCustomer');
 			return $cookies.get('activeCustomer');
 		}
 
 		/**
 		 * @method
+		 * @throws {TypeError}
 		 *
 		 * @param customerId {String} Active customer ID
 		 */
@@ -49,6 +56,8 @@ define(['seed/auth/module'], function (module) {
 			}
 
 			$cookies.put('activeCustomer', customerId);
+
+			$log.debug('Updated "activeCustomer" value in cookie');
 		}
 
 		/**
@@ -56,6 +65,8 @@ define(['seed/auth/module'], function (module) {
 		 */
 		function removeCustomer() {
 			$cookies.remove('activeCustomer');
+
+			$log.debug('Removed "activeCustomer" from cookie');
 		}
 
 		/**
@@ -64,12 +75,15 @@ define(['seed/auth/module'], function (module) {
 		 * @returns {String} Session token
 		 */
 		function getToken() {
+			$log.debug('Fetched "token" value from cookie');
+
 			removeCookieValueIfObject('token');
 			return $cookies.get('token');
 		}
 
 		/**
 		 * @method
+		 * @throws {TypeError}
 		 *
 		 * @param token {String} Session token
 		 */
@@ -79,6 +93,8 @@ define(['seed/auth/module'], function (module) {
 			}
 
 			$cookies.put('token', token);
+
+			$log.debug('Updated "token" value in cookie');
 		}
 
 		/**
@@ -86,6 +102,8 @@ define(['seed/auth/module'], function (module) {
 		 */
 		function removeToken() {
 			$cookies.remove('token');
+
+			$log.debug('Removed "token" from cookie');
 		}
 
 		/**
@@ -100,6 +118,7 @@ define(['seed/auth/module'], function (module) {
 
 		/**
 		 * @method
+		 * @throws {TypeError}
 		 *
 		 * @param locale {String} locale code
 		 */
@@ -109,6 +128,8 @@ define(['seed/auth/module'], function (module) {
 			}
 
 			$cookies.put('lang', locale);
+
+			$log.debug('Updated "lang" value in cookie');
 		}
 
 		/**
@@ -116,6 +137,8 @@ define(['seed/auth/module'], function (module) {
 		 */
 		function removeLanguage() {
 			$cookies.remove('lang');
+
+			$log.debug('Removed "lang" from cookie');
 		}
 
 		/**
@@ -124,11 +147,14 @@ define(['seed/auth/module'], function (module) {
 		 * @returns {Boolean} locale code
 		 */
 		function getCookieConsent() {
+			$log.debug('Fetched "cookieConsent" value from cookie');
+
 			return $cookies.getObject('cookieConsent');
 		}
 
 		/**
 		 * @method
+		 * @throws {TypeError}
 		 *
 		 * @param cookieConsent {Boolean} Is cookie consent accepted
 		 */
@@ -138,6 +164,8 @@ define(['seed/auth/module'], function (module) {
 			}
 
 			$cookies.putObject('cookieConsent', cookieConsent);
+
+			$log.debug('Updated "cookieConsent" value in cookie');
 		}
 
 		/**
@@ -145,6 +173,20 @@ define(['seed/auth/module'], function (module) {
 		 */
 		function removeCookieConsent() {
 			$cookies.remove('cookieConsent');
+
+			$log.debug('Removed "cookieConsent" from cookie');
+		}
+
+		/**
+		 * @method
+		 */
+		function clearCookie() {
+			self.removeCookieConsent();
+			self.removeCustomer();
+			self.removeLanguage();
+			self.removeToken();
+
+			$log.debug('Cleared cookie');
 		}
 
 		/**
@@ -161,6 +203,8 @@ define(['seed/auth/module'], function (module) {
 			// Duck-typing based detection if string is serialized JSON object or object-like string
 			if (cookieValue && (cookieValue.indexOf('{') >= 0 || cookieValue.indexOf('"') >= 0)) {
 				$cookies.remove(key);
+
+				$log.debug('Removed object-like "' + key + '" value from cookie');
 			}
 		}
 

@@ -23,7 +23,7 @@ define([
 				});
 
 				afterEach(function () {
-					neoCookie.removeCookieConsent();
+					neoCookie.clearCookie();
 				});
 
 				it('should contain init and acceptCookies methods', function () {

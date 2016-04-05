@@ -19,10 +19,7 @@ define([], function () {
 				});
 
 				afterEach(function () {
-					neoCookie.removeToken();
-					neoCookie.removeLanguage();
-					neoCookie.removeCustomer();
-					neoCookie.removeCookieConsent();
+					neoCookie.clearCookie();
 				});
 
 				describe('method: getCustomer', function () {
