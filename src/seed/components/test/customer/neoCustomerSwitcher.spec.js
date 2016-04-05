@@ -10,6 +10,12 @@ define([
 				var $compile, $rootScope, $log, $cookies, $window;
 
 				beforeEach(function () {
+					$window = {location: {reload: jasmine.createSpy()}};
+
+					module(function ($provide) {
+						$provide.value('$window', $window);
+					});
+
 					// Inject service into module
 					inject(function ($injector) {
 						$compile = $injector.get('$compile');
@@ -30,7 +36,7 @@ define([
 					};
 
 					$rootScope.customer = {
-						name: 'testCustomer',
+						name: 'testCustomer'
 					};
 				});
 
@@ -54,11 +60,11 @@ define([
 					// GIVEN
 					var selectedCustomer = {
 						customerId: 'testId',
-						customerName: 'testCustomer',
+						customerName: 'testCustomer'
 					};
 
-					spyOn($window.location, 'reload').and.callFake(function () {
-					});
+					spyOn($cookies, 'putObject');
+
 
 					var scope = $rootScope.$new();
 					var element = $compile('<neo-customer-switcher></neo-customer-switcher>')(scope);
@@ -72,7 +78,7 @@ define([
 
 					// THEN
 					expect($rootScope.customer).toEqual(selectedCustomer);
-					expect($cookies.getObject('activeCustomer')).toBe(selectedCustomer.customerId);
+					expect($cookies.putObject).toHaveBeenCalled();
 					expect($window.location.reload).toHaveBeenCalled();
 				});
 			});

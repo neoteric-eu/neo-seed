@@ -1,4 +1,4 @@
-define(['seed/auth/module', 'moment', 'moment-timezone'], function (module, moment) {
+define(['seed/auth/module', 'angular', 'moment'], function (module, angular, moment) {
 	'use strict';
 
 	/**
@@ -20,68 +20,99 @@ define(['seed/auth/module', 'moment', 'moment-timezone'], function (module, mome
 		this.checkSession = checkSession;
 
 		function setSession(user, customer) {
-			var dfd = $q.defer();
-
-			try {
-				PermissionStore.defineManyPermissions(
-					customer.featureKeys,
-					function (stateParams, roleName) {
-						return customer.$hasPermission(roleName);
-					});
-				$log.debug('Set access rights');
-
-				$cookies.putObject('activeCustomer', customer.customerId);
-				$cookies.putObject('token', user.$metadata.token);
-				$log.debug('Set cookie objects');
-
-				$log.debug('Set timezone');
-				if (user.timezone) {
-					moment.tz.setDefault(user.timezone);
-				}
-
-				$rootScope.user = user;
-				$rootScope.customer = customer;
-				$log.debug('Set customer and user objects available globally');
-
-				neoRequestHeaders.setCustomerId(customer.customerId);
-				neoRequestHeaders.setAuthToken(user.$metadata.token);
-
-				$log.debug('Set new user session');
-				dfd.resolve();
-
-			} catch (e) {
-				$log.error('Error setting up user session', e);
-				dfd.reject(e);
+			if (!angular.isDefined(user)) {
+				throw new ReferenceError('Parameter "user" must be defined');
 			}
 
-			return dfd.promise;
+			if (!angular.isDefined(customer)) {
+				throw new ReferenceError('Parameter "customer" must be defined');
+			}
+			
+			try {
+				setAccessRights(customer);
+				setCookieObjects(customer, user);
+				setTimezone(user);
+				setGlobalObjects(user, customer);
+				setRequestHeaders(customer, user);
+
+				$log.debug('Set new user session');
+				return $q.resolve();
+
+			} catch (err) {
+				$log.error('Error setting up user session', err);
+				return $q.reject(err);
+			}
+		}
+
+		function setAccessRights(customer) {
+			PermissionStore.defineManyPermissions(
+				customer.featureKeys,
+				function (stateParams, roleName) {
+					return customer.$hasPermission(roleName);
+				});
+			$log.debug('Set access rights');
+		}
+
+		function setCookieObjects(customer, user) {
+			$cookies.putObject('activeCustomer', customer.customerId);
+			$cookies.putObject('token', user.$metadata.token);
+			$log.debug('Set cookie objects');
+		}
+
+		function setTimezone(user) {
+			if (user.timezone) {
+				moment.tz.setDefault(user.timezone);
+				$log.debug('Set timezone');
+			}
+		}
+
+// @todo
+		function setGlobalObjects(user, customer) {
+			$rootScope.user = user;
+			$rootScope.customer = customer;
+			$log.debug('Set customer and user objects available globally');
+		}
+
+		function setRequestHeaders(customer, user) {
+			neoRequestHeaders.setCustomerId(customer.customerId);
+			neoRequestHeaders.setAuthToken(user.$metadata.token);
 		}
 
 		function clearSession() {
-			var dfd = $q.defer();
-
 			try {
-				$cookies.remove('token');
-				$cookies.remove('activeCustomer');
-				$log.debug('Removed cookie objects');
+				clearCookieObject();
+				clearAccessRights();
+				clearGlobalObject();
+				clearRequestHeaders();
 
-				PermissionStore.clearStore();
-				$log.debug('Cleared access rights');
+				$log.debug('Cleared user session');
+				return $q.resolve();
 
-				$rootScope.user = undefined;
-				$rootScope.customer = undefined;
-				$log.debug('Removed global objects');
-
-				neoRequestHeaders.clearHeaders();
-				dfd.resolve();
-
-			} catch (e) {
-				$log.error('Error clearing user session', e);
-				dfd.reject(e);
+			} catch (err) {
+				$log.error('Error clearing user session', err);
+				return $q.reject(err);
 			}
+		}
 
-			$log.debug('Cleared user session');
-			return dfd.promise;
+		function clearCookieObject() {
+			$cookies.remove('token');
+			$cookies.remove('activeCustomer');
+			$log.debug('Removed cookie objects');
+		}
+
+		function clearAccessRights() {
+			PermissionStore.clearStore();
+			$log.debug('Cleared access rights');
+		}
+
+		function clearGlobalObject() {
+			$rootScope.user = undefined;
+			$rootScope.customer = undefined;
+			$log.debug('Removed global objects');
+		}
+
+		function clearRequestHeaders() {
+			neoRequestHeaders.clearHeaders();
 		}
 
 		function checkSession() {
