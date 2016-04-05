@@ -5,28 +5,22 @@ define(['moment', 'moment-timezone'], function (moment) {
 		describe('module: auth', function () {
 			describe('service: neoSession', function () {
 
-				var $q, $rootScope, $log, $timeout, Permission, neoSession, UserAPI, CustomerAPI, LanguageAPI, User, scope, neoCookie;
+				var $q;
+				var $log;
+				var $rootScope;
+				var UserAPI;
+				var neoSession;
+				var neoCookie;
 
 				beforeEach(function () {
 
 					inject(function ($injector) {
-						neoSession = $injector.get('neoSession');
-						UserAPI = $injector.get('UserAPI');
-						CustomerAPI = $injector.get('CustomerAPI');
-						User = $injector.get('User');
-						$rootScope = $injector.get('$rootScope');
-						LanguageAPI = $injector.get('LanguageAPI');
-						$log = $injector.get('$log');
-						$timeout = $injector.get('$timeout');
-						Permission = $injector.get('Permission');
 						$q = $injector.get('$q');
+						$log = $injector.get('$log');
+						$rootScope = $injector.get('$rootScope');
+						neoSession = $injector.get('neoSession');
 						neoCookie = $injector.get('neoCookie');
-					});
-				});
-
-				beforeEach(function () {
-					inject(function ($injector) {
-						scope = $injector.get('$rootScope').$new();
+						UserAPI = $injector.get('UserAPI');
 					});
 				});
 
@@ -199,8 +193,10 @@ define(['moment', 'moment-timezone'], function (moment) {
 							.then(function () {
 								wasCalled = true;
 							});
+
 						// WHEN
 						$rootScope.$apply();
+
 						// THEN
 						expect(wasCalled).toBeTruthy();
 						expect(neoSession.setSession).toHaveBeenCalled();
@@ -218,9 +214,11 @@ define(['moment', 'moment-timezone'], function (moment) {
 									featureKeys: []
 								}]
 							});
+
 							user.$metadata = {
 								token: 'exampleToken'
 							};
+
 							return $q.resolve(user);
 						});
 
@@ -240,13 +238,12 @@ define(['moment', 'moment-timezone'], function (moment) {
 						expect(wasCalled).toBeTruthy();
 					});
 
-					it('should return rejected promise when setting up a session', function () {
+					it('should return rejected promise when server return error setting up a session', function () {
 						// GIVEN
 						neoCookie.setToken('exampleToken');
 						neoCookie.setCustomer('exampleCustomer');
 
 						spyOn(neoSession, 'clearSession').and.callThrough();
-
 						spyOn(UserAPI, 'authInfo').and.callFake(function () {
 							return $q.reject();
 						});
@@ -256,13 +253,13 @@ define(['moment', 'moment-timezone'], function (moment) {
 
 						var wasCalled = false;
 
+						// WHEN
 						neoSession
 							.checkSession()
 							.catch(function () {
 								wasCalled = true;
 							});
 
-						// WHEN
 						$rootScope.$apply();
 
 						// THEN
