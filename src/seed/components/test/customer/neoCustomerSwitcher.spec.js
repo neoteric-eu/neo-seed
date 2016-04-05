@@ -10,6 +10,12 @@ define([
 				var $compile, $rootScope, $log, neoCookie, $window;
 
 				beforeEach(function () {
+					$window = {location: {reload: jasmine.createSpy()}};
+
+					module(function ($provide) {
+						$provide.value('$window', $window);
+					});
+
 					// Inject service into module
 					inject(function ($injector) {
 						$compile = $injector.get('$compile');
@@ -62,8 +68,8 @@ define([
 						customerName: 'testCustomer'
 					};
 
-					spyOn($window.location, 'reload').and.callFake(function () {
-					});
+					spyOn($cookies, 'putObject');
+
 
 					var scope = $rootScope.$new();
 					var element = $compile('<neo-customer-switcher></neo-customer-switcher>')(scope);

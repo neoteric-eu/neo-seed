@@ -24,7 +24,6 @@ define([
 		'ngSanitize',
 
 		'gettext',
-		'permission',
 		'angularMoment',
 		'restmod',
 		'angular-loading-bar',
@@ -32,6 +31,8 @@ define([
 		'ui.bootstrap',
 		'ui.select',
 		'ui.router',
+
+		'permission',
 
 		'app.conf',
 
