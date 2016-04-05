@@ -4,13 +4,13 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 	/**
 	 * @param $log {Object} Logging service
 	 * @param $cookies {Function} Cookie service
-	 * @param Permission {Object} ACL service
+	 * @param PermissionStore {Object} ACL service
 	 * @param $q {Object} Angular promise provider
 	 * @param neoRequestHeaders {Object} Request decorator
 	 * @param UserAPI {Object} Interface for REST communication with server
 	 * @param $rootScope {Object} Angular global scope helper
 	 */
-	var neoSession = function ($log, $cookies, Permission, $q, $rootScope, neoRequestHeaders, UserAPI) {
+	var neoSession = function ($log, $cookies, PermissionStore, $q, $rootScope, neoRequestHeaders, UserAPI) {
 
 		$log = $log.getInstance('seed.auth.neoSession');
 		$log.debug('Initiated service');
@@ -45,7 +45,7 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 		}
 
 		function setAccessRights(customer) {
-			Permission.defineManyRoles(
+			PermissionStore.defineManyPermissions(
 				customer.featureKeys,
 				function (stateParams, roleName) {
 					return customer.$hasPermission(roleName);
@@ -101,7 +101,7 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 		}
 
 		function clearAccessRights() {
-			Permission.roleValidations = _.pick(Permission.roleValidations, 'AUTHORIZED');
+			PermissionStore.clearStore();
 			$log.debug('Cleared access rights');
 		}
 
@@ -116,7 +116,8 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 		}
 
 		function checkSession() {
-			var self = this,
+			var dfd = $q.defer(),
+				self = this,
 				token = $cookies.getObject('token'),
 				activeCustomer = $cookies.getObject('activeCustomer');
 
@@ -124,7 +125,6 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 				neoRequestHeaders.setAuthToken(token);
 
 				UserAPI
-
 					.authInfo()
 					.then(function (user) {
 						// When reload page set session again
@@ -132,11 +132,11 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 							var customer = _.findWhere(user.customers, {customerId: activeCustomer});
 							self.setSession(user, customer)
 								.then(function () {
-									$q.resolve();
+									dfd.resolve();
 								});
 						} else {
 							// Or pass it
-							$q.resolve();
+							dfd.resolve();
 						}
 
 						$log.debug('Successfully checked if user user session is still valid');
@@ -146,7 +146,7 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 						self
 							.clearSession()
 							.finally(function () {
-								$q.reject(e);
+								dfd.reject(e);
 							});
 
 						$log.error('Error while checking user session', e);
@@ -154,10 +154,10 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 			} else {
 				$log.debug('User does not have set in cookie either token or activeCustomer');
 
-				$q.reject();
+				dfd.reject();
 			}
 
-			return $q.promise;
+			return dfd.promise;
 		}
 	};
 

@@ -5,7 +5,7 @@ define(['moment', 'moment-timezone'], function (moment) {
 		describe('module: auth', function () {
 			describe('service: neoSession', function () {
 
-				var $q, $rootScope, $log, $timeout, Permission, neoSession, UserAPI, CustomerAPI, LanguageAPI, User, scope;
+				var $q, $rootScope, $log, $timeout, $cookies, Permission, neoSession, UserAPI, CustomerAPI, LanguageAPI, User, scope;
 
 				beforeEach(function () {
 
@@ -20,6 +20,7 @@ define(['moment', 'moment-timezone'], function (moment) {
 						$timeout = $injector.get('$timeout');
 						Permission = $injector.get('Permission');
 						$q = $injector.get('$q');
+						$cookies = $injector.get('$cookies');
 					});
 				});
 
@@ -28,10 +29,10 @@ define(['moment', 'moment-timezone'], function (moment) {
 						scope = $injector.get('$rootScope').$new();
 					});
 				});
-				beforeEach(function () {
-					spyOn(LanguageAPI, 'getLanguage').and.callFake(function () {
-						return {localePOSIX: 'en_GB'};
-					});
+
+				afterEach(function () {
+					$cookies.remove('token');
+					$cookies.remove('activeCustomer');
 				});
 
 				it('should throw error when calling setSession and user is not defined', function () {
@@ -154,8 +155,121 @@ define(['moment', 'moment-timezone'], function (moment) {
 					expect(called).toBeFalsy();
 				});
 
-				it('should set ')
-				
+				fdescribe('method: checkSession', function () {
+
+					it('should return rejected promise when user does not have set token and active customer set', function () {
+						// GIVEN
+						var wasCalled = false;
+
+						// WHEN
+						neoSession
+							.checkSession()
+							.catch(function () {
+								wasCalled = true
+							});
+
+						$rootScope.$apply();
+
+						// THEN
+						expect(wasCalled).toBeTruthy();
+					});
+
+					it('should call setSession and resolve promise when global object user and customer are not set', function () {
+						// GIVEN
+						$cookies.putObject('token', 'exampleToken');
+						$cookies.putObject('activeCustomer', 'exampleCustomer');
+						spyOn(neoSession, 'setSession').and.callThrough();
+						spyOn(UserAPI, 'authInfo').and.callFake(function () {
+							var user = UserAPI.build({
+								customers: [{
+									customerId: 'exampleCustomer',
+									featureKeys: []
+								}]
+							});
+							user.$metadata = {
+								token: 'exampleToken'
+							};
+							return $q.resolve(user);
+						});
+
+						var wasCalled = false;
+
+						neoSession
+							.checkSession()
+							.then(function () {
+								wasCalled = true;
+							});
+						// WHEN
+						$rootScope.$apply();
+						// THEN
+						expect(wasCalled).toBeTruthy();
+						expect(neoSession.setSession).toHaveBeenCalled();
+					});
+
+					it('should return resolved promise when global object user and customer are set', function () {
+						// GIVEN
+						$cookies.putObject('token', 'exampleToken');
+						$cookies.putObject('activeCustomer', 'exampleCustomer');
+
+						spyOn(UserAPI, 'authInfo').and.callFake(function () {
+							var user = UserAPI.build({
+								customers: [{
+									customerId: 'exampleCustomer',
+									featureKeys: []
+								}]
+							});
+							user.$metadata = {
+								token: 'exampleToken'
+							};
+							return $q.resolve(user);
+						});
+
+						$rootScope.user = {};
+						$rootScope.customer = {};
+
+						var wasCalled = false;
+
+						neoSession
+							.checkSession()
+							.then(function () {
+								wasCalled = true;
+							});
+						// WHEN
+						$rootScope.$apply();
+						// THEN
+						expect(wasCalled).toBeTruthy();
+					});
+
+					it('should return rejected promise when setting up a session', function () {
+						// GIVEN
+						$cookies.putObject('token', 'exampleToken');
+						$cookies.putObject('activeCustomer', 'exampleCustomer');
+
+						spyOn(neoSession, 'clearSession').and.callThrough();
+
+						spyOn(UserAPI, 'authInfo').and.callFake(function () {
+							return $q.reject();
+						});
+
+						$rootScope.user = {};
+						$rootScope.customer = {};
+
+						var wasCalled = false;
+
+						neoSession
+							.checkSession()
+							.catch(function () {
+								wasCalled = true;
+							});
+
+						// WHEN
+						$rootScope.$apply();
+
+						// THEN
+						expect(wasCalled).toBeTruthy();
+						expect(neoSession.clearSession).toHaveBeenCalled();
+					});
+				});
 			});
 		});
 	});
