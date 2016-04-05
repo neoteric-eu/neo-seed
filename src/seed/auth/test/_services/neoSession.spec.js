@@ -5,7 +5,7 @@ define(['moment', 'moment-timezone'], function (moment) {
 		describe('module: auth', function () {
 			describe('service: neoSession', function () {
 
-				var $q, $rootScope, $log, $timeout, $cookies, Permission, neoSession, UserAPI, CustomerAPI, LanguageAPI, User, scope;
+				var $q, $rootScope, $log, $timeout, Permission, neoSession, UserAPI, CustomerAPI, LanguageAPI, User, scope, neoCookie;
 
 				beforeEach(function () {
 
@@ -20,7 +20,7 @@ define(['moment', 'moment-timezone'], function (moment) {
 						$timeout = $injector.get('$timeout');
 						Permission = $injector.get('Permission');
 						$q = $injector.get('$q');
-						$cookies = $injector.get('$cookies');
+						neoCookie = $injector.get('neoCookie');
 					});
 				});
 
@@ -31,8 +31,7 @@ define(['moment', 'moment-timezone'], function (moment) {
 				});
 
 				afterEach(function () {
-					$cookies.remove('token');
-					$cookies.remove('activeCustomer');
+					neoCookie.clearCookie();
 				});
 
 				it('should throw error when calling setSession and user is not defined', function () {
@@ -176,8 +175,9 @@ define(['moment', 'moment-timezone'], function (moment) {
 
 					it('should call setSession and resolve promise when global object user and customer are not set', function () {
 						// GIVEN
-						$cookies.putObject('token', 'exampleToken');
-						$cookies.putObject('activeCustomer', 'exampleCustomer');
+						neoCookie.setToken('exampleToken');
+						neoCookie.setCustomer('exampleCustomer');
+
 						spyOn(neoSession, 'setSession').and.callThrough();
 						spyOn(UserAPI, 'authInfo').and.callFake(function () {
 							var user = UserAPI.build({
@@ -208,8 +208,8 @@ define(['moment', 'moment-timezone'], function (moment) {
 
 					it('should return resolved promise when global object user and customer are set', function () {
 						// GIVEN
-						$cookies.putObject('token', 'exampleToken');
-						$cookies.putObject('activeCustomer', 'exampleCustomer');
+						neoCookie.setToken('exampleToken');
+						neoCookie.setCustomer('exampleCustomer');
 
 						spyOn(UserAPI, 'authInfo').and.callFake(function () {
 							var user = UserAPI.build({
@@ -242,8 +242,8 @@ define(['moment', 'moment-timezone'], function (moment) {
 
 					it('should return rejected promise when setting up a session', function () {
 						// GIVEN
-						$cookies.putObject('token', 'exampleToken');
-						$cookies.putObject('activeCustomer', 'exampleCustomer');
+						neoCookie.setToken('exampleToken');
+						neoCookie.setCustomer('exampleCustomer');
 
 						spyOn(neoSession, 'clearSession').and.callThrough();
 

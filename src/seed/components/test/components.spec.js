@@ -1,8 +1,7 @@
 define([
 	'angular',
 	'angular-mocks',
-	'seed/components/_includes',
-	'seed/components/module'
+	'seed/components/_includes'
 ], function () {
 	'use strict';
 

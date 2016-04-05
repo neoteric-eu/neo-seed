@@ -7,7 +7,7 @@ define([
 		describe('module: components', function () {
 			describe('directive: cookieConsent', function () {
 
-				var $compile, $rootScope, $log, $cookies;
+				var $compile, $rootScope, $log, neoCookie;
 				var scope, element, vm;
 
 				beforeEach(function () {
@@ -16,11 +16,14 @@ define([
 						$compile = $injector.get('$compile');
 						$rootScope = $injector.get('$rootScope');
 						$log = $injector.get('$log');
-						$cookies = $injector.get('$cookies');
+						neoCookie = $injector.get('neoCookie');
 					});
 
 					scope = $rootScope.$new();
-					$cookies.remove('cookieConsent');
+				});
+
+				afterEach(function () {
+					neoCookie.clearCookie();
 				});
 
 				it('should contain init and acceptCookies methods', function () {
@@ -47,13 +50,13 @@ define([
 					scope.$digest();
 
 					// THEN
-					expect($cookies.getObject('cookieConsent')).toBe(true);
+					expect(neoCookie.getCookieConsent()).toBe(true);
 					expect(element[0].style.display).toBe('none');
 				});
 
 				it('should hide element on init if cookie is present', function () {
 					// GIVEN
-					$cookies.putObject('cookieConsent', true);
+					neoCookie.setCookieConsent(true);
 
 					element = $compile('<cookie-consent></cookie-consent>')(scope);
 					scope.$digest();

@@ -10,11 +10,11 @@ define(['seed/components/module'], function (app) {
 	 * <neo-customer-switcher></neo-customer-switcher>
 	 *
 	 * @param $log {Object} Logging service
-	 * @param $cookies {Function} Cookie service
+	 * @param neoCookie {seed.auth.neoCookie} Cookie service
 	 * @param $window {Object} Window object helper
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function neoCustomerSwitcher($log, $cookies, $window) {
+	function neoCustomerSwitcher($log, neoCookie, $window) {
 		$log = $log.getInstance('seed.components.neoCustomerSwitcher');
 
 		$log.debug('Initiated directive');
@@ -37,7 +37,7 @@ define(['seed/components/module'], function (app) {
 
 				function setActiveCustomer(customer) {
 					$scope.$root.customer = customer;
-					$cookies.putObject('activeCustomer', customer.customerId);
+					neoCookie.setCustomer(customer.customerId);
 
 					$window.location.reload();
 					$log.debug('Changed user customer to: ' + customer.customerName);

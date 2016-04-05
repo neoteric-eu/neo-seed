@@ -7,21 +7,15 @@ define([
 		describe('module: components', function () {
 			describe('directive: neoCustomerSwitcher', function () {
 
-				var $compile, $rootScope, $log, $cookies, $window;
+				var $compile, $rootScope, $log, neoCookie, $window;
 
 				beforeEach(function () {
-					$window = {location: {reload: jasmine.createSpy()}};
-
-					module(function ($provide) {
-						$provide.value('$window', $window);
-					});
-
 					// Inject service into module
 					inject(function ($injector) {
 						$compile = $injector.get('$compile');
 						$rootScope = $injector.get('$rootScope');
 						$log = $injector.get('$log');
-						$cookies = $injector.get('$cookies');
+						neoCookie = $injector.get('neoCookie');
 						$window = $injector.get('$window');
 					});
 
@@ -39,6 +33,11 @@ define([
 						name: 'testCustomer'
 					};
 				});
+
+				afterEach(function () {
+					neoCookie.removeCustomer();
+				});
+
 
 				it('should should set actuve customer and user according to root scope', function () {
 					// GIVEN
@@ -63,8 +62,8 @@ define([
 						customerName: 'testCustomer'
 					};
 
-					spyOn($cookies, 'putObject');
-
+					spyOn($window.location, 'reload').and.callFake(function () {
+					});
 
 					var scope = $rootScope.$new();
 					var element = $compile('<neo-customer-switcher></neo-customer-switcher>')(scope);
@@ -78,7 +77,7 @@ define([
 
 					// THEN
 					expect($rootScope.customer).toEqual(selectedCustomer);
-					expect($cookies.putObject).toHaveBeenCalled();
+					expect(neoCookie.getCustomer()).toBe(selectedCustomer.customerId);
 					expect($window.location.reload).toHaveBeenCalled();
 				});
 			});

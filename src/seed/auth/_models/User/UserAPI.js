@@ -9,13 +9,12 @@ define(['seed/auth/module'], function (module) {
 	 *
 	 * @param $q {Object} Angular promise implementation
 	 * @param $log {Object} Logging service
-	 * @param $cookies {Function} Cookie service
 	 * @param $rootScope {Object} Global scope provider
 	 * @param BaseAPI {Function} Base interface for REST communication with server
 	 * @param User {Object} Model factory
 	 * @return {Function} Instantiated service
 	 */
-	var UserAPI = function ($log, $cookies, $rootScope, BaseAPI, User, $q) {
+	var UserAPI = function ($log, $rootScope, BaseAPI, User, $q) {
 
 		$log = $log.getInstance('seed.auth.UserAPI');
 		$log.debug('Initiated service');
