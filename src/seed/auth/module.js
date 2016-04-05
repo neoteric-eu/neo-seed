@@ -21,9 +21,9 @@ define([
 		'angularMoment',
 		'ngCookies',
 		'ui.router',
+		'permission',
 		'gettext',
 		'restmod',
-		'permission',
 		// seed modules
 		'seed.templateCache',
 		'seed.helpers',
