@@ -3,7 +3,7 @@ define(['angular'], function (ng) {
 
 	var module = ng.module('seed.auth.login', []);
 
-	module.config(function ($stateProvider, appConf) {
+	module.config(function ($stateProvider) {
 
 		$stateProvider
 			.state('auth.login', {
