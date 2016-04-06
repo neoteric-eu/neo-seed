@@ -222,9 +222,6 @@ define(['moment', 'moment-timezone'], function (moment) {
 							return $q.resolve(user);
 						});
 
-						$rootScope.user = {};
-						$rootScope.customer = {};
-
 						var wasCalled = false;
 
 						neoSession
@@ -247,9 +244,6 @@ define(['moment', 'moment-timezone'], function (moment) {
 						spyOn(UserAPI, 'authInfo').and.callFake(function () {
 							return $q.reject();
 						});
-
-						$rootScope.user = {};
-						$rootScope.customer = {};
 
 						var wasCalled = false;
 

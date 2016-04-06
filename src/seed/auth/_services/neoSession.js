@@ -12,9 +12,12 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 	 * @param neoCookie {seed.auth.neoCookie}
 	 * @param neoRequestHeaders {seed.auth.neoRequestHeaders}
 	 * @param UserAPI {seed.auth.UserAPI}
-	 * @param PermissionStore {permission.PermissionStore}
+	 * @param neoPermission {seed.auth.neoPermission}
+	 * @param authConf {seed.auth.authConf}
 	 */
-	function neoSession($log, $q, $rootScope, neoCookie, neoRequestHeaders, UserAPI, PermissionStore) {
+	function neoSession($log, $q, $rootScope,
+											neoCookie, neoPermission, neoRequestHeaders,
+											authConf, UserAPI) {
 
 		$log = $log.getInstance('seed.auth.neoSession');
 		$log.debug('Initiated service');
@@ -49,7 +52,9 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 				setGlobalObjects(user, customer);
 				setRequestHeaders(user, customer);
 
-				$log.debug('Set new user session');
+				$rootScope.$broadcast(authConf.neoSession.events.setSession);
+
+				$log.debug('Set up new user session');
 				return $q.resolve();
 
 			} catch (err) {
@@ -64,19 +69,19 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 		 * @returns {promise}
 		 */
 		function clearSession() {
-			try {
-				clearCookieObject();
-				clearAccessRights();
-				clearGlobalObject();
-				clearRequestHeaders();
+			clearCookieObject();
+			clearAccessRights();
+			clearGlobalObject();
+			clearRequestHeaders();
 
-				$log.debug('Cleared user session');
-				return $q.resolve();
+			$rootScope.$broadcast(authConf.neoSession.events.clearSession);
 
-			} catch (err) {
-				$log.error('Error clearing user session', err);
-				return $q.reject(err);
-			}
+			$log.debug('Cleared user session');
+			return $q.resolve();
+		}
+
+		function hasSetTokenAndCustomerInGlobals() {
+			return !!($rootScope.user && $rootScope.customer);
 		}
 
 		/**
@@ -85,34 +90,42 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 		 * @returns {promise}
 		 */
 		function checkSession() {
+
 			var token = neoCookie.getToken();
 			var customerId = neoCookie.getCustomer();
 
-			if (!(hasSetTokenAndCustomer(token, customerId))) {
-				$log.debug('User does not have stored in cookie either "token" or "activeCustomer"');
+			if (!(hasSetTokenAndCustomerInCookies(token, customerId))) {
+				$log.debug('Not found stored in cookie "token" and "activeCustomer"');
 
 				return $q.reject();
 			}
 
-			neoRequestHeaders.setAuthToken(token);
 
-			return UserAPI
-				.authInfo()
-				.then(function (user) {
-					$log.debug('Successfully checked if user user session is still valid');
+			if (!hasSetTokenAndCustomerInGlobals()) {
+				$log.debug('Not found globally defined "token" and "activeCustomer"');
 
-					var customer = _.findWhere(user.customers, {customerId: customerId});
-					return self.setSession(user, customer);
-				})
-				.catch(function (e) {
-					$log.error('Error while checking user session', e);
+				neoRequestHeaders.setAuthToken(token);
 
-					return self.clearSession()
-						.finally(function () {
-							return $q.reject(e);
-						});
+				return UserAPI
+					.authInfo()
+					.then(function (user) {
+						$log.debug('Successfully checked if user user session is still valid');
 
-				});
+						var customer = _.findWhere(user.customers, {customerId: customerId});
+						return self.setSession(user, customer);
+					})
+					.catch(function (e) {
+						$log.error('Error while checking user session', e);
+
+						return self
+							.clearSession()
+							.finally(function () {
+								return $q.reject(e);
+							});
+					});
+			}
+
+			return $q.resolve();
 		}
 
 		/**
@@ -124,7 +137,7 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 		 *
 		 * @returns {Boolean}
 		 */
-		function hasSetTokenAndCustomer(token, customerId) {
+		function hasSetTokenAndCustomerInCookies(token, customerId) {
 			return !!(token && customerId);
 		}
 
@@ -135,13 +148,25 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 		 * @param customer {seed.auth.Customer}
 		 */
 		function setAccessRights(customer) {
-			PermissionStore.defineManyPermissions(
-				customer.featureKeys,
-				function (stateParams, roleName) {
-					return customer.$hasPermission(roleName);
-				});
+			var permissionNames = customer.featureKeys;
+			var rolesNames = _.map(customer.roles, function (role) {
+				return role.roleName;
+			});
+
+			neoPermission.setPermissions(permissionNames);
+			neoPermission.setRoles(rolesNames);
 
 			$log.debug('Set access rights');
+		}
+
+		/**
+		 * @method
+		 * @private
+		 */
+		function clearAccessRights() {
+			neoPermission.clear();
+
+			$log.debug('Cleared access rights');
 		}
 
 		/**
@@ -152,10 +177,24 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 		 * @param customer {seed.auth.Customer}
 		 */
 		function setCookieObjects(user, customer) {
-			neoCookie.setCustomer(customer.customerId);
-			neoCookie.setToken(user.$metadata.token);
+			var customerId = customer.customerId;
+			var token = user.$metadata.token;
+
+			neoCookie.setCustomer(customerId);
+			neoCookie.setToken(token);
 
 			$log.debug('Set cookie properties');
+		}
+
+		/**
+		 * @method
+		 * @private
+		 */
+		function clearCookieObject() {
+			neoCookie.removeToken();
+			neoCookie.removeCustomer();
+
+			$log.debug('Removed cookie token and active customer');
 		}
 
 		/**
@@ -189,47 +228,29 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 		/**
 		 * @method
 		 * @private
+		 */
+		function clearGlobalObject() {
+			$rootScope.user = undefined;
+			$rootScope.customer = undefined;
+
+			$log.debug('Removed global objects');
+		}
+
+		/**
+		 * @method
+		 * @private
 		 *
 		 * @param user {seed.auth.User}
 		 * @param customer {seed.auth.Customer}
 		 */
 		function setRequestHeaders(user, customer) {
-			neoRequestHeaders.setCustomerId(customer.customerId);
-			neoRequestHeaders.setAuthToken(user.$metadata.token);
+			var customerId = customer.customerId;
+			var token = user.$metadata.token;
+
+			neoRequestHeaders.setCustomerId(customerId);
+			neoRequestHeaders.setAuthToken(token);
 
 			$log.debug('Set request headers');
-		}
-
-		/**
-		 * @method
-		 * @private
-		 */
-		function clearCookieObject() {
-			neoCookie.removeToken();
-			neoCookie.removeCustomer();
-
-			$log.debug('Removed cookie token and active customer');
-		}
-
-		/**
-		 * @method
-		 * @private
-		 */
-		function clearAccessRights() {
-			PermissionStore.clearStore();
-
-			$log.debug('Cleared access rights');
-		}
-
-		/**
-		 * @method
-		 * @private
-		 */
-		function clearGlobalObject() {
-			delete $rootScope.user;
-			delete $rootScope.customer;
-
-			$log.debug('Removed global objects');
 		}
 
 		/**

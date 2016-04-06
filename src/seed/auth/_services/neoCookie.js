@@ -57,7 +57,7 @@ define(['seed/auth/module'], function (module) {
 
 			$cookies.put('activeCustomer', customerId);
 
-			$log.debug('Updated "activeCustomer" value in cookie');
+			$log.debug('Updated "activeCustomer" value in cookie to ' + customerId);
 		}
 
 		/**
@@ -94,7 +94,7 @@ define(['seed/auth/module'], function (module) {
 
 			$cookies.put('token', token);
 
-			$log.debug('Updated "token" value in cookie');
+			$log.debug('Updated "token" value in cookie to ' + token);
 		}
 
 		/**

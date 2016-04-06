@@ -32,21 +32,14 @@ define([
 		// sub-modules
 		'seed.auth.login',
 		'seed.auth.register',
-		'seed.auth.password',
-		'seed.auth.lock'
+		'seed.auth.password'
 	]);
 
-	module.config(function ($stateProvider, appConf) {
+	module.config(function ($stateProvider) {
 
 		$stateProvider
 			.state('auth', {
 				abstract: true,
-				data: {
-					permissions: {
-						except: ['AUTHORIZED'],
-						redirectTo: appConf.generalSettings.defaultRedirectStateAfterLogin
-					}
-				},
 				views: {
 					root: {
 						templateUrl: 'seed/auth/views/view.html'
@@ -55,28 +48,17 @@ define([
 			})
 
 			.state('auth.logout', {
-				url: '/logout',
-				data: {
-					permissions: {
-						only: ['AUTHORIZED'],
-						redirectTo: 'auth.login'
-					}
-				},
-				views: {
-					auth: {
-						controller: function ($rootScope, $state, UserAPI, neoSession) {
-							UserAPI
-								.logout($rootScope.user)
-								.then(function () {
-									neoSession
-										.clearSession()
-										.finally(function () {
-											$state.go('auth.login');
-										});
-								});
-						}
-					}
+				onEnter: function ($rootScope, $state, UserAPI, neoSession) {
+					UserAPI
+						.logout($rootScope.user)
+						.finally(function () {
+							return neoSession.clearSession();
+						})
+						.finally(function () {
+							$state.go('auth.login');
+						});
 				}
+
 			});
 	});
 

@@ -15,17 +15,18 @@ define(['seed/auth/module'], function (module) {
 	 * @param defaultLanguage
 	 * @param gettextCatalog
 	 * @param amMoment
-	 * @param authConf
+	 * @param authConf {seed.auth.authConf}
 	 * @param neoCookie {seed.auth.neoCookie}
 	 * @param LanguageAPI
 	 * @param appConf
+	 * @param neoRequestHeaders {seed.auth.neoRequestHeaders}
 	 */
 	function neoLanguage($log, $rootScope, $window,
 											 availableLanguages, activeLanguage, defaultLanguage,
 											 gettextCatalog, amMoment, authConf,
-											 neoCookie, LanguageAPI, appConf) {
+											 neoCookie, neoRequestHeaders, LanguageAPI, appConf) {
 
-		$log = $log.getInstance('app.auth.neoLanguage');
+		$log = $log.getInstance('seed.auth.neoLanguage');
 		$log.debug('Initiated service');
 
 		this.init = init;
@@ -164,6 +165,7 @@ define(['seed/auth/module'], function (module) {
 
 			// Write locale to cookie
 			neoCookie.setLanguage(activeLanguage.locale);
+			neoRequestHeaders.setAcceptLanguage(language.locale);
 
 			// Update libraries locale settings
 			gettextCatalog.setCurrentLanguage(language.localePOSIX);

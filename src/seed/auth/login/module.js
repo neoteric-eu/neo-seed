@@ -12,12 +12,6 @@ define(['angular'], function (ng) {
 					auth: {
 						template: '<auth-login-form></auth-login-form>'
 					}
-				},
-				data: {
-					permissions: {
-						except: ['AUTHORIZED'],
-						redirectTo: appConf.generalSettings.defaultRedirectStateAfterLogin
-					}
 				}
 			})
 
@@ -26,12 +20,6 @@ define(['angular'], function (ng) {
 				views: {
 					auth: {
 						template: '<auth-profile-select-form></auth-profile-select-form>'
-					}
-				},
-				data: {
-					permissions: {
-						except: ['AUTHORIZED'],
-						redirectTo: appConf.generalSettings.defaultRedirectStateAfterLogin
 					}
 				}
 			});

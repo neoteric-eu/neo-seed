@@ -82,9 +82,7 @@ define(['seed/auth/module'], function (module) {
 							return this.$send({
 								method: 'POST',
 								url: this.$scope.$url() + '/logout'
-							}, function (_response) {
-								this.$unwrap(_response.data, null);
-							}, null);
+							});
 						},
 
 						$authInfo: function () {

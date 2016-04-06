@@ -8,7 +8,7 @@ define(['angular'], function (ng) {
 			.state('auth.passwordReset', {
 				url: '/password/reset',
 				views: {
-					'auth': {
+					auth: {
 						template: '<auth-password-reset-init-form></auth-password-reset-init-form>'
 					}
 				},
@@ -20,7 +20,7 @@ define(['angular'], function (ng) {
 			.state('auth.passwordResetFinish', {
 				url: '/password/reset/:token',
 				views: {
-					'auth': {
+					auth: {
 						template: '<auth-password-reset-form></auth-password-reset-form>'
 					}
 				},
@@ -32,7 +32,6 @@ define(['angular'], function (ng) {
 
 	module.run(function ($log) {
 		$log = $log.getInstance('seed.auth.password.module');
-
 		$log.debug('Initiated module');
 	});
 

@@ -8,30 +8,25 @@ define(['seed/auth/module'], function (module) {
 	 *
 	 * @param $http {Object} Facilitates communication with the remote HTTP servers
 	 * @param $log {Object} Logging service
-	 * @param $rootScope {Object} Angular top level scope
-	 * @param authConf {seed.auth.authConf} Module configuration
 	 */
-	var neoRequestHeaders = function ($log, $http, $rootScope, authConf) {
-		$log = $log.getInstance('app.auth.neoRequestHeaders');
+	function neoRequestHeaders($log, $http) {
+		$log = $log.getInstance('seed.auth.neoRequestHeaders');
 		$log.debug('Initiated service');
 
-		this.init = init;
 		this.setAuthToken = setAuthToken;
 		this.setCustomerId = setCustomerId;
 		this.setAcceptLanguage = setAcceptLanguage;
 		this.clearHeaders = clearHeaders;
 
-		init();
-
-		function init() {
-			$rootScope.$on(authConf.neoLanguage.events.setActiveLanguage, function (event, language) {
-				setAcceptLanguage(language.locale);
-			});
-		}
-
+		/**
+		 * @method
+		 * @throws {ReferenceError}
+		 *
+		 * @param token {String}
+		 */
 		function setAuthToken(token) {
 			if (_.isEmpty(token)) {
-				throw new Error('Token in Authorization header must not be empty');
+				throw new ReferenceError('Token in Authorization header must not be empty');
 			}
 
 			$http.defaults.headers.common['Authorization'] = 'token ' + token;
@@ -39,9 +34,15 @@ define(['seed/auth/module'], function (module) {
 			$log.debug('Set Authorization header ', token);
 		}
 
+		/**
+		 * @method
+		 * @throws {ReferenceError}
+		 *
+		 * @param customerId {String}
+		 */
 		function setCustomerId(customerId) {
 			if (_.isEmpty(customerId)) {
-				throw new Error('CustomerId in X-Customer header must not be empty');
+				throw new ReferenceError('CustomerId in X-Customer header must not be empty');
 			}
 
 			$http.defaults.headers.common['X-Customer-Id'] = customerId;
@@ -50,21 +51,28 @@ define(['seed/auth/module'], function (module) {
 		}
 
 		/**
+		 * @method
+		 *
+		 * @param locale {String}
+		 *
 		 * Accept-Language value is set based on:
 		 * @see https://en.wikipedia.org/wiki/Content_negotiation
 		 * @see https://en.wikipedia.org/wiki/IETF_language_tag
 		 * @see http://tools.ietf.org/html/rfc7231#section-5.3
 		 */
-		function setAcceptLanguage(language) {
-			if (_.isEmpty(language)) {
+		function setAcceptLanguage(locale) {
+			if (_.isEmpty(locale)) {
 				throw new Error('Language in AcceptLanguage header must not be empty');
 			}
 
-			$http.defaults.headers.common['Accept-Language'] = language;
+			$http.defaults.headers.common['Accept-Language'] = locale;
 
 			$log.debug('Set Accept-Language header');
 		}
 
+		/**
+		 *
+		 */
 		function clearHeaders() {
 			delete $http.defaults.headers.common['Authorization'];
 			delete $http.defaults.headers.common['X-Customer-Id'];
@@ -72,7 +80,7 @@ define(['seed/auth/module'], function (module) {
 
 			$log.debug('Cleared headers');
 		}
-	};
+	}
 
 	module.service('neoRequestHeaders', neoRequestHeaders);
 });

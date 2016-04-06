@@ -1,8 +1,9 @@
 define([
-	'./_services/neoSession',
-	'./_services/neoRequestHeaders',
-	'./_services/neoLanguage',
 	'./_services/neoCookie',
+	'./_services/neoSession',
+	'./_services/neoLanguage',
+	'./_services/neoPermission',
+	'./_services/neoRequestHeaders',
 
 	'./_constants/authConf',
 
@@ -29,10 +30,7 @@ define([
 	'./register/module',
 
 	'./password/_includes',
-	'./password/module',
-
-	'./lock/_includes',
-	'./lock/module'
+	'./password/module'
 ], function () {
 	'use strict';
 });

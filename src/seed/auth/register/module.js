@@ -15,7 +15,7 @@ define([
 	 */
 	var module = ng.module('seed.auth.register', []);
 
-	module.config(function ($stateProvider, gettext, appConf) {
+	module.config(function ($stateProvider, gettext) {
 		$stateProvider
 			.state('auth.register', {
 				url: '/register',
@@ -25,11 +25,7 @@ define([
 					}
 				},
 				data: {
-					title: gettext('Register'),
-					permissions: {
-						except: ['AUTHORIZED'],
-						redirectTo: appConf.generalSettings.defaultRedirectStateAfterLogin
-					}
+					title: gettext('Register')
 				}
 			});
 	});

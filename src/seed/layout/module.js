@@ -31,7 +31,7 @@ define(['angular'], function (ng) {
 		});
 	});
 
-	module.run(function (PermissionStore, neoSession, $rootScope) {
+	module.run(function (PermissionStore, neoSession, $rootScope, authConf) {
 
 		$rootScope.$on('$stateChangePermissionDenied', function (event, toState, toParams) {
 			$rootScope.requestedState = undefined;
@@ -41,6 +41,12 @@ define(['angular'], function (ng) {
 					toParams: toParams
 				};
 			}
+		});
+
+		$rootScope.$on(authConf.neoPermission.events.clear, function () {
+			PermissionStore.definePermission('AUTHORIZED', function () {
+				return neoSession.checkSession();
+			});
 		});
 
 		PermissionStore.definePermission('AUTHORIZED', function () {

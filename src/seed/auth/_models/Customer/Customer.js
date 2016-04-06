@@ -11,15 +11,18 @@ define(['seed/auth/module'], function (module) {
 	 */
 	var Customer = function (restmod) {
 		return restmod
-			.model()
+			.model('/customers')
 			.mix({
+				customerId: {},
+				customerName: {},
+				featureKeys: {},
+				roles: {},
+				timezone: {},
+
 				$extend: {
 					Record: {
 						$setSelected: function (customer) {
 							this.$selected = customer;
-						},
-						$hasPermission: function (permission) {
-							return _.includes(this.featureKeys, permission);
 						}
 					}
 				}

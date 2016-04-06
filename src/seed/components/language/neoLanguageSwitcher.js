@@ -10,8 +10,9 @@ define(['seed/components/module'], function (module) {
 	 * <neo-language-switcher></neo-language-switcher>
 	 *
 	 * @param $log {Object} Logging service
-	 * @param LanguageAPI {Object} Interface for REST communication with server
-	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
+	 * @param neoLanguage {seed.auth.neoLanguage}
+	 * @param availableLanguages {seed.auth.availableLanguages}
+	 * @param activeLanguage {seed.auth.activeLanguage}
 	 */
 	function neoLanguageSwitcher($log, neoLanguage, availableLanguages, activeLanguage) {
 		$log = $log.getInstance('seed.components.neoLanguageSwitcher');
@@ -39,15 +40,12 @@ define(['seed/components/module'], function (module) {
 				 * @param language {seed.auth.Language} Language model
 				 */
 				function setLanguageActive(language) {
-					neoLanguage.setActiveCustomer(language);
-					vm.activeLanguage = language;
+					neoLanguage.setActiveLanguage(language);
 
 					$log.debug('Switched application language');
 				}
 
-
 				$log.debug('Initiated controller');
-
 			}
 		};
 	}
