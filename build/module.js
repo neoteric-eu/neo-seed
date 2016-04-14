@@ -1,17 +1,12 @@
 define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint quotmark: false*/ "use strict"; return angular.module("seed.templateCache",[]).run(function ($templateCache, $log) {$log = $log.getInstance('seed.templateCache.module');  
 
-  $templateCache.put('seed/auth/lock/forms/authLockForm.html',
-    "<form class=neo-form><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{vm.user.getFullName()}} <small><i class=\"fa fa-lock text-muted\"></i> &nbsp;Locked</small></h1></fieldset><fieldset><div class=input-icon-right><i class=\"icon-append fa fa-lock\"></i> <input class=form-control type=password placeholder=\"{{'Password'|translate}}\"></div><p class=\"no-margin margin-top-5\">{{'Logged as someone else?'|translate}} <a ui-sref=auth.login>{{'Click here'|translate}}</a></p></fieldset><footer><button type=submit class=\"btn btn-primary\">{{'Unlock'|translate}}</button></footer></form>"
-  );
-
-
   $templateCache.put('seed/auth/login/forms/login/authLoginForm.html',
     "<form class=neo-form ng-submit=vm.login() novalidate><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{'Welcome!'|translate}} <small>{{'Please log in'|translate}}</small></h1></fieldset><fieldset><section class=form-group ng-show=vm.formError><p class=\"alert alert-danger\" ng-model=formError><button type=button class=close data-dismiss=alert>&times;</button> {{'Wrong e-mail or password.'|translate}}</p></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-user\"></i> <input type=email class=form-control placeholder=\"{{'Email'|translate}}\" ng-model=vm.user.login></div></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-lock\"></i> <input type=password class=form-control placeholder=\"{{'Password'|translate}}\" ng-model=vm.user.password></div><div class=note><a ui-sref=auth.passwordReset>{{'Forgot password?'|translate}}</a></div></section><section ng-if=vm.appConf.generalSettings.showEuLogotypes style=\"height: 125px\"><neo-eu-logotypes></neo-eu-logotypes></section></fieldset><footer><button type=button class=\"btn btn-default\" ui-sref=auth.register>{{'Register'|translate}}</button><div class=\"btn-group pull-right\"><button type=submit class=\"btn btn-primary\">{{'Log in'|translate}}</button> <button type=button class=\"btn btn-primary dropdown-toggle\" ng-show=vm.predefinedLogins.length data-toggle=dropdown><span class=caret></span></button><ul class=dropdown-menu ng-show=vm.predefinedLogins.length><li ng-repeat=\"user in vm.predefinedLogins\"><a href ng-click=vm.loginAs(user)>{{ user.login }}</a></li></ul></div></footer></form>"
   );
 
 
   $templateCache.put('seed/auth/login/forms/profileSelect/authProfileSelectForm.html',
-		"<form class=neo-form novalidate><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{'Select profile'|translate}} <small>{{'to continue'|translate}}</small></h1></fieldset><fieldset><div class=\"panel panel-default\"><div class=list-group><button type=button ng-repeat=\"customer in vm.user.customers\" ng-class=\"{'list-group-item-info' : vm.isCustomerActive(customer)}\" ng-click=vm.setCustomerActive(customer) class=list-group-item>{{customer.customerName}} <i class=\"pull-right fa\" ng-class=\"{ 'fa-check-square': vm.isCustomerActive(customer), 'fa-square-o': !vm.isCustomerActive(customer) }\"></i></button></div></div></fieldset><footer><button type=submit ng-click=vm.login() class=\"btn btn-primary\">{{'Select'|translate}}</button><div class=btn-group><a class=\"btn btn-default\" ui-sref=auth.login>{{'Back'|translate}}</a></div></footer></form>"
+    "<form class=neo-form novalidate><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{'Select profile'|translate}} <small>{{'to continue'|translate}}</small></h1></fieldset><fieldset><div class=\"panel panel-default\"><div class=list-group><button type=button ng-repeat=\"customer in vm.user.customers\" ng-class=\"{'list-group-item-info' : vm.isCustomerActive(customer)}\" ng-click=vm.setCustomerActive(customer) class=list-group-item>{{customer.customerName}} <i class=\"pull-right fa\" ng-class=\"{ 'fa-check-square': vm.isCustomerActive(customer), 'fa-square-o': !vm.isCustomerActive(customer) }\"></i></button></div></div></fieldset><footer><button type=submit ng-click=vm.login() class=\"btn btn-primary\">{{'Select'|translate}}</button><div class=btn-group><a class=\"btn btn-default\" ui-sref=auth.login>{{'Back'|translate}}</a></div></footer></form>"
   );
 
 
@@ -189,14 +184,13 @@ define('seed/helpers/module',['angular'], function (ng) {
 
 	module.run(function ($log) {
 		$log = $log.getInstance('seed.helpers.module');
-
 		$log.debug('Initiated module');
 	});
 
 	return module;
 });
 
-define('seed/helpers/interceptors/HttpErrorInterceptor',['seed/helpers/module'], function (app) {
+define('seed/helpers/_interceptors/HttpErrorInterceptor',['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -235,10 +229,10 @@ define('seed/helpers/interceptors/HttpErrorInterceptor',['seed/helpers/module'],
 		};
 	}
 
-	app.factory('HttpErrorInterceptor', HttpErrorInterceptor);
+	module.factory('HttpErrorInterceptor', HttpErrorInterceptor);
 });
 
-define('seed/helpers/interceptors/HttpRequestInterceptor',['seed/helpers/module'], function (module) {
+define('seed/helpers/_interceptors/HttpRequestInterceptor',['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -273,7 +267,7 @@ define('seed/helpers/interceptors/HttpRequestInterceptor',['seed/helpers/module'
 	module.factory('HttpRequestInterceptor', HttpRequestInterceptor);
 });
 
-define('seed/helpers/decorators/logDecorator',['angular', 'moment', 'seed/helpers/module'], function (ng, moment, module) {
+define('seed/helpers/_decorators/logDecorator',['angular', 'moment', 'seed/helpers/module'], function (ng, moment, module) {
 	'use strict';
 
 	/**
@@ -326,7 +320,7 @@ define('seed/helpers/decorators/logDecorator',['angular', 'moment', 'seed/helper
 	module.decorator('$log', $log);
 });
 
-define('seed/helpers/enums/BaseEnum',['seed/helpers/module'], function (module) {
+define('seed/helpers/_enums/BaseEnum',['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -413,7 +407,7 @@ define('seed/helpers/enums/BaseEnum',['seed/helpers/module'], function (module) 
 	module.factory('BaseEnum', BaseEnum);
 });
 
-define('seed/helpers/services/neoTemplateLoader',['seed/helpers/module'], function (module) {
+define('seed/helpers/_services/templateLoader/neoTemplateLoader',['seed/helpers/module'], function (module) {
 	'use strict';
 
 	/**
@@ -552,7 +546,7 @@ define('seed/helpers/lodash/lodashExtensions',['lodash', './jsonStringify'], fun
 
 });
 
-define('seed/helpers/eventAggregator/EventAggregatorFactory',['seed/helpers/module'], function (module) {
+define('seed/helpers/_services/eventAggregator/EventAggregatorFactory',['seed/helpers/module'], function (module) {
 	'use strict';
 	/**
 	 * Returns new instance of event aggregator.
@@ -1763,17 +1757,17 @@ define('seed/helpers/restmod/packers/PackerUtils',[], function () {
 });
 
 define('seed/helpers/_includes',[
-	'./interceptors/HttpErrorInterceptor',
-	'./interceptors/HttpRequestInterceptor',
+	'./_interceptors/HttpErrorInterceptor',
+	'./_interceptors/HttpRequestInterceptor',
 
-	'./decorators/logDecorator',
+	'./_decorators/logDecorator',
 
-	'./enums/BaseEnum',
+	'./_enums/BaseEnum',
 
-	'./services/neoTemplateLoader',
+	'./_services/templateLoader/neoTemplateLoader',
 
 	'./lodash/lodashExtensions',
-	'./eventAggregator/EventAggregatorFactory',
+	'./_services/eventAggregator/EventAggregatorFactory',
 
 	'./moment/momentDatetimeDayrange',
 	'./moment/neoMomentDate',
@@ -1815,7 +1809,7 @@ define('seed/helpers/_includes',[
 define('seed/components/module',['angular'], function (ng) {
 	'use strict';
 
-	var module = ng.module('seed.components', []);
+	var module = ng.module('seed.components', ['seed.helpers', 'seed.auth']);
 
 	module.run(function ($log) {
 		$log = $log.getInstance('seed.components.module');
@@ -1909,11 +1903,11 @@ define('seed/components/customer/neoCustomerSwitcher',['seed/components/module']
 	 * <neo-customer-switcher></neo-customer-switcher>
 	 *
 	 * @param $log {Object} Logging service
-	 * @param $cookies {Function} Cookie service
+	 * @param neoCookie {seed.auth.neoCookie} Cookie service
 	 * @param $window {Object} Window object helper
 	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
 	 */
-	function neoCustomerSwitcher($log, $cookies, $window) {
+	function neoCustomerSwitcher($log, neoCookie, $window) {
 		$log = $log.getInstance('seed.components.neoCustomerSwitcher');
 
 		$log.debug('Initiated directive');
@@ -1936,7 +1930,7 @@ define('seed/components/customer/neoCustomerSwitcher',['seed/components/module']
 
 				function setActiveCustomer(customer) {
 					$scope.$root.customer = customer;
-					$cookies.putObject('activeCustomer', customer.customerId);
+					neoCookie.setCustomer(customer.customerId);
 
 					$window.location.reload();
 					$log.debug('Changed user customer to: ' + customer.customerName);
@@ -1963,10 +1957,11 @@ define('seed/components/language/neoLanguageSwitcher',['seed/components/module']
 	 * <neo-language-switcher></neo-language-switcher>
 	 *
 	 * @param $log {Object} Logging service
-	 * @param LanguageAPI {Object} Interface for REST communication with server
-	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
+	 * @param neoLanguage {seed.auth.neoLanguage}
+	 * @param availableLanguages {seed.auth.availableLanguages}
+	 * @param activeLanguage {seed.auth.activeLanguage}
 	 */
-	function neoLanguageSwitcher($log, LanguageAPI) {
+	function neoLanguageSwitcher($log, neoLanguage, availableLanguages, activeLanguage) {
 		$log = $log.getInstance('seed.components.neoLanguageSwitcher');
 
 		$log.debug('Initiated directive');
@@ -1981,8 +1976,8 @@ define('seed/components/language/neoLanguageSwitcher',['seed/components/module']
 				var vm = this;
 
 				// variables
-				vm.languageCollection = LanguageAPI.languageCollection;
-				vm.activeLanguage = LanguageAPI.getLanguage();
+				vm.languageCollection = availableLanguages;
+				vm.activeLanguage = activeLanguage;
 
 				// methods
 				vm.setLanguageActive = setLanguageActive;
@@ -1992,15 +1987,12 @@ define('seed/components/language/neoLanguageSwitcher',['seed/components/module']
 				 * @param language {seed.auth.Language} Language model
 				 */
 				function setLanguageActive(language) {
-					LanguageAPI.setLanguage(language);
-					vm.activeLanguage = language;
+					neoLanguage.setActiveLanguage(language);
 
 					$log.debug('Switched application language');
 				}
 
-
 				$log.debug('Initiated controller');
-
 			}
 		};
 	}
@@ -2641,13 +2633,14 @@ define('seed/components/cookieConsent/cookieConsent',['seed/components/module'],
 	 * @class cookieConsent
 	 * @memberOf seed.components
 	 *
-	 * @return {{restrict: string, replace: boolean, templateUrl: string, scope: {}, link: Function}}
-	 * @param $cookies
+	 * @example
+	 *  <cookie-consent></cookie-consent>
+	 *
 	 * @param $log {Object} Logging service
-	 *              <cookie-consent></cookie-consent>
+	 * @param neoCookie {seed.auth.neoCookie}
 	 */
 
-	function cookieConsent($cookies, $log) {
+	function cookieConsent($log, neoCookie) {
 		$log = $log.getInstance('seed.components.cookieConsent');
 
 		$log.debug('Initiated directive');
@@ -2666,13 +2659,14 @@ define('seed/components/cookieConsent/cookieConsent',['seed/components/module'],
 				vm.init();
 
 				function init() {
-					if ($cookies.getObject('cookieConsent')) {
+					var isCookieConsentAccepted = neoCookie.getCookieConsent();
+					if (isCookieConsentAccepted) {
 						$element.hide();
 					}
 				}
 
 				function acceptCookies() {
-					$cookies.putObject('cookieConsent', true);
+					neoCookie.setCookieConsent(true);
 					$element.hide();
 				}
 
@@ -2683,6 +2677,35 @@ define('seed/components/cookieConsent/cookieConsent',['seed/components/module'],
 
 	module.directive('cookieConsent', cookieConsent);
 
+});
+
+define('seed/components/favicon/neoFavicon',['seed/components/module'], function (module) {
+	'use strict';
+
+	function neoFavicon($log, appConf) {
+		return {
+			restrict: 'A',
+			compile: function (tElement) {
+
+				$log = $log.getInstance('seed.components.neoFavicon');
+				$log.debug('Initiated directive');
+
+				if(!appConf.generalSettings.favicon || !appConf.generalSettings.favicon.uri) {
+					tElement.remove();
+
+					return;
+				}
+
+				if(appConf.generalSettings.favicon.sizes) {
+					tElement.attr('sizes', appConf.generalSettings.favicon.sizes);
+				}
+
+				tElement.attr('href', appConf.generalSettings.favicon.uri);
+			}
+		};
+	}
+
+	module.directive('neoFavicon', neoFavicon);
 });
 
 define('seed/components/_includes',[
@@ -2701,7 +2724,8 @@ define('seed/components/_includes',[
 	'./pageTitle/neoPageTitle',
 	'./versionTag/neoVersionTag',
 
-	'./cookieConsent/cookieConsent'
+	'./cookieConsent/cookieConsent',
+	'./favicon/neoFavicon'
 ], function () {
 	'use strict';
 });
@@ -2739,7 +2763,7 @@ define('seed/layout/module',['angular'], function (ng) {
 		});
 	});
 
-	module.run(function (Permission, neoSession, $rootScope) {
+	module.run(function (PermissionStore, neoSession, $rootScope, authConf) {
 
 		$rootScope.$on('$stateChangePermissionDenied', function (event, toState, toParams) {
 			$rootScope.requestedState = undefined;
@@ -2751,7 +2775,13 @@ define('seed/layout/module',['angular'], function (ng) {
 			}
 		});
 
-		Permission.defineRole('AUTHORIZED', function () {
+		$rootScope.$on(authConf.neoPermission.events.clear, function () {
+			PermissionStore.definePermission('AUTHORIZED', function () {
+				return neoSession.checkSession();
+			});
+		});
+
+		PermissionStore.definePermission('AUTHORIZED', function () {
 			return neoSession.checkSession();
 		});
 	});
@@ -2855,6 +2885,13 @@ define('seed/layout/_includes',[
 	'use strict';
 });
 
+//! moment-timezone.js
+//! version : 0.5.0
+//! author : Tim Wood
+//! license : MIT
+//! github.com/moment/moment-timezone
+!function(a,b){"use strict";"function"==typeof define&&define.amd?define('moment-timezone',["moment"],b):"object"==typeof module&&module.exports?module.exports=b(require("moment")):b(a.moment)}(this,function(a){"use strict";function b(a){return a>96?a-87:a>64?a-29:a-48}function c(a){var c,d=0,e=a.split("."),f=e[0],g=e[1]||"",h=1,i=0,j=1;for(45===a.charCodeAt(0)&&(d=1,j=-1),d;d<f.length;d++)c=b(f.charCodeAt(d)),i=60*i+c;for(d=0;d<g.length;d++)h/=60,c=b(g.charCodeAt(d)),i+=c*h;return i*j}function d(a){for(var b=0;b<a.length;b++)a[b]=c(a[b])}function e(a,b){for(var c=0;b>c;c++)a[c]=Math.round((a[c-1]||0)+6e4*a[c]);a[b-1]=1/0}function f(a,b){var c,d=[];for(c=0;c<b.length;c++)d[c]=a[b[c]];return d}function g(a){var b=a.split("|"),c=b[2].split(" "),g=b[3].split(""),h=b[4].split(" ");return d(c),d(g),d(h),e(h,g.length),{name:b[0],abbrs:f(b[1].split(" "),g),offsets:f(c,g),untils:h,population:0|b[5]}}function h(a){a&&this._set(g(a))}function i(a){var b=a.toTimeString(),c=b.match(/\(.+\)/);c=c&&c[0]?c[0].match(/[A-Z]/g).join(""):b.match(/[A-Z]{3,5}/g)[0],"GMT"===c&&(c=void 0),this.at=+a,this.abbr=c,this.offset=a.getTimezoneOffset()}function j(a){this.zone=a,this.offsetScore=0,this.abbrScore=0}function k(a,b){for(var c,d;d=6e4*((b.at-a.at)/12e4|0);)c=new i(new Date(a.at+d)),c.offset===a.offset?a=c:b=c;return a}function l(){var a,b,c,d=(new Date).getFullYear()-2,e=new i(new Date(d,0,1)),f=[e];for(c=1;48>c;c++)b=new i(new Date(d,c,1)),b.offset!==e.offset&&(a=k(e,b),f.push(a),f.push(new i(new Date(a.at+6e4)))),e=b;for(c=0;4>c;c++)f.push(new i(new Date(d+c,0,1))),f.push(new i(new Date(d+c,6,1)));return f}function m(a,b){return a.offsetScore!==b.offsetScore?a.offsetScore-b.offsetScore:a.abbrScore!==b.abbrScore?a.abbrScore-b.abbrScore:b.zone.population-a.zone.population}function n(a,b){var c,e;for(d(b),c=0;c<b.length;c++)e=b[c],I[e]=I[e]||{},I[e][a]=!0}function o(a){var b,c,d,e=a.length,f={},g=[];for(b=0;e>b;b++){d=I[a[b].offset]||{};for(c in d)d.hasOwnProperty(c)&&(f[c]=!0)}for(b in f)f.hasOwnProperty(b)&&g.push(H[b]);return g}function p(){var a,b,c,d=l(),e=d.length,f=o(d),g=[];for(b=0;b<f.length;b++){for(a=new j(t(f[b]),e),c=0;e>c;c++)a.scoreOffsetAt(d[c]);g.push(a)}return g.sort(m),g.length>0?g[0].zone.name:void 0}function q(a){return(!D||a)&&(D=p()),D}function r(a){return(a||"").toLowerCase().replace(/\//g,"_")}function s(a){var b,c,d,e;for("string"==typeof a&&(a=[a]),b=0;b<a.length;b++)d=a[b].split("|"),c=d[0],e=r(c),F[e]=a[b],H[e]=c,d[5]&&n(e,d[2].split(" "))}function t(a,b){a=r(a);var c,d=F[a];return d instanceof h?d:"string"==typeof d?(d=new h(d),F[a]=d,d):G[a]&&b!==t&&(c=t(G[a],t))?(d=F[a]=new h,d._set(c),d.name=H[a],d):null}function u(){var a,b=[];for(a in H)H.hasOwnProperty(a)&&(F[a]||F[G[a]])&&H[a]&&b.push(H[a]);return b.sort()}function v(a){var b,c,d,e;for("string"==typeof a&&(a=[a]),b=0;b<a.length;b++)c=a[b].split("|"),d=r(c[0]),e=r(c[1]),G[d]=e,H[d]=c[0],G[e]=d,H[e]=c[1]}function w(a){s(a.zones),v(a.links),A.dataVersion=a.version}function x(a){return x.didShowError||(x.didShowError=!0,z("moment.tz.zoneExists('"+a+"') has been deprecated in favor of !moment.tz.zone('"+a+"')")),!!t(a)}function y(a){return!(!a._a||void 0!==a._tzm)}function z(a){"undefined"!=typeof console&&"function"==typeof console.error&&console.error(a)}function A(b){var c=Array.prototype.slice.call(arguments,0,-1),d=arguments[arguments.length-1],e=t(d),f=a.utc.apply(null,c);return e&&!a.isMoment(b)&&y(f)&&f.add(e.parse(f),"minutes"),f.tz(d),f}function B(a){return function(){return this._z?this._z.abbr(this):a.call(this)}}function C(a){return function(){return this._z=null,a.apply(this,arguments)}}if(void 0!==a.tz)return z("Moment Timezone "+a.tz.version+" was already loaded "+(a.tz.dataVersion?"with data from ":"without any data")+a.tz.dataVersion),a;var D,E="0.5.0",F={},G={},H={},I={},J=a.version.split("."),K=+J[0],L=+J[1];(2>K||2===K&&6>L)&&z("Moment Timezone requires Moment.js >= 2.6.0. You are using Moment.js "+a.version+". See momentjs.com"),h.prototype={_set:function(a){this.name=a.name,this.abbrs=a.abbrs,this.untils=a.untils,this.offsets=a.offsets,this.population=a.population},_index:function(a){var b,c=+a,d=this.untils;for(b=0;b<d.length;b++)if(c<d[b])return b},parse:function(a){var b,c,d,e,f=+a,g=this.offsets,h=this.untils,i=h.length-1;for(e=0;i>e;e++)if(b=g[e],c=g[e+1],d=g[e?e-1:e],c>b&&A.moveAmbiguousForward?b=c:b>d&&A.moveInvalidForward&&(b=d),f<h[e]-6e4*b)return g[e];return g[i]},abbr:function(a){return this.abbrs[this._index(a)]},offset:function(a){return this.offsets[this._index(a)]}},j.prototype.scoreOffsetAt=function(a){this.offsetScore+=Math.abs(this.zone.offset(a.at)-a.offset),this.zone.abbr(a.at).match(/[A-Z]/g).join("")!==a.abbr&&this.abbrScore++},A.version=E,A.dataVersion="",A._zones=F,A._links=G,A._names=H,A.add=s,A.link=v,A.load=w,A.zone=t,A.zoneExists=x,A.guess=q,A.names=u,A.Zone=h,A.unpack=g,A.unpackBase60=c,A.needsOffset=y,A.moveInvalidForward=!0,A.moveAmbiguousForward=!1;var M=a.fn;a.tz=A,a.defaultZone=null,a.updateOffset=function(b,c){var d,e=a.defaultZone;void 0===b._z&&(e&&y(b)&&!b._isUTC&&(b._d=a.utc(b._a)._d,b.utc().add(e.parse(b),"minutes")),b._z=e),b._z&&(d=b._z.offset(b),Math.abs(d)<16&&(d/=60),void 0!==b.utcOffset?b.utcOffset(-d,c):b.zone(d,c))},M.tz=function(b){return b?(this._z=t(b),this._z?a.updateOffset(this):z("Moment Timezone has no data for "+b+". See http://momentjs.com/timezone/docs/#/data-loading/."),this):this._z?this._z.name:void 0},M.zoneName=B(M.zoneName),M.zoneAbbr=B(M.zoneAbbr),M.utc=C(M.utc),a.tz.setDefault=function(b){return(2>K||2===K&&9>L)&&z("Moment Timezone setDefault() requires Moment.js >= 2.9.0. You are using Moment.js "+a.version+"."),a.defaultZone=b?t(b):null,a};var N=a.momentProperties;return"[object Array]"===Object.prototype.toString.call(N)?(N.push("_z"),N.push("_a")):N&&(N._z=null),w({version:"2015g",zones:["Africa/Abidjan|GMT|0|0||48e5","Africa/Khartoum|EAT|-30|0||51e5","Africa/Algiers|CET|-10|0||26e5","Africa/Lagos|WAT|-10|0||17e6","Africa/Maputo|CAT|-20|0||26e5","Africa/Cairo|EET EEST|-20 -30|010101010|1Cby0 Fb0 c10 8n0 8Nd0 gL0 e10 mn0|15e6","Africa/Casablanca|WET WEST|0 -10|01010101010101010101010101010101010101010|1Cco0 Db0 1zd0 Lz0 1Nf0 wM0 co0 go0 1o00 s00 dA0 vc0 11A0 A00 e00 y00 11A0 uM0 e00 Dc0 11A0 s00 e00 IM0 WM0 mo0 gM0 LA0 WM0 jA0 e00 Rc0 11A0 e00 e00 U00 11A0 8o0 e00 11A0|32e5","Europe/Paris|CET CEST|-10 -20|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|11e6","Africa/Johannesburg|SAST|-20|0||84e5","Africa/Tripoli|EET CET CEST|-20 -10 -20|0120|1IlA0 TA0 1o00|11e5","Africa/Windhoek|WAST WAT|-20 -10|01010101010101010101010|1C1c0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 11B0|32e4","America/Adak|HST HDT|a0 90|01010101010101010101010|1BR00 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|326","America/Anchorage|AKST AKDT|90 80|01010101010101010101010|1BQX0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|30e4","America/Santo_Domingo|AST|40|0||29e5","America/Araguaina|BRT BRST|30 20|010|1IdD0 Lz0|14e4","America/Argentina/Buenos_Aires|ART|30|0|","America/Asuncion|PYST PYT|30 40|01010101010101010101010|1C430 1a10 1fz0 1a10 1fz0 1cN0 17b0 1ip0 17b0 1ip0 17b0 1ip0 19X0 1fB0 19X0 1fB0 19X0 1ip0 17b0 1ip0 17b0 1ip0|28e5","America/Panama|EST|50|0||15e5","America/Bahia|BRT BRST|30 20|010|1FJf0 Rb0|27e5","America/Bahia_Banderas|MST CDT CST|70 50 60|01212121212121212121212|1C1l0 1nW0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0|84e3","America/Fortaleza|BRT|30|0||34e5","America/Managua|CST|60|0||22e5","America/Manaus|AMT|40|0||19e5","America/Bogota|COT|50|0||90e5","America/Denver|MST MDT|70 60|01010101010101010101010|1BQV0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|26e5","America/Campo_Grande|AMST AMT|30 40|01010101010101010101010|1BIr0 1zd0 On0 1zd0 Rb0 1zd0 Lz0 1C10 Lz0 1C10 On0 1zd0 On0 1zd0 On0 1zd0 On0 1C10 Lz0 1C10 Lz0 1C10|77e4","America/Cancun|CST CDT EST|60 50 50|010101010102|1C1k0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 Dd0|63e4","America/Caracas|VET|4u|0||29e5","America/Cayenne|GFT|30|0||58e3","America/Cayman|EST EDT|50 40|01010101010|1Qtj0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|58e3","America/Chicago|CST CDT|60 50|01010101010101010101010|1BQU0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|92e5","America/Chihuahua|MST MDT|70 60|01010101010101010101010|1C1l0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0|81e4","America/Phoenix|MST|70|0||42e5","America/Los_Angeles|PST PDT|80 70|01010101010101010101010|1BQW0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|15e6","America/New_York|EST EDT|50 40|01010101010101010101010|1BQT0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|21e6","America/Rio_Branco|AMT ACT|40 50|01|1KLE0|31e4","America/Fort_Nelson|PST PDT MST|80 70 70|010101010102|1BQW0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0|39e2","America/Halifax|AST ADT|40 30|01010101010101010101010|1BQS0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|39e4","America/Godthab|WGT WGST|30 20|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|17e3","America/Goose_Bay|AST ADT|40 30|01010101010101010101010|1BQQ1 1zb0 Op0 1zcX Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|76e2","America/Grand_Turk|EST EDT AST|50 40 40|0101010101012|1BQT0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|37e2","America/Guayaquil|ECT|50|0||27e5","America/Guyana|GYT|40|0||80e4","America/Havana|CST CDT|50 40|01010101010101010101010|1BQR0 1wo0 U00 1zc0 U00 1qM0 Oo0 1zc0 Oo0 1zc0 Oo0 1zc0 Rc0 1zc0 Oo0 1zc0 Oo0 1zc0 Oo0 1zc0 Oo0 1zc0|21e5","America/La_Paz|BOT|40|0||19e5","America/Lima|PET|50|0||11e6","America/Mexico_City|CST CDT|60 50|01010101010101010101010|1C1k0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0|20e6","America/Metlakatla|PST|80|0||14e2","America/Miquelon|PMST PMDT|30 20|01010101010101010101010|1BQR0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|61e2","America/Montevideo|UYST UYT|20 30|010101010101|1BQQ0 1ld0 14n0 1ld0 14n0 1o10 11z0 1o10 11z0 1o10 11z0|17e5","America/Noronha|FNT|20|0||30e2","America/North_Dakota/Beulah|MST MDT CST CDT|70 60 60 50|01232323232323232323232|1BQV0 1zb0 Oo0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0","America/Paramaribo|SRT|30|0||24e4","America/Port-au-Prince|EST EDT|50 40|0101010101010101010|1GI70 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|23e5","America/Santa_Isabel|PST PDT|80 70|01010101010101010101010|1C1m0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0|23e3","America/Santiago|CLST CLT CLT|30 40 30|010101010102|1C1f0 1fB0 1nX0 G10 1EL0 Op0 1zb0 Rd0 1wn0 Rd0 1wn0|62e5","America/Sao_Paulo|BRST BRT|20 30|01010101010101010101010|1BIq0 1zd0 On0 1zd0 Rb0 1zd0 Lz0 1C10 Lz0 1C10 On0 1zd0 On0 1zd0 On0 1zd0 On0 1C10 Lz0 1C10 Lz0 1C10|20e6","America/Scoresbysund|EGT EGST|10 0|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|452","America/St_Johns|NST NDT|3u 2u|01010101010101010101010|1BQPv 1zb0 Op0 1zcX Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|11e4","Antarctica/Casey|CAST AWST|-b0 -80|0101|1BN30 40P0 KL0|10","Antarctica/Davis|DAVT DAVT|-50 -70|0101|1BPw0 3Wn0 KN0|70","Antarctica/DumontDUrville|DDUT|-a0|0||80","Antarctica/Macquarie|AEDT MIST|-b0 -b0|01|1C140|1","Antarctica/Mawson|MAWT|-50|0||60","Pacific/Auckland|NZDT NZST|-d0 -c0|01010101010101010101010|1C120 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00|14e5","Antarctica/Rothera|ROTT|30|0||130","Antarctica/Syowa|SYOT|-30|0||20","Antarctica/Troll|UTC CEST|0 -20|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|40","Antarctica/Vostok|VOST|-60|0||25","Asia/Baghdad|AST|-30|0||66e5","Asia/Almaty|ALMT|-60|0||15e5","Asia/Amman|EET EEST|-20 -30|010101010101010101010|1BVy0 1qM0 11A0 1o00 11A0 4bX0 Dd0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0|25e5","Asia/Anadyr|ANAT ANAST ANAT|-c0 -c0 -b0|0120|1BWe0 1qN0 WM0|13e3","Asia/Aqtobe|AQTT|-50|0||27e4","Asia/Ashgabat|TMT|-50|0||41e4","Asia/Baku|AZT AZST|-40 -50|01010101010101010101010|1BWo0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|27e5","Asia/Bangkok|ICT|-70|0||15e6","Asia/Beirut|EET EEST|-20 -30|01010101010101010101010|1BWm0 1qL0 WN0 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0|22e5","Asia/Bishkek|KGT|-60|0||87e4","Asia/Brunei|BNT|-80|0||42e4","Asia/Kolkata|IST|-5u|0||15e6","Asia/Chita|YAKT YAKST YAKT IRKT|-90 -a0 -a0 -80|01023|1BWh0 1qM0 WM0 8Hz0|33e4","Asia/Choibalsan|CHOT CHOST|-80 -90|0101010101010|1O8G0 1cJ0 1cP0 1cJ0 1cP0 1fx0 1cP0 1cJ0 1cP0 1cJ0 1cP0 1cJ0|38e3","Asia/Shanghai|CST|-80|0||23e6","Asia/Dhaka|BDT|-60|0||16e6","Asia/Damascus|EET EEST|-20 -30|01010101010101010101010|1C0m0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1qL0|26e5","Asia/Dili|TLT|-90|0||19e4","Asia/Dubai|GST|-40|0||39e5","Asia/Dushanbe|TJT|-50|0||76e4","Asia/Gaza|EET EEST|-20 -30|01010101010101010101010|1BVW1 SKX 1xd1 MKX 1AN0 1a00 1fA0 1cL0 1cN0 1nX0 1210 1nz0 1210 1nz0 14N0 1nz0 1210 1nz0 1210 1nz0 1210 1nz0|18e5","Asia/Hebron|EET EEST|-20 -30|0101010101010101010101010|1BVy0 Tb0 1xd1 MKX bB0 cn0 1cN0 1a00 1fA0 1cL0 1cN0 1nX0 1210 1nz0 1210 1nz0 14N0 1nz0 1210 1nz0 1210 1nz0 1210 1nz0|25e4","Asia/Hong_Kong|HKT|-80|0||73e5","Asia/Hovd|HOVT HOVST|-70 -80|0101010101010|1O8H0 1cJ0 1cP0 1cJ0 1cP0 1fx0 1cP0 1cJ0 1cP0 1cJ0 1cP0 1cJ0|81e3","Asia/Irkutsk|IRKT IRKST IRKT|-80 -90 -90|01020|1BWi0 1qM0 WM0 8Hz0|60e4","Europe/Istanbul|EET EEST|-20 -30|01010101010101010101010|1BWp0 1qM0 Xc0 1qo0 WM0 1qM0 11A0 1o00 1200 1nA0 11A0 1tA0 U00 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|13e6","Asia/Jakarta|WIB|-70|0||31e6","Asia/Jayapura|WIT|-90|0||26e4","Asia/Jerusalem|IST IDT|-20 -30|01010101010101010101010|1BVA0 17X0 1kp0 1dz0 1c10 1aL0 1eN0 1oL0 10N0 1oL0 10N0 1oL0 10N0 1rz0 W10 1rz0 W10 1rz0 10N0 1oL0 10N0 1oL0|81e4","Asia/Kabul|AFT|-4u|0||46e5","Asia/Kamchatka|PETT PETST PETT|-c0 -c0 -b0|0120|1BWe0 1qN0 WM0|18e4","Asia/Karachi|PKT|-50|0||24e6","Asia/Urumqi|XJT|-60|0||32e5","Asia/Kathmandu|NPT|-5J|0||12e5","Asia/Khandyga|VLAT VLAST VLAT YAKT YAKT|-a0 -b0 -b0 -a0 -90|010234|1BWg0 1qM0 WM0 17V0 7zD0|66e2","Asia/Krasnoyarsk|KRAT KRAST KRAT|-70 -80 -80|01020|1BWj0 1qM0 WM0 8Hz0|10e5","Asia/Kuala_Lumpur|MYT|-80|0||71e5","Asia/Magadan|MAGT MAGST MAGT MAGT|-b0 -c0 -c0 -a0|01023|1BWf0 1qM0 WM0 8Hz0|95e3","Asia/Makassar|WITA|-80|0||15e5","Asia/Manila|PHT|-80|0||24e6","Europe/Athens|EET EEST|-20 -30|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|35e5","Asia/Novokuznetsk|KRAT NOVST NOVT NOVT|-70 -70 -60 -70|01230|1BWj0 1qN0 WM0 8Hz0|55e4","Asia/Novosibirsk|NOVT NOVST NOVT|-60 -70 -70|01020|1BWk0 1qM0 WM0 8Hz0|15e5","Asia/Omsk|OMST OMSST OMST|-60 -70 -70|01020|1BWk0 1qM0 WM0 8Hz0|12e5","Asia/Oral|ORAT|-50|0||27e4","Asia/Pyongyang|KST KST|-90 -8u|01|1P4D0|29e5","Asia/Qyzylorda|QYZT|-60|0||73e4","Asia/Rangoon|MMT|-6u|0||48e5","Asia/Sakhalin|SAKT SAKST SAKT|-a0 -b0 -b0|01020|1BWg0 1qM0 WM0 8Hz0|58e4","Asia/Tashkent|UZT|-50|0||23e5","Asia/Seoul|KST|-90|0||23e6","Asia/Singapore|SGT|-80|0||56e5","Asia/Srednekolymsk|MAGT MAGST MAGT SRET|-b0 -c0 -c0 -b0|01023|1BWf0 1qM0 WM0 8Hz0|35e2","Asia/Tbilisi|GET|-40|0||11e5","Asia/Tehran|IRST IRDT|-3u -4u|01010101010101010101010|1BTUu 1dz0 1cp0 1dz0 1cp0 1dz0 1cN0 1dz0 1cp0 1dz0 1cp0 1dz0 1cp0 1dz0 1cN0 1dz0 1cp0 1dz0 1cp0 1dz0 1cp0 1dz0|14e6","Asia/Thimphu|BTT|-60|0||79e3","Asia/Tokyo|JST|-90|0||38e6","Asia/Ulaanbaatar|ULAT ULAST|-80 -90|0101010101010|1O8G0 1cJ0 1cP0 1cJ0 1cP0 1fx0 1cP0 1cJ0 1cP0 1cJ0 1cP0 1cJ0|12e5","Asia/Ust-Nera|MAGT MAGST MAGT VLAT VLAT|-b0 -c0 -c0 -b0 -a0|010234|1BWf0 1qM0 WM0 17V0 7zD0|65e2","Asia/Vladivostok|VLAT VLAST VLAT|-a0 -b0 -b0|01020|1BWg0 1qM0 WM0 8Hz0|60e4","Asia/Yakutsk|YAKT YAKST YAKT|-90 -a0 -a0|01020|1BWh0 1qM0 WM0 8Hz0|28e4","Asia/Yekaterinburg|YEKT YEKST YEKT|-50 -60 -60|01020|1BWl0 1qM0 WM0 8Hz0|14e5","Asia/Yerevan|AMT AMST|-40 -50|01010|1BWm0 1qM0 WM0 1qM0|13e5","Atlantic/Azores|AZOT AZOST|10 0|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|25e4","Europe/Lisbon|WET WEST|0 -10|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|27e5","Atlantic/Cape_Verde|CVT|10|0||50e4","Atlantic/South_Georgia|GST|20|0||30","Atlantic/Stanley|FKST FKT|30 40|010|1C6R0 U10|21e2","Australia/Sydney|AEDT AEST|-b0 -a0|01010101010101010101010|1C140 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0|40e5","Australia/Adelaide|ACDT ACST|-au -9u|01010101010101010101010|1C14u 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0|11e5","Australia/Brisbane|AEST|-a0|0||20e5","Australia/Darwin|ACST|-9u|0||12e4","Australia/Eucla|ACWST|-8J|0||368","Australia/Lord_Howe|LHDT LHST|-b0 -au|01010101010101010101010|1C130 1cMu 1cLu 1cMu 1cLu 1fAu 1cLu 1cMu 1cLu 1cMu 1cLu 1cMu 1cLu 1cMu 1cLu 1cMu 1cLu 1fAu 1cLu 1cMu 1cLu 1cMu|347","Australia/Perth|AWST|-80|0||18e5","Pacific/Easter|EASST EAST EAST|50 60 50|010101010102|1C1f0 1fB0 1nX0 G10 1EL0 Op0 1zb0 Rd0 1wn0 Rd0 1wn0|30e2","Europe/Dublin|GMT IST|0 -10|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|12e5","Etc/GMT+1|GMT+1|10|0|","Etc/GMT+10|GMT+10|a0|0|","Etc/GMT+11|GMT+11|b0|0|","Etc/GMT+12|GMT+12|c0|0|","Etc/GMT+2|GMT+2|20|0|","Etc/GMT+3|GMT+3|30|0|","Etc/GMT+4|GMT+4|40|0|","Etc/GMT+5|GMT+5|50|0|","Etc/GMT+6|GMT+6|60|0|","Etc/GMT+7|GMT+7|70|0|","Etc/GMT+8|GMT+8|80|0|","Etc/GMT+9|GMT+9|90|0|","Etc/GMT-1|GMT-1|-10|0|","Etc/GMT-10|GMT-10|-a0|0|","Etc/GMT-11|GMT-11|-b0|0|","Etc/GMT-12|GMT-12|-c0|0|","Etc/GMT-13|GMT-13|-d0|0|","Etc/GMT-14|GMT-14|-e0|0|","Etc/GMT-2|GMT-2|-20|0|","Etc/GMT-3|GMT-3|-30|0|","Etc/GMT-4|GMT-4|-40|0|","Etc/GMT-5|GMT-5|-50|0|","Etc/GMT-6|GMT-6|-60|0|","Etc/GMT-7|GMT-7|-70|0|","Etc/GMT-8|GMT-8|-80|0|","Etc/GMT-9|GMT-9|-90|0|","Etc/UCT|UCT|0|0|","Etc/UTC|UTC|0|0|","Europe/London|GMT BST|0 -10|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|10e6","Europe/Chisinau|EET EEST|-20 -30|01010101010101010101010|1BWo0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|67e4","Europe/Kaliningrad|EET EEST FET|-20 -30 -30|01020|1BWo0 1qM0 WM0 8Hz0|44e4","Europe/Minsk|EET EEST FET MSK|-20 -30 -30 -30|01023|1BWo0 1qM0 WM0 8Hy0|19e5","Europe/Moscow|MSK MSD MSK|-30 -40 -40|01020|1BWn0 1qM0 WM0 8Hz0|16e6","Europe/Samara|SAMT SAMST SAMT|-40 -40 -30|0120|1BWm0 1qN0 WM0|12e5","Europe/Simferopol|EET EEST MSK MSK|-20 -30 -40 -30|01010101023|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11z0 1nW0|33e4","Pacific/Honolulu|HST|a0|0||37e4","Indian/Chagos|IOT|-60|0||30e2","Indian/Christmas|CXT|-70|0||21e2","Indian/Cocos|CCT|-6u|0||596","Indian/Kerguelen|TFT|-50|0||130","Indian/Mahe|SCT|-40|0||79e3","Indian/Maldives|MVT|-50|0||35e4","Indian/Mauritius|MUT|-40|0||15e4","Indian/Reunion|RET|-40|0||84e4","Pacific/Majuro|MHT|-c0|0||28e3","MET|MET MEST|-10 -20|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00","Pacific/Chatham|CHADT CHAST|-dJ -cJ|01010101010101010101010|1C120 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00|600","Pacific/Apia|SST SDT WSDT WSST|b0 a0 -e0 -d0|01012323232323232323232|1Dbn0 1ff0 1a00 CI0 AQ0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00|37e3","Pacific/Bougainville|PGT BST|-a0 -b0|01|1NwE0|18e4","Pacific/Chuuk|CHUT|-a0|0||49e3","Pacific/Efate|VUT|-b0|0||66e3","Pacific/Enderbury|PHOT|-d0|0||1","Pacific/Fakaofo|TKT TKT|b0 -d0|01|1Gfn0|483","Pacific/Fiji|FJST FJT|-d0 -c0|01010101010101010101010|1BWe0 1o00 Rc0 1wo0 Ao0 1Nc0 Ao0 1Q00 xz0 1SN0 uM0 1SM0 uM0 1VA0 s00 1VA0 uM0 1SM0 uM0 1SM0 uM0 1SM0|88e4","Pacific/Funafuti|TVT|-c0|0||45e2","Pacific/Galapagos|GALT|60|0||25e3","Pacific/Gambier|GAMT|90|0||125","Pacific/Guadalcanal|SBT|-b0|0||11e4","Pacific/Guam|ChST|-a0|0||17e4","Pacific/Kiritimati|LINT|-e0|0||51e2","Pacific/Kosrae|KOST|-b0|0||66e2","Pacific/Marquesas|MART|9u|0||86e2","Pacific/Pago_Pago|SST|b0|0||37e2","Pacific/Nauru|NRT|-c0|0||10e3","Pacific/Niue|NUT|b0|0||12e2","Pacific/Norfolk|NFT NFT|-bu -b0|01|1PoCu|25e4","Pacific/Noumea|NCT|-b0|0||98e3","Pacific/Palau|PWT|-90|0||21e3","Pacific/Pohnpei|PONT|-b0|0||34e3","Pacific/Port_Moresby|PGT|-a0|0||25e4","Pacific/Rarotonga|CKT|a0|0||13e3","Pacific/Tahiti|TAHT|a0|0||18e4","Pacific/Tarawa|GILT|-c0|0||29e3","Pacific/Tongatapu|TOT|-d0|0||75e3","Pacific/Wake|WAKT|-c0|0||16e3","Pacific/Wallis|WFT|-c0|0||94"],links:["Africa/Abidjan|Africa/Accra","Africa/Abidjan|Africa/Bamako","Africa/Abidjan|Africa/Banjul","Africa/Abidjan|Africa/Bissau","Africa/Abidjan|Africa/Conakry","Africa/Abidjan|Africa/Dakar","Africa/Abidjan|Africa/Freetown","Africa/Abidjan|Africa/Lome","Africa/Abidjan|Africa/Monrovia","Africa/Abidjan|Africa/Nouakchott","Africa/Abidjan|Africa/Ouagadougou","Africa/Abidjan|Africa/Sao_Tome","Africa/Abidjan|Africa/Timbuktu","Africa/Abidjan|America/Danmarkshavn","Africa/Abidjan|Atlantic/Reykjavik","Africa/Abidjan|Atlantic/St_Helena","Africa/Abidjan|Etc/GMT","Africa/Abidjan|Etc/GMT+0","Africa/Abidjan|Etc/GMT-0","Africa/Abidjan|Etc/GMT0","Africa/Abidjan|Etc/Greenwich","Africa/Abidjan|GMT","Africa/Abidjan|GMT+0","Africa/Abidjan|GMT-0","Africa/Abidjan|GMT0","Africa/Abidjan|Greenwich","Africa/Abidjan|Iceland","Africa/Algiers|Africa/Tunis","Africa/Cairo|Egypt","Africa/Casablanca|Africa/El_Aaiun","Africa/Johannesburg|Africa/Maseru","Africa/Johannesburg|Africa/Mbabane","Africa/Khartoum|Africa/Addis_Ababa","Africa/Khartoum|Africa/Asmara","Africa/Khartoum|Africa/Asmera","Africa/Khartoum|Africa/Dar_es_Salaam","Africa/Khartoum|Africa/Djibouti","Africa/Khartoum|Africa/Juba","Africa/Khartoum|Africa/Kampala","Africa/Khartoum|Africa/Mogadishu","Africa/Khartoum|Africa/Nairobi","Africa/Khartoum|Indian/Antananarivo","Africa/Khartoum|Indian/Comoro","Africa/Khartoum|Indian/Mayotte","Africa/Lagos|Africa/Bangui","Africa/Lagos|Africa/Brazzaville","Africa/Lagos|Africa/Douala","Africa/Lagos|Africa/Kinshasa","Africa/Lagos|Africa/Libreville","Africa/Lagos|Africa/Luanda","Africa/Lagos|Africa/Malabo","Africa/Lagos|Africa/Ndjamena","Africa/Lagos|Africa/Niamey","Africa/Lagos|Africa/Porto-Novo","Africa/Maputo|Africa/Blantyre","Africa/Maputo|Africa/Bujumbura","Africa/Maputo|Africa/Gaborone","Africa/Maputo|Africa/Harare","Africa/Maputo|Africa/Kigali","Africa/Maputo|Africa/Lubumbashi","Africa/Maputo|Africa/Lusaka","Africa/Tripoli|Libya","America/Adak|America/Atka","America/Adak|US/Aleutian","America/Anchorage|America/Juneau","America/Anchorage|America/Nome","America/Anchorage|America/Sitka","America/Anchorage|America/Yakutat","America/Anchorage|US/Alaska","America/Argentina/Buenos_Aires|America/Argentina/Catamarca","America/Argentina/Buenos_Aires|America/Argentina/ComodRivadavia","America/Argentina/Buenos_Aires|America/Argentina/Cordoba","America/Argentina/Buenos_Aires|America/Argentina/Jujuy","America/Argentina/Buenos_Aires|America/Argentina/La_Rioja","America/Argentina/Buenos_Aires|America/Argentina/Mendoza","America/Argentina/Buenos_Aires|America/Argentina/Rio_Gallegos","America/Argentina/Buenos_Aires|America/Argentina/Salta","America/Argentina/Buenos_Aires|America/Argentina/San_Juan","America/Argentina/Buenos_Aires|America/Argentina/San_Luis","America/Argentina/Buenos_Aires|America/Argentina/Tucuman","America/Argentina/Buenos_Aires|America/Argentina/Ushuaia","America/Argentina/Buenos_Aires|America/Buenos_Aires","America/Argentina/Buenos_Aires|America/Catamarca","America/Argentina/Buenos_Aires|America/Cordoba","America/Argentina/Buenos_Aires|America/Jujuy","America/Argentina/Buenos_Aires|America/Mendoza","America/Argentina/Buenos_Aires|America/Rosario","America/Campo_Grande|America/Cuiaba","America/Chicago|America/Indiana/Knox","America/Chicago|America/Indiana/Tell_City","America/Chicago|America/Knox_IN","America/Chicago|America/Matamoros","America/Chicago|America/Menominee","America/Chicago|America/North_Dakota/Center","America/Chicago|America/North_Dakota/New_Salem","America/Chicago|America/Rainy_River","America/Chicago|America/Rankin_Inlet","America/Chicago|America/Resolute","America/Chicago|America/Winnipeg","America/Chicago|CST6CDT","America/Chicago|Canada/Central","America/Chicago|US/Central","America/Chicago|US/Indiana-Starke","America/Chihuahua|America/Mazatlan","America/Chihuahua|Mexico/BajaSur","America/Denver|America/Boise","America/Denver|America/Cambridge_Bay","America/Denver|America/Edmonton","America/Denver|America/Inuvik","America/Denver|America/Ojinaga","America/Denver|America/Shiprock","America/Denver|America/Yellowknife","America/Denver|Canada/Mountain","America/Denver|MST7MDT","America/Denver|Navajo","America/Denver|US/Mountain","America/Fortaleza|America/Belem","America/Fortaleza|America/Maceio","America/Fortaleza|America/Recife","America/Fortaleza|America/Santarem","America/Halifax|America/Glace_Bay","America/Halifax|America/Moncton","America/Halifax|America/Thule","America/Halifax|Atlantic/Bermuda","America/Halifax|Canada/Atlantic","America/Havana|Cuba","America/Los_Angeles|America/Dawson","America/Los_Angeles|America/Ensenada","America/Los_Angeles|America/Tijuana","America/Los_Angeles|America/Vancouver","America/Los_Angeles|America/Whitehorse","America/Los_Angeles|Canada/Pacific","America/Los_Angeles|Canada/Yukon","America/Los_Angeles|Mexico/BajaNorte","America/Los_Angeles|PST8PDT","America/Los_Angeles|US/Pacific","America/Los_Angeles|US/Pacific-New","America/Managua|America/Belize","America/Managua|America/Costa_Rica","America/Managua|America/El_Salvador","America/Managua|America/Guatemala","America/Managua|America/Regina","America/Managua|America/Swift_Current","America/Managua|America/Tegucigalpa","America/Managua|Canada/East-Saskatchewan","America/Managua|Canada/Saskatchewan","America/Manaus|America/Boa_Vista","America/Manaus|America/Porto_Velho","America/Manaus|Brazil/West","America/Metlakatla|Pacific/Pitcairn","America/Mexico_City|America/Merida","America/Mexico_City|America/Monterrey","America/Mexico_City|Mexico/General","America/New_York|America/Detroit","America/New_York|America/Fort_Wayne","America/New_York|America/Indiana/Indianapolis","America/New_York|America/Indiana/Marengo","America/New_York|America/Indiana/Petersburg","America/New_York|America/Indiana/Vevay","America/New_York|America/Indiana/Vincennes","America/New_York|America/Indiana/Winamac","America/New_York|America/Indianapolis","America/New_York|America/Iqaluit","America/New_York|America/Kentucky/Louisville","America/New_York|America/Kentucky/Monticello","America/New_York|America/Louisville","America/New_York|America/Montreal","America/New_York|America/Nassau","America/New_York|America/Nipigon","America/New_York|America/Pangnirtung","America/New_York|America/Thunder_Bay","America/New_York|America/Toronto","America/New_York|Canada/Eastern","America/New_York|EST5EDT","America/New_York|US/East-Indiana","America/New_York|US/Eastern","America/New_York|US/Michigan","America/Noronha|Brazil/DeNoronha","America/Panama|America/Atikokan","America/Panama|America/Coral_Harbour","America/Panama|America/Jamaica","America/Panama|EST","America/Panama|Jamaica","America/Phoenix|America/Creston","America/Phoenix|America/Dawson_Creek","America/Phoenix|America/Hermosillo","America/Phoenix|MST","America/Phoenix|US/Arizona","America/Rio_Branco|America/Eirunepe","America/Rio_Branco|America/Porto_Acre","America/Rio_Branco|Brazil/Acre","America/Santiago|Antarctica/Palmer","America/Santiago|Chile/Continental","America/Santo_Domingo|America/Anguilla","America/Santo_Domingo|America/Antigua","America/Santo_Domingo|America/Aruba","America/Santo_Domingo|America/Barbados","America/Santo_Domingo|America/Blanc-Sablon","America/Santo_Domingo|America/Curacao","America/Santo_Domingo|America/Dominica","America/Santo_Domingo|America/Grenada","America/Santo_Domingo|America/Guadeloupe","America/Santo_Domingo|America/Kralendijk","America/Santo_Domingo|America/Lower_Princes","America/Santo_Domingo|America/Marigot","America/Santo_Domingo|America/Martinique","America/Santo_Domingo|America/Montserrat","America/Santo_Domingo|America/Port_of_Spain","America/Santo_Domingo|America/Puerto_Rico","America/Santo_Domingo|America/St_Barthelemy","America/Santo_Domingo|America/St_Kitts","America/Santo_Domingo|America/St_Lucia","America/Santo_Domingo|America/St_Thomas","America/Santo_Domingo|America/St_Vincent","America/Santo_Domingo|America/Tortola","America/Santo_Domingo|America/Virgin","America/Sao_Paulo|Brazil/East","America/St_Johns|Canada/Newfoundland","Asia/Aqtobe|Asia/Aqtau","Asia/Ashgabat|Asia/Ashkhabad","Asia/Baghdad|Asia/Aden","Asia/Baghdad|Asia/Bahrain","Asia/Baghdad|Asia/Kuwait","Asia/Baghdad|Asia/Qatar","Asia/Baghdad|Asia/Riyadh","Asia/Bangkok|Asia/Ho_Chi_Minh","Asia/Bangkok|Asia/Phnom_Penh","Asia/Bangkok|Asia/Saigon","Asia/Bangkok|Asia/Vientiane","Asia/Dhaka|Asia/Dacca","Asia/Dubai|Asia/Muscat","Asia/Hong_Kong|Hongkong","Asia/Jakarta|Asia/Pontianak","Asia/Jerusalem|Asia/Tel_Aviv","Asia/Jerusalem|Israel","Asia/Kathmandu|Asia/Katmandu","Asia/Kolkata|Asia/Calcutta","Asia/Kolkata|Asia/Colombo","Asia/Kuala_Lumpur|Asia/Kuching","Asia/Makassar|Asia/Ujung_Pandang","Asia/Seoul|ROK","Asia/Shanghai|Asia/Chongqing","Asia/Shanghai|Asia/Chungking","Asia/Shanghai|Asia/Harbin","Asia/Shanghai|Asia/Macao","Asia/Shanghai|Asia/Macau","Asia/Shanghai|Asia/Taipei","Asia/Shanghai|PRC","Asia/Shanghai|ROC","Asia/Singapore|Singapore","Asia/Tashkent|Asia/Samarkand","Asia/Tehran|Iran","Asia/Thimphu|Asia/Thimbu","Asia/Tokyo|Japan","Asia/Ulaanbaatar|Asia/Ulan_Bator","Asia/Urumqi|Asia/Kashgar","Australia/Adelaide|Australia/Broken_Hill","Australia/Adelaide|Australia/South","Australia/Adelaide|Australia/Yancowinna","Australia/Brisbane|Australia/Lindeman","Australia/Brisbane|Australia/Queensland","Australia/Darwin|Australia/North","Australia/Lord_Howe|Australia/LHI","Australia/Perth|Australia/West","Australia/Sydney|Australia/ACT","Australia/Sydney|Australia/Canberra","Australia/Sydney|Australia/Currie","Australia/Sydney|Australia/Hobart","Australia/Sydney|Australia/Melbourne","Australia/Sydney|Australia/NSW","Australia/Sydney|Australia/Tasmania","Australia/Sydney|Australia/Victoria","Etc/UCT|UCT","Etc/UTC|Etc/Universal","Etc/UTC|Etc/Zulu","Etc/UTC|UTC","Etc/UTC|Universal","Etc/UTC|Zulu","Europe/Athens|Asia/Nicosia","Europe/Athens|EET","Europe/Athens|Europe/Bucharest","Europe/Athens|Europe/Helsinki","Europe/Athens|Europe/Kiev","Europe/Athens|Europe/Mariehamn","Europe/Athens|Europe/Nicosia","Europe/Athens|Europe/Riga","Europe/Athens|Europe/Sofia","Europe/Athens|Europe/Tallinn","Europe/Athens|Europe/Uzhgorod","Europe/Athens|Europe/Vilnius","Europe/Athens|Europe/Zaporozhye","Europe/Chisinau|Europe/Tiraspol","Europe/Dublin|Eire","Europe/Istanbul|Asia/Istanbul","Europe/Istanbul|Turkey","Europe/Lisbon|Atlantic/Canary","Europe/Lisbon|Atlantic/Faeroe","Europe/Lisbon|Atlantic/Faroe","Europe/Lisbon|Atlantic/Madeira","Europe/Lisbon|Portugal","Europe/Lisbon|WET","Europe/London|Europe/Belfast","Europe/London|Europe/Guernsey","Europe/London|Europe/Isle_of_Man","Europe/London|Europe/Jersey","Europe/London|GB","Europe/London|GB-Eire","Europe/Moscow|Europe/Volgograd","Europe/Moscow|W-SU","Europe/Paris|Africa/Ceuta","Europe/Paris|Arctic/Longyearbyen","Europe/Paris|Atlantic/Jan_Mayen","Europe/Paris|CET","Europe/Paris|Europe/Amsterdam","Europe/Paris|Europe/Andorra","Europe/Paris|Europe/Belgrade","Europe/Paris|Europe/Berlin","Europe/Paris|Europe/Bratislava","Europe/Paris|Europe/Brussels","Europe/Paris|Europe/Budapest","Europe/Paris|Europe/Busingen","Europe/Paris|Europe/Copenhagen","Europe/Paris|Europe/Gibraltar","Europe/Paris|Europe/Ljubljana","Europe/Paris|Europe/Luxembourg","Europe/Paris|Europe/Madrid","Europe/Paris|Europe/Malta","Europe/Paris|Europe/Monaco","Europe/Paris|Europe/Oslo","Europe/Paris|Europe/Podgorica","Europe/Paris|Europe/Prague","Europe/Paris|Europe/Rome","Europe/Paris|Europe/San_Marino","Europe/Paris|Europe/Sarajevo","Europe/Paris|Europe/Skopje","Europe/Paris|Europe/Stockholm","Europe/Paris|Europe/Tirane","Europe/Paris|Europe/Vaduz","Europe/Paris|Europe/Vatican","Europe/Paris|Europe/Vienna","Europe/Paris|Europe/Warsaw","Europe/Paris|Europe/Zagreb","Europe/Paris|Europe/Zurich","Europe/Paris|Poland","Pacific/Auckland|Antarctica/McMurdo","Pacific/Auckland|Antarctica/South_Pole","Pacific/Auckland|NZ","Pacific/Chatham|NZ-CHAT","Pacific/Chuuk|Pacific/Truk","Pacific/Chuuk|Pacific/Yap","Pacific/Easter|Chile/EasterIsland","Pacific/Guam|Pacific/Saipan","Pacific/Honolulu|HST","Pacific/Honolulu|Pacific/Johnston","Pacific/Honolulu|US/Hawaii","Pacific/Majuro|Kwajalein","Pacific/Majuro|Pacific/Kwajalein","Pacific/Pago_Pago|Pacific/Midway","Pacific/Pago_Pago|Pacific/Samoa","Pacific/Pago_Pago|US/Samoa","Pacific/Pohnpei|Pacific/Ponape"]
+}),a});
 /**
  * @namespace seed.auth
  * @memberOf seed
@@ -2862,6 +2899,8 @@ define('seed/layout/_includes',[
 
 define('seed/auth/module',[
 	'angular',
+	'moment',
+	'moment-timezone',
 	'angular-moment',
 	'angular-cookies',
 	'angular-gettext',
@@ -2876,9 +2915,9 @@ define('seed/auth/module',[
 		'angularMoment',
 		'ngCookies',
 		'ui.router',
+		'permission',
 		'gettext',
 		'restmod',
-		'permission',
 		// seed modules
 		'seed.templateCache',
 		'seed.helpers',
@@ -2887,21 +2926,14 @@ define('seed/auth/module',[
 		// sub-modules
 		'seed.auth.login',
 		'seed.auth.register',
-		'seed.auth.password',
-		'seed.auth.lock'
+		'seed.auth.password'
 	]);
 
-	module.config(function ($stateProvider, appConf) {
+	module.config(function ($stateProvider) {
 
 		$stateProvider
 			.state('auth', {
 				abstract: true,
-				data: {
-					permissions: {
-						except: ['AUTHORIZED'],
-						redirectTo: appConf.generalSettings.defaultRedirectStateAfterLogin
-					}
-				},
 				views: {
 					root: {
 						templateUrl: 'seed/auth/views/view.html'
@@ -2910,28 +2942,17 @@ define('seed/auth/module',[
 			})
 
 			.state('auth.logout', {
-				url: '/logout',
-				data: {
-					permissions: {
-						only: ['AUTHORIZED'],
-						redirectTo: 'auth.login'
-					}
-				},
-				views: {
-					auth: {
-						controller: function ($rootScope, $state, UserAPI, neoSession) {
-							UserAPI
-								.logout($rootScope.user)
-								.then(function () {
-									neoSession
-										.clearSession()
-										.finally(function () {
-											$state.go('auth.login');
-										});
-								});
-						}
-					}
+				onEnter: function ($rootScope, $state, UserAPI, neoSession) {
+					UserAPI
+						.logout($rootScope.user)
+						.finally(function () {
+							return neoSession.clearSession();
+						})
+						.finally(function () {
+							$state.go('auth.login');
+						});
 				}
+
 			});
 	});
 
@@ -2943,231 +2964,784 @@ define('seed/auth/module',[
 	return module;
 });
 
-define('seed/auth/_directives/neoPermissionOnly',['seed/auth/module'], function (module) {
+define('seed/auth/_services/neoCookie',['seed/auth/module'], function (module) {
 	'use strict';
 
 	/**
-	 * Shows/hides element for other than provided permission only
-	 * @class neoPermissionOnly
+	 * Service for manipulating cookies data
+	 *
+	 * @class neoCookie
+	 * @memberOf seed.auth
+	 */
+	function neoCookie($log, $cookies) {
+
+		$log = $log.getInstance('seed.auth.neoCookie');
+		$log.debug('Initiated service');
+
+		var self = this;
+
+		this.getCustomer = getCustomer;
+		this.setCustomer = setCustomer;
+		this.removeCustomer = removeCustomer;
+
+		this.getToken = getToken;
+		this.setToken = setToken;
+		this.removeToken = removeToken;
+
+		this.getLanguage = getLanguage;
+		this.setLanguage = setLanguage;
+		this.removeLanguage = removeLanguage;
+
+		this.getCookieConsent = getCookieConsent;
+		this.setCookieConsent = setCookieConsent;
+		this.removeCookieConsent = removeCookieConsent;
+
+		this.clearCookie = clearCookie;
+
+		/**
+		 * @method
+		 *
+		 * @returns {String} Active customer ID
+		 */
+		function getCustomer() {
+			$log.debug('Fetched "activeCustomer" value from cookie');
+
+			removeCookieValueIfObject('activeCustomer');
+			return $cookies.get('activeCustomer');
+		}
+
+		/**
+		 * @method
+		 * @throws {TypeError}
+		 *
+		 * @param customerId {String} Active customer ID
+		 */
+		function setCustomer(customerId) {
+			if (!_.isString(customerId)) {
+				throw new TypeError('Parameter "customerId" must be String');
+			}
+
+			$cookies.put('activeCustomer', customerId);
+
+			$log.debug('Updated "activeCustomer" value in cookie to ' + customerId);
+		}
+
+		/**
+		 * @method
+		 */
+		function removeCustomer() {
+			$cookies.remove('activeCustomer');
+
+			$log.debug('Removed "activeCustomer" from cookie');
+		}
+
+		/**
+		 * @method
+		 *
+		 * @returns {String} Session token
+		 */
+		function getToken() {
+			$log.debug('Fetched "token" value from cookie');
+
+			removeCookieValueIfObject('token');
+			return $cookies.get('token');
+		}
+
+		/**
+		 * @method
+		 * @throws {TypeError}
+		 *
+		 * @param token {String} Session token
+		 */
+		function setToken(token) {
+			if (!_.isString(token)) {
+				throw new TypeError('Parameter "token" must be String');
+			}
+
+			$cookies.put('token', token);
+
+			$log.debug('Updated "token" value in cookie to ' + token);
+		}
+
+		/**
+		 * @method
+		 */
+		function removeToken() {
+			$cookies.remove('token');
+
+			$log.debug('Removed "token" from cookie');
+		}
+
+		/**
+		 * @method
+		 *
+		 * @returns {String} locale code
+		 */
+		function getLanguage() {
+			removeCookieValueIfObject('lang');
+			return $cookies.get('lang');
+		}
+
+		/**
+		 * @method
+		 * @throws {TypeError}
+		 *
+		 * @param locale {String} locale code
+		 */
+		function setLanguage(locale) {
+			if (!_.isString(locale)) {
+				throw new TypeError('Parameter "locale" must be String');
+			}
+
+			$cookies.put('lang', locale);
+
+			$log.debug('Updated "lang" value in cookie');
+		}
+
+		/**
+		 * @method
+		 */
+		function removeLanguage() {
+			$cookies.remove('lang');
+
+			$log.debug('Removed "lang" from cookie');
+		}
+
+		/**
+		 * @method
+		 *
+		 * @returns {Boolean} locale code
+		 */
+		function getCookieConsent() {
+			$log.debug('Fetched "cookieConsent" value from cookie');
+
+			return $cookies.getObject('cookieConsent');
+		}
+
+		/**
+		 * @method
+		 * @throws {TypeError}
+		 *
+		 * @param cookieConsent {Boolean} Is cookie consent accepted
+		 */
+		function setCookieConsent(cookieConsent) {
+			if (!_.isBoolean(cookieConsent)) {
+				throw new TypeError('Parameter "cookieConsent" must be Boolean');
+			}
+
+			$cookies.putObject('cookieConsent', cookieConsent);
+
+			$log.debug('Updated "cookieConsent" value in cookie');
+		}
+
+		/**
+		 * @method
+		 */
+		function removeCookieConsent() {
+			$cookies.remove('cookieConsent');
+
+			$log.debug('Removed "cookieConsent" from cookie');
+		}
+
+		/**
+		 * @method
+		 */
+		function clearCookie() {
+			self.removeCookieConsent();
+			self.removeCustomer();
+			self.removeLanguage();
+			self.removeToken();
+
+			$log.debug('Cleared cookie');
+		}
+
+		/**
+		 * @method
+		 * @private
+		 *
+		 * This method should be deprecated as soon as possible
+		 *
+		 * @param key {String} Cookie key to test
+		 */
+		function removeCookieValueIfObject(key) {
+			var cookieValue = $cookies.get(key);
+
+			// Duck-typing based detection if string is serialized JSON object or object-like string
+			if (cookieValue && (cookieValue.indexOf('{') >= 0 || cookieValue.indexOf('"') >= 0)) {
+				$cookies.remove(key);
+
+				$log.debug('Removed object-like "' + key + '" value from cookie');
+			}
+		}
+
+	}
+
+	module.service('neoCookie', neoCookie);
+});
+
+
+define('seed/auth/_services/neoSession',['seed/auth/module', 'angular', 'moment'], function (module, angular, moment) {
+	'use strict';
+
+	/**
+	 * Session management service
+	 * @class neoSession
 	 * @memberOf seed.auth
 	 *
 	 * @param $log {Object} Logging service
-	 * @param Permission {Object} Access permission service
-	 * @return {{restrict: string, link: Function}}
-	 */
-	function neoPermissionOnly($log, Permission) {
-
-		$log = $log.getInstance('seed.auth.neoPermissionOnly');
-		$log.debug('Initiated directive');
-
-		return {
-			restrict: 'A',
-			link: function (scope, element, attrs) {
-				try {
-					Permission
-						.authorize({only: [attrs.neoPermissionOnly]})
-						.then(function () {
-							element.show();
-						})
-						.catch(function () {
-							element.hide();
-						});
-				} catch (e) {
-					element.hide();
-					$log.info(e.message + ': ' + attrs.neoPermissionOnly);
-				}
-
-				$log.debug('Called linking function');
-			}
-		};
-	}
-
-	return module.directive('neoPermissionOnly', neoPermissionOnly);
-});
-
-define('seed/auth/_directives/neoPermissionExcept',['seed/auth/module'], function (module) {
-	'use strict';
-
-	/**
-	 * Shows/hides element for provided permission only
-	 * @class neoPermissionExcept
-	 * @memberOf seed.auth
-	 *
-	 * @param $log {Object} Logging service
-	 * @param Permission {Object} Access permission service
-	 * @return {{restrict: string, link: Function}}
-	 */
-	function neoPermissionExcept($log, Permission) {
-
-		$log = $log.getInstance('seed.auth.neoPermissionExcept');
-		$log.debug('Initiated directive');
-
-		return {
-			restrict: 'A',
-			link: function (scope, element, attrs) {
-				try {
-					Permission
-						.authorize({only: [attrs.neoPermissionExcept]})
-						.then(function () {
-							element.show();
-						})
-						.catch(function () {
-							element.hide();
-						});
-				} catch (e) {
-					element.hide();
-					$log.info(e.message + ': ' + attrs.neoPermissionExcept);
-				}
-
-				$log.debug('Called linking function');
-			}
-		};
-	}
-
-	return module.directive('neoPermissionExcept', neoPermissionExcept);
-});
-
-//! moment-timezone.js
-//! version : 0.5.1
-//! author : Tim Wood
-//! license : MIT
-//! github.com/moment/moment-timezone
-!function(a,b){"use strict";"function"==typeof define&&define.amd?define('moment-timezone',["moment"],b):"object"==typeof module&&module.exports?module.exports=b(require("moment")):b(a.moment)}(this,function(a){"use strict";function b(a){return a>96?a-87:a>64?a-29:a-48}function c(a){var c,d=0,e=a.split("."),f=e[0],g=e[1]||"",h=1,i=0,j=1;for(45===a.charCodeAt(0)&&(d=1,j=-1),d;d<f.length;d++)c=b(f.charCodeAt(d)),i=60*i+c;for(d=0;d<g.length;d++)h/=60,c=b(g.charCodeAt(d)),i+=c*h;return i*j}function d(a){for(var b=0;b<a.length;b++)a[b]=c(a[b])}function e(a,b){for(var c=0;b>c;c++)a[c]=Math.round((a[c-1]||0)+6e4*a[c]);a[b-1]=1/0}function f(a,b){var c,d=[];for(c=0;c<b.length;c++)d[c]=a[b[c]];return d}function g(a){var b=a.split("|"),c=b[2].split(" "),g=b[3].split(""),h=b[4].split(" ");return d(c),d(g),d(h),e(h,g.length),{name:b[0],abbrs:f(b[1].split(" "),g),offsets:f(c,g),untils:h,population:0|b[5]}}function h(a){a&&this._set(g(a))}function i(a){var b=a.toTimeString(),c=b.match(/\([a-z ]+\)/i);c&&c[0]?(c=c[0].match(/[A-Z]/g),c=c?c.join(""):void 0):(c=b.match(/[A-Z]{3,5}/g),c=c?c[0]:void 0),"GMT"===c&&(c=void 0),this.at=+a,this.abbr=c,this.offset=a.getTimezoneOffset()}function j(a){this.zone=a,this.offsetScore=0,this.abbrScore=0}function k(a,b){for(var c,d;d=6e4*((b.at-a.at)/12e4|0);)c=new i(new Date(a.at+d)),c.offset===a.offset?a=c:b=c;return a}function l(){var a,b,c,d=(new Date).getFullYear()-2,e=new i(new Date(d,0,1)),f=[e];for(c=1;48>c;c++)b=new i(new Date(d,c,1)),b.offset!==e.offset&&(a=k(e,b),f.push(a),f.push(new i(new Date(a.at+6e4)))),e=b;for(c=0;4>c;c++)f.push(new i(new Date(d+c,0,1))),f.push(new i(new Date(d+c,6,1)));return f}function m(a,b){return a.offsetScore!==b.offsetScore?a.offsetScore-b.offsetScore:a.abbrScore!==b.abbrScore?a.abbrScore-b.abbrScore:b.zone.population-a.zone.population}function n(a,b){var c,e;for(d(b),c=0;c<b.length;c++)e=b[c],I[e]=I[e]||{},I[e][a]=!0}function o(a){var b,c,d,e=a.length,f={},g=[];for(b=0;e>b;b++){d=I[a[b].offset]||{};for(c in d)d.hasOwnProperty(c)&&(f[c]=!0)}for(b in f)f.hasOwnProperty(b)&&g.push(H[b]);return g}function p(){try{var a=Intl.DateTimeFormat().resolvedOptions().timeZone,b=H[r(a)];if(b)return b;z("Moment Timezone found "+a+" from the Intl api, but did not have that data loaded.")}catch(c){}var d,e,f,g=l(),h=g.length,i=o(g),k=[];for(e=0;e<i.length;e++){for(d=new j(t(i[e]),h),f=0;h>f;f++)d.scoreOffsetAt(g[f]);k.push(d)}return k.sort(m),k.length>0?k[0].zone.name:void 0}function q(a){return(!D||a)&&(D=p()),D}function r(a){return(a||"").toLowerCase().replace(/\//g,"_")}function s(a){var b,c,d,e;for("string"==typeof a&&(a=[a]),b=0;b<a.length;b++)d=a[b].split("|"),c=d[0],e=r(c),F[e]=a[b],H[e]=c,d[5]&&n(e,d[2].split(" "))}function t(a,b){a=r(a);var c,d=F[a];return d instanceof h?d:"string"==typeof d?(d=new h(d),F[a]=d,d):G[a]&&b!==t&&(c=t(G[a],t))?(d=F[a]=new h,d._set(c),d.name=H[a],d):null}function u(){var a,b=[];for(a in H)H.hasOwnProperty(a)&&(F[a]||F[G[a]])&&H[a]&&b.push(H[a]);return b.sort()}function v(a){var b,c,d,e;for("string"==typeof a&&(a=[a]),b=0;b<a.length;b++)c=a[b].split("|"),d=r(c[0]),e=r(c[1]),G[d]=e,H[d]=c[0],G[e]=d,H[e]=c[1]}function w(a){s(a.zones),v(a.links),A.dataVersion=a.version}function x(a){return x.didShowError||(x.didShowError=!0,z("moment.tz.zoneExists('"+a+"') has been deprecated in favor of !moment.tz.zone('"+a+"')")),!!t(a)}function y(a){return!(!a._a||void 0!==a._tzm)}function z(a){"undefined"!=typeof console&&"function"==typeof console.error&&console.error(a)}function A(b){var c=Array.prototype.slice.call(arguments,0,-1),d=arguments[arguments.length-1],e=t(d),f=a.utc.apply(null,c);return e&&!a.isMoment(b)&&y(f)&&f.add(e.parse(f),"minutes"),f.tz(d),f}function B(a){return function(){return this._z?this._z.abbr(this):a.call(this)}}function C(a){return function(){return this._z=null,a.apply(this,arguments)}}if(void 0!==a.tz)return z("Moment Timezone "+a.tz.version+" was already loaded "+(a.tz.dataVersion?"with data from ":"without any data")+a.tz.dataVersion),a;var D,E="0.5.1",F={},G={},H={},I={},J=a.version.split("."),K=+J[0],L=+J[1];(2>K||2===K&&6>L)&&z("Moment Timezone requires Moment.js >= 2.6.0. You are using Moment.js "+a.version+". See momentjs.com"),h.prototype={_set:function(a){this.name=a.name,this.abbrs=a.abbrs,this.untils=a.untils,this.offsets=a.offsets,this.population=a.population},_index:function(a){var b,c=+a,d=this.untils;for(b=0;b<d.length;b++)if(c<d[b])return b},parse:function(a){var b,c,d,e,f=+a,g=this.offsets,h=this.untils,i=h.length-1;for(e=0;i>e;e++)if(b=g[e],c=g[e+1],d=g[e?e-1:e],c>b&&A.moveAmbiguousForward?b=c:b>d&&A.moveInvalidForward&&(b=d),f<h[e]-6e4*b)return g[e];return g[i]},abbr:function(a){return this.abbrs[this._index(a)]},offset:function(a){return this.offsets[this._index(a)]}},j.prototype.scoreOffsetAt=function(a){this.offsetScore+=Math.abs(this.zone.offset(a.at)-a.offset),this.zone.abbr(a.at).match(/[A-Z]/g).join("")!==a.abbr&&this.abbrScore++},A.version=E,A.dataVersion="",A._zones=F,A._links=G,A._names=H,A.add=s,A.link=v,A.load=w,A.zone=t,A.zoneExists=x,A.guess=q,A.names=u,A.Zone=h,A.unpack=g,A.unpackBase60=c,A.needsOffset=y,A.moveInvalidForward=!0,A.moveAmbiguousForward=!1;var M=a.fn;a.tz=A,a.defaultZone=null,a.updateOffset=function(b,c){var d,e=a.defaultZone;void 0===b._z&&(e&&y(b)&&!b._isUTC&&(b._d=a.utc(b._a)._d,b.utc().add(e.parse(b),"minutes")),b._z=e),b._z&&(d=b._z.offset(b),Math.abs(d)<16&&(d/=60),void 0!==b.utcOffset?b.utcOffset(-d,c):b.zone(d,c))},M.tz=function(b){return b?(this._z=t(b),this._z?a.updateOffset(this):z("Moment Timezone has no data for "+b+". See http://momentjs.com/timezone/docs/#/data-loading/."),this):this._z?this._z.name:void 0},M.zoneName=B(M.zoneName),M.zoneAbbr=B(M.zoneAbbr),M.utc=C(M.utc),a.tz.setDefault=function(b){return(2>K||2===K&&9>L)&&z("Moment Timezone setDefault() requires Moment.js >= 2.9.0. You are using Moment.js "+a.version+"."),a.defaultZone=b?t(b):null,a};var N=a.momentProperties;return"[object Array]"===Object.prototype.toString.call(N)?(N.push("_z"),N.push("_a")):N&&(N._z=null),w({version:"2016a",zones:["Africa/Abidjan|GMT|0|0||48e5","Africa/Khartoum|EAT|-30|0||51e5","Africa/Algiers|CET|-10|0||26e5","Africa/Lagos|WAT|-10|0||17e6","Africa/Maputo|CAT|-20|0||26e5","Africa/Cairo|EET EEST|-20 -30|010101010|1Cby0 Fb0 c10 8n0 8Nd0 gL0 e10 mn0|15e6","Africa/Casablanca|WET WEST|0 -10|01010101010101010101010101010101010101010|1Cco0 Db0 1zd0 Lz0 1Nf0 wM0 co0 go0 1o00 s00 dA0 vc0 11A0 A00 e00 y00 11A0 uM0 e00 Dc0 11A0 s00 e00 IM0 WM0 mo0 gM0 LA0 WM0 jA0 e00 Rc0 11A0 e00 e00 U00 11A0 8o0 e00 11A0|32e5","Europe/Paris|CET CEST|-10 -20|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|11e6","Africa/Johannesburg|SAST|-20|0||84e5","Africa/Tripoli|EET CET CEST|-20 -10 -20|0120|1IlA0 TA0 1o00|11e5","Africa/Windhoek|WAST WAT|-20 -10|01010101010101010101010|1C1c0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 11B0|32e4","America/Adak|HST HDT|a0 90|01010101010101010101010|1BR00 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|326","America/Anchorage|AKST AKDT|90 80|01010101010101010101010|1BQX0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|30e4","America/Santo_Domingo|AST|40|0||29e5","America/Araguaina|BRT BRST|30 20|010|1IdD0 Lz0|14e4","America/Argentina/Buenos_Aires|ART|30|0|","America/Asuncion|PYST PYT|30 40|01010101010101010101010|1C430 1a10 1fz0 1a10 1fz0 1cN0 17b0 1ip0 17b0 1ip0 17b0 1ip0 19X0 1fB0 19X0 1fB0 19X0 1ip0 17b0 1ip0 17b0 1ip0|28e5","America/Panama|EST|50|0||15e5","America/Bahia|BRT BRST|30 20|010|1FJf0 Rb0|27e5","America/Bahia_Banderas|MST CDT CST|70 50 60|01212121212121212121212|1C1l0 1nW0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0|84e3","America/Fortaleza|BRT|30|0||34e5","America/Managua|CST|60|0||22e5","America/Manaus|AMT|40|0||19e5","America/Bogota|COT|50|0||90e5","America/Denver|MST MDT|70 60|01010101010101010101010|1BQV0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|26e5","America/Campo_Grande|AMST AMT|30 40|01010101010101010101010|1BIr0 1zd0 On0 1zd0 Rb0 1zd0 Lz0 1C10 Lz0 1C10 On0 1zd0 On0 1zd0 On0 1zd0 On0 1C10 Lz0 1C10 Lz0 1C10|77e4","America/Cancun|CST CDT EST|60 50 50|010101010102|1C1k0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 Dd0|63e4","America/Caracas|VET|4u|0||29e5","America/Cayenne|GFT|30|0||58e3","America/Chicago|CST CDT|60 50|01010101010101010101010|1BQU0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|92e5","America/Chihuahua|MST MDT|70 60|01010101010101010101010|1C1l0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0|81e4","America/Phoenix|MST|70|0||42e5","America/Los_Angeles|PST PDT|80 70|01010101010101010101010|1BQW0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|15e6","America/New_York|EST EDT|50 40|01010101010101010101010|1BQT0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|21e6","America/Rio_Branco|AMT ACT|40 50|01|1KLE0|31e4","America/Fort_Nelson|PST PDT MST|80 70 70|010101010102|1BQW0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0|39e2","America/Halifax|AST ADT|40 30|01010101010101010101010|1BQS0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|39e4","America/Godthab|WGT WGST|30 20|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|17e3","America/Goose_Bay|AST ADT|40 30|01010101010101010101010|1BQQ1 1zb0 Op0 1zcX Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|76e2","America/Grand_Turk|EST EDT AST|50 40 40|0101010101012|1BQT0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|37e2","America/Guayaquil|ECT|50|0||27e5","America/Guyana|GYT|40|0||80e4","America/Havana|CST CDT|50 40|01010101010101010101010|1BQR0 1wo0 U00 1zc0 U00 1qM0 Oo0 1zc0 Oo0 1zc0 Oo0 1zc0 Rc0 1zc0 Oo0 1zc0 Oo0 1zc0 Oo0 1zc0 Oo0 1zc0|21e5","America/La_Paz|BOT|40|0||19e5","America/Lima|PET|50|0||11e6","America/Mexico_City|CST CDT|60 50|01010101010101010101010|1C1k0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0 14p0 1lb0 14p0 1nX0 11B0 1nX0 11B0 1nX0 14p0 1lb0 14p0 1lb0|20e6","America/Metlakatla|PST AKST AKDT|80 90 80|012121212121|1PAa0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|14e2","America/Miquelon|PMST PMDT|30 20|01010101010101010101010|1BQR0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|61e2","America/Montevideo|UYST UYT|20 30|010101010101|1BQQ0 1ld0 14n0 1ld0 14n0 1o10 11z0 1o10 11z0 1o10 11z0|17e5","America/Noronha|FNT|20|0||30e2","America/North_Dakota/Beulah|MST MDT CST CDT|70 60 60 50|01232323232323232323232|1BQV0 1zb0 Oo0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0","America/Paramaribo|SRT|30|0||24e4","America/Port-au-Prince|EST EDT|50 40|0101010101010101010|1GI70 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|23e5","America/Santiago|CLST CLT CLT|30 40 30|010101010102|1C1f0 1fB0 1nX0 G10 1EL0 Op0 1zb0 Rd0 1wn0 Rd0 1wn0|62e5","America/Sao_Paulo|BRST BRT|20 30|01010101010101010101010|1BIq0 1zd0 On0 1zd0 Rb0 1zd0 Lz0 1C10 Lz0 1C10 On0 1zd0 On0 1zd0 On0 1zd0 On0 1C10 Lz0 1C10 Lz0 1C10|20e6","America/Scoresbysund|EGT EGST|10 0|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|452","America/St_Johns|NST NDT|3u 2u|01010101010101010101010|1BQPv 1zb0 Op0 1zcX Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0|11e4","Antarctica/Casey|CAST AWST|-b0 -80|0101|1BN30 40P0 KL0|10","Antarctica/Davis|DAVT DAVT|-50 -70|0101|1BPw0 3Wn0 KN0|70","Antarctica/DumontDUrville|DDUT|-a0|0||80","Antarctica/Macquarie|AEDT MIST|-b0 -b0|01|1C140|1","Antarctica/Mawson|MAWT|-50|0||60","Pacific/Auckland|NZDT NZST|-d0 -c0|01010101010101010101010|1C120 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00|14e5","Antarctica/Rothera|ROTT|30|0||130","Antarctica/Syowa|SYOT|-30|0||20","Antarctica/Troll|UTC CEST|0 -20|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|40","Antarctica/Vostok|VOST|-60|0||25","Asia/Baghdad|AST|-30|0||66e5","Asia/Almaty|ALMT|-60|0||15e5","Asia/Amman|EET EEST|-20 -30|010101010101010101010|1BVy0 1qM0 11A0 1o00 11A0 4bX0 Dd0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0|25e5","Asia/Anadyr|ANAT ANAST ANAT|-c0 -c0 -b0|0120|1BWe0 1qN0 WM0|13e3","Asia/Aqtobe|AQTT|-50|0||27e4","Asia/Ashgabat|TMT|-50|0||41e4","Asia/Baku|AZT AZST|-40 -50|01010101010101010101010|1BWo0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|27e5","Asia/Bangkok|ICT|-70|0||15e6","Asia/Beirut|EET EEST|-20 -30|01010101010101010101010|1BWm0 1qL0 WN0 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0|22e5","Asia/Bishkek|KGT|-60|0||87e4","Asia/Brunei|BNT|-80|0||42e4","Asia/Kolkata|IST|-5u|0||15e6","Asia/Chita|YAKT YAKST YAKT IRKT|-90 -a0 -a0 -80|010230|1BWh0 1qM0 WM0 8Hz0 3re0|33e4","Asia/Choibalsan|CHOT CHOST|-80 -90|0101010101010|1O8G0 1cJ0 1cP0 1cJ0 1cP0 1fx0 1cP0 1cJ0 1cP0 1cJ0 1cP0 1cJ0|38e3","Asia/Shanghai|CST|-80|0||23e6","Asia/Dhaka|BDT|-60|0||16e6","Asia/Damascus|EET EEST|-20 -30|01010101010101010101010|1C0m0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1qL0 WN0 1qL0 WN0 1qL0 11B0 1nX0 11B0 1nX0 11B0 1nX0 11B0 1qL0|26e5","Asia/Dili|TLT|-90|0||19e4","Asia/Dubai|GST|-40|0||39e5","Asia/Dushanbe|TJT|-50|0||76e4","Asia/Gaza|EET EEST|-20 -30|01010101010101010101010|1BVW1 SKX 1xd1 MKX 1AN0 1a00 1fA0 1cL0 1cN0 1nX0 1210 1nz0 1210 1nz0 14N0 1nz0 1210 1nz0 1210 1nz0 1210 1nz0|18e5","Asia/Hebron|EET EEST|-20 -30|0101010101010101010101010|1BVy0 Tb0 1xd1 MKX bB0 cn0 1cN0 1a00 1fA0 1cL0 1cN0 1nX0 1210 1nz0 1210 1nz0 14N0 1nz0 1210 1nz0 1210 1nz0 1210 1nz0|25e4","Asia/Hong_Kong|HKT|-80|0||73e5","Asia/Hovd|HOVT HOVST|-70 -80|0101010101010|1O8H0 1cJ0 1cP0 1cJ0 1cP0 1fx0 1cP0 1cJ0 1cP0 1cJ0 1cP0 1cJ0|81e3","Asia/Irkutsk|IRKT IRKST IRKT|-80 -90 -90|01020|1BWi0 1qM0 WM0 8Hz0|60e4","Europe/Istanbul|EET EEST|-20 -30|01010101010101010101010|1BWp0 1qM0 Xc0 1qo0 WM0 1qM0 11A0 1o00 1200 1nA0 11A0 1tA0 U00 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|13e6","Asia/Jakarta|WIB|-70|0||31e6","Asia/Jayapura|WIT|-90|0||26e4","Asia/Jerusalem|IST IDT|-20 -30|01010101010101010101010|1BVA0 17X0 1kp0 1dz0 1c10 1aL0 1eN0 1oL0 10N0 1oL0 10N0 1oL0 10N0 1rz0 W10 1rz0 W10 1rz0 10N0 1oL0 10N0 1oL0|81e4","Asia/Kabul|AFT|-4u|0||46e5","Asia/Kamchatka|PETT PETST PETT|-c0 -c0 -b0|0120|1BWe0 1qN0 WM0|18e4","Asia/Karachi|PKT|-50|0||24e6","Asia/Urumqi|XJT|-60|0||32e5","Asia/Kathmandu|NPT|-5J|0||12e5","Asia/Khandyga|VLAT VLAST VLAT YAKT YAKT|-a0 -b0 -b0 -a0 -90|010234|1BWg0 1qM0 WM0 17V0 7zD0|66e2","Asia/Krasnoyarsk|KRAT KRAST KRAT|-70 -80 -80|01020|1BWj0 1qM0 WM0 8Hz0|10e5","Asia/Kuala_Lumpur|MYT|-80|0||71e5","Asia/Magadan|MAGT MAGST MAGT MAGT|-b0 -c0 -c0 -a0|01023|1BWf0 1qM0 WM0 8Hz0|95e3","Asia/Makassar|WITA|-80|0||15e5","Asia/Manila|PHT|-80|0||24e6","Europe/Athens|EET EEST|-20 -30|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|35e5","Asia/Novokuznetsk|KRAT NOVST NOVT NOVT|-70 -70 -60 -70|01230|1BWj0 1qN0 WM0 8Hz0|55e4","Asia/Novosibirsk|NOVT NOVST NOVT|-60 -70 -70|01020|1BWk0 1qM0 WM0 8Hz0|15e5","Asia/Omsk|OMST OMSST OMST|-60 -70 -70|01020|1BWk0 1qM0 WM0 8Hz0|12e5","Asia/Oral|ORAT|-50|0||27e4","Asia/Pyongyang|KST KST|-90 -8u|01|1P4D0|29e5","Asia/Qyzylorda|QYZT|-60|0||73e4","Asia/Rangoon|MMT|-6u|0||48e5","Asia/Sakhalin|SAKT SAKST SAKT|-a0 -b0 -b0|01020|1BWg0 1qM0 WM0 8Hz0|58e4","Asia/Tashkent|UZT|-50|0||23e5","Asia/Seoul|KST|-90|0||23e6","Asia/Singapore|SGT|-80|0||56e5","Asia/Srednekolymsk|MAGT MAGST MAGT SRET|-b0 -c0 -c0 -b0|01023|1BWf0 1qM0 WM0 8Hz0|35e2","Asia/Tbilisi|GET|-40|0||11e5","Asia/Tehran|IRST IRDT|-3u -4u|01010101010101010101010|1BTUu 1dz0 1cp0 1dz0 1cp0 1dz0 1cN0 1dz0 1cp0 1dz0 1cp0 1dz0 1cp0 1dz0 1cN0 1dz0 1cp0 1dz0 1cp0 1dz0 1cp0 1dz0|14e6","Asia/Thimphu|BTT|-60|0||79e3","Asia/Tokyo|JST|-90|0||38e6","Asia/Ulaanbaatar|ULAT ULAST|-80 -90|0101010101010|1O8G0 1cJ0 1cP0 1cJ0 1cP0 1fx0 1cP0 1cJ0 1cP0 1cJ0 1cP0 1cJ0|12e5","Asia/Ust-Nera|MAGT MAGST MAGT VLAT VLAT|-b0 -c0 -c0 -b0 -a0|010234|1BWf0 1qM0 WM0 17V0 7zD0|65e2","Asia/Vladivostok|VLAT VLAST VLAT|-a0 -b0 -b0|01020|1BWg0 1qM0 WM0 8Hz0|60e4","Asia/Yakutsk|YAKT YAKST YAKT|-90 -a0 -a0|01020|1BWh0 1qM0 WM0 8Hz0|28e4","Asia/Yekaterinburg|YEKT YEKST YEKT|-50 -60 -60|01020|1BWl0 1qM0 WM0 8Hz0|14e5","Asia/Yerevan|AMT AMST|-40 -50|01010|1BWm0 1qM0 WM0 1qM0|13e5","Atlantic/Azores|AZOT AZOST|10 0|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|25e4","Europe/Lisbon|WET WEST|0 -10|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|27e5","Atlantic/Cape_Verde|CVT|10|0||50e4","Atlantic/South_Georgia|GST|20|0||30","Atlantic/Stanley|FKST FKT|30 40|010|1C6R0 U10|21e2","Australia/Sydney|AEDT AEST|-b0 -a0|01010101010101010101010|1C140 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0|40e5","Australia/Adelaide|ACDT ACST|-au -9u|01010101010101010101010|1C14u 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1cM0 1fA0 1cM0 1cM0 1cM0 1cM0|11e5","Australia/Brisbane|AEST|-a0|0||20e5","Australia/Darwin|ACST|-9u|0||12e4","Australia/Eucla|ACWST|-8J|0||368","Australia/Lord_Howe|LHDT LHST|-b0 -au|01010101010101010101010|1C130 1cMu 1cLu 1cMu 1cLu 1fAu 1cLu 1cMu 1cLu 1cMu 1cLu 1cMu 1cLu 1cMu 1cLu 1cMu 1cLu 1fAu 1cLu 1cMu 1cLu 1cMu|347","Australia/Perth|AWST|-80|0||18e5","Pacific/Easter|EASST EAST EAST|50 60 50|010101010102|1C1f0 1fB0 1nX0 G10 1EL0 Op0 1zb0 Rd0 1wn0 Rd0 1wn0|30e2","Europe/Dublin|GMT IST|0 -10|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|12e5","Etc/GMT+1|GMT+1|10|0|","Etc/GMT+10|GMT+10|a0|0|","Etc/GMT+11|GMT+11|b0|0|","Etc/GMT+12|GMT+12|c0|0|","Etc/GMT+2|GMT+2|20|0|","Etc/GMT+3|GMT+3|30|0|","Etc/GMT+4|GMT+4|40|0|","Etc/GMT+5|GMT+5|50|0|","Etc/GMT+6|GMT+6|60|0|","Etc/GMT+7|GMT+7|70|0|","Etc/GMT+8|GMT+8|80|0|","Etc/GMT+9|GMT+9|90|0|","Etc/GMT-1|GMT-1|-10|0|","Etc/GMT-10|GMT-10|-a0|0|","Etc/GMT-11|GMT-11|-b0|0|","Etc/GMT-12|GMT-12|-c0|0|","Etc/GMT-13|GMT-13|-d0|0|","Etc/GMT-14|GMT-14|-e0|0|","Etc/GMT-2|GMT-2|-20|0|","Etc/GMT-3|GMT-3|-30|0|","Etc/GMT-4|GMT-4|-40|0|","Etc/GMT-5|GMT-5|-50|0|","Etc/GMT-6|GMT-6|-60|0|","Etc/GMT-7|GMT-7|-70|0|","Etc/GMT-8|GMT-8|-80|0|","Etc/GMT-9|GMT-9|-90|0|","Etc/UCT|UCT|0|0|","Etc/UTC|UTC|0|0|","Europe/London|GMT BST|0 -10|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|10e6","Europe/Chisinau|EET EEST|-20 -30|01010101010101010101010|1BWo0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00|67e4","Europe/Kaliningrad|EET EEST FET|-20 -30 -30|01020|1BWo0 1qM0 WM0 8Hz0|44e4","Europe/Minsk|EET EEST FET MSK|-20 -30 -30 -30|01023|1BWo0 1qM0 WM0 8Hy0|19e5","Europe/Moscow|MSK MSD MSK|-30 -40 -40|01020|1BWn0 1qM0 WM0 8Hz0|16e6","Europe/Samara|SAMT SAMST SAMT|-40 -40 -30|0120|1BWm0 1qN0 WM0|12e5","Europe/Simferopol|EET EEST MSK MSK|-20 -30 -40 -30|01010101023|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11z0 1nW0|33e4","Pacific/Honolulu|HST|a0|0||37e4","Indian/Chagos|IOT|-60|0||30e2","Indian/Christmas|CXT|-70|0||21e2","Indian/Cocos|CCT|-6u|0||596","Indian/Kerguelen|TFT|-50|0||130","Indian/Mahe|SCT|-40|0||79e3","Indian/Maldives|MVT|-50|0||35e4","Indian/Mauritius|MUT|-40|0||15e4","Indian/Reunion|RET|-40|0||84e4","Pacific/Majuro|MHT|-c0|0||28e3","MET|MET MEST|-10 -20|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00","Pacific/Chatham|CHADT CHAST|-dJ -cJ|01010101010101010101010|1C120 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00|600","Pacific/Apia|SST SDT WSDT WSST|b0 a0 -e0 -d0|01012323232323232323232|1Dbn0 1ff0 1a00 CI0 AQ0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00|37e3","Pacific/Bougainville|PGT BST|-a0 -b0|01|1NwE0|18e4","Pacific/Chuuk|CHUT|-a0|0||49e3","Pacific/Efate|VUT|-b0|0||66e3","Pacific/Enderbury|PHOT|-d0|0||1","Pacific/Fakaofo|TKT TKT|b0 -d0|01|1Gfn0|483","Pacific/Fiji|FJST FJT|-d0 -c0|01010101010101010101010|1BWe0 1o00 Rc0 1wo0 Ao0 1Nc0 Ao0 1Q00 xz0 1SN0 uM0 1SM0 uM0 1VA0 s00 1VA0 uM0 1SM0 uM0 1SM0 uM0 1SM0|88e4","Pacific/Funafuti|TVT|-c0|0||45e2","Pacific/Galapagos|GALT|60|0||25e3","Pacific/Gambier|GAMT|90|0||125","Pacific/Guadalcanal|SBT|-b0|0||11e4","Pacific/Guam|ChST|-a0|0||17e4","Pacific/Kiritimati|LINT|-e0|0||51e2","Pacific/Kosrae|KOST|-b0|0||66e2","Pacific/Marquesas|MART|9u|0||86e2","Pacific/Pago_Pago|SST|b0|0||37e2","Pacific/Nauru|NRT|-c0|0||10e3","Pacific/Niue|NUT|b0|0||12e2","Pacific/Norfolk|NFT NFT|-bu -b0|01|1PoCu|25e4","Pacific/Noumea|NCT|-b0|0||98e3","Pacific/Palau|PWT|-90|0||21e3","Pacific/Pitcairn|PST|80|0||56","Pacific/Pohnpei|PONT|-b0|0||34e3","Pacific/Port_Moresby|PGT|-a0|0||25e4","Pacific/Rarotonga|CKT|a0|0||13e3","Pacific/Tahiti|TAHT|a0|0||18e4","Pacific/Tarawa|GILT|-c0|0||29e3","Pacific/Tongatapu|TOT|-d0|0||75e3","Pacific/Wake|WAKT|-c0|0||16e3","Pacific/Wallis|WFT|-c0|0||94"],links:["Africa/Abidjan|Africa/Accra","Africa/Abidjan|Africa/Bamako","Africa/Abidjan|Africa/Banjul","Africa/Abidjan|Africa/Bissau","Africa/Abidjan|Africa/Conakry","Africa/Abidjan|Africa/Dakar","Africa/Abidjan|Africa/Freetown","Africa/Abidjan|Africa/Lome","Africa/Abidjan|Africa/Monrovia","Africa/Abidjan|Africa/Nouakchott","Africa/Abidjan|Africa/Ouagadougou","Africa/Abidjan|Africa/Sao_Tome","Africa/Abidjan|Africa/Timbuktu","Africa/Abidjan|America/Danmarkshavn","Africa/Abidjan|Atlantic/Reykjavik","Africa/Abidjan|Atlantic/St_Helena","Africa/Abidjan|Etc/GMT","Africa/Abidjan|Etc/GMT+0","Africa/Abidjan|Etc/GMT-0","Africa/Abidjan|Etc/GMT0","Africa/Abidjan|Etc/Greenwich","Africa/Abidjan|GMT","Africa/Abidjan|GMT+0","Africa/Abidjan|GMT-0","Africa/Abidjan|GMT0","Africa/Abidjan|Greenwich","Africa/Abidjan|Iceland","Africa/Algiers|Africa/Tunis","Africa/Cairo|Egypt","Africa/Casablanca|Africa/El_Aaiun","Africa/Johannesburg|Africa/Maseru","Africa/Johannesburg|Africa/Mbabane","Africa/Khartoum|Africa/Addis_Ababa","Africa/Khartoum|Africa/Asmara","Africa/Khartoum|Africa/Asmera","Africa/Khartoum|Africa/Dar_es_Salaam","Africa/Khartoum|Africa/Djibouti","Africa/Khartoum|Africa/Juba","Africa/Khartoum|Africa/Kampala","Africa/Khartoum|Africa/Mogadishu","Africa/Khartoum|Africa/Nairobi","Africa/Khartoum|Indian/Antananarivo","Africa/Khartoum|Indian/Comoro","Africa/Khartoum|Indian/Mayotte","Africa/Lagos|Africa/Bangui","Africa/Lagos|Africa/Brazzaville","Africa/Lagos|Africa/Douala","Africa/Lagos|Africa/Kinshasa","Africa/Lagos|Africa/Libreville","Africa/Lagos|Africa/Luanda","Africa/Lagos|Africa/Malabo","Africa/Lagos|Africa/Ndjamena","Africa/Lagos|Africa/Niamey","Africa/Lagos|Africa/Porto-Novo","Africa/Maputo|Africa/Blantyre","Africa/Maputo|Africa/Bujumbura","Africa/Maputo|Africa/Gaborone","Africa/Maputo|Africa/Harare","Africa/Maputo|Africa/Kigali","Africa/Maputo|Africa/Lubumbashi","Africa/Maputo|Africa/Lusaka","Africa/Tripoli|Libya","America/Adak|America/Atka","America/Adak|US/Aleutian","America/Anchorage|America/Juneau","America/Anchorage|America/Nome","America/Anchorage|America/Sitka","America/Anchorage|America/Yakutat","America/Anchorage|US/Alaska","America/Argentina/Buenos_Aires|America/Argentina/Catamarca","America/Argentina/Buenos_Aires|America/Argentina/ComodRivadavia","America/Argentina/Buenos_Aires|America/Argentina/Cordoba","America/Argentina/Buenos_Aires|America/Argentina/Jujuy","America/Argentina/Buenos_Aires|America/Argentina/La_Rioja","America/Argentina/Buenos_Aires|America/Argentina/Mendoza","America/Argentina/Buenos_Aires|America/Argentina/Rio_Gallegos","America/Argentina/Buenos_Aires|America/Argentina/Salta","America/Argentina/Buenos_Aires|America/Argentina/San_Juan","America/Argentina/Buenos_Aires|America/Argentina/San_Luis","America/Argentina/Buenos_Aires|America/Argentina/Tucuman","America/Argentina/Buenos_Aires|America/Argentina/Ushuaia","America/Argentina/Buenos_Aires|America/Buenos_Aires","America/Argentina/Buenos_Aires|America/Catamarca","America/Argentina/Buenos_Aires|America/Cordoba","America/Argentina/Buenos_Aires|America/Jujuy","America/Argentina/Buenos_Aires|America/Mendoza","America/Argentina/Buenos_Aires|America/Rosario","America/Campo_Grande|America/Cuiaba","America/Chicago|America/Indiana/Knox","America/Chicago|America/Indiana/Tell_City","America/Chicago|America/Knox_IN","America/Chicago|America/Matamoros","America/Chicago|America/Menominee","America/Chicago|America/North_Dakota/Center","America/Chicago|America/North_Dakota/New_Salem","America/Chicago|America/Rainy_River","America/Chicago|America/Rankin_Inlet","America/Chicago|America/Resolute","America/Chicago|America/Winnipeg","America/Chicago|CST6CDT","America/Chicago|Canada/Central","America/Chicago|US/Central","America/Chicago|US/Indiana-Starke","America/Chihuahua|America/Mazatlan","America/Chihuahua|Mexico/BajaSur","America/Denver|America/Boise","America/Denver|America/Cambridge_Bay","America/Denver|America/Edmonton","America/Denver|America/Inuvik","America/Denver|America/Ojinaga","America/Denver|America/Shiprock","America/Denver|America/Yellowknife","America/Denver|Canada/Mountain","America/Denver|MST7MDT","America/Denver|Navajo","America/Denver|US/Mountain","America/Fortaleza|America/Belem","America/Fortaleza|America/Maceio","America/Fortaleza|America/Recife","America/Fortaleza|America/Santarem","America/Halifax|America/Glace_Bay","America/Halifax|America/Moncton","America/Halifax|America/Thule","America/Halifax|Atlantic/Bermuda","America/Halifax|Canada/Atlantic","America/Havana|Cuba","America/Los_Angeles|America/Dawson","America/Los_Angeles|America/Ensenada","America/Los_Angeles|America/Santa_Isabel","America/Los_Angeles|America/Tijuana","America/Los_Angeles|America/Vancouver","America/Los_Angeles|America/Whitehorse","America/Los_Angeles|Canada/Pacific","America/Los_Angeles|Canada/Yukon","America/Los_Angeles|Mexico/BajaNorte","America/Los_Angeles|PST8PDT","America/Los_Angeles|US/Pacific","America/Los_Angeles|US/Pacific-New","America/Managua|America/Belize","America/Managua|America/Costa_Rica","America/Managua|America/El_Salvador","America/Managua|America/Guatemala","America/Managua|America/Regina","America/Managua|America/Swift_Current","America/Managua|America/Tegucigalpa","America/Managua|Canada/East-Saskatchewan","America/Managua|Canada/Saskatchewan","America/Manaus|America/Boa_Vista","America/Manaus|America/Porto_Velho","America/Manaus|Brazil/West","America/Mexico_City|America/Merida","America/Mexico_City|America/Monterrey","America/Mexico_City|Mexico/General","America/New_York|America/Detroit","America/New_York|America/Fort_Wayne","America/New_York|America/Indiana/Indianapolis","America/New_York|America/Indiana/Marengo","America/New_York|America/Indiana/Petersburg","America/New_York|America/Indiana/Vevay","America/New_York|America/Indiana/Vincennes","America/New_York|America/Indiana/Winamac","America/New_York|America/Indianapolis","America/New_York|America/Iqaluit","America/New_York|America/Kentucky/Louisville","America/New_York|America/Kentucky/Monticello","America/New_York|America/Louisville","America/New_York|America/Montreal","America/New_York|America/Nassau","America/New_York|America/Nipigon","America/New_York|America/Pangnirtung","America/New_York|America/Thunder_Bay","America/New_York|America/Toronto","America/New_York|Canada/Eastern","America/New_York|EST5EDT","America/New_York|US/East-Indiana","America/New_York|US/Eastern","America/New_York|US/Michigan","America/Noronha|Brazil/DeNoronha","America/Panama|America/Atikokan","America/Panama|America/Cayman","America/Panama|America/Coral_Harbour","America/Panama|America/Jamaica","America/Panama|EST","America/Panama|Jamaica","America/Phoenix|America/Creston","America/Phoenix|America/Dawson_Creek","America/Phoenix|America/Hermosillo","America/Phoenix|MST","America/Phoenix|US/Arizona","America/Rio_Branco|America/Eirunepe","America/Rio_Branco|America/Porto_Acre","America/Rio_Branco|Brazil/Acre","America/Santiago|Antarctica/Palmer","America/Santiago|Chile/Continental","America/Santo_Domingo|America/Anguilla","America/Santo_Domingo|America/Antigua","America/Santo_Domingo|America/Aruba","America/Santo_Domingo|America/Barbados","America/Santo_Domingo|America/Blanc-Sablon","America/Santo_Domingo|America/Curacao","America/Santo_Domingo|America/Dominica","America/Santo_Domingo|America/Grenada","America/Santo_Domingo|America/Guadeloupe","America/Santo_Domingo|America/Kralendijk","America/Santo_Domingo|America/Lower_Princes","America/Santo_Domingo|America/Marigot","America/Santo_Domingo|America/Martinique","America/Santo_Domingo|America/Montserrat","America/Santo_Domingo|America/Port_of_Spain","America/Santo_Domingo|America/Puerto_Rico","America/Santo_Domingo|America/St_Barthelemy","America/Santo_Domingo|America/St_Kitts","America/Santo_Domingo|America/St_Lucia","America/Santo_Domingo|America/St_Thomas","America/Santo_Domingo|America/St_Vincent","America/Santo_Domingo|America/Tortola","America/Santo_Domingo|America/Virgin","America/Sao_Paulo|Brazil/East","America/St_Johns|Canada/Newfoundland","Asia/Aqtobe|Asia/Aqtau","Asia/Ashgabat|Asia/Ashkhabad","Asia/Baghdad|Asia/Aden","Asia/Baghdad|Asia/Bahrain","Asia/Baghdad|Asia/Kuwait","Asia/Baghdad|Asia/Qatar","Asia/Baghdad|Asia/Riyadh","Asia/Bangkok|Asia/Ho_Chi_Minh","Asia/Bangkok|Asia/Phnom_Penh","Asia/Bangkok|Asia/Saigon","Asia/Bangkok|Asia/Vientiane","Asia/Dhaka|Asia/Dacca","Asia/Dubai|Asia/Muscat","Asia/Hong_Kong|Hongkong","Asia/Jakarta|Asia/Pontianak","Asia/Jerusalem|Asia/Tel_Aviv","Asia/Jerusalem|Israel","Asia/Kathmandu|Asia/Katmandu","Asia/Kolkata|Asia/Calcutta","Asia/Kolkata|Asia/Colombo","Asia/Kuala_Lumpur|Asia/Kuching","Asia/Makassar|Asia/Ujung_Pandang","Asia/Seoul|ROK","Asia/Shanghai|Asia/Chongqing","Asia/Shanghai|Asia/Chungking","Asia/Shanghai|Asia/Harbin","Asia/Shanghai|Asia/Macao","Asia/Shanghai|Asia/Macau","Asia/Shanghai|Asia/Taipei","Asia/Shanghai|PRC","Asia/Shanghai|ROC","Asia/Singapore|Singapore","Asia/Tashkent|Asia/Samarkand","Asia/Tehran|Iran","Asia/Thimphu|Asia/Thimbu","Asia/Tokyo|Japan","Asia/Ulaanbaatar|Asia/Ulan_Bator","Asia/Urumqi|Asia/Kashgar","Australia/Adelaide|Australia/Broken_Hill","Australia/Adelaide|Australia/South","Australia/Adelaide|Australia/Yancowinna","Australia/Brisbane|Australia/Lindeman","Australia/Brisbane|Australia/Queensland","Australia/Darwin|Australia/North","Australia/Lord_Howe|Australia/LHI","Australia/Perth|Australia/West","Australia/Sydney|Australia/ACT","Australia/Sydney|Australia/Canberra","Australia/Sydney|Australia/Currie","Australia/Sydney|Australia/Hobart","Australia/Sydney|Australia/Melbourne","Australia/Sydney|Australia/NSW","Australia/Sydney|Australia/Tasmania","Australia/Sydney|Australia/Victoria","Etc/UCT|UCT","Etc/UTC|Etc/Universal","Etc/UTC|Etc/Zulu","Etc/UTC|UTC","Etc/UTC|Universal","Etc/UTC|Zulu","Europe/Athens|Asia/Nicosia","Europe/Athens|EET","Europe/Athens|Europe/Bucharest","Europe/Athens|Europe/Helsinki","Europe/Athens|Europe/Kiev","Europe/Athens|Europe/Mariehamn","Europe/Athens|Europe/Nicosia","Europe/Athens|Europe/Riga","Europe/Athens|Europe/Sofia","Europe/Athens|Europe/Tallinn","Europe/Athens|Europe/Uzhgorod","Europe/Athens|Europe/Vilnius","Europe/Athens|Europe/Zaporozhye","Europe/Chisinau|Europe/Tiraspol","Europe/Dublin|Eire","Europe/Istanbul|Asia/Istanbul","Europe/Istanbul|Turkey","Europe/Lisbon|Atlantic/Canary","Europe/Lisbon|Atlantic/Faeroe","Europe/Lisbon|Atlantic/Faroe","Europe/Lisbon|Atlantic/Madeira","Europe/Lisbon|Portugal","Europe/Lisbon|WET","Europe/London|Europe/Belfast","Europe/London|Europe/Guernsey","Europe/London|Europe/Isle_of_Man","Europe/London|Europe/Jersey","Europe/London|GB","Europe/London|GB-Eire","Europe/Moscow|Europe/Volgograd","Europe/Moscow|W-SU","Europe/Paris|Africa/Ceuta","Europe/Paris|Arctic/Longyearbyen","Europe/Paris|Atlantic/Jan_Mayen","Europe/Paris|CET","Europe/Paris|Europe/Amsterdam","Europe/Paris|Europe/Andorra","Europe/Paris|Europe/Belgrade","Europe/Paris|Europe/Berlin","Europe/Paris|Europe/Bratislava","Europe/Paris|Europe/Brussels","Europe/Paris|Europe/Budapest","Europe/Paris|Europe/Busingen","Europe/Paris|Europe/Copenhagen","Europe/Paris|Europe/Gibraltar","Europe/Paris|Europe/Ljubljana","Europe/Paris|Europe/Luxembourg","Europe/Paris|Europe/Madrid","Europe/Paris|Europe/Malta","Europe/Paris|Europe/Monaco","Europe/Paris|Europe/Oslo","Europe/Paris|Europe/Podgorica","Europe/Paris|Europe/Prague","Europe/Paris|Europe/Rome","Europe/Paris|Europe/San_Marino","Europe/Paris|Europe/Sarajevo","Europe/Paris|Europe/Skopje","Europe/Paris|Europe/Stockholm","Europe/Paris|Europe/Tirane","Europe/Paris|Europe/Vaduz","Europe/Paris|Europe/Vatican","Europe/Paris|Europe/Vienna","Europe/Paris|Europe/Warsaw","Europe/Paris|Europe/Zagreb","Europe/Paris|Europe/Zurich","Europe/Paris|Poland","Pacific/Auckland|Antarctica/McMurdo","Pacific/Auckland|Antarctica/South_Pole","Pacific/Auckland|NZ","Pacific/Chatham|NZ-CHAT","Pacific/Chuuk|Pacific/Truk","Pacific/Chuuk|Pacific/Yap","Pacific/Easter|Chile/EasterIsland","Pacific/Guam|Pacific/Saipan","Pacific/Honolulu|HST","Pacific/Honolulu|Pacific/Johnston","Pacific/Honolulu|US/Hawaii","Pacific/Majuro|Kwajalein","Pacific/Majuro|Pacific/Kwajalein","Pacific/Pago_Pago|Pacific/Midway","Pacific/Pago_Pago|Pacific/Samoa","Pacific/Pago_Pago|US/Samoa","Pacific/Pohnpei|Pacific/Ponape"]
-}),a});
-define('seed/auth/_services/neoSession',['seed/auth/module', 'moment', 'moment-timezone'], function (module, moment) {
-	'use strict';
-
-	/**
-	 * @param $log {Object} Logging service
-	 * @param $cookies {Function} Cookie service
-	 * @param Permission {Object} ACL service
 	 * @param $q {Object} Angular promise provider
-	 * @param neoRequestHeaders {Object} Request decorator
-	 * @param UserAPI {Object} Interface for REST communication with server
 	 * @param $rootScope {Object} Angular global scope helper
+	 * @param neoCookie {seed.auth.neoCookie}
+	 * @param neoRequestHeaders {seed.auth.neoRequestHeaders}
+	 * @param UserAPI {seed.auth.UserAPI}
+	 * @param neoPermission {seed.auth.neoPermission}
+	 * @param authConf {seed.auth.authConf}
 	 */
-	var neoSession = function ($log, $cookies, Permission, $q, $rootScope, neoRequestHeaders, UserAPI) {
+	function neoSession($log, $q, $rootScope,
+											neoCookie, neoPermission, neoRequestHeaders,
+											authConf, UserAPI) {
 
 		$log = $log.getInstance('seed.auth.neoSession');
 		$log.debug('Initiated service');
+
+		var self = this;
 
 		this.setSession = setSession;
 		this.clearSession = clearSession;
 		this.checkSession = checkSession;
 
+		/**
+		 * @method
+		 * @throws {ReferenceError}
+		 *
+		 * @param user {seed.auth.User}
+		 * @param customer {seed.auth.Customer}
+		 * @returns {promise}
+		 */
 		function setSession(user, customer) {
-			var dfd = $q.defer();
-
-			try {
-				Permission.defineManyRoles(
-					customer.featureKeys,
-					function (stateParams, roleName) {
-						return customer.$hasPermission(roleName);
-					});
-				$log.debug('Set access rights');
-
-				$cookies.putObject('activeCustomer', customer.customerId);
-				$cookies.putObject('token', user.$metadata.token);
-				$log.debug('Set cookie objects');
-
-				$log.debug('Set timezone');
-				if (user.timezone) {
-					moment.tz.setDefault(user.timezone);
-				}
-
-				$rootScope.user = user;
-				$rootScope.customer = customer;
-				$log.debug('Set customer and user objects available globally');
-
-				neoRequestHeaders.setCustomerId(customer.customerId);
-				neoRequestHeaders.setAuthToken(user.$metadata.token);
-
-				$log.debug('Set new user session');
-				dfd.resolve();
-
-			} catch (e) {
-				$log.error('Error setting up user session', e);
-				dfd.reject(e);
+			if (!angular.isDefined(user)) {
+				throw new ReferenceError('Parameter "user" must be defined');
 			}
 
-			return dfd.promise;
+			if (!angular.isDefined(customer)) {
+				throw new ReferenceError('Parameter "customer" must be defined');
+			}
+
+			try {
+				setAccessRights(customer);
+				setCookieObjects(user, customer);
+				setTimezone(user);
+				setGlobalObjects(user, customer);
+				setRequestHeaders(user, customer);
+
+				$rootScope.$broadcast(authConf.neoSession.events.setSession);
+
+				$log.debug('Set up new user session');
+				return $q.resolve();
+
+			} catch (err) {
+				$log.error('Error setting up user session', err);
+				return $q.reject(err);
+			}
 		}
 
+		/**
+		 * @method
+		 *
+		 * @returns {promise}
+		 */
 		function clearSession() {
-			var dfd = $q.defer();
+			clearCookieObject();
+			clearAccessRights();
+			clearGlobalObject();
+			clearRequestHeaders();
 
-			try {
-				$cookies.remove('token');
-				$cookies.remove('activeCustomer');
-				$log.debug('Removed cookie objects');
-
-				Permission.roleValidations = _.pick(Permission.roleValidations, 'AUTHORIZED');
-				$log.debug('Cleared access rights');
-
-				$rootScope.user = undefined;
-				$rootScope.customer = undefined;
-				$log.debug('Removed global objects');
-
-				neoRequestHeaders.clearHeaders();
-				dfd.resolve();
-
-			} catch (e) {
-				$log.error('Error clearing user session', e);
-				dfd.reject(e);
-			}
+			$rootScope.$broadcast(authConf.neoSession.events.clearSession);
 
 			$log.debug('Cleared user session');
-			return dfd.promise;
+			return $q.resolve();
 		}
 
+		function hasSetTokenAndCustomerInGlobals() {
+			return !!($rootScope.user && $rootScope.customer);
+		}
+
+		/**
+		 * @method
+		 *
+		 * @returns {promise}
+		 */
 		function checkSession() {
-			var dfd = $q.defer(),
-				self = this,
-				token = $cookies.getObject('token'),
-				activeCustomer = $cookies.getObject('activeCustomer');
 
-			if (token && activeCustomer) {
-				neoRequestHeaders.setAuthToken(token);
+			var token = neoCookie.getToken();
+			var customerId = neoCookie.getCustomer();
 
-				UserAPI
-					.authInfo()
-					.then(function (user) {
-						// When reload page set session again
-						if (!($rootScope.user && $rootScope.customer)) {
-							var customer = _.findWhere(user.customers, {customerId: activeCustomer});
-							self.setSession(user, customer)
-								.then(function () {
-									dfd.resolve();
-								});
-						} else {
-							// Or pass it
-							dfd.resolve();
-						}
+			if (!(hasSetTokenAndCustomerInCookies(token, customerId))) {
+				$log.debug('Not found stored in cookie "token" and "activeCustomer"');
 
-						$log.debug('Successfully checked if user user session is still valid');
-
-					})
-					.catch(function (e) {
-						self
-							.clearSession()
-							.finally(function () {
-								dfd.reject(e);
-							});
-
-						$log.error('Error while checking user session', e);
-					});
-			} else {
-				$log.debug('User does not have set in cookie either token or activeCustomer');
-
-				dfd.reject();
+				return $q.reject();
 			}
 
-			return dfd.promise;
+
+			if (!hasSetTokenAndCustomerInGlobals()) {
+				$log.debug('Not found globally defined "token" and "activeCustomer"');
+
+				neoRequestHeaders.setAuthToken(token);
+
+				return UserAPI
+					.authInfo()
+					.then(function (user) {
+						$log.debug('Successfully checked if user user session is still valid');
+
+						var customer = _.findWhere(user.customers, {customerId: customerId});
+						return self.setSession(user, customer);
+					})
+					.catch(function (e) {
+						$log.error('Error while checking user session', e);
+
+						return self
+							.clearSession()
+							.finally(function () {
+								return $q.reject(e);
+							});
+					});
+			}
+
+			return $q.resolve();
 		}
-	};
+
+		/**
+		 * @method
+		 * @private
+		 *
+		 * @param token {String}
+		 * @param customerId {String}
+		 *
+		 * @returns {Boolean}
+		 */
+		function hasSetTokenAndCustomerInCookies(token, customerId) {
+			return !!(token && customerId);
+		}
+
+		/**
+		 * @method
+		 * @private
+		 *
+		 * @param customer {seed.auth.Customer}
+		 */
+		function setAccessRights(customer) {
+			var permissionNames = customer.featureKeys;
+			var rolesNames = _.map(customer.roles, function (role) {
+				return role.roleName;
+			});
+
+			neoPermission.setPermissions(permissionNames);
+			neoPermission.setRoles(rolesNames);
+
+			$log.debug('Set access rights');
+		}
+
+		/**
+		 * @method
+		 * @private
+		 */
+		function clearAccessRights() {
+			neoPermission.clear();
+
+			$log.debug('Cleared access rights');
+		}
+
+		/**
+		 * @method
+		 * @private
+		 *
+		 * @param user {seed.auth.User}
+		 * @param customer {seed.auth.Customer}
+		 */
+		function setCookieObjects(user, customer) {
+			var customerId = customer.customerId;
+			var token = user.$metadata.token;
+
+			neoCookie.setCustomer(customerId);
+			neoCookie.setToken(token);
+
+			$log.debug('Set cookie properties');
+		}
+
+		/**
+		 * @method
+		 * @private
+		 */
+		function clearCookieObject() {
+			neoCookie.removeToken();
+			neoCookie.removeCustomer();
+
+			$log.debug('Removed cookie token and active customer');
+		}
+
+		/**
+		 * @method
+		 * @private
+		 *
+		 * @param user {seed.auth.User}
+		 */
+		function setTimezone(user) {
+			if (user.timezone) {
+				moment.tz.setDefault(user.timezone);
+
+				$log.debug('Set timezone');
+			}
+		}
+
+		/**
+		 * @method
+		 * @private
+		 *
+		 * @param user {seed.auth.User}
+		 * @param customer {seed.auth.Customer}
+		 */
+		function setGlobalObjects(user, customer) {
+			$rootScope.user = user;
+			$rootScope.customer = customer;
+
+			$log.debug('Set customer and user objects available globally');
+		}
+
+		/**
+		 * @method
+		 * @private
+		 */
+		function clearGlobalObject() {
+			$rootScope.user = undefined;
+			$rootScope.customer = undefined;
+
+			$log.debug('Removed global objects');
+		}
+
+		/**
+		 * @method
+		 * @private
+		 *
+		 * @param user {seed.auth.User}
+		 * @param customer {seed.auth.Customer}
+		 */
+		function setRequestHeaders(user, customer) {
+			var customerId = customer.customerId;
+			var token = user.$metadata.token;
+
+			neoRequestHeaders.setCustomerId(customerId);
+			neoRequestHeaders.setAuthToken(token);
+
+			$log.debug('Set request headers');
+		}
+
+		/**
+		 * @method
+		 * @private
+		 */
+		function clearRequestHeaders() {
+			neoRequestHeaders.clearHeaders();
+
+			$log.debug('Cleared request headers');
+		}
+	}
 
 	module.service('neoSession', neoSession);
 });
+
+define('seed/auth/_services/neoLanguage',['seed/auth/module'], function (module) {
+	'use strict';
+
+	/**
+	 * Service for manipulating language changes
+	 *
+	 * @class neoLanguage
+	 * @memberOf seed.auth
+	 *
+	 * @param $log
+	 * @param $rootScope
+	 * @param $window
+	 * @param availableLanguages
+	 * @param activeLanguage
+	 * @param defaultLanguage
+	 * @param gettextCatalog
+	 * @param amMoment
+	 * @param authConf {seed.auth.authConf}
+	 * @param neoCookie {seed.auth.neoCookie}
+	 * @param LanguageAPI
+	 * @param appConf
+	 * @param neoRequestHeaders {seed.auth.neoRequestHeaders}
+	 */
+	function neoLanguage($log, $rootScope, $window,
+											 availableLanguages, activeLanguage, defaultLanguage,
+											 gettextCatalog, amMoment, authConf,
+											 neoCookie, neoRequestHeaders, LanguageAPI, appConf) {
+
+		$log = $log.getInstance('seed.auth.neoLanguage');
+		$log.debug('Initiated service');
+
+		this.init = init;
+		this.getLanguageByLocale = getLanguageByLocale;
+		this.isLanguageAvailable = isLanguageAvailable;
+		this.setActiveLanguage = setActiveLanguage;
+
+		/**
+		 * Initiates available language collection and select initial language
+		 * @method
+		 */
+		function init() {
+
+			initAvailableLanguagesCollection();
+			initDefaultLanguage();
+
+			var cookieLang = neoCookie.getLanguage();
+
+			if (isLanguageAvailable(cookieLang)) {
+				setActiveLanguageFromCookie(cookieLang);
+				return;
+			}
+
+			var browserLang = detectBrowserLanguage();
+
+			if (isLanguageAvailable(browserLang)) {
+				setActiveLanguageFromBrowser(browserLang);
+				return;
+			}
+
+			setActiveLanguage(defaultLanguage);
+			$log.debug('Set up container with language from default settings');
+		}
+
+		/**
+		 * Initialize availableLanguages collection based on provided config
+		 * @method
+		 * @private
+		 *
+		 * @throws {ReferenceError}
+		 */
+		function initAvailableLanguagesCollection() {
+			try {
+				_.assign(availableLanguages, LanguageAPI
+					.collection()
+					.$decode(appConf.languageSettings.languageCollection));
+				$log.debug('Initiated available languages collection');
+			} catch (err) {
+				throw new ReferenceError('Malformed "availableLanguages" collection');
+			}
+		}
+
+
+		/**
+		 * Builds defaultLanguage object based on provided config
+		 * @method
+		 * @private
+		 */
+		function initDefaultLanguage() {
+			defaultLanguage = LanguageAPI.build(appConf.languageSettings.defaultLanguage);
+			$log.debug('Initiated default language');
+		}
+
+		/**
+		 * Set activeLanguage based on cookie stored locale
+		 * @method
+		 * @private
+		 *
+		 * @param cookieLang {String} Cookie locale string
+		 */
+		function setActiveLanguageFromCookie(cookieLang) {
+			var cookieLanguageObject = getLanguageByLocale(cookieLang);
+			setActiveLanguage(cookieLanguageObject);
+
+			$log.debug('Set up container with language from cookies');
+		}
+
+		/**
+		 * Retrieve language from brwser preferences
+		 * @method
+		 * @private
+		 *
+		 * @returns {string} Browser locale string
+		 */
+		function detectBrowserLanguage() {
+			return $window.navigator.language ||
+				$window.navigator.userLanguage ||
+				$window.navigator.systemLanguage;
+		}
+
+
+		/**
+		 * Set activeLanguage based on browser locale
+		 * @method
+		 * @private
+		 *
+		 * @param browserLang {String} Browser locale string
+		 */
+		function setActiveLanguageFromBrowser(browserLang) {
+			var browserLanguageObject = getLanguageByLocale(browserLang);
+			setActiveLanguage(browserLanguageObject);
+
+			$log.debug('Set up container with language from browser preferences');
+		}
+
+		/**
+		 * Finds if language is defined in language collection by locale
+		 * @method
+		 *
+		 * @param locale {String}
+		 *
+		 * @returns {boolean}
+		 */
+		function isLanguageAvailable(locale) {
+			return _.some(availableLanguages, function (language) {
+				return language.locale === locale ||
+					language.localePOSIX === locale ||
+					language.code === locale;
+			});
+		}
+
+		/**
+		 * Set application interface language
+		 * @method
+		 *
+		 * @throws {ReferenceError}
+		 *
+		 * @param language {seed.auth.Language}
+		 */
+		function setActiveLanguage(language) {
+			if (_.isUndefined(language.locale) && !isLanguageAvailable(language.locale)) {
+				throw new ReferenceError('Trying to set language to not available one');
+			}
+
+			_.assign(activeLanguage, language);
+
+			// Write locale to cookie
+			neoCookie.setLanguage(activeLanguage.locale);
+			neoRequestHeaders.setAcceptLanguage(language.locale);
+
+			// Update libraries locale settings
+			gettextCatalog.setCurrentLanguage(language.localePOSIX);
+			amMoment.changeLocale(language.locale, null);
+
+			$rootScope.$broadcast(authConf.neoLanguage.events.setActiveLanguage, language);
+
+			$log.debug('Set application language to: ' + language.localePOSIX);
+		}
+
+		/**
+		 * Find language by it's locale name
+		 * @method
+		 *
+		 * @param locale {String} locale string
+		 * @returns {seed.auth.Language}
+		 */
+		function getLanguageByLocale(locale) {
+			return _.find(availableLanguages, function (language) {
+				if (language.locale === locale ||
+					language.localePOSIX === locale ||
+					language.code === locale) {
+					return language;
+				}
+			});
+		}
+	}
+
+	module.service('neoLanguage', neoLanguage);
+});
+
+
+define('seed/auth/_services/neoPermission',['seed/auth/module'], function (module) {
+	'use strict';
+
+	/**
+	 * Manges application access control
+	 * @class neoPermission
+	 * @memberOf seed.auth
+	 *
+	 * @param $log {Object}
+	 * @param $rootScope {Object}
+	 * @param authConf {seed.auth.authConf}
+	 * @param PermissionStore {permission.PermissionStore}
+	 * @param RoleStore {permission.RoleStore}
+	 */
+	function neoPermission($log, $rootScope,
+												 authConf, PermissionStore, RoleStore) {
+
+		$log = $log.getInstance('seed.auth.neoPermission');
+		$log.debug('Initiated service');
+
+		var permissions = [];
+		var roles = [];
+
+		this.setPermissions = setPermissions;
+		this.setRoles = setRoles;
+		this.clear = clear;
+
+		/**
+		 * @method
+		 *
+		 * @param permissionsArray {Array}
+		 */
+		function setPermissions(permissionsArray) {
+			permissions = permissionsArray;
+
+			_.each(permissions, function (permissionName) {
+				PermissionStore.definePermission(permissionName, validatePermission);
+			});
+
+			$rootScope.$broadcast(authConf.neoPermission.events.setPermissions);
+		}
+
+		/**
+		 * @method
+		 *
+		 * @param rolesArray {Array}
+		 */
+		function setRoles(rolesArray) {
+			roles = rolesArray;
+
+			_.each(roles, function (roleName) {
+				RoleStore.defineRole(roleName, [], validateRole);
+			});
+
+			$rootScope.$broadcast(authConf.neoPermission.events.setRoles);
+		}
+
+		/**
+		 * @method
+		 */
+		function clear() {
+			PermissionStore.clearStore();
+			RoleStore.clearStore();
+
+			$rootScope.$broadcast(authConf.neoPermission.events.clear);
+		}
+
+		/**
+		 * @method
+		 * @private
+		 *
+		 * @param permissionName
+		 * @returns {boolean}
+		 */
+		function validatePermission(permissionName) {
+			return _.includes(permissions, permissionName);
+		}
+
+		/**
+		 * @method
+		 * @private
+		 *
+		 * @param roleName
+		 * @returns {boolean}
+		 */
+		function validateRole(roleName) {
+			return _.includes(roles, roleName);
+		}
+	}
+
+	module.service('neoPermission', neoPermission);
+});
+
 
 define('seed/auth/_services/neoRequestHeaders',['seed/auth/module'], function (module) {
 	'use strict';
@@ -3178,10 +3752,10 @@ define('seed/auth/_services/neoRequestHeaders',['seed/auth/module'], function (m
 	 * @memberOf seed.auth
 	 *
 	 * @param $http {Object} Facilitates communication with the remote HTTP servers
-	 * @param $log
+	 * @param $log {Object} Logging service
 	 */
-	var neoRequestHeaders = function ($log, $http) {
-		$log = $log.getInstance('app.auth.neoRequestHeaders');
+	function neoRequestHeaders($log, $http) {
+		$log = $log.getInstance('seed.auth.neoRequestHeaders');
 		$log.debug('Initiated service');
 
 		this.setAuthToken = setAuthToken;
@@ -3189,9 +3763,15 @@ define('seed/auth/_services/neoRequestHeaders',['seed/auth/module'], function (m
 		this.setAcceptLanguage = setAcceptLanguage;
 		this.clearHeaders = clearHeaders;
 
+		/**
+		 * @method
+		 * @throws {ReferenceError}
+		 *
+		 * @param token {String}
+		 */
 		function setAuthToken(token) {
 			if (_.isEmpty(token)) {
-				throw new Error('Token in Authorization header must not be empty');
+				throw new ReferenceError('Token in Authorization header must not be empty');
 			}
 
 			$http.defaults.headers.common['Authorization'] = 'token ' + token;
@@ -3199,9 +3779,15 @@ define('seed/auth/_services/neoRequestHeaders',['seed/auth/module'], function (m
 			$log.debug('Set Authorization header ', token);
 		}
 
+		/**
+		 * @method
+		 * @throws {ReferenceError}
+		 *
+		 * @param customerId {String}
+		 */
 		function setCustomerId(customerId) {
 			if (_.isEmpty(customerId)) {
-				throw new Error('CustomerId in X-Customer header must not be empty');
+				throw new ReferenceError('CustomerId in X-Customer header must not be empty');
 			}
 
 			$http.defaults.headers.common['X-Customer-Id'] = customerId;
@@ -3210,21 +3796,28 @@ define('seed/auth/_services/neoRequestHeaders',['seed/auth/module'], function (m
 		}
 
 		/**
+		 * @method
+		 *
+		 * @param locale {String}
+		 *
 		 * Accept-Language value is set based on:
 		 * @see https://en.wikipedia.org/wiki/Content_negotiation
 		 * @see https://en.wikipedia.org/wiki/IETF_language_tag
 		 * @see http://tools.ietf.org/html/rfc7231#section-5.3
 		 */
-		function setAcceptLanguage(language) {
-			if (_.isEmpty(language)) {
+		function setAcceptLanguage(locale) {
+			if (_.isEmpty(locale)) {
 				throw new Error('Language in AcceptLanguage header must not be empty');
 			}
 
-			$http.defaults.headers.common['Accept-Language'] = language;
+			$http.defaults.headers.common['Accept-Language'] = locale;
 
 			$log.debug('Set Accept-Language header');
 		}
 
+		/**
+		 *
+		 */
 		function clearHeaders() {
 			delete $http.defaults.headers.common['Authorization'];
 			delete $http.defaults.headers.common['X-Customer-Id'];
@@ -3232,12 +3825,96 @@ define('seed/auth/_services/neoRequestHeaders',['seed/auth/module'], function (m
 
 			$log.debug('Cleared headers');
 		}
-	};
+	}
 
 	module.service('neoRequestHeaders', neoRequestHeaders);
 });
 
 
+define('seed/auth/_constants/authConf',['seed/auth/module'], function (module) {
+	'use strict';
+
+	/**
+	 * @const authConf
+	 * @memberOf seed.auth
+	 */
+	var authConf = {
+		neoLanguage: {
+			events: {
+				setActiveLanguage: 'seed.auth.neoLanguage::setActiveLanguage'
+			}
+		},
+		neoSession: {
+			events: {
+				setSession: 'seed.auth.neoSession::setSession',
+				clearSession: 'seed.auth.neoSession::clearSession'
+			}
+		},
+		neoPermission: {
+			events: {
+				setPermissions: 'seed.auth.neoPermission::setPermissions',
+				setRoles: 'seed.auth.neoPermission::setRoles',
+				clear: 'seed.auth.neoPermission::clear'
+			}
+		}
+	};
+
+	module.constant('authConf', authConf);
+});
+define('seed/auth/_values/availableLanguages',['seed/auth/module'], function (module) {
+	'use strict';
+
+	/**
+	 * Stores container wide set of available languages [READ ONLY].
+	 *
+	 * This object is used for wasier access to value.
+	 * To manipulate language selection use neoLanguage service.
+	 *
+	 * @name availableLanguages
+	 * @memberOf seed.auth
+	 *
+	 * @param LanguageAPI {seed.auth.LanguageAPI}
+	 * @param appConf {app.appConf} Application configuration
+	 * @returns {seed.auth.Language}
+	 */
+	module.value('availableLanguages', []);
+});
+define('seed/auth/_values/activeLanguage',['seed/auth/module'], function (module) {
+	'use strict';
+
+	/**
+	 * Stores currently used language in application [READ ONLY].
+	 *
+	 * This object is used for easier access to value.
+	 * To manipulate language selection use neoLanguage service.
+	 *
+	 * @name activeLanguage
+	 * @memberOf seed.auth
+	 *
+	 * @param LanguageAPI {seed.auth.LanguageAPI}
+	 * @param appConf {app.appConf} Application configuration
+	 * @returns {seed.auth.Language}
+	 */
+	module.value('activeLanguage', {});
+});
+define('seed/auth/_values/defaultLanguage',['seed/auth/module'], function (module) {
+	'use strict';
+
+	/**
+	 * Stores default language in application [READ ONLY].
+	 *
+	 * This object is used for easier access to value.
+	 * To manipulate language selection use neoLanguage service.
+	 *
+	 * @name activeLanguage
+	 * @memberOf seed.auth
+	 *
+	 * @param LanguageAPI {seed.auth.LanguageAPI}
+	 * @param appConf {app.appConf} Application configuration
+	 * @returns {seed.auth.Language}
+	 */
+	module.value('defaultLanguage', {});
+});
 define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 	'use strict';
 
@@ -3247,12 +3924,10 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
-	 * @param $cookies {Function} Cookie service
-	 * @param LanguageAPI {seed.auth.LanguageAPI} Language service
-	 * @param appConf {Object} Application configuration
+	 * @param neoLanguage {seed.auth.neoLanguage} Language service
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, $cookies, LanguageAPI, appConf) {
+	var User = function (restmod, neoLanguage, activeLanguage) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
@@ -3271,10 +3946,10 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 						return lang.localePOSIX;
 					},
 					decode: function (locale) {
-						return LanguageAPI.getByLocale(locale);
+						return neoLanguage.getLanguageByLocale(locale);
 					},
 					init: function () {
-						return LanguageAPI.getLanguage().localePOSIX;
+						return activeLanguage.localePOSIX;
 					}
 				},
 				timezone: {
@@ -3324,9 +3999,7 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 							return this.$send({
 								method: 'POST',
 								url: this.$scope.$url() + '/logout'
-							}, function (_response) {
-								this.$unwrap(_response.data, null);
-							}, null);
+							});
 						},
 
 						$authInfo: function () {
@@ -3334,10 +4007,7 @@ define('seed/auth/_models/User/User',['seed/auth/module'], function (module) {
 							return this.$send({
 								method: 'GET',
 								url: this.$scope.$url() + '/authInfo',
-								cache: true,
-								data: {
-									token: $cookies.getObject('token')
-								}
+								cache: true
 							}, function (_response) {
 								this.$unwrap(_response.data, null);
 							}, null);
@@ -3403,14 +4073,14 @@ define('seed/auth/_models/User/UserAPI',['seed/auth/module'], function (module) 
 	 * @implements {seed.BaseAPI}
 	 * @memberOf seed.auth
 	 *
+	 * @param $q {Object} Angular promise implementation
 	 * @param $log {Object} Logging service
-	 * @param $cookies {Function} Cookie service
 	 * @param $rootScope {Object} Global scope provider
 	 * @param BaseAPI {Function} Base interface for REST communication with server
 	 * @param User {Object} Model factory
 	 * @return {Function} Instantiated service
 	 */
-	var UserAPI = function ($log, $cookies, $rootScope, BaseAPI, User, $q) {
+	var UserAPI = function ($log, $rootScope, BaseAPI, User, $q) {
 
 		$log = $log.getInstance('seed.auth.UserAPI');
 		$log.debug('Initiated service');
@@ -3487,7 +4157,7 @@ define('seed/auth/_models/User/UserAPI',['seed/auth/module'], function (module) 
 				});
 		};
 
-		api.resetPassword = function (user) {
+		api.resetPasswordFinish = function (user) {
 			return user
 				.$passwordReset()
 				.$asPromise()
@@ -3587,15 +4257,18 @@ define('seed/auth/_models/Customer/Customer',['seed/auth/module'], function (mod
 	 */
 	var Customer = function (restmod) {
 		return restmod
-			.model()
+			.model('/customers')
 			.mix({
+				customerId: {},
+				customerName: {},
+				featureKeys: {},
+				roles: {},
+				timezone: {},
+
 				$extend: {
 					Record: {
 						$setSelected: function (customer) {
 							this.$selected = customer;
-						},
-						$hasPermission: function (permission) {
-							return _.includes(this.featureKeys, permission);
 						}
 					}
 				}
@@ -3615,12 +4288,11 @@ define('seed/auth/_models/Customer/CustomerAPI',['seed/auth/module'], function (
 	 * @memberOf seed.auth
 	 *
 	 * @param $log {Object} Logging service
-	 * @param $cookies {Function} Cookie service
 	 * @param Customer {Object} Model factory
 	 * @param BaseAPI {Function} Base interface for REST communication with server
 	 * @return {Function} Instantiated service
 	 */
-	var CustomerAPI = function ($log, $cookies, Customer, BaseAPI) {
+	var CustomerAPI = function ($log, Customer, BaseAPI) {
 
 		$log = $log.getInstance('seed.auth.CustomerAPI');
 
@@ -3646,118 +4318,26 @@ define('seed/auth/_models/Customer/CustomerAPI',['seed/auth/module'], function (
 
 
 
-define('seed/auth/_models/Language/LanguageAPI',[
-	'seed/auth/module',
-	'lodash',
-	'moment'
-], function (module, _) {
+define('seed/auth/_models/Language/LanguageAPI',['seed/auth/module'], function (module) {
 	'use strict';
 
 	/**
 	 * Interface for REST communication with server
 	 * @constructor
-	 * @implements {seed.helpers.BaseAPI}
+	 * @extends {seed.helpers.BaseAPI}
 	 * @memberOf seed.auth
 	 *
 	 * @param $log {Object} Logging service
-	 * @param $window {Object} Window service
-	 * @param $cookies {angular-cookies} Cookie service
 	 * @param Language {Object} Model factory
-	 * @param neoRequestHeaders {neoRequestHeaders} Header manipulation service
 	 * @param BaseAPI {Function} Base interface for REST communication with server
-	 * @param $rootScope {Object} Global scope provider
-	 * @param appConf {appConf} Application configuration
-	 * @param gettextCatalog {Object} translation catalog provider
-	 * @param amMoment {Object} Moment configuration provider
 	 * @return {Function} Instantiated service
 	 */
-	var LanguageAPI = function ($log, $window, $cookies, $rootScope, Language, neoRequestHeaders, BaseAPI,
-															gettextCatalog, amMoment, appConf) {
+	var LanguageAPI = function ($log, Language, BaseAPI) {
 
 		$log = $log.getInstance('seed.auth.LanguageAPI');
 		$log.debug('Initiated service');
 
-		var api = new BaseAPI(Language);
-
-		api.languageCollection = [];
-
-		/**
-		 * Initiate the collection of the languages and set application language.
-		 */
-		api.init = function () {
-			api.languageCollection = Language
-				.$collection()
-				.$decode(appConf.languageSettings.languageCollection);
-
-			$log.debug('Set up application language collection');
-
-			var cookieLang = $cookies.getObject('lang');
-
-			if (_.isObject(cookieLang)) {
-				api.setLanguage(cookieLang);
-				$log.debug('Set up application language from cookie');
-				return;
-			}
-
-			var browserLang = $window.navigator.language || $window.navigator.userLanguage || $window.navigator.systemLanguage;
-
-			if (_.some(api.languageCollection, {locale: browserLang})) {
-				api.setLanguage(_.find(api.languageCollection, {locale: browserLang}));
-				$log.debug('Set up application language from browser preferences');
-				return;
-			}
-
-			api.setLanguage(appConf.languageSettings.defaultLanguage);
-			$log.debug('Set up application language from defaults');
-		};
-
-		/**
-		 * Set application interface language
-		 * @param language {seed.auth.Language} Language instance
-		 */
-		api.setLanguage = function (language) {
-			if (!_.isObject(language)) {
-				$log.error('Param language have to be an object');
-			}
-
-			api.languageCollection.$setSelected(language);
-
-			// Write locale to cookie
-			$cookies.put('lang', _.stringify(language));
-			// Update headers
-			neoRequestHeaders.setAcceptLanguage(language.locale);
-
-			// Update libraries locale settings
-			gettextCatalog.setCurrentLanguage(language.localePOSIX);
-			amMoment.changeLocale(language.locale);
-
-			$rootScope.$broadcast('seed.languageAPI.setLanguage', language);
-
-			$log.debug('Set application language to: ' + language.localePOSIX);
-		};
-
-		/**
-		 * Get application interface language
-		 * @return {seed.auth.Language} Language instance
-		 */
-		api.getLanguage = function () {
-			return api.languageCollection.$selected;
-		};
-
-		/**
-		 * Get model Language by locale
-		 * @param locale
-		 * @returns {Language|RecordApi}
-		 */
-		api.getByLocale = function (locale) {
-			var lang = _.find(api.languageCollection, {localePOSIX: locale});
-			if(!lang) {
-				$log.error('Could not find locale: ', locale);
-			}
-			return Language.$buildRaw(lang || {});
-		};
-
-		return api;
+		return new BaseAPI(Language);
 	};
 
 	module.service('LanguageAPI', LanguageAPI);
@@ -3773,8 +4353,7 @@ define('seed/auth/_models/Language/Language',['seed/auth/module'], function (mod
 	 * @memberOf seed.auth
 	 *
 	 * @param restmod {Object} Data model layer interface
-	 * @param appConf {appConf} app configuration
-	 * @param appConf.languageSettings {appConf.languageSettings} language settings
+	 * @param defaultLanguage {seed.auth.Language} Default application language
 	 *
 	 * @class Language
 	 * @type {RecordApi}
@@ -3784,25 +4363,18 @@ define('seed/auth/_models/Language/Language',['seed/auth/module'], function (mod
 	 *
 	 * @returns {Language} Model instance
 	 */
-	function Language(restmod, appConf) {
+	function Language(restmod, defaultLanguage) {
 		return restmod
 			.model('/language')
 			.mix({
 				code: {
-					init: appConf.languageSettings.defaultLanguage.code
+					init: defaultLanguage.code
 				},
 				locale: {
-					init: appConf.languageSettings.defaultLanguage.locale
+					init: defaultLanguage.locale
 				},
 				localePOSIX: {
-					init: appConf.languageSettings.defaultLanguage.localePOSIX
-				},
-				$extend: {
-					Resource: {
-						$setSelected: function (locale) {
-							this.$selected = locale;
-						}
-					}
+					init: defaultLanguage.localePOSIX
 				}
 			});
 	}
@@ -4198,7 +4770,7 @@ define('seed/auth/password/module',['angular'], function (ng) {
 			.state('auth.passwordReset', {
 				url: '/password/reset',
 				views: {
-					'auth': {
+					auth: {
 						template: '<auth-password-reset-init-form></auth-password-reset-init-form>'
 					}
 				},
@@ -4210,7 +4782,7 @@ define('seed/auth/password/module',['angular'], function (ng) {
 			.state('auth.passwordResetFinish', {
 				url: '/password/reset/:token',
 				views: {
-					'auth': {
+					auth: {
 						template: '<auth-password-reset-form></auth-password-reset-form>'
 					}
 				},
@@ -4222,7 +4794,6 @@ define('seed/auth/password/module',['angular'], function (ng) {
 
 	module.run(function ($log) {
 		$log = $log.getInstance('seed.auth.password.module');
-
 		$log.debug('Initiated module');
 	});
 
@@ -4276,7 +4847,7 @@ define('seed/auth/password/forms/passwordReset/authPasswordResetForm',['seed/aut
 					formValidation.validate();
 
 					if (formValidation.isValid()) {
-						UserAPI.resetPassword(vm.user)
+						UserAPI.resetPasswordFinish(vm.user)
 							.then(function () {
 								vm.formSuccess = true;
 
@@ -4355,104 +4926,18 @@ define('seed/auth/password/_includes',[
 	'use strict';
 });
 
-define('seed/auth/lock/module',[
-	'angular'
-], function (ng) {
-	'use strict';
-
-	var module = ng.module('seed.auth.lock', []);
-
-	module.config(function ($stateProvider) {
-
-		$stateProvider
-			.state('auth.lock', {
-				url: '/lock',
-				views: {
-					auth: {
-						template: '<auth-lock-form></auth-lock-form>'
-					}
-				},
-				data: {
-					title: 'Locked Screen'
-				}
-			});
-	});
-
-	module.run(function ($log) {
-		$log = $log.getInstance('seed.auth.lock.module');
-		$log.debug('Initiated module');
-	});
-
-	return module;
-});
-
-define('seed/auth/lock/forms/authLockForm',['seed/auth/lock/module'], function (module) {
-	'use strict';
-
-	/**
-	 * Renders list fo available fields and handles adding them to the composite layer
-	 * @class authLockForm
-	 * @memberOf seed.auth.login
-	 *
-	 * @param $log {Object} Logging service
-	 * @param $state {Object} UI-Router state helper
-	 * @param neoSession {Object} Session service
-	 * @param appConf {Object} Application configuration
-	 * @return {{restrict: string, templateUrl: string, controllerAs: string, controller: Function}}
-	 */
-	function authLockForm($log, $state, neoSession, appConf) {
-
-		$log = $log.getInstance('seed.auth.login.authLockForm');
-		$log.debug('Initiated directive');
-
-		return {
-			restrict: 'EA',
-			templateUrl: 'seed/auth/lock/forms/authLockForm.html',
-			controllerAs: 'vm',
-
-			controller: function ($scope) {
-				var vm = this;
-
-				// variables
-				vm.user = $scope.$root.user;
-
-				//methods
-				vm.login = login;
-
-				init();
-
-				function init() {
-					vm.activeCustomer = _.first(vm.user.customers);
-
-					$log.debug('Initiated controller');
-				}
-
-				function login() {
-
-					neoSession.setSession(vm.user, vm.activeCustomer);
-					$state.go(appConf.generalSettings.defaultStateToRedirectAfterLogin);
-
-					$log.debug('Logged into profile: ' + vm.activeCustomer.customerName);
-				}
-			}
-		};
-	}
-
-	module.directive('authLockForm', authLockForm);
-});
-
-define('seed/auth/lock/_includes',[
-	'./forms/authLockForm'
-], function () {
-	'use strict';
-});
-
 define('seed/auth/_includes',[
-	'./_directives/neoPermissionOnly',
-	'./_directives/neoPermissionExcept',
-
+	'./_services/neoCookie',
 	'./_services/neoSession',
+	'./_services/neoLanguage',
+	'./_services/neoPermission',
 	'./_services/neoRequestHeaders',
+
+	'./_constants/authConf',
+
+	'./_values/availableLanguages',
+	'./_values/activeLanguage',
+	'./_values/defaultLanguage',
 
 	'./_models/User/User',
 	'./_models/User/UserAPI',
@@ -4473,10 +4958,7 @@ define('seed/auth/_includes',[
 	'./register/module',
 
 	'./password/_includes',
-	'./password/module',
-
-	'./lock/_includes',
-	'./lock/module'
+	'./password/module'
 ], function () {
 	'use strict';
 });
@@ -4506,7 +4988,7 @@ define('seed/forms/validate/neoValidate',[
 ], function (module) {
 	'use strict';
 
-	function neoValidate($log, LanguageAPI) {
+	function neoValidate($log, activeLanguage) {
 
 		$log = $log.getInstance('seed.forms.neoValidate');
 		$log.debug('Initiated directive');
@@ -4519,11 +5001,9 @@ define('seed/forms/validate/neoValidate',[
 			},
 			link: function (scope, form) {
 
-				var currentLanguage = LanguageAPI.getLanguage();
-
 				var defaults = {
 					framework: 'bootstrap',
-					locale: currentLanguage.locale,
+					locale: activeLanguage.locale,
 					addOns: {
 						i18n: {}
 					},
@@ -4539,11 +5019,7 @@ define('seed/forms/validate/neoValidate',[
 
 				var options = {};
 
-				scope.$on('seed.languageAPI.setLanguage', function (e, language) {
-
-					if (currentLanguage.locale === language.locale) {
-						return;
-					}
+				scope.$on('seed.auth.neoLanguage::setActiveLanguage', function (e, language) {
 
 					options.locale = language.locale;
 
@@ -5379,7 +5855,6 @@ define('seed/module',[
 		'ngSanitize',
 
 		'gettext',
-		'permission',
 		'angularMoment',
 		'restmod',
 		'angular-loading-bar',
@@ -5387,6 +5862,8 @@ define('seed/module',[
 		'ui.bootstrap',
 		'ui.select',
 		'ui.router',
+
+		'permission',
 
 		'app.conf',
 
@@ -5428,10 +5905,10 @@ define('seed/module',[
 		$httpProvider.interceptors.push('HttpRequestInterceptor');
 	});
 
-	seed.run(function (gettextCatalog, LanguageAPI, $log, appConf) {
+	seed.run(function (gettextCatalog, neoLanguage, $log, appConf) {
 		$log = $log.getInstance('seed.module');
 
-		LanguageAPI.init();
+		neoLanguage.init();
 		gettextCatalog.debug = appConf.environmentSettings.debugEnabled;
 
 		$log.debug('Set up seed configuration');

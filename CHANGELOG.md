@@ -1,3 +1,23 @@
+<a name="2.5.0"></a>
+# [2.5.0](//compare/v2.4.6...v2.5.0) (2016-04-14)
+
+
+### Bug Fixes
+
+* neoCustomerSwitcher window reload issue fixed ba606e2
+* small fix in neoSession 8162101
+* updating spec description cb95b07
+
+### Features
+
+* **favicon:** possibility to set up favicon for project 20b2980
+* neoCookie service 5249695
+* neoLanguage service e1075fb
+* neoPermission service 91da983
+* Updated permission library to 2.1.x cbcf74b
+
+
+
 <a name="2.4.6"></a>
 ## [2.4.6](//compare/v2.4.4...v2.4.6) (2016-03-25)
 
