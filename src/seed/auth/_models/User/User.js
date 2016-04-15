@@ -10,7 +10,7 @@ define(['seed/auth/module'], function (module) {
 	 * @param neoLanguage {seed.auth.neoLanguage} Language service
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, neoLanguage, activeLanguage) {
+	var User = function (restmod, neoLanguage, activeLanguage, appConf) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
