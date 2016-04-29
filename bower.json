@@ -11,7 +11,7 @@
     "angular-moment": "0.10.3",
     "angular-gettext": "2.1.2",
     "angular-loading-bar": "0.8.0",
-    "angular-permission": "2.x",
+    "angular-permission": "kobalka/angular-permission#2.x",
     "angular-restmod": "1.1.9",
     "angular-bootstrap": "0.14.3",
     "angular-ui-select": "0.13.1",
