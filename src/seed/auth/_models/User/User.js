@@ -8,15 +8,15 @@ define(['seed/auth/module'], function (module) {
 	 *
 	 * @param restmod {Object} Data model layer interface
 	 * @param neoLanguage {seed.auth.neoLanguage} Language service
-	 * @param activeLanguage
-	 * @param appConf
+	 * @param activeLanguage {seed.auth.activeLanguage}
+	 * @param appConf {seed.appConf}
 	 * @return {*|Model} Model instance
 	 */
 	var User = function (restmod, neoLanguage, activeLanguage, appConf) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
-			.mix('UserPacker', {
+			.mix('UserPacker', 'SassMgrStyleAPI', {
 				type: {
 					init: 'User'
 				},
