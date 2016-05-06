@@ -1,3 +1,19 @@
+<a name="2.6.0"></a>
+# [2.6.0](//compare/v2.5.0...v2.6.0) (2016-05-06)
+
+
+### Bug Fixes
+
+* **SassMgrStyleAPI:** remove unnecessary dependencies e8f60ae
+* **User:** missing appConf dependency 2187a45
+
+### Features
+
+* **headers:** add support for appCode from config and set up headers 1ab2cbb
+* **paramSerializer:** #82 - move param serializer to restmod models 7a47f7e
+
+
+
 <a name="2.5.1"></a>
 ## [2.5.1](//compare/v2.5.0...v2.5.1) (2016-04-15)
 
