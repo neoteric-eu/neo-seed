@@ -1,8 +1,6 @@
 define([
     'lodash',
-    'seed/helpers/module',
-    'angular-restmod/preload',
-    'angular-restmod/find-many'
+    'seed/helpers/module'
 ], function (_ , app) {
     'use strict';
     
