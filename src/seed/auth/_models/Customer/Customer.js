@@ -12,7 +12,7 @@ define(['seed/auth/module'], function (module) {
 	var Customer = function (restmod) {
 		return restmod
 			.model('/customers')
-			.mix({
+			.mix('SassMgrStyleAPI', {
 				customerId: {},
 				customerName: {},
 				featureKeys: {},

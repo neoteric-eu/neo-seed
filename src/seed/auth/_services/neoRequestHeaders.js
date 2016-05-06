@@ -1,4 +1,4 @@
-define(['seed/auth/module'], function (module) {
+define(['lodash', 'seed/auth/module'], function (_, module) {
 	'use strict';
 
 	/**
@@ -16,6 +16,7 @@ define(['seed/auth/module'], function (module) {
 		this.setAuthToken = setAuthToken;
 		this.setCustomerId = setCustomerId;
 		this.setAcceptLanguage = setAcceptLanguage;
+		this.setAppCode = setAppCode; // this is stupidity to write code like this, my manifest by cojack
 		this.clearHeaders = clearHeaders;
 
 		/**
@@ -77,8 +78,25 @@ define(['seed/auth/module'], function (module) {
 			delete $http.defaults.headers.common['Authorization'];
 			delete $http.defaults.headers.common['X-Customer-Id'];
 			delete $http.defaults.headers.common['Accept-Language'];
+			delete $http.defaults.headers.common['X-App-Code'];
 
 			$log.debug('Cleared headers');
+		}
+
+		/**
+		 *
+		 * @param appCode {string}
+		 */
+		function setAppCode(appCode) {
+			appCode = appCode || false;
+
+			if (!appCode || _.startsWith('__', appCode)) {
+				return $log.warn('AppCode header is empty');
+			}
+
+			$http.defaults.headers.common['X-App-Code'] = appCode;
+
+			$log.debug('Set X-App-Code header', appCode);
 		}
 	}
 
