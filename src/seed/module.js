@@ -47,7 +47,7 @@ define([
 	]);
 
 	seed.config(function ($provide, $httpProvider, $locationProvider, $compileProvider, cfpLoadingBarProvider,
-						  $logProvider, restmodProvider, uiSelectConfig, appConf) {
+												$logProvider, restmodProvider, uiSelectConfig, appConf) {
 
 		restmodProvider.rebase('NeoStyleAPI');
 
@@ -69,11 +69,9 @@ define([
 		$httpProvider.useApplyAsync(true);
 		$httpProvider.useLegacyPromiseExtensions(true);
 
-		// set default serializer for http request
-		$httpProvider.defaults.paramSerializer = '$httpParamSerializer';
-
 		// Add the interceptors to the $httpProvider.
 		$httpProvider.interceptors.push('HttpErrorInterceptor');
+		$httpProvider.interceptors.push('HttpRequestInterceptor');
 	});
 
 	seed.run(function (gettextCatalog, neoLanguage, $log, appConf) {

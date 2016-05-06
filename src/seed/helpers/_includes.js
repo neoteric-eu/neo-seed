@@ -1,5 +1,6 @@
 define([
 	'./_interceptors/HttpErrorInterceptor',
+	'./_interceptors/HttpRequestInterceptor',
 
 	'./_decorators/logDecorator',
 
@@ -37,7 +38,6 @@ define([
 	'./restmod/models/BaseAPI',
 	'./restmod/models/BaseModel',
 	'./restmod/styles/NeoStyleAPI',
-	'./restmod/styles/SassMgrStyleAPI',
 	'./restmod/packers/PackerUtils'
 ], function () {
 	'use strict';

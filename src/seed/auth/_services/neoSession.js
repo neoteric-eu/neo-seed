@@ -10,15 +10,14 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 	 * @param $q {Object} Angular promise provider
 	 * @param $rootScope {Object} Angular global scope helper
 	 * @param neoCookie {seed.auth.neoCookie}
-	 * @param neoPermission {seed.auth.neoPermission}
 	 * @param neoRequestHeaders {seed.auth.neoRequestHeaders}
 	 * @param UserAPI {seed.auth.UserAPI}
+	 * @param neoPermission {seed.auth.neoPermission}
 	 * @param authConf {seed.auth.authConf}
-	 * @param appConf {seed.appConf}
 	 */
-	function neoSession($log, $q, $rootScope, neoCookie, 
-						neoPermission, neoRequestHeaders, 
-						UserAPI, authConf, appConf) {
+	function neoSession($log, $q, $rootScope,
+											neoCookie, neoPermission, neoRequestHeaders,
+											authConf, UserAPI) {
 
 		$log = $log.getInstance('seed.auth.neoSession');
 		$log.debug('Initiated service');
@@ -92,10 +91,8 @@ define(['seed/auth/module', 'angular', 'moment'], function (module, angular, mom
 		 */
 		function checkSession() {
 
-			var token = neoCookie.getToken(),
-				customerId = neoCookie.getCustomer();
-			
-			neoRequestHeaders.setAppCode(appConf.environmentSettings.appCode);
+			var token = neoCookie.getToken();
+			var customerId = neoCookie.getCustomer();
 
 			if (!(hasSetTokenAndCustomerInCookies(token, customerId))) {
 				$log.debug('Not found stored in cookie "token" and "activeCustomer"');
