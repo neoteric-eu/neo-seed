@@ -102,7 +102,7 @@ define(['seed/auth/module'], function (module) {
 							//noinspection JSUnresolvedFunction
 							return this.$send({
 								method: 'POST',
-								url: appConf.environmentSettings.apiUrl + '/registration',
+								url: this.$scope.getProperty('urlPrefix') + '/registration',
 								data: this
 							}, function (_response) {
 								this.$unwrap(_response.data, null);
