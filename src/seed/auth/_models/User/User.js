@@ -8,9 +8,10 @@ define(['seed/auth/module'], function (module) {
 	 *
 	 * @param restmod {Object} Data model layer interface
 	 * @param neoLanguage {seed.auth.neoLanguage} Language service
+	 * @param activeLanguage {seed.auth.activeLanguage}
 	 * @return {*|Model} Model instance
 	 */
-	var User = function (restmod, neoLanguage, activeLanguage, appConf) {
+	var User = function (restmod, neoLanguage, activeLanguage) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
@@ -100,7 +101,7 @@ define(['seed/auth/module'], function (module) {
 							//noinspection JSUnresolvedFunction
 							return this.$send({
 								method: 'POST',
-								url: appConf.environmentSettings.apiUrl + '/registration',
+								url: this.$scope.getProperty('urlPrefix') + '/registration',
 								data: this
 							}, function (_response) {
 								this.$unwrap(_response.data, null);
