@@ -1,3 +1,13 @@
+<a name="2.6.1"></a>
+## [2.6.1](//compare/v2.6.0...v2.6.1) (2016-05-11)
+
+
+### Bug Fixes
+
+* **User:** Fix wrong url for registration fc0d6d3
+
+
+
 <a name="2.6.0"></a>
 # [2.6.0](//compare/v2.5.0...v2.6.0) (2016-05-06)
 
