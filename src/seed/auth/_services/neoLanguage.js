@@ -169,7 +169,7 @@ define(['seed/auth/module'], function (module) {
 
 			// Update libraries locale settings
 			gettextCatalog.setCurrentLanguage(language.localePOSIX);
-			amMoment.changeLocale(language.locale, null);
+			amMoment.changeLocale(language.locale);
 
 			$rootScope.$broadcast(authConf.neoLanguage.events.setActiveLanguage, language);
 
