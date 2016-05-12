@@ -1,3 +1,12 @@
+<a name="2.6.2"></a>
+## [2.6.2](//compare/v2.5.0...v2.6.2) (2016-05-12)
+
+
+### Bug Fixes
+
+* **neoLanguage:** remove unnecessary func argument 2ca7dc4
+
+
 <a name="2.6.1"></a>
 ## [2.6.1](//compare/v2.6.0...v2.6.1) (2016-05-11)
 
@@ -22,6 +31,9 @@
 * **headers:** add support for appCode from config and set up headers 1ab2cbb
 * **paramSerializer:** #82 - move param serializer to restmod models 7a47f7e
 
+BREAKING CHANGE:
+apiUrl will now end at "http://domain.com:port/api" without version number
+you have to provide this information in your models
 
 
 <a name="2.5.1"></a>
