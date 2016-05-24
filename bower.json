@@ -1,6 +1,6 @@
 {
   "name": "neo-seed",
-  "version": "2.5.1",
+  "version": "2.5.3",
   "dependencies": {
     "angular": "1.4.x",
     "bootstrap": "3.x",
@@ -11,10 +11,10 @@
     "angular-moment": "0.10.3",
     "angular-gettext": "2.1.2",
     "angular-loading-bar": "0.8.0",
-    "angular-permission": "kobalka/angular-permission#2.x",
+    "angular-permission": "2.3.8",
     "angular-restmod": "1.1.9",
     "angular-bootstrap": "0.14.3",
-    "angular-ui-select": "0.13.1",
+    "angular-ui-select": "0.17.x",
     "angular-ui-router": "0.2.15",
     "ng-table": "0.8.3",
     "lodash": "3.10.x",
