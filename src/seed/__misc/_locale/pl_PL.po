@@ -133,7 +133,7 @@ msgstr "Zaloguj się"
 msgid ""
 "Please provide an email address to which the password reset link will be "
 "sent."
-msgstr "Podaj adres mailowy na które ma zostać wysłany link resetujący hasło."
+msgstr "Podaj adres mailowy, na który ma zostać wysłany link resetujący hasło."
 
 #: src/seed/tables/partials/neo-footer.html:42
 msgid "Previous"
