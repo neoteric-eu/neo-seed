@@ -1,5 +1,13 @@
+<a name="2.6.3"></a>
+## [2.6.3](//compare/v2.6.2...v2.6.3) (2016-05-31)
+
+
+### Chore
+
+* **bower:** Change angular-permission to neoteric fork with override feature 5ddf99b
+
 <a name="2.6.2"></a>
-## [2.6.2](//compare/v2.5.0...v2.6.2) (2016-05-12)
+## [2.6.2](//compare/v2.6.1...v2.6.2) (2016-05-12)
 
 
 ### Bug Fixes
@@ -18,7 +26,7 @@
 
 
 <a name="2.6.0"></a>
-# [2.6.0](//compare/v2.5.0...v2.6.0) (2016-05-06)
+# [2.6.0](//compare/v2.5.1...v2.6.0) (2016-05-06)
 
 
 ### Bug Fixes
