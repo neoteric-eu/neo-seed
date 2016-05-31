@@ -1,10 +1,5 @@
 define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint quotmark: false*/ "use strict"; return angular.module("seed.templateCache",[]).run(function ($templateCache, $log) {$log = $log.getInstance('seed.templateCache.module');  
 
-  $templateCache.put('seed/auth/lock/forms/authLockForm.html',
-    "<form class=neo-form><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{vm.user.getFullName()}} <small><i class=\"fa fa-lock text-muted\"></i> &nbsp;Locked</small></h1></fieldset><fieldset><div class=input-icon-right><i class=\"icon-append fa fa-lock\"></i> <input class=form-control type=password placeholder=\"{{'Password'|translate}}\"></div><p class=\"no-margin margin-top-5\">{{'Logged as someone else?'|translate}} <a ui-sref=auth.login>{{'Click here'|translate}}</a></p></fieldset><footer><button type=submit class=\"btn btn-primary\">{{'Unlock'|translate}}</button></footer></form>"
-  );
-
-
   $templateCache.put('seed/auth/login/forms/login/authLoginForm.html',
     "<form class=neo-form ng-submit=vm.login() novalidate><img ng-src={{vm.user.avatar}}><fieldset><h1 class=text-center>{{'Welcome!'|translate}} <small>{{'Please log in'|translate}}</small></h1></fieldset><fieldset><section class=form-group ng-show=vm.formError><p class=\"alert alert-danger\" ng-model=formError><button type=button class=close data-dismiss=alert>&times;</button> {{'Wrong e-mail or password.'|translate}}</p></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-user\"></i> <input type=email class=form-control placeholder=\"{{'Email'|translate}}\" ng-model=vm.user.login></div></section><section class=form-group><div class=input-icon-right><i class=\"icon-append fa fa-lock\"></i> <input type=password class=form-control placeholder=\"{{'Password'|translate}}\" ng-model=vm.user.password></div><div class=note><a ui-sref=auth.passwordReset>{{'Forgot password?'|translate}}</a></div></section><section ng-if=vm.appConf.generalSettings.showEuLogotypes style=\"height: 125px\"><neo-eu-logotypes></neo-eu-logotypes></section></fieldset><footer><button type=button class=\"btn btn-default\" ui-sref=auth.register>{{'Register'|translate}}</button><div class=\"btn-group pull-right\"><button type=submit class=\"btn btn-primary\">{{'Log in'|translate}}</button> <button type=button class=\"btn btn-primary dropdown-toggle\" ng-show=vm.predefinedLogins.length data-toggle=dropdown><span class=caret></span></button><ul class=dropdown-menu ng-show=vm.predefinedLogins.length><li ng-repeat=\"user in vm.predefinedLogins\"><a href ng-click=vm.loginAs(user)>{{ user.login }}</a></li></ul></div></footer></form>"
   );
@@ -56,12 +51,12 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 
 
   $templateCache.put('seed/components/euLogotypes/neoEuLogotypes.html',
-    "<img src=\"assets/seed/img/euLogotypes/eu-rozwoj-logo.jpg\"> <img src=\"assets/seed/img/euLogotypes/eu-ig-logo.jpg\"><p>Projekt współfinansowany ze środków Europejskiego Funduszu Rozwoju Reginalnego w ramach Programu Operacyjnego Innowacyjna Gospodarka.</p>"
+    "<img src=assets/seed/img/euLogotypes/eu-rozwoj-logo.jpg> <img src=assets/seed/img/euLogotypes/eu-ig-logo.jpg><p>Projekt współfinansowany ze środków Europejskiego Funduszu Rozwoju Reginalnego w ramach Programu Operacyjnego Innowacyjna Gospodarka.</p>"
   );
 
 
   $templateCache.put('seed/components/language/neoLanguageSwitcher.html',
-    "<ul class=\"header-dropdown-list hidden-xs\"><li class=dropdown dropdown><a class=dropdown-toggle dropdown-toggle><img class=\"flag flag-{{vm.activeLanguage.code}}\"> <span>{{vm.activeLanguage.name}}</span> <i class=\"fa fa-angle-down\"></i></a><ul class=\"dropdown-menu pull-right\"><li ng-class=\"{active: language === vm.activeLanguage}\" ng-repeat=\"language in vm.languageCollection\"><a ng-click=vm.setLanguageActive(language)><img class=\"flag flag-{{language.code}}\"> {{language.name}}</a></li></ul></li></ul>"
+    "<ul class=\"header-dropdown-list hidden-xs\"><li class=dropdown dropdown><a class=dropdown-toggle dropdown-toggle><img class=\"flag flag-{{vm.activeLanguage.code}}\"> <span>{{vm.activeLanguage.name}} </span><i class=\"fa fa-angle-down\"></i></a><ul class=\"dropdown-menu pull-right\"><li ng-class=\"{active: language === vm.activeLanguage}\" ng-repeat=\"language in vm.languageCollection\"><a ng-click=vm.setLanguageActive(language)><img class=\"flag flag-{{language.code}}\"> {{language.name}}</a></li></ul></li></ul>"
   );
 
 
@@ -91,7 +86,7 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 
 
   $templateCache.put('seed/layout/partials/header.html',
-    "<header id=header><div class=\"navbar-brand no-selection\"><img ng-src=\"{{::vm.appConf.generalSettings.logo}}\"> {{::vm.appConf.generalSettings.name}}</div><neo-activities></neo-activities><neo-customer-switcher></neo-customer-switcher><div class=pull-right><div id=hide-menu class=\"btn-header pull-right\"><span><a toggle-menu title=\"Collapse Menu\"><i class=\"fa fa-bars\"></i></a></span></div><div class=\"btn-header transparent pull-right\"><span><a full-screen title=\"Full Screen\"><i class=\"fa fa-arrows-alt\"></i></a></span></div><div id=logout class=\"btn-header transparent pull-right\"><span><a ui-sref=auth.logout title=\"{{'Sign Out'|translate}}\"><i class=\"fa fa-sign-out\"></i></a></span></div><neo-language-switcher></neo-language-switcher></div></header>"
+    "<header id=header><div class=\"navbar-brand no-selection\"><img ng-src={{::vm.appConf.generalSettings.logo}}> {{::vm.appConf.generalSettings.name}}</div><neo-activities></neo-activities><neo-customer-switcher></neo-customer-switcher><div class=pull-right><div id=hide-menu class=\"btn-header pull-right\"><span><a toggle-menu title=\"Collapse Menu\"><i class=\"fa fa-bars\"></i></a></span></div><div class=\"btn-header transparent pull-right\"><span><a full-screen title=\"Full Screen\"><i class=\"fa fa-arrows-alt\"></i></a></span></div><div id=logout class=\"btn-header transparent pull-right\"><span><a ui-sref=auth.logout title=\"{{'Sign Out'|translate}}\"><i class=\"fa fa-sign-out\"></i></a></span></div><neo-language-switcher></neo-language-switcher></div></header>"
   );
 
 
@@ -106,7 +101,7 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 
 
   $templateCache.put('seed/tables/_directives/neoTableDateFilter/neoTableDateFilter.html',
-    "<div class=\"icon-addon addon-sm\"><input neo-datepicker=\"{allowEmpty: true}\" ng-change=vm.changeDate() ng-model=vm.selectedDate class=\"form-control input-xs\" type=\"text\"><label class=\"fa fa-calendar\"></label><i class=\"fa fa-trash-o clear-btn\" aria-hidden=true ng-show=\"vm.selectedDate !== undefined\" ng-click=\"vm.selectedDate = undefined; vm.changeDate()\"></i></div>"
+    "<div class=\"icon-addon addon-sm\"><input neo-datepicker=\"{allowEmpty: true}\" ng-change=vm.changeDate() ng-model=vm.selectedDate class=\"form-control input-xs\" type=text><label class=\"fa fa-calendar\"></label><i class=\"fa fa-trash-o clear-btn\" aria-hidden=true ng-show=\"vm.selectedDate !== undefined\" ng-click=\"vm.selectedDate = undefined; vm.changeDate()\"></i></div>"
   );
 
 
@@ -156,7 +151,7 @@ define('seed/__misc/_templates/module',['angular'], function(angular) { /*jshint
 
 
   $templateCache.put('seed/tables/partials/neo-footer.html',
-    "<div class=dt-toolbar-footer><div class=\"col-sm-8 hidden-xs neo-table-info\" style=\"position: absolute; overflow: visible\">{{'Showing'|translate}} {{params.total() ? (params.page() - 1) * params.count() + 1 : 0}} {{'to'|translate}} {{(params.page() * params.count()) &lt; params.total() ? params.page() * params.count() : params.total()}} {{'of'|translate}} {{params.total()}} {{'entries paginated by'|translate}}<div class=\"btn-group btn-group-sm\" dropdown><button type=button class=\"btn btn-default dropdown-toggle\" dropdown-toggle>{{ params.count() }} <span class=caret></span></button><ul class=\"dropdown-menu dropup\" role=menu><li ng-repeat=\"count in params.settings().counts track by $index\"><a ng-click=params.count(count)>{{count}}</a></li></ul></div>{{'items per page'|translate}}</div><div class=\"col-xs-12 col-sm-4 neo-table-paginate\"><ul class=pagination><li ng-class=\"{'disabled': !page.active}\" ng-repeat=\"page in pages\" ng-switch=page.type><a ng-switch-when=prev ng-click=params.page(page.number)>{{'Previous'|translate}}</a> <a ng-switch-when=first ng-click=params.page(page.number)><span ng-bind=page.number></span></a> <a ng-switch-when=page ng-click=params.page(page.number)><span ng-bind=page.number></span></a> <a ng-switch-when=more ng-click=params.page(page.number)>...</a> <a ng-switch-when=last ng-click=params.page(page.number)><span ng-bind=page.number></span></a> <a ng-switch-when=next ng-click=params.page(page.number)>{{'Next'|translate}}</a></li></ul></div></div>"
+    "<div class=dt-toolbar-footer><div class=\"col-sm-8 hidden-xs neo-table-info\" style=\"position: absolute; overflow: visible\">{{'Showing'|translate}} {{params.total() ? (params.page() - 1) * params.count() + 1 : 0}} {{'to'|translate}} {{(params.page() * params.count()) &lt; params.total() ? params.page() * params.count() : params.total()}} {{'of'|translate}} {{params.total()}} {{'entries paginated by'|translate}}<div class=\"btn-group btn-group-sm\" dropdown><button type=button class=\"btn btn-default dropdown-toggle\" dropdown-toggle>{{ params.count() }} <span class=caret></span></button><ul class=\"dropdown-menu dropup\" role=menu><li ng-repeat=\"count in params.settings().counts track by $index\"><a ng-click=params.count(count)>{{count}}</a></li></ul></div>{{'items per page'|translate}}</div><div class=\"col-xs-12 col-sm-4 neo-table-paginate\"><ul class=pagination><li ng-class=\"{'disabled': !page.active}\" ng-repeat=\"page in pages\" ng-switch=page.type><a ng-switch-when=prev ng-click=params.page(page.number)>{{'Previous'|translate}} </a><a ng-switch-when=first ng-click=params.page(page.number)><span ng-bind=page.number></span> </a><a ng-switch-when=page ng-click=params.page(page.number)><span ng-bind=page.number></span> </a><a ng-switch-when=more ng-click=params.page(page.number)>... </a><a ng-switch-when=last ng-click=params.page(page.number)><span ng-bind=page.number></span> </a><a ng-switch-when=next ng-click=params.page(page.number)>{{'Next'|translate}}</a></li></ul></div></div>"
   );
 
 
