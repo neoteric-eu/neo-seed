@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: src/seed/forms/input/neoDatepicker.js:49
 msgid "Apply"
@@ -19,7 +19,7 @@ msgstr "Zatwierdź"
 msgid "Are you sure you want to remove item?"
 msgstr "Czy na pewno chcesz usunąć ten element?"
 
-#: src/seed/auth/login/forms/profileSelect/authProfileSelectForm.html:45
+#: src/seed/auth/login/forms/profileSelect/authProfileSelectForm.html:46
 msgid "Back"
 msgstr "Powrót"
 
@@ -27,13 +27,9 @@ msgstr "Powrót"
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: src/seed/auth/password/forms/PasswordReset/authPasswordResetForm.html:4
+#: src/seed/auth/password/forms/passwordReset/authPasswordResetForm.html:4
 msgid "Choose new password"
 msgstr "Podaj nowe hasło"
-
-#: src/seed/auth/lock/forms/authLockForm.html:18
-msgid "Click here"
-msgstr "Kliknij tutaj"
 
 #: src/seed/helpers/restmod/models/BaseAPI.js:150
 msgid "Confirmation"
@@ -52,7 +48,7 @@ msgstr "Email"
 msgid "entries paginated by"
 msgstr "elementów po"
 
-#: src/seed/components/messages/appMessages.js:20
+#: src/seed/components/messages/appMessages.js:23
 msgid "Error"
 msgstr "Błąd"
 
@@ -64,11 +60,18 @@ msgstr "Zapomniałeś hasła?"
 msgid "I agree to the terms and policy"
 msgstr "Akceptuję terminy i warunki korzystania z serwisu"
 
-#: src/seed/components/messages/appMessages.js:25
+#: src/seed/auth/password/forms/passwordResetInit/authPasswordResetInitForm.html:21
+msgid ""
+"If there is nothing new in your inbox, please remember to check the spam "
+"folder."
+msgstr ""
+"Jeżeli nie masz emaila w skrzynce odbiorczej, sprawdź folder ze spamem."
+
+#: src/seed/components/messages/appMessages.js:28
 msgid "Info"
 msgstr "Info"
 
-#: src/seed/components/messages/appMessages.js:93
+#: src/seed/components/messages/appMessages.js:96
 msgid "Internal server error"
 msgstr "Wewnętrzny błąd serwera"
 
@@ -76,21 +79,13 @@ msgstr "Wewnętrzny błąd serwera"
 msgid "items per page"
 msgstr "na stronie"
 
-#: src/seed/auth/login/forms/login/authLoginForm.html:55
+#: src/seed/auth/login/forms/login/authLoginForm.html:62
 #: src/seed/auth/register/forms/register/authRegisterForm.html:62
 msgid "Log in"
 msgstr "Zaloguj"
 
-#: src/seed/auth/lock/forms/authLockForm.html:17
-msgid "Logged as someone else?"
-msgstr "Zalogowany jako inny?"
-
-#: src/seed/auth/login/forms/login/authLoginForm.html:62
-msgid "Login as"
-msgstr "Zaloguj jako"
-
-#: src/seed/auth/password/forms/PasswordReset/authPasswordResetForm.html:33
-#: src/seed/auth/password/module.js:34
+#: src/seed/auth/password/forms/passwordReset/authPasswordResetForm.html:33
+#: src/seed/auth/password/module.js:28
 msgid "New password"
 msgstr "Nowe hasło"
 
@@ -102,33 +97,31 @@ msgstr "Następny"
 msgid "No"
 msgstr "Nie"
 
-#: src/seed/auth/password/forms/PasswordResetInit/authPasswordResetInitForm.js:36
+#: src/seed/auth/password/forms/passwordResetInit/authPasswordResetInitForm.js:36
 msgid "No account found with that email address."
 msgstr "Nie znaleziono konta z takim adresem email."
 
-#: src/seed/auth/password/forms/PasswordReset/authPasswordResetForm.js:66
+#: src/seed/auth/password/forms/passwordReset/authPasswordResetForm.js:61
 msgid ""
 "No active password reset requests are associated with that email address"
 msgstr ""
-"Nie odnaleziono żądania zresetowania hasła powiązanych z tym adresem "
-"email."
+"Nie odnaleziono żądania zresetowania hasła powiązanych z tym adresem email."
 
 #: src/seed/tables/partials/neo-footer.html:12
 msgid "of"
 msgstr "z"
 
-#: src/seed/auth/password/forms/PasswordReset/authPasswordResetForm.html:23
-msgid "page in 4 sec..."
-msgstr "za 4 sekundy…"
+#: src/seed/auth/password/forms/passwordReset/authPasswordResetForm.html:23
+msgid "page in a few sec..."
+msgstr "za kilka sekund…"
 
-#: src/seed/auth/lock/forms/authLockForm.html:14
 #: src/seed/auth/login/forms/login/authLoginForm.html:36
 #: src/seed/auth/register/forms/register/authRegisterForm.html:31
 msgid "Password"
 msgstr "Hasło"
 
-#: src/seed/auth/password/forms/PasswordReset/authPasswordResetForm.js:36
-#: src/seed/auth/register/forms/register/authRegisterForm.js:52
+#: src/seed/auth/password/forms/passwordReset/authPasswordResetForm.js:22
+#: src/seed/auth/register/forms/register/authRegisterForm.js:55
 msgid "Passwords must match"
 msgstr "Hasła muszą być identyczne"
 
@@ -136,17 +129,17 @@ msgstr "Hasła muszą być identyczne"
 msgid "Please log in"
 msgstr "Zaloguj się"
 
-#: src/seed/auth/password/forms/PasswordResetInit/authPasswordResetInitForm.html:37
+#: src/seed/auth/password/forms/passwordResetInit/authPasswordResetInitForm.html:35
 msgid ""
 "Please provide an email address to which the password reset link will be "
 "sent."
-msgstr ""
-"Podaj adres mailowy na które ma zostać wysłany link resetujący hasło."
+msgstr "Podaj adres mailowy, na który ma zostać wysłany link resetujący hasło."
 
 #: src/seed/tables/partials/neo-footer.html:42
 msgid "Previous"
 msgstr "Poprzedni"
 
+#: src/seed/auth/login/forms/login/authLoginForm.html:56
 #: src/seed/auth/register/forms/register/authRegisterForm.html:57
 #: src/seed/auth/register/module.js:28
 msgid "Register"
@@ -156,22 +149,22 @@ msgstr "Zarejestruj"
 msgid "Registration"
 msgstr "Rejestracja"
 
-#: src/seed/auth/password/forms/PasswordReset/authPasswordResetForm.html:44
+#: src/seed/auth/password/forms/passwordReset/authPasswordResetForm.html:44
 #: src/seed/auth/register/forms/register/authRegisterForm.html:40
 msgid "Repeat password"
 msgstr "Powtórz hasło"
 
-#: src/seed/auth/password/forms/PasswordReset/authPasswordResetForm.html:55
-#: src/seed/auth/password/forms/PasswordResetInit/authPasswordResetInitForm.html:45
+#: src/seed/auth/password/forms/passwordReset/authPasswordResetForm.html:55
+#: src/seed/auth/password/forms/passwordResetInit/authPasswordResetInitForm.html:43
 msgid "Reset"
 msgstr "Zresetuj"
 
-#: src/seed/auth/password/forms/PasswordResetInit/authPasswordResetInitForm.html:5
-#: src/seed/auth/password/module.js:22
+#: src/seed/auth/password/forms/passwordResetInit/authPasswordResetInitForm.html:5
+#: src/seed/auth/password/module.js:16
 msgid "Reset password"
 msgstr "Zresetuj hasło"
 
-#: src/seed/auth/login/forms/profileSelect/authProfileSelectForm.html:38
+#: src/seed/auth/login/forms/profileSelect/authProfileSelectForm.html:39
 msgid "Select"
 msgstr "Wybierz"
 
@@ -187,13 +180,21 @@ msgstr "Pokazuje"
 msgid "Sign Out"
 msgstr "Wyloguj"
 
-#: src/seed/components/messages/appMessages.js:10
+#: src/seed/components/messages/appMessages.js:13
 msgid "Success"
 msgstr "Sukces"
 
-#: src/seed/auth/password/forms/PasswordReset/authPasswordResetForm.html:22
-msgid "The password has ben reset! You will be redirected to"
-msgstr "Hasło zostało zresetowane. Zastaniesz przekierowany do "
+#: src/seed/auth/password/forms/passwordReset/authPasswordResetForm.html:22
+msgid "The password has been reset! You will be redirected to"
+msgstr "Hasło zostało zresetowane. Zastaniesz przekierowany do"
+
+#: src/seed/auth/password/forms/passwordResetInit/authPasswordResetInitForm.html:20
+msgid ""
+"The password reset link has been sent to the provided email. Check your "
+"inbox and follow the instructions from the email."
+msgstr ""
+"Link resetujący hasło został wysłany na podany adres email. Sprawdź skrzynkę "
+"odbiorczą i podążaj za instrukcjami z emaila."
 
 #: src/seed/tables/partials/neo-footer.html:8
 msgid "to"
@@ -203,11 +204,7 @@ msgstr "do"
 msgid "to continue"
 msgstr "aby kontynuować"
 
-#: src/seed/auth/lock/forms/authLockForm.html:25
-msgid "Unlock"
-msgstr "Odblokuj"
-
-#: src/seed/components/messages/appMessages.js:15
+#: src/seed/components/messages/appMessages.js:18
 msgid "Warning"
 msgstr "Ostrzeżenie"
 
@@ -223,3 +220,15 @@ msgstr "Błędny e-mail lub hasło"
 #: src/seed/helpers/restmod/models/BaseAPI.js:154
 msgid "Yes"
 msgstr "Tak"
+
+#~ msgid "Click here"
+#~ msgstr "Kliknij tutaj"
+
+#~ msgid "Logged as someone else?"
+#~ msgstr "Zalogowany jako inny?"
+
+#~ msgid "Login as"
+#~ msgstr "Zaloguj jako"
+
+#~ msgid "Unlock"
+#~ msgstr "Odblokuj"

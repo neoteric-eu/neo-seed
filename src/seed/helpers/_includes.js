@@ -5,6 +5,8 @@ define([
 
 	'./_enums/BaseEnum',
 
+	'./_exceptions/exceptionHandler',
+
 	'./_services/templateLoader/neoTemplateLoader',
 
 	'./lodash/lodashExtensions',
