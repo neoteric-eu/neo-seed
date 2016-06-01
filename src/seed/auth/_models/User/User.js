@@ -15,7 +15,7 @@ define(['seed/auth/module'], function (module) {
 		//noinspection JSUnusedGlobalSymbols
 		return restmod
 			.model('/users')
-			.mix('UserPacker', {
+			.mix('UserPacker', 'SassMgrStyleAPI', {
 				type: {
 					init: 'User'
 				},
