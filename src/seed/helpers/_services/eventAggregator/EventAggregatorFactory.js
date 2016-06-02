@@ -42,7 +42,7 @@ define(['seed/helpers/module'], function (module) {
 		 * @param name {String} Event name to broadcast.
 		 * @param [args] {...*} Optional one or more arguments which will be passed onto the event listeners.
 		 */
-		EventAggregator.prototype.publish = function (name, args) {
+		EventAggregator.prototype.publish = function (name) {
 			var listenersArgs = [name].concat(Array.prototype.slice.call(arguments, 1));
 			this.$eventBus.$broadcast.apply(this.$eventBus,  listenersArgs);
 		};
