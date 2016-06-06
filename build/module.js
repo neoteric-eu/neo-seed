@@ -282,12 +282,18 @@ define('seed/helpers/_decorators/logDecorator',['angular', 'moment', 'seed/helpe
 
 		$delegate.getInstance = getInstance;
 
-		function decorate(logFn, className) {
+		function decorate(logFn, className, level, reThrow) {
 			var enhancedLogFn = function () {
 				var args = [].slice.call(arguments),
-					now = moment().format('YYYY-MM-DD HH:mm:ss');
+						now = moment().format('YYYY-MM-DD HH:mm:ss');
 
 				args[0] = [null, now + ' - ' + className, args[0]].join('');
+
+				if (reThrow) {
+					var error =  new Error(args[0]);
+					error.level = level;
+					throw error ;
+				}
 
 				logFn.apply(null, args);
 			};
@@ -302,13 +308,12 @@ define('seed/helpers/_decorators/logDecorator',['angular', 'moment', 'seed/helpe
 			var className = _.isUndefined(name) ? '' : name + ' :: ';
 			var logInstance = ng.copy($delegate);
 
-
 			_.assign(logInstance, {
 				log: decorate($delegate.log, className),
 				info: decorate($delegate.info, className),
 				warn: decorate($delegate.warn, className),
 				debug: decorate($delegate.debug, className),
-				error: decorate($delegate.error, className)
+				error: decorate($delegate.error, className, 'ERROR', true)
 			});
 
 			return logInstance;
@@ -416,6 +421,7 @@ define('seed/helpers/_exceptions/exceptionHandler',['seed/helpers/module'], func
                 exception.message += ' (caused by "' + cause + '")';
             }
             exception.requireType = 'angular';
+            exception.level = 'ERROR';
             exception.requireModules = [cause];
             if(typeof $window.handleStackTrace === 'function') {
                 $window.handleStackTrace(exception);
@@ -423,6 +429,8 @@ define('seed/helpers/_exceptions/exceptionHandler',['seed/helpers/module'], func
         };
     });
 });
+
+
 define('seed/helpers/_services/templateLoader/neoTemplateLoader',['seed/helpers/module'], function (module) {
 	'use strict';
 
