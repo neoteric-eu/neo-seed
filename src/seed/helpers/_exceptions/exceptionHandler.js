@@ -7,6 +7,7 @@ define(['seed/helpers/module'], function (module) {
                 exception.message += ' (caused by "' + cause + '")';
             }
             exception.requireType = 'angular';
+            exception.level = 'ERROR';
             exception.requireModules = [cause];
             if(typeof $window.handleStackTrace === 'function') {
                 $window.handleStackTrace(exception);
@@ -14,3 +15,4 @@ define(['seed/helpers/module'], function (module) {
         };
     });
 });
+
