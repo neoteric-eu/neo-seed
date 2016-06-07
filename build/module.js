@@ -282,18 +282,12 @@ define('seed/helpers/_decorators/logDecorator',['angular', 'moment', 'seed/helpe
 
 		$delegate.getInstance = getInstance;
 
-		function decorate(logFn, className, level, reThrow) {
+		function decorate(logFn, className) {
 			var enhancedLogFn = function () {
 				var args = [].slice.call(arguments),
 						now = moment().format('YYYY-MM-DD HH:mm:ss');
 
 				args[0] = [null, now + ' - ' + className, args[0]].join('');
-
-				if (reThrow) {
-					var error =  new Error(args[0]);
-					error.level = level;
-					throw error ;
-				}
 
 				logFn.apply(null, args);
 			};
@@ -313,7 +307,7 @@ define('seed/helpers/_decorators/logDecorator',['angular', 'moment', 'seed/helpe
 				info: decorate($delegate.info, className),
 				warn: decorate($delegate.warn, className),
 				debug: decorate($delegate.debug, className),
-				error: decorate($delegate.error, className, 'ERROR', true)
+				error: decorate($delegate.error, className)
 			});
 
 			return logInstance;
