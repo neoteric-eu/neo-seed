@@ -1,6 +1,6 @@
 {
   "name": "neo-seed",
-  "version": "2.5.7",
+  "version": "2.5.8",
   "dependencies": {
     "angular": "1.4.x",
     "bootstrap": "3.x",
