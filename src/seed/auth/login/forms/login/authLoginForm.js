@@ -71,6 +71,7 @@ define(['seed/auth/module'], function (module) {
 								neoSession
 									.setSession(vm.user, _.first(vm.user.customers))
 									.then(function () {
+										$state.reload();
 										if ($rootScope.requestedState) {
 											$state.go($rootScope.requestedState.toState, $rootScope.requestedState.toParams);
 										} else {
