@@ -51,6 +51,7 @@ module.exports = function () {
 
           // Other vendor
           'moment': 'empty:',
+          'moment-timezone': 'empty:',
           'lodash': 'empty:',
 
           'raphael': 'empty:',

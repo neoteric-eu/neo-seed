@@ -1,3 +1,13 @@
+<a name="2.6.5"></a>
+## [2.6.5](//compare/v2.6.4...v2.6.5) (2016-06-28)
+
+
+### Bug Fixes
+
+* **build:** moment-timezone added to require empty: list 1cfd1e1
+
+
+
 <a name="2.6.4"></a>
 ## [2.6.4](//compare/v2.6.3...v2.6.4) (2016-06-01)
 
