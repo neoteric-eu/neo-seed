@@ -18,7 +18,9 @@ define(['seed/auth/module'], function (module) {
 				featureKeys: {},
 				roles: {},
 				timezone: {},
-
+				subscriptions: {
+					hasMany: 'Subscription'
+				},
 				$extend: {
 					Record: {
 						$setSelected: function (customer) {
