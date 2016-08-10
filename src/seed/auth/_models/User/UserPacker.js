@@ -36,11 +36,11 @@ define([
 					if (_resource.$response.config.url.match(/authInfo$/) ||
 						_resource.$response.config.url.match(/login$/)) {
 						name = 'user';
-
-						if (_raw.data) {
-							_raw = _raw.data;
-						}
 					}
+				}
+
+				if (_raw.data) {
+					_raw = _raw.data;
 				}
 
 				if (meta) {
