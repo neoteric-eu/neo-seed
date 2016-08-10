@@ -4230,11 +4230,11 @@ define('seed/auth/_models/User/UserPacker',[
 					if (_resource.$response.config.url.match(/authInfo$/) ||
 						_resource.$response.config.url.match(/login$/)) {
 						name = 'user';
-
-						if (_raw.data) {
-							_raw = _raw.data;
-						}
 					}
+				}
+
+				if (_raw.data) {
+					_raw = _raw.data;
 				}
 
 				if (meta) {
@@ -4278,7 +4278,9 @@ define('seed/auth/_models/Customer/Customer',['seed/auth/module'], function (mod
 				featureKeys: {},
 				roles: {},
 				timezone: {},
-
+				subscriptions: {
+					hasMany: 'Subscription'
+				},
 				$extend: {
 					Record: {
 						$setSelected: function (customer) {
