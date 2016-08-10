@@ -90,7 +90,7 @@ define(['seed/auth/module'], function (module) {
 							return this.$send({
 								method: 'GET',
 								url: this.$scope.$url() + '/authInfo',
-								cache: true
+								cache: false
 							}, function (_response) {
 								this.$unwrap(_response.data, null);
 							}, null);
