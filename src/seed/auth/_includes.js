@@ -16,6 +16,7 @@ define([
 	'./_models/User/UserPacker',
 
 	'./_models/Customer/Customer',
+	'./_models/Customer/Subscription',
 	'./_models/Customer/CustomerAPI',
 
 	'./_models/Language/LanguageAPI',

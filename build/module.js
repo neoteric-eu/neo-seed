@@ -4294,6 +4294,33 @@ define('seed/auth/_models/Customer/Customer',['seed/auth/module'], function (mod
 	module.factory('Customer', Customer);
 });
 
+define('seed/auth/_models/Customer/Subscription',['seed/auth/module'], function (module) {
+    'use strict';
+
+    /**
+     * @constructor
+     * @implements {seed.BaseModel}
+     * @memberOf seed.auth
+     *
+     * @param restmod {Object} Data model layer interface
+     * @return {*|Model} Model instance
+     */
+
+
+    var Subscription = function (restmod) {
+        return restmod
+            .model('/subscriptions')
+            .mix({
+                expiryDate: {
+                    serialize: 'Datetime'
+                }
+            });
+    };
+
+    module.factory('Subscription', Subscription);
+
+});
+
 define('seed/auth/_models/Customer/CustomerAPI',['seed/auth/module'], function (module) {
 	'use strict';
 
@@ -4960,6 +4987,7 @@ define('seed/auth/_includes',[
 	'./_models/User/UserPacker',
 
 	'./_models/Customer/Customer',
+	'./_models/Customer/Subscription',
 	'./_models/Customer/CustomerAPI',
 
 	'./_models/Language/LanguageAPI',
