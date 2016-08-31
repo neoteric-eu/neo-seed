@@ -4322,6 +4322,9 @@ define('seed/auth/_models/Customer/Subscription',['seed/auth/module'], function 
             .mix({
                 expiryDate: {
                     serialize: 'Datetime'
+                },
+                graceExpiryDate: {
+                    serialize: 'Datetime'
                 }
             });
     };

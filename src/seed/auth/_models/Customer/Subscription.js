@@ -17,6 +17,9 @@ define(['seed/auth/module'], function (module) {
             .mix({
                 expiryDate: {
                     serialize: 'Datetime'
+                },
+                graceExpiryDate: {
+                    serialize: 'Datetime'
                 }
             });
     };
