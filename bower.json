@@ -1,6 +1,6 @@
 {
   "name": "neo-seed",
-  "version": "2.5.19",
+  "version": "2.5.20",
   "dependencies": {
     "angular": "1.4.x",
     "bootstrap": "3.x",
@@ -13,7 +13,7 @@
     "angular-loading-bar": "0.8.0",
     "angular-permission": "2.3.8",
     "angular-restmod": "1.1.9",
-    "angular-bootstrap": "0.14.3",
+    "angular-bootstrap": "2.1.4",
     "angular-ui-select": "0.17.x",
     "angular-ui-router": "0.2.15",
     "ng-table": "0.8.3",
