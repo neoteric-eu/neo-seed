@@ -1,6 +1,6 @@
 {
   "name": "neo-seed",
-  "version": "2.5.20",
+  "version": "2.5.21",
   "dependencies": {
     "angular": "1.4.x",
     "bootstrap": "3.x",
@@ -19,7 +19,7 @@
     "ng-table": "0.8.3",
     "lodash": "3.10.x",
     "moment": "2.10.x",
-    "moment-timezone": "0.5.x",
+    "moment-timezone": "0.5.11",
     "requirejs": "2.1.x",
     "less-elements": "latest",
     "animate.less": "latest",
