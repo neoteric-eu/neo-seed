@@ -21,7 +21,7 @@
     "moment": "2.10.x",
     "moment-timezone": "0.5.11",
     "requirejs": "2.1.x",
-    "less-elements": "Michun/less-elements#master",
+    "less-elements": "Michun/less-elements#1.0.0",
     "animate.less": "latest",
     "font-awesome": "4.x",
     "form.validation": "latest",
