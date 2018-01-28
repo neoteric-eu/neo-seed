@@ -71,7 +71,6 @@
     },
     "less": {
       "bootstrap": "bootstrap/less",
-      "elements/elements.less": "less-elements/elements.less",
       "animate/animate.less": "animate.less/animate.less",
       "animate/source": "animate.less/source",
       "font-awesome/": "font-awesome/less",
